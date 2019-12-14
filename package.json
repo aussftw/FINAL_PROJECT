@@ -5,7 +5,9 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "nodemon server.js"
+    "server": "nodemon server.js",
+    "front": "npm run start --prefix client",
+    "dev": "concurrently \"npm run server\"  \"npm run front\""
   },
   "repository": {
     "type": "git",
@@ -31,6 +33,7 @@
     "validator": "^11.1.0"
   },
   "devDependencies": {
+    "concurrently": "^5.0.1",
     "nodemon": "^1.19.1"
   }
 }
