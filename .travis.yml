@@ -6,7 +6,7 @@ node_js:
 cache:
   directories:
     - ./client/node_modules
-      ./server/node_modules
+      ./node_modules
 
 before_script:
   - npm install
