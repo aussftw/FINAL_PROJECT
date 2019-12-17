@@ -66,3 +66,17 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+### eslint
+
+"plugins": ["import"] - показывает несуществующие переменные;
+
+prettier config:
+"useTabs": false, - табы или пробелы
+"tabWidth": 2, - длинна таба
+"printWidth": 85, длинна строки
+"singleQuote": true,-одинарная кавычка
+"trailingComma": "none",
+"bracketSpacing": true,
+"jsxBracketSameLine": false,вытягивает в одну строчку код у компонентов если мало пропсов
+"semi": true - использование точки с запятой
