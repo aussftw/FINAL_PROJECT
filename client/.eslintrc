@@ -4,6 +4,7 @@
   "rules": {
     "func-names": ["error", "never"],
     "no-console": "warn",
+    "react/prop-types": 0,
     "no-dupe-args": "warn",
     "no-duplicate-case": "error",
     "no-debugger": "error",
