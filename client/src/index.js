@@ -6,7 +6,7 @@ import {Provider} from 'react-redux';
 import {configureStore} from './store';
 import App from './App';
 import {ThemeProvider} from '@material-ui/core/styles';
-import theme from 'theme';
+import theme from './theme';
 
 import './index.css';
 

@@ -14,14 +14,14 @@ const theme = createMuiTheme({
     primary:{
       main: lightGreen[700], //main theme color
       light: lightGreen[100], //footer bg
-      dark:lightGreen[900] //hover btn
+      dark: lightGreen[900], //hover btn
     },
     secondary:{
-      main:grey[700], //main grey
-      dark:gray[900], // black
-      light:grey[200] //maybe
-    }
-  }
+      main: grey[700], //main grey
+      dark: grey[900], // black
+      light: grey[100], //maybe
+    },
+  },
 });
 
 export default theme;
