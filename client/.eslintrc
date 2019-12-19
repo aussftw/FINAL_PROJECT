@@ -8,14 +8,13 @@
     "no-duplicate-case": "error",
     "no-debugger": "error",
     "no-dupe-keys": "error",
+    "react/button-has-type": "off",
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-    "padding-line-between-statements": [
-      "error",
+    "react/destructuring-assignment": ["warn","always"],
+    "padding-line-between-statements": ["error",
       { "blankLine": "always", "prev": "const", "next": "return" },
       { "blankLine": "always", "prev": "function", "next": "return" },
       { "blankLine": "always", "prev": "let", "next": "return" }
-    ],
-    "react/destructuring-assignment": ["warn","always"],
-    "react/button-has-type": "off"
+    ]
   }
 }
