@@ -1,12 +1,23 @@
 import React from 'react';
-import  Test  from './components/Header';
+
+
+
+
+import Brands from './components/Brands/Brands.js';
+import Footer from './components/Footer/index.js';
+
 
 function App() {
   return (
     <div className="App">
       <h1>Some Shop</h1>
       <p> for real</p>
-      <Test />
+
+
+
+      <Brands />
+      <Footer />
+
     </div>
   );
 }
