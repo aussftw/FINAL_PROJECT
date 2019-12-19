@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Brands from './components/Brands/Brands.js';
-import Footer from './components/Footer/Footer.js';
+import Footer from './components/Footer/index.js';
 
 function App() {
   return (

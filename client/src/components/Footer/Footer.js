@@ -3,7 +3,7 @@ import React from 'react';
 import theme from '../../theme';
 import useStyles from './useStyles';
 import { ThemeProvider } from '@material-ui/core/styles';
-import Hidden from '@material-ui/core/Hidden';
+// import Hidden from '@material-ui/core/Hidden';
 import {
   Grid,
   Typography,
@@ -36,7 +36,6 @@ const Footer = () => {
                 <IconButton>
                   <DraftsIcon />
                   <Typography color="secondary" draftsIcon={<DraftsIcon />}>
-                    {' '}
                     planty@mail.com&icon
                   </Typography>
                 </IconButton>
@@ -115,7 +114,7 @@ const Footer = () => {
                 <Typography color="secondary.[light]">Service</Typography>
               </ExpansionPanelDetails>
               <ExpansionPanelDetails>
-                <Typography color="secondary">Terms&Conditions</Typography>
+                <Typography color="secondary">Terms&Conditions © 2020</Typography>
               </ExpansionPanelDetails>
             </ExpansionPanel>
           </Grid>
@@ -125,7 +124,7 @@ const Footer = () => {
         <Grid container>
           <Grid item xs={12} className={classes}>
             <Typography className={classes.textedFooter}>
-              Designed by Webibazaar Theme All rights reserved.
+              Designed by Webibazaar Theme All rights reserved. © 2020
             </Typography>
           </Grid>
         </Grid>
