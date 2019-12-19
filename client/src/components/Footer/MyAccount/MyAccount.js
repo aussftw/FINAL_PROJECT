@@ -1,6 +1,6 @@
-import React from 'react';
-import theme from '../../../theme';
-import useStyles from './useStyles';
+import React from "react";
+// import theme from "../../../theme";
+import useStyles from "./useStyles";
 
 import {
   Grid,
@@ -8,13 +8,9 @@ import {
   ExpansionPanel,
   ExpansionPanelSummary,
   ExpansionPanelDetails,
-  IconButton,
-} from '@material-ui/core';
+} from "@material-ui/core";
 
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import DraftsIcon from '@material-ui/icons/Drafts';
-import LocationOnSharpIcon from '@material-ui/icons/LocationOnSharp';
-import PhoneSharpIcon from '@material-ui/icons/PhoneSharp';
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 const MyAccount = () => {
   const classes = useStyles();
@@ -35,9 +31,6 @@ const MyAccount = () => {
         </ExpansionPanelDetails>
         <ExpansionPanelDetails>
           <Typography color="secondary">Service</Typography>
-        </ExpansionPanelDetails>
-        <ExpansionPanelDetails>
-          <Typography color="secondary">Terms&Conditions © 2020</Typography>
         </ExpansionPanelDetails>
       </ExpansionPanel>
     </Grid>
