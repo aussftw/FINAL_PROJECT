@@ -1,34 +1,8 @@
 {
-  "env": {
-    "browser": true,
-    "es6": true
-  },
-  "plugins": ["import",
-    "prettier"
-  ],
-  "extends": [
-    "eslint:recommended",
-    "react-app",
-    "plugin:prettier/recommended"
-  ],
-  "parserOptions": {
-    "ecmaVersion": 2018,
-    "sourceType": "module"
-  },
+  "extends": ["airbnb","airbnb/hooks","prettier"],
+  "plugins": ["prettier"],
   "rules": {
-    "prettier/prettier": "error",
-    "no-console": 0,
-    "no-alert": 2,
-    "import/first": "error",
-    "no-trailing-spaces": [
-      "error",
-      {
-        "skipBlankLines": true
-      }
-    ],
-    "jsx-quotes": [
-      1,
-      "prefer-double"
-    ]
+    "func-names": ["error", "never"],
+    "no-console": "warn"
   }
 }
