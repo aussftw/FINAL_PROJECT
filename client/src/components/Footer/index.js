@@ -18,7 +18,9 @@ import LocationOnSharpIcon from '@material-ui/icons/LocationOnSharp';
 import PhoneSharpIcon from '@material-ui/icons/PhoneSharp';
 
 import ContactUs from './ContactUs/ContactUs';
-
+import Payment from './Payment/Payment';
+import MyAccount from './MyAccount/MyAccount';
+import Information from './Information/Information';
 const Footer = () => {
   const classes = useStyles();
   // console.log(classes);
@@ -30,96 +32,9 @@ const Footer = () => {
         {/* <Hidden smDown> */}
         <Grid container>
           <ContactUs />
-          {/* <Grid item xs={12} lg={3} md={12}>
-            <ExpansionPanel className={classes.bg}>
-              <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                <Typography className={classes}>CONTACT US</Typography>
-              </ExpansionPanelSummary>
-              <ExpansionPanelDetails>
-                <IconButton>
-                  <DraftsIcon />
-                  <Typography color="secondary" draftsIcon={<DraftsIcon />}>
-                    planty@mail.com&icon
-                  </Typography>
-                </IconButton>
-              </ExpansionPanelDetails>
-              <ExpansionPanelDetails>
-                <IconButton>
-                  <LocationOnSharpIcon />
-                  <Typography color="secondary">Location</Typography>
-                </IconButton>
-              </ExpansionPanelDetails>
-              <ExpansionPanelDetails>
-                <IconButton>
-                  <PhoneSharpIcon />
-                  <Typography color="secondary">Phone</Typography>
-                </IconButton>
-              </ExpansionPanelDetails>
-            </ExpansionPanel>
-          </Grid> */}
-          <Grid item xs={12} lg={3} md={12} className={classes}>
-            <ExpansionPanel className={classes.bg}>
-              <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                <Typography className={classes}>PAYMENT</Typography>
-              </ExpansionPanelSummary>
-              <ExpansionPanelDetails>
-                <Typography>maestropic</Typography>
-              </ExpansionPanelDetails>
-              <ExpansionPanelDetails>
-                <Typography>american express pic</Typography>
-              </ExpansionPanelDetails>
-              <ExpansionPanelDetails>
-                <Typography>paypal pic</Typography>
-              </ExpansionPanelDetails>
-              <ExpansionPanelDetails>
-                <Typography>some pic</Typography>
-              </ExpansionPanelDetails>
-            </ExpansionPanel>
-          </Grid>
-          <Grid item xs={12} lg={3} md={12} className={classes}>
-            <ExpansionPanel className={classes.bg}>
-              <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                <Typography className={classes}>INFORMATION</Typography>
-              </ExpansionPanelSummary>
-              <ExpansionPanelDetails>
-                <Typography color="secondary">About us</Typography>
-              </ExpansionPanelDetails>
-              <ExpansionPanelDetails>
-                <Typography>About us</Typography>
-              </ExpansionPanelDetails>
-              <ExpansionPanelDetails>
-                <Typography color="secondary">Delivery info</Typography>
-              </ExpansionPanelDetails>
-              <ExpansionPanelDetails>
-                <Typography>Element </Typography>
-              </ExpansionPanelDetails>
-              <ExpansionPanelDetails>
-                <Typography color="secondary">Features </Typography>
-              </ExpansionPanelDetails>
-            </ExpansionPanel>
-          </Grid>
-          <Grid item xs={12} lg={3} md={12} className={classes}>
-            <ExpansionPanel className={classes.bg}>
-              <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                <Typography className={classes}>MY ACCOUNT</Typography>
-              </ExpansionPanelSummary>
-              <ExpansionPanelDetails>
-                <Typography color="secondary">Whishlist</Typography>
-              </ExpansionPanelDetails>
-              <ExpansionPanelDetails>
-                <Typography color="secondary">Checkout</Typography>
-              </ExpansionPanelDetails>
-              <ExpansionPanelDetails>
-                <Typography color="secondary">Gallery</Typography>
-              </ExpansionPanelDetails>
-              <ExpansionPanelDetails>
-                <Typography color="secondary.[light]">Service</Typography>
-              </ExpansionPanelDetails>
-              <ExpansionPanelDetails>
-                <Typography color="secondary">Terms&Conditions © 2020</Typography>
-              </ExpansionPanelDetails>
-            </ExpansionPanel>
-          </Grid>
+          <Payment />
+          <MyAccount />
+          <Information />
         </Grid>
         {/* </Hidden> */}
         {/* <Hidden mdUp> */}
