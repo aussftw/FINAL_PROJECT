@@ -1,10 +1,10 @@
 import React from "react";
 // import theme from '../../theme';
-import useStyles from "./useStyles";
 
 import {
   Grid,
   Typography,
+  Link,
   ExpansionPanel,
   ExpansionPanelSummary,
   ExpansionPanelDetails,
@@ -12,9 +12,11 @@ import {
 } from "@material-ui/core";
 
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import useStyles from "./useStyles";
 
 const Information = () => {
   const classes = useStyles();
+
   return (
     <Grid item xs={12} lg={3} md={12} className={classes}>
       <ExpansionPanel className={classes.bg}>
@@ -22,16 +24,16 @@ const Information = () => {
           <Typography className={classes}>INFORMATION</Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
-          <Typography color="secondary">About us</Typography>
+          <Link color="secondary">About us</Link>
         </ExpansionPanelDetails>
         <ExpansionPanelDetails>
-          <Typography color="secondary">Delivery info</Typography>
+          <Link color="secondary">Delivery info</Link>
         </ExpansionPanelDetails>
         <ExpansionPanelDetails>
-          <Typography color="secondary">Element </Typography>
+          <Link color="secondary">Element </Link>
         </ExpansionPanelDetails>
         <ExpansionPanelDetails>
-          <Typography color="secondary">Features </Typography>
+          <Link color="secondary">Features </Link>
         </ExpansionPanelDetails>
       </ExpansionPanel>
     </Grid>

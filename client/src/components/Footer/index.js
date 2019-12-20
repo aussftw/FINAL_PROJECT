@@ -1,10 +1,10 @@
 import React from "react";
 
-// import theme from "../../theme";
-import useStyles from "./useStyles";
-// import { ThemeProvider } from "@material-ui/core/styles";
+import { ThemeProvider } from "@material-ui/core/styles";
 import Hidden from "@material-ui/core/Hidden";
 import { Grid } from "@material-ui/core";
+import useStyles from "./useStyles";
+import theme from "../../theme";
 
 import ContactUs from "./ContactUs/ContactUs";
 import Payment from "./Payment/Payment";
@@ -17,19 +17,20 @@ const Footer = () => {
 
   return (
     <>
-      <Hidden MdUp>
+      <Hidden SmDown>
         <p>LOGO</p>
       </Hidden>
-      <Grid container>
-        <ContactUs />
-        <Payment />
-        <MyAccount />
-        <Information />
-      </Grid>
-
-      <Grid container>
-        <Copy />
-      </Grid>
+      <Hidden MdUp>
+        <Grid container>
+          <ContactUs />
+          <Payment />
+          <MyAccount />
+          <Information />
+        </Grid>
+        <Grid container>
+          <Copy />
+        </Grid>
+      </Hidden>
     </>
   );
 };

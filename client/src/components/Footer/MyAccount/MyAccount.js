@@ -1,19 +1,21 @@
 import React from "react";
 // import theme from "../../../theme";
-import useStyles from "./useStyles";
 
 import {
   Grid,
   Typography,
+  Link,
   ExpansionPanel,
   ExpansionPanelSummary,
   ExpansionPanelDetails,
 } from "@material-ui/core";
 
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import useStyles from "./useStyles";
 
 const MyAccount = () => {
   const classes = useStyles();
+
   return (
     <Grid item xs={12} lg={3} md={12}>
       <ExpansionPanel className={classes.bg}>
@@ -21,16 +23,16 @@ const MyAccount = () => {
           <Typography className={classes}>MY ACCOUNT</Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
-          <Typography color="secondary">Whishlist</Typography>
+          <Link color="secondary">Whishlist</Link>
         </ExpansionPanelDetails>
         <ExpansionPanelDetails>
-          <Typography color="secondary">Checkout</Typography>
+          <Link color="secondary">Checkout</Link>
         </ExpansionPanelDetails>
         <ExpansionPanelDetails>
-          <Typography color="secondary">Gallery</Typography>
+          <Link color="secondary">Gallery</Link>
         </ExpansionPanelDetails>
         <ExpansionPanelDetails>
-          <Typography color="secondary">Service</Typography>
+          <Link color="secondary">Service</Link>
         </ExpansionPanelDetails>
       </ExpansionPanel>
     </Grid>

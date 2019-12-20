@@ -1,10 +1,10 @@
 import React from "react";
 // import theme from '../../theme';
-import useStyles from "./useStyles";
 
 import {
   Grid,
   Typography,
+  Link,
   ExpansionPanel,
   ExpansionPanelSummary,
   ExpansionPanelDetails,
@@ -16,6 +16,7 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import DraftsIcon from "@material-ui/icons/Drafts";
 import LocationOnSharpIcon from "@material-ui/icons/LocationOnSharp";
 import PhoneSharpIcon from "@material-ui/icons/PhoneSharp";
+import useStyles from "./useStyles";
 
 const ContactUs = () => {
   const classes = useStyles();
@@ -28,30 +29,30 @@ const ContactUs = () => {
         </ExpansionPanelSummary>
         <Hidden MdUp>
           <ExpansionPanelDetails>
-            <Typography color="secondary">Logo</Typography>
+            <Link color="secondary">Logo</Link>
           </ExpansionPanelDetails>
         </Hidden>
         <ExpansionPanelDetails>
           <IconButton>
             <DraftsIcon />
-            <Typography
+            <Link
               color="secondary"
               draftsIcon={<DraftsIcon className={classes.draftsIcon} />}
             >
               planty@mail.com
-            </Typography>
+            </Link>
           </IconButton>
         </ExpansionPanelDetails>
         <ExpansionPanelDetails>
           <IconButton>
             <LocationOnSharpIcon />
-            <Typography color="secondary">Location</Typography>
+            <Link color="secondary">Location</Link>
           </IconButton>
         </ExpansionPanelDetails>
         <ExpansionPanelDetails>
           <IconButton>
             <PhoneSharpIcon />
-            <Typography color="secondary">Phone</Typography>
+            <Link color="secondary">Phone</Link>
           </IconButton>
         </ExpansionPanelDetails>
       </ExpansionPanel>
