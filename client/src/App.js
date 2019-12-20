@@ -1,11 +1,6 @@
-import React from 'react';
-
-
-
-
-import Brands from './components/Brands/Brands.js';
-import Footer from './components/Footer/index.js';
-
+import React from "react";
+import Brands from "./components/Brands/Brands.js";
+import Footer from "./components/Footer/index.js";
 
 function App() {
   return (
@@ -13,11 +8,8 @@ function App() {
       <h1>Some Shop</h1>
       <p> for real</p>
 
-
-
       <Brands />
       <Footer />
-
     </div>
   );
 }
