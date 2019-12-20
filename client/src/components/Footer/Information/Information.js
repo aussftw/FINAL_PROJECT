@@ -25,13 +25,10 @@ const Information = () => {
           <Typography color="secondary">About us</Typography>
         </ExpansionPanelDetails>
         <ExpansionPanelDetails>
-          <Typography>About us</Typography>
-        </ExpansionPanelDetails>
-        <ExpansionPanelDetails>
           <Typography color="secondary">Delivery info</Typography>
         </ExpansionPanelDetails>
         <ExpansionPanelDetails>
-          <Typography>Element </Typography>
+          <Typography color="secondary">Element </Typography>
         </ExpansionPanelDetails>
         <ExpansionPanelDetails>
           <Typography color="secondary">Features </Typography>

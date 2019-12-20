@@ -19,6 +19,7 @@ import PhoneSharpIcon from "@material-ui/icons/PhoneSharp";
 
 const ContactUs = () => {
   const classes = useStyles();
+
   return (
     <Grid item xs={12} lg={3} md={12}>
       <ExpansionPanel className={classes.bg}>
@@ -33,8 +34,11 @@ const ContactUs = () => {
         <ExpansionPanelDetails>
           <IconButton>
             <DraftsIcon />
-            <Typography color="secondary" draftsIcon={<DraftsIcon />}>
-              planty@mail.com&icon
+            <Typography
+              color="secondary"
+              draftsIcon={<DraftsIcon className={classes.draftsIcon} />}
+            >
+              planty@mail.com
             </Typography>
           </IconButton>
         </ExpansionPanelDetails>
