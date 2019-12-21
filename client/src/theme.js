@@ -1,5 +1,8 @@
+// eslint-disable-next-line no-unused-vars
+
 import { createMuiTheme } from '@material-ui/core/styles';
 import { lightGreen, grey } from '@material-ui/core/colors';
+
 
 const breakePointsValues = {
   xs: 0,
@@ -20,6 +23,7 @@ const theme = createMuiTheme({
       main: grey[700], //main grey
       dark: grey[900], // black
       light: grey[200], //maybe
+
     },
   },
 });

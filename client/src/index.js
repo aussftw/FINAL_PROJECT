@@ -13,7 +13,6 @@ import './index.css';
 const store = configureStore();
 
 ReactDOM.render(
-
   <ThemeProvider theme={theme}>
     <Provider store={store}>
       <BrowserRouter>
@@ -23,5 +22,6 @@ ReactDOM.render(
   </ThemeProvider>,
 // eslint-disable-next-line no-undef
   document.getElementById('root')
+
 
 );
