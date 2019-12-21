@@ -1,39 +1,44 @@
 import React from 'react';
-import {TilesItem} from '../TilesItem/TilesItem';
-import {makeStyles} from '@material-ui/core';
-import Grid from '@material-ui/core/Grid';
-import GridList from "@material-ui/core/GridList";
-import GridListTile from "@material-ui/core/GridListTile";
+import { TilesItem } from '../TilesItem/TilesItem';
+import { makeStyles } from '@material-ui/core';
+import GridListTile from '@material-ui/core/GridListTile';
+import GridList from '@material-ui/core/GridList';
 
 const useStyles = makeStyles({
-  root: {
-    flexGrow: 1
+  box: {
+    display: 'flex',
+    flexWrap: 'wrap',
   },
-
+  tileBox: {
+    maxWidth: '643px',
+    height: '800px',
+  },
 });
 
 export const TilesPanel = () => {
-  const classes = makeStyles();
+  const classes = useStyles();
 
   return (
-    <div className={classes.root}>
-      <GridList container spacing={2} >
-        <GridListTile item >
-          <TilesItem text={'Shamrock'}   />
+    <div className={classes.box}>
+      <GridList cellHeight={245} className={classes.tileBox}>
+        <GridListTile cols={2} rows={2}>
+          <TilesItem text={'Shamrock'} img={"https://madebyhand.in/wordpress/plantly/wp-content/uploads/2019/12/cat1.png"}/>
         </GridListTile>
-        <GridListTile item >
-          <TilesItem text={'Geraniums'} />
+        <GridListTile cols={2} rows={1}>
+          <TilesItem text={'Geraniums'} img={'https://madebyhand.in/wordpress/plantly/wp-content/uploads/2019/12/cat2.jpg'}/>
         </GridListTile>
-        <GridListTile item >
-          <TilesItem text={'Bermuda'}  />
+      </GridList>
+      <GridList className={classes.tileBox} cellHeight={245}>
+        <GridListTile cols={1} rows={1}>
+          <TilesItem text={'Bermuda'} img={"https://madebyhand.in/wordpress/plantly/wp-content/uploads/2019/12/cat4.jpg"}/>
         </GridListTile>
-        <GridListTile item >
-          <TilesItem text={'Plants'}  />
+        <GridListTile cols={1} rows={1}>
+          <TilesItem text={'Plants'} img={"https://madebyhand.in/wordpress/plantly/wp-content/uploads/2019/12/cat3.jpg"}/>
         </GridListTile>
-        <GridListTile item >
-          <TilesItem text={'Natural'}  />
+        <GridListTile cols={2} rows={2}>
+          <TilesItem text={'Natural'} img={"https://madebyhand.in/wordpress/plantly/wp-content/uploads/2019/12/cat5.png"}/>
         </GridListTile>
       </GridList>
     </div>
-  )
+  );
 };
