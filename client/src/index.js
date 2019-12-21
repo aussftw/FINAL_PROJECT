@@ -1,21 +1,27 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import {BrowserRouter} from "react-router-dom";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
 
-import {Provider} from "react-redux";
-import {configureStore} from "./store";
-import App from "./App";
+import { Provider } from 'react-redux';
+import { configureStore } from './store';
+import App from './App';
+import { ThemeProvider } from '@material-ui/core/styles';
+import theme from './theme';
 
-import "./index.css";
+import './index.css';
 
 const store = configureStore();
 
 ReactDOM.render(
-  <Provider store={store}>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </Provider>,
-    // eslint-disable-next-line no-undef
-  document.getElementById("root")
+  <ThemeProvider theme={theme}>
+    <Provider store={store}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </Provider>
+  </ThemeProvider>,
+// eslint-disable-next-line no-undef
+  document.getElementById('root')
+
+
 );
