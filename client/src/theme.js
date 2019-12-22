@@ -1,13 +1,15 @@
-import { createMuiTheme } from "@material-ui/core/styles";
-import { lightGreen, grey } from "@material-ui/core/colors";
+import { createMuiTheme } from '@material-ui/core/styles';
+import { lightGreen, grey } from '@material-ui/core/colors';
 
-// const breakePointsValues = {
-//   xs: 0,
-//   sm: 576,
-//   md: 768,
-//   lg: 992,
-//   xl: 1200,
-// };
+
+const breakePointsValues = {
+  xs: 0,
+  sm: 576,
+  md: 768,
+  lg: 992,
+  xl: 1200,
+};
+
 
 const theme = createMuiTheme({
   palette: {
@@ -19,7 +21,8 @@ const theme = createMuiTheme({
     secondary: {
       main: grey[700], // main grey
       dark: grey[900], // black
-      light: grey[200], // maybe
+
+      light: grey[200], //maybe
     },
   },
   spacing: 8,

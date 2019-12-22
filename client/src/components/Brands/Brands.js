@@ -1,5 +1,6 @@
 import React from "react";
 
+
 import { Container } from "@material-ui/core";
 
 // import { Grid } from "@material-ui/core";
@@ -13,6 +14,11 @@ import Emirates from "./Pics/brand4.png";
 
 const Brands = () => {
   const classes = useStyles();
+
+
+
+const Brands = () => {
+
 
   return (
     <Container className={classes.brandsContaier}>
