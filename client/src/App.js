@@ -19,8 +19,8 @@ function App() {
       {clicked ? <CartMini /> : null}
 
       <Stock />
-      {/* <Brands />
-      <Footer /> */}
+      <Brands />
+      <Footer />
     </div>
   );
 }
