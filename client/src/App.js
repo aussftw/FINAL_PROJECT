@@ -1,4 +1,5 @@
 
+
 import React, { useState } from "react";
 import MainButton from "./components/common/buttons/MainButton";
 import CartMini from "./components/Header/CartMini/CartMini";
@@ -8,6 +9,7 @@ import Brands from "./components/Brands/Brands";
 import Footer from "./components/Footer/index";
 import Test from "./components/Header";
 import Stock from "./components/Stock";
+
 
 
 function App() {
@@ -22,6 +24,7 @@ function App() {
       {clicked ? <CartMini /> : null}
 
       <Test />
+
       <Brands />
       <Footer />
       <Stock />
