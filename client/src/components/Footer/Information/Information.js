@@ -8,7 +8,6 @@ import {
   ExpansionPanel,
   ExpansionPanelSummary,
   ExpansionPanelDetails,
-  IconButton,
 } from "@material-ui/core";
 
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
@@ -24,16 +23,24 @@ const Information = () => {
           <Typography className={classes}>INFORMATION</Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
-          <Link color="secondary">About us</Link>
+          <Link href="/#" color="secondary">
+            About us
+          </Link>
         </ExpansionPanelDetails>
         <ExpansionPanelDetails>
-          <Link color="secondary">Delivery info</Link>
+          <Link href="/#" color="secondary">
+            Delivery info
+          </Link>
         </ExpansionPanelDetails>
         <ExpansionPanelDetails>
-          <Link color="secondary">Element </Link>
+          <Link href="/#" color="secondary">
+            ELement
+          </Link>
         </ExpansionPanelDetails>
         <ExpansionPanelDetails>
-          <Link color="secondary">Features </Link>
+          <Link href="/#" color="secondary">
+            Features
+          </Link>
         </ExpansionPanelDetails>
       </ExpansionPanel>
     </Grid>

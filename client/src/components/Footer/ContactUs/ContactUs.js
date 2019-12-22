@@ -29,7 +29,9 @@ const ContactUs = () => {
         </ExpansionPanelSummary>
         <Hidden MdUp>
           <ExpansionPanelDetails>
-            <Link color="secondary">Logo</Link>
+            <Link href="/#" color="secondary">
+              Logo
+            </Link>
           </ExpansionPanelDetails>
         </Hidden>
         <ExpansionPanelDetails>
@@ -37,6 +39,7 @@ const ContactUs = () => {
             <DraftsIcon />
             <Link
               color="secondary"
+              href="/#"
               draftsIcon={<DraftsIcon className={classes.draftsIcon} />}
             >
               planty@mail.com
@@ -46,13 +49,17 @@ const ContactUs = () => {
         <ExpansionPanelDetails>
           <IconButton>
             <LocationOnSharpIcon />
-            <Link color="secondary">Location</Link>
+            <Link href="/#" color="secondary">
+              Location
+            </Link>
           </IconButton>
         </ExpansionPanelDetails>
         <ExpansionPanelDetails>
           <IconButton>
             <PhoneSharpIcon />
-            <Link color="secondary">Phone</Link>
+            <Link href="/#" color="secondary">
+              Phone
+            </Link>
           </IconButton>
         </ExpansionPanelDetails>
       </ExpansionPanel>
