@@ -27,7 +27,7 @@ const Footer = () => {
           <MyAccount />
           <Information />
         </Grid>
-        <Grid container>
+        <Grid>
           <Copy />
         </Grid>
       </Hidden>

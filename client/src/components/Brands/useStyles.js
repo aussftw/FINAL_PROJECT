@@ -7,12 +7,13 @@ const useStyles = makeStyles(theme => ({
   brandsContaier: {
     display: "flex",
     flexDirection: "column",
+
+    alignItems: "center",
   },
   brand: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
+    margin: theme.spacing(1.5),
     width: 150,
-    height: 100,
+    height: 110,
   },
 }));
 
