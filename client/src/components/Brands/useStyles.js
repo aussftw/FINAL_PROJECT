@@ -1,13 +1,9 @@
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(theme => ({
-  border: {
-    border: "1px solid black",
-  },
   brandsContaier: {
     display: "flex",
     flexDirection: "column",
-
     alignItems: "center",
   },
   brand: {

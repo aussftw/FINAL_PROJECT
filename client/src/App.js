@@ -18,11 +18,9 @@ function App() {
       <MainButton text="BlaBla" onClick={() => setClicked(!clicked)} />
       {clicked ? <CartMini /> : null}
 
-      <Test />
-
       <Stock />
-      <Brands />
-      <Footer />
+      {/* <Brands />
+      <Footer /> */}
     </div>
   );
 }
