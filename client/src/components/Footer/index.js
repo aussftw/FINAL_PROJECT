@@ -1,10 +1,10 @@
 import React from "react";
 
-import { ThemeProvider } from "@material-ui/core/styles";
+// import { ThemeProvider } from "@material-ui/core/styles";
 import Hidden from "@material-ui/core/Hidden";
 import { Grid } from "@material-ui/core";
-import useStyles from "./useStyles";
-import theme from "../../theme";
+// import useStyles from "./useStyles";
+// import theme from "../../theme";
 
 import ContactUs from "./ContactUs/ContactUs";
 import Payment from "./Payment/Payment";
@@ -13,7 +13,7 @@ import Information from "./Information/Information";
 import Copy from "./Copy/Copy";
 
 const Footer = () => {
-  const classes = useStyles();
+  // const classes = useStyles();
 
   return (
     <>

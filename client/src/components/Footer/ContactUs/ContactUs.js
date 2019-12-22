@@ -8,7 +8,6 @@ import {
   ExpansionPanel,
   ExpansionPanelSummary,
   ExpansionPanelDetails,
-  IconButton,
 } from "@material-ui/core";
 import Hidden from "@material-ui/core/Hidden";
 
@@ -35,32 +34,27 @@ const ContactUs = () => {
           </ExpansionPanelDetails>
         </Hidden>
         <ExpansionPanelDetails>
-          <IconButton>
-            <DraftsIcon />
-            <Link
-              color="secondary"
-              href="/#"
-              draftsIcon={<DraftsIcon className={classes.draftsIcon} />}
-            >
-              planty@mail.com
-            </Link>
-          </IconButton>
+          <DraftsIcon className={classes.contactUsIcon} />
+          <Link
+            className={classes.contactUsItem}
+            color="secondary"
+            href="/#"
+            draftsIcon={<DraftsIcon />}
+          >
+            planty@mail.com
+          </Link>
         </ExpansionPanelDetails>
         <ExpansionPanelDetails>
-          <IconButton>
-            <LocationOnSharpIcon />
-            <Link href="/#" color="secondary">
-              Location
-            </Link>
-          </IconButton>
+          <LocationOnSharpIcon className={classes.contactUsIcon} />
+          <Link href="/#" color="secondary" className={classes.contactUsItem}>
+            Location
+          </Link>
         </ExpansionPanelDetails>
         <ExpansionPanelDetails>
-          <IconButton>
-            <PhoneSharpIcon />
-            <Link href="/#" color="secondary">
-              Phone
-            </Link>
-          </IconButton>
+          <PhoneSharpIcon className={classes.contactUsIcon} />
+          <Link href="/#" color="secondary" className={classes.contactUsItem}>
+            Phone
+          </Link>
         </ExpansionPanelDetails>
       </ExpansionPanel>
     </Grid>

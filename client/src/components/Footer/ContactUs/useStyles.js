@@ -1,9 +1,12 @@
 import { makeStyles } from "@material-ui/core/styles";
-import theme from "../../../theme";
 
 const useStyles = makeStyles(theme => ({
-  draftsIcon: {
+  contactUsIcon: {
     marginRight: theme.spacing(1),
+    color: theme.palette.secondary.main,
+  },
+  contactUsItem: {
+    fontSize: 16,
   },
   bg: {
     backgroundColor: theme.palette.primary.light,

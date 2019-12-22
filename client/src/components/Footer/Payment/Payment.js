@@ -26,16 +26,16 @@ const Payment = () => {
           <Typography className={classes}>PAYMENT</Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
-          <img src={MasterCard} />
+          <img src={AmericanExpress} alt="American Express" />
         </ExpansionPanelDetails>
         <ExpansionPanelDetails>
-          <img src={PayPal} />
+          <img src={PayPal} alt="PayPal" />
         </ExpansionPanelDetails>
         <ExpansionPanelDetails>
-          <img src={MasterCard} />
+          <img src={MasterCard} alt="Master Card" />
         </ExpansionPanelDetails>
         <ExpansionPanelDetails>
-          <img src={Visa} />
+          <img src={Visa} alt="Visa" />
         </ExpansionPanelDetails>
       </ExpansionPanel>
     </Grid>

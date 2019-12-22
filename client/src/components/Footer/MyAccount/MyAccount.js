@@ -23,16 +23,24 @@ const MyAccount = () => {
           <Typography className={classes}>MY ACCOUNT</Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
-          <Link color="secondary">Whishlist</Link>
+          <Link color="secondary" href="/">
+            Whishlist
+          </Link>
         </ExpansionPanelDetails>
         <ExpansionPanelDetails>
-          <Link color="secondary">Checkout</Link>
+          <Link color="secondary" href="/">
+            Checkout
+          </Link>
         </ExpansionPanelDetails>
         <ExpansionPanelDetails>
-          <Link color="secondary">Gallery</Link>
+          <Link color="secondary" href="/">
+            Gallery
+          </Link>
         </ExpansionPanelDetails>
         <ExpansionPanelDetails>
-          <Link color="secondary">Service</Link>
+          <Link color="secondary" href="/">
+            Service
+          </Link>
         </ExpansionPanelDetails>
       </ExpansionPanel>
     </Grid>
