@@ -113,9 +113,11 @@ const useStyle = makeStyles(() => ({
       opacity: 0,
       transform: "scale(0.7)",
     },
+
     "30%": {
       opacity: 0,
     },
+
     "70%": {
       transform: "scale(0.8)",
       opacity: 1,

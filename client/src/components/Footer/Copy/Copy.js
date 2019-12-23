@@ -6,7 +6,7 @@ const Copy = () => {
   const classes = useStyles();
 
   return (
-    <Grid item xs={12} className={classes}>
+    <Grid item xs={12} className={classes.copyHeader}>
       <Divider variant="middle" />
       <Typography className={classes.textedFooter}>
         Designed by Webibazaar Theme All rights reserved. © 2020
