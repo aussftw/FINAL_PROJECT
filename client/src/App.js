@@ -1,15 +1,13 @@
 import React, { useState } from "react";
 import MainButton from "./components/common/buttons/MainButton";
 import CartMini from "./components/Header/CartMini/CartMini";
-
+import { HomePage } from './components/HomePage/HomePage';
 import Brands from "./components/Brands/Brands";
 
 import Footer from "./components/Footer/index";
 // eslint-disable-next-line
 // import Stock from "./components/Stock";
 import Subscribe from "./components/Subscribe/Subscribe";
-
-
 
 function App() {
   const [clicked, setClicked] = useState(false);
@@ -18,6 +16,7 @@ function App() {
     <div className="App">
       <h1>Some Shop</h1>
       <p> for real</p>
+      <HomePage />
       <MainButton text="BlaBla" onClick={() => setClicked(!clicked)} />
       {clicked ? <CartMini /> : null}
       {/* eslint-disable-next-line */}

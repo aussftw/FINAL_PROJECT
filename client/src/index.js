@@ -11,6 +11,7 @@ import theme from "./theme";
 
 import "./index.css";
 
+
 const store = configureStore();
 
 ReactDOM.render(
@@ -21,10 +22,5 @@ ReactDOM.render(
       </BrowserRouter>
     </Provider>
   </ThemeProvider>,
-
-// eslint-disable-next-line no-undef
-  document.getElementById('root')
-
-
-
+  document.getElementById("root")
 );

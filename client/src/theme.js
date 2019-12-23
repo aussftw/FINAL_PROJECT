@@ -12,20 +12,29 @@ const breakePointsValues = {
 
 
 const theme = createMuiTheme({
-  palette: {
-    primary: {
-      main: lightGreen[700], // main theme color
-      light: lightGreen[200], // footer bg
-      dark: lightGreen[900], // hover btn
-    },
-    secondary: {
-      main: grey[700], // main grey
-      dark: grey[900], // black
-
-      light: grey[200], //maybe
+  overrides: {
+    MuiGridListTile: {
+      root: {
+        position: 'relative',
+      },
+      tile: {
+        padding: '0 15px',
+      },
     },
   },
+  palette: {
+    primary: {
+      main: lightGreen[700], //main theme color
+      light: lightGreen[100], //footer bg
+      dark: lightGreen[900], //hover btn
+    },
+    secondary: {
+      main: grey[700], //main grey
+      dark: grey[900], // black
+      light: grey[100], //maybe
+    },
   spacing: 8,
+  },
 });
 
 export default theme;

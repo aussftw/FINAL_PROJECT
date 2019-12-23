@@ -2,6 +2,7 @@
   "extends": ["airbnb","airbnb/hooks","prettier"],
   "plugins": ["prettier"],
   "rules": {
+
     "func-names": ["error", "never"],
     "no-console": "warn",
     "react/prop-types": 0,
@@ -16,6 +17,7 @@
       { "blankLine": "always", "prev": "const", "next": "return" },
       { "blankLine": "always", "prev": "function", "next": "return" },
       { "blankLine": "always", "prev": "let", "next": "return" }
+
     ]
   }
 }
