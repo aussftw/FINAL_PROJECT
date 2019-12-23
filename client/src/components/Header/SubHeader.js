@@ -3,13 +3,15 @@ import {Link} from 'react-router-dom';
 
 import MenuListComposition from "./Dropdown";
 
-import {makeStyles, withStyles} from "@material-ui/core";
+import {makeStyles} from "@material-ui/core";
 
 import Box from '@material-ui/core/Box';
 
 
 const useStyles = makeStyles(theme => ({
   subheader: {
+    marginTop: '65px',
+    minHeight: '25px',
     padding: '10px 24px',
     backgroundColor: theme.palette.secondary.light,
   },
@@ -39,25 +41,21 @@ export default function SubHeader() {
   // );
 
   return (
-
       <Box display='flex' justifyContent="center" className={classes.subheader}>
-
         <Box>
           <Link
               className={classes.link}
+              // to='/' exact component={pageFirst}
               // component={} to="/second"
           >Home</Link>
-
-            <MenuListComposition
-                menuTitle={'Shop'}
-                plantCategories={['Succulents', 'Aloe', 'Emergents', 'Geraniums']}
-                className={classes.link}
-            />
+          <MenuListComposition
+              menuTitle={'Shop'}
+              plantCategories={['Succulents', 'Aloe', 'Emergents', 'Geraniums']}
+              className={classes.link}
+          />
           <Link className={classes.link}>About Us</Link>
           <Link className={classes.link}>Contacts</Link>
         </Box>
       </Box>
-
-
   );
 }

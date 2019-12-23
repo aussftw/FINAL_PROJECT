@@ -23,6 +23,16 @@ const theme = createMuiTheme({
     }
   },
   overrides: {
+    MuiFab:{
+      root:{
+        backgroundColor: 'white',
+        color: lightGreen[700],
+        '&:hover':{
+          boxShadow:  '0px 3px 5px -1px lightGreen, 0px 6px 10px 0px lightGreen, 0px 1px 18px 0px lightGreen',
+          backgroundColor: 'white',
+        }
+      },
+    },
     MuiTooltip: {
       tooltip: {
         fontSize: '14px',
