@@ -1,23 +1,21 @@
-import React from 'react';
-import theme from '../../../theme';
-import useStyles from './useStyles';
+import React from "react";
+// import theme from "../../../theme";
 
 import {
   Grid,
   Typography,
+  Link,
   ExpansionPanel,
   ExpansionPanelSummary,
   ExpansionPanelDetails,
-  IconButton,
-} from '@material-ui/core';
+} from "@material-ui/core";
 
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import DraftsIcon from '@material-ui/icons/Drafts';
-import LocationOnSharpIcon from '@material-ui/icons/LocationOnSharp';
-import PhoneSharpIcon from '@material-ui/icons/PhoneSharp';
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import useStyles from "./useStyles";
 
 const MyAccount = () => {
   const classes = useStyles();
+
   return (
     <Grid item xs={12} lg={3} md={12}>
       <ExpansionPanel className={classes.bg}>
@@ -25,19 +23,24 @@ const MyAccount = () => {
           <Typography className={classes}>MY ACCOUNT</Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
-          <Typography color="secondary">Whishlist</Typography>
+          <Link color="secondary" href="/">
+            Whishlist
+          </Link>
         </ExpansionPanelDetails>
         <ExpansionPanelDetails>
-          <Typography color="secondary">Checkout</Typography>
+          <Link color="secondary" href="/">
+            Checkout
+          </Link>
         </ExpansionPanelDetails>
         <ExpansionPanelDetails>
-          <Typography color="secondary">Gallery</Typography>
+          <Link color="secondary" href="/">
+            Gallery
+          </Link>
         </ExpansionPanelDetails>
         <ExpansionPanelDetails>
-          <Typography color="secondary">Service</Typography>
-        </ExpansionPanelDetails>
-        <ExpansionPanelDetails>
-          <Typography color="secondary">Terms&Conditions © 2020</Typography>
+          <Link color="secondary" href="/">
+            Service
+          </Link>
         </ExpansionPanelDetails>
       </ExpansionPanel>
     </Grid>

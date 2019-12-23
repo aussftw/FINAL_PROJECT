@@ -1,6 +1,5 @@
-import React from 'react';
+import React from "react";
 // import theme from '../../theme';
-import useStyles from './useStyles';
 
 import {
   Grid,
@@ -8,16 +7,18 @@ import {
   ExpansionPanel,
   ExpansionPanelSummary,
   ExpansionPanelDetails,
-  IconButton,
-} from '@material-ui/core';
+} from "@material-ui/core";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import useStyles from "./useStyles";
 
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import DraftsIcon from '@material-ui/icons/Drafts';
-import LocationOnSharpIcon from '@material-ui/icons/LocationOnSharp';
-import PhoneSharpIcon from '@material-ui/icons/PhoneSharp';
+import AmericanExpress from "./pics/AmericanExpress.png";
+import Visa from "./pics/visa.png";
+import MasterCard from "./pics/mastercard.png";
+import PayPal from "./pics/PayPal.png";
 
 const Payment = () => {
   const classes = useStyles();
+
   return (
     <Grid item xs={12} lg={3} md={12} className={classes}>
       <ExpansionPanel className={classes.bg}>
@@ -25,16 +26,16 @@ const Payment = () => {
           <Typography className={classes}>PAYMENT</Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
-          <Typography>maestropic</Typography>
+          <img src={AmericanExpress} alt="American Express" />
         </ExpansionPanelDetails>
         <ExpansionPanelDetails>
-          <Typography>american express pic</Typography>
+          <img src={PayPal} alt="PayPal" />
         </ExpansionPanelDetails>
         <ExpansionPanelDetails>
-          <Typography>paypal pic</Typography>
+          <img src={MasterCard} alt="Master Card" />
         </ExpansionPanelDetails>
         <ExpansionPanelDetails>
-          <Typography>some pic</Typography>
+          <img src={Visa} alt="Visa" />
         </ExpansionPanelDetails>
       </ExpansionPanel>
     </Grid>

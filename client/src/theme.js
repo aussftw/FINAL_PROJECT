@@ -1,12 +1,12 @@
-import {createMuiTheme} from '@material-ui/core/styles';
-import {lightGreen, grey} from '@material-ui/core/colors';
+import { createMuiTheme } from '@material-ui/core/styles';
+import { lightGreen, grey } from '@material-ui/core/colors';
 
 const breakePointsValues = {
   xs: 0,
   sm: 576,
   md: 768,
   lg: 992,
-  xl: 1200
+  xl: 1200,
 };
 
 const theme = createMuiTheme({
@@ -22,6 +22,7 @@ const theme = createMuiTheme({
       light: grey[200] //maybe
     }
   },
+  spacing: 8,
   overrides: {
     MuiFab:{
       root:{

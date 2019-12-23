@@ -1,3 +1,4 @@
+
 import React from 'react';
 
 import CustomizedSearch from './Search'
@@ -16,7 +17,6 @@ import Badge from '@material-ui/core/Badge';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-
 
 import Paper from "@material-ui/core/Paper";
 const useStyles = makeStyles(theme => ({
@@ -199,3 +199,23 @@ export default function Header() {
       </div>
   );
 }
+// import React, { useState } from "react";
+//
+// const Test = () => {
+//   const [active, setActive] = useState(false);
+//
+//   return (
+//       <div>
+//         <h1>Gogi</h1>
+//         <button
+//             onClick={() => {
+//               setActive(!active);
+//             }}
+//         >
+//           Click Gogi
+//         </button>
+//       </div>
+//   );
+// };
+//
+// export default Test;
