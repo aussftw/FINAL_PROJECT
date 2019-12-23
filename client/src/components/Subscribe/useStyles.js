@@ -11,24 +11,28 @@ const useStyles = makeStyles(theme => ({
     alignItems: "center",
     textAlign: "center",
     marginBottom: 10,
+    fontWeight: 600,
   },
 
   input: {
     backgroundColor: "#fff",
     paddingLeft: 15,
     paddingRight: 15,
-    paddingTop: 8,
+    paddingTop: 6,
     paddingBottom: 2,
     width: "90%",
     marginBottom: 15,
     borderRadius: "5px",
+    height: 50,
   },
 
   actionButton: {
     marginBottom: 15,
-    padding: 20,
+    paddingLeft: 20,
+    paddingRight: 20,
     color: "#fff",
     backgroundColor: theme.palette.primary.main,
+    height: 50,
   },
 
   subscribeBar: {
