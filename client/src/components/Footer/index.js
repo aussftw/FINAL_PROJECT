@@ -1,49 +1,41 @@
-function App() {
-  var subtitle;
-  const [modalIsOpen, setIsOpen] = React.useState(false);
+import React from "react";
 
-  const a = 0;
+// import { ThemeProvider } from "@material-ui/core/styles";
+import Hidden from "@material-ui/core/Hidden";
+import { Grid, Container, Typography } from "@material-ui/core";
+import useStyles from "./useStyles";
+// import theme from "../../theme";
 
+// import Hidden from '@material-ui/core/Hidden';
+import ContactUs from "./ContactUs/ContactUs";
+import Payment from "./Payment/Payment";
+import MyAccount from "./MyAccount/MyAccount";
+import Information from "./Information/Information";
 
-  function openModal() {
-    setIsOpen(true);
-  }
+import Copy from "./Copy/Copy";
 
-  function afterOpenModal() {
-    // references are now sync'd and can be accessed.
-    subtitle.style.color = '#f00';
-  }
+const Footer = () => {
+  const classes = useStyles();
 
-  function closeModal() {
-    setIsOpen(false);
-  }
-
-  console.log(hhh);
-  console.log(hhh);
-  console.log(hhh);
   return (
-    <div>
-      <button onClick={openModal}>Open Modal</button>
-      <Modal
-        isOpen={modalIsOpen}
-        onAfterOpen={afterOpenModal}
-        onRequestClose={closeModal}
-        style={customStyles}
-        contentLabel="Example Modal"
-      >
-        <h2 ref={_subtitle => (subtitle = _subtitle)}>Hello</h2>
-        <button onClick={closeModal}>close</button>
-        <div>I am a modal</div>
-        <form>
-          <input />
-          <button>tab navigation</button>
-          <button>stays</button>
-          <button>inside</button>
-          <button>the modal</button>
-        </form>
-      </Modal>
-    </div>
+    <Container className={classes.bg} maxWidth>
+      <Hidden SmDown>
+        <Typography>LOGO</Typography>
+      </Hidden>
+      <Hidden MdUp>
+        <Grid container>
+          <ContactUs />
+          <Payment />
+          <MyAccount />
+          <Information />
+        </Grid>
+        <Grid>
+          <Copy />
+        </Grid>
+      </Hidden>
+    </Container>
   );
-}
+};
 
-ReactDOM.render(<App />, appElement);
+export default Footer;
+

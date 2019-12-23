@@ -1,6 +1,7 @@
 import { createMuiTheme } from '@material-ui/core/styles';
 import { lightGreen, grey } from '@material-ui/core/colors';
 
+
 const breakePointsValues = {
   xs: 0,
   sm: 576,
@@ -8,6 +9,7 @@ const breakePointsValues = {
   lg: 992,
   xl: 1200,
 };
+
 
 const theme = createMuiTheme({
   overrides: {
@@ -31,6 +33,7 @@ const theme = createMuiTheme({
       dark: grey[900], // black
       light: grey[100], //maybe
     },
+  spacing: 8,
   },
 });
 
