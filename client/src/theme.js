@@ -12,6 +12,9 @@ const breakePointsValues = {
 const theme = createMuiTheme({
   overrides: {
     MuiGridListTile: {
+      root: {
+        position: 'relative',
+      },
       tile: {
         padding: '0 15px',
       },
