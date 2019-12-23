@@ -2,7 +2,7 @@ import React from "react";
 
 // import { ThemeProvider } from "@material-ui/core/styles";
 import Hidden from "@material-ui/core/Hidden";
-import { Grid, Box } from "@material-ui/core";
+import { Grid, Container, Typography } from "@material-ui/core";
 import useStyles from "./useStyles";
 // import theme from "../../theme";
 
@@ -18,9 +18,9 @@ const Footer = () => {
   const classes = useStyles();
 
   return (
-    <Box className={classes.bg}>
+    <Container className={classes.bg} maxWidth>
       <Hidden SmDown>
-        <p>LOGO</p>
+        <Typography>LOGO</Typography>
       </Hidden>
       <Hidden MdUp>
         <Grid container>
@@ -33,7 +33,7 @@ const Footer = () => {
           <Copy />
         </Grid>
       </Hidden>
-    </Box>
+    </Container>
   );
 };
 

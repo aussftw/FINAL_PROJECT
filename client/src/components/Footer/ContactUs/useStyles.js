@@ -10,6 +10,7 @@ const useStyles = makeStyles(theme => ({
   },
   bg: {
     backgroundColor: theme.palette.primary.light,
+    borderRadius: "0px", // dosent work
   },
 }));
 

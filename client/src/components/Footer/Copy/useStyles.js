@@ -1,9 +1,14 @@
 import { makeStyles } from "@material-ui/core/styles";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(() => ({
+  // we can also use theme here
   textedFooter: {
-    padding: 20,
+    paddingBottom: 30,
+    paddingTop: 10,
     textAlign: "center",
+  },
+  copyHeader: {
+    paddingTop: 30,
   },
 }));
 
