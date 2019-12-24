@@ -10,6 +10,13 @@ import { lightGreen, grey } from "@material-ui/core/colors";
 // };
 
 const theme = createMuiTheme({
+  breakpoints: {
+    xs: 0,
+    sm: 576,
+    md: 768,
+    lg: 992,
+    xl: 1200,
+  },
   palette: {
     primary: {
       main: lightGreen[700], // main theme color
@@ -51,13 +58,10 @@ const theme = createMuiTheme({
     },
 
     MuiFab: {
-      root: {
-        backgroundColor: "white",
-        color: lightGreen[700],
+      secondary: {
+        backgroundColor: lightGreen[700],
         "&:hover": {
-          boxShadow:
-            "0px 3px 5px -1px lightGreen, 0px 6px 10px 0px lightGreen, 0px 1px 18px 0px lightGreen",
-          backgroundColor: "white",
+          backgroundColor: lightGreen[900],
         },
       },
     },
@@ -72,6 +76,13 @@ const theme = createMuiTheme({
         "&:hover": {
           color: lightGreen[700],
           backgroundColor: lightGreen[100],
+        },
+      },
+      contained: {
+        color: "white",
+        backgroundColor: lightGreen[700],
+        "&:hover": {
+          backgroundColor: lightGreen[900],
         },
       },
     },

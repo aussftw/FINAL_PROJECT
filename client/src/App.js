@@ -20,11 +20,11 @@ function App() {
   return (
     <div className="App">
       <BackToTop />
-      <HomePage />
       <Header />
       <BrowserRouter>
         <SubHeader />
       </BrowserRouter>
+      <HomePage />
       <MainButton text="BlaBla" onClick={() => setClicked(!clicked)} />
       {clicked ? <CartMini /> : null}
       {/* eslint-disable-next-line */}
