@@ -61,7 +61,7 @@ export default function MenuListComposition(props) {
   return (
     <div className={classes.root}>
       {/* ? : если в коллекции новые поступления есть */}
-      <Tooltip title="New" placement="top" open arrow>
+      <Tooltip title="New" placement="top" arrow>
         <Link
           href="/#"
           ref={anchorRef}

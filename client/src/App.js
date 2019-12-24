@@ -19,15 +19,12 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Some Shop</h1>
-      <p> for real</p>
+      <BackToTop />
       <HomePage />
-
       <Header />
       <BrowserRouter>
         <SubHeader />
       </BrowserRouter>
-
       <MainButton text="BlaBla" onClick={() => setClicked(!clicked)} />
       {clicked ? <CartMini /> : null}
       {/* eslint-disable-next-line */}
@@ -35,7 +32,6 @@ function App() {
       <Brands />
       <Subscribe />
       <Footer />
-      <BackToTop />
     </div>
   );
 }
