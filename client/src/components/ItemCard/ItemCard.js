@@ -1,59 +1,56 @@
-import React from "react";
+import React from 'react';
 
-import { makeStyles } from "@material-ui/core/styles";
-import {
-  Box,
-  Card,
-  CardMedia,
-  CardActionArea,
-  CardContent,
-  Typography,
-  Tooltip,
-} from "@material-ui/core";
-import { StarBorder } from "@material-ui/icons";
-import Rating from "@material-ui/lab/Rating";
-// import theme from '../../theme.js';
+import Box from '@material-ui/core/Box';
+import Button from '@material-ui/core/Button';
+import Card from '@material-ui/core/Card';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardMedia from '@material-ui/core/CardMedia';
+import CardContent from '@material-ui/core/CardContent';
+import IconButton from '@material-ui/core/IconButton';
+import Typography from '@material-ui/core/Typography';
+import Tooltip from '@material-ui/core/Tooltip';
 
-const useStyles = makeStyles(theme => ({
-  card: {
-    maxWidth: 240,
-  },
-  cardContent: {
-    paddingTop: 8,
-  },
-  media: {
-    height: 200,
-  },
-  title: {
-    fontSize: 14,
-    color: theme.palette.secondary.dark,
-    "&:hover": {
-      color: theme.palette.primary.main,
-    },
-  },
-  rating: {
-    color: theme.palette.primary.main,
-    iconEmpty: {
-      color: theme.palette.primary.main,
-    },
-  },
-}));
+import StarBorder from '@material-ui/icons/StarBorder';
+import Favorite from '@material-ui/icons/Favorite';
+import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
+
+import Rating from '@material-ui/lab/Rating';
+import useStyles from './useStyles';
 
 const CardTooltipText = value => {
-  if (value === undefined) return "Not yet rated";
+  if (value === undefined) return 'Not yet rated';
   const rate = Math.round(value * 100) / 100;
 
   return `Rated ${rate} out of 5`;
 };
 
-const ItemCard = ({ title, value }) => {
+const ItemCard = ({ title, value, price, inCart, inWishList }) => {
   const classes = useStyles();
 
   return (
     <Card className={classes.card}>
-      <CardActionArea className={classes.actionArea}>
+      {inWishList ? (
+        <Tooltip title='Remove from wishlist'>
+          <IconButton className={classes.wishList}>
+            <Favorite />
+          </IconButton>
+        </Tooltip>
+        )
+        : (
+          <Tooltip title='Add to wishlist'>
+            <IconButton className={classes.wishList}>
+              <FavoriteBorder />
+            </IconButton>
+          </Tooltip>
+        )}
+      <CardActionArea
+        classes={{
+          root: classes.actionArea,
+          focusHighlight: classes.focusHighlight
+        }}
+      >
         <CardMedia
-          className={classes.media}
+          className={classes.mediaImage}
           image="/img/10-310x270.jpg"
           title="Plant"
         />
@@ -67,7 +64,7 @@ const ItemCard = ({ title, value }) => {
             {title}
           </Typography>
           <Tooltip title={CardTooltipText(value)}>
-            <Box align="center">
+            <Box align="center" gutterBottom>
               <Rating
                 className={classes.rating}
                 name="rating"
@@ -81,7 +78,18 @@ const ItemCard = ({ title, value }) => {
               />
             </Box>
           </Tooltip>
+          <Typography className={classes.price} align="center">
+            $
+            {price.toFixed(2)}
+          </Typography>
         </CardContent>
+        {inCart ? (
+          <Tooltip title='Remove from cart'>
+            <Button variant="text" className={classes.removeFromCart} fullWidth>in cart</Button>
+          </Tooltip>
+          )
+          :
+          <Button variant="text" fullWidth>+ add to cart</Button>}
       </CardActionArea>
     </Card>
   );

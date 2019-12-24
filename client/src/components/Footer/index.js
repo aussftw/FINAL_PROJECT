@@ -1,26 +1,26 @@
-import React from "react";
+import React from 'react';
 
-import { ThemeProvider } from "@material-ui/core/styles";
+import { ThemeProvider } from '@material-ui/core/styles';
+import Hidden from '@material-ui/core/Hidden';
 import {
   Grid,
   Typography,
-  // ExpansionPanel,
-  // ExpansionPanelSummary,
-  // ExpansionPanelDetails,
-  // IconButton,
-} from "@material-ui/core";
-// import Hidden from '@material-ui/core/Hidden';
-// import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-// import DraftsIcon from '@material-ui/icons/Drafts';
-// import LocationOnSharpIcon from '@material-ui/icons/LocationOnSharp';
-// import PhoneSharpIcon from '@material-ui/icons/PhoneSharp';
-import useStyles from "./useStyles";
-import theme from "../../theme";
+  ExpansionPanel,
+  ExpansionPanelSummary,
+  ExpansionPanelDetails,
+  IconButton,
+} from '@material-ui/core';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import DraftsIcon from '@material-ui/icons/Drafts';
+import LocationOnSharpIcon from '@material-ui/icons/LocationOnSharp';
+import PhoneSharpIcon from '@material-ui/icons/PhoneSharp';
+import useStyles from './useStyles';
+import theme from '../../theme';
 
-import ContactUs from "./ContactUs/ContactUs";
-import Payment from "./Payment/Payment";
-import MyAccount from "./MyAccount/MyAccount";
-import Information from "./Information/Information";
+import ContactUs from './ContactUs/ContactUs';
+import Payment from './Payment/Payment';
+import MyAccount from './MyAccount/MyAccount';
+import Information from './Information/Information';
 
 const Footer = () => {
   const classes = useStyles();
