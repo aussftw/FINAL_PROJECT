@@ -1,28 +1,16 @@
-import { makeStyles } from '@material-ui/core/styles';
-import theme from '../../../theme';
+import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(theme => ({
-  border: {
-    border: '1px solid black',
+  contactUsIcon: {
+    marginRight: theme.spacing(1),
+    color: theme.palette.secondary.main,
   },
-  borderNoBottom: {
-    borderLeft: '1px solid black',
-    borderTop: '1px solid black',
-    borderRight: '1px solid black',
-  },
-  borderNoRight: {
-    borderLeft: '1px solid black',
-    borderTop: '1px solid black',
-    borderBottom: '1px solid black',
+  contactUsItem: {
+    fontSize: 16,
   },
   bg: {
-    backgroundColor: 'theme.palette.primary.main',
-  },
-  textedFooter: {
-    margin: 20,
-    // backgroundColor: '#F2F6E8',
-
     backgroundColor: theme.palette.primary.light,
+    borderRadius: "0px", // dosent work
   },
 }));
 

@@ -1,14 +1,15 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
+import React from "react";
+import ReactDOM from "react-dom";
+import { BrowserRouter } from "react-router-dom";
+import { ThemeProvider } from "@material-ui/core/styles";
+import { Provider } from "react-redux";
+// eslint-disable-next-line
+import configureStore from "./store";
+import App from "./App";
 
-import { Provider } from 'react-redux';
-import { ThemeProvider } from '@material-ui/core/styles';
-import { configureStore } from './store';
-import App from './App';
-import theme from './theme';
+import theme from "./theme";
 
-import './index.css';
+import "./index.css";
 
 const store = configureStore();
 
@@ -20,8 +21,6 @@ ReactDOM.render(
       </BrowserRouter>
     </Provider>
   </ThemeProvider>,
-// eslint-disable-next-line no-undef
-  document.getElementById('root')
-
-
+  // eslint-disable-next-line
+  document.getElementById("root")
 );

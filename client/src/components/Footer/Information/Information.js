@@ -1,23 +1,21 @@
-import React from 'react';
+import React from "react";
 // import theme from '../../theme';
-import useStyles from './useStyles';
 
 import {
   Grid,
   Typography,
+  Link,
   ExpansionPanel,
   ExpansionPanelSummary,
   ExpansionPanelDetails,
-  IconButton,
-} from '@material-ui/core';
+} from "@material-ui/core";
 
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import DraftsIcon from '@material-ui/icons/Drafts';
-import LocationOnSharpIcon from '@material-ui/icons/LocationOnSharp';
-import PhoneSharpIcon from '@material-ui/icons/PhoneSharp';
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import useStyles from "./useStyles";
 
 const Information = () => {
   const classes = useStyles();
+
   return (
     <Grid item xs={12} lg={3} md={12} className={classes}>
       <ExpansionPanel className={classes.bg}>
@@ -25,19 +23,24 @@ const Information = () => {
           <Typography className={classes}>INFORMATION</Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
-          <Typography color="secondary">About us</Typography>
+          <Link href="/#" color="secondary">
+            About us
+          </Link>
         </ExpansionPanelDetails>
         <ExpansionPanelDetails>
-          <Typography>About us</Typography>
+          <Link href="/#" color="secondary">
+            Delivery info
+          </Link>
         </ExpansionPanelDetails>
         <ExpansionPanelDetails>
-          <Typography color="secondary">Delivery info</Typography>
+          <Link href="/#" color="secondary">
+            ELement
+          </Link>
         </ExpansionPanelDetails>
         <ExpansionPanelDetails>
-          <Typography>Element </Typography>
-        </ExpansionPanelDetails>
-        <ExpansionPanelDetails>
-          <Typography color="secondary">Features </Typography>
+          <Link href="/#" color="secondary">
+            Features
+          </Link>
         </ExpansionPanelDetails>
       </ExpansionPanel>
     </Grid>
