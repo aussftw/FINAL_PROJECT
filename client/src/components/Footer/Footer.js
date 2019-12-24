@@ -1,8 +1,6 @@
-import React from 'react';
+import React from "react";
 
-import theme from '../../theme';
-import useStyles from './useStyles';
-import { ThemeProvider } from '@material-ui/core/styles';
+import { ThemeProvider } from "@material-ui/core/styles";
 // import Hidden from '@material-ui/core/Hidden';
 import {
   Grid,
@@ -11,11 +9,13 @@ import {
   ExpansionPanelSummary,
   ExpansionPanelDetails,
   IconButton,
-} from '@material-ui/core';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import DraftsIcon from '@material-ui/icons/Drafts';
-import LocationOnSharpIcon from '@material-ui/icons/LocationOnSharp';
-import PhoneSharpIcon from '@material-ui/icons/PhoneSharp';
+} from "@material-ui/core";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import DraftsIcon from "@material-ui/icons/Drafts";
+import LocationOnSharpIcon from "@material-ui/icons/LocationOnSharp";
+import PhoneSharpIcon from "@material-ui/icons/PhoneSharp";
+import useStyles from "./useStyles";
+import theme from "../../theme";
 
 const Footer = () => {
   const classes = useStyles();
@@ -114,7 +114,9 @@ const Footer = () => {
                 <Typography color="secondary.[light]">Service</Typography>
               </ExpansionPanelDetails>
               <ExpansionPanelDetails>
-                <Typography color="secondary">Terms&Conditions © 2020</Typography>
+                <Typography color="secondary">
+                  Terms&Conditions © 2020
+                </Typography>
               </ExpansionPanelDetails>
             </ExpansionPanel>
           </Grid>
