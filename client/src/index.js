@@ -4,13 +4,13 @@ import { BrowserRouter } from "react-router-dom";
 
 import { ThemeProvider } from "@material-ui/core/styles";
 import { Provider } from "react-redux";
-import { configureStore } from "./store";
+// eslint-disable-next-line
+import configureStore from "./store";
 import App from "./App";
 
 import theme from "./theme";
 
 import "./index.css";
-
 
 const store = configureStore();
 
@@ -22,5 +22,6 @@ ReactDOM.render(
       </BrowserRouter>
     </Provider>
   </ThemeProvider>,
+  // eslint-disable-next-line
   document.getElementById("root")
 );

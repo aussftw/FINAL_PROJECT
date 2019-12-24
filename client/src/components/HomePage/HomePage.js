@@ -1,12 +1,13 @@
-import React from 'react';
+import React from "react";
 
-import { TilesPanel } from '../Tiles/TilesPanel/TilesPanel';
-import Container from '@material-ui/core/Container';
+import Container from "@material-ui/core/Container";
+import TilesPanel from "../Tiles/TilesPanel/TilesPanel";
 
-export const HomePage = () => {
+const HomePage = () => {
   return (
-    <Container maxWidth={'lg'} disableGutters={true}>
+    <Container maxWidth="lg" disableGutters>
       <TilesPanel />
     </Container>
-  )
+  );
 };
+export default HomePage;
