@@ -7,7 +7,7 @@ import useStyles from "./useStyles";
 const CardAtMiniCart = ({ url, title, qty, price }) => {
   const classes = useStyles();
   const [isAddedToCart, setAddedToCart] = useState(true);
-
+  console.log("keks");
   function removeFromMiniCartBtn() {
     setAddedToCart(!isAddedToCart);
     // if(localStorage.getItem(`AddedToCart${id}`)){
