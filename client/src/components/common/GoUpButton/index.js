@@ -1,43 +1,57 @@
-import React from 'react';
-
-import Fab from '@material-ui/core/Fab';
-import ExpandLessIcon from '@material-ui/icons/ExpandLess';
-import {makeStyles} from "@material-ui/core";
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import Fab from "@material-ui/core/Fab";
+import Zoom from "@material-ui/core/Zoom";
+import useScrollTrigger from "@material-ui/core/useScrollTrigger";
+import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 
 const useStyles = makeStyles(theme => ({
-  flex: {
-    display: 'flex',
-    justifyContent: 'space-between',
-
-  },
-
-  //button!!!!!!
-  fab: {
-    position: 'absolute',
-    color: 'green',
-
+  root: {
+    position: "fixed",
+    bottom: theme.spacing(2),
+    right: theme.spacing(2),
   },
 }));
 
-
-export default function GoUpButton() {
+const ScrollTop = props => {
+  const { children } = props;
   const classes = useStyles();
 
-  const styleS = {
+  const trigger = useScrollTrigger({
+    disableHysteresis: true,
+    threshold: 100,
+  });
 
-    backgroundImage: `url(${"favicon/favicon.ico"})`,
-    width: '50px',
-    height: '50px',
-    zIndex: '1',
+  const handleClick = event => {
+    // eslint-disable-next-line
+    const anchor = (event.target.ownerDocument || document).querySelector(
+      "#back-to-top-anchor"
+    );
+
+    if (anchor) {
+      anchor.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
   };
 
-  return(
-      <div>
-        <Fab variant="extended" classes={classes.fab}>
-          <ExpandLessIcon/>
-        </Fab>
-        <Fab variant="extended" classes={classes.fab} style={styleS}>
-        </Fab>
+  return (
+    <Zoom in={trigger}>
+      <div onClick={handleClick} role="presentation" className={classes.root}>
+        {children}
       </div>
-  )
-}
+    </Zoom>
+  );
+};
+const BackToTop = props => {
+  return (
+    <div>
+      {/* eslint-disable-next-line react/jsx-props-no-spreading */}
+      <ScrollTop {...props}>
+        <Fab color="secondary" size="small" aria-label="scroll back to top">
+          <KeyboardArrowUpIcon />
+        </Fab>
+      </ScrollTop>
+    </div>
+  );
+};
+
+export default BackToTop;

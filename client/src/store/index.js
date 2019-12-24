@@ -1,13 +1,13 @@
-import { createStore, applyMiddleware, compose } from 'redux';
-import { createLogger } from 'redux-logger';
-import thunk from 'redux-thunk';
+import { createStore, applyMiddleware, compose } from "redux";
+// eslint-disable-next-line
+import { createLogger } from "redux-logger";
+import thunk from "redux-thunk";
 
-import rootReducer from './reducers/rootReducer';
+import rootReducer from "./reducers/rootReducer";
+// eslint-disable-next-line
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const composeEnhancers =
-  window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-
-export function configureStore(initState) {
+export default function configureStore(initState) {
   const logger = createLogger();
   const store = createStore(
     rootReducer,
@@ -15,5 +15,6 @@ export function configureStore(initState) {
     // applyMiddleware(thunk, logger),
     composeEnhancers(applyMiddleware(thunk, logger))
   );
+
   return store;
 }

@@ -1,31 +1,29 @@
-import React from 'react';
-import {Link} from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
 
+import { makeStyles } from "@material-ui/core";
+
+import Box from "@material-ui/core/Box";
 import MenuListComposition from "./Dropdown";
-
-import {makeStyles} from "@material-ui/core";
-
-import Box from '@material-ui/core/Box';
-
 
 const useStyles = makeStyles(theme => ({
   subheader: {
-    marginTop: '65px',
-    minHeight: '25px',
-    padding: '10px 24px',
+    marginTop: "65px",
+    minHeight: "25px",
+    padding: "10px 24px",
     backgroundColor: theme.palette.secondary.light,
   },
   link: {
-    display: 'inline-block',
-    padding: '0 20px',
+    display: "inline-block",
+    padding: "0 20px",
     color: theme.palette.secondary.main,
-    textTransform: 'uppercase',
-    textDecoration: 'none',
-    '&:hover': {
+    textTransform: "uppercase",
+    textDecoration: "none",
+    "&:hover": {
       color: theme.palette.primary.main,
       borderBottom: `1px solid ${theme.palette.primary.main}`,
     },
-  }
+  },
 }));
 
 export default function SubHeader() {
@@ -41,21 +39,23 @@ export default function SubHeader() {
   // );
 
   return (
-      <Box display='flex' justifyContent="center" className={classes.subheader}>
-        <Box>
-          <Link
-              className={classes.link}
-              // to='/' exact component={pageFirst}
-              // component={} to="/second"
-          >Home</Link>
-          <MenuListComposition
-              menuTitle={'Shop'}
-              plantCategories={['Succulents', 'Aloe', 'Emergents', 'Geraniums']}
-              className={classes.link}
-          />
-          <Link className={classes.link}>About Us</Link>
-          <Link className={classes.link}>Contacts</Link>
-        </Box>
+    <Box display="flex" justifyContent="center" className={classes.subheader}>
+      <Box>
+        <Link className={classes.link} to="/">
+          Home
+        </Link>
+        <MenuListComposition
+          menuTitle="Shop"
+          plantCategories={["Succulents", "Aloe", "Emergents", "Geraniums"]}
+          className={classes.link}
+        />
+        <Link className={classes.link} to="/second">
+          About Us
+        </Link>
+        <Link className={classes.link} to="/third">
+          Contacts
+        </Link>
       </Box>
+    </Box>
   );
 }
