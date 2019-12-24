@@ -34,7 +34,8 @@ export default function TextBlock() {
       </Box>
       {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
       <a href="#" className={classes.link}>
-        Shop now &#8594;{" "}
+        Shop now &#8594;
+        {" "}
       </a>
     </div>
   );

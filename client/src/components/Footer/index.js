@@ -1,16 +1,15 @@
-import React from "react";
+import React from 'react';
+import { Container } from '@material-ui/core';
 
-// import { ThemeProvider } from "@material-ui/core/styles";
-import Hidden from "@material-ui/core/Hidden";
-import { Grid, Container, Typography } from "@material-ui/core";
+// import { Grid } from '@material-ui/core/Hidden';
+// import { ThemeProvider } from '@material-ui/core/Hidden';
 import useStyles from "./useStyles";
-// import theme from "../../theme";
 
-// import Hidden from '@material-ui/core/Hidden';
 import ContactUs from "./ContactUs/ContactUs";
 import Payment from "./Payment/Payment";
 import MyAccount from "./MyAccount/MyAccount";
 import Information from "./Information/Information";
+
 
 import Copy from "./Copy/Copy";
 

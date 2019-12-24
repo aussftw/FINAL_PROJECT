@@ -27,9 +27,13 @@ const CardAtMiniCart = ({ url, title, qty, price }) => {
           <div>
             <p className={classes.mini_cart_card_title}>{title}</p>
             <p>
-              {qty} x{" "}
+              {qty}
+              {' '}
+x
+              {" "}
               <span className={classes.mini_cart_card_price}>
-                ${price.toFixed(2)}
+                $
+                {price.toFixed(2)}
               </span>
             </p>
           </div>
