@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { BrowserRouter } from "react-router-dom";
+import FilterByCategory from "./components/Filters/index";
 
 import MainButton from "./components/common/buttons/MainButton";
 import CartMini from "./components/Header/CartMini/CartMini";
-import TopRated from './components/TopRated/TopRated';
+import TopRated from "./components/TopRated/TopRated";
 
 import HomePage from "./components/HomePage/HomePage";
 
@@ -38,6 +39,7 @@ function App() {
       <Brands />
       <Subscribe />
       <Footer />
+      <FilterByCategory />
       <BackToTop />
     </div>
   );
