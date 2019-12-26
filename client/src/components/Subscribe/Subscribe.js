@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import {
   Typography,
@@ -13,11 +13,8 @@ import useStyles from "./useStyles";
 // import MainButton from "../common/buttons/MainButton";
 
 const Subscribe = () => {
+  const [userEmail, setUserEmail] = useState("");
   const classes = useStyles();
-
-  const getUserEmail = e => {
-    const userEmail = e.target.value;
-  };
 
   const sentUserEmail = () => {
     console.log("get");
@@ -36,7 +33,7 @@ const Subscribe = () => {
         <InputBase
           className={classes.input}
           placeholder="Your email address"
-          onChange={getUserEmail}
+          onChange={e => setUserEmail(e.target.value)}
           onKeyPress={handleKeyPress}
         />
         <Button className={classes.actionButton} onClick={sentUserEmail}>
