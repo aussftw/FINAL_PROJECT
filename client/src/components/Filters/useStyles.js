@@ -17,6 +17,14 @@ const useStyles = makeStyles(theme => ({
     width: "50%",
     marginLeft: 15,
   },
+  root_tooltip: {
+    position: "relative",
+    width: 400,
+  },
+  tooltip: {
+    position: "absolute",
+    width: "40px",
+  },
 }));
 
 export default useStyles;
