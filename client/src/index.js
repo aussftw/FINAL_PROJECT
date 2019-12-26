@@ -4,7 +4,6 @@ import { BrowserRouter } from "react-router-dom";
 
 import { ThemeProvider } from "@material-ui/core/styles";
 import { Provider } from "react-redux";
-// eslint-disable-next-line
 import configureStore from "./store";
 import App from "./App";
 

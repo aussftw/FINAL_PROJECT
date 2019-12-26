@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
+// import axios from "axios";
 
 import { makeStyles } from "@material-ui/core";
 
@@ -27,41 +27,28 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-// axios.defaults.baseURL = 'http://cards.danit.com.ua/';
-
-// function getCards(){
+// function post() {
 //
-//   // const token =localStorage.getItem('token') ;
-//   // console.log(token);
-//   // const token ='8eca04c25c57' ;
+//   const Succulents = [
 //
-//   axios.get('http://cards.danit.com.ua/cards',  {
-//     headers: { Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlMDNjOTJmMTlmMjIzMDM1MDFhM2Q1MiIsImZpcnN0TmFtZSI6IkFsaW5hIiwibGFzdE5hbWUiOiJZZWdhbmlhbiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTU3NzMwNjQ5OCwiZXhwIjoxNTc3MzQyNDk4fQ.iAop8unGYVm4QwRfIgO-0fh3_l6PTLL-VgSXPXap21Q` }
-//   })
-//     .then((response) => {
-//       console.log(response);
-//     })
-//     .catch((error) => {
-//       console.log(error);
-//     });
-// }
+//   ];
+//   Succulents.forEach(function(item) {
+//     axios
+//       .post("/products",item,{
+//              headers: {
+//                Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlMDNjOTJmMTlmMjIzMDM1MDFhM2Q1MiIsImZpcnN0TmFtZSI6IkFsaW5hIiwibGFzdE5hbWUiOiJZZWdhbmlhbiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTU3NzM3NzU1NSwiZXhwIjoxNTc3NDEzNTU1fQ.v9hONNr7dhx4rV57CZXznFRoziJZVuU24KoJ4Zh51vo",
+//              } })
+//       .then(newProduct => {
+//         console.log(newProduct);
+//       })
+//       .catch(err => {
+//         console.log(err);
+//       });
+//
+//   });
 
-function get() {
-  axios
-    .get("/catalog", {
-      headers: {
-        Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlMDNjOTJmMTlmMjIzMDM1MDFhM2Q1MiIsImZpcnN0TmFtZSI6IkFsaW5hIiwibGFzdE5hbWUiOiJZZWdhbmlhbiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTU3NzMwNjQ5OCwiZXhwIjoxNTc3MzQyNDk4fQ.iAop8unGYVm4QwRfIgO-0fh3_l6PTLL-VgSXPXap21Q`,
-      },
-    })
-    .then(catalog => {
-      console.log(catalog);
-    })
-    .catch(err => {
-      console.log(err);
-    });
-}
-
-export default function SubHeader() {
+export default function SubHeader(props) {
+  const { categories } = props;
   const classes = useStyles();
 
   // const renderLink = React.useMemo(
@@ -77,13 +64,13 @@ export default function SubHeader() {
   return (
     <Box display="flex" justifyContent="center" className={classes.subheader}>
       <Box>
-        <button onClick={get}>22</button>
+        {/* <button onClick={post}>22</button> */}
         <Link className={classes.link} to="/">
           Home
         </Link>
         <MenuListComposition
           menuTitle="Shop"
-          plantCategories={get}
+          plantCategories={categories}
           className={classes.link}
         />
         <Link className={classes.link} to="/second">
