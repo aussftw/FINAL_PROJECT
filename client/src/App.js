@@ -3,7 +3,7 @@ import { BrowserRouter } from "react-router-dom";
 
 import MainButton from "./components/common/buttons/MainButton";
 import CartMini from "./components/Header/CartMini/CartMini";
-import TopRated from './components/TopRated/TopRated';
+import TopRated from "./components/TopRated/TopRated";
 
 import HomePage from "./components/HomePage/HomePage";
 
@@ -22,15 +22,10 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Some Shop</h1>
-      <TopRated />
-      <p> for real</p>
-      <HomePage />
       <Header />
-      <BrowserRouter>
-        <SubHeader />
-      </BrowserRouter>
-
+      <SubHeader />
+      <TopRated />
+      <HomePage />
       <MainButton text="BlaBla" onClick={() => setClicked(!clicked)} />
       {clicked ? <CartMini /> : null}
       {/* eslint-disable-next-line */}
