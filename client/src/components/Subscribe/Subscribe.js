@@ -10,11 +10,12 @@ import {
 } from "@material-ui/core";
 import useStyles from "./useStyles";
 
-// import MainButton from "../common/buttons/MainButton";
-
 const Subscribe = () => {
   const [email, setUserEmail] = useState("");
+  // eslint-disable-next-line
+  const [error, setError] = useState(false);
   const classes = useStyles();
+
   const obj = {
     email,
     letterSubject:
@@ -23,25 +24,23 @@ const Subscribe = () => {
   };
 
   const sentUserEmail = async () => {
+    setError(false);
     const authOptions = {
       method: "POST",
       url: "/subscribers",
       data: obj,
     };
 
-    // eslint-disable-next-line
     await axios(authOptions)
-      // eslint-disable-next-line
       .then(res => {
-        // eslint-disable-next-line
         return res;
       })
+      // eslint-disable-next-line
       .catch(error => {
-        // eslint-disable-next-line
-        error;
+        setError(true);
       });
 
-    // setUserEmail("");
+    // await setUserEmail("");
   };
 
   const handleKeyPress = e => {
@@ -52,7 +51,7 @@ const Subscribe = () => {
 
   return (
     <Container className={classes.subscribeContainer} maxWidth>
-      <Typography className={classes.subscribeTitle}>NEWSLETTER </Typography>
+      <Typography className={classes.subscribeTitle}>NEWSLETTER</Typography>
       <Box className={classes.subscribeBar}>
         <InputBase
           className={classes.input}
