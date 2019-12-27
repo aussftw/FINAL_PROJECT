@@ -12,7 +12,7 @@
     "react/button-has-type": "off",
     "import/prefer-default-export": "off",
     "react/jsx-props-no-spreading": "off",
-    "no-underscore-dangle": ["error", { "allow": ["true"] }],
+    "no-underscore-dangle": 0,
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "react/destructuring-assignment": ["warn", "always"],
     "padding-line-between-statements": [
