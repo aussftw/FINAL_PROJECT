@@ -23,7 +23,7 @@ const CardTooltipText = value => {
   return `Rated ${value} out of 5`;
 };
 
-const ItemCard = ({ title, rate, price, inCart, inWishList }) => {
+const ItemCard = ({ title, rate, price, img, inCart, inWishList }) => {
   const classes = useStyles();
 
   return (
@@ -49,8 +49,9 @@ const ItemCard = ({ title, rate, price, inCart, inWishList }) => {
       >
         <CardMedia
           className={classes.mediaImage}
-          image="/img/10-310x270.jpg"
+          image={img}
           title="Plant"
+          component="div"
         />
         <CardContent className={classes.cardContent}>
           <Typography

@@ -68,6 +68,7 @@ const TopRated = () => {
                   .join(" ")}
                 rate={value.rate.rating}
                 price={value.currentPrice}
+                img={value.imageUrls[0]}
                 inCart={false}
                 inWishList={false}
               />
