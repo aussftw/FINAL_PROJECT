@@ -15,7 +15,6 @@ const theme = createMuiTheme({
       main: lightGreen[700], // main theme color
       light: lightGreen[100], // footer bg
       dark: lightGreen[900], // hover btn
-
     },
     secondary: {
       main: grey[700], // main grey
