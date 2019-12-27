@@ -3,7 +3,7 @@ import { BrowserRouter } from "react-router-dom";
 
 import MainButton from "./components/common/buttons/MainButton";
 import CartMini from "./components/Header/CartMini/CartMini";
-import TopRated from './components/TopRated/TopRated';
+import TopRated from "./components/TopRated/TopRated";
 
 import HomePage from "./components/HomePage/HomePage";
 
@@ -13,8 +13,8 @@ import SubHeader from "./components/Header/SubHeader";
 import BackToTop from "./components/common/GoUpButton";
 
 import Footer from "./components/Footer/index";
-// eslint-disable-next-line
-// import Stock from "./components/Stock";
+
+import Stock from "./components/Stock";
 import Subscribe from "./components/Subscribe/Subscribe";
 
 function App() {
@@ -30,11 +30,11 @@ function App() {
       <BrowserRouter>
         <SubHeader />
       </BrowserRouter>
-
+      <Stock />
       <MainButton text="BlaBla" onClick={() => setClicked(!clicked)} />
       {clicked ? <CartMini /> : null}
       {/* eslint-disable-next-line */}
-      {/* <Stock /> */}
+
       <Brands />
       <Subscribe />
       <Footer />
