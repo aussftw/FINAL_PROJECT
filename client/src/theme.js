@@ -66,12 +66,6 @@ const theme = createMuiTheme({
       },
     },
 
-    MuiExpansionPanelDetails: {
-      root: {
-        paddingRight: 15,
-      },
-    },
-
     MuiButton: {
       root: {
         fontSize: 13,
