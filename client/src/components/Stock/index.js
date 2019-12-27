@@ -1,40 +1,15 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+// import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import Container from "@material-ui/core/Container";
+
+import useStyles from "./useStyles";
 import TextBlock from "./TextBlock";
-import imagesObj from "./images";
+import { imagesObj } from "./const";
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    flexGrow: 1,
-    border: "none",
-    marginBottom: 50,
-  },
-  visible: {
-    [theme.breakpoints.down("sm")]: {
-      display: "none",
-    },
-    [theme.breakpoints.up("md")]: {
-      display: "block",
-    },
-  },
-  paper: {
-    height: "100%",
-    padding: theme.spacing(2),
-    textAlign: "center",
-    color: theme.palette.text.secondary,
-    boxShadow: "none",
-    boxSizing: "border-box",
-  },
-}));
-
-// const images = {
-//   fst: "img/banner1.jpg",
-//   snd: "img/banner2.jpg",
-// };
 const images = imagesObj;
+
 export default function Stock() {
   const [spacing] = React.useState(2);
   const classes = useStyles();

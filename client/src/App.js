@@ -26,11 +26,12 @@ function App() {
       <TopRated />
       <p> for real</p>
       <HomePage />
+      <Stock />
       <Header />
       <BrowserRouter>
         <SubHeader />
       </BrowserRouter>
-      <Stock />
+
       <MainButton text="BlaBla" onClick={() => setClicked(!clicked)} />
       {clicked ? <CartMini /> : null}
       {/* eslint-disable-next-line */}
