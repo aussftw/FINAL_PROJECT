@@ -30,7 +30,7 @@ const Subscribe = () => {
     };
 
     // eslint-disable-next-line
-    const result = await axios(authOptions)
+    await axios(authOptions)
       // eslint-disable-next-line
       .then(res => {
         // eslint-disable-next-line
@@ -40,6 +40,8 @@ const Subscribe = () => {
         // eslint-disable-next-line
         error;
       });
+
+    // setUserEmail("");
   };
 
   const handleKeyPress = e => {
