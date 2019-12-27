@@ -23,6 +23,7 @@ const CardTooltipText = value => {
   return `Rated ${value} out of 5`;
 };
 
+
 const ItemCard = ({ title, rate, price, img, inCart, inWishList }) => {
   const classes = useStyles();
 
