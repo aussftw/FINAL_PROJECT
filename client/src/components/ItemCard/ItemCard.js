@@ -14,17 +14,17 @@ import StarBorder from "@material-ui/icons/StarBorder";
 import Favorite from "@material-ui/icons/Favorite";
 import FavoriteBorder from "@material-ui/icons/FavoriteBorder";
 
-// import { Rating } from "@material-ui/lab/Rating";
+import Rating from "@material-ui/lab/Rating";
 import useStyles from "./useStyles";
 
 const CardTooltipText = value => {
   if (value === undefined) return "Not yet rated";
-  const rate = Math.round(value * 100) / 100;
 
-  return `Rated ${rate} out of 5`;
+  return `Rated ${value} out of 5`;
 };
 
-const ItemCard = ({ title, value, price, inCart, inWishList }) => {
+
+const ItemCard = ({ title, rate, price, img, inCart, inWishList }) => {
   const classes = useStyles();
 
   return (
@@ -50,8 +50,9 @@ const ItemCard = ({ title, value, price, inCart, inWishList }) => {
       >
         <CardMedia
           className={classes.mediaImage}
-          image="/img/10-310x270.jpg"
+          image={img}
           title="Plant"
+          component="div"
         />
         <CardContent className={classes.cardContent}>
           <Typography
@@ -62,19 +63,19 @@ const ItemCard = ({ title, value, price, inCart, inWishList }) => {
           >
             {title}
           </Typography>
-          <Tooltip title={CardTooltipText(value)}>
+          <Tooltip title={CardTooltipText(rate)}>
             <Box align="center" gutterBottom>
-              {/* <Rating
+              <Rating
                 className={classes.rating}
                 name="rating"
-                value={value}
+                value={rate}
                 size="small"
                 precision={0.5}
                 readOnly
                 emptyIcon={
                   <StarBorder color="primary" style={{ fontSize: 18 }} />
                 }
-              /> */}
+              />
             </Box>
           </Tooltip>
           <Typography className={classes.price} align="center">
