@@ -4,7 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
-import Typography from "@material-ui/core/Typography";
+// import Typography from "@material-ui/core/Typography";
 // import MenuItem from "@material-ui/core/MenuItem";
 // import Menu from "@material-ui/core/Menu";
 
@@ -13,24 +13,21 @@ import Badge from "@material-ui/core/Badge";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import MailIcon from "@material-ui/icons/Mail";
 import NotificationsIcon from "@material-ui/icons/Notifications";
-import SimpleModal from "../common/Modal";
+// import Logo from "../common/Logo/Logo.svg";
 
+import { Link } from "react-router-dom";
 import TemporaryDrawer from "./BurgerPanel";
 import CustomizedSearch from "./Search";
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles(theme => ({
   flex: {
     display: "flex",
     justifyContent: "space-between",
   },
-
-  // button!!!!!!
-  fab: {
-    position: "absolute",
-    backgroundImage: `url(${"img/arrow.jpg"})`,
-    // bottom: theme.spacing(2),
-    // right: theme.spacing(2),
+  logo: {
+    height: "45px",
   },
+
   // grow: {
   //   flexGrow: 1,
   // },
@@ -49,18 +46,18 @@ const useStyles = makeStyles(() => ({
   //     width: 200,
   //   },
   // },
-  // sectionDesktop: {
-  //   display: 'none',
-  //   [theme.breakpoints.up('md')]: {
-  //     display: 'flex',
-  //   },
-  // },
-  // sectionMobile: {
-  //   display: 'flex',
-  //   [theme.breakpoints.up('md')]: {
-  //     display: 'none',
-  //   },
-  // },
+  sectionDesktop: {
+    display: "none",
+    [theme.breakpoints.up("md")]: {
+      display: "flex",
+    },
+  },
+  sectionMobile: {
+    display: "flex",
+    [theme.breakpoints.up("md")]: {
+      display: "none",
+    },
+  },
 }));
 
 export default function Header() {
@@ -149,12 +146,18 @@ export default function Header() {
     <div>
       <AppBar color="white" position="fixed">
         <Toolbar className={classes.flex}>
-          <TemporaryDrawer />
-          <Typography>LOGO</Typography>
-          <CustomizedSearch />
-          {/* <div/> */}
+          <div className={classes.flex}>
+            <TemporaryDrawer className={classes.sectionMobile} />
+            <Link href="/#">
+              <img src="./img/Logo.svg" alt="logo" className={classes.logo} />
+            </Link>
+          </div>
+
           <div>
-            <SimpleModal />
+            <CustomizedSearch />
+          </div>
+
+          <div>
             <IconButton aria-label="show 4 new mails" color="inherit">
               <Badge badgeContent={8} color="secondary">
                 <MailIcon />
@@ -188,7 +191,6 @@ export default function Header() {
             {/*  > */}
             {/*    <MoreIcon /> */}
             {/*  </IconButton> */}
-            {/* </div> */}
           </div>
         </Toolbar>
       </AppBar>
@@ -196,7 +198,7 @@ export default function Header() {
       {/* {renderMenu} */}
     </div>
   );
-}
+};
 // import React, { useState } from "react";
 //
 // const Test = () => {
@@ -217,3 +219,5 @@ export default function Header() {
 // };
 //
 // export default Test;
+
+export default Header;

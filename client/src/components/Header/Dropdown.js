@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
 import { makeStyles } from "@material-ui/core/styles";
 import { Tooltip } from "@material-ui/core";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
@@ -61,7 +60,7 @@ export default function MenuListComposition(props) {
   return (
     <div className={classes.root}>
       {/* ? : если в коллекции новые поступления есть */}
-      <Tooltip title="New" placement="top" open arrow>
+      <Tooltip title="New" placement="top" arrow>
         <Link
           href="/#"
           ref={anchorRef}
