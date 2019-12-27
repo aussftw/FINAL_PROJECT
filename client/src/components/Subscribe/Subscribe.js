@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import {
   Typography,
@@ -13,11 +13,33 @@ import useStyles from "./useStyles";
 // import MainButton from "../common/buttons/MainButton";
 
 const Subscribe = () => {
-  const [userEmail, setUserEmail] = useState("");
+  const [email, setUserEmail] = useState("");
   const classes = useStyles();
+  const obj = {
+    email,
+    letterSubject:
+      "Congratulations you have successfully subscribed to Planty newsletter",
+    letterHtml: "fancyLetter",
+  };
 
-  const sentUserEmail = () => {
-    console.log("get");
+  const sentUserEmail = async () => {
+    const authOptions = {
+      method: "POST",
+      url: "/subscribers",
+      data: obj,
+    };
+
+    // eslint-disable-next-line
+    const result = await axios(authOptions)
+      // eslint-disable-next-line
+      .then(res => {
+        // eslint-disable-next-line
+        return res;
+      })
+      .catch(error => {
+        // eslint-disable-next-line
+        error;
+      });
   };
 
   const handleKeyPress = e => {
@@ -37,7 +59,7 @@ const Subscribe = () => {
           onKeyPress={handleKeyPress}
         />
         <Button className={classes.actionButton} onClick={sentUserEmail}>
-          Subscribe{" "}
+          Subscribe
         </Button>
       </Box>
       <Divider variant="middle" />
