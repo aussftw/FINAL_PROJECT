@@ -10,7 +10,7 @@ import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import Tooltip from "@material-ui/core/Tooltip";
 
-// import StarBorder from "@material-ui/icons/StarBorder";
+import StarBorder from "@material-ui/icons/StarBorder";
 import Favorite from "@material-ui/icons/Favorite";
 import FavoriteBorder from "@material-ui/icons/FavoriteBorder";
 
