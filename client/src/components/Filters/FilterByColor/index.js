@@ -49,7 +49,9 @@ const FilterByColor = () => {
   const classes = useStyles();
 
   const [state, setState] = useState({
-    checkedG: true,
+    checkedFirst: true,
+    checkedSecond: true,
+    checkedThird: true,
   });
 
   const handleChange = name => event => {
@@ -70,9 +72,9 @@ const FilterByColor = () => {
           <FormControlLabel
             control={
               <GreenCheckbox
-                checked={state.checkedG}
-                onChange={handleChange("checkedG")}
-                value="checkedG"
+                checked={state.checkedFirst}
+                onChange={handleChange("checkedFirst")}
+                value="checkedFirst"
               />
             }
             label="Green"
@@ -83,9 +85,9 @@ const FilterByColor = () => {
           <FormControlLabel
             control={
               <GreenCheckbox
-                checked={state.checkedG}
-                onChange={handleChange("checkedG")}
-                value="checkedG"
+                checked={state.checkedSecond}
+                onChange={handleChange("checkedSecond")}
+                value="checkedSecond"
               />
             }
             label="White"
@@ -95,9 +97,9 @@ const FilterByColor = () => {
           <FormControlLabel
             control={
               <GreenCheckbox
-                checked={state.checkedG}
-                onChange={handleChange("checkedG")}
-                value="checkedG"
+                checked={state.checkedThird}
+                onChange={handleChange("checkedThird")}
+                value="checkedThird"
               />
             }
             label="Other"
