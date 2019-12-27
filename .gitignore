@@ -12,6 +12,7 @@ _brief/
 .idea
 /*.env
 .env
+e --abort
 
 # from server .gitignore:
 
