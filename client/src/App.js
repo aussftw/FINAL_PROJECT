@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { BrowserRouter } from "react-router-dom";
-
 import MainButton from "./components/common/buttons/MainButton";
 import CartMini from "./components/Header/CartMini/CartMini";
 import TopRated from "./components/TopRated/TopRated";
