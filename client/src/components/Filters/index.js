@@ -3,6 +3,7 @@ import axios from "axios";
 import Container from "@material-ui/core/Container";
 import FilterByCategory from "./FilterByCategory";
 import ItemCard from "../ItemCard/ItemCard";
+import FilterByColor from "./FilterByColor";
 
 const Filters = () => {
   const [products, setProducts] = useState(null);
@@ -26,6 +27,7 @@ const Filters = () => {
   return (
     <>
       <FilterByCategory />
+      <FilterByColor />
       <Container>
         {preloader}
         {products &&
