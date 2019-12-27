@@ -9,7 +9,6 @@ import {
   ExpansionPanelSummary,
   ExpansionPanelDetails,
 } from "@material-ui/core";
-import Hidden from "@material-ui/core/Hidden";
 
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import DraftsIcon from "@material-ui/icons/Drafts";
@@ -26,13 +25,6 @@ const ContactUs = () => {
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
           <Typography className={classes}>CONTACT US</Typography>
         </ExpansionPanelSummary>
-        <Hidden MdUp>
-          <ExpansionPanelDetails>
-            <Link href="/#" color="secondary">
-              Logo
-            </Link>
-          </ExpansionPanelDetails>
-        </Hidden>
         <ExpansionPanelDetails>
           <DraftsIcon className={classes.contactUsIcon} />
           <Link

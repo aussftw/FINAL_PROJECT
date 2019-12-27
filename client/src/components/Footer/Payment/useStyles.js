@@ -4,9 +4,9 @@ const useStyles = makeStyles(theme => ({
   bg: {
     backgroundColor: theme.palette.primary.light,
   },
-  textedFooter: {
-    margin: 20,
-    backgroundColor: theme.palette.primary.light,
+  paymentMethods: {
+    display: "flex",
+    flexDirection: "row",
   },
 }));
 
