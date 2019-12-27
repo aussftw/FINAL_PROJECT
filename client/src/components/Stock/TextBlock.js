@@ -1,6 +1,9 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
+import { textObj } from "./const";
+
+const text = textObj;
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -24,13 +27,10 @@ export default function TextBlock() {
 
   return (
     <div className={classes.paragraph}>
-      <p>New Collection 2020</p>
-      <h4 className={classes.title}>House Shape Plant</h4>
+      <p>{text.name}</p>
+      <h4 className={classes.title}>{text.title}</h4>
       <Box display={{ xs: "none", md: "block" }}>
-        <p>
-          Casual multifunctional sofabeds head elevation comfortable sofa at
-          daytime transforms into changes to a very comfortable bed at night.
-        </p>
+        <p>{text.desc}</p>
       </Box>
       {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
       <a href="#" className={classes.link}>

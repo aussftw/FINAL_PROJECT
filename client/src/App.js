@@ -9,8 +9,8 @@ import Header from "./components/Header";
 import SubHeader from "./components/Header/SubHeader";
 import BackToTop from "./components/common/GoUpButton";
 import Footer from "./components/Footer/index";
-// eslint-disable-next-line
-// import Stock from "./components/Stock";
+
+import Stock from "./components/Stock";
 import Subscribe from "./components/Subscribe/Subscribe";
 
 function App() {
@@ -23,10 +23,13 @@ function App() {
       <SubHeader />
       <TopRated />
       <HomePage />
+      <Stock />
+      <Header />
+      <BrowserRouter>
+        <SubHeader />
+      </BrowserRouter>
       <MainButton text="BlaBla" onClick={() => setClicked(!clicked)} />
       {clicked ? <CartMini /> : null}
-      {/* eslint-disable-next-line */}
-      {/* <Stock /> */}
       <Brands />
       <Subscribe />
       <Footer />
