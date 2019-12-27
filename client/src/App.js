@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { BrowserRouter } from "react-router-dom";
-import FilterByCategory from "./components/Filters/index";
 
 import MainButton from "./components/common/buttons/MainButton";
 import CartMini from "./components/Header/CartMini/CartMini";
@@ -17,6 +16,8 @@ import Footer from "./components/Footer/index";
 // eslint-disable-next-line
 // import Stock from "./components/Stock";
 import Subscribe from "./components/Subscribe/Subscribe";
+
+import Filters from "./components/Filters";
 
 function App() {
   const [clicked, setClicked] = useState(false);
@@ -39,7 +40,7 @@ function App() {
       <Brands />
       <Subscribe />
       <Footer />
-      <FilterByCategory />
+      <Filters />
       <BackToTop />
     </div>
   );
