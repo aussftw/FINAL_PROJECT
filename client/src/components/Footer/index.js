@@ -1,12 +1,9 @@
 import React from "react";
+import { Container, Grid, Typography } from "@material-ui/core";
 
-// import { ThemeProvider } from "@material-ui/core/styles";
-import Hidden from "@material-ui/core/Hidden";
-import { Grid, Container, Typography } from "@material-ui/core";
+// import { ThemeProvider } from '@material-ui/core/Hidden';
 import useStyles from "./useStyles";
-// import theme from "../../theme";
 
-// import Hidden from '@material-ui/core/Hidden';
 import ContactUs from "./ContactUs/ContactUs";
 import Payment from "./Payment/Payment";
 import MyAccount from "./MyAccount/MyAccount";
@@ -19,20 +16,16 @@ const Footer = () => {
 
   return (
     <Container className={classes.bg} maxWidth>
-      <Hidden SmDown>
-        <Typography>LOGO</Typography>
-      </Hidden>
-      <Hidden MdUp>
-        <Grid container>
-          <ContactUs />
-          <Payment />
-          <MyAccount />
-          <Information />
-        </Grid>
-        <Grid>
-          <Copy />
-        </Grid>
-      </Hidden>
+      <Typography>LOGO</Typography>
+      <Grid container>
+        <ContactUs />
+        <Payment />
+        <MyAccount />
+        <Information />
+      </Grid>
+      <Grid>
+        <Copy />
+      </Grid>
     </Container>
   );
 };

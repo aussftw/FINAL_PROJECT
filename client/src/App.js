@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import MainButton from "./components/common/buttons/MainButton";
 import CartMini from "./components/Header/CartMini/CartMini";
+import TopRated from "./components/TopRated/TopRated";
+
 import HomePage from "./components/HomePage/HomePage";
 import Brands from "./components/Brands/Brands";
 import Header from "./components/Header";
@@ -19,6 +21,7 @@ function App() {
       <BackToTop />
       <Header />
       <SubHeader />
+      <TopRated />
       <HomePage />
       <MainButton text="BlaBla" onClick={() => setClicked(!clicked)} />
       {clicked ? <CartMini /> : null}
