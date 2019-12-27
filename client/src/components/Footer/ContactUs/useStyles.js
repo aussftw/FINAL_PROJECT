@@ -12,6 +12,10 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.primary.light,
     borderRadius: "0px", // dosent work
   },
+  logo: {
+    height: 30,
+    width: 70,
+  },
 }));
 
 export default useStyles;
