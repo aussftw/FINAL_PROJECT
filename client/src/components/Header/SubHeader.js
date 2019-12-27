@@ -26,8 +26,10 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function SubHeader() {
+export default function SubHeader(props) {
+  const { categories } = props;
   const classes = useStyles();
+
   // const renderLink = React.useMemo(
   //     () =>
   //         React.forwardRef((linkProps, ref) => (
@@ -46,7 +48,7 @@ export default function SubHeader() {
         </Link>
         <MenuListComposition
           menuTitle="Shop"
-          plantCategories={["Succulents", "Aloe", "Emergents", "Geraniums"]}
+          plantCategories={categories}
           className={classes.link}
         />
         <Link className={classes.link} to="/second">
