@@ -44,7 +44,6 @@ const GreenCheckbox = withStyles({
     },
   },
   checked: {},
-  // eslint-disable-next-line react/jsx-props-no-spreading
 })(props => <Checkbox color="default" {...props} />);
 const FilterByColor = () => {
   const classes = useStyles();
