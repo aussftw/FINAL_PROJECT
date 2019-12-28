@@ -6,29 +6,29 @@ import Hidden from "@material-ui/core/Hidden";
 
 import useStyles from "./useStyles";
 import ItemCard from "../ItemCard/ItemCard";
-import PreloaderAdaptive from "../Preloader/Adaptive";
+import Preloader from "../Preloader/Desktop";
 
 const TopRated = () => {
   const classes = useStyles();
   const [products, setProducts] = useState(null);
-  const [preloader, setPreloader] = useState(true);
 
   useEffect(() => {
     axios
       .get("/products")
       .then(response => {
         setProducts(response.data);
-        setPreloader(false);
       })
       .catch(err => {
+        // eslint-disable-next-line no-console
         console.log(err);
       });
   }, []);
 
   return (
     <Container className={classes.topRatedContainer} maxWidth="lg">
-      {preloader && PreloaderAdaptive}
-      {products &&
+      {!products ? (
+        <Preloader />
+      ) : (
         products.slice(0, 8).map((value, index) => {
           let result;
           switch (index) {
@@ -74,7 +74,8 @@ const TopRated = () => {
               />
             </Hidden>
           );
-        })}
+        })
+      )}
     </Container>
   );
 };
