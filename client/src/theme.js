@@ -42,7 +42,7 @@ const theme = createMuiTheme({
 
     MuiTooltip: {
       tooltip: {
-        fontSize: "14px",
+        fontSize: "13px",
         backgroundColor: lightGreen[700],
       },
       arrow: {

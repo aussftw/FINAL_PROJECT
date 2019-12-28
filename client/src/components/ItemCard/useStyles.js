@@ -7,15 +7,19 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1,
     margin: theme.spacing(1),
     width: 240,
-    padding: 4,
+    padding: theme.spacing(1),
+    transition: "box-shadow 0.2s ease-out",
     "&:hover": {
-      boxShadow: "1px 3px 7px 0px rgba(0,0,0,0.24)",
+      boxShadow: "2px 3px 7px 0px rgba(0,0,0,0.24)",
+    },
+    "&:hover $mediaImage": {
+      transform: "scale(1)",
     },
   },
   wishList: {
     position: "absolute",
-    top: theme.spacing(2),
-    right: theme.spacing(2),
+    top: theme.spacing(1),
+    right: theme.spacing(1),
     color: theme.palette.primary.main,
     backgroundColor: "#ffffff",
     zIndex: 2,
@@ -32,6 +36,8 @@ const useStyles = makeStyles(theme => ({
   },
   mediaImage: {
     height: 200,
+    transform: "scale(0.9)",
+    transition: "transform 0.2s ease-out",
   },
   title: {
     fontSize: 14,
@@ -54,11 +60,12 @@ const useStyles = makeStyles(theme => ({
       color: theme.palette.primary.main,
     },
   },
-  removeFromCart: {
+  inCart: {
+    paddingTop: theme.spacing(1),
+    paddingBottom: 7,
+    fontSize: 13,
+    fontWeight: 700,
     color: theme.palette.primary.main,
-    "&:hover": {
-      color: theme.palette.secondary.dark,
-    },
   },
 }));
 

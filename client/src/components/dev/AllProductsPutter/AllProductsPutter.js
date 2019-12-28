@@ -11,9 +11,11 @@ const AllProductsPutter = () => {
       .get("/products")
       .then(response => {
         setProducts(response.data);
+        // eslint-disable-next-line no-console
         console.log(response);
       })
       .catch(err => {
+        // eslint-disable-next-line no-console
         console.log(err);
       });
   }, []);
@@ -40,17 +42,20 @@ const AllProductsPutter = () => {
             data: {
               rate: {
                 rating: resultRating,
-                voters: voters,
+                voters,
               },
             },
           }
         )
         .then(response => {
+          // eslint-disable-next-line no-console
           console.log(response.data);
         })
         .catch(err => {
+          // eslint-disable-next-line no-console
           console.log(err);
         });
+      // eslint-disable-next-line no-console
       console.log("rating: ", resultRating, "voters: ", voters);
     }
   };

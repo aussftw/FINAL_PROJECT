@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
@@ -23,21 +23,28 @@ const CardTooltipText = value => {
   return `Rated ${value} out of 5`;
 };
 
-
-const ItemCard = ({ title, rate, price, img, inCart, inWishList }) => {
+const ItemCard = ({ title, rate, price, img, inCart, inWishlist }) => {
   const classes = useStyles();
+  const [wishlist, setWishlist] = useState(inWishlist);
+  const [cart, setCart] = useState(inCart);
 
   return (
     <Card className={classes.card}>
-      {inWishList ? (
+      {wishlist ? (
         <Tooltip title="Remove from wishlist">
-          <IconButton className={classes.wishList}>
+          <IconButton
+            className={classes.wishList}
+            onClick={() => setWishlist(false)}
+          >
             <Favorite />
           </IconButton>
         </Tooltip>
       ) : (
         <Tooltip title="Add to wishlist">
-          <IconButton className={classes.wishList}>
+          <IconButton
+            className={classes.wishList}
+            onClick={() => setWishlist(true)}
+          >
             <FavoriteBorder />
           </IconButton>
         </Tooltip>
@@ -63,7 +70,7 @@ const ItemCard = ({ title, rate, price, img, inCart, inWishList }) => {
           >
             {title}
           </Typography>
-          <Tooltip title={CardTooltipText(rate)}>
+          <Tooltip placement="bottom-end" title={CardTooltipText(rate)}>
             <Box align="center" gutterBottom>
               <Rating
                 className={classes.rating}
@@ -82,18 +89,17 @@ const ItemCard = ({ title, rate, price, img, inCart, inWishList }) => {
             ${price.toFixed(2)}
           </Typography>
         </CardContent>
-        {inCart ? (
-          <Tooltip title="Remove from cart">
-            <Button variant="text" className={classes.removeFromCart} fullWidth>
-              in cart
-            </Button>
-          </Tooltip>
-        ) : (
-          <Button variant="text" fullWidth>
-            + add to cart
-          </Button>
+        {cart && (
+          <Typography className={classes.inCart} align="center">
+            IN CART
+          </Typography>
         )}
       </CardActionArea>
+      {!cart && (
+        <Button variant="text" fullWidth onClick={() => setCart(true)}>
+          + add to cart
+        </Button>
+      )}
     </Card>
   );
 };
