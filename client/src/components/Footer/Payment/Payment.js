@@ -23,8 +23,11 @@ const Payment = () => {
   return (
     <Grid item xs={12} lg={3} md={12} className={classes}>
       <ExpansionPanel className={classes.bg}>
-        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-          <Typography className={classes}>PAYMENT</Typography>
+        <ExpansionPanelSummary
+          className={classes}
+          expandIcon={<ExpandMoreIcon />}
+        >
+          <Typography>PAYMENT</Typography>
         </ExpansionPanelSummary>
         <Box className={classes.paymentMethods}>
           <ExpansionPanelDetails className={classes.root}>
