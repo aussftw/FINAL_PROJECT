@@ -10,6 +10,8 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(1.5),
     width: 150,
     height: 110,
+    backgroundSize: "cover",
+    overflow: "hidden",
   },
 }));
 
