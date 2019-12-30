@@ -38,6 +38,10 @@ const useStyles = makeStyles(theme => ({
   paymentMethod: {
     marginRight: "1rem",
   },
+  logo: {
+    height: 30,
+    width: 70,
+  },
 }));
 
 export default useStyles;
