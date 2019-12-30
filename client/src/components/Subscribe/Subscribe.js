@@ -59,7 +59,11 @@ const Subscribe = () => {
           onChange={e => setUserEmail(e.target.value)}
           onKeyPress={handleKeyPress}
         />
-        <Button className={classes.actionButton} onClick={sentUserEmail}>
+        <Button
+          className={classes.actionButton}
+          onClick={sentUserEmail}
+          variant="contained"
+        >
           Subscribe
         </Button>
       </Box>

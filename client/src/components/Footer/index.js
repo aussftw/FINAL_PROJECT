@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Grid, Typography } from "@material-ui/core";
+import { Container, Grid, Link } from "@material-ui/core";
 
 // import { ThemeProvider } from '@material-ui/core/Hidden';
 import useStyles from "./useStyles";
@@ -16,7 +16,9 @@ const Footer = () => {
 
   return (
     <Container className={classes.bg} maxWidth>
-      <Typography>LOGO</Typography>
+      <Link href="/#" className={classes.logoContainer}>
+        <img src="./img/Logo.svg" alt="logo" className={classes.logo} />
+      </Link>
       <Grid container>
         <ContactUs />
         <Payment />
