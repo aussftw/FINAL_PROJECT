@@ -8,6 +8,7 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     flexDirection: "row",
     backgroundColor: theme.palette.primary.light,
+    padding: 5,
   },
 
   linkIcon: {
@@ -18,6 +19,7 @@ const useStyles = makeStyles(theme => ({
   },
   detailsTitle: {
     fontWeight: 600,
+    fontSize: 16,
   },
   infoTitle: {
     fontWeight: 600,
@@ -36,10 +38,27 @@ const useStyles = makeStyles(theme => ({
   },
   infoDetail: {
     maxWidth: 120,
+    margin: 0,
   },
   infoDetailValue: {},
   currentPrice: {
     fontWeight: 600,
+  },
+  buttonsBar: {
+    marginTop: 15,
+    marginBottom: 15,
+  },
+  actionButton: {
+    marginLeft: 4,
+    marginRight: 4,
+  },
+  detailsDescription: {
+    marginTop: 15,
+    marginBottom: 10,
+  },
+  descriptionText: {
+    textAlign: "justify",
+    marginTop: 10,
   },
   previousPrice: {
     fontWeight: 600,
@@ -54,10 +73,6 @@ const useStyles = makeStyles(theme => ({
       left: 0,
       transform: "rotate(-7deg",
     },
-  },
-
-  buttonsBar: {
-    marginTop: 200,
   },
 }));
 
