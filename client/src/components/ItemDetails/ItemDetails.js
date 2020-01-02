@@ -114,9 +114,7 @@ const ItemDetails = () => {
 
           <List>
             <ListItem className={classes.root}>
-              <ListItemText primary="Price:" className={classes.infoDetail}>
-                Price:
-              </ListItemText>
+              <ListItemText primary="Price:" className={classes.infoDetail} />
               <Typography
                 color="secondary.dark"
                 className={classes.previousPrice}
@@ -126,9 +124,7 @@ const ItemDetails = () => {
               </Typography>
             </ListItem>
             <ListItem className={classes.root}>
-              <ListItemText primary="Price:" className={classes.infoDetail}>
-                Price:
-              </ListItemText>
+              <ListItemText primary="Price:" className={classes.infoDetail} />
               <Typography
                 color="secondary.dark"
                 className={classes.currentPrice}
@@ -159,9 +155,9 @@ const ItemDetails = () => {
         </Box>
       </Box>
       <Box className={classes.detailsDescription}>
-        <Typography>
-          Description:
-          {/* eslint-disable-next-line */}
+        <span className={classes.descriptionTitle}>Description: </span>
+        {/* eslint-disable-next-line */}
+        <Typography className={classes.descriptionText}>
           {item.description}
         </Typography>
       </Box>
