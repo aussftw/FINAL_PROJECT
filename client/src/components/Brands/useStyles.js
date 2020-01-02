@@ -8,8 +8,8 @@ const useStyles = makeStyles(theme => ({
   },
   brand: {
     margin: theme.spacing(1.5),
-    width: 150,
-    height: 110,
+    width: 250,
+    height: 150,
     backgroundSize: "cover",
     overflow: "hidden",
   },

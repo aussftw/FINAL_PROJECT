@@ -8,7 +8,9 @@ import {
   Box,
   Link,
   Button,
-  IconButton,
+  List,
+  ListItem,
+  ListItemText,
 } from "@material-ui/core";
 import HomeSharpIcon from "@material-ui/icons/HomeSharp";
 import FavoriteBorderSharpIcon from "@material-ui/icons/FavoriteBorderSharp";
@@ -46,11 +48,16 @@ const ItemDetails = () => {
   return (
     <Container className={classes.brandsContaier} maxWidth="lg">
       {preloader && PreloaderAdaptive}
-      <Box>
-        <Link href="/#">
-          <HomeSharpIcon />
+      <Box className={classes.detailsHeader}>
+        <Link href="/#" className={classes.linkIcon}>
+          <HomeSharpIcon className={classes.icon} fontSize="large" />
         </Link>
-        <Typography variant="h6" color="secondary.dark">
+        <Divider orientation="vertical" />
+        <Typography
+          variant="h6"
+          color="secondary.dark"
+          className={classes.detailsTitle}
+        >
           {item.name}
         </Typography>
       </Box>
@@ -59,50 +66,94 @@ const ItemDetails = () => {
           <img src="" alt="" />
         </Box>
         <Box className={classes.infoContainer}>
-          <Typography variant="h4" color="secondary.dark">
+          <Typography
+            variant="h6"
+            color="secondary.dark"
+            className={classes.infoTitle}
+          >
             {item.name}
           </Typography>
           <Divider variant="middle" />
-          <Typography variant="h6" color="secondary.dark">
-            Product code:
-            {/* eslint-disable-next-line */}
-            {item._id}
-          </Typography>
-          <Typography variant="h6" color="secondary.dark">
-            Color:
-            {item.color}
-          </Typography>
-          <Typography variant="h6" color="secondary.dark">
-            Size:
-            {item.sizes}
-          </Typography>
+          <List>
+            <ListItem className={classes.root}>
+              <ListItemText
+                className={classes.infoDetail}
+                color="secondary.dark"
+                primary="Product code:"
+              />
+              <Typography className={classes.infoDetailValue}>
+                {/* eslint-disable-next-line */}
+                {item._id}
+              </Typography>
+            </ListItem>
+            <ListItem className={classes.root}>
+              <ListItemText
+                className={classes.infoDetail}
+                color="secondary.dark"
+                primary="Color:"
+              />
+              <Typography className={classes.infoDetailValue}>
+                {/* eslint-disable-next-line */}
+                {item.color}
+              </Typography>
+            </ListItem>
+            <ListItem className={classes.root}>
+              <ListItemText
+                className={classes.infoDetail}
+                color="secondary.dark"
+                primary="Size:"
+              />
+              <Typography className={classes.infoDetailValue}>
+                {/* eslint-disable-next-line */}
+                {item.sizes}
+              </Typography>
+            </ListItem>
+          </List>
+
           <Divider variant="middle" />
-          <Typography variant="h5" color="secondary.dark">
-            Price:
-            {/* eslint-disable-next-line */}
-            {item.previousPrice}$
-          </Typography>
-          <Typography variant="h5" color="secondary.dark">
-            Price:
-            {/* eslint-disable-next-line */}
-            {item.currentPrice}$
-          </Typography>
+
+          <List>
+            <ListItem className={classes.root}>
+              <ListItemText primary="Price:" className={classes.infoDetail}>
+                Price:
+              </ListItemText>
+              <Typography
+                color="secondary.dark"
+                className={classes.previousPrice}
+              >
+                {/* eslint-disable-next-line */}
+                {item.previousPrice}$
+              </Typography>
+            </ListItem>
+            <ListItem className={classes.root}>
+              <ListItemText primary="Price:" className={classes.infoDetail}>
+                Price:
+              </ListItemText>
+              <Typography
+                color="secondary.dark"
+                className={classes.currentPrice}
+              >
+                {/* eslint-disable-next-line */}
+                {item.currentPrice}$
+              </Typography>
+            </ListItem>
+          </List>
           <Divider variant="middle" />
           <QtyCounter />
           <Divider variant="middle" />
-          <Box className={classes.buttonBar}>
+          <Box className={classes.buttonsBar}>
             <Button
-              lassName={classes.actionButton}
+              className={classes.actionButton}
               onClick="add to cart function here"
               variant="contained"
             >
               Add to cart
             </Button>
-            <IconButton color="" aria-label="Add to wishlist">
+            <Button color="" aria-label="Add to wishlist" variant="contained">
               <FavoriteBorderSharpIcon
                 onClick={console.log("add to wishlist function here")}
               />
-            </IconButton>
+            </Button>
           </Box>
           <Divider variant="middle" />
         </Box>

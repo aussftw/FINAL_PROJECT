@@ -7,7 +7,6 @@ import useStyles from "./useStyles";
 
 const Brands = () => {
   const classes = useStyles();
-
   const [brands, setBrands] = useState([]);
   const [preloader, setPreloader] = useState(true);
 
@@ -17,8 +16,6 @@ const Brands = () => {
       .then(response => {
         setBrands(response.data);
         setPreloader(false);
-        // eslint-disable-next-line
-        console.log(response.data);
       })
       .catch(err => {
         // eslint-disable-next-line
