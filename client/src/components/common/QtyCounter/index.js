@@ -29,14 +29,14 @@ const QtyCounter = () => {
   };
 
   return (
-    <Container className={classes.qtyContainer} maxWidth="lg">
-      <Typography> Qty:</Typography>
+    <Container className={classes.root} maxWidth="lg">
+      <Typography className={classes.title}> Qty:</Typography>
       <Box>
         <IconButton color="" aria-label="More">
           <AddSharpIcon onClick={() => inc()} />
         </IconButton>
         <InputBase
-          // className={classes.input}
+          className={classes.input}
           onChange={e => setQty(+e.target.value)}
           value={qty}
           type="tel"

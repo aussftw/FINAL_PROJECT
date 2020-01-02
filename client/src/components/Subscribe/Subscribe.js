@@ -38,6 +38,7 @@ const Subscribe = () => {
       // eslint-disable-next-line
       .catch(error => {
         setError(true);
+        console.log(error.response);
       });
 
     // await setUserEmail("");
