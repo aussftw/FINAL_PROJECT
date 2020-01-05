@@ -17,9 +17,18 @@ const useStyles = makeStyles(theme => ({
   icon: {
     fontSize: "large",
   },
+
+  imgScale: {
+    height: 150,
+    width: 200,
+  },
   detailsTitle: {
     fontWeight: 600,
     fontSize: 16,
+    marginTop: 5,
+    // ":firstLetter": {
+    //   textTransform: "capitalize",
+    // },
   },
   infoTitle: {
     fontWeight: 600,
@@ -35,6 +44,10 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up("sm")]: {
       flexDirection: "row",
     },
+  },
+
+  rarings: {
+    marginLeft: theme.spacing(2),
   },
   infoDetail: {
     maxWidth: 120,

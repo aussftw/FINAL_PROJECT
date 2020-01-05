@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-
+import { Carousel } from "react-responsive-carousel";
 import axios from "axios";
 import {
   Container,
@@ -11,10 +11,14 @@ import {
   List,
   ListItem,
   ListItemText,
+  Tooltip,
 } from "@material-ui/core";
-import HomeSharpIcon from "@material-ui/icons/HomeSharp";
+import HomeIcon from "@material-ui/icons/HomeSharp";
 import FavoriteBorderSharpIcon from "@material-ui/icons/FavoriteBorderSharp";
+import StarBorder from "@material-ui/icons/StarBorder";
+
 // import FavoriteSharpIcon from "@material-ui/icons/FavoriteSharp";
+import Rating from "@material-ui/lab/Rating";
 import QtyCounter from "../common/QtyCounter";
 import PreloaderAdaptive from "../Preloader/Adaptive";
 
@@ -22,7 +26,11 @@ import useStyles from "./useStyles";
 
 const ItemDetails = () => {
   const classes = useStyles();
-  const [item, setItem] = useState([]);
+  const [item, setItem] = useState({
+    imageUrls: [],
+    name: "",
+    rate: { rating: 0 },
+  });
   const [preloader, setPreloader] = useState(true);
 
   useEffect(() => {
@@ -39,18 +47,35 @@ const ItemDetails = () => {
         // eslint-disable-next-line
         console.log(error);
       });
-  }, [item.name]);
+  }, []);
 
-  // .split(" ")
-  // .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-  // .join(" ")
+  // eslint-disable-next-line
+  const CardTooltipText = rating => {
+    if (item.rate.rating === undefined) return "Not yet rated";
+
+    return `Rated ${item.rating} out of 5`;
+  };
+
+  console.log(item.rate.rating);
+
+  const {
+    name,
+    imageUrls,
+    _id,
+    color,
+    sizes,
+    rate,
+    currentPrice,
+    previousPrice,
+    description,
+  } = item;
 
   return (
     <Container className={classes.brandsContaier} maxWidth="lg">
       {preloader && PreloaderAdaptive}
       <Box className={classes.detailsHeader}>
         <Link href="/#" className={classes.linkIcon}>
-          <HomeSharpIcon className={classes.icon} fontSize="large" />
+          <HomeIcon style={{ fontSize: "30px", color: "black" }} />
         </Link>
         <Divider orientation="vertical" />
         <Typography
@@ -58,12 +83,34 @@ const ItemDetails = () => {
           color="secondary.dark"
           className={classes.detailsTitle}
         >
-          {item.name}
+          {name
+            .split(" ")
+            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(" ")}
         </Typography>
       </Box>
       <Box className={classes.detailsBody}>
         <Box className={classes.imagesContainer}>
-          <img src="" alt="" />
+          {/* {imageUrls.map(image => (
+            <img src={image} alt="keke" />
+          ))} */}
+          <Container maxWidth={false}>
+            <Carousel
+              showThumbs={false}
+              showArrows
+              showStatus={false}
+              // axis="vertical"
+              infiniteLoop
+            >
+              {imageUrls[0] ? (
+                imageUrls.map(image => (
+                  <img src={image} alt="keke" className={classes.imgScale} />
+                ))
+              ) : (
+                <PreloaderAdaptive />
+              )}
+            </Carousel>
+          </Container>
         </Box>
         <Box className={classes.infoContainer}>
           <Typography
@@ -71,7 +118,10 @@ const ItemDetails = () => {
             color="secondary.dark"
             className={classes.infoTitle}
           >
-            {item.name}
+            {name
+              .split(" ")
+              .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+              .join(" ")}
           </Typography>
           <Divider variant="middle" />
           <List>
@@ -83,7 +133,7 @@ const ItemDetails = () => {
               />
               <Typography className={classes.infoDetailValue}>
                 {/* eslint-disable-next-line */}
-                {item._id}
+                {_id}
               </Typography>
             </ListItem>
             <ListItem className={classes.root}>
@@ -94,7 +144,7 @@ const ItemDetails = () => {
               />
               <Typography className={classes.infoDetailValue}>
                 {/* eslint-disable-next-line */}
-                {item.color}
+                {color}
               </Typography>
             </ListItem>
             <ListItem className={classes.root}>
@@ -105,10 +155,23 @@ const ItemDetails = () => {
               />
               <Typography className={classes.infoDetailValue}>
                 {/* eslint-disable-next-line */}
-                {item.sizes}
+                {sizes}
               </Typography>
             </ListItem>
           </List>
+          <Tooltip title={CardTooltipText(rate)}>
+            <Box className={classes.rating}>
+              <Rating
+                name="size-medium"
+                value={rate}
+                size="medium"
+                precision={0.5}
+                emptyIcon={
+                  <StarBorder color="primary" style={{ fontSize: 24 }} />
+                }
+              />
+            </Box>
+          </Tooltip>
 
           <Divider variant="middle" />
 
@@ -120,7 +183,7 @@ const ItemDetails = () => {
                 className={classes.previousPrice}
               >
                 {/* eslint-disable-next-line */}
-                {item.previousPrice}$
+                {previousPrice}$
               </Typography>
             </ListItem>
             <ListItem className={classes.root}>
@@ -130,7 +193,7 @@ const ItemDetails = () => {
                 className={classes.currentPrice}
               >
                 {/* eslint-disable-next-line */}
-                {item.currentPrice}$
+                {currentPrice}$
               </Typography>
             </ListItem>
           </List>
@@ -154,11 +217,12 @@ const ItemDetails = () => {
           <Divider variant="middle" />
         </Box>
       </Box>
+
       <Box className={classes.detailsDescription}>
         <span className={classes.descriptionTitle}>Description: </span>
         {/* eslint-disable-next-line */}
         <Typography className={classes.descriptionText}>
-          {item.description}
+          {description}
         </Typography>
       </Box>
     </Container>
