@@ -12,27 +12,26 @@ const useStyles = makeStyles(theme => ({
   },
 
   linkIcon: {
-    marginRight: theme.spacing(1.5),
+    marginRight: theme.spacing(1),
   },
   icon: {
     fontSize: "large",
   },
 
   imagesContainer: {
-    width: "50%vw",
     marginTop: theme.spacing(5),
   },
-
-  imgScale: {
-    height: 150,
-    width: 200,
-  },
+  // imgScale: {
+  //   height: 150,
+  //   width: 200,
+  // },
   detailsTitle: {
     fontWeight: 600,
     fontSize: 16,
     marginTop: 5,
   },
   infoContainer: {
+    marginRight: theme.spacing(2),
     [theme.breakpoints.up("md")]: {
       width: "50%",
     },

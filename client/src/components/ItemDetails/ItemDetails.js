@@ -27,7 +27,8 @@ import PreloaderAdaptive from "../Preloader/Adaptive";
 
 import useStyles from "./useStyles";
 
-const ItemDetails = () => {
+// eslint-disable-next-line
+const ItemDetails = ({ id, inCart, inWishList }) => {
   const classes = useStyles();
   const [item, setItem] = useState({
     imageUrls: [],
@@ -44,7 +45,7 @@ const ItemDetails = () => {
         setItem(response.data);
         setPreloader(false);
         // eslint-disable-next-line
-        console.log(response.data);
+        // console.log(response.data);
       })
 
       .catch(error => {
@@ -68,9 +69,6 @@ const ItemDetails = () => {
       .join(" ");
   };
 
-  console.log(item.rate.rating);
-  console.log(item.imageUrls, "PIC");
-
   const {
     name,
     imageUrls,
@@ -84,26 +82,19 @@ const ItemDetails = () => {
   } = item;
 
   return (
-    <Container className={classes.brandsContaier} maxWidth="lg">
+    <Container className={classes.brandsContaier} maxWidth="true">
       {preloader && PreloaderAdaptive}
       <Box className={classes.detailsHeader}>
         <Link href="/#" className={classes.linkIcon}>
           <HomeIcon style={{ fontSize: "30px", color: "black" }} />
         </Link>
         <Divider orientation="vertical" />
-        <Typography
-          variant="h6"
-          color="secondary.dark"
-          className={classes.detailsTitle}
-        >
+        <Typography variant="h6" className={classes.detailsTitle}>
           {upperName(name)}
         </Typography>
       </Box>
       <Box className={classes.detailsBody}>
         <Container maxWidth={false} className={classes.imagesContainer}>
-          {/* {imageUrls.map(image => (
-            <img src={image} alt="keke" />
-          ))} */}
           <Gallery
             index={index}
             onRequestChange={i => {
@@ -112,6 +103,7 @@ const ItemDetails = () => {
           >
             {imageUrls.map(image => (
               <GalleryImage
+                key={index}
                 objectFit="contain"
                 src={image}
                 alt="flower_picture"
@@ -121,11 +113,7 @@ const ItemDetails = () => {
           </Gallery>
         </Container>
         <Box className={classes.infoContainer}>
-          <Typography
-            variant="h6"
-            color="secondary.dark"
-            className={classes.infoTitle}
-          >
+          <Typography variant="h6" className={classes.infoTitle}>
             {upperName(name)}
           </Typography>
           <Divider variant="middle" />
@@ -133,7 +121,6 @@ const ItemDetails = () => {
             <ListItem className={classes.root}>
               <ListItemText
                 className={classes.infoDetail}
-                color="secondary.dark"
                 primary="Product code:"
               />
               <Typography className={classes.infoDetailValue}>
@@ -142,22 +129,14 @@ const ItemDetails = () => {
               </Typography>
             </ListItem>
             <ListItem className={classes.root}>
-              <ListItemText
-                className={classes.infoDetail}
-                color="secondary.dark"
-                primary="Color:"
-              />
+              <ListItemText className={classes.infoDetail} primary="Color:" />
               <Typography className={classes.infoDetailValue}>
                 {/* eslint-disable-next-line */}
                 {color}
               </Typography>
             </ListItem>
             <ListItem className={classes.root}>
-              <ListItemText
-                className={classes.infoDetail}
-                color="secondary.dark"
-                primary="Size:"
-              />
+              <ListItemText className={classes.infoDetail} primary="Size:" />
               <Typography className={classes.infoDetailValue}>
                 {/* eslint-disable-next-line */}
                 {sizes}
@@ -177,26 +156,18 @@ const ItemDetails = () => {
               />
             </Box>
           </Tooltip>
-
           <Divider variant="middle" />
-
           <List>
             <ListItem className={classes.root}>
               <ListItemText primary="Price:" className={classes.infoDetail} />
-              <Typography
-                color="secondary.dark"
-                className={classes.previousPrice}
-              >
+              <Typography className={classes.previousPrice}>
                 {/* eslint-disable-next-line */}
                 {previousPrice}$
               </Typography>
             </ListItem>
             <ListItem className={classes.root}>
               <ListItemText primary="Price:" className={classes.infoDetail} />
-              <Typography
-                color="secondary.dark"
-                className={classes.currentPrice}
-              >
+              <Typography className={classes.currentPrice}>
                 {/* eslint-disable-next-line */}
                 {currentPrice}$
               </Typography>
@@ -208,12 +179,12 @@ const ItemDetails = () => {
           <Box className={classes.buttonsBar}>
             <Button
               className={classes.actionButton}
-              onClick="add to cart function here"
+              onClick={console.log("add to cart function here")}
               variant="contained"
             >
               Add to cart
             </Button>
-            <Button color="" aria-label="Add to wishlist" variant="contained">
+            <Button aria-label="Add to wishlist" variant="contained">
               <FavoriteBorderSharpIcon
                 onClick={console.log("add to wishlist function here")}
               />
