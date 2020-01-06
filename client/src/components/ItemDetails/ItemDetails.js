@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Carousel } from "react-responsive-carousel";
+// import { Carousel } from "react-responsive-carousel";
+
+import { Gallery, GalleryImage } from "react-gesture-gallery";
+
 import axios from "axios";
 import {
   Container,
@@ -31,6 +34,7 @@ const ItemDetails = () => {
     name: "",
     rate: { rating: 0 },
   });
+  const [index, setIndex] = useState(0);
   const [preloader, setPreloader] = useState(true);
 
   useEffect(() => {
@@ -49,14 +53,23 @@ const ItemDetails = () => {
       });
   }, []);
 
+  // helpers
+
   // eslint-disable-next-line
   const CardTooltipText = rating => {
     if (item.rate.rating === undefined) return "Not yet rated";
-
     return `Rated ${item.rating} out of 5`;
   };
 
+  const upperName = string => {
+    return string
+      .split(" ")
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ");
+  };
+
   console.log(item.rate.rating);
+  console.log(item.imageUrls, "PIC");
 
   const {
     name,
@@ -83,45 +96,37 @@ const ItemDetails = () => {
           color="secondary.dark"
           className={classes.detailsTitle}
         >
-          {name
-            .split(" ")
-            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-            .join(" ")}
+          {upperName(name)}
         </Typography>
       </Box>
       <Box className={classes.detailsBody}>
-        <Box className={classes.imagesContainer}>
+        <Container maxWidth={false} className={classes.imagesContainer}>
           {/* {imageUrls.map(image => (
             <img src={image} alt="keke" />
           ))} */}
-          <Container maxWidth={false}>
-            <Carousel
-              showThumbs={false}
-              showArrows
-              showStatus={false}
-              // axis="vertical"
-              infiniteLoop
-            >
-              {imageUrls[0] ? (
-                imageUrls.map(image => (
-                  <img src={image} alt="keke" className={classes.imgScale} />
-                ))
-              ) : (
-                <PreloaderAdaptive />
-              )}
-            </Carousel>
-          </Container>
-        </Box>
+          <Gallery
+            index={index}
+            onRequestChange={i => {
+              setIndex(i);
+            }}
+          >
+            {imageUrls.map(image => (
+              <GalleryImage
+                objectFit="contain"
+                src={image}
+                alt="flower_picture"
+                // className={classes.imgScale}
+              />
+            ))}
+          </Gallery>
+        </Container>
         <Box className={classes.infoContainer}>
           <Typography
             variant="h6"
             color="secondary.dark"
             className={classes.infoTitle}
           >
-            {name
-              .split(" ")
-              .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-              .join(" ")}
+            {upperName(name)}
           </Typography>
           <Divider variant="middle" />
           <List>
