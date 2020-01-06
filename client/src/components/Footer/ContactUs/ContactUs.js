@@ -27,12 +27,7 @@ const ContactUs = () => {
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
           <DraftsIcon className={classes.contactUsIcon} />
-          <Link
-            className={classes.contactUsItem}
-            color="secondary"
-            href="/#"
-            draftsIcon={<DraftsIcon />}
-          >
+          <Link className={classes.contactUsItem} color="secondary" href="/#">
             planty@mail.com
           </Link>
         </ExpansionPanelDetails>

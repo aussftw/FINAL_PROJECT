@@ -5,9 +5,12 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+    [theme.breakpoints.up("sm")]: {
+      flexDirection: "row",
+    },
   },
   brand: {
-    margin: theme.spacing(1.5),
+    margin: "1rem 4rem 1rem 3rem",
     width: 250,
     height: 150,
     backgroundSize: "cover",
