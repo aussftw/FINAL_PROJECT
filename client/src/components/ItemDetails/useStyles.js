@@ -18,6 +18,11 @@ const useStyles = makeStyles(theme => ({
     fontSize: "large",
   },
 
+  imagesContainer: {
+    width: "50%vw",
+    marginTop: theme.spacing(5),
+  },
+
   imgScale: {
     height: 150,
     width: 200,
@@ -26,10 +31,13 @@ const useStyles = makeStyles(theme => ({
     fontWeight: 600,
     fontSize: 16,
     marginTop: 5,
-    // ":firstLetter": {
-    //   textTransform: "capitalize",
-    // },
   },
+  infoContainer: {
+    [theme.breakpoints.up("md")]: {
+      width: "50%",
+    },
+  },
+
   infoTitle: {
     fontWeight: 600,
     marginTop: 15,
@@ -46,8 +54,10 @@ const useStyles = makeStyles(theme => ({
     },
   },
 
-  rarings: {
-    marginLeft: theme.spacing(2),
+  rating: {
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: theme.spacing(1),
   },
   infoDetail: {
     maxWidth: 120,
@@ -72,6 +82,7 @@ const useStyles = makeStyles(theme => ({
   descriptionText: {
     textAlign: "justify",
     marginTop: 10,
+    fontSize: 14,
   },
   previousPrice: {
     fontWeight: 600,
