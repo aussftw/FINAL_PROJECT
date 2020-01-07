@@ -19,12 +19,12 @@ const Footer = () => {
       <Link href="/#" className={classes.logoContainer}>
         <img src="./img/Logo.svg" alt="logo" className={classes.logo} />
       </Link>
-      <Grid container>
+      <Container className={classes.footerData}>
         <ContactUs />
         <Payment />
         <MyAccount />
         <Information />
-      </Grid>
+      </Container>
       <Grid>
         <Copy />
       </Grid>
