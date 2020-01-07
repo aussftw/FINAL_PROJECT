@@ -28,7 +28,7 @@ const Brands = () => {
   const { _id, url, customId } = brands;
 
   return (
-    <Container className={classes.brandsContaier} maxWidth="true">
+    <Container className={classes.brandsContaier}>
       <Hidden smDown>
         {brands.length === 0 ? (
           <PreloaderAdaptive />
