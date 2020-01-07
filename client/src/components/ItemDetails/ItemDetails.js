@@ -81,8 +81,10 @@ const ItemDetails = ({ id, inCart, inWishList }) => {
     description,
   } = item;
 
+  const title = upperName(name);
+
   return (
-    <Container className={classes.brandsContaier} maxWidth="true">
+    <Container className={classes.brandsContaier} maxWidth="lg">
       {preloader && PreloaderAdaptive}
       <Box className={classes.detailsHeader}>
         <Link href="/#" className={classes.linkIcon}>
@@ -90,7 +92,7 @@ const ItemDetails = ({ id, inCart, inWishList }) => {
         </Link>
         <Divider orientation="vertical" />
         <Typography variant="h6" className={classes.detailsTitle}>
-          {upperName(name)}
+          {title}
         </Typography>
       </Box>
       <Box className={classes.detailsBody}>
@@ -114,7 +116,7 @@ const ItemDetails = ({ id, inCart, inWishList }) => {
         </Container>
         <Box className={classes.infoContainer}>
           <Typography variant="h6" className={classes.infoTitle}>
-            {upperName(name)}
+            {title}
           </Typography>
           <Divider variant="middle" />
           <List>
