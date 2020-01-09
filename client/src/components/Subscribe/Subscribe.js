@@ -38,6 +38,7 @@ const Subscribe = () => {
       // eslint-disable-next-line
       .catch(error => {
         setError(true);
+        console.log(error.response);
       });
 
     // await setUserEmail("");
@@ -59,7 +60,11 @@ const Subscribe = () => {
           onChange={e => setUserEmail(e.target.value)}
           onKeyPress={handleKeyPress}
         />
-        <Button className={classes.actionButton} onClick={sentUserEmail}>
+        <Button
+          className={classes.actionButton}
+          onClick={sentUserEmail}
+          variant="contained"
+        >
           Subscribe
         </Button>
       </Box>

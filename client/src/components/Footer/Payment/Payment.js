@@ -7,6 +7,8 @@ import {
   ExpansionPanel,
   ExpansionPanelSummary,
   ExpansionPanelDetails,
+  Box,
+  Hidden,
 } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import useStyles from "./useStyles";
@@ -20,25 +22,32 @@ const Payment = () => {
   const classes = useStyles();
 
   return (
-    <Grid item xs={12} lg={3} md={12} className={classes}>
-      <ExpansionPanel className={classes.bg}>
-        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-          <Typography className={classes}>PAYMENT</Typography>
-        </ExpansionPanelSummary>
-        <ExpansionPanelDetails>
-          <img src={AmericanExpress} alt="American Express" />
-        </ExpansionPanelDetails>
-        <ExpansionPanelDetails>
-          <img src={PayPal} alt="PayPal" />
-        </ExpansionPanelDetails>
-        <ExpansionPanelDetails>
-          <img src={MasterCard} alt="Master Card" />
-        </ExpansionPanelDetails>
-        <ExpansionPanelDetails>
-          <img src={Visa} alt="Visa" />
-        </ExpansionPanelDetails>
-      </ExpansionPanel>
-    </Grid>
+    <Hidden mdUp>
+      <Grid item xs={12} lg={3} md={12} className={classes}>
+        <ExpansionPanel className={classes.bg}>
+          <ExpansionPanelSummary
+            className={classes}
+            expandIcon={<ExpandMoreIcon />}
+          >
+            <Typography>PAYMENT</Typography>
+          </ExpansionPanelSummary>
+          <Box className={classes.paymentMethods}>
+            <ExpansionPanelDetails className={classes.root}>
+              <img src={AmericanExpress} alt="American Express" />
+            </ExpansionPanelDetails>
+            <ExpansionPanelDetails className={classes.root}>
+              <img src={PayPal} alt="PayPal" />
+            </ExpansionPanelDetails>
+            <ExpansionPanelDetails className={classes.root}>
+              <img src={MasterCard} alt="Master Card" />
+            </ExpansionPanelDetails>
+            <ExpansionPanelDetails className={classes.root}>
+              <img src={Visa} alt="Visa" />
+            </ExpansionPanelDetails>
+          </Box>
+        </ExpansionPanel>
+      </Grid>
+    </Hidden>
   );
 };
 

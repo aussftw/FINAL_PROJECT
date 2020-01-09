@@ -7,26 +7,27 @@ const useStyles = makeStyles(theme => ({
     paddingBottom: 10,
   },
 
-  subscribeTitle: {
-    alignItems: "center",
-    textAlign: "center",
-    marginBottom: 10,
-    fontWeight: 600,
+  root: {
+    display: "flex",
+    flexDirection: "row",
+    marginTop: 15,
+    padding: 2,
+    [theme.breakpoints.up("sm")]: {
+      flexDirection: "column",
+    },
   },
+
+  title: {},
 
   input: {
     backgroundColor: "#fff",
-    paddingLeft: 15,
-    paddingRight: 15,
-    paddingTop: 6,
+    paddingLeft: 10,
+    paddingRight: 10,
+    paddingTop: 2,
     paddingBottom: 2,
-
-    marginBottom: 15,
+    width: "18%",
     borderRadius: "5px",
-    height: 50,
-    [theme.breakpoints.up("sm")]: {
-      width: "60%",
-    },
+    border: 2,
   },
 
   actionButton: {
@@ -41,9 +42,6 @@ const useStyles = makeStyles(theme => ({
   subscribeBar: {
     display: "flex",
     flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    margin: "1rem",
   },
 }));
 

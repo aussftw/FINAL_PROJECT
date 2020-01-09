@@ -1,44 +1,66 @@
-import React from "react";
-import { Container } from "@material-ui/core";
+import React, { useState, useEffect } from "react";
 
-// import { Grid } from "@material-ui/core";
-// import { ThemeProvider } from '@material-ui/core/styles';
+import axios from "axios";
+// import { Gallery, GalleryImage } from "react-gesture-gallery";
+import { Container, Link, Box } from "@material-ui/core";
+import PreloaderAdaptive from "../Preloader/Adaptive";
 import useStyles from "./useStyles";
-
-import SaukraLike from "./Pics/brand1.png";
-import Hermes from "./Pics/brand2.png";
-import Versace from "./Pics/brand3.jpg";
-import Emirates from "./Pics/brand4.png";
 
 const Brands = () => {
   const classes = useStyles();
+  const [brands, setBrands] = useState([]);
+  // eslint-disable-next-line
+  const [preloader, setPreloader] = useState(true);
+
+  useEffect(() => {
+    axios
+      .get("/partners")
+      .then(response => {
+        setBrands(response.data);
+        setPreloader(false);
+      })
+      .catch(err => {
+        // eslint-disable-next-line
+        console.log(err);
+      });
+  }, []);
+
+  const { _id, url } = brands;
 
   return (
     <Container className={classes.brandsContaier}>
-      <img
-        src={SaukraLike}
-        alt="Sakura-like logo"
-        className={classes.brand}
-        spacing={5}
-      />
-      <img
-        src={Hermes}
-        alt="Sakura-like logo"
-        className={classes.brand}
-        spacing={3}
-      />
-      <img
-        src={Versace}
-        alt="Sakura-like logo"
-        className={classes.brand}
-        spacing={3}
-      />
-      <img
-        src={Emirates}
-        alt="Sakura-like logo"
-        className={classes.brand}
-        spacing={3}
-      />
+      {/* <Hidden smDown>
+        {brands.length === 0 ? (
+          <PreloaderAdaptive />
+        ) : (
+          brands.map(brand => (
+            <Link href={url} key={customId}>
+              <Box
+                className={classes.brand}
+                style={{
+                  backgroundImage: `url(${brand.imageUrl})`,
+                }}
+              />
+            </Link>
+          ))
+        )}
+      </Hidden> */}
+      {/* <Hidden mdUp> */}
+      {brands.length === 0 ? (
+        <PreloaderAdaptive />
+      ) : (
+        brands.map(brand => (
+          <Link href={url} key={_id}>
+            <Box
+              className={classes.brand}
+              style={{
+                backgroundImage: `url(${brand.imageUrl})`,
+              }}
+            />
+          </Link>
+        ))
+      )}
+      {/* </Hidden> */}
     </Container>
   );
 };
