@@ -13,6 +13,7 @@ import Badge from "@material-ui/core/Badge";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import MailIcon from "@material-ui/icons/Mail";
 import NotificationsIcon from "@material-ui/icons/Notifications";
+import SimpleModal from "../common/Modal";
 
 import TemporaryDrawer from "./BurgerPanel";
 import CustomizedSearch from "./Search";
@@ -153,6 +154,7 @@ export default function Header() {
           <CustomizedSearch />
           {/* <div/> */}
           <div>
+            <SimpleModal />
             <IconButton aria-label="show 4 new mails" color="inherit">
               <Badge badgeContent={8} color="secondary">
                 <MailIcon />

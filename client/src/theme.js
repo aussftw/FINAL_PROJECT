@@ -75,6 +75,12 @@ const theme = createMuiTheme({
         },
       },
     },
+    MuiInputLabel: {
+      outlined: {
+        fontWeight: 800,
+        backgroundColor: "white",
+      },
+    },
   },
 });
 

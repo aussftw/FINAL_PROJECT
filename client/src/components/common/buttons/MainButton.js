@@ -18,8 +18,12 @@ const ColorButton = withStyles(() => ({
   },
 }))(Button);
 
-const MainButton = ({ text, onClick }) => {
-  return <ColorButton onClick={onClick}>{text}</ColorButton>;
+const MainButton = ({ text, onClick, variant }) => {
+  return (
+    <ColorButton variant={variant} onClick={onClick}>
+      {text}
+    </ColorButton>
+  );
 };
 
 export default MainButton;
