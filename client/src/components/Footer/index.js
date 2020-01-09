@@ -24,8 +24,8 @@ const Footer = () => {
       <Container className={classes.footerData}>
         <ContactUs />
         <Payment />
-        <MyAccount />
         <Information />
+        <MyAccount />
       </Container>
       <Grid>
         <Copy />
