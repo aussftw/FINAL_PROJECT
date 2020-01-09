@@ -4,7 +4,6 @@ const useStyles = makeStyles(theme => ({
   contactUsIcon: {
     marginRight: theme.spacing(1.5),
     color: theme.palette.secondary.main,
-    [theme.breakpoints.up("sm")]: {},
   },
   contactUsItem: {
     fontSize: 16,
