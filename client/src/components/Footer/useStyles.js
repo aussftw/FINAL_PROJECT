@@ -5,7 +5,6 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.primary.light,
     padding: 0,
   },
-
   footerData: {
     display: "flex",
     flexDirection: "column",

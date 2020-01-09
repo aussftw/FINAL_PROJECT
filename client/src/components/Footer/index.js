@@ -1,7 +1,6 @@
 import React from "react";
 import { Container, Grid, Link, Hidden } from "@material-ui/core";
 
-// import { ThemeProvider } from '@material-ui/core/Hidden';
 import useStyles from "./useStyles";
 
 import ContactUs from "./ContactUs/ContactUs";

@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 
 import axios from "axios";
+
 // import { Gallery, GalleryImage } from "react-gesture-gallery";
+
 import { Container, Link, Box } from "@material-ui/core";
 import PreloaderAdaptive from "../Preloader/Adaptive";
 import useStyles from "./useStyles";
@@ -25,6 +27,7 @@ const Brands = () => {
       });
   }, []);
 
+  // eslint-disable-next-line
   const { _id, url } = brands;
 
   return (

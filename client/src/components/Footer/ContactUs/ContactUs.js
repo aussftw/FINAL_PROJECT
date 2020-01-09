@@ -77,7 +77,6 @@ const ContactUs = () => {
               Phone
             </Link>
           </Box>
-
           <Box className={classes.paymentMethods}>
             <img
               className={classes.paymentMethod}
