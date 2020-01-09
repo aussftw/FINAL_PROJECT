@@ -15,7 +15,8 @@ const useStyles = makeStyles(theme => ({
       flexDirection: "row",
       justifyContent: "center",
       alignItems: "center",
-      margin: "2rem 10rem",
+      margin: "0rem 10rem",
+      padding: "1rem 0",
     },
   },
   logoContainer: {

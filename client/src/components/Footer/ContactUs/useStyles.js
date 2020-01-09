@@ -11,14 +11,13 @@ const useStyles = makeStyles(theme => ({
       marginTop: "-2rem",
     },
   },
-
   itemContainer: {
     margin: "1rem 0",
   },
   mainContainer: {
     backgroundColor: theme.palette.primary.light,
     [theme.breakpoints.up("sm")]: {
-      margin: "1.5rem 1rem",
+      // margin: "0 1rem",
     },
   },
   logoContainer: {
