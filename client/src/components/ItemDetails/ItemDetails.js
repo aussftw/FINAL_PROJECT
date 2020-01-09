@@ -20,7 +20,7 @@ import HomeIcon from "@material-ui/icons/HomeSharp";
 import FavoriteBorderSharpIcon from "@material-ui/icons/FavoriteBorderSharp";
 import StarBorder from "@material-ui/icons/StarBorder";
 
-// import FavoriteSharpIcon from "@material-ui/icons/FavoriteSharp";
+import FavoriteSharpIcon from "@material-ui/icons/FavoriteSharp";
 import Rating from "@material-ui/lab/Rating";
 import QtyCounter from "../common/QtyCounter";
 import PreloaderAdaptive from "../Preloader/Adaptive";
@@ -184,15 +184,20 @@ const ItemDetails = ({ id, inCart, inWishList }) => {
               onClick={console.log("add to cart function here")}
               variant="contained"
             >
-              Add to cart
+              {inCart ? "Remove from cart" : "Add to cart"}
             </Button>
             <Button aria-label="Add to wishlist" variant="contained">
-              <FavoriteBorderSharpIcon
-                onClick={console.log("add to wishlist function here")}
-              />
+              {inWishList ? (
+                <FavoriteSharpIcon
+                  onClick={console.log("add to wishlist function here")}
+                />
+              ) : (
+                <FavoriteBorderSharpIcon
+                  onClick={console.log("add to wishlist function here")}
+                />
+              )}
             </Button>
           </Box>
-          <Divider variant="middle" />
         </Box>
       </Box>
 
