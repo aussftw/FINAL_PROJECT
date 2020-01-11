@@ -22,7 +22,7 @@ const AllProductsPutter = () => {
 
   const setRandomRate = () => {
     for (let i = 0; i < products.length; i += 1) {
-      let voters = Math.round(Math.random() * 10 + 5);
+      let voters = Math.round(Math.random() * 10 + 2);
       let resultRating = (Math.floor(Math.random() * 400) + 100) / 100;
       if (resultRating < 3) {
         resultRating = undefined;

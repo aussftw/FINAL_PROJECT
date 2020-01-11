@@ -14,13 +14,13 @@ const TopRated = () => {
 
   useEffect(() => {
     axios
-      .get("/products")
+      .get("/products/top")
       .then(response => {
         setProducts(response.data);
       })
       .catch(err => {
         // eslint-disable-next-line no-console
-        console.log(err);
+        console.log(err.response.data);
       });
   }, []);
 
@@ -62,10 +62,9 @@ const TopRated = () => {
               lgDown={result.lgDown}
             >
               <ItemCard
-                title={value.name
-                  .split(" ")
-                  .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-                  .join(" ")}
+                /* eslint-disable-next-line no-underscore-dangle */
+                key={value._id}
+                title={value.name}
                 rate={value.rate.rating}
                 price={value.currentPrice}
                 img={value.imageUrls[0]}
