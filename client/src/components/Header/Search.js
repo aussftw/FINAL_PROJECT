@@ -3,14 +3,14 @@ import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import InputBase from "@material-ui/core/InputBase";
 import Divider from "@material-ui/core/Divider";
-import IconButton from "@material-ui/core/IconButton";
+import Button from "@material-ui/core/Button";
 import SearchIcon from "@material-ui/icons/Search";
 
 import MenuListComposition from "./Dropdown";
 
 const useStyles = makeStyles(theme => ({
   root: {
-    padding: "2px 4px",
+    paddingLeft: theme.spacing(1),
     display: "flex",
     alignItems: "center",
     width: 400,
@@ -22,8 +22,12 @@ const useStyles = makeStyles(theme => ({
     textDecoration: "none",
   },
   input: {
+    fontSize: "0.8rem",
     // marginLeft: theme.spacing(1),
     flex: 3,
+    [theme.breakpoints.up("md")]: {
+      backgroundColor: "red",
+    },
   },
   iconButton: {
     padding: 10,
@@ -51,15 +55,16 @@ export default function CustomizedSearch() {
       <InputBase
         className={classes.input}
         placeholder="Search Products..."
-        inputProps={{ "aria-label": "search google maps" }}
+        inputProps={{ "aria-label": "search products" }}
       />
-      <IconButton
-        type="submit"
+      <Button
         className={classes.iconButton}
+        variant="contained"
+        type="submit"
         aria-label="search"
       >
         <SearchIcon />
-      </IconButton>
+      </Button>
     </Paper>
   );
 }
