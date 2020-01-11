@@ -54,7 +54,9 @@ const CustomerSchema = new Schema({
     type: Date,
     default: Date.now
   }
-});
+},
+  { strict: false }
+);
 
 CustomerSchema.methods.comparePassword = function(candidatePassword, cb) {
   bcrypt.compare(candidatePassword, this.password, function(err, isMatch) {

@@ -62,6 +62,12 @@ const ProductSchema = new Schema(
     date: {
       type: Date,
       default: Date.now
+    },
+    rate: {
+      rating: {
+        type: Number,
+        default: 0
+      }
     }
   },
   { strict: false }
