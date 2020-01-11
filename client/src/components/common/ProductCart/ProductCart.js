@@ -23,7 +23,7 @@ const CardTooltipText = value => {
   return `Rated ${value} out of 5`;
 };
 
-const ItemCard = ({ title, rate, price, img, inCart, inWishlist }) => {
+const ProductCart = ({ title, rate, price, img, inCart, inWishlist }) => {
   const classes = useStyles();
   const [wishlist, setWishlist] = useState(inWishlist);
   const [cart, setCart] = useState(inCart);
@@ -102,4 +102,4 @@ const ItemCard = ({ title, rate, price, img, inCart, inWishlist }) => {
   );
 };
 
-export default ItemCard;
+export default ProductCart;

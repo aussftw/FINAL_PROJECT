@@ -4,7 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 import { ThemeProvider } from "@material-ui/core/styles";
 import { Provider } from "react-redux";
 import configureStore from "./store";
-import App from "./App";
+import Routes from "./routes/Routes";
 
 import theme from "./theme";
 
@@ -16,7 +16,7 @@ ReactDOM.render(
   <ThemeProvider theme={theme}>
     <Provider store={store}>
       <BrowserRouter>
-        <App />
+        <Routes />
       </BrowserRouter>
     </Provider>
   </ThemeProvider>,

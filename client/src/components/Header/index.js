@@ -95,7 +95,7 @@ const Header = () => {
   //     open={isMenuOpen}
   //     onClose={handleMenuClose}
   //   >
-  //     <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+  //     <MenuItem onClick={handleMenuClose}>Profiler</MenuItem>
   //     <MenuItem onClick={handleMenuClose}>My account</MenuItem>
   //   </Menu>
   // );
@@ -136,7 +136,7 @@ const Header = () => {
   //         >
   //           <AccountCircle />
   //         </IconButton>
-  //         <p>Profile</p>
+  //         <p>Profiler</p>
   //       </MenuItem>
   //     </Menu>
   // );
