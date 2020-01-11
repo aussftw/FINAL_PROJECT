@@ -181,3 +181,18 @@ exports.searchProducts = async (req, res, next) => {
 
   res.send(matchedProducts);
 };
+
+exports.getTopRatedProducts = (req, res, next) => {
+  const topRatedProducts = {"rate.rating": -1};
+  const startPage = 8;
+
+  Product.find()
+        .sort(topRatedProducts)
+        .limit(startPage)
+        .then(products => res.send(products))
+        .catch(err =>
+            res.status(400).json({
+              message: `Error happened on server: "${err}" `
+            })
+        );
+};
