@@ -13,23 +13,30 @@ import theme from "../../theme";
 
 const useStyles = makeStyles({
   textField: {
-    width: "75%",
+    width: "90%",
     marginBottom: "20px",
   },
   wrapper: {
     padding: "15px",
   },
+  flexContainer: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
   title: {
     margin: "10px 0 30px 0",
     letterSpacing: "1px",
     textTransform: "uppercase",
+    textAlign: "center",
+    color: theme.palette.primary.dark,
   },
   btn: {
     letterSpacing: "2px",
     margin: "20px 0",
     padding: "12px 0",
     color: "white",
-    width: "35%",
+    width: "50%",
     backgroundColor: theme.palette.primary.main,
     "&:hover": {
       backgroundColor: theme.palette.primary.dark,
@@ -75,93 +82,86 @@ const RegistrationForm = () => {
   return (
     <div className={classes.wrapper}>
       <h3 className={classes.title}>Registration Form</h3>
-      <div>
-        <form>
-          <TextField
-            label="First Name"
-            variant="outlined"
-            value={values.firstName}
-            required
-            onChange={handleChange("firstName")}
-            className={classes.textField}
-          />
-          <TextField
-            label="Last Name"
-            variant="outlined"
-            value={values.lastName}
-            required
-            onChange={handleChange("lastName")}
-            className={classes.textField}
-          />
-          <TextField
-            label="Login"
-            variant="outlined"
-            value={values.login}
-            onChange={handleChange("login")}
-            required
-            className={classes.textField}
-          />
-          <TextField
-            label="Email"
-            variant="outlined"
-            value={values.email}
-            onChange={handleChange("email")}
-            required
-            className={classes.textField}
-          />
+      <form className={classes.flexContainer}>
+        <TextField
+          label="First Name"
+          variant="outlined"
+          value={values.firstName}
+          required
+          onChange={handleChange("firstName")}
+          className={classes.textField}
+        />
+        <TextField
+          label="Last Name"
+          variant="outlined"
+          value={values.lastName}
+          required
+          onChange={handleChange("lastName")}
+          className={classes.textField}
+        />
+        <TextField
+          label="Login"
+          variant="outlined"
+          value={values.login}
+          onChange={handleChange("login")}
+          required
+          className={classes.textField}
+        />
+        <TextField
+          label="Email"
+          variant="outlined"
+          value={values.email}
+          onChange={handleChange("email")}
+          required
+          className={classes.textField}
+        />
 
-          <FormControl
-            className={classes.textField}
-            variant="outlined"
-            required
-          >
-            <InputLabel>Password</InputLabel>
-            <OutlinedInput
-              type={showPassword ? "text" : "password"}
-              value={values.password}
-              onChange={handleChange("password")}
-              endAdornment={
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label="toggle password visibility"
-                    onClick={handleClickShowPassword}
-                    onMouseDown={handleMouseDownPassword}
-                    edge="end"
-                  >
-                    {values.showPassword ? <Visibility /> : <VisibilityOff />}
-                  </IconButton>
-                </InputAdornment>
-              }
-              labelWidth={70}
-            />
-          </FormControl>
+        <FormControl className={classes.textField} variant="outlined" required>
+          <InputLabel>Password</InputLabel>
+          <OutlinedInput
+            type={showPassword ? "text" : "password"}
+            value={values.password}
+            onChange={handleChange("password")}
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                  edge="end"
+                >
+                  {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                </IconButton>
+              </InputAdornment>
+            }
+            labelWidth={70}
+          />
+        </FormControl>
 
-          <TextField
-            label="Telephone"
-            variant="outlined"
-            type="number"
-            value={values.telephone}
-            onChange={handleChange("telephone")}
-            className={classes.textField}
-          />
-          <TextField
-            label="Address"
-            variant="outlined"
-            value={values.address}
-            onChange={handleChange("address")}
-            className={classes.textField}
-          />
-          <br />
-          <Button
-            text="Submit"
-            variant="outline"
-            onClick={submitRegistration}
-            className={classes.btn}
-          >
-            Registration
-          </Button>
-        </form>
-      </div>
+        <TextField
+          label="Telephone"
+          variant="outlined"
+          type="number"
+          value={values.telephone}
+          onChange={handleChange("telephone")}
+          className={classes.textField}
+        />
+        <TextField
+          label="Address"
+          variant="outlined"
+          value={values.address}
+          onChange={handleChange("address")}
+          className={classes.textField}
+        />
+        <Button
+          text="Submit"
+          variant="outline"
+          onClick={submitRegistration}
+          className={classes.btn}
+        >
+          Registration
+        </Button>
+      </form>
     </div>
   );
 };
