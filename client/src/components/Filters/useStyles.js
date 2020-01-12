@@ -25,6 +25,10 @@ const useStyles = makeStyles(theme => ({
     position: "absolute",
     width: "40px",
   },
+  container: {
+    display: "flex",
+    justifyContent: "space-between",
+  }
 }));
 
 export default useStyles;

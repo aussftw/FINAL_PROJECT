@@ -63,7 +63,7 @@ const ItemCard = ({ title, value, price, inCart, inWishList }) => {
             {title}
           </Typography>
           <Tooltip title={CardTooltipText(value)}>
-            <Box align="center" gutterBottom>
+            <Box align="center" gutterbottom>
               {/* <Rating
                 className={classes.rating}
                 name="rating"
