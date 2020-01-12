@@ -22,8 +22,7 @@ const useStyles = makeStyles(theme => ({
     border: `5px solid ${theme.palette.primary.main}`,
     borderRadius: "8px",
     boxShadow: theme.shadows[5],
-    minWidth: "45vw",
-    maxWidth: "75vw",
+    minWidth: "40vw",
   },
   icon: {
     colors: theme.palette.primary.main,
