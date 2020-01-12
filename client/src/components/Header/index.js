@@ -18,6 +18,7 @@ import NotificationsIcon from "@material-ui/icons/Notifications";
 import { Link } from "react-router-dom";
 import TemporaryDrawer from "./BurgerPanel";
 import CustomizedSearch from "./Search";
+import MainButton from "../common/buttons/MainButton";
 
 const useStyles = makeStyles(theme => ({
   flex: {
@@ -158,6 +159,13 @@ export default function Header() {
           </div>
 
           <div>
+            <Link to="/login">
+              <MainButton // Need a new component here
+                text="Sign In"
+                variant="outline"
+                type="button"
+              />
+            </Link>
             <IconButton aria-label="show 4 new mails" color="inherit">
               <Badge badgeContent={8} color="secondary">
                 <MailIcon />
@@ -198,7 +206,7 @@ export default function Header() {
       {/* {renderMenu} */}
     </div>
   );
-};
+}
 // import React, { useState } from "react";
 //
 // const Test = () => {
@@ -219,5 +227,3 @@ export default function Header() {
 // };
 //
 // export default Test;
-
-export default Header;
