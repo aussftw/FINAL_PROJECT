@@ -9,7 +9,6 @@ import LoginForm from "../components/LoginForm";
 import RegistrationForm from "../components/RegistrationForm";
 import ItemDetailsPage from "../pages/ItemDetailsPage/ItemDetailsPage";
 
-
 const Routes = ({ isAuthenticated = false }) => {
   return isAuthenticated ? (
     <Switch>
@@ -25,7 +24,7 @@ const Routes = ({ isAuthenticated = false }) => {
       <Route path="/profile">
         <Profiler />
       </Route>
-      <Redirect to="/" /> 
+      <Redirect to="/" />
     </Switch>
   ) : (
     <Switch>

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Redirect from "react-router-dom/es/Redirect";
+import Redirect from "react-router-dom/Redirect";
 import axios from "axios";
 import RegistrationContent from "./RegistrationContent";
 
@@ -14,14 +14,13 @@ const RegistrationForm = () => {
     address: "",
     isAdmin: false,
   });
-
+  const [showPassword, setShowPassword] = useState(false);
   const [open, setOpen] = useState(true);
-
+  const [registration, setRegistration] = useState(false);
+  const [message, setMessage] = useState("");
   const handleClose = () => {
     setOpen(false);
   };
-
-  const [showPassword, setShowPassword] = useState(false);
 
   const handleChange = prop => event => {
     setValues({ ...newUserData, [prop]: event.target.value });
@@ -31,37 +30,41 @@ const RegistrationForm = () => {
     setShowPassword(() => !showPassword);
   };
 
-  const handleMouseDownPassword = event => {
-    event.preventDefault();
-  };
-
   const submitRegistration = e => {
     e.preventDefault();
-    handleClose();
     console.log(newUserData);
     axios
       .post("/customers", newUserData)
       .then(response => {
         console.log(response);
+        if (response.statusText === "OK") {
+          setRegistration(true);
+        }
       })
       .catch(error => {
+        setMessage(error.message);
         console.log(error.response.data);
       });
   };
 
   return (
     <>
+      {/* eslint-disable-next-line no-nested-ternary */}
       {open ? (
-        <RegistrationContent
-          handleClose={handleClose}
-          submitRegistration={submitRegistration}
-          handleMouseDownPassword={handleMouseDownPassword}
-          handleChange={handleChange}
-          handleClickShowPassword={handleClickShowPassword}
-          open={open}
-          newUserData={newUserData}
-          showPassword={showPassword}
-        />
+        registration ? (
+          <Redirect to="/login" />
+        ) : (
+          <RegistrationContent
+            handleClose={handleClose}
+            submitRegistration={submitRegistration}
+            handleChange={handleChange}
+            handleClickShowPassword={handleClickShowPassword}
+            open={open}
+            newUserData={newUserData}
+            showPassword={showPassword}
+            message={message}
+          />
+        )
       ) : (
         <Redirect to="/" />
       )}
