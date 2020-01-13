@@ -48,9 +48,6 @@ const useStyles = makeStyles({
     boxShadow: theme.shadows[5],
     minWidth: "40vw",
   },
-  icon: {
-    colors: theme.palette.primary.main,
-  },
 });
 
 export default useStyles;

@@ -1,27 +1,24 @@
 import React from "react";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
-import TextField from "@material-ui/core/TextField";
-import FormControl from "@material-ui/core/FormControl";
-import InputLabel from "@material-ui/core/InputLabel";
-import OutlinedInput from "@material-ui/core/OutlinedInput";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import IconButton from "@material-ui/core/IconButton";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
 import Button from "@material-ui/core/Button";
 import Modal from "@material-ui/core/Modal";
+import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import ModalHeader from "../../common/ModalHeader";
 import useStyles from "./useStyles";
 
 const RegistrationContent = ({
   handleClose,
   submitRegistration,
-  handleMouseDownPassword,
   handleChange,
   handleClickShowPassword,
   open,
   newUserData,
   showPassword,
+  message,
 }) => {
   const classes = useStyles();
 
@@ -43,55 +40,77 @@ const RegistrationContent = ({
           <ModalHeader />
           <div className={classes.wrapper}>
             <h3 className={classes.title}>Registration Form</h3>
-            <form className={classes.flexContainer}>
-              <TextField
+            <ValidatorForm
+              className={classes.flexContainer}
+              noValidate={false}
+              onSubmit={submitRegistration}
+            >
+              <TextValidator
                 label="First Name"
                 variant="outlined"
                 value={newUserData.firstName}
-                required
                 onChange={handleChange("firstName")}
                 className={classes.textField}
+                validators={[
+                  "required",
+                  "matchRegexp:^[`'\"()A-Za-zd.s_-]{2,50}$",
+                ]}
+                errorMessages={[
+                  "this field is required",
+                  "Your name must be more then 2 characters, including only latin letters",
+                ]}
               />
-              <TextField
+              <TextValidator
                 label="Last Name"
                 variant="outlined"
                 value={newUserData.lastName}
-                required
                 onChange={handleChange("lastName")}
                 className={classes.textField}
+                validators={[
+                  "matchRegexp:^[`'\"()A-Za-zd.s_-]{2,50}$",
+                  "required",
+                ]}
+                errorMessages={[
+                  "Your name must be more then 2 characters, including only latin letters",
+                  "this field is required",
+                ]}
               />
-              <TextField
+              <TextValidator
                 label="Login"
                 variant="outlined"
                 value={newUserData.login}
                 onChange={handleChange("login")}
-                required
                 className={classes.textField}
+                validators={["required", "matchRegexp:^[a-zA-Z0-9]{3,22}$"]}
+                errorMessages={[
+                  "this field is required",
+                  "Your password must be 3-22 characters, including only latin letters and numbers",
+                ]}
               />
-              <TextField
+              <TextValidator
                 label="Email"
                 variant="outlined"
                 value={newUserData.email}
                 onChange={handleChange("email")}
-                required
                 className={classes.textField}
+                validators={["required", "isEmail"]}
+                errorMessages={["this field is required", "email is not valid"]}
               />
-              <FormControl
+
+              <TextValidator
                 className={classes.textField}
                 variant="outlined"
-                required
-              >
-                <InputLabel>Password</InputLabel>
-                <OutlinedInput
-                  type={showPassword ? "text" : "password"}
-                  value={newUserData.password}
-                  onChange={handleChange("password")}
-                  endAdornment={
+                label="Password"
+                value={newUserData.password}
+                onChange={handleChange("password")}
+                InputProps={{
+                  type: showPassword ? "text" : "password",
+                  endAdornment: (
                     <InputAdornment position="end">
                       <IconButton
                         aria-label="toggle password visibility"
                         onClick={handleClickShowPassword}
-                        onMouseDown={handleMouseDownPassword}
+                        // onMouseDown={handleMouseDownPassword}
                         edge="end"
                       >
                         {newUserData.showPassword ? (
@@ -101,34 +120,37 @@ const RegistrationContent = ({
                         )}
                       </IconButton>
                     </InputAdornment>
-                  }
-                  labelWidth={70}
-                />
-              </FormControl>
-              <TextField
+                  ),
+                }}
+                validators={["required", "matchRegexp:^[a-zA-Z0-9]{8,16}$"]}
+                errorMessages={[
+                  "this field is required",
+                  "Your password must be 8-16 characters, including only latin letters and numbers",
+                ]}
+              />
+
+              <TextValidator
                 label="Telephone"
                 variant="outlined"
                 type="tel"
                 value={newUserData.telephone}
                 onChange={handleChange("telephone")}
                 className={classes.textField}
+                validators={["matchRegexp:^[0-9-+\\s()]{10,18}$"]}
+                errorMessages={["phone is not valid"]}
               />
-              <TextField
+              <TextValidator
                 label="Address"
                 variant="outlined"
                 value={newUserData.address}
                 onChange={handleChange("address")}
                 className={classes.textField}
               />
-              <Button
-                text="Submit"
-                variant="outline"
-                onClick={submitRegistration}
-                className={classes.btn}
-              >
+              <Button type="submit" variant="outlined" className={classes.btn}>
                 Registration
               </Button>
-            </form>
+            </ValidatorForm>
+            {Boolean(message) && <p className={classes.errText}>{message}</p>}
           </div>
         </div>
       </Fade>

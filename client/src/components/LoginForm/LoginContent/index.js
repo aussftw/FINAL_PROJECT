@@ -84,8 +84,8 @@ const LoginContent = ({
                 />
               </FormControl>
               <p className={classes.text}>
-                Ещё не зарегистрированы? &nbsp;
-                <Link to="/registration">Зарегистрироваться</Link>
+                Have not an account yet ? &nbsp;
+                <Link to="/registration">Registratation</Link>
               </p>
               <Button className={classes.btn} onClick={submitLogin}>
                 Login
