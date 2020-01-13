@@ -11,7 +11,7 @@ import OutlinedInput from "@material-ui/core/OutlinedInput";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import IconButton from "@material-ui/core/IconButton";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
-import ModalHeader from "../../common/Modal/ModalHeader";
+import ModalHeader from "../../common/ModalHeader";
 
 import useStyles from "./useStyles";
 

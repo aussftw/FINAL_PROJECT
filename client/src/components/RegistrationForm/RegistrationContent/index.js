@@ -10,7 +10,7 @@ import IconButton from "@material-ui/core/IconButton";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
 import Button from "@material-ui/core/Button";
 import Modal from "@material-ui/core/Modal";
-import ModalHeader from "../../common/Modal/ModalHeader";
+import ModalHeader from "../../common/ModalHeader";
 import useStyles from "./useStyles";
 
 const RegistrationContent = ({
