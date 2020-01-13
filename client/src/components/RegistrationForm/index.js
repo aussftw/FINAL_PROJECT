@@ -34,7 +34,7 @@ const RegistrationForm = () => {
     e.preventDefault();
     console.log(newUserData);
     axios
-      .post("/customersasdas", newUserData)
+      .post("/customers", newUserData)
       .then(response => {
         console.log(response);
         if (response.statusText === "OK") {

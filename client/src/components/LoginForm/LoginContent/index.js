@@ -4,13 +4,10 @@ import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 import Modal from "@material-ui/core/Modal";
 import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
-import FormControl from "@material-ui/core/FormControl";
-import InputLabel from "@material-ui/core/InputLabel";
-import OutlinedInput from "@material-ui/core/OutlinedInput";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import IconButton from "@material-ui/core/IconButton";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
+import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import ModalHeader from "../../common/ModalHeader";
 
 import useStyles from "./useStyles";
@@ -18,12 +15,12 @@ import useStyles from "./useStyles";
 const LoginContent = ({
   handleOpen,
   submitLogin,
-  handleMouseDownPassword,
   handleChange,
   handleClickShowPassword,
   open,
   userData,
   showPassword,
+  message,
 }) => {
   const classes = useStyles();
 
@@ -45,31 +42,33 @@ const LoginContent = ({
           <ModalHeader />
           <div className={classes.wrapper}>
             <h3 className={classes.title}>Log In Form</h3>
-            <form>
-              <TextField
+            <ValidatorForm noValidate={false} onSubmit={submitLogin}>
+              <TextValidator
                 label="Login or Email"
-                required
                 variant="outlined"
                 value={userData.loginOrEmail}
                 onChange={handleChange("loginOrEmail")}
                 className={classes.textField}
+                validators={["required", "matchRegexp:^[a-zA-Z0-9]{3,22}$"]}
+                errorMessages={[
+                  "this field is required",
+                  "Your password must be 3-22 characters, including only latin letters and numbers",
+                ]}
               />
-              <FormControl
+
+              <TextValidator
                 className={classes.textField}
                 variant="outlined"
-                required
-              >
-                <InputLabel>Password</InputLabel>
-                <OutlinedInput
-                  type={showPassword ? "text" : "password"}
-                  value={userData.password}
-                  onChange={handleChange("password")}
-                  endAdornment={
+                label="Password"
+                value={userData.password}
+                onChange={handleChange("password")}
+                InputProps={{
+                  type: showPassword ? "text" : "password",
+                  endAdornment: (
                     <InputAdornment position="end">
                       <IconButton
                         aria-label="toggle password visibility"
                         onClick={handleClickShowPassword}
-                        onMouseDown={handleMouseDownPassword}
                         edge="end"
                       >
                         {userData.showPassword ? (
@@ -79,18 +78,29 @@ const LoginContent = ({
                         )}
                       </IconButton>
                     </InputAdornment>
-                  }
-                  labelWidth={70}
-                />
-              </FormControl>
+                  ),
+                }}
+                validators={["required", "matchRegexp:^[a-zA-Z0-9]{8,16}$"]}
+                errorMessages={[
+                  "this field is required",
+                  "Your password must be 8-16 characters, including only latin letters and numbers",
+                ]}
+              />
               <p className={classes.text}>
                 Have not an account yet ? &nbsp;
-                <Link to="/registration">Registratation</Link>
+                <Link to="/registration">
+                  <span className={classes.regLink}>Registration</span>
+                </Link>
               </p>
-              <Button className={classes.btn} onClick={submitLogin}>
+              <Button className={classes.btn} type="submit">
                 Login
               </Button>
-            </form>
+            </ValidatorForm>
+            {message === "Login complete !"
+              ? Boolean(message) && (
+                  <p className={classes.successMsg}>{message}</p>
+                )
+              : Boolean(message) && <p className={classes.errMsg}>{message}</p>}
           </div>
         </div>
       </Fade>

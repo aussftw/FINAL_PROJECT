@@ -40,11 +40,7 @@ const RegistrationContent = ({
           <ModalHeader />
           <div className={classes.wrapper}>
             <h3 className={classes.title}>Registration Form</h3>
-            <ValidatorForm
-              className={classes.flexContainer}
-              noValidate={false}
-              onSubmit={submitRegistration}
-            >
+            <ValidatorForm noValidate={false} onSubmit={submitRegistration}>
               <TextValidator
                 label="First Name"
                 variant="outlined"
@@ -110,7 +106,6 @@ const RegistrationContent = ({
                       <IconButton
                         aria-label="toggle password visibility"
                         onClick={handleClickShowPassword}
-                        // onMouseDown={handleMouseDownPassword}
                         edge="end"
                       >
                         {newUserData.showPassword ? (
