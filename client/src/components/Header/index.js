@@ -1,4 +1,5 @@
 import React from "react";
+
 import { makeStyles } from "@material-ui/core/styles";
 
 import Toolbar from "@material-ui/core/Toolbar";
@@ -17,6 +18,7 @@ import NotificationsIcon from "@material-ui/icons/Notifications";
 import { Link } from "react-router-dom";
 import TemporaryDrawer from "./BurgerPanel";
 import CustomizedSearch from "./Search";
+import MainButton from "../common/buttons/MainButton";
 
 const useStyles = makeStyles(theme => ({
   flex: {
@@ -59,7 +61,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const Header = () => {
+export default function Header() {
   const classes = useStyles();
   // const [anchorEl, setAnchorEl] = React.useState(null);
   // const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -157,6 +159,13 @@ const Header = () => {
           </div>
 
           <div>
+            <Link to="/login">
+              <MainButton // Need a new component here
+                text="Sign In"
+                variant="outline"
+                type="button"
+              />
+            </Link>
             <IconButton aria-label="show 4 new mails" color="inherit">
               <Badge badgeContent={8} color="secondary">
                 <MailIcon />
@@ -197,7 +206,7 @@ const Header = () => {
       {/* {renderMenu} */}
     </div>
   );
-};
+}
 // import React, { useState } from "react";
 //
 // const Test = () => {
@@ -218,5 +227,3 @@ const Header = () => {
 // };
 //
 // export default Test;
-
-export default Header;
