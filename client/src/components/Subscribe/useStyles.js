@@ -20,10 +20,13 @@ const useStyles = makeStyles(theme => ({
     paddingRight: 15,
     paddingTop: 6,
     paddingBottom: 2,
-    width: "90%",
+
     marginBottom: 15,
     borderRadius: "5px",
     height: 50,
+    [theme.breakpoints.up("sm")]: {
+      width: "60%",
+    },
   },
 
   actionButton: {
@@ -38,6 +41,9 @@ const useStyles = makeStyles(theme => ({
   subscribeBar: {
     display: "flex",
     flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    margin: "1rem",
   },
 }));
 

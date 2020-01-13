@@ -3,9 +3,8 @@ import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 import { ThemeProvider } from "@material-ui/core/styles";
 import { Provider } from "react-redux";
-// eslint-disable-next-line
 import configureStore from "./store";
-import App from "./App";
+import Routes from "./routes/Routes";
 
 import theme from "./theme";
 
@@ -17,7 +16,7 @@ ReactDOM.render(
   <ThemeProvider theme={theme}>
     <Provider store={store}>
       <BrowserRouter>
-        <App />
+        <Routes />
       </BrowserRouter>
     </Provider>
   </ThemeProvider>,

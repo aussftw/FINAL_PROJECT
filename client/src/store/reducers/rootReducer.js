@@ -1,3 +1,11 @@
-import { combineReducers } from 'redux';
+import { combineReducers } from "redux";
 
-export default combineReducers({});
+import categoriesReducer from "./categoriesReducer";
+import chooseColor from "./choiseFilter";
+
+const rootReducer = combineReducers({
+  categoriesReducer,
+  chooseColor,
+});
+
+export default rootReducer;

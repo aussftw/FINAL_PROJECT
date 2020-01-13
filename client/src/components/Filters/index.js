@@ -38,6 +38,7 @@ const Filters = () => {
             products.map(value => {
               return (
                 <ItemCard
+                key={value._id}
                   title={value.name
                     .split(" ")
                     .map(word => word.charAt(0).toUpperCase() + word.slice(1))

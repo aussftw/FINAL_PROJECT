@@ -43,7 +43,7 @@ const ScrollTop = props => {
 };
 const BackToTop = props => {
   return (
-    <div>
+    <div id="back-to-top-anchor">
       {/* eslint-disable-next-line react/jsx-props-no-spreading */}
       <ScrollTop {...props}>
         <Fab color="secondary" size="small" aria-label="scroll back to top">
