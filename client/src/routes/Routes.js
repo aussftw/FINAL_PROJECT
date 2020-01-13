@@ -5,6 +5,10 @@ import { connect } from "react-redux";
 import HomePage from "../pages/HomePage/HomePage";
 import Cart from "../pages/Cart/Cart";
 import Profiler from "../pages/Profiler/Profiler";
+import LoginForm from "../components/LoginForm";
+import RegistrationForm from "../components/RegistrationForm";
+import ItemDetailsPage from "../pages/ItemDetailsPage/ItemDetailsPage";
+
 
 const Routes = ({ isAuthenticated = false }) => {
   return isAuthenticated ? (
@@ -15,10 +19,13 @@ const Routes = ({ isAuthenticated = false }) => {
       <Route path="/cart">
         <Cart />
       </Route>
+      <Route path="/products/:id">
+        <ItemDetailsPage />
+      </Route>
       <Route path="/profile">
         <Profiler />
       </Route>
-      <Redirect to="/" />
+      <Redirect to="/" /> 
     </Switch>
   ) : (
     <Switch>
@@ -27,6 +34,12 @@ const Routes = ({ isAuthenticated = false }) => {
       </Route>
       <Route path="/cart">
         <Cart />
+      </Route>
+      <Route path="/login">
+        <LoginForm />
+      </Route>
+      <Route path="/registration">
+        <RegistrationForm />
       </Route>
       <Redirect to="/" />
     </Switch>
