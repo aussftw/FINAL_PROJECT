@@ -10,7 +10,7 @@ const LoginForm = () => {
     loginOrEmail: "",
     password: "",
   });
-  
+
   const [message, setMessage] = useState("");
 
   const handleOpen = () => {
@@ -30,15 +30,16 @@ const LoginForm = () => {
     axios
       .post("/customers/login", userData)
       .then(response => {
+        // eslint-disable-next-line no-console
         console.log(response);
         if (response.statusText === "OK") {
           setMessage("Login complete !");
         }
       })
       .catch(err => {
+        // eslint-disable-next-line no-console
         console.log(err.response.data);
         setMessage(err.message);
-
       });
   };
 

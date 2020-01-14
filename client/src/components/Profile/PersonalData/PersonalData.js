@@ -13,7 +13,7 @@ import useStyles from "./useStyles";
 // };
 
 export default function PersonalData() {
-// { customer = user }
+  // { customer = user }
   const classes = useStyles();
   const [isEditable, setIsEditable] = useState(false);
   const [value, setValue] = useState({
@@ -58,6 +58,7 @@ export default function PersonalData() {
     axios
       .put("/customers", updatedCustomer)
       .then(updatedUser => {
+        // eslint-disable-next-line
         console.log(updatedUser);
       })
       .catch(error => setMessage(`Error: ${error.message}`));

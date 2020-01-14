@@ -38,6 +38,7 @@ const Subscribe = () => {
       // eslint-disable-next-line
       .catch(error => {
         setError(true);
+        // eslint-disable-next-line
         console.log(error.response);
       });
 

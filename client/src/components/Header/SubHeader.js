@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 
 import { makeStyles } from "@material-ui/core";
 
 import Box from "@material-ui/core/Box";
+import { getLinks } from "../../store/actions";
 import MenuListComposition from "./Dropdown";
 
 const useStyles = makeStyles(theme => ({
@@ -26,8 +28,12 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function SubHeader(props) {
-  const { categories } = props;
+function SubHeader(props) {
+  useEffect(() => {
+    props.getLinks();
+    // eslint-disable-next-line
+  }, []);
+
   const classes = useStyles();
 
   // const renderLink = React.useMemo(
@@ -41,23 +47,52 @@ export default function SubHeader(props) {
   // );
 
   return (
-    <Box display="flex" justifyContent="center" className={classes.subheader}>
-      <Box>
-        <Link className={classes.link} to="/">
-          Home
-        </Link>
-        <MenuListComposition
-          menuTitle="Shop"
-          plantCategories={categories}
-          className={classes.link}
-        />
-        <Link className={classes.link} to="/second">
-          About Us
-        </Link>
-        <Link className={classes.link} to="/third">
-          Contacts
-        </Link>
-      </Box>
-    </Box>
+    <div>
+      // eslint-disable-next-line
+      {props.links.links.length > 0 ? (
+        <Box
+          display="flex"
+          justifyContent="center"
+          className={classes.subheader}
+        >
+          <Box>
+            // eslint-disable-next-line
+            {props.links.links.map(item => {
+              return item.links.length === 1 ? (
+                <Link
+                  key={item._id}
+                  className={classes.link}
+                  to={item.links[0].url}
+                >
+                  {item.title}
+                </Link>
+              ) : (
+                <MenuListComposition
+                  key={item._id}
+                  menuTitle={item.title}
+                  className={classes.link}
+                />
+              );
+            })}
+          </Box>
+        </Box>
+      ) : (
+        <div />
+      )}
+    </div>
   );
 }
+
+function mapStateToProps(state) {
+  return {
+    links: state.linksReducer,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    getLinks: () => dispatch(getLinks()),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SubHeader);
