@@ -26,7 +26,7 @@ const useStyles = makeStyles(theme => ({
     // marginLeft: theme.spacing(1),
     flex: 3,
     [theme.breakpoints.up("md")]: {
-      backgroundColor: "red",
+      // backgroundColor: "red",
     },
   },
   iconButton: {
@@ -43,12 +43,8 @@ export default function CustomizedSearch() {
 
   return (
     <Paper component="form" className={classes.root}>
-      {/* <IconButton className={classes.iconButton} aria-label="menu"> */}
-      {/*  <MenuIcon /> */}
-      {/* </IconButton> */}
       <MenuListComposition
         menuTitle="All Categories"
-        plantCategories={["Succulents", "Aloe", "Emergents", "Geraniums"]}
         className={classes.link}
       />
       <Divider className={classes.divider} orientation="vertical" />
