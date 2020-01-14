@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import ExpansionPanel from "@material-ui/core/ExpansionPanel";
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
@@ -12,37 +11,8 @@ import Box from "@material-ui/core/Box";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import MenuIcon from "@material-ui/icons/Menu";
 import CloseIcon from "@material-ui/icons/Close";
-import { getCategories, getLinks } from "../../store/actions";
-
-const useStyles = makeStyles(() => ({
-  list: {
-    width: 250,
-    padding: "20px 10px",
-  },
-  sideMenuTitle: {
-    margin: "0",
-    alignSelf: "center",
-  },
-  sideMenuHeader: {
-    display: "flex",
-    justifyContent: "space-between",
-    alignContent: "center",
-    paddingLeft: "24px",
-  },
-  sideMenuText: {
-    display: "block",
-    padding: "12px 24px",
-    color: "black",
-    textDecoration: "none",
-  },
-  dropdownText: {
-    color: "black",
-    textDecoration: "none",
-  },
-  nestedList: {
-    paddingLeft: "15%",
-  },
-}));
+import { getCategories, getLinks } from "../../../store/actions";
+import useStyles from "./useStyles";
 
 function TemporaryDrawer(props) {
   const classes = useStyles();
@@ -122,7 +92,7 @@ function TemporaryDrawer(props) {
   );
 
   return (
-    <div>
+    <div className={classes.burgerMenuMobile}>
       <IconButton
         edge="start"
         color="inherit"

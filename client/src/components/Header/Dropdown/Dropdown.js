@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { makeStyles } from "@material-ui/core/styles";
 import { Tooltip } from "@material-ui/core";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import Grow from "@material-ui/core/Grow";
@@ -11,20 +10,8 @@ import MenuList from "@material-ui/core/MenuList";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import { connect } from "react-redux";
-import { getCategories } from "../../store/actions";
-
-const useStyles = makeStyles(() => ({
-  root: {
-    display: "inline-block",
-  },
-  dropdownIcon: {
-    fontSize: "1rem",
-  },
-  menuList: {
-    marginTop: "10px",
-    zIndex: "20",
-  },
-}));
+import { getCategories } from "../../../store/actions";
+import useStyles from "./useStyles";
 
 function MenuListComposition(props) {
   const { menuTitle, className } = props;

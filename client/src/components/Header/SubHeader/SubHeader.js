@@ -2,31 +2,12 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
-import { makeStyles } from "@material-ui/core";
-
 import Box from "@material-ui/core/Box";
-import { getLinks } from "../../store/actions";
-import MenuListComposition from "./Dropdown";
+import useStyles from "./useStyles";
 
-const useStyles = makeStyles(theme => ({
-  subheader: {
-    marginTop: "65px",
-    minHeight: "25px",
-    padding: "10px 24px",
-    backgroundColor: theme.palette.secondary.light,
-  },
-  link: {
-    display: "inline-block",
-    padding: "0 20px",
-    color: theme.palette.secondary.main,
-    textTransform: "uppercase",
-    textDecoration: "none",
-    "&:hover": {
-      color: theme.palette.primary.main,
-      borderBottom: `1px solid ${theme.palette.primary.main}`,
-    },
-  },
-}));
+import { getLinks } from "../../../store/actions";
+import MenuListComposition from "../Dropdown/Dropdown";
+import CustomizedSearch from "../Search/Search";
 
 function SubHeader(props) {
   useEffect(() => {
@@ -48,6 +29,9 @@ function SubHeader(props) {
 
   return (
     <div>
+      <div className={classes.searchMobileWrap}>
+        <CustomizedSearch className={classes.searchMobile} />
+      </div>
       {props.links.links.length > 0 ? (
         <Box
           display="flex"

@@ -1,36 +1,14 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
 import AppBar from "@material-ui/core/AppBar";
 import Badge from "@material-ui/core/Badge";
 import MailIcon from "@material-ui/icons/Mail";
 import { Link } from "react-router-dom";
-import TemporaryDrawer from "./BurgerPanel";
-import CustomizedSearch from "./Search";
+import TemporaryDrawer from "./BurgerMenu/BurgerMenu";
+import CustomizedSearch from "./Search/Search";
 import MainButton from "../common/buttons/MainButton";
-
-const useStyles = makeStyles(theme => ({
-  flex: {
-    display: "flex",
-    justifyContent: "space-between",
-  },
-  logo: {
-    height: "45px",
-  },
-  sectionDesktop: {
-    display: "none",
-    [theme.breakpoints.up("md")]: {
-      display: "flex",
-    },
-  },
-  sectionMobile: {
-    display: "flex",
-    [theme.breakpoints.up("md")]: {
-      display: "none",
-    },
-  },
-}));
+import useStyles from "./useStyles";
 
 const Header = () => {
   const classes = useStyles();
@@ -40,13 +18,13 @@ const Header = () => {
       <AppBar color="inherit" position="fixed">
         <Toolbar className={classes.flex}>
           <div className={classes.flex}>
-            <TemporaryDrawer className={classes.sectionMobile} />
+            <TemporaryDrawer />
             <Link to="/">
               <img src="./img/Logo.svg" alt="logo" className={classes.logo} />
             </Link>
           </div>
           <div>
-            <CustomizedSearch />
+            <CustomizedSearch className={classes.searchDesktop} />
           </div>
           <div>
             <Link to="/login">

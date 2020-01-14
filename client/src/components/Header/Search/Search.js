@@ -1,48 +1,18 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import InputBase from "@material-ui/core/InputBase";
 import Divider from "@material-ui/core/Divider";
 import Button from "@material-ui/core/Button";
 import SearchIcon from "@material-ui/icons/Search";
+import MenuListComposition from "../Dropdown/Dropdown";
+import useStyles from "./useStyles";
 
-import MenuListComposition from "./Dropdown";
-
-const useStyles = makeStyles(theme => ({
-  root: {
-    paddingLeft: theme.spacing(1),
-    display: "flex",
-    alignItems: "center",
-    width: 400,
-    boxShadow: "none",
-    border: "1px solid grey",
-  },
-  link: {
-    color: theme.palette.secondary.main,
-    textDecoration: "none",
-  },
-  input: {
-    fontSize: "0.8rem",
-    // marginLeft: theme.spacing(1),
-    flex: 3,
-    [theme.breakpoints.up("md")]: {
-      // backgroundColor: "red",
-    },
-  },
-  iconButton: {
-    padding: 10,
-  },
-  divider: {
-    height: 28,
-    margin: 4,
-  },
-}));
-
-export default function CustomizedSearch() {
+export default function CustomizedSearch(props) {
+  const { className } = props;
   const classes = useStyles();
 
   return (
-    <Paper component="form" className={classes.root}>
+    <Paper component="form" className={`${classes.search} ${className}`}>
       <MenuListComposition
         menuTitle="All Categories"
         className={classes.link}
