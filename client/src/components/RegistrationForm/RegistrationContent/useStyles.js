@@ -48,8 +48,9 @@ const useStyles = makeStyles({
     boxShadow: theme.shadows[5],
     maxWidth: "50vw",
   },
-  icon: {
-    colors: theme.palette.primary.main,
+  errText: {
+    fontSize: "24px",
+    color: "red",
   },
 });
 
