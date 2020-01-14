@@ -10,6 +10,7 @@ const LoginForm = () => {
     loginOrEmail: "",
     password: "",
   });
+  
   const [message, setMessage] = useState("");
 
   const handleOpen = () => {
@@ -37,6 +38,7 @@ const LoginForm = () => {
       .catch(err => {
         console.log(err.response.data);
         setMessage(err.message);
+
       });
   };
 

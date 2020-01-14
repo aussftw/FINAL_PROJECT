@@ -14,6 +14,7 @@ const RegistrationForm = () => {
     address: "",
     isAdmin: false,
   });
+
   const [showPassword, setShowPassword] = useState(false);
   const [open, setOpen] = useState(true);
   const [registration, setRegistration] = useState(false);

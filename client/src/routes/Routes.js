@@ -17,10 +17,13 @@ const Routes = ({ isAuthenticated = false }) => {
       <Route path="/cart">
         <Cart />
       </Route>
+      <Route path="/products/:id">
+        <ItemDetailsPage />
+      </Route>
       <Route path="/profile">
         <Profiler />
       </Route>
-      <Redirect to="/" />
+      <Redirect to="/" /> 
     </Switch>
   ) : (
     <Switch>
