@@ -27,7 +27,6 @@ const LoginForm = () => {
 
   const submitLogin = e => {
     e.preventDefault();
-    console.log(userData);
     axios
       .post("/customers/login", userData)
       .then(response => {
