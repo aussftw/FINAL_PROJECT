@@ -11,6 +11,7 @@ const LoginForm = () => {
     password: "",
   });
   const [message, setMessage] = useState("");
+  const [isLogin, setIsLogin] = useState(false);
 
   const handleOpen = () => {
     setOpen(false);
@@ -31,7 +32,7 @@ const LoginForm = () => {
       .then(response => {
         console.log(response);
         if (response.statusText === "OK") {
-          setMessage("Login complete !");
+          setIsLogin(true);
         }
       })
       .catch(err => {
@@ -42,17 +43,22 @@ const LoginForm = () => {
 
   return (
     <>
+      {/* eslint-disable-next-line no-nested-ternary */}
       {open ? (
-        <LoginContent
-          handleOpen={handleOpen}
-          submitLogin={submitLogin}
-          handleChange={handleChange}
-          handleClickShowPassword={handleClickShowPassword}
-          open={open}
-          userData={userData}
-          showPassword={showPassword}
-          message={message}
-        />
+        isLogin ? (
+          <Redirect to="/" />
+        ) : (
+          <LoginContent
+            handleOpen={handleOpen}
+            submitLogin={submitLogin}
+            handleChange={handleChange}
+            handleClickShowPassword={handleClickShowPassword}
+            open={open}
+            userData={userData}
+            showPassword={showPassword}
+            message={message}
+          />
+        )
       ) : (
         <Redirect to="/" />
       )}
