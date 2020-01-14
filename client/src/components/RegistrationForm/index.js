@@ -14,6 +14,7 @@ const RegistrationForm = () => {
     address: "",
     isAdmin: false,
   });
+
   const [showPassword, setShowPassword] = useState(false);
   const [open, setOpen] = useState(true);
   const [registration, setRegistration] = useState(false);
@@ -42,8 +43,8 @@ const RegistrationForm = () => {
         }
       })
       .catch(error => {
-        setMessage(error.message);
         console.log(error.response.data);
+        setMessage(error.message);
       });
   };
 

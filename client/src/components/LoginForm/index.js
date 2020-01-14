@@ -10,6 +10,7 @@ const LoginForm = () => {
     loginOrEmail: "",
     password: "",
   });
+
   const [message, setMessage] = useState("");
 
   const handleOpen = () => {
@@ -28,7 +29,7 @@ const LoginForm = () => {
     e.preventDefault();
     console.log(userData);
     axios
-      .post("/customers/logincddfs", userData)
+      .post("/customers/login", userData)
       .then(response => {
         console.log(response);
         if (response.statusText === "OK") {
