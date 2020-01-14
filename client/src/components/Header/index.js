@@ -4,9 +4,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
 import AppBar from "@material-ui/core/AppBar";
 import Badge from "@material-ui/core/Badge";
-import AccountCircle from "@material-ui/icons/AccountCircle";
 import MailIcon from "@material-ui/icons/Mail";
-import NotificationsIcon from "@material-ui/icons/Notifications";
 import { Link } from "react-router-dom";
 import TemporaryDrawer from "./BurgerPanel";
 import CustomizedSearch from "./Search";
@@ -62,14 +60,6 @@ const Header = () => {
               <Badge badgeContent={8} color="secondary">
                 <MailIcon />
               </Badge>
-            </IconButton>
-            <IconButton aria-label="show 17 new notifications" color="inherit">
-              <Badge badgeContent={5} color="secondary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
-            <IconButton>
-              <AccountCircle />
             </IconButton>
           </div>
         </Toolbar>

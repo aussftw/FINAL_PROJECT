@@ -91,7 +91,7 @@ function TemporaryDrawer(props) {
             <Link
               key={item._id}
               className={classes.sideMenuText}
-              to={item.links.url}
+              to={item.links[0].url}
             >
               {item.title}
             </Link>
@@ -107,7 +107,7 @@ function TemporaryDrawer(props) {
                     className={classes.nestedList}
                   >
                     <Typography>
-                      <Link className={classes.dropdownText} href="/#">
+                      <Link className={classes.dropdownText} to="/#">
                         {menuItem.name}
                       </Link>
                     </Typography>

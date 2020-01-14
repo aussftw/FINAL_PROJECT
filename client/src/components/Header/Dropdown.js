@@ -73,7 +73,7 @@ function MenuListComposition(props) {
           {/* ? : если в коллекции новые поступления есть */}
           <Tooltip title="New" placement="top" arrow>
             <Link
-              href="/#"
+              to="/#"
               ref={anchorRef}
               aria-controls={open ? "menu-list-grow" : undefined}
               aria-haspopup="true"

@@ -60,7 +60,7 @@ function SubHeader(props) {
                 <Link
                   key={item._id}
                   className={classes.link}
-                  to={item.links.url}
+                  to={item.links[0].url}
                 >
                   {item.title}
                 </Link>
