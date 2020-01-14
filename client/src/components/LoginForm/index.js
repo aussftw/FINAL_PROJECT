@@ -10,6 +10,8 @@ const LoginForm = () => {
     loginOrEmail: "",
     password: "",
   });
+  
+  const [message, setMessage] = useState("");
 
   const handleOpen = () => {
     setOpen(false);
@@ -23,21 +25,20 @@ const LoginForm = () => {
     setShowPassword(() => !showPassword);
   };
 
-  const handleMouseDownPassword = event => {
-    event.preventDefault();
-  };
-
   const submitLogin = e => {
     e.preventDefault();
-    handleOpen();
-    console.log(userData);
     axios
       .post("/customers/login", userData)
       .then(response => {
         console.log(response);
+        if (response.statusText === "OK") {
+          setMessage("Login complete !");
+        }
       })
       .catch(err => {
         console.log(err.response.data);
+        setMessage(err.message);
+
       });
   };
 
@@ -47,12 +48,12 @@ const LoginForm = () => {
         <LoginContent
           handleOpen={handleOpen}
           submitLogin={submitLogin}
-          handleMouseDownPassword={handleMouseDownPassword}
           handleChange={handleChange}
           handleClickShowPassword={handleClickShowPassword}
           open={open}
           userData={userData}
           showPassword={showPassword}
+          message={message}
         />
       ) : (
         <Redirect to="/" />

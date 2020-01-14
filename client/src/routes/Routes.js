@@ -7,8 +7,6 @@ import Cart from "../pages/Cart/Cart";
 import Profiler from "../pages/Profiler/Profiler";
 import LoginForm from "../components/LoginForm";
 import RegistrationForm from "../components/RegistrationForm";
-import ItemDetailsPage from "../pages/ItemDetailsPage/ItemDetailsPage";
-
 
 const Routes = ({ isAuthenticated = false }) => {
   return isAuthenticated ? (
