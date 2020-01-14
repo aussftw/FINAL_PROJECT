@@ -10,11 +10,11 @@ const useStyles = makeStyles(theme => ({
     flexDirection: "column",
     padding: 0,
     margin: 0,
-    [theme.breakpoints.up("sm")]: {
+    [theme.breakpoints.up("md")]: {
       flexDirection: "row",
       justifyContent: "center",
       alignItems: "center",
-      margin: "0rem 10rem",
+      margin: "0rem 8rem",
       padding: "1rem 0",
     },
   },

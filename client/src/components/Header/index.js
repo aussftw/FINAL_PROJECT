@@ -10,6 +10,7 @@ import NotificationsIcon from "@material-ui/icons/Notifications";
 import { Link } from "react-router-dom";
 import TemporaryDrawer from "./BurgerPanel";
 import CustomizedSearch from "./Search";
+import MainButton from "../common/buttons/MainButton";
 
 const useStyles = makeStyles(theme => ({
   flex: {
@@ -50,6 +51,13 @@ const Header = () => {
             <CustomizedSearch />
           </div>
           <div>
+            <Link to="/login">
+              <MainButton // Need a new component here
+                text="Sign In"
+                variant="outline"
+                type="button"
+              />
+            </Link>
             <IconButton aria-label="show 4 new mails" color="inherit">
               <Badge badgeContent={8} color="secondary">
                 <MailIcon />
