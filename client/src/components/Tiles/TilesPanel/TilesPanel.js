@@ -1,19 +1,8 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core";
 import GridListTile from "@material-ui/core/GridListTile";
 import GridList from "@material-ui/core/GridList";
 import TilesItem from "../TilesItem/TilesItem";
-
-const useStyles = makeStyles({
-  box: {
-    display: "flex",
-    flexWrap: "wrap",
-  },
-  tileBox: {
-    maxWidth: "643px",
-    height: "800px",
-  },
-});
+import useStyles from "./useStyles";
 
 const TilesPanel = () => {
   const classes = useStyles();

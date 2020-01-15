@@ -96,11 +96,7 @@ const LoginContent = ({
                 Login
               </Button>
             </ValidatorForm>
-            {message === "Login complete !"
-              ? Boolean(message) && (
-                  <p className={classes.successMsg}>{message}</p>
-                )
-              : Boolean(message) && <p className={classes.errMsg}>{message}</p>}
+            {Boolean(message) && <p className={classes.errMsg}>{message}</p>}
           </div>
         </div>
       </Fade>

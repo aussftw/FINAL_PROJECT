@@ -3,22 +3,21 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 
 import Toolbar from "@material-ui/core/Toolbar";
-import IconButton from "@material-ui/core/IconButton";
+// import IconButton from "@material-ui/core/IconButton";
 // import Typography from "@material-ui/core/Typography";
 // import MenuItem from "@material-ui/core/MenuItem";
 // import Menu from "@material-ui/core/Menu";
 
 import AppBar from "@material-ui/core/AppBar";
-import Badge from "@material-ui/core/Badge";
-import AccountCircle from "@material-ui/icons/AccountCircle";
-import MailIcon from "@material-ui/icons/Mail";
-import NotificationsIcon from "@material-ui/icons/Notifications";
+// import Badge from "@material-ui/core/Badge";
+// import MailIcon from "@material-ui/icons/Mail";
+// import NotificationsIcon from "@material-ui/icons/Notifications";
 // import Logo from "../common/Logo/Logo.svg";
 
 import { Link } from "react-router-dom";
 import TemporaryDrawer from "./BurgerPanel";
 import CustomizedSearch from "./Search";
-import MainButton from "../common/buttons/MainButton";
+import LoginButton from "../LoginButton/LoginButton";
 
 const useStyles = makeStyles(theme => ({
   flex: {
@@ -61,7 +60,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function Header() {
+function Header() {
   const classes = useStyles();
   // const [anchorEl, setAnchorEl] = React.useState(null);
   // const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -159,35 +158,17 @@ export default function Header() {
           </div>
 
           <div>
-            <Link to="/login">
-              <MainButton // Need a new component here
-                text="Sign In"
-                variant="outline"
-                type="button"
-              />
-            </Link>
-            <IconButton aria-label="show 4 new mails" color="inherit">
-              <Badge badgeContent={8} color="secondary">
-                <MailIcon />
-              </Badge>
-            </IconButton>
-            <IconButton aria-label="show 17 new notifications" color="inherit">
-              <Badge badgeContent={5} color="secondary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
-            <IconButton>
-              {/* <IconButton */}
-              {/* // edge="end" aria-label="account of current user" aria-controls= */}
-              {/* {menuId} */}
-              {/* // aria-haspopup="true" onClick= */}
-              {/* //               // */}
-              {/* {' '} */}
-              {/* {handleProfileMenuOpen} */}
-              {/* //               // color="inherit" */}
-              {/* > */}
-              <AccountCircle />
-            </IconButton>
+            <LoginButton />
+            {/* <IconButton aria-label="show 4 new mails" color="inherit"> */}
+            {/*  <Badge badgeContent={8} color="secondary"> */}
+            {/*    <MailIcon /> */}
+            {/*  </Badge> */}
+            {/* </IconButton> */}
+            {/* <IconButton aria-label="show 17 new notifications" color="inherit"> */}
+            {/*  <Badge badgeContent={5} color="secondary"> */}
+            {/*    <NotificationsIcon /> */}
+            {/*  </Badge> */}
+            {/* </IconButton> */}
 
             {/* <div className={classes.sectionMobile}> */}
             {/*  <IconButton */}
@@ -227,3 +208,5 @@ export default function Header() {
 // };
 //
 // export default Test;
+
+export default Header;
