@@ -15,8 +15,7 @@ export default function ChangePasswordForm() {
   ] = useState("");
   const [message, setMessage] = useState("");
 
-  const tokenAuth =
-    "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlMDc1NDlhMGM4OTBhMWQ1ODg3YzY2MCIsImZpcnN0TmFtZSI6IkV1Z2VuIiwibGFzdE5hbWUiOiJNYXJrb3YiLCJpc0FkbWluIjp0cnVlLCJpYXQiOjE1Nzg2NTk4MjQsImV4cCI6MTU3ODY5NTgyNH0.mHEVIHVtMmswUrkbLrhWUeDCDumEc_evLq77GAAYtLw";
+  // const tokenAuth = localStorage.getItem("authToken");
 
   const passwords = {
     password: oldPasswordValue,
@@ -27,7 +26,7 @@ export default function ChangePasswordForm() {
     event.preventDefault();
     setMessage("");
     if (newPasswordValue === confirmationNewPasswordValue) {
-      axios.defaults.headers.common.Authorization = tokenAuth;
+      // axios.defaults.headers.common.Authorization = tokenAuth;
       axios
         .put("/customers/password", passwords)
         .then(updatedCustomer => {
@@ -36,6 +35,7 @@ export default function ChangePasswordForm() {
           } else {
             setMessage(updatedCustomer.data.message);
           }
+          // eslint-disable-next-line no-console
           console.log(updatedCustomer);
         })
         .catch(error => setMessage(`Error: ${error.message}`));

@@ -44,3 +44,17 @@ export function getLinks() {
       });
   };
 }
+export const logIn = data => {
+  // eslint-disable-next-line no-console
+  console.log("i am in ");
+  return {
+    type: "LOG_IN",
+    payload: data,
+  };
+};
+
+export const logOut = () => {
+  return {
+    type: "LOG_OUT",
+  };
+};

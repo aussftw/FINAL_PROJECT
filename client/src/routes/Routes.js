@@ -6,10 +6,14 @@ import HomePage from "../pages/HomePage/HomePage";
 import Cart from "../pages/Cart/Cart";
 import Profiler from "../pages/Profiler/Profiler";
 import LoginForm from "../components/LoginForm";
+import NotFound from "../pages/NotFound/NotFound";
 import RegistrationForm from "../components/RegistrationForm";
+import ItemDetailsPage from "../pages/ItemDetailsPage/ItemDetailsPage";
 
-const Routes = ({ isAuthenticated = false }) => {
-  return isAuthenticated ? (
+const Routes = ({ customer }) => {
+  // eslint-disable-next-line no-console
+  console.log("МЫ в роутах", customer);
+  return customer ? (
     <Switch>
       <Route exact path="/">
         <HomePage />
@@ -17,7 +21,6 @@ const Routes = ({ isAuthenticated = false }) => {
       <Route path="/cart">
         <Cart />
       </Route>
-      <Route path="/products/:id">{/* <ItemDetailsPage /> */}</Route>
       <Route path="/profile">
         <Profiler />
       </Route>
@@ -31,11 +34,17 @@ const Routes = ({ isAuthenticated = false }) => {
       <Route path="/cart">
         <Cart />
       </Route>
+      <Route path="/notfound">
+        <NotFound />
+      </Route>
       <Route path="/login">
         <LoginForm />
       </Route>
       <Route path="/registration">
         <RegistrationForm />
+      </Route>
+      <Route path="/products/:id">
+        <ItemDetailsPage />
       </Route>
       <Redirect to="/" />
     </Switch>
@@ -44,7 +53,7 @@ const Routes = ({ isAuthenticated = false }) => {
 
 function mapStateToProps(state) {
   return {
-    customer: state.isAuthenticated,
+    customer: state.loginReducer.login,
   };
 }
 

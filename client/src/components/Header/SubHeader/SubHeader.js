@@ -32,6 +32,7 @@ const SubHeader = props => {
       <div className={classes.searchMobileWrap}>
         <CustomizedSearch className={classes.searchMobile} />
       </div>
+      {/* eslint-disable-next-line react/destructuring-assignment */}
       {props.links.links.length > 0 ? (
         <Box
           display="flex"
@@ -39,6 +40,7 @@ const SubHeader = props => {
           className={classes.subheader}
         >
           <Box>
+            {/* eslint-disable-next-line react/destructuring-assignment */}
             {props.links.links.map(item => {
               return item.links.length === 1 ? (
                 <Link
