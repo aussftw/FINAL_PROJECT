@@ -9,7 +9,7 @@ import { getLinks } from "../../../store/actions";
 import MenuListComposition from "../Dropdown/Dropdown";
 import CustomizedSearch from "../Search/Search";
 
-function SubHeader(props) {
+const SubHeader = props => {
   useEffect(() => {
     props.getLinks();
     // eslint-disable-next-line
@@ -63,7 +63,7 @@ function SubHeader(props) {
       )}
     </div>
   );
-}
+};
 
 function mapStateToProps(state) {
   return {

@@ -14,7 +14,7 @@ import CloseIcon from "@material-ui/icons/Close";
 import { getCategories, getLinks } from "../../../store/actions";
 import useStyles from "./useStyles";
 
-function TemporaryDrawer(props) {
+const TemporaryDrawer = props => {
   const classes = useStyles();
 
   useEffect(() => {
@@ -106,7 +106,7 @@ function TemporaryDrawer(props) {
       </Drawer>
     </div>
   );
-}
+};
 
 function mapStateToProps(state) {
   return {
