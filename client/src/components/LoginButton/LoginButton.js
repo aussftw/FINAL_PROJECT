@@ -49,7 +49,7 @@ const LoginButton = ({ logOut, customer, user }) => {
     </>
   );
 };
-
+//
 const mapStateToProps = state => {
   return {
     customer: state.loginReducer.login,
