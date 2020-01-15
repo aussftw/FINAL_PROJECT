@@ -51,7 +51,7 @@ const Subscribe = () => {
   };
 
   return (
-    <Container className={classes.subscribeContainer} maxWidth>
+    <Container className={classes.subscribeContainer} maxWidth="xl">
       <Typography className={classes.subscribeTitle}>NEWSLETTER</Typography>
       <Box className={classes.subscribeBar}>
         <InputBase
