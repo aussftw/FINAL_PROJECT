@@ -12,8 +12,10 @@ export default function WishList() {
     // axios.defaults.headers.common.Authorization = tokenAuth;
     axios
       .get("/wishlist")
+      // eslint-disable-next-line no-console
       .then(wishlist => console.log(wishlist))
       .catch(err => {
+        // eslint-disable-next-line no-console
         console.log(err);
       });
   }, []);

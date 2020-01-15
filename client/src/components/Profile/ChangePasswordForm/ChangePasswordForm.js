@@ -35,6 +35,7 @@ export default function ChangePasswordForm() {
           } else {
             setMessage(updatedCustomer.data.message);
           }
+          // eslint-disable-next-line no-console
           console.log(updatedCustomer);
         })
         .catch(error => setMessage(`Error: ${error.message}`));

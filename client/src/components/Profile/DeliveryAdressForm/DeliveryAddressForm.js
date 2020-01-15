@@ -20,6 +20,7 @@ export default function DeliveryAddressForm() {
       .put("/customers", address)
       .then(updatedCustomer => {
         setMessage(updatedCustomer.data.message);
+        // eslint-disable-next-line no-console
         console.log(updatedCustomer);
       })
       .catch(error => setMessage(`Error: ${error.message}`));

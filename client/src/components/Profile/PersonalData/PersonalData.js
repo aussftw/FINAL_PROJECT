@@ -57,6 +57,7 @@ export default function PersonalData() {
     axios
       .put("/customers", updatedCustomer)
       .then(updatedUser => {
+        // eslint-disable-next-line
         console.log(updatedUser);
       })
       .catch(error => setMessage(`Error: ${error.message}`));
