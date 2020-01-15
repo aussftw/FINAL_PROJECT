@@ -7,11 +7,10 @@ import rootReducer from "./reducers/rootReducer";
 // eslint-disable-next-line
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-export default function configureStore(initState) {
+export default function configureStore() {
   const logger = createLogger();
   const store = createStore(
     rootReducer,
-    initState,
     // applyMiddleware(thunk, logger),
     composeEnhancers(applyMiddleware(thunk, logger))
   );

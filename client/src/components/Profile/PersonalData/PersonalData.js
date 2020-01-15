@@ -24,10 +24,9 @@ export default function PersonalData() {
   });
   const [message, setMessage] = useState("");
 
-  const tokenAuth =
-    "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlMDc1NDlhMGM4OTBhMWQ1ODg3YzY2MCIsImZpcnN0TmFtZSI6IkV1Z2VuaXkiLCJsYXN0TmFtZSI6Ik1hcmtvdiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTU3ODc0MjA1MCwiZXhwIjoxNTc4Nzc4MDUwfQ.ljSKSegF-2QlO3Eh39tkmFZKLmshZYISFROkHy5AFNg";
+  // const tokenAuth = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlMDc1NDlhMGM4OTBhMWQ1ODg3YzY2MCIsImZpcnN0TmFtZSI6IkV1Z2VuaXkiLCJsYXN0TmFtZSI6Ik1hcmtvdiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTU3ODc0MjA1MCwiZXhwIjoxNTc4Nzc4MDUwfQ.ljSKSegF-2QlO3Eh39tkmFZKLmshZYISFROkHy5AFNg";
   useEffect(() => {
-    axios.defaults.headers.common.Authorization = tokenAuth;
+    // axios.defaults.headers.common.Authorization = tokenAuth;
     axios.get("/customers/customer").then(loggedInCustomer => {
       setValue({
         firstName: loggedInCustomer.data.firstName,
@@ -54,7 +53,7 @@ export default function PersonalData() {
   const saveData = event => {
     event.preventDefault();
     setMessage("");
-    axios.defaults.headers.common.Authorization = tokenAuth;
+    // axios.defaults.headers.common.Authorization = tokenAuth;
     axios
       .put("/customers", updatedCustomer)
       .then(updatedUser => {

@@ -10,8 +10,9 @@ import NotFound from "../pages/NotFound/NotFound";
 import RegistrationForm from "../components/RegistrationForm";
 import ItemDetailsPage from "../pages/ItemDetailsPage/ItemDetailsPage";
 
-const Routes = ({ isAuthenticated = false }) => {
-  return isAuthenticated ? (
+const Routes = ({ customer }) => {
+  console.log("МЫ в роутах", customer);
+  return customer ? (
     <Switch>
       <Route exact path="/">
         <HomePage />
@@ -51,7 +52,7 @@ const Routes = ({ isAuthenticated = false }) => {
 
 function mapStateToProps(state) {
   return {
-    customer: state.isAuthenticated,
+    customer: state.loginReducer.login,
   };
 }
 

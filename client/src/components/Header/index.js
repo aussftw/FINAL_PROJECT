@@ -1,14 +1,14 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Toolbar from "@material-ui/core/Toolbar";
-import IconButton from "@material-ui/core/IconButton";
+// import IconButton from "@material-ui/core/IconButton";
 import AppBar from "@material-ui/core/AppBar";
-import Badge from "@material-ui/core/Badge";
-import MailIcon from "@material-ui/icons/Mail";
+// import Badge from "@material-ui/core/Badge";
+// import MailIcon from "@material-ui/icons/Mail";
 import { Link } from "react-router-dom";
 import TemporaryDrawer from "./BurgerPanel";
 import CustomizedSearch from "./Search";
-import MainButton from "../common/buttons/MainButton";
+import LoginButton from "../LoginButton/LoginButton";
 
 const useStyles = makeStyles(theme => ({
   flex: {
@@ -49,18 +49,28 @@ const Header = () => {
             <CustomizedSearch />
           </div>
           <div>
-            <Link to="/login">
-              <MainButton // Need a new component here
-                text="Sign In"
-                variant="outline"
-                type="button"
-              />
-            </Link>
-            <IconButton aria-label="show 4 new mails" color="inherit">
-              <Badge badgeContent={8} color="secondary">
-                <MailIcon />
-              </Badge>
-            </IconButton>
+            <LoginButton />
+            {/* <IconButton aria-label="show 4 new mails" color="inherit"> */}
+            {/*  <Badge badgeContent={8} color="secondary"> */}
+            {/*    <MailIcon /> */}
+            {/*  </Badge> */}
+            {/* </IconButton> */}
+            {/* <IconButton aria-label="show 17 new notifications" color="inherit"> */}
+            {/*  <Badge badgeContent={5} color="secondary"> */}
+            {/*    <NotificationsIcon /> */}
+            {/*  </Badge> */}
+            {/* </IconButton> */}
+
+            {/* <div className={classes.sectionMobile}> */}
+            {/*  <IconButton */}
+            {/*      aria-label="show more" */}
+            {/*      aria-controls={mobileMenuId} */}
+            {/*      aria-haspopup="true" */}
+            {/*      onClick={handleMobileMenuOpen} */}
+            {/*      color="inherit" */}
+            {/*  > */}
+            {/*    <MoreIcon /> */}
+            {/*  </IconButton> */}
           </div>
         </Toolbar>
       </AppBar>

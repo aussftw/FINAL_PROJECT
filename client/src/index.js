@@ -9,6 +9,10 @@ import Routes from "./routes/Routes";
 import theme from "./theme";
 
 import "./index.css";
+// import Header from './components/Header';
+// import SubHeader from './components/Header/SubHeader';
+// import BackToTop from './components/common/GoUpButton';
+// import Footer from './components/Footer';
 
 const store = configureStore();
 
