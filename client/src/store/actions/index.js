@@ -22,3 +22,17 @@ export function getCategories() {
       });
   };
 }
+
+export const logIn = data => {
+  console.log("i am in ");
+  return {
+    type: "LOG_IN",
+    payload: data,
+  };
+};
+
+export const logOut = () => {
+  return {
+    type: "LOG_OUT",
+  };
+};

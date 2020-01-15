@@ -59,10 +59,6 @@ const useStyles = makeStyles({
     fontSize: "24px",
     color: "red",
   },
-  successMsg: {
-    fontSize: "24px",
-    color: theme.palette.primary.main,
-  },
 });
 
 export default useStyles;
