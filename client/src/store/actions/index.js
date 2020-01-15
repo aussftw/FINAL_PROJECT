@@ -23,10 +23,11 @@ export function getCategories() {
   };
 }
 
-export const logIn = () => {
+export const logIn = data => {
   console.log("i am in ");
   return {
     type: "LOG_IN",
+    payload: data,
   };
 };
 

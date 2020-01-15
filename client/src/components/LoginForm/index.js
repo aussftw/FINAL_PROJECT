@@ -34,6 +34,7 @@ const LoginForm = ({ logIn }) => {
       .get("/customers/customer")
       .then(response => {
         console.log("Our User", response);
+        logIn(response.data);
       })
       .catch(err => {
         console.log(err);
@@ -53,7 +54,6 @@ const LoginForm = ({ logIn }) => {
           localStorage.setItem("authToken", response.data.token);
           setAuthToken(response.data.token);
           getUser();
-          logIn();
         }
       })
       .catch(err => {

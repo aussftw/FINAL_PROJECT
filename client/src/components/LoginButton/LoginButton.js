@@ -9,7 +9,7 @@ import useStyles from "./useStyles";
 import setAuthToken from "../common/setAuthToken";
 
 // eslint-disable-next-line no-shadow
-const LoginButton = ({ logOut, customer }) => {
+const LoginButton = ({ logOut, customer, user }) => {
   const classes = useStyles();
 
   const signOut = e => {
@@ -25,6 +25,7 @@ const LoginButton = ({ logOut, customer }) => {
       {customer ? (
         <>
           <Link to="/profile" className={classes.link}>
+            <span>{`${user.firstName} ${user.lastName}`}</span>
             <IconButton>
               <AccountCircle />
             </IconButton>
@@ -52,6 +53,7 @@ const LoginButton = ({ logOut, customer }) => {
 const mapStateToProps = state => {
   return {
     customer: state.loginReducer.login,
+    user: state.loginReducer.user,
   };
 };
 
