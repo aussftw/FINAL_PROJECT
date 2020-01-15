@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Redirect from "react-router-dom/Redirect";
+import { Redirect } from "react-router-dom";
 import axios from "axios";
 import RegistrationContent from "./RegistrationContent";
 

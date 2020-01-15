@@ -1,9 +1,13 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
 import LoginContent from "./LoginContent";
+import setAuthToken from "../common/setAuthToken";
+import { logIn } from "../../store/actions";
 
-const LoginForm = () => {
+// eslint-disable-next-line no-shadow
+const LoginForm = ({ logIn }) => {
   const [open, setOpen] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
   const [userData, setValues] = useState({
@@ -25,14 +29,31 @@ const LoginForm = () => {
     setShowPassword(() => !showPassword);
   };
 
+  const getUser = () => {
+    axios
+      .get("/customers/customer")
+      .then(response => {
+        console.log("Our User", response);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
   const submitLogin = e => {
     e.preventDefault();
     axios
       .post("/customers/login", userData)
       .then(response => {
-        console.log(response);
-        if (response.statusText === "OK") {
+        console.log(response.data.token);
+        if (response.statusText === "OK" && response.data.success) {
           setIsLogin(true);
+          console.log(response);
+          // eslint-disable-next-line no-undef
+          localStorage.setItem("authToken", response.data.token);
+          setAuthToken(response.data.token);
+          getUser();
+          logIn();
         }
       })
       .catch(err => {
@@ -66,4 +87,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default connect(null, { logIn })(LoginForm);

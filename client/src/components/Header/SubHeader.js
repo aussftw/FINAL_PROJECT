@@ -51,7 +51,7 @@ export default function SubHeader(props) {
           plantCategories={categories}
           className={classes.link}
         />
-        <Link className={classes.link} to="/second">
+        <Link className={classes.link} to="/cart">
           About Us
         </Link>
         <Link className={classes.link} to="/third">
