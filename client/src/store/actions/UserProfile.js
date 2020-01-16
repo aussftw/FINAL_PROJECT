@@ -24,7 +24,7 @@ export const editDataLocal = (event, value) => {
 export const saveUserData = (event, updatedCustomer) => dispatch => {
   event.preventDefault();
   axios
-    .put("/customer", updatedCustomer)
+    .put("/customers", updatedCustomer)
     .then(updatedUser => {
       // eslint-disable-next-line
       console.log(updatedUser);

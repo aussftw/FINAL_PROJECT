@@ -13,10 +13,12 @@ import WishList from "./WishList/WishList";
 
 function TabPanel(props) {
   const { children, value, index } = props;
+  const classes = useStyles();
 
   return (
     <Typography
       component="div"
+      className={classes.tabpanel}
       role="tabpanel"
       hidden={value !== index}
       id={`vertical-tabpanel-${index}`}
