@@ -15,6 +15,9 @@ const useStyles = makeStyles(theme => ({
   input: {
     fontSize: "0.8rem",
     flex: 3,
+    // "&::after": {
+    //   borderBottom: "none",
+    // },
   },
   iconButton: {
     padding: 10,
