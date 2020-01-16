@@ -1,7 +1,6 @@
 import React from "react";
-import { Container, Grid, Typography } from "@material-ui/core";
+import { Container, Grid, Link, Hidden, Box } from "@material-ui/core";
 
-// import { ThemeProvider } from '@material-ui/core/Hidden';
 import useStyles from "./useStyles";
 
 import ContactUs from "./ContactUs/ContactUs";
@@ -15,14 +14,18 @@ const Footer = () => {
   const classes = useStyles();
 
   return (
-    <Container className={classes.bg} maxWidth>
-      <Typography>LOGO</Typography>
-      <Grid container>
+    <Container className={classes.bg} maxWidth="xl">
+      <Hidden mdUp>
+        <Link href="/#" className={classes.logoContainer}>
+          <img src="./img/Logo.svg" alt="logo" className={classes.logo} />
+        </Link>
+      </Hidden>
+      <Box className={classes.footerData}>
         <ContactUs />
         <Payment />
-        <MyAccount />
         <Information />
-      </Grid>
+        <MyAccount />
+      </Box>
       <Grid>
         <Copy />
       </Grid>
