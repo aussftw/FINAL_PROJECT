@@ -181,6 +181,7 @@ const ItemDetails = ({ id, inCart, inWishList }) => {
           <Box className={classes.buttonsBar}>
             <Button
               className={classes.actionButton}
+              // eslint-disable-next-line
               onClick={console.log("add to cart function here")}
               variant="contained"
             >
@@ -189,10 +190,12 @@ const ItemDetails = ({ id, inCart, inWishList }) => {
             <Button aria-label="Add to wishlist" variant="contained">
               {inWishList ? (
                 <FavoriteSharpIcon
+                  // eslint-disable-next-line
                   onClick={console.log("add to wishlist function here")}
                 />
               ) : (
                 <FavoriteBorderSharpIcon
+                  // eslint-disable-next-line
                   onClick={console.log("add to wishlist function here")}
                 />
               )}

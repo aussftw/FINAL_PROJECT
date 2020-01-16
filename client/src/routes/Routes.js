@@ -11,6 +11,7 @@ import RegistrationForm from "../components/RegistrationForm";
 import ItemDetailsPage from "../pages/ItemDetailsPage/ItemDetailsPage";
 
 const Routes = ({ customer }) => {
+  // eslint-disable-next-line no-console
   console.log("МЫ в роутах", customer);
   return customer ? (
     <Switch>

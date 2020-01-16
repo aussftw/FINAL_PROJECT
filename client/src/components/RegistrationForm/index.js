@@ -32,18 +32,21 @@ const RegistrationForm = () => {
 
   const submitRegistration = e => {
     e.preventDefault();
+    // eslint-disable-next-line no-console
     console.log(newUserData);
     axios
       .post("/customers", newUserData)
       .then(response => {
+        // eslint-disable-next-line no-console
         console.log(response);
         if (response.statusText === "OK") {
           setRegistration(true);
         }
       })
       .catch(error => {
-        console.log(error.response.data);
         setMessage(error.message);
+        // eslint-disable-next-line no-console
+        console.log(error.response.data);
       });
   };
 
