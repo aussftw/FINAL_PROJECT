@@ -1,6 +1,12 @@
 import { combineReducers } from "redux";
+import loginReducer from "./loginReducer";
 import categoriesReducer from "./categoriesReducer";
+import linksReducer from "./linksReducer";
 
-export default combineReducers({
+const rootReducer = combineReducers({
   categoriesReducer,
+  loginReducer,
+  linksReducer,
 });
+
+export default rootReducer;

@@ -2,7 +2,6 @@
   "extends": ["airbnb","airbnb/hooks","prettier"],
   "plugins": ["prettier"],
   "rules": {
-
     "func-names": ["error", "never"],
     "no-console": "warn",
     "react/prop-types": 0,
@@ -13,11 +12,11 @@
     "react/button-has-type": "off",
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "react/destructuring-assignment": ["warn","always"],
+    "no-underscore-dangle": "off",
     "padding-line-between-statements": ["error",
       { "blankLine": "always", "prev": "const", "next": "return" },
       { "blankLine": "always", "prev": "function", "next": "return" },
       { "blankLine": "always", "prev": "let", "next": "return" }
-
     ]
   }
 }

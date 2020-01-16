@@ -42,7 +42,7 @@ const theme = createMuiTheme({
 
     MuiTooltip: {
       tooltip: {
-        fontSize: "14px",
+        fontSize: "13px",
         backgroundColor: lightGreen[700],
       },
       arrow: {
@@ -84,6 +84,12 @@ const theme = createMuiTheme({
         "&:hover": {
           backgroundColor: lightGreen[900],
         },
+      },
+    },
+    MuiInputLabel: {
+      outlined: {
+        fontWeight: 800,
+        backgroundColor: "white",
       },
     },
   },
