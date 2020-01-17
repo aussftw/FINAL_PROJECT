@@ -1,36 +1,18 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Toolbar from "@material-ui/core/Toolbar";
-// import IconButton from "@material-ui/core/IconButton";
-import AppBar from "@material-ui/core/AppBar";
-// import Badge from "@material-ui/core/Badge";
-// import MailIcon from "@material-ui/icons/Mail";
 import { Link } from "react-router-dom";
-import TemporaryDrawer from "./BurgerPanel";
-import CustomizedSearch from "./Search";
+
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import IconButton from "@material-ui/core/IconButton";
+import Badge from "@material-ui/core/Badge";
+import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
+// import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+
+import TemporaryDrawer from "./BurgerMenu/BurgerMenu";
+import CustomizedSearch from "./Search/Search";
 import LoginButton from "../LoginButton/LoginButton";
 
-const useStyles = makeStyles(theme => ({
-  flex: {
-    display: "flex",
-    justifyContent: "space-between",
-  },
-  logo: {
-    height: "45px",
-  },
-  sectionDesktop: {
-    display: "none",
-    [theme.breakpoints.up("md")]: {
-      display: "flex",
-    },
-  },
-  sectionMobile: {
-    display: "flex",
-    [theme.breakpoints.up("md")]: {
-      display: "none",
-    },
-  },
-}));
+import useStyles from "./useStyles";
 
 const Header = () => {
   const classes = useStyles();
@@ -40,37 +22,27 @@ const Header = () => {
       <AppBar color="inherit" position="fixed">
         <Toolbar className={classes.flex}>
           <div className={classes.flex}>
-            <TemporaryDrawer className={classes.sectionMobile} />
+            <TemporaryDrawer />
             <Link to="/">
               <img src="./img/Logo.svg" alt="logo" className={classes.logo} />
             </Link>
           </div>
           <div>
-            <CustomizedSearch />
+            <CustomizedSearch className={classes.searchDesktop} />
           </div>
           <div>
             <LoginButton />
-            {/* <IconButton aria-label="show 4 new mails" color="inherit"> */}
-            {/*  <Badge badgeContent={8} color="secondary"> */}
-            {/*    <MailIcon /> */}
-            {/*  </Badge> */}
-            {/* </IconButton> */}
+            <IconButton aria-label="show new mails" color="inherit">
+              <Badge badgeContent={8} color="primary">
+                <ShoppingCartOutlinedIcon />
+              </Badge>
+            </IconButton>
+            {/* <CartMini /> */}
             {/* <IconButton aria-label="show 17 new notifications" color="inherit"> */}
-            {/*  <Badge badgeContent={5} color="secondary"> */}
-            {/*    <NotificationsIcon /> */}
+            {/*  <Badge badgeContent={5} color="primary"> */}
+            {/*    <FavoriteBorderIcon /> */}
             {/*  </Badge> */}
             {/* </IconButton> */}
-
-            {/* <div className={classes.sectionMobile}> */}
-            {/*  <IconButton */}
-            {/*      aria-label="show more" */}
-            {/*      aria-controls={mobileMenuId} */}
-            {/*      aria-haspopup="true" */}
-            {/*      onClick={handleMobileMenuOpen} */}
-            {/*      color="inherit" */}
-            {/*  > */}
-            {/*    <MoreIcon /> */}
-            {/*  </IconButton> */}
           </div>
         </Toolbar>
       </AppBar>
