@@ -17,6 +17,9 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     flexDirection: "column",
   },
+  message: {
+    textAlign: "center",
+  },
 }));
 
 export default useStyles;

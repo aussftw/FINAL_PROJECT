@@ -10,9 +10,10 @@ const useStyles = makeStyles(theme => ({
     },
   },
   brand: {
-    margin: "1rem 1rem 1rem rem",
-    width: 120,
-    height: 150,
+    margin: "1rem",
+    [theme.breakpoints.up("sm")]: {
+      margin: "2rem",
+    },
     backgroundSize: "cover",
     overflow: "hidden",
   },
