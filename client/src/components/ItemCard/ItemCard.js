@@ -20,7 +20,7 @@ import useStyles from "./useStyles";
 const CardTooltipText = value => {
   if (value === undefined) return "Not yet rated";
 
-  return `Rated ${value} out of 5`;
+  return `Rated ${value.toFixed(2)} out of 5`;
 };
 
 const ItemCard = ({ title, rate, price, img, inCart, inWishlist }) => {
