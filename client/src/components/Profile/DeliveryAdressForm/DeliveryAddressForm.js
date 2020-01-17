@@ -1,29 +1,23 @@
-import React, { useState } from "react";
+import React from "react";
 import Button from "@material-ui/core/Button";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
-import axios from "axios";
+import { connect } from "react-redux";
 import useStyles from "./useStyles";
+import {
+  saveUserData,
+  editInputsData,
+} from "../../../store/actions/UserProfile";
 
-export default function DeliveryAddressForm() {
+// eslint-disable-next-line no-shadow
+function DeliveryAddressForm({ user, saveUserData, editInputsData, error }) {
   const classes = useStyles();
-  const [addressValue, setAddressValue] = useState("");
-  const [message, setMessage] = useState("");
 
-  // const tokenAuth = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlMDc1NDlhMGM4OTBhMWQ1ODg3YzY2MCIsImZpcnN0TmFtZSI6IkV1Z2VuaXkiLCJsYXN0TmFtZSI6Ik1hcmtvdiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTU3ODc0MjA1MCwiZXhwIjoxNTc4Nzc4MDUwfQ.ljSKSegF-2QlO3Eh39tkmFZKLmshZYISFROkHy5AFNg";
+  const saveAddress = event => {
+    saveUserData(event, user);
+  };
 
-  const address = { address: addressValue };
-
-  const addAddress = event => {
-    event.preventDefault();
-    // axios.defaults.headers.common.Authorization = tokenAuth;
-    axios
-      .put("/customers", address)
-      .then(updatedCustomer => {
-        setMessage(updatedCustomer.data.message);
-        // eslint-disable-next-line no-console
-        console.log(updatedCustomer);
-      })
-      .catch(error => setMessage(`Error: ${error.message}`));
+  const handleChange = event => {
+    editInputsData(event, user);
   };
 
   return (
@@ -34,31 +28,42 @@ export default function DeliveryAddressForm() {
           className={classes.form}
           noValidate={false}
           autoComplete="off"
-          onSubmit={addAddress}
+          onSubmit={saveAddress}
         >
           <TextValidator
             id="delivery-address-input"
             label="Delivery address"
-            value={addressValue}
+            value={user.address}
             variant="outlined"
             multiline
-            rowsMax="4"
-            inputProps={{ minLength: 10, maxLength: 100 }}
+            rowsMax="5"
+            inputProps={{ name: "address" }}
             placeholder="Your address"
-            onChange={event => setAddressValue(event.target.value)}
+            onChange={handleChange}
             validators={[
               "required",
-              "matchRegexp:^[A-Za-z0-9'\\.\\-\\s\\,]{10,100}$",
+              "matchRegexp:^[A-Za-zа-яА-Я0-9'\\.\\-\\s\\,]{10,100}$",
             ]}
             errorMessages={[
               "this field is required",
-              "address must be 10-100 characters, including only latin letters, numbers, commas and points",
+              "address must be 10-100 characters, including only letters, numbers, commas and points",
             ]}
           />
           <Button type="submit">ADD ADDRESS</Button>
         </ValidatorForm>
-        {Boolean(message) && <p>{message}</p>}
+        {Boolean(error) && <p className={classes.message}>{error.message}</p>}
       </div>
     </div>
   );
 }
+
+function mapStateToProps(state) {
+  return {
+    user: state.loginReducer.user,
+    error: state.loginReducer.error,
+  };
+}
+
+export default connect(mapStateToProps, { saveUserData, editInputsData })(
+  DeliveryAddressForm
+);
