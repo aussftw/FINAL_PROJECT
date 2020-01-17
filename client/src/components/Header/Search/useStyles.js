@@ -2,27 +2,31 @@ import { makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({
   search: {
-    paddingLeft: theme.spacing(1),
     alignItems: "center",
-    width: 400,
     boxShadow: "none",
     border: "1px solid grey",
   },
   link: {
+    display: "none",
+    [theme.breakpoints.up("md")]: {
+      display: "flex",
+    },
     color: theme.palette.secondary.main,
     textDecoration: "none",
+    padding: 9,
   },
-  input: {
-    fontSize: "0.8rem",
-    flex: 3,
+  form: {
+    display: "none",
+    [theme.breakpoints.up("sm")]: {
+      display: "flex",
+    },
   },
   iconButton: {
-    padding: 10,
+    padding: 8,
   },
-  divider: {
-    height: 28,
-    margin: 4,
-  },
+  // divider: {
+  //   height: 28,
+  // },
 }));
 
 export default useStyles;
