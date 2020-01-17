@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 
 import Paper from "@material-ui/core/Paper";
-import Divider from "@material-ui/core/Divider";
+// import Divider from "@material-ui/core/Divider";
 import Button from "@material-ui/core/Button";
 import SearchIcon from "@material-ui/icons/Search";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
@@ -40,28 +40,31 @@ const CustomizedSearch = props => {
         menuTitle="All Categories"
         className={classes.link}
       />
-      <Divider className={classes.divider} orientation="vertical" />
+      {/* <Divider className={classes.divider} orientation="vertical" /> */}
 
-      <ValidatorForm noValidate={false} onSubmit={searchPhrases}>
+      <ValidatorForm
+        noValidate={false}
+        onSubmit={searchPhrases}
+        className={classes.form}
+      >
         <TextValidator
           value={text.query}
           onChange={searchChange("query")}
-          className={classes.input}
-          // disableUnderline
-          placeholder="Search Products..."
-          validators={["required", "matchRegexp:^[`'\"()A-Za-zd.s_-]{2,50}$"]}
+          // className={classes.input}
+          variant="outlined"
+          size="small"
+          placeholder="Search..."
+          validators={["required", "matchRegexp:^[`'\"()A-Za-zd.s_-]{3,50}"]}
           errorMessages={[
             "this field is required",
-            " Only 2 characters and more, including only latin letters",
+            " Only latin letters, 3 characters and more",
           ]}
         />
-
         <Button
           className={classes.iconButton}
           variant="contained"
           type="submit"
           aria-label="search"
-          // onSubmit={(e)=>{e.preventDefault(); searchPhrases()}}
         >
           <SearchIcon />
         </Button>
