@@ -38,6 +38,7 @@ const Subscribe = () => {
       // eslint-disable-next-line
       .catch(error => {
         setError(true);
+        // eslint-disable-next-line
         console.log(error.response);
       });
 
@@ -51,7 +52,7 @@ const Subscribe = () => {
   };
 
   return (
-    <Container className={classes.subscribeContainer} maxWidth>
+    <Container className={classes.subscribeContainer} maxWidth="xl">
       <Typography className={classes.subscribeTitle}>NEWSLETTER</Typography>
       <Box className={classes.subscribeBar}>
         <InputBase

@@ -32,8 +32,8 @@ const QtyCounter = () => {
     <Container className={classes.root} maxWidth="lg">
       <Typography className={classes.title}> Qty:</Typography>
       <Box>
-        <IconButton color="" aria-label="More">
-          <AddSharpIcon onClick={() => inc()} />
+        <IconButton aria-label="More" onClick={() => inc()}>
+          <AddSharpIcon />
         </IconButton>
         <InputBase
           className={classes.input}
@@ -41,8 +41,8 @@ const QtyCounter = () => {
           value={qty}
           type="tel"
         />
-        <IconButton color="" aria-label="Less">
-          <RemoveSharpIcon onClick={() => dec()} />
+        <IconButton aria-label="Less" onClick={() => dec()}>
+          <RemoveSharpIcon />
         </IconButton>
       </Box>
     </Container>

@@ -17,12 +17,19 @@ const useStyles = makeStyles({
     padding: "15px",
     display: "flex",
     flexDirection: "column",
-    alignItems: "center",
     textAlign: "center",
+    maxWidth: "70%",
+    margin: "0 auto",
   },
   text: {
     marginTop: "0",
     fontSize: "20px",
+    letterSpacing: "1px",
+  },
+  regLink: {
+    fontWeight: "bold",
+    letterSpacing: "2.5px",
+    color: theme.palette.primary.main,
   },
   btn: {
     letterSpacing: "2px",
@@ -46,10 +53,11 @@ const useStyles = makeStyles({
     border: `5px solid ${theme.palette.primary.main}`,
     borderRadius: "8px",
     boxShadow: theme.shadows[5],
-    minWidth: "40vw",
+    width: "40vw",
   },
-  icon: {
-    colors: theme.palette.primary.main,
+  errMsg: {
+    fontSize: "24px",
+    color: "red",
   },
 });
 

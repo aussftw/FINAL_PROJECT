@@ -32,29 +32,13 @@ const Brands = () => {
 
   return (
     <Container className={classes.brandsContaier}>
-      {/* <Hidden smDown>
-        {brands.length === 0 ? (
-          <PreloaderAdaptive />
-        ) : (
-          brands.map(brand => (
-            <Link href={url} key={customId}>
-              <Box
-                className={classes.brand}
-                style={{
-                  backgroundImage: `url(${brand.imageUrl})`,
-                }}
-              />
-            </Link>
-          ))
-        )}
-      </Hidden> */}
-      {/* <Hidden mdUp> */}
       {brands.length === 0 ? (
         <PreloaderAdaptive />
       ) : (
         brands.map(brand => (
-          <Link href={url} key={_id}>
+          <Link href={url}>
             <Box
+              key={_id} // fix key error
               className={classes.brand}
               style={{
                 backgroundImage: `url(${brand.imageUrl})`,
@@ -63,7 +47,6 @@ const Brands = () => {
           </Link>
         ))
       )}
-      {/* </Hidden> */}
     </Container>
   );
 };
