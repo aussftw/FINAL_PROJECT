@@ -1,7 +1,5 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-
-import { makeStyles } from "@material-ui/core/styles";
 import { Tooltip } from "@material-ui/core";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import Grow from "@material-ui/core/Grow";
@@ -12,22 +10,24 @@ import MenuList from "@material-ui/core/MenuList";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import { connect } from "react-redux";
-import { getCategories } from "../../store/actions";
+import axios from "axios";
+import { getCategories } from "../../../store/actions";
+import useStyles from "./useStyles";
 
-const useStyles = makeStyles(() => ({
-  root: {
-    display: "inline-block",
-  },
-  dropdownIcon: {
-    fontSize: "1rem",
-  },
-  menuList: {
-    marginTop: "10px",
-    zIndex: "20",
-  },
-}));
+function filter(category) {
+  axios
+    .get(`/products/filter?categories=${category}`)
+    .then(products => {
+      // eslint-disable-next-line no-console
+      console.log(products);
+    })
+    .catch(err => {
+      // eslint-disable-next-line no-console
+      console.log(err);
+    });
+}
 
-function MenuListComposition(props) {
+const MenuListComposition = props => {
   const { menuTitle, className } = props;
 
   const classes = useStyles();
@@ -78,7 +78,10 @@ function MenuListComposition(props) {
               ref={anchorRef}
               aria-controls={open ? "menu-list-grow" : undefined}
               aria-haspopup="true"
-              onClick={handleToggle}
+              onClick={e => {
+                e.preventDefault();
+                handleToggle();
+              }}
               className={className}
             >
               {menuTitle}
@@ -117,7 +120,18 @@ function MenuListComposition(props) {
                       {props.categories.categories.map(menuItem => {
                         return (
                           <MenuItem key={menuItem.id} onClick={handleClose}>
-                            <Link href="/#" className={className}>
+                            <Link
+                              to="/#"
+                              onClick={e => {
+                                e.preventDefault();
+                                filter(menuItem.name);
+                              }}
+                              onKeyDown={e => {
+                                e.preventDefault();
+                                filter(menuItem.name);
+                              }}
+                              className={className}
+                            >
                               {menuItem.name}
                             </Link>
                           </MenuItem>
@@ -135,7 +149,7 @@ function MenuListComposition(props) {
       )}
     </div>
   );
-}
+};
 
 function mapStateToProps(state) {
   return {

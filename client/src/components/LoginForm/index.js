@@ -33,10 +33,12 @@ const LoginForm = ({ logIn }) => {
     axios
       .get("/customers/customer")
       .then(response => {
+        // eslint-disable-next-line no-console
         console.log("Our User", response);
         logIn(response.data);
       })
       .catch(err => {
+        // eslint-disable-next-line no-console
         console.log(err);
       });
   };
@@ -46,9 +48,11 @@ const LoginForm = ({ logIn }) => {
     axios
       .post("/customers/login", userData)
       .then(response => {
+        // eslint-disable-next-line no-console
         console.log(response.data.token);
         if (response.statusText === "OK" && response.data.success) {
           setIsLogin(true);
+          // eslint-disable-next-line no-console
           console.log(response);
           // eslint-disable-next-line no-undef
           localStorage.setItem("authToken", response.data.token);
@@ -57,6 +61,7 @@ const LoginForm = ({ logIn }) => {
         }
       })
       .catch(err => {
+        // eslint-disable-next-line no-console
         console.log(err.response.data);
         setMessage(err.message);
       });

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Button from "@material-ui/core/Button";
-// import TextField from "@material-ui/core/TextField";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import axios from "axios";
 import useStyles from "./useStyles";
@@ -15,8 +14,6 @@ export default function ChangePasswordForm() {
   ] = useState("");
   const [message, setMessage] = useState("");
 
-  // const tokenAuth = localStorage.getItem("authToken");
-
   const passwords = {
     password: oldPasswordValue,
     newPassword: newPasswordValue,
@@ -26,7 +23,6 @@ export default function ChangePasswordForm() {
     event.preventDefault();
     setMessage("");
     if (newPasswordValue === confirmationNewPasswordValue) {
-      // axios.defaults.headers.common.Authorization = tokenAuth;
       axios
         .put("/customers/password", passwords)
         .then(updatedCustomer => {
@@ -35,6 +31,7 @@ export default function ChangePasswordForm() {
           } else {
             setMessage(updatedCustomer.data.message);
           }
+          // eslint-disable-next-line no-console
           console.log(updatedCustomer);
         })
         .catch(error => setMessage(`Error: ${error.message}`));
@@ -64,12 +61,12 @@ export default function ChangePasswordForm() {
             label="Input old password"
             value={oldPasswordValue}
             variant="outlined"
-            inputProps={{ type: "password", minLength: 8, maxLength: 16 }}
+            inputProps={{ type: "password", minLength: 8, maxLength: 20 }}
             onChange={event => setOldPasswordValue(event.target.value)}
-            validators={["required", "matchRegexp:^[a-zA-Z0-9]{8,16}$"]}
+            validators={["required", "matchRegexp:^[a-zA-Z0-9]{8,20}$"]}
             errorMessages={[
               "this field is required",
-              "Your password must be 8-16 characters, including only latin letters and numbers",
+              "Your password must be 8-20 characters, including only latin letters and numbers",
             ]}
           />
           <TextValidator
@@ -77,12 +74,12 @@ export default function ChangePasswordForm() {
             label="Input new password"
             value={newPasswordValue}
             variant="outlined"
-            inputProps={{ type: "password", minLength: 8, maxLength: 16 }}
+            inputProps={{ type: "password", minLength: 8, maxLength: 20 }}
             onChange={event => setNewPasswordValue(event.target.value)}
-            validators={["required", "matchRegexp:^[a-zA-Z0-9]{8,16}$"]}
+            validators={["required", "matchRegexp:^[a-zA-Z0-9]{8,20}$"]}
             errorMessages={[
               "this field is required",
-              "Your password must be 8-16 characters, including only latin letters and numbers",
+              "Your password must be 8-20 characters, including only latin letters and numbers",
             ]}
           />
           <TextValidator
@@ -90,22 +87,21 @@ export default function ChangePasswordForm() {
             label="Confirm new password"
             value={confirmationNewPasswordValue}
             variant="outlined"
-            inputProps={{ type: "password", minLength: 8, maxLength: 16 }}
+            inputProps={{ type: "password", minLength: 8, maxLength: 20 }}
             onChange={event =>
               setConfirmationNewPasswordValue(event.target.value)
             }
             validators={[
               "required",
-              "matchRegexp:^[a-zA-Z0-9]+$",
+              "matchRegexp:^[a-zA-Z0-9]{8,20}$",
               "isPasswordMatch",
             ]}
             errorMessages={[
               "this field is required",
-              "Your password must be 8-16 characters, including only latin letters and numbers",
+              "Your password must be 8-20 characters, including only latin letters and numbers",
               "password mismatch",
             ]}
           />
-          {/* <input type="submit" onSubmit={savePassword} value="SAVE PASSWORD" /> */}
           <Button type="submit">SAVE PASSWORD</Button>
         </ValidatorForm>
         {Boolean(message) && <p className={classes.message}>{message}</p>}

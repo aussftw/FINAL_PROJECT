@@ -43,10 +43,7 @@ const CartMini = ({ goodsAtCart = hardCodedGoodsForCart }) => {
           </ul>
           <p className={classes.total}>
             <span className={classes.subtotal}>Subtotal: </span>
-            <span className={classes.subtotal_price}>
-$
-              {subTotalWithComas}
-            </span>
+            <span className={classes.subtotal_price}>${subTotalWithComas}</span>
           </p>
           <p className={classes.mini_cart_buttons}>
             <MainButton text="VIEW CART">VIEW CART</MainButton>

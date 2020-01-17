@@ -1,15 +1,15 @@
 import { makeStyles } from "@material-ui/core/styles";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(() => ({
   root: {
-    "& .MuiTextField-root": {
-      margin: theme.spacing(1),
-      minWidth: 260,
-    },
+    display: "flex",
+    // width: 600,
+    flexDirection: "column",
   },
   title: {
     margin: "0px 0px 5px 0",
     padding: 5,
+    textAlign: "center",
   },
   list: {
     display: "flex",
