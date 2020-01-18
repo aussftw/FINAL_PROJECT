@@ -10,6 +10,7 @@ import Footer from "../../components/Footer";
 // import ItemDetails from "../../components/ItemDetails/ItemDetails";
 import Stock from "../../components/Stock";
 import Subscribe from "../../components/Subscribe/Subscribe";
+import ProductCarousel from "../../components/ProductCarousel";
 
 function HomePage() {
   return (
@@ -18,8 +19,10 @@ function HomePage() {
       <Header />
       <SubHeader />
       <TopRated />
+      <ProductCarousel />
       <TilesContainer />
       <Stock />
+
       <Brands />
       <Subscribe />
       <Footer />
