@@ -1,119 +1,81 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import * as axios from "axios";
 
 import Container from "@material-ui/core/Container";
 import Hidden from "@material-ui/core/Hidden";
 
 import useStyles from "./useStyles";
 import ItemCard from "../ItemCard/ItemCard";
+import Preloader from "../Preloader/Desktop";
 
 const TopRated = () => {
   const classes = useStyles();
-  const hardCodeArray = [
-    {
-      title: "1 Exercitat Virginia",
-      value: 3.675698,
-      price: 38,
-      inCart: false,
-      inWishList: false,
-    },
-    {
-      title: "2 Exercitat Virginia",
-      price: 38,
-      value: 3.675698,
-      inCart: false,
-      inWishList: true,
-    },
-    {
-      title: "3 Exercitat Virginia",
-      price: 38,
-      inCart: false,
-      inWishList: true,
-    },
-    {
-      title: "4 Exercitat Virginia",
-      value: 3.675698,
-      price: 38,
-      inCart: true,
-      inWishList: false,
-    },
-    {
-      title: "5 Exercitat Virginia",
-      price: 38,
-      value: 3.675698,
-      inCart: false,
-      inWishList: false,
-    },
-    {
-      title: "6 Exercitat Virginia",
-      price: 38,
-      inCart: false,
-      inWishList: true,
-    },
-    {
-      title: "7 Exercitat Virginia",
-      value: 3.675698,
-      price: 38,
-      inCart: false,
-      inWishList: false,
-    },
-    {
-      title: "8 Exercitat Virginia",
-      price: 38,
-      value: 3.675698,
-      inCart: false,
-      inWishList: false,
-    },
-    {
-      title: "9 Exercitat Virginia",
-      price: 38,
-      inCart: false,
-      inWishList: true,
-    },
-  ];
+  const [products, setProducts] = useState(null);
+
+  useEffect(() => {
+    axios
+      .get("/products/top")
+      .then(response => {
+        setProducts(response.data);
+      })
+      .catch(err => {
+        // eslint-disable-next-line no-console
+        console.log(err.response.data);
+      });
+  }, []);
 
   return (
-    <Container className={classes.topRatedContainer} maxWidth="xl">
-      {hardCodeArray.slice(0, 8).map((value, index) => {
-        let result;
-        switch (index) {
-          case 2:
-            result = { xsDown: true };
-            break;
-          case 3:
-            result = { xsDown: true };
-            break;
-          case 4:
-            result = { smDown: true };
-            break;
-          case 5:
-            result = { smDown: true };
-            break;
-          case 6:
-            result = { mdDown: true };
-            break;
-          case 7:
-            result = { mdDown: true };
-            break;
-          default:
-            result = {};
-        }
+    <Container className={classes.topRatedContainer} maxWidth="lg">
+      {!products ? (
+        <Preloader />
+      ) : (
+        products.slice(0, 8).map((value, index) => {
+          let result;
+          switch (index) {
+            case 2:
+              result = { xsDown: true };
+              break;
+            case 3:
+              result = { xsDown: true };
+              break;
+            case 4:
+              result = { smDown: true };
+              break;
+            case 5:
+              result = { smDown: true };
+              break;
+            case 6:
+              result = { mdDown: true };
+              break;
+            case 7:
+              result = { mdDown: true };
+              break;
+            default:
+              result = {};
+          }
 
-        return (
-          <Hidden
-            xsDown={result.xsDown}
-            smDown={result.smDown}
-            mdDown={result.mdDown}
-          >
-            <ItemCard
-              title={value.title}
-              value={value.value}
-              price={value.price}
-              inCart={value.inCart}
-              inWishList={value.inWishList}
-            />
-          </Hidden>
-        );
-      })}
+          return (
+            <Hidden
+              xsDown={result.xsDown}
+              smDown={result.smDown}
+              mdDown={result.mdDown}
+              lgDown={result.lgDown}
+            >
+              <ItemCard
+                /* eslint-disable-next-line no-underscore-dangle */
+                key={value._id}
+                title={value.name}
+                rate={value.rate.rating}
+                price={value.currentPrice}
+                img={value.imageUrls[0]}
+                inCart={false}
+                inWishList={false}
+                id={value._id}
+              />
+            </Hidden>
+          );
+        })
+      )}
     </Container>
   );
 };

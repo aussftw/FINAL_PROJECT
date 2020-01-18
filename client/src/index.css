@@ -9,13 +9,16 @@ body {
 }
 
 code {
-
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
 /* html,
 body {
+  outline: none;
   max-width: 100%;
   overflow-x: hidden;
+}
+*:focus {
+  outline: none;
 } */

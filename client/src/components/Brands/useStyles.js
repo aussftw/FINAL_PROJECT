@@ -5,11 +5,18 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+    justifyContent: "center",
+    [theme.breakpoints.up("sm")]: {
+      flexDirection: "row",
+    },
   },
   brand: {
-    margin: theme.spacing(1.5),
-    width: 150,
-    height: 110,
+    margin: "1rem",
+    [theme.breakpoints.up("sm")]: {
+      margin: "2rem",
+    },
+    backgroundSize: "cover",
+    overflow: "hidden",
   },
 }));
 
