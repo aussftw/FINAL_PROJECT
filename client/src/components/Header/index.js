@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 import AppBar from "@material-ui/core/AppBar";
@@ -13,9 +13,16 @@ import CustomizedSearch from "./Search/Search";
 import LoginButton from "../LoginButton/LoginButton";
 
 import useStyles from "./useStyles";
+import CartMini from "./CartMini/CartMini";
 
 const Header = () => {
   const classes = useStyles();
+
+  const [isCartOpened, toggleCart] = useState(false);
+
+  function cartToggling() {
+    toggleCart(!isCartOpened);
+  }
 
   return (
     <div>
@@ -32,12 +39,16 @@ const Header = () => {
           </div>
           <div>
             <LoginButton />
-            <IconButton aria-label="show new mails" color="inherit">
+            <IconButton
+              aria-label="show new mails"
+              color="inherit"
+              onClick={cartToggling}
+            >
               <Badge badgeContent={8} color="primary">
                 <ShoppingCartOutlinedIcon />
               </Badge>
             </IconButton>
-            {/* <CartMini /> */}
+            {isCartOpened ? <CartMini /> : <div />}
             {/* <IconButton aria-label="show 17 new notifications" color="inherit"> */}
             {/*  <Badge badgeContent={5} color="primary"> */}
             {/*    <FavoriteBorderIcon /> */}
