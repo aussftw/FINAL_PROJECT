@@ -5,7 +5,7 @@ import linksReducer from "./linksReducer";
 
 const rootReducer = combineReducers({
   categoriesReducer,
-  loginReducer,
+  user: loginReducer,
   linksReducer,
 });
 

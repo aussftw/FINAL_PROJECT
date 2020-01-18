@@ -1,69 +1,61 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { connect } from "react-redux";
 import Button from "@material-ui/core/Button";
-// import TextField from "@material-ui/core/TextField";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import axios from "axios";
+import { editDataSuccess, editDataFailure } from "../../../store/actions";
 import useStyles from "./useStyles";
-
-// const user = {
-//   firstName: "Customer",
-//   lastName: "Customerov",
-//   email: "customer@mail.com",
-//   telephone: "+11 123 33 44",
-// };
-
-export default function PersonalData() {
-  // { customer = user }
+// eslint-disable-next-line no-shadow
+function PersonalData({ userData, editDataSuccess, editDataFailure }) {
   const classes = useStyles();
   const [isEditable, setIsEditable] = useState(false);
   const [value, setValue] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    telephone: "",
+    firstName: userData.firstName,
+    lastName: userData.lastName,
+    email: userData.email,
+    telephone: userData.telephone,
   });
   const [message, setMessage] = useState("");
-
-  // const tokenAuth = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlMDc1NDlhMGM4OTBhMWQ1ODg3YzY2MCIsImZpcnN0TmFtZSI6IkV1Z2VuaXkiLCJsYXN0TmFtZSI6Ik1hcmtvdiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTU3ODc0MjA1MCwiZXhwIjoxNTc4Nzc4MDUwfQ.ljSKSegF-2QlO3Eh39tkmFZKLmshZYISFROkHy5AFNg";
-  useEffect(() => {
-    // axios.defaults.headers.common.Authorization = tokenAuth;
-    axios.get("/customers/customer").then(loggedInCustomer => {
-      setValue({
-        firstName: loggedInCustomer.data.firstName,
-        lastName: loggedInCustomer.data.lastName,
-        email: loggedInCustomer.data.email,
-        telephone: loggedInCustomer.data.telephone,
-      });
-    });
-  }, []);
-
+  // useEffect(() => {
+  // axios.get("/customers/customer")
+  //   .then(loggedInCustomer => {
+  //     setValue({
+  //       firstName: loggedInCustomer.data.firstName,
+  //       lastName: loggedInCustomer.data.lastName,
+  //       email: loggedInCustomer.data.email,
+  //       telephone: loggedInCustomer.data.telephone,
+  //   });
+  // })
+  //     .catch(error => setMessage(`Error: ${error.message}`));
+  // }, []);
   const editData = event => {
     event.preventDefault();
     setMessage("");
     setIsEditable(true);
   };
-
   const updatedCustomer = {
     firstName: value.firstName,
     lastName: value.lastName,
     email: value.email,
     telephone: value.telephone,
   };
-
   const saveData = event => {
     event.preventDefault();
     setMessage("");
-    // axios.defaults.headers.common.Authorization = tokenAuth;
     axios
       .put("/customers", updatedCustomer)
       .then(updatedUser => {
         // eslint-disable-next-line
         console.log(updatedUser);
+        editDataSuccess(updatedUser.data);
       })
-      .catch(error => setMessage(`Error: ${error.message}`));
+      .catch(error => {
+        console.log(error);
+        editDataFailure(error);
+        setMessage(`Error: ${error.message}`);
+      });
     setIsEditable(false);
   };
-
   const handleChange = event => {
     setValue({ ...value, [event.target.name]: event.target.value });
   };
@@ -158,3 +150,11 @@ export default function PersonalData() {
     </div>
   );
 }
+function mapStateToProps(state) {
+  return {
+    user: state.user.userData,
+  };
+}
+export default connect(mapStateToProps, { editDataSuccess, editDataFailure })(
+  PersonalData
+);

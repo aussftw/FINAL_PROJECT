@@ -1,21 +1,24 @@
+import * as constants from "../constants";
+
 const initialState = {
-  login: false,
-  user: {
+  isAuthenticated: false,
+  userData: {
     firstName: "",
     lastName: "",
     email: "",
     telephone: "",
     address: "",
   },
+  error: "",
 };
 
 const loginReducer = (state = initialState, action) => {
   switch (action.type) {
-    case "LOG_IN":
+    case constants.LOG_IN_SUCCESS:
       return {
         ...state,
-        login: true,
-        user: {
+        isAuthenticated: true,
+        userData: {
           firstName: action.payload.firstName,
           lastName: action.payload.lastName,
           email: action.payload.email,
@@ -23,17 +26,34 @@ const loginReducer = (state = initialState, action) => {
           address: action.payload.address,
         },
       };
-    case "LOG_OUT":
+    case constants.LOG_OUT:
       return {
         ...state,
-        login: false,
-        user: {
+        isAuthenticated: false,
+        userData: {
           firstName: "",
           lastName: "",
           email: "",
           telephone: "",
           address: "",
         },
+      };
+    case constants.EDIT_USER_DATA_SUCCESS:
+      return {
+        ...state,
+        userData: {
+          firstName: action.payload.firstName,
+          lastName: action.payload.lastName,
+          email: action.payload.email,
+          telephone: action.payload.telephone,
+          address: action.payload.address,
+        },
+      };
+    case constants.EDIT_USER_DATA_FAILURE:
+      return state;
+    case constants.LOG_IN_FAILURE:
+      return {
+        error: action.paylod,
       };
     default:
       return state;

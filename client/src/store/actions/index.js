@@ -1,4 +1,5 @@
 import axios from "axios";
+import * as constants from "../constants";
 
 // eslint-disable-next-line import/prefer-default-export
 export function getCategories() {
@@ -10,13 +11,13 @@ export function getCategories() {
       .get("/catalog")
       .then(catalog => {
         dispatch({
-          type: "GET_CATEGORIES_SUCCESS",
+          type: constants.GET_CATEGORIES_SUCCESS,
           payload: catalog.data,
         });
       })
       .catch(err => {
         dispatch({
-          type: "GET_CATEGORIES_ERROR",
+          type: constants.GET_CATEGORIES_FAILURE,
           payload: err,
         });
       });
@@ -32,29 +33,28 @@ export function getLinks() {
       .get("/links")
       .then(links => {
         dispatch({
-          type: "GET_LINKS_SUCCESS",
+          type: constants.GET_LINKS_SUCCESS,
           payload: links.data,
         });
       })
       .catch(err => {
         dispatch({
-          type: "GET_LINKS_ERROR",
+          type: constants.GET_LINKS_FAILURE,
           payload: err,
         });
       });
   };
 }
-export const logIn = data => {
-  // eslint-disable-next-line no-console
-  console.log("i am in ");
+
+export const editDataSuccess = data => {
   return {
-    type: "LOG_IN",
+    type: constants.EDIT_USER_DATA_SUCCESS,
     payload: data,
   };
 };
 
-export const logOut = () => {
+export const editDataFailure = () => {
   return {
-    type: "LOG_OUT",
+    type: constants.EDIT_USER_DATA_FAILURE,
   };
 };

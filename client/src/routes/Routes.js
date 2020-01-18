@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
+import axios from "axios";
 
 import HomePage from "../pages/HomePage/HomePage";
 import Cart from "../pages/Cart/Cart";
@@ -9,11 +10,35 @@ import LoginForm from "../components/LoginForm";
 import NotFound from "../pages/NotFound/NotFound";
 import RegistrationForm from "../components/RegistrationForm";
 import ItemDetailsPage from "../pages/ItemDetailsPage/ItemDetailsPage";
+import { logIn } from "../store/actions/loginActions";
+import setAuthToken from "../components/common/setAuthToken";
 
-const Routes = ({ customer }) => {
+// eslint-disable-next-line no-shadow
+const Routes = ({ isAuthenticated, logIn }) => {
+  useEffect(() => {
+    // eslint-disable-next-line no-undef
+    const token = localStorage.getItem("authToken");
+    // eslint-disable-next-line no-console
+    console.log(token);
+    if (token !== null) {
+      setAuthToken(token);
+      axios
+        .get("/customers/customer")
+        .then(response => {
+          // eslint-disable-next-line no-console
+          console.log("Our User", response);
+          logIn(response.data);
+        })
+        .catch(err => {
+          // eslint-disable-next-line no-console
+          console.log(err);
+        });
+    }
+  }, [logIn]);
+
   // eslint-disable-next-line no-console
-  console.log("МЫ в роутах", customer);
-  return customer ? (
+  console.log("МЫ в роутах", isAuthenticated);
+  return isAuthenticated ? (
     <Switch>
       <Route exact path="/">
         <HomePage />
@@ -53,8 +78,8 @@ const Routes = ({ customer }) => {
 
 function mapStateToProps(state) {
   return {
-    customer: state.loginReducer.login,
+    isAuthenticated: state.user.isAuthenticated,
   };
 }
 
-export default connect(mapStateToProps)(Routes);
+export default connect(mapStateToProps, { logIn })(Routes);
