@@ -13,6 +13,7 @@ import WishList from "./WishList/WishList";
 
 function TabPanel(props) {
   const { children, value, index } = props;
+  const classes = useStyles();
 
   return (
     <Typography
@@ -21,6 +22,7 @@ function TabPanel(props) {
       hidden={value !== index}
       id={`vertical-tabpanel-${index}`}
       aria-labelledby={`vertical-tab-${index}`}
+      className={classes.tabpanel}
     >
       {value === index && <Box p={1}>{children}</Box>}
     </Typography>
@@ -52,17 +54,17 @@ const Profile = () => {
         className={classes.tabs}
       >
         <Tab
-          label="Personal Details"
+          label="Wishlist"
           id="vertical-tab-0"
           aria-controls="vertical-tabpanel-0"
         />
         <Tab
-          label="Delivery Address"
+          label="Personal Details"
           id="vertical-tab-1"
           aria-controls="vertical-tabpanel-1"
         />
         <Tab
-          label="Wishlist"
+          label="Delivery Address"
           id="vertical-tab-2"
           aria-controls="vertical-tabpanel-2"
         />
@@ -79,13 +81,13 @@ const Profile = () => {
       </Tabs>
 
       <TabPanel value={value} index={0}>
-        <PersonalData />
+        <WishList />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <DeliveryAddressForm />
+        <PersonalData />
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <WishList />
+        <DeliveryAddressForm />
       </TabPanel>
       <TabPanel value={value} index={3}>
         Cart

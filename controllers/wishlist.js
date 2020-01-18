@@ -162,11 +162,26 @@ exports.deleteProductFromWishlish = async (req, res, next) => {
         }
 
         const wishlistData = {};
+
         wishlistData.products = wishlist.products.filter(
           elem => elem.toString() !== req.params.productId
         );
 
         const updatedWishlist = queryCreator(wishlistData);
+
+        if(wishlistData.products.length === 0) {
+          return Wishlist.deleteOne({ customerId: req.user.id })
+            .then(deletedCount =>
+              res.status(200).json({
+                products: []
+              })
+            )
+            .catch(err =>
+              res.status(400).json({
+                message: `Error happened on server: "${err}" `
+              })
+            );
+        }
 
         Wishlist.findOneAndUpdate(
           { customerId: req.user.id },
@@ -175,7 +190,9 @@ exports.deleteProductFromWishlish = async (req, res, next) => {
         )
           .populate("products")
           .populate("customerId")
-          .then(wishlist => res.json(wishlist))
+          .then(wishlist => {
+            res.json(wishlist);
+          })
           .catch(err =>
             res.status(400).json({
               message: `Error happened on server: "${err}" `

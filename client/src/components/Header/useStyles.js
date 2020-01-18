@@ -7,12 +7,17 @@ const useStyles = makeStyles(theme => ({
   },
   logo: {
     height: "40px",
-  },
-  searchDesktop: {
     display: "none",
-    [theme.breakpoints.up("md")]: {
+    [theme.breakpoints.up("sm")]: {
       display: "flex",
     },
+  },
+  searchDesktop: {
+    display: "flex",
+    // display: "none",
+    // [theme.breakpoints.up("md")]: {
+    //   display: "flex",
+    // },
   },
 }));
 export default useStyles;
