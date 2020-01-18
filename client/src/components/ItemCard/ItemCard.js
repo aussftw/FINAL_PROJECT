@@ -15,7 +15,13 @@ import Favorite from "@material-ui/icons/Favorite";
 import FavoriteBorder from "@material-ui/icons/FavoriteBorder";
 
 import Rating from "@material-ui/lab/Rating";
+import { connect } from "react-redux";
 import useStyles from "./useStyles";
+
+import {
+  wishlistAddItem,
+  wishlistDeleteItem,
+} from "../../store/actions/Wishlist";
 
 const CardTooltipText = value => {
   if (value === undefined) return "Not yet rated";
@@ -23,18 +29,33 @@ const CardTooltipText = value => {
   return `Rated ${value} out of 5`;
 };
 
-const ItemCard = ({ title, rate, price, img, inCart, inWishlist }) => {
+// eslint-disable-next-line no-shadow,no-unused-vars
+const ItemCard = ({
+  title,
+  rate,
+  price,
+  img,
+  inCart,
+  inWishlist,
+  id,
+  wishlistAll,
+  wishlistAddItem,
+  wishlistDeleteItem,
+}) => {
   const classes = useStyles();
-  const [wishlist, setWishlist] = useState(inWishlist);
+  // const [wishlist, setWishlist] = useState(inWishlist);
   const [cart, setCart] = useState(inCart);
+
+  // console.log(wishlistAll);
+  // console.log(wishlistAll.every(el => el._id !== id));
 
   return (
     <Card className={classes.card}>
-      {wishlist ? (
+      {!wishlistAll.every(el => el._id !== id) ? (
         <Tooltip arrow title="Remove from wishlist">
           <IconButton
             className={classes.wishList}
-            onClick={() => setWishlist(false)}
+            onClick={() => wishlistDeleteItem(id)}
           >
             <Favorite />
           </IconButton>
@@ -43,7 +64,7 @@ const ItemCard = ({ title, rate, price, img, inCart, inWishlist }) => {
         <Tooltip arrow title="Add to wishlist">
           <IconButton
             className={classes.wishList}
-            onClick={() => setWishlist(true)}
+            onClick={() => wishlistAddItem(id)}
           >
             <FavoriteBorder />
           </IconButton>
@@ -102,4 +123,13 @@ const ItemCard = ({ title, rate, price, img, inCart, inWishlist }) => {
   );
 };
 
-export default ItemCard;
+function mapStateToProps(state) {
+  return {
+    wishlistAll: state.wishlistReducer.wishlist,
+  };
+}
+
+export default connect(mapStateToProps, {
+  wishlistAddItem,
+  wishlistDeleteItem,
+})(ItemCard);

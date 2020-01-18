@@ -16,13 +16,14 @@ export const editDataFailure = err => {
 
 export const editDataLocal = (event, value) => {
   return {
-    type: "EDIT_USER_DATA",
+    type: "EDIT_USER_DATA_LOCAL",
     payload: { ...value, [event.target.name]: event.target.value },
   };
 };
 
 export const saveUserData = (event, updatedCustomer) => dispatch => {
   event.preventDefault();
+
   axios
     .put("/customers", updatedCustomer)
     .then(updatedUser => {

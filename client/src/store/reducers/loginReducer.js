@@ -49,7 +49,7 @@ const loginReducer = (state = initialState, action) => {
       };
     case "EDIT_USER_DATA_FAILURE":
       return { ...state, error: action.payload };
-    case "EDIT_USER_DATA":
+    case "EDIT_USER_DATA_LOCAL":
       return {
         ...state,
         user: {
