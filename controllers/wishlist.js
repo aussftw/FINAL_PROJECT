@@ -182,8 +182,6 @@ exports.deleteProductFromWishlish = async (req, res, next) => {
               })
             );
         }
-        console.log("updatedWishlist", updatedWishlist);
-
 
         Wishlist.findOneAndUpdate(
           { customerId: req.user.id },
@@ -193,7 +191,6 @@ exports.deleteProductFromWishlish = async (req, res, next) => {
           .populate("products")
           .populate("customerId")
           .then(wishlist => {
-            console.log(wishlist);
             res.json(wishlist);
           })
           .catch(err =>

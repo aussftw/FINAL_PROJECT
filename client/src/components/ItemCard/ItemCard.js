@@ -46,8 +46,8 @@ const ItemCard = ({
   // const [wishlist, setWishlist] = useState(inWishlist);
   const [cart, setCart] = useState(inCart);
 
-  console.log(wishlistAll);
-  console.log(wishlistAll.every(el => el._id !== id));
+  // console.log(wishlistAll);
+  // console.log(wishlistAll.every(el => el._id !== id));
 
   return (
     <Card className={classes.card}>
