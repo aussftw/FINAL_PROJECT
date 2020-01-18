@@ -10,12 +10,11 @@ const useStyles = makeStyles(theme => ({
   },
   tabs: {
     borderRight: `1px solid ${theme.palette.divider}`,
+    width: 200,
     minWidth: 90,
   },
   tabpanel: {
-    display: "flex",
-    justifyContent: "center",
-    width: "calc(100%-200px)",
+    width: "100%",
   },
 }));
 

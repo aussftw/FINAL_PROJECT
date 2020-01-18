@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Button from "@material-ui/core/Button";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import axios from "axios";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 import useStyles from "./useStyles";
 
 export default function ChangePasswordForm() {
@@ -13,6 +14,7 @@ export default function ChangePasswordForm() {
     setConfirmationNewPasswordValue,
   ] = useState("");
   const [message, setMessage] = useState("");
+  const matches = useMediaQuery(theme => theme.breakpoints.down("xs"));
 
   const passwords = {
     password: oldPasswordValue,
@@ -58,8 +60,9 @@ export default function ChangePasswordForm() {
         >
           <TextValidator
             id="customer-old-password-input"
-            label="Input old password"
+            label="Old password"
             value={oldPasswordValue}
+            size={matches ? "small" : null}
             variant="outlined"
             inputProps={{ type: "password", minLength: 8, maxLength: 20 }}
             onChange={event => setOldPasswordValue(event.target.value)}
@@ -71,8 +74,9 @@ export default function ChangePasswordForm() {
           />
           <TextValidator
             id="customer-new-password-input"
-            label="Input new password"
+            label="New password"
             value={newPasswordValue}
+            size={matches ? "small" : null}
             variant="outlined"
             inputProps={{ type: "password", minLength: 8, maxLength: 20 }}
             onChange={event => setNewPasswordValue(event.target.value)}
@@ -84,8 +88,9 @@ export default function ChangePasswordForm() {
           />
           <TextValidator
             id="customer-confirm-password-input"
-            label="Confirm new password"
+            label="Confirm password"
             value={confirmationNewPasswordValue}
+            size={matches ? "small" : null}
             variant="outlined"
             inputProps={{ type: "password", minLength: 8, maxLength: 20 }}
             onChange={event =>
@@ -102,7 +107,9 @@ export default function ChangePasswordForm() {
               "password mismatch",
             ]}
           />
-          <Button type="submit">SAVE PASSWORD</Button>
+          <Button className={classes.btn} type="submit">
+            SAVE PASSWORD
+          </Button>
         </ValidatorForm>
         {Boolean(message) && <p className={classes.message}>{message}</p>}
       </div>
