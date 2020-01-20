@@ -28,8 +28,6 @@ export const getUser = () => dispatch => {
     .then(response => {
       dispatch(logInSuccess(response.data));
       dispatch(preloaderClose());
-      // eslint-disable-next-line no-console
-      console.log("Our User", response);
     })
     .catch(error => {
       dispatch(logInFailure(error));
@@ -46,8 +44,6 @@ export const logIn = user => dispatch => {
   axios
     .post("/customers/login", user)
     .then(response => {
-      // eslint-disable-next-line no-console
-      console.log(response.data.token);
       if (response.statusText === "OK" && response.data.success) {
         setAuthToken(response.data.token);
       }
