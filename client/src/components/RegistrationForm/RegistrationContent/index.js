@@ -13,7 +13,7 @@ import useStyles from "./useStyles";
 
 const RegistrationContent = ({
   handleClose,
-  submitRegistration,
+  setSubmitRegistration,
   handleChange,
   handleClickShowPassword,
   open,
@@ -41,7 +41,10 @@ const RegistrationContent = ({
           <ModalHeader />
           <div className={classes.wrapper}>
             <h3 className={classes.title}>Registration Form</h3>
-            <ValidatorForm noValidate={false} onSubmit={submitRegistration}>
+            <ValidatorForm
+              noValidate={false}
+              onSubmit={() => setSubmitRegistration(true)}
+            >
               <TextValidator
                 label="First Name"
                 variant="outlined"

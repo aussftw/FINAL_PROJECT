@@ -4,28 +4,25 @@ import { connect } from "react-redux";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import AccountCircle from "@material-ui/icons/AccountCircle";
-import { logOut } from "../../store/actions";
+import { logOut } from "../../store/actions/loginActions";
 import useStyles from "./useStyles";
 import setAuthToken from "../common/setAuthToken";
 
 // eslint-disable-next-line no-shadow
-const LoginButton = ({ logOut, customer, user }) => {
+const LoginButton = ({ logOut, isAuthenticated, user }) => {
   const classes = useStyles();
-
   const signOut = e => {
     e.preventDefault();
     setAuthToken(false);
-    // eslint-disable-next-line no-undef
-    localStorage.removeItem("authToken");
     logOut();
   };
 
   return (
     <>
-      {customer ? (
+      {isAuthenticated ? (
         <>
+          <span>{`${user.firstName} ${user.lastName}`}</span>
           <Link to="/profile" className={classes.link}>
-            <span>{`${user.firstName} ${user.lastName}`}</span>
             <IconButton>
               <AccountCircle />
             </IconButton>
@@ -52,7 +49,7 @@ const LoginButton = ({ logOut, customer, user }) => {
 
 const mapStateToProps = state => {
   return {
-    customer: state.loginReducer.login,
+    isAuthenticated: state.loginReducer.isAuthenticated,
     user: state.loginReducer.user,
   };
 };

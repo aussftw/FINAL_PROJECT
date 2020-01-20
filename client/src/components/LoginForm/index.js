@@ -4,7 +4,7 @@ import axios from "axios";
 import { Redirect } from "react-router-dom";
 import LoginContent from "./LoginContent";
 import setAuthToken from "../common/setAuthToken";
-import { logIn } from "../../store/actions";
+import { logIn, logInFailure } from "../../store/actions/loginActions";
 
 // eslint-disable-next-line no-shadow
 const LoginForm = ({ logIn }) => {
@@ -64,6 +64,7 @@ const LoginForm = ({ logIn }) => {
       .catch(err => {
         // eslint-disable-next-line no-console
         console.log(err.response.data);
+        logInFailure();
         setMessage(err.message);
       });
   };
@@ -93,4 +94,4 @@ const LoginForm = ({ logIn }) => {
   );
 };
 
-export default connect(null, { logIn })(LoginForm);
+export default connect(null, { logIn, logInFailure })(LoginForm);

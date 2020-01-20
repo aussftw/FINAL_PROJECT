@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
+import axios from "axios";
 
 import HomePage from "../pages/HomePage/HomePage";
 import Cart from "../pages/Cart/Cart";
@@ -9,11 +10,38 @@ import LoginForm from "../components/LoginForm";
 import NotFound from "../pages/NotFound/NotFound";
 import RegistrationForm from "../components/RegistrationForm";
 import ItemDetailsPage from "../pages/ItemDetailsPage/ItemDetailsPage";
+import { logIn } from "../store/actions/loginActions";
+import setAuthToken from "../components/common/setAuthToken";
+import Preloader from "../components/Preloader/Desktop";
 
-const Routes = ({ customer }) => {
-  // eslint-disable-next-line no-console
-  console.log("МЫ в роутах", customer);
-  return customer ? (
+// eslint-disable-next-line no-shadow
+const Routes = ({ isAuthenticated, logIn }) => {
+  const [preloader, setPreloader] = useState(true);
+  useEffect(() => {
+    // eslint-disable-next-line no-undef
+    const token = localStorage.getItem("authToken");
+    if (token) {
+      setAuthToken(token);
+      axios
+        .get("/customers/customer")
+        .then(response => {
+          if (response.statusText === "OK") setPreloader(false);
+          logIn(response.data);
+        })
+        .catch(err => {
+          setPreloader(false);
+          // eslint-disable-next-line no-console
+          console.log(err);
+        });
+    } else {
+      setPreloader(false);
+    }
+  }, [logIn]);
+
+  // eslint-disable-next-line no-nested-ternary
+  return preloader ? (
+    <Preloader />
+  ) : isAuthenticated ? (
     <Switch>
       <Route exact path="/">
         <HomePage />
@@ -53,8 +81,8 @@ const Routes = ({ customer }) => {
 
 function mapStateToProps(state) {
   return {
-    customer: state.loginReducer.login,
+    isAuthenticated: state.loginReducer.isAuthenticated,
   };
 }
 
-export default connect(mapStateToProps)(Routes);
+export default connect(mapStateToProps, { logIn })(Routes);

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Redirect } from "react-router-dom";
 import axios from "axios";
 import RegistrationContent from "./RegistrationContent";
@@ -18,6 +18,8 @@ const RegistrationForm = () => {
   const [open, setOpen] = useState(true);
   const [registration, setRegistration] = useState(false);
   const [message, setMessage] = useState("");
+  const [submitRegistration, setSubmitRegistration] = useState(false);
+
   const handleClose = () => {
     setOpen(false);
   };
@@ -30,25 +32,24 @@ const RegistrationForm = () => {
     setShowPassword(() => !showPassword);
   };
 
-  const submitRegistration = e => {
-    e.preventDefault();
-    // eslint-disable-next-line no-console
-    console.log(newUserData);
-    axios
-      .post("/customers", newUserData)
-      .then(response => {
-        // eslint-disable-next-line no-console
-        console.log(response);
-        if (response.statusText === "OK") {
-          setRegistration(true);
-        }
-      })
-      .catch(error => {
-        setMessage(error.message);
-        // eslint-disable-next-line no-console
-        console.log(error.response.data);
-      });
-  };
+  useEffect(() => {
+    if (submitRegistration) {
+      axios
+        .post("/customers", newUserData)
+        .then(response => {
+          // eslint-disable-next-line no-console
+          console.log(response);
+          if (response.statusText === "OK") {
+            setRegistration(true);
+          }
+        })
+        .catch(error => {
+          setMessage(error.message);
+          // eslint-disable-next-line no-console
+          console.log(error.response.data);
+        });
+    }
+  }, [submitRegistration, newUserData]);
 
   return (
     <>
@@ -59,7 +60,7 @@ const RegistrationForm = () => {
         ) : (
           <RegistrationContent
             handleClose={handleClose}
-            submitRegistration={submitRegistration}
+            setSubmitRegistration={setSubmitRegistration}
             handleChange={handleChange}
             handleClickShowPassword={handleClickShowPassword}
             open={open}
