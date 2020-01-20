@@ -14,7 +14,6 @@ import Preloader from "../components/Preloader/Desktop";
 import { getUser } from "../store/actions/loginActions";
 import { getWishlist } from "../store/actions/Wishlist";
 
-// eslint-disable-next-line no-shadow
 const Routes = ({ isAuthenticated, getUser, getWishlist }) => {
   const [preloader, setPreloader] = useState(true);
   useEffect(() => {
