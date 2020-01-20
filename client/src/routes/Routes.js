@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 
@@ -11,11 +11,17 @@ import RegistrationForm from "../components/RegistrationForm";
 import ItemDetailsPage from "../pages/ItemDetailsPage/ItemDetailsPage";
 import setAuthToken from "../components/common/setAuthToken";
 import Preloader from "../components/Preloader/Desktop";
-import { getUser } from "../store/actions/loginActions";
+import { getUser, preloaderClose } from "../store/actions/loginActions";
 import { getWishlist } from "../store/actions/Wishlist";
 
-const Routes = ({ isAuthenticated, getUser, getWishlist }) => {
-  const [preloader, setPreloader] = useState(true);
+// eslint-disable-next-line no-shadow
+const Routes = ({
+  isAuthenticated,
+  getUser,
+  getWishlist,
+  preloaderClose,
+  preloader,
+}) => {
   useEffect(() => {
     // eslint-disable-next-line no-undef
     const token = localStorage.getItem("authToken");
@@ -23,11 +29,10 @@ const Routes = ({ isAuthenticated, getUser, getWishlist }) => {
       setAuthToken(token);
       getUser();
       getWishlist();
-      setPreloader(false);
     } else {
-      setPreloader(false);
+      preloaderClose();
     }
-  }, [getUser, getWishlist]);
+  }, [getUser, getWishlist, preloaderClose]);
 
   // eslint-disable-next-line no-nested-ternary
   return preloader ? (
@@ -74,7 +79,12 @@ function mapStateToProps(state) {
   return {
     isAuthenticated: state.loginReducer.isAuthenticated,
     user: state.loginReducer.user,
+    preloader: state.loginReducer.loginPreloader,
   };
 }
 
-export default connect(mapStateToProps, { getUser, getWishlist })(Routes);
+export default connect(mapStateToProps, {
+  getUser,
+  getWishlist,
+  preloaderClose,
+})(Routes);
