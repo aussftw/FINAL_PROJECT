@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import axios from "axios";
 
 import HomePage from "../pages/HomePage/HomePage";
 import Cart from "../pages/Cart/Cart";
@@ -10,33 +9,26 @@ import LoginForm from "../components/LoginForm";
 import NotFound from "../pages/NotFound/NotFound";
 import RegistrationForm from "../components/RegistrationForm";
 import ItemDetailsPage from "../pages/ItemDetailsPage/ItemDetailsPage";
-import { logIn } from "../store/actions/loginActions";
 import setAuthToken from "../components/common/setAuthToken";
 import Preloader from "../components/Preloader/Desktop";
+import { getUser } from "../store/actions/loginActions";
+import { getWishlist } from "../store/actions/Wishlist";
 
 // eslint-disable-next-line no-shadow
-const Routes = ({ isAuthenticated, logIn }) => {
+const Routes = ({ isAuthenticated, getUser, getWishlist }) => {
   const [preloader, setPreloader] = useState(true);
   useEffect(() => {
     // eslint-disable-next-line no-undef
     const token = localStorage.getItem("authToken");
     if (token) {
       setAuthToken(token);
-      axios
-        .get("/customers/customer")
-        .then(response => {
-          if (response.statusText === "OK") setPreloader(false);
-          logIn(response.data);
-        })
-        .catch(err => {
-          setPreloader(false);
-          // eslint-disable-next-line no-console
-          console.log(err);
-        });
+      getUser();
+      getWishlist();
+      setPreloader(false);
     } else {
       setPreloader(false);
     }
-  }, [logIn]);
+  }, [getUser, getWishlist]);
 
   // eslint-disable-next-line no-nested-ternary
   return preloader ? (
@@ -82,7 +74,8 @@ const Routes = ({ isAuthenticated, logIn }) => {
 function mapStateToProps(state) {
   return {
     isAuthenticated: state.loginReducer.isAuthenticated,
+    user: state.loginReducer.user,
   };
 }
 
-export default connect(mapStateToProps, { logIn })(Routes);
+export default connect(mapStateToProps, { getUser, getWishlist })(Routes);
