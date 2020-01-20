@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import axios from "axios";
@@ -12,33 +12,36 @@ import RegistrationForm from "../components/RegistrationForm";
 import ItemDetailsPage from "../pages/ItemDetailsPage/ItemDetailsPage";
 import { logIn } from "../store/actions/loginActions";
 import setAuthToken from "../components/common/setAuthToken";
+import Preloader from "../components/Preloader/Desktop";
 
 // eslint-disable-next-line no-shadow
 const Routes = ({ isAuthenticated, logIn }) => {
+  const [preloader, setPreloader] = useState(true);
   useEffect(() => {
     // eslint-disable-next-line no-undef
     const token = localStorage.getItem("authToken");
-    // eslint-disable-next-line no-console
-    console.log(token);
     if (token) {
       setAuthToken(token);
       axios
         .get("/customers/customer")
         .then(response => {
-          // eslint-disable-next-line no-console
-          console.log("Our User", response);
+          if (response.statusText === "OK") setPreloader(false);
           logIn(response.data);
         })
         .catch(err => {
+          setPreloader(false);
           // eslint-disable-next-line no-console
           console.log(err);
         });
+    } else {
+      setPreloader(false);
     }
   }, [logIn]);
 
-  // eslint-disable-next-line no-console
-  console.log("МЫ в роутах", isAuthenticated);
-  return isAuthenticated ? (
+  // eslint-disable-next-line no-nested-ternary
+  return preloader ? (
+    <Preloader />
+  ) : isAuthenticated ? (
     <Switch>
       <Route exact path="/">
         <HomePage />

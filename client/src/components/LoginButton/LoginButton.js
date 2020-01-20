@@ -11,13 +11,9 @@ import setAuthToken from "../common/setAuthToken";
 // eslint-disable-next-line no-shadow
 const LoginButton = ({ logOut, isAuthenticated, user }) => {
   const classes = useStyles();
-  console.log(isAuthenticated);
-
   const signOut = e => {
     e.preventDefault();
     setAuthToken(false);
-    // eslint-disable-next-line no-undef
-    localStorage.removeItem("authToken");
     logOut();
   };
 
@@ -25,8 +21,8 @@ const LoginButton = ({ logOut, isAuthenticated, user }) => {
     <>
       {isAuthenticated ? (
         <>
+          <span>{`${user.firstName} ${user.lastName}`}</span>
           <Link to="/profile" className={classes.link}>
-            <span>{`${user.firstName} ${user.lastName}`}</span>
             <IconButton>
               <AccountCircle />
             </IconButton>
