@@ -1,6 +1,7 @@
 import * as constants from "../constants";
 
 const initialState = {
+  loginPreloader: true,
   isAuthenticated: false,
   user: {
     firstName: "",
@@ -68,6 +69,11 @@ const loginReducer = (state = initialState, action) => {
           telephone: action.payload.telephone,
           address: action.payload.address,
         },
+      };
+    case constants.PRELOADER_CLOSE:
+      return {
+        ...state,
+        loginPreloader: false,
       };
     default:
       return state;

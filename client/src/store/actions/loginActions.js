@@ -16,11 +16,18 @@ const logInFailure = error => {
   };
 };
 
+export const preloaderClose = () => {
+  return {
+    type: constants.PRELOADER_CLOSE,
+  };
+};
+
 export const getUser = () => dispatch => {
   axios
     .get("/customers/customer")
     .then(response => {
       dispatch(logInSuccess(response.data));
+      dispatch(preloaderClose());
       // eslint-disable-next-line no-console
       console.log("Our User", response);
     })
