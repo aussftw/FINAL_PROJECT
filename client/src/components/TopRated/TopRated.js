@@ -70,6 +70,7 @@ const TopRated = () => {
                 img={value.imageUrls[0]}
                 inCart={false}
                 inWishList={false}
+                id={value._id}
               />
             </Hidden>
           );

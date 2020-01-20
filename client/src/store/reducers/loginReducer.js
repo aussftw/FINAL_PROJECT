@@ -2,7 +2,7 @@ import * as constants from "../constants";
 
 const initialState = {
   isAuthenticated: false,
-  userData: {
+  user: {
     firstName: "",
     lastName: "",
     email: "",
@@ -18,7 +18,7 @@ const loginReducer = (state = initialState, action) => {
       return {
         ...state,
         isAuthenticated: true,
-        userData: {
+        user: {
           firstName: action.payload.firstName,
           lastName: action.payload.lastName,
           email: action.payload.email,
@@ -30,7 +30,7 @@ const loginReducer = (state = initialState, action) => {
       return {
         ...state,
         isAuthenticated: false,
-        userData: {
+        user: {
           firstName: "",
           lastName: "",
           email: "",
@@ -41,7 +41,7 @@ const loginReducer = (state = initialState, action) => {
     case constants.EDIT_USER_DATA_SUCCESS:
       return {
         ...state,
-        userData: {
+        user: {
           firstName: action.payload.firstName,
           lastName: action.payload.lastName,
           email: action.payload.email,
@@ -50,10 +50,21 @@ const loginReducer = (state = initialState, action) => {
         },
       };
     case constants.EDIT_USER_DATA_FAILURE:
-      return state;
+      return { ...state, error: action.payload };
     case constants.LOG_IN_FAILURE:
       return {
         error: action.paylod,
+      };
+    case "EDIT_USER_DATA_LOCAL":
+      return {
+        ...state,
+        user: {
+          firstName: action.payload.firstName,
+          lastName: action.payload.lastName,
+          email: action.payload.email,
+          telephone: action.payload.telephone,
+          address: action.payload.address,
+        },
       };
     default:
       return state;

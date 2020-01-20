@@ -7,7 +7,7 @@ import useStyles from "./useStyles";
 
 import { getLinks } from "../../../store/actions";
 import MenuListComposition from "../Dropdown/Dropdown";
-import CustomizedSearch from "../Search/Search";
+// import CustomizedSearch from "../Search/Search";
 
 const SubHeader = props => {
   useEffect(() => {
@@ -30,7 +30,7 @@ const SubHeader = props => {
   return (
     <div>
       <div className={classes.searchMobileWrap}>
-        <CustomizedSearch className={classes.searchMobile} />
+        {/* <CustomizedSearch className={classes.searchMobile} /> */}
       </div>
       {/* eslint-disable-next-line react/destructuring-assignment */}
       {props.links.links.length > 0 ? (

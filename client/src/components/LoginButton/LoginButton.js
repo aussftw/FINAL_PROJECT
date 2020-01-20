@@ -9,7 +9,7 @@ import useStyles from "./useStyles";
 import setAuthToken from "../common/setAuthToken";
 
 // eslint-disable-next-line no-shadow
-const LoginButton = ({ logOut, isAuthenticated, userData }) => {
+const LoginButton = ({ logOut, isAuthenticated, user }) => {
   const classes = useStyles();
   console.log(isAuthenticated);
 
@@ -26,7 +26,7 @@ const LoginButton = ({ logOut, isAuthenticated, userData }) => {
       {isAuthenticated ? (
         <>
           <Link to="/profile" className={classes.link}>
-            <span>{`${userData.firstName} ${userData.lastName}`}</span>
+            <span>{`${user.firstName} ${user.lastName}`}</span>
             <IconButton>
               <AccountCircle />
             </IconButton>
@@ -53,8 +53,8 @@ const LoginButton = ({ logOut, isAuthenticated, userData }) => {
 
 const mapStateToProps = state => {
   return {
-    isAuthenticated: state.user.isAuthenticated,
-    userData: state.user.userData,
+    isAuthenticated: state.loginReducer.isAuthenticated,
+    user: state.loginReducer.user,
   };
 };
 

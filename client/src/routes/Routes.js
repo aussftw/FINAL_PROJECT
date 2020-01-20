@@ -20,7 +20,7 @@ const Routes = ({ isAuthenticated, logIn }) => {
     const token = localStorage.getItem("authToken");
     // eslint-disable-next-line no-console
     console.log(token);
-    if (token !== null) {
+    if (token) {
       setAuthToken(token);
       axios
         .get("/customers/customer")
@@ -78,7 +78,7 @@ const Routes = ({ isAuthenticated, logIn }) => {
 
 function mapStateToProps(state) {
   return {
-    isAuthenticated: state.user.isAuthenticated,
+    isAuthenticated: state.loginReducer.isAuthenticated,
   };
 }
 
