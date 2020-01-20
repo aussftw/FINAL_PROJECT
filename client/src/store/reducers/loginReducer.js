@@ -25,6 +25,7 @@ const loginReducer = (state = initialState, action) => {
           telephone: action.payload.telephone,
           address: action.payload.address,
         },
+        error: "",
       };
     case constants.LOG_OUT:
       return {
@@ -37,6 +38,7 @@ const loginReducer = (state = initialState, action) => {
           telephone: "",
           address: "",
         },
+        error: "",
       };
     case constants.EDIT_USER_DATA_SUCCESS:
       return {
@@ -53,9 +55,10 @@ const loginReducer = (state = initialState, action) => {
       return { ...state, error: action.payload };
     case constants.LOG_IN_FAILURE:
       return {
-        error: action.paylod,
+        ...state,
+        error: action.payload,
       };
-    case "EDIT_USER_DATA_LOCAL":
+    case constants.EDIT_USER_DATA_LOCAL:
       return {
         ...state,
         user: {
