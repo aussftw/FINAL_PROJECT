@@ -49,10 +49,14 @@ const LoginContent = ({
                 value={userData.loginOrEmail}
                 onChange={handleChange("loginOrEmail")}
                 className={classes.textField}
-                validators={["required", "matchRegexp:^[a-zA-Z0-9]{3,22}$"]}
+                validators={[
+                  "required",
+                  `${"matchRegexp:^[a-zA-Z0-9]{3,22}" ||
+                    "matchRegexp: ^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\\.[a-zA-Z]{2,4}"}`,
+                ]}
                 errorMessages={[
                   "this field is required",
-                  "Your password must be 3-22 characters, including only latin letters and numbers",
+                  "Your Log in must be 3-22 characters, including latin letters and numbers or use your Email",
                 ]}
               />
 
