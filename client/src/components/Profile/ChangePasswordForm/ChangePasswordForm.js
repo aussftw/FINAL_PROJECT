@@ -55,16 +55,23 @@ export default function ChangePasswordForm() {
         <ValidatorForm
           className={classes.form}
           noValidate={false}
-          autoComplete="off"
+          autoComplete="on"
           onSubmit={savePassword}
         >
+          <input type="text" autoComplete="user-name" hidden />
           <TextValidator
             id="customer-old-password-input"
             label="Old password"
+            InputLabelProps={{ className: classes.input }}
             value={oldPasswordValue}
             size={matches ? "small" : null}
             variant="outlined"
-            inputProps={{ type: "password", minLength: 8, maxLength: 20 }}
+            inputProps={{
+              type: "password",
+              minLength: 8,
+              maxLength: 20,
+              autoComplete: "current-password",
+            }}
             onChange={event => setOldPasswordValue(event.target.value)}
             validators={["required", "matchRegexp:^[a-zA-Z0-9]{8,20}$"]}
             errorMessages={[
@@ -75,10 +82,16 @@ export default function ChangePasswordForm() {
           <TextValidator
             id="customer-new-password-input"
             label="New password"
+            InputLabelProps={{ className: classes.input }}
             value={newPasswordValue}
             size={matches ? "small" : null}
             variant="outlined"
-            inputProps={{ type: "password", minLength: 8, maxLength: 20 }}
+            inputProps={{
+              type: "password",
+              minLength: 8,
+              maxLength: 20,
+              autoComplete: "new-password",
+            }}
             onChange={event => setNewPasswordValue(event.target.value)}
             validators={["required", "matchRegexp:^[a-zA-Z0-9]{8,20}$"]}
             errorMessages={[
@@ -89,10 +102,16 @@ export default function ChangePasswordForm() {
           <TextValidator
             id="customer-confirm-password-input"
             label="Confirm password"
+            InputLabelProps={{ className: classes.input }}
             value={confirmationNewPasswordValue}
             size={matches ? "small" : null}
             variant="outlined"
-            inputProps={{ type: "password", minLength: 8, maxLength: 20 }}
+            inputProps={{
+              type: "password",
+              minLength: 8,
+              maxLength: 20,
+              autoComplete: "new-password",
+            }}
             onChange={event =>
               setConfirmationNewPasswordValue(event.target.value)
             }

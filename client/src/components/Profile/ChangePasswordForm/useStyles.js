@@ -23,6 +23,9 @@ const useStyles = makeStyles(theme => ({
     flexDirection: "column",
     alignItems: "center",
   },
+  input: {
+    fontWeight: 400,
+  },
   btn: {
     width: 160,
     fontSize: "12px",
