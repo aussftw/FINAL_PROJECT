@@ -9,6 +9,7 @@ import LoginForm from "../components/LoginForm";
 import NotFound from "../pages/NotFound/NotFound";
 import RegistrationForm from "../components/RegistrationForm";
 import ItemDetailsPage from "../pages/ItemDetailsPage/ItemDetailsPage";
+import SearchPage from "../pages/SearchPage/SearchPage";
 import setAuthToken from "../components/common/setAuthToken";
 import Preloader from "../components/Preloader/Desktop";
 import { getUser, preloaderClose } from "../store/actions/loginActions";
@@ -45,6 +46,18 @@ const Routes = ({
       <Route path="/cart">
         <Cart />
       </Route>
+      <Route path="/search">
+        <SearchPage />
+      </Route>
+      <Route path="/shop">
+        <p>shop</p>
+      </Route>
+      <Route path="/about-us">
+        <p>about us</p>
+      </Route>
+      <Route path="/notfound">
+        <NotFound />
+      </Route>
       <Route path="/profile">
         <Profiler />
       </Route>
@@ -58,6 +71,15 @@ const Routes = ({
       <Route path="/cart">
         <Cart />
       </Route>
+      <Route path="/search">
+        <SearchPage />
+      </Route>
+      <Route path="/shop">
+        <p>shop</p>
+      </Route>
+      {/* <Route path="/about-us"> */}
+
+      {/* </Route> */}
       <Route path="/notfound">
         <NotFound />
       </Route>

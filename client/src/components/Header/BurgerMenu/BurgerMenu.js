@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import Drawer from "@material-ui/core/Drawer";
@@ -11,17 +11,14 @@ import Box from "@material-ui/core/Box";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import MenuIcon from "@material-ui/icons/Menu";
 import CloseIcon from "@material-ui/icons/Close";
-import { getCategories, getLinks } from "../../../store/actions";
+import axios from "axios";
+import { searchPhrases } from "../../../store/actions";
 import useStyles from "./useStyles";
 
 const TemporaryDrawer = props => {
+  // eslint-disable-next-line no-shadow
+  const { searchPhrases } = props;
   const classes = useStyles();
-
-  useEffect(() => {
-    props.getLinks();
-    props.getCategories();
-    // eslint-disable-next-line
-  }, []);
 
   const [state, setState] = React.useState({
     top: false,
@@ -41,6 +38,18 @@ const TemporaryDrawer = props => {
     setState({ ...state, [side]: open });
   };
 
+  const filter = category => {
+    axios
+      .get(`/products/filter?categories=${category}`)
+      .then(products => {
+        searchPhrases(products.data.products);
+      })
+      .catch(err => {
+        // eslint-disable-next-line no-console
+        console.log(err);
+      });
+  };
+
   const sideList = side => (
     <div className={classes.list} role="presentation">
       <div className={classes.sideMenuHeader}>
@@ -56,6 +65,7 @@ const TemporaryDrawer = props => {
       </div>
 
       <Box>
+        {/* eslint-disable-next-line react/destructuring-assignment */}
         {props.links.links.map(item => {
           return item.links.length <= 1 ? (
             <Link
@@ -67,18 +77,32 @@ const TemporaryDrawer = props => {
             </Link>
           ) : (
             <ExpansionPanel key={item._id} style={{ boxShadow: "none" }}>
-              <ExpansionPanelSummary expandIcon={<ArrowDropDownIcon />}>
+              <ExpansionPanelSummary
+                expandIcon={<ArrowDropDownIcon />}
+                href="/#"
+              >
                 {item.title}
               </ExpansionPanelSummary>
-              {props.categories.categories.map(menuItem => {
+              {item.links.map(menuItem => {
                 return (
                   <ExpansionPanelDetails
-                    key={menuItem.id}
+                    key={menuItem._id}
                     className={classes.nestedList}
                   >
                     <Typography>
-                      <Link className={classes.dropdownText} to="/#">
-                        {menuItem.name}
+                      <Link
+                        className={classes.dropdownText}
+                        // onKeyPress={() => {
+                        //   filter(menuItem.description);
+                        //   toggleDrawer("left", false);
+                        // }}
+                        onClick={() => {
+                          toggleDrawer("left", false);
+                          filter(menuItem.description);
+                        }}
+                        to={menuItem.url}
+                      >
+                        {menuItem.description}
                       </Link>
                     </Typography>
                   </ExpansionPanelDetails>
@@ -98,6 +122,7 @@ const TemporaryDrawer = props => {
         color="inherit"
         aria-label="open drawer"
         onClick={toggleDrawer("left", true)}
+        href="/#"
       >
         <MenuIcon />
       </IconButton>
@@ -111,14 +136,12 @@ const TemporaryDrawer = props => {
 function mapStateToProps(state) {
   return {
     links: state.linksReducer,
-    categories: state.categoriesReducer,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    getLinks: () => dispatch(getLinks()),
-    getCategories: () => dispatch(getCategories()),
+    searchPhrases: data => dispatch(searchPhrases(data)),
   };
 }
 
