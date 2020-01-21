@@ -84,6 +84,7 @@ const loginReducer = (state = initialState, action) => {
           lastName: action.payload.lastName,
         },
         isAuthenticated: true,
+
       };
     default:
       return state;
