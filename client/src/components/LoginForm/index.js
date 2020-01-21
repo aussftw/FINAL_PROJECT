@@ -14,6 +14,18 @@ const LoginForm = ({ logIn, isAuthenticated, error, getWishlist }) => {
     password: "",
   });
 
+  // eslint-disable-next-line no-shadow
+  const handleError = error => {
+    console.log(error);
+    if (error.response.data.loginOrEmail) {
+      return error.response.data.loginOrEmail;
+    }
+    if (error.response.data.password) {
+      return error.response.data.password;
+    }
+    return error.message;
+  };
+
   const handleOpen = () => {
     setOpen(false);
   };
@@ -48,7 +60,7 @@ const LoginForm = ({ logIn, isAuthenticated, error, getWishlist }) => {
             open={open}
             user={user}
             showPassword={showPassword}
-            message={error}
+            message={error !== "" ? handleError(error) : ""}
           />
         )
       ) : (
