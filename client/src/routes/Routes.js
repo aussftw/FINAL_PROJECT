@@ -10,7 +10,8 @@ import NotFound from "../pages/NotFound/NotFound";
 import RegistrationForm from "../components/RegistrationForm";
 import ItemDetailsPage from "../pages/ItemDetailsPage/ItemDetailsPage";
 import setAuthToken from "../components/common/setAuthToken";
-import Preloader from "../components/Preloader/Desktop";
+import Preloader from "../components/Preloader";
+
 import { getUser, preloaderClose } from "../store/actions/loginActions";
 import { getWishlist } from "../store/actions/wishlist";
 

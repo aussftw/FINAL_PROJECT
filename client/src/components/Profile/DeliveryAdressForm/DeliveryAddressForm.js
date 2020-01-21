@@ -54,7 +54,11 @@ function DeliveryAddressForm({ user, saveUserData, editInputsData, error }) {
             ADD ADDRESS
           </Button>
         </ValidatorForm>
-        {Boolean(error) && <p className={classes.message}>{error.message}</p>}
+        {Boolean(error) && (
+          <p
+            className={classes.message}
+          >{`Data didn't save. Error: ${error.message}`}</p>
+        )}
       </div>
     </div>
   );

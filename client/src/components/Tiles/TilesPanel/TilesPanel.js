@@ -4,7 +4,7 @@ import GridListTile from "@material-ui/core/GridListTile";
 import GridList from "@material-ui/core/GridList";
 import TilesItem from "../TilesItem/TilesItem";
 import useStyles from "./useStyles";
-import Preloader from "../../Preloader/Desktop";
+import Preloader from "../../Preloader";
 
 const TilesPanel = () => {
   const classes = useStyles();

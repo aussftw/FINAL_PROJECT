@@ -6,7 +6,7 @@ import Hidden from "@material-ui/core/Hidden";
 
 import useStyles from "./useStyles";
 import ItemCard from "../ItemCard/ItemCard";
-import Preloader from "../Preloader/Desktop";
+import Preloader from "../Preloader";
 
 const TopRated = () => {
   const classes = useStyles();
