@@ -46,13 +46,6 @@ export const getUser = () => dispatch => {
     });
 };
 
-export const userFromJwt = data => {
-  return {
-    type: constants.USER_FROM_JWT,
-    payload: data,
-  };
-};
-
 export const logOut = () => {
   return {
     type: constants.LOG_OUT,
