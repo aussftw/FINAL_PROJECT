@@ -38,8 +38,8 @@ export const getUser = () => dispatch => {
     .then(response => {
       if (response.statusText === "OK" && response.data.success) {
         dispatch(userFromJwt(jwt(response.data.token)));
-        dispatch(logInSuccess(response.data));
       }
+      dispatch(logInSuccess(response.data));
     })
     .catch(error => {
       dispatch(logInFailure(error));
