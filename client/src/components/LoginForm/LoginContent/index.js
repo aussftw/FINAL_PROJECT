@@ -18,9 +18,9 @@ const LoginContent = ({
   handleChange,
   handleClickShowPassword,
   open,
-  userData,
+  user,
   showPassword,
-  message,
+  // message,
 }) => {
   const classes = useStyles();
 
@@ -46,7 +46,7 @@ const LoginContent = ({
               <TextValidator
                 label="Login or Email"
                 variant="outlined"
-                value={userData.loginOrEmail}
+                value={user.loginOrEmail}
                 onChange={handleChange("loginOrEmail")}
                 className={classes.textField}
                 validators={[
@@ -64,7 +64,7 @@ const LoginContent = ({
                 className={classes.textField}
                 variant="outlined"
                 label="Password"
-                value={userData.password}
+                value={user.password}
                 onChange={handleChange("password")}
                 InputProps={{
                   type: showPassword ? "text" : "password",
@@ -75,11 +75,7 @@ const LoginContent = ({
                         onClick={handleClickShowPassword}
                         edge="end"
                       >
-                        {userData.showPassword ? (
-                          <Visibility />
-                        ) : (
-                          <VisibilityOff />
-                        )}
+                        {user.showPassword ? <Visibility /> : <VisibilityOff />}
                       </IconButton>
                     </InputAdornment>
                   ),
@@ -100,7 +96,7 @@ const LoginContent = ({
                 Login
               </Button>
             </ValidatorForm>
-            {Boolean(message) && <p className={classes.errMsg}>{message}</p>}
+            {/* {Boolean(message) && <p className={classes.errMsg}>{message.response.data}</p>} */}
           </div>
         </div>
       </Fade>

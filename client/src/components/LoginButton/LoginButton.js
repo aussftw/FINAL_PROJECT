@@ -16,8 +16,6 @@ const LoginButton = ({ logOut, isAuthenticated, user, wishlistLogOut }) => {
   const signOut = e => {
     e.preventDefault();
     setAuthToken(false);
-    // eslint-disable-next-line no-undef
-    localStorage.removeItem("authToken");
     logOut();
     wishlistLogOut();
   };
@@ -26,7 +24,9 @@ const LoginButton = ({ logOut, isAuthenticated, user, wishlistLogOut }) => {
     <>
       {isAuthenticated ? (
         <>
-          <span>{`${user.firstName} ${user.lastName}`}</span>
+          <span>Welcome, </span>
+          <span>{`${user.firstName} ${user.lastName} `}</span>
+
           <Link to="/profile" className={classes.link}>
             <IconButton>
               <AccountCircle />

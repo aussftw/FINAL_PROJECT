@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import v4 from "uuid";
 import { connect } from "react-redux";
@@ -10,8 +10,17 @@ import { getWishlist } from "../../../store/actions/wishlist";
 function WishList({ wishlist, error }) {
   const classes = useStyles();
 
-  // eslint-disable-next-line no-unused-vars
-  const [message, setMessage] = useState("");
+  const errorMessageArray = [
+    "Product is absent in wishlist",
+    "Product was added to wishlist before",
+    "Wishlist does not exist",
+  ];
+  // eslint-disable-next-line no-nested-ternary
+  const errorMessage = error
+    ? errorMessageArray.includes(error.response.data.message)
+      ? ""
+      : error
+    : "";
 
   return (
     <div className={classes.root}>
@@ -36,7 +45,9 @@ function WishList({ wishlist, error }) {
       ) : (
         <p className={classes.message}>Your wishlist is empty</p>
       )}
-      {Boolean(error) && <p className={classes.message}>{error.message}</p>}
+      {Boolean(errorMessage) && (
+        <p className={classes.message}>{`${errorMessage.message}`}</p>
+      )}
     </div>
   );
 }

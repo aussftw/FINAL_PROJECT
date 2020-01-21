@@ -1,7 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import axios from "axios";
 
 import HomePage from "../pages/HomePage/HomePage";
 import Cart from "../pages/Cart/Cart";
@@ -10,37 +9,31 @@ import LoginForm from "../components/LoginForm";
 import NotFound from "../pages/NotFound/NotFound";
 import RegistrationForm from "../components/RegistrationForm";
 import ItemDetailsPage from "../pages/ItemDetailsPage/ItemDetailsPage";
-import { logIn } from "../store/actions/loginActions";
-import { getWishlist } from "../store/actions/wishlist";
 import setAuthToken from "../components/common/setAuthToken";
+import Preloader from "../components/Preloader/Desktop";
+import { getUser } from "../store/actions/loginActions";
+import { getWishlist } from "../store/actions/wishlist";
 
 // eslint-disable-next-line no-shadow
-const Routes = ({ isAuthenticated, logIn, getWishlist }) => {
+const Routes = ({ isAuthenticated, getUser, getWishlist }) => {
+  const [preloader, setPreloader] = useState(true);
   useEffect(() => {
     // eslint-disable-next-line no-undef
     const token = localStorage.getItem("authToken");
-    // eslint-disable-next-line no-console
-    console.log(token);
     if (token) {
       setAuthToken(token);
-      axios
-        .get("/customers/customer")
-        .then(response => {
-          // eslint-disable-next-line no-console
-          console.log("Our User", response);
-          logIn(response.data);
-          getWishlist();
-        })
-        .catch(err => {
-          // eslint-disable-next-line no-console
-          console.log(err);
-        });
+      getUser();
+      getWishlist();
+      setPreloader(false);
+    } else {
+      setPreloader(false);
     }
-  }, [getWishlist, logIn]);
+  }, [getUser, getWishlist]);
 
-  // eslint-disable-next-line no-console
-  console.log("МЫ в роутах", isAuthenticated);
-  return isAuthenticated ? (
+  // eslint-disable-next-line no-nested-ternary
+  return preloader ? (
+    <Preloader />
+  ) : isAuthenticated ? (
     <Switch>
       <Route exact path="/">
         <HomePage />
@@ -81,7 +74,8 @@ const Routes = ({ isAuthenticated, logIn, getWishlist }) => {
 function mapStateToProps(state) {
   return {
     isAuthenticated: state.loginReducer.isAuthenticated,
+    user: state.loginReducer.user,
   };
 }
 
-export default connect(mapStateToProps, { logIn, getWishlist })(Routes);
+export default connect(mapStateToProps, { getUser, getWishlist })(Routes);
