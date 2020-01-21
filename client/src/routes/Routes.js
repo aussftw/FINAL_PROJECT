@@ -34,9 +34,10 @@ const Routes = ({
     const token = localStorage.getItem("authToken");
     if (token) {
       userFromJwt(jwt(token));
+      preloaderClose();
       setAuthToken(token);
-      getUser();
       getWishlist();
+      getUser();
     } else {
       preloaderClose();
     }
