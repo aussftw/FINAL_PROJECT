@@ -16,13 +16,18 @@ const logInFailure = error => {
   };
 };
 
+export const preloaderClose = () => {
+  return {
+    type: constants.PRELOADER_CLOSE,
+  };
+};
+
 export const getUser = () => dispatch => {
   axios
     .get("/customers/customer")
     .then(response => {
       dispatch(logInSuccess(response.data));
-      // eslint-disable-next-line no-console
-      console.log("Our User", response);
+      dispatch(preloaderClose());
     })
     .catch(error => {
       dispatch(logInFailure(error));
@@ -39,8 +44,6 @@ export const logIn = user => dispatch => {
   axios
     .post("/customers/login", user)
     .then(response => {
-      // eslint-disable-next-line no-console
-      console.log(response.data.token);
       if (response.statusText === "OK" && response.data.success) {
         setAuthToken(response.data.token);
       }
