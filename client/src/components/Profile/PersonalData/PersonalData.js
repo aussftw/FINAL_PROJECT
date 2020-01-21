@@ -6,7 +6,7 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 import {
   saveUserData,
   editInputsData,
-} from "../../../store/actions/UserProfile";
+} from "../../../store/actions/userProfile";
 import useStyles from "./useStyles";
 
 // eslint-disable-next-line no-shadow
@@ -42,6 +42,7 @@ function PersonalData({ user, saveUserData, editInputsData, error }) {
             id="customer-name-input"
             disabled={!isEditable}
             label="First Name"
+            InputLabelProps={{ className: classes.input }}
             value={user.firstName}
             size={matches ? "small" : null}
             variant={isEditable ? "outlined" : "standard"}
@@ -61,6 +62,7 @@ function PersonalData({ user, saveUserData, editInputsData, error }) {
             id="customer-last-name-input"
             disabled={!isEditable}
             label="Last Name"
+            InputLabelProps={{ className: classes.input }}
             value={user.lastName}
             size={matches ? "small" : null}
             variant={isEditable ? "outlined" : "standard"}
@@ -80,6 +82,7 @@ function PersonalData({ user, saveUserData, editInputsData, error }) {
             id="customer-email-input"
             disabled={!isEditable}
             label="Email"
+            InputLabelProps={{ className: classes.input }}
             value={user.email}
             size={matches ? "small" : null}
             variant={isEditable ? "outlined" : "standard"}
@@ -94,6 +97,7 @@ function PersonalData({ user, saveUserData, editInputsData, error }) {
             id="customer-phone-input"
             disabled={!isEditable}
             label="Phone Number"
+            InputLabelProps={{ className: classes.input }}
             type="tel"
             value={user.telephone}
             size={matches ? "small" : null}

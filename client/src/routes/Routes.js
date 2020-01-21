@@ -12,7 +12,7 @@ import ItemDetailsPage from "../pages/ItemDetailsPage/ItemDetailsPage";
 import setAuthToken from "../components/common/setAuthToken";
 import Preloader from "../components/Preloader/Desktop";
 import { getUser, preloaderClose } from "../store/actions/loginActions";
-import { getWishlist } from "../store/actions/Wishlist";
+import { getWishlist } from "../store/actions/wishlist";
 
 // eslint-disable-next-line no-shadow
 const Routes = ({

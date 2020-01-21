@@ -1,27 +1,26 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+// eslint-disable-next-line import/no-extraneous-dependencies
+import v4 from "uuid";
 import { connect } from "react-redux";
 import useStyles from "./useStyles";
 import WishlistCard from "./WishlistCard/WishlistCard";
 
-import { getWishlist } from "../../../store/actions/Wishlist";
+import { getWishlist } from "../../../store/actions/wishlist";
 
-// const list = [
-//   {imageUrls: ["img/products/Aloe.jpg", "img/products/Aloe-2.jpg"], quantity: 45, _id: "5e03df49fe7e3c01e07f57be", name: "aloe vera", currentPrice: 7.99, previousPrice: 9, productUrl: "/aloe",},
-//   {imageUrls: ["img/products/lavender.jpg", "img/products/lavender-2.jpg"], quantity: 0, _id: "5e04b6eca8c2961dbc2e62cd", name: "lavender", currentPrice: 12.99, previousPrice: 15, productUrl: "/lavender",},
-//   {imageUrls: ["img/products/Clusia-rosea.jpg", "img/products/Clusia-rosea-2.jpg", "img/products/Clusia-rosea-3.jpg", "img/products/Clusia-rosea-4.jpg",], quantity: 60, _id: "5e04f38176188f27f0aa35c2", name: "clusia rosea princess - autograph tree", currentPrice: 8.8, productUrl: "/clusia-rosea",},
-// ];
-
-// eslint-disable-next-line no-shadow
-function WishList({ wishlist, error, getWishlist }) {
-  // eslint-disable-next-line no-unused-expressions
-  useEffect(() => {
-    getWishlist();
-  }, [getWishlist]);
+function WishList({ wishlist, error }) {
   const classes = useStyles();
 
-  // const [wishlist1, setWishlist] = useState(list);
-  // eslint-disable-next-line no-unused-vars
-  const [message, setMessage] = useState("");
+  const errorMessageArray = [
+    "Product is absent in wishlist",
+    "Product was added to wishlist before",
+    "Wishlist does not exist",
+  ];
+  // eslint-disable-next-line no-nested-ternary
+  const errorMessage = error
+    ? errorMessageArray.includes(error.response.data.message)
+      ? ""
+      : error
+    : "";
 
   return (
     <div className={classes.root}>
@@ -29,9 +28,11 @@ function WishList({ wishlist, error, getWishlist }) {
       {wishlist.length > 0 ? (
         <div>
           {wishlist.map(item => {
+            const randomId = v4();
+
             return (
               <WishlistCard
-                key={item._id}
+                key={randomId}
                 id={item._id}
                 img={item.imageUrls[0]}
                 title={item.name}
@@ -44,7 +45,9 @@ function WishList({ wishlist, error, getWishlist }) {
       ) : (
         <p className={classes.message}>Your wishlist is empty</p>
       )}
-      {Boolean(error) && <p className={classes.message}>{error.message}</p>}
+      {Boolean(errorMessage) && (
+        <p className={classes.message}>{`${errorMessage.message}`}</p>
+      )}
     </div>
   );
 }

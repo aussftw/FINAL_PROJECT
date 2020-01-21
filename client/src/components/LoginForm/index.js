@@ -3,10 +3,9 @@ import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import LoginContent from "./LoginContent";
 import { logIn } from "../../store/actions/loginActions";
-import { getWishlist } from "../../store/actions/Wishlist";
 
 // eslint-disable-next-line no-shadow
-const LoginForm = ({ logIn, isAuthenticated, error, getWishlist }) => {
+const LoginForm = ({ logIn, isAuthenticated, error }) => {
   const [open, setOpen] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
   const [user, setValues] = useState({
@@ -30,7 +29,6 @@ const LoginForm = ({ logIn, isAuthenticated, error, getWishlist }) => {
   const submitLogin = e => {
     e.preventDefault();
     logIn(user);
-    getWishlist();
   };
 
   return (
@@ -65,4 +63,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { logIn, getWishlist })(LoginForm);
+export default connect(mapStateToProps, { logIn })(LoginForm);

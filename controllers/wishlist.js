@@ -118,6 +118,13 @@ exports.addProductToWishlist = async (req, res, next) => {
               })
             );
         } else {
+
+          if (wishlist.products.includes(req.params.productId)) {
+            res.status(400).json({
+              message: "Product was added to wishlist before"
+            });
+            return
+          }
           const wishlistData = {};
           wishlistData.products = wishlist.products.concat(
             req.params.productId
@@ -155,7 +162,7 @@ exports.deleteProductFromWishlish = async (req, res, next) => {
       } else {
         if (!wishlist.products.includes(req.params.productId)) {
           res.status(400).json({
-            message: `Product with _id "${req.params.productId}" is absent in wishlist.`
+            message: "Product is absent in wishlist"
           });
 
           return;

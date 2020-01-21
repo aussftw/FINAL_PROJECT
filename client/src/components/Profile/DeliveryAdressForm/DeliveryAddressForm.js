@@ -6,7 +6,7 @@ import useStyles from "./useStyles";
 import {
   saveUserData,
   editInputsData,
-} from "../../../store/actions/UserProfile";
+} from "../../../store/actions/userProfile";
 
 // eslint-disable-next-line no-shadow
 function DeliveryAddressForm({ user, saveUserData, editInputsData, error }) {
@@ -33,6 +33,7 @@ function DeliveryAddressForm({ user, saveUserData, editInputsData, error }) {
           <TextValidator
             id="delivery-address-input"
             label="Delivery address"
+            InputLabelProps={{ className: classes.input }}
             value={user.address}
             variant="outlined"
             multiline

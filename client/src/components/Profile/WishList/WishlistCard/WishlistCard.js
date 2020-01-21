@@ -10,12 +10,11 @@ import { connect } from "react-redux";
 import Button from "@material-ui/core/Button";
 import useStyles from "./useStyles";
 
-import { wishlistDeleteItem } from "../../../../store/actions/Wishlist";
+import { wishlistDeleteItem } from "../../../../store/actions/wishlist";
 // import {Link} from "react-router-dom";
 
 const WishlistCard = ({
   id,
-  // itemIndex,
   title,
   price,
   img,
@@ -25,41 +24,6 @@ const WishlistCard = ({
 }) => {
   const classes = useStyles();
   const matches = useMediaQuery(theme => theme.breakpoints.down("xs"));
-
-  // const [cartQuantity, setCartQuantity] = useState(cartQty);
-  // const [subtotal, setSubtotal] = useState(cartQty * price);
-  // const qId = `quantity-${id}`;
-
-  // const calculatePrice = useCallback(() => {
-  //   setSubtotal(Math.round(cartQuantity * price * 100) / 100);
-  // }, [cartQuantity, price]);
-
-  // const changeCartProductQuantity = event => {
-  //   if (event.target.value > shopQty) {
-  //     setCartQuantity(shopQty);
-  //   } else if (event.target.value < 0) {
-  //     setCartQuantity(0);
-  //   } else if (event.target.value === "") {
-  //     setCartQuantity(1);
-  //   } else {
-  //     setCartQuantity(event.target.value);
-  //   }
-  // };
-
-  // const decreaseCartProductQuantity = () => {
-  //   if (cartQuantity > 0) {
-  //     setCartQuantity(+cartQuantity - 1);
-  //   }
-  // };
-  // const increaseCartProductQuantity = () => {
-  //   if (cartQuantity < shopQty) {
-  //     setCartQuantity(+cartQuantity + 1);
-  //   }
-  // };
-  //
-  // useEffect(() => {
-  //   calculatePrice();
-  // }, [calculatePrice]);
 
   return (
     <Grid container className={classes.item} spacing={1}>

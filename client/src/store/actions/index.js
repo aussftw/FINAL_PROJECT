@@ -45,16 +45,3 @@ export function getLinks() {
       });
   };
 }
-
-export const editDataSuccess = data => {
-  return {
-    type: constants.EDIT_USER_DATA_SUCCESS,
-    payload: data,
-  };
-};
-
-export const editDataFailure = () => {
-  return {
-    type: constants.EDIT_USER_DATA_FAILURE,
-  };
-};

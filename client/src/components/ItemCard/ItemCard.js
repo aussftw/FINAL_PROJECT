@@ -9,6 +9,7 @@ import CardContent from "@material-ui/core/CardContent";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import Tooltip from "@material-ui/core/Tooltip";
+// import { Link }  from "react-router-dom";
 
 import StarBorder from "@material-ui/icons/StarBorder";
 import Favorite from "@material-ui/icons/Favorite";
@@ -21,7 +22,7 @@ import useStyles from "./useStyles";
 import {
   wishlistAddItem,
   wishlistDeleteItem,
-} from "../../store/actions/Wishlist";
+} from "../../store/actions/wishlist";
 
 const CardTooltipText = value => {
   if (value === undefined) return "Not yet rated";
@@ -41,16 +42,21 @@ const ItemCard = ({
   wishlistAll,
   wishlistAddItem,
   wishlistDeleteItem,
+  isAuthenticated,
 }) => {
   const classes = useStyles();
   // const [wishlist, setWishlist] = useState(inWishlist);
   const [cart, setCart] = useState(inCart);
 
-  // console.log(wishlistAll);
-  // console.log(wishlistAll.every(el => el._id !== id));
+  const handleDeleteItemFromWishlist = () => {
+    if (isAuthenticated) {
+      wishlistAddItem(id);
+    }
+  };
 
   return (
     <Card className={classes.card}>
+      {/* eslint-disable-next-line no-nested-ternary */}
       {!wishlistAll.every(el => el._id !== id) ? (
         <Tooltip arrow title="Remove from wishlist">
           <IconButton
@@ -61,14 +67,27 @@ const ItemCard = ({
           </IconButton>
         </Tooltip>
       ) : (
-        <Tooltip arrow title="Add to wishlist">
+        // isAuthenticated ? (
+        <Tooltip
+          arrow
+          title={isAuthenticated ? "Add to wishlist" : "Only for logined user"}
+        >
           <IconButton
             className={classes.wishList}
-            onClick={() => wishlistAddItem(id)}
+            onClick={() => handleDeleteItemFromWishlist()}
           >
             <FavoriteBorder />
           </IconButton>
         </Tooltip>
+        // ) : (
+        //   <Link to="/login">
+        //     <IconButton
+        //       className={classes.wishList}
+        //     >
+        //       <FavoriteBorder />
+        //     </IconButton>
+        //   </Link>
+        // )
       )}
       <CardActionArea
         classes={{
@@ -115,7 +134,7 @@ const ItemCard = ({
         )}
       </CardActionArea>
       {!cart && (
-        <Button variant="text" fullWidth onClick={() => setCart(true)}>
+        <Button variant="outlined" fullWidth onClick={() => setCart(true)}>
           + add to cart
         </Button>
       )}
@@ -126,6 +145,7 @@ const ItemCard = ({
 function mapStateToProps(state) {
   return {
     wishlistAll: state.wishlistReducer.wishlist,
+    isAuthenticated: state.loginReducer.isAuthenticated,
   };
 }
 

@@ -1,6 +1,7 @@
 import axios from "axios";
 import * as constants from "../constants";
 import setAuthToken from "../../components/common/setAuthToken";
+import { getWishlist } from "./wishlist";
 
 const logInSuccess = data => {
   return {
@@ -48,6 +49,7 @@ export const logIn = user => dispatch => {
         setAuthToken(response.data.token);
       }
       dispatch(getUser());
+      dispatch(getWishlist());
     })
     .catch(error => {
       dispatch(logInFailure(error));
