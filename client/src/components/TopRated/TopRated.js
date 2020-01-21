@@ -56,20 +56,21 @@ const TopRated = () => {
 
           return (
             <Hidden
+              key={value._id}
               xsDown={result.xsDown}
               smDown={result.smDown}
               mdDown={result.mdDown}
               lgDown={result.lgDown}
             >
               <ItemCard
-                /* eslint-disable-next-line no-underscore-dangle */
-                key={value._id}
+                // key={value._id}
                 title={value.name}
                 rate={value.rate.rating}
                 price={value.currentPrice}
                 img={value.imageUrls[0]}
                 inCart={false}
                 inWishList={false}
+                id={value._id}
               />
             </Hidden>
           );

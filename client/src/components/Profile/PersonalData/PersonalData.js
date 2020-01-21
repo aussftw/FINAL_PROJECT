@@ -2,16 +2,18 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import Button from "@material-ui/core/Button";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 import {
   saveUserData,
   editInputsData,
-} from "../../../store/actions/UserProfile";
+} from "../../../store/actions/userProfile";
 import useStyles from "./useStyles";
 
 // eslint-disable-next-line no-shadow
 function PersonalData({ user, saveUserData, editInputsData, error }) {
   const classes = useStyles();
   const [isEditable, setIsEditable] = useState(false);
+  const matches = useMediaQuery(theme => theme.breakpoints.down("xs"));
 
   const editData = event => {
     event.preventDefault();
@@ -40,10 +42,14 @@ function PersonalData({ user, saveUserData, editInputsData, error }) {
             id="customer-name-input"
             disabled={!isEditable}
             label="First Name"
+            InputLabelProps={{ className: classes.input }}
             value={user.firstName}
+            size={matches ? "small" : null}
             variant={isEditable ? "outlined" : "standard"}
             inputProps={{
               name: "firstName",
+              minLength: 2,
+              maxLength: 25,
             }}
             onChange={handleChange}
             validators={["required", "matchRegexp:^[a-zA-Zа-яА-Я]{2,25}$"]}
@@ -56,10 +62,14 @@ function PersonalData({ user, saveUserData, editInputsData, error }) {
             id="customer-last-name-input"
             disabled={!isEditable}
             label="Last Name"
+            InputLabelProps={{ className: classes.input }}
             value={user.lastName}
+            size={matches ? "small" : null}
             variant={isEditable ? "outlined" : "standard"}
             inputProps={{
               name: "lastName",
+              minLength: 2,
+              maxLength: 25,
             }}
             onChange={handleChange}
             validators={["required", "matchRegexp:^[a-zA-Zа-яА-Я]{2,25}$"]}
@@ -72,7 +82,9 @@ function PersonalData({ user, saveUserData, editInputsData, error }) {
             id="customer-email-input"
             disabled={!isEditable}
             label="Email"
+            InputLabelProps={{ className: classes.input }}
             value={user.email}
+            size={matches ? "small" : null}
             variant={isEditable ? "outlined" : "standard"}
             inputProps={{
               name: "email",
@@ -85,8 +97,10 @@ function PersonalData({ user, saveUserData, editInputsData, error }) {
             id="customer-phone-input"
             disabled={!isEditable}
             label="Phone Number"
+            InputLabelProps={{ className: classes.input }}
             type="tel"
             value={user.telephone}
+            size={matches ? "small" : null}
             variant={isEditable ? "outlined" : "standard"}
             inputProps={{
               name: "telephone",
@@ -100,9 +114,13 @@ function PersonalData({ user, saveUserData, editInputsData, error }) {
             ]}
           />
           {isEditable ? (
-            <Button type="submit">SAVE DATA</Button>
+            <Button className={classes.btn} type="submit">
+              SAVE DATA
+            </Button>
           ) : (
-            <Button onClick={editData}>EDIT PERSONAL DATA</Button>
+            <Button className={classes.btn} onClick={editData}>
+              EDIT PERSONAL DATA
+            </Button>
           )}
         </ValidatorForm>
         {Boolean(error) && <p className={classes.message}>{error.message}</p>}

@@ -6,7 +6,7 @@ import useStyles from "./useStyles";
 import {
   saveUserData,
   editInputsData,
-} from "../../../store/actions/UserProfile";
+} from "../../../store/actions/userProfile";
 
 // eslint-disable-next-line no-shadow
 function DeliveryAddressForm({ user, saveUserData, editInputsData, error }) {
@@ -33,11 +33,12 @@ function DeliveryAddressForm({ user, saveUserData, editInputsData, error }) {
           <TextValidator
             id="delivery-address-input"
             label="Delivery address"
+            InputLabelProps={{ className: classes.input }}
             value={user.address}
             variant="outlined"
             multiline
-            rowsMax="5"
-            inputProps={{ name: "address" }}
+            rowsMax="8"
+            inputProps={{ name: "address", minLength: 10, maxLength: 100 }}
             placeholder="Your address"
             onChange={handleChange}
             validators={[
@@ -49,7 +50,9 @@ function DeliveryAddressForm({ user, saveUserData, editInputsData, error }) {
               "address must be 10-100 characters, including only letters, numbers, commas and points",
             ]}
           />
-          <Button type="submit">ADD ADDRESS</Button>
+          <Button className={classes.btn} type="submit">
+            ADD ADDRESS
+          </Button>
         </ValidatorForm>
         {Boolean(error) && <p className={classes.message}>{error.message}</p>}
       </div>

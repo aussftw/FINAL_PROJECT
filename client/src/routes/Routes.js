@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 
@@ -9,11 +9,35 @@ import LoginForm from "../components/LoginForm";
 import NotFound from "../pages/NotFound/NotFound";
 import RegistrationForm from "../components/RegistrationForm";
 import ItemDetailsPage from "../pages/ItemDetailsPage/ItemDetailsPage";
+import setAuthToken from "../components/common/setAuthToken";
+import Preloader from "../components/Preloader/Desktop";
+import { getUser, preloaderClose } from "../store/actions/loginActions";
+import { getWishlist } from "../store/actions/wishlist";
 
-const Routes = ({ customer }) => {
-  // eslint-disable-next-line no-console
-  console.log("МЫ в роутах", customer);
-  return customer ? (
+// eslint-disable-next-line no-shadow
+const Routes = ({
+  isAuthenticated,
+  getUser,
+  getWishlist,
+  preloaderClose,
+  preloader,
+}) => {
+  useEffect(() => {
+    // eslint-disable-next-line no-undef
+    const token = localStorage.getItem("authToken");
+    if (token) {
+      setAuthToken(token);
+      getUser();
+      getWishlist();
+    } else {
+      preloaderClose();
+    }
+  }, [getUser, getWishlist, preloaderClose]);
+
+  // eslint-disable-next-line no-nested-ternary
+  return preloader ? (
+    <Preloader />
+  ) : isAuthenticated ? (
     <Switch>
       <Route exact path="/">
         <HomePage />
@@ -53,8 +77,14 @@ const Routes = ({ customer }) => {
 
 function mapStateToProps(state) {
   return {
-    customer: state.loginReducer.login,
+    isAuthenticated: state.loginReducer.isAuthenticated,
+    user: state.loginReducer.user,
+    preloader: state.loginReducer.loginPreloader,
   };
 }
 
-export default connect(mapStateToProps)(Routes);
+export default connect(mapStateToProps, {
+  getUser,
+  getWishlist,
+  preloaderClose,
+})(Routes);
