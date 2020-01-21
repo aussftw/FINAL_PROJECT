@@ -35,6 +35,13 @@ export const getUser = () => dispatch => {
     });
 };
 
+export const userFromJwt = data => {
+  return {
+    type: constants.USER_FROM_JWT,
+    payload: data,
+  };
+};
+
 export const logOut = () => {
   return {
     type: constants.LOG_OUT,
@@ -48,8 +55,8 @@ export const logIn = user => dispatch => {
       if (response.statusText === "OK" && response.data.success) {
         setAuthToken(response.data.token);
       }
-      dispatch(getUser());
       dispatch(getWishlist());
+      // dispatch(getUser());
     })
     .catch(error => {
       dispatch(logInFailure(error));

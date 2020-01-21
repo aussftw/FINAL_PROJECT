@@ -76,6 +76,15 @@ const loginReducer = (state = initialState, action) => {
         ...state,
         loginPreloader: false,
       };
+    case constants.USER_FROM_JWT:
+      console.log("I AM HERE =========", action.payload);
+      return {
+        ...state,
+        user: {
+          firstName: action.payload.firstName,
+          lastName: action.payload.lastName,
+        },
+      };
     default:
       return state;
   }

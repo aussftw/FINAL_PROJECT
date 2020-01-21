@@ -1,4 +1,5 @@
 import { makeStyles } from "@material-ui/core";
+import theme from "../../../theme";
 
 const useStyles = makeStyles({
   box: {
@@ -8,6 +9,12 @@ const useStyles = makeStyles({
   tileBox: {
     maxWidth: "643px",
     height: "800px",
+  },
+  [theme.breakpoints.down("sm")]: {
+    width: "100%",
+  },
+  [theme.breakpoints.up("sm")]: {
+    width: "50%",
   },
 });
 
