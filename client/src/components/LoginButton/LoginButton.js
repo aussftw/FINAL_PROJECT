@@ -26,7 +26,7 @@ const LoginButton = ({ logOut, customer, user }) => {
         <>
           <Link to="/profile" className={classes.link}>
             <span>{`${user.firstName} ${user.lastName}`}</span>
-            <IconButton>
+            <IconButton className={classes.icon}>
               <AccountCircle />
             </IconButton>
           </Link>

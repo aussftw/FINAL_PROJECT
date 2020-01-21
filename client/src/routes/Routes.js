@@ -9,6 +9,7 @@ import LoginForm from "../components/LoginForm";
 import NotFound from "../pages/NotFound/NotFound";
 import RegistrationForm from "../components/RegistrationForm";
 import ItemDetailsPage from "../pages/ItemDetailsPage/ItemDetailsPage";
+import SearchPage from "../pages/SearchPage/SearchPage";
 
 const Routes = ({ customer }) => {
   // eslint-disable-next-line no-console
@@ -20,6 +21,18 @@ const Routes = ({ customer }) => {
       </Route>
       <Route path="/cart">
         <Cart />
+      </Route>
+      <Route path="/search">
+        <SearchPage />
+      </Route>
+      <Route path="/shop">
+        <p>shop</p>
+      </Route>
+      <Route path="/about-us">
+        <p>about us</p>
+      </Route>
+      <Route path="/notfound">
+        <NotFound />
       </Route>
       <Route path="/profile">
         <Profiler />
@@ -34,6 +47,15 @@ const Routes = ({ customer }) => {
       <Route path="/cart">
         <Cart />
       </Route>
+      <Route path="/search">
+        <SearchPage />
+      </Route>
+      <Route path="/shop">
+        <p>shop</p>
+      </Route>
+      {/* <Route path="/about-us"> */}
+
+      {/* </Route> */}
       <Route path="/notfound">
         <NotFound />
       </Route>
