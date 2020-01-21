@@ -30,7 +30,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function TextBlock() {
+const TextBlock = (slideTitle, slideSubtitle) => {
   const classes = useStyles();
 
   return (
@@ -40,9 +40,10 @@ export default function TextBlock() {
       alignItems="center"
       className={classes.paragraph}
     >
-      <p>new arrival 2020</p>
-      <h1 className={classes.title}>new perfect plant collection</h1>
+      <p>{slideTitle}</p>
+      <h1 className={classes.title}>{slideSubtitle}</h1>
       <Button className={classes.actionButton}>shop now</Button>
     </Box>
   );
-}
+};
+export default TextBlock;
