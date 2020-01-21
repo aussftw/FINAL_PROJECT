@@ -76,6 +76,17 @@ const loginReducer = (state = initialState, action) => {
         ...state,
         loginPreloader: false,
       };
+    case constants.USER_FROM_JWT:
+      // eslint-disable-next-line no-console
+      console.log("I AM HERE =========", action.payload);
+      return {
+        ...state,
+        user: {
+          firstName: action.payload.firstName,
+          lastName: action.payload.lastName,
+        },
+        isAuthenticated: true,
+      };
     default:
       return state;
   }

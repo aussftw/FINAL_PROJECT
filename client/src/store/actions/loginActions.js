@@ -1,4 +1,6 @@
 import axios from "axios";
+// eslint-disable-next-line import/no-extraneous-dependencies
+import jwt from "jwt-decode";
 import * as constants from "../constants";
 import setAuthToken from "../../components/common/setAuthToken";
 import { getWishlist } from "./wishlist";
@@ -23,12 +25,21 @@ export const preloaderClose = () => {
   };
 };
 
+export const userFromJwt = data => {
+  return {
+    type: constants.USER_FROM_JWT,
+    payload: data,
+  };
+};
+
 export const getUser = () => dispatch => {
   axios
     .get("/customers/customer")
     .then(response => {
+      if (response.statusText === "OK" && response.data.success) {
+        dispatch(userFromJwt(jwt(response.data.token)));
+      }
       dispatch(logInSuccess(response.data));
-      dispatch(preloaderClose());
     })
     .catch(error => {
       dispatch(logInFailure(error));
@@ -47,7 +58,9 @@ export const logIn = user => dispatch => {
     .then(response => {
       if (response.statusText === "OK" && response.data.success) {
         setAuthToken(response.data.token);
+        dispatch(userFromJwt(jwt(response.data.token)));
       }
+      dispatch(getWishlist());
       dispatch(getUser());
       dispatch(getWishlist());
     })

@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
+// eslint-disable-next-line import/no-extraneous-dependencies,import/no-unresolved
+import jwt from "jwt-decode";
 
 import HomePage from "../pages/HomePage/HomePage";
 import Cart from "../pages/Cart/Cart";
@@ -11,8 +13,11 @@ import RegistrationForm from "../components/RegistrationForm";
 import ItemDetailsPage from "../pages/ItemDetailsPage/ItemDetailsPage";
 import setAuthToken from "../components/common/setAuthToken";
 import Preloader from "../components/Preloader";
-
-import { getUser, preloaderClose } from "../store/actions/loginActions";
+import {
+  getUser,
+  preloaderClose,
+  userFromJwt,
+} from "../store/actions/loginActions";
 import { getWishlist } from "../store/actions/wishlist";
 
 // eslint-disable-next-line no-shadow
@@ -22,18 +27,21 @@ const Routes = ({
   getWishlist,
   preloaderClose,
   preloader,
+  userFromJwt,
 }) => {
   useEffect(() => {
     // eslint-disable-next-line no-undef
     const token = localStorage.getItem("authToken");
     if (token) {
+      userFromJwt(jwt(token));
+      preloaderClose();
       setAuthToken(token);
-      getUser();
       getWishlist();
+      getUser();
     } else {
       preloaderClose();
     }
-  }, [getUser, getWishlist, preloaderClose]);
+  }, [getUser, getWishlist, preloaderClose, userFromJwt]);
 
   // eslint-disable-next-line no-nested-ternary
   return preloader ? (
@@ -88,4 +96,5 @@ export default connect(mapStateToProps, {
   getUser,
   getWishlist,
   preloaderClose,
+  userFromJwt,
 })(Routes);
