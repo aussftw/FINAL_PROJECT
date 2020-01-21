@@ -44,7 +44,7 @@ const RegistrationForm = () => {
           }
         })
         .catch(error => {
-          setMessage(error);
+          setMessage(error.message);
         });
     }
   }, [submitRegistration, newUserData]);
