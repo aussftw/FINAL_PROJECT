@@ -17,6 +17,8 @@ const wishlistReducer = (state = initialState, action) => {
       return { ...state, wishlist: action.payload.products, error: "" };
     case "WISHLIST_DELETE_ITEM_FAILURE":
       return { ...state, error: action.payload };
+    case "WISHLIST_LOG_OUT":
+      return { ...state, wishlist: [], error: "" };
     default:
       return state;
   }

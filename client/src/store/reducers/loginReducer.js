@@ -51,6 +51,7 @@ const loginReducer = (state = initialState, action) => {
           telephone: action.payload.telephone,
           address: action.payload.address,
         },
+        error: "",
       };
     case constants.EDIT_USER_DATA_FAILURE:
       return { ...state, error: action.payload };

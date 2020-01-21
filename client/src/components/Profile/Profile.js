@@ -4,12 +4,18 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
+import { connect } from "react-redux";
+
 import useStyles from "./useStyles";
 
 import PersonalData from "./PersonalData/PersonalData";
 import ChangePasswordForm from "./ChangePasswordForm/ChangePasswordForm";
 import DeliveryAddressForm from "./DeliveryAdressForm/DeliveryAddressForm";
 import WishList from "./WishList/WishList";
+
+import { logOut } from "../../store/actions/loginActions";
+import { wishlistLogOut } from "../../store/actions/wishlist";
+import setAuthToken from "../common/setAuthToken";
 
 function TabPanel(props) {
   const { children, value, index } = props;
@@ -35,12 +41,20 @@ function TabPanel(props) {
 //   value: PropTypes.any.isRequired,
 // };
 
-const Profile = () => {
+// eslint-disable-next-line no-shadow
+const Profile = ({ logOut, wishlistLogOut }) => {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
+  };
+  const profileLogOut = () => {
+    setAuthToken(false);
+    // eslint-disable-next-line no-undef
+    localStorage.removeItem("authToken");
+    wishlistLogOut();
+    logOut();
   };
 
   return (
@@ -78,6 +92,12 @@ const Profile = () => {
           id="vertical-tab-4"
           aria-controls="vertical-tabpanel-4"
         />
+        <Tab
+          label="Log Out"
+          id="vertical-tab-5"
+          aria-controls="vertical-tabpanel-5"
+          onClick={() => profileLogOut()}
+        />
       </Tabs>
 
       <TabPanel value={value} index={0}>
@@ -90,7 +110,7 @@ const Profile = () => {
         <DeliveryAddressForm />
       </TabPanel>
       <TabPanel value={value} index={3}>
-        Cart
+        Orders history
       </TabPanel>
       <TabPanel value={value} index={4}>
         <ChangePasswordForm />
@@ -99,4 +119,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default connect(null, { logOut, wishlistLogOut })(Profile);
