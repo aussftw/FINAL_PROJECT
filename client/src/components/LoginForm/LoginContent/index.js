@@ -20,7 +20,7 @@ const LoginContent = ({
   open,
   user,
   showPassword,
-  // message,
+  message,
 }) => {
   const classes = useStyles();
 
@@ -42,6 +42,7 @@ const LoginContent = ({
           <ModalHeader />
           <div className={classes.wrapper}>
             <h3 className={classes.title}>Log In Form</h3>
+            {Boolean(message) && <p className={classes.errMsg}>{message}</p>}
             <ValidatorForm noValidate={false} onSubmit={submitLogin}>
               <TextValidator
                 label="Login or Email"
@@ -96,7 +97,6 @@ const LoginContent = ({
                 Login
               </Button>
             </ValidatorForm>
-            {/* {Boolean(message) && <p className={classes.errMsg}>{message.response.data}</p>} */}
           </div>
         </div>
       </Fade>

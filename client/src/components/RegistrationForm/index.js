@@ -39,14 +39,12 @@ const RegistrationForm = () => {
         .then(response => {
           // eslint-disable-next-line no-console
           console.log(response);
-          if (response.statusText === "OK") {
+          if (response.statusText === "OK" && response.data.success) {
             setRegistration(true);
           }
         })
         .catch(error => {
-          setMessage(error.message);
-          // eslint-disable-next-line no-console
-          console.log(error.response.data);
+          setMessage(error);
         });
     }
   }, [submitRegistration, newUserData]);
