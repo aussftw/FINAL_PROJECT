@@ -18,7 +18,6 @@ const loginReducer = (state = initialState, action) => {
     case constants.LOG_IN_SUCCESS:
       return {
         ...state,
-        isAuthenticated: true,
         user: {
           firstName: action.payload.firstName,
           lastName: action.payload.lastName,
@@ -84,6 +83,8 @@ const loginReducer = (state = initialState, action) => {
           firstName: action.payload.firstName,
           lastName: action.payload.lastName,
         },
+        isAuthenticated: true,
+
       };
     default:
       return state;

@@ -15,7 +15,6 @@ const LoginForm = ({ logIn, isAuthenticated, error }) => {
 
   // eslint-disable-next-line no-shadow
   const handleError = error => {
-    console.log(error);
     if (error.response.data.loginOrEmail) {
       return error.response.data.loginOrEmail;
     }
