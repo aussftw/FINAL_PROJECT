@@ -19,6 +19,7 @@ import {
   userFromJwt,
 } from "../store/actions/loginActions";
 import { getWishlist } from "../store/actions/wishlist";
+import SearchPage from "../pages/SearchPage/SearchPage";
 
 // eslint-disable-next-line no-shadow
 const Routes = ({
@@ -54,6 +55,18 @@ const Routes = ({
       <Route path="/cart">
         <Cart />
       </Route>
+      <Route path="/search">
+        <SearchPage />
+      </Route>
+      <Route path="/shop">
+        <p>shop</p>
+      </Route>
+      <Route path="/about-us">
+        <p>about us</p>
+      </Route>
+      <Route path="/notfound">
+        <NotFound />
+      </Route>
       <Route path="/profile">
         <Profiler />
       </Route>
@@ -67,6 +80,15 @@ const Routes = ({
       <Route path="/cart">
         <Cart />
       </Route>
+      <Route path="/search">
+        <SearchPage />
+      </Route>
+      <Route path="/shop">
+        <p>shop</p>
+      </Route>
+      {/* <Route path="/about-us"> */}
+
+      {/* </Route> */}
       <Route path="/notfound">
         <NotFound />
       </Route>
