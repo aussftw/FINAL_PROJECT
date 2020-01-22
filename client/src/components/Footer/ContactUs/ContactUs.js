@@ -57,7 +57,7 @@ const ContactUs = () => {
       <Hidden smDown>
         <Container className={classes.mainContainer}>
           <Link href="/#" className={classes.logoContainer}>
-            <img src="./img/Logo.svg" alt="logo" className={classes.logo} />
+            <img src="/img/Logo.svg" alt="logo" className={classes.logo} />
           </Link>
           <Box className={classes.itemContainer}>
             <DraftsIcon className={classes.contactUsIcon} />

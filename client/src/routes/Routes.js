@@ -20,6 +20,7 @@ import {
 } from "../store/actions/loginActions";
 import { getWishlist } from "../store/actions/wishlist";
 import SearchPage from "../pages/SearchPage/SearchPage";
+import Shop from "../pages/Shop/Shop";
 
 // eslint-disable-next-line no-shadow
 const Routes = ({
@@ -49,59 +50,56 @@ const Routes = ({
     <Preloader />
   ) : isAuthenticated ? (
     <Switch>
-      <Route exact path="/">
+      <Route exact path="/api/">
         <HomePage />
       </Route>
-      <Route path="/cart">
+      <Route path="/api/cart">
         <Cart />
       </Route>
-      <Route path="/search">
+      <Route path="/api/search">
         <SearchPage />
       </Route>
-      <Route path="/shop">
-        <p>shop</p>
+      <Route path="/api/shop">
+        <Shop />
       </Route>
-      <Route path="/about-us">
-        <p>about us</p>
-      </Route>
-      <Route path="/notfound">
+      <Route path="/api/notfound">
         <NotFound />
       </Route>
-      <Route path="/profile">
+      <Route path="/api/profile">
         <Profiler />
       </Route>
-      <Redirect to="/" />
+      <Redirect to="/api/" />
     </Switch>
   ) : (
     <Switch>
-      <Route exact path="/">
+      <Route exact path="/api/">
         <HomePage />
       </Route>
-      <Route path="/cart">
+      <Route path="/api/cart">
         <Cart />
       </Route>
-      <Route path="/search">
+      <Route path="/api/search">
         <SearchPage />
       </Route>
-      <Route path="/shop">
-        <p>shop</p>
+      <Route path="/api/shop">
+        <Shop />
       </Route>
       {/* <Route path="/about-us"> */}
 
       {/* </Route> */}
-      <Route path="/notfound">
+      <Route path="/api/notfound">
         <NotFound />
       </Route>
-      <Route path="/login">
+      <Route path="/api/login">
         <LoginForm />
       </Route>
-      <Route path="/registration">
+      <Route path="/api/registration">
         <RegistrationForm />
       </Route>
-      <Route path="/products/:id">
+      <Route path="/api/products/:id">
         <ItemDetailsPage />
       </Route>
-      <Redirect to="/" />
+      <Redirect to="/api/" />
     </Switch>
   );
 };
