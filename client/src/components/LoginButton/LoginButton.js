@@ -27,7 +27,7 @@ const LoginButton = ({ logOut, isAuthenticated, user, wishlistLogOut }) => {
           <span>Welcome, </span>
           <span>{`${user.firstName} ${user.lastName} `}</span>
 
-          <Link to="/api/profile" className={classes.link}>
+          <Link to="/profile" className={classes.link}>
             <IconButton>
               <AccountCircle />
             </IconButton>
@@ -42,7 +42,7 @@ const LoginButton = ({ logOut, isAuthenticated, user, wishlistLogOut }) => {
           </Button>
         </>
       ) : (
-        <Link to="/api/login" className={classes.link}>
+        <Link to="/login" className={classes.link}>
           <Button className={classes.btn} variant="outlined" type="button">
             Sign In
           </Button>

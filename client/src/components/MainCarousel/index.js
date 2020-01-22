@@ -1,5 +1,7 @@
 import React from "react";
+// eslint-disable-next-line import/no-unresolved
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+// eslint-disable-next-line import/no-unresolved
 import { Carousel } from "react-responsive-carousel";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";

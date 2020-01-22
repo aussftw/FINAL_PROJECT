@@ -50,56 +50,56 @@ const Routes = ({
     <Preloader />
   ) : isAuthenticated ? (
     <Switch>
-      <Route exact path="/api/">
+      <Route exact path="/">
         <HomePage />
       </Route>
-      <Route path="/api/cart">
+      <Route path="/cart">
         <Cart />
       </Route>
-      <Route path="/api/search">
+      <Route path="/search">
         <SearchPage />
       </Route>
-      <Route path="/api/shop">
+      <Route path="/shop">
         <Shop />
       </Route>
-      <Route path="/api/notfound">
+      <Route path="/notfound">
         <NotFound />
       </Route>
-      <Route path="/api/profile">
+      <Route path="/profile">
         <Profiler />
       </Route>
-      <Redirect to="/api/" />
+      <Redirect to="/" />
     </Switch>
   ) : (
     <Switch>
-      <Route exact path="/api/">
+      <Route exact path="/">
         <HomePage />
       </Route>
-      <Route path="/api/cart">
+      <Route path="/cart">
         <Cart />
       </Route>
-      <Route path="/api/search">
+      <Route path="/search">
         <SearchPage />
       </Route>
-      <Route path="/api/shop">
-        <Shop />
+      <Route path="/shop">
+        <p>shop</p>
       </Route>
       {/* <Route path="/about-us"> */}
 
       {/* </Route> */}
-      <Route path="/api/notfound">
+      <Route path="/notfound">
         <NotFound />
       </Route>
-      <Route path="/api/login">
+      <Route path="/login">
         <LoginForm />
       </Route>
-      <Route path="/api/registration">
+      <Route path="/registration">
         <RegistrationForm />
       </Route>
-      <Route path="/api/products/:id">
+      <Route path="/products/:id">
         <ItemDetailsPage />
       </Route>
-      <Redirect to="/api/" />
+      <Redirect to="/" />
     </Switch>
   );
 };
