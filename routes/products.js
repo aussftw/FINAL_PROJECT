@@ -13,7 +13,8 @@ const {
   getProductById,
   getProductsFilterParams,
   searchProducts,
-  getTopRatedProducts
+  getTopRatedProducts,
+  actualizationProducts
 } = require("../controllers/products");
 
 // Configurations for multer
@@ -89,6 +90,11 @@ router.get("/", getProducts);
 // @desc    GET top rated products
 // @access  Public
 router.get("/top", getTopRatedProducts);
+
+// @route   POST /products/actualization
+// @desc    POST appropriate to search query products
+// @access  Public
+router.post("/actualization", actualizationProducts);
 
 // @route   GET /products/filter
 // @desc    GET appropriate filtered products
