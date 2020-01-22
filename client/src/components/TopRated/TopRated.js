@@ -6,7 +6,7 @@ import Hidden from "@material-ui/core/Hidden";
 
 import useStyles from "./useStyles";
 import ItemCard from "../ItemCard/ItemCard";
-import Preloader from "../Preloader/Desktop";
+import Preloader from "../Preloader";
 
 const TopRated = () => {
   const classes = useStyles();
@@ -17,7 +17,6 @@ const TopRated = () => {
       .get("/products/top")
       .then(response => {
         setProducts(response.data);
-        console.log(response.data);
       })
       .catch(err => {
         // eslint-disable-next-line no-console
@@ -71,7 +70,6 @@ const TopRated = () => {
                 rate={value.rate.rating}
                 price={value.currentPrice}
                 img={value.imageUrls[0]}
-                inWishList={false}
               />
             </Hidden>
           );

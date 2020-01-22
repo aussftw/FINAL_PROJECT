@@ -8,7 +8,7 @@ import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
 import { connect } from "react-redux";
 import useStyles from "./useStyles";
-import Preloader from "../../components/Preloader/Desktop";
+import Preloader from "../../components/Preloader";
 import ProductCart from "../../components/common/ProductCart/ProductCart";
 import { getCart } from "../../store/actions/Cart";
 import BackToTop from "../../components/common/GoUpButton";

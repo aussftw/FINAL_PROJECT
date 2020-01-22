@@ -11,6 +11,7 @@ import Snackbar from "@material-ui/core/Snackbar";
 import SnackbarContent from "@material-ui/core/SnackbarContent";
 import Typography from "@material-ui/core/Typography";
 import Tooltip from "@material-ui/core/Tooltip";
+// import { Link }  from "react-router-dom";
 
 import CheckCircleRoundedIcon from "@material-ui/icons/CheckCircleRounded";
 import Favorite from "@material-ui/icons/Favorite";
@@ -21,6 +22,10 @@ import Rating from "@material-ui/lab/Rating";
 import { connect } from "react-redux";
 import useStyles from "./useStyles";
 import { addItemCart } from "../../store/actions/Cart";
+import {
+  wishlistAddItem,
+  wishlistDeleteItem,
+} from "../../store/actions/wishlist";
 
 // eslint-disable-next-line no-shadow
 const ItemCard = ({
@@ -30,11 +35,13 @@ const ItemCard = ({
   rate,
   price,
   img,
-  inWishlist,
   addItemCart,
+  wishlistAll,
+  wishlistAddItem,
+  wishlistDeleteItem,
+  isAuthenticated,
 }) => {
   const classes = useStyles();
-  const [wishlist, setWishlist] = useState(inWishlist);
   const [snackbarAddToCart, setSnackbarAddToCart] = useState(false);
 
   const CardTooltipText = value => {
@@ -55,26 +62,46 @@ const ItemCard = ({
     setSnackbarAddToCart(false);
   };
 
+  const handleDeleteItemFromWishlist = () => {
+    if (isAuthenticated) {
+      wishlistAddItem(id);
+    }
+  };
+
   return (
     <Card className={classes.card}>
-      {wishlist ? (
+      {/* eslint-disable-next-line no-nested-ternary */}
+      {!wishlistAll.every(el => el._id !== id) ? (
         <Tooltip arrow title="Remove from wishlist">
           <IconButton
             className={classes.wishList}
-            onClick={() => setWishlist(false)}
+            onClick={() => wishlistDeleteItem(id)}
           >
             <Favorite />
           </IconButton>
         </Tooltip>
       ) : (
-        <Tooltip arrow title="Add to wishlist">
+        // isAuthenticated ? (
+        <Tooltip
+          arrow
+          title={isAuthenticated ? "Add to wishlist" : "Only for logined user"}
+        >
           <IconButton
             className={classes.wishList}
-            onClick={() => setWishlist(true)}
+            onClick={() => handleDeleteItemFromWishlist()}
           >
             <FavoriteBorder />
           </IconButton>
         </Tooltip>
+        // ) : (
+        //   <Link to="/login">
+        //     <IconButton
+        //       className={classes.wishList}
+        //     >
+        //       <FavoriteBorder />
+        //     </IconButton>
+        //   </Link>
+        // )
       )}
       <CardActionArea
         classes={{
@@ -144,4 +171,15 @@ const ItemCard = ({
   );
 };
 
-export default connect(null, { addItemCart })(ItemCard);
+function mapStateToProps(state) {
+  return {
+    wishlistAll: state.wishlistReducer.wishlist,
+    isAuthenticated: state.loginReducer.isAuthenticated,
+  };
+}
+
+export default connect(mapStateToProps, {
+  wishlistAddItem,
+  wishlistDeleteItem,
+  addItemCart,
+})(ItemCard);

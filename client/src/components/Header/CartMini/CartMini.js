@@ -1,5 +1,6 @@
 import React from "react";
 import Card from "@material-ui/core/Card";
+import { Link } from "react-router-dom";
 import useStyles from "./useStyles";
 import CardAtMiniCart from "../CardAtMiniCart/CardAtMiniCart";
 import MainButton from "../../common/buttons/MainButton";
@@ -46,7 +47,9 @@ const CartMini = ({ goodsAtCart = hardCodedGoodsForCart }) => {
             <span className={classes.subtotal_price}>${subTotalWithComas}</span>
           </p>
           <p className={classes.mini_cart_buttons}>
-            <MainButton text="VIEW CART">VIEW CART</MainButton>
+            <Link to="/cart">
+              <MainButton text="VIEW CART">VIEW CART</MainButton>
+            </Link>
             <MainButton text="CHECKOUT">CHECKOUT</MainButton>
           </p>
         </div>

@@ -27,23 +27,20 @@ const Brands = () => {
       });
   }, []);
 
-  // eslint-disable-next-line
-  const { _id, url } = brands;
-
   return (
     <Container className={classes.brandsContaier}>
       {brands.length === 0 ? (
         <PreloaderAdaptive />
       ) : (
         brands.map(brand => (
-          <Link href={url}>
-            <Box
-              key={_id} // fix key error
-              className={classes.brand}
-              style={{
-                backgroundImage: `url(${brand.imageUrl})`,
-              }}
-            />
+          <Link href={brand.url} key={brand._id}>
+            <Box>
+              <img
+                src={`${brand.imageUrl}`}
+                alt={`${brand.name}`}
+                className={classes.brand}
+              />
+            </Box>
           </Link>
         ))
       )}

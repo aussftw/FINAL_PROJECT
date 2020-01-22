@@ -1,59 +1,67 @@
 import React from "react";
-import Toolbar from "@material-ui/core/Toolbar";
-// import IconButton from "@material-ui/core/IconButton";
-import AppBar from "@material-ui/core/AppBar";
-// import Badge from "@material-ui/core/Badge";
-// import MailIcon from "@material-ui/icons/Mail";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import IconButton from "@material-ui/core/IconButton";
+import Badge from "@material-ui/core/Badge";
+import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
+// import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+
 import TemporaryDrawer from "./BurgerMenu/BurgerMenu";
 import CustomizedSearch from "./Search/Search";
 import LoginButton from "../LoginButton/LoginButton";
+
 import useStyles from "./useStyles";
 
-const Header = () => {
-  const classes = useStyles();
+const Header = () =>
+  // { isAuthenticated, wishlistCounter }
+  {
+    const classes = useStyles();
 
-  return (
-    <div>
-      <AppBar color="inherit" position="fixed">
-        <Toolbar className={classes.flex}>
-          <div className={classes.flex}>
-            <TemporaryDrawer />
-            <Link to="/">
-              <img src="./img/Logo.svg" alt="logo" className={classes.logo} />
-            </Link>
-          </div>
-          <div>
-            <CustomizedSearch className={classes.searchDesktop} />
-          </div>
-          <div>
-            <LoginButton />
-            {/* <IconButton aria-label="show 4 new mails" color="inherit"> */}
-            {/*  <Badge badgeContent={8} color="secondary"> */}
-            {/*    <MailIcon /> */}
-            {/*  </Badge> */}
-            {/* </IconButton> */}
-            {/* <IconButton aria-label="show 17 new notifications" color="inherit"> */}
-            {/*  <Badge badgeContent={5} color="secondary"> */}
-            {/*    <NotificationsIcon /> */}
-            {/*  </Badge> */}
-            {/* </IconButton> */}
+    return (
+      <div>
+        <AppBar color="inherit" position="fixed">
+          <Toolbar className={classes.flex}>
+            <div className={classes.flex}>
+              <TemporaryDrawer />
+              <Link to="/">
+                <img src="./img/Logo.svg" alt="logo" className={classes.logo} />
+              </Link>
+            </div>
+            <div>
+              <CustomizedSearch className={classes.searchDesktop} />
+            </div>
+            <div>
+              <LoginButton />
+              <IconButton
+                aria-label="show new products at cart"
+                color="inherit"
+              >
+                <Badge badgeContent={8} color="primary">
+                  <ShoppingCartOutlinedIcon />
+                </Badge>
+              </IconButton>
+              {/* <CartMini /> */}
+              {/* <IconButton aria-label="show new products at wishlist" color="inherit"> */}
+              {/*  <Badge badgeContent={wishlistCounter} color="primary"> */}
+              {/*    <FavoriteBorderIcon /> */}
+              {/*  </Badge> */}
+              {/* </IconButton> */}
+            </div>
+          </Toolbar>
+        </AppBar>
+      </div>
+    );
+  };
 
-            {/* <div className={classes.sectionMobile}> */}
-            {/*  <IconButton */}
-            {/*      aria-label="show more" */}
-            {/*      aria-controls={mobileMenuId} */}
-            {/*      aria-haspopup="true" */}
-            {/*      onClick={handleMobileMenuOpen} */}
-            {/*      color="inherit" */}
-            {/*  > */}
-            {/*    <MoreIcon /> */}
-            {/*  </IconButton> */}
-          </div>
-        </Toolbar>
-      </AppBar>
-    </div>
-  );
-};
+// function mapStateToProps(state) {
+//   return {
+//     isAuthenticated: state.loginReducer.isAuthenticated,
+//     wishlistCounter: state.wishlistReducer.wishlist.length,
+//     error: state.wishlistReducer.error,
+//   };
+// }
 
-export default Header;
+export default connect()(Header);
+// mapStateToProps

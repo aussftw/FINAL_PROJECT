@@ -17,7 +17,7 @@ const Footer = () => {
     <Container className={classes.bg} maxWidth="xl">
       <Hidden mdUp>
         <Link href="/#" className={classes.logoContainer}>
-          <img src="./img/Logo.svg" alt="logo" className={classes.logo} />
+          <img src="img/Logo.svg" alt="logo" className={classes.logo} />
         </Link>
       </Hidden>
       <Box className={classes.footerData}>

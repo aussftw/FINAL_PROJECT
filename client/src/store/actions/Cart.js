@@ -26,7 +26,7 @@ export const actualizationLocalCartFailure = error => {
   };
 };
 export const getCart = () => dispatch => {
-  if (store.getState().loginReducer.login) {
+  if (store.getState().loginReducer.isAuthenticated) {
     // const mergeCarts = data => {
     //   if (store.getState().cartReducer.cart.length === 0) {
     //     dispatch(getCartSuccess(data));
@@ -118,7 +118,7 @@ export const addItemCartFailure = error => {
   };
 };
 export const addItemCart = (id, itemNo) => dispatch => {
-  if (store.getState().loginReducer.login) {
+  if (store.getState().loginReducer.isAuthenticated) {
     axios
       .put(`/cart/${id}`)
       .then(response => {
@@ -164,7 +164,7 @@ export const decreaseItemCartFailure = error => {
   };
 };
 export const decreaseItemCart = id => dispatch => {
-  if (store.getState().loginReducer.login) {
+  if (store.getState().loginReducer.isAuthenticated) {
     axios
       .delete(`/cart/product/${id}`)
       .then(response => {
@@ -201,7 +201,7 @@ export const deleteItemCartFailure = error => {
   };
 };
 export const deleteItemCart = id => dispatch => {
-  if (store.getState().loginReducer.login) {
+  if (store.getState().loginReducer.isAuthenticated) {
     axios
       .delete(`/cart/${id}`)
       .then(response => {
@@ -238,7 +238,7 @@ export const changeItemCartQuantityFailure = error => {
   };
 };
 export const changeItemCartQuantity = (id, cartQty) => dispatch => {
-  if (store.getState().loginReducer.login) {
+  if (store.getState().loginReducer.isAuthenticated) {
     const storeProductList = store.getState().cartReducer.cart.map(item => {
       if (item.product._id === id) {
         return { product: item.product._id, cartQuantity: cartQty };
