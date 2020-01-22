@@ -1,46 +1,17 @@
 import React from "react";
 
-import { makeStyles } from "@material-ui/core/styles";
-
 import Grid from "@material-ui/core/Grid";
 import { Button } from "@material-ui/core";
 import Box from "@material-ui/core/Box";
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    flexGrow: 1,
-    border: "none",
-    marginBottom: 50,
-  },
-  block: {
-    marginTop: -250,
-    width: "50%",
-  },
-  paragraph: {
-    // textDecoration: 'none',
-    textAlign: "left",
-    color: "#989898",
-  },
-  title: {
-    color: "#000000",
-    textTransform: "capitalize",
-  },
-  actionButton: {
-    marginBottom: 15,
-    paddingLeft: 20,
-    paddingRight: 20,
-    color: "#fff",
-    backgroundColor: theme.palette.primary.main,
-    height: 50,
-  },
-}));
+import useStyles from "./useStyles";
 
 const Slide = ({ image, title, subTitle }) => {
   const classes = useStyles();
 
   return (
-    <div>
-      <img src={image} alt="slide" />
+    <div className={classes.slider}>
+      <img className={classes.slider} src={image} alt="slide" />
       <Grid
         xs={6}
         justify="center"
