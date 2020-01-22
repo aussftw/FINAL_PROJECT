@@ -12,6 +12,12 @@ const useStyles = makeStyles(theme => ({
       display: "flex",
     },
   },
+  link: {
+    color: "black",
+    "&$visited": {
+      color: "theme. primary.dark",
+    },
+  },
   searchDesktop: {
     display: "flex",
     // display: "none",

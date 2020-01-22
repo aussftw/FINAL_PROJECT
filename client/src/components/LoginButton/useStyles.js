@@ -15,6 +15,7 @@ const useStyles = makeStyles({
   },
   link: {
     textDecoration: "none",
+    color: "black",
   },
   icon: {
     color: "black",

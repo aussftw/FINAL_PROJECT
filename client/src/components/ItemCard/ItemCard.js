@@ -7,47 +7,101 @@ import CardActionArea from "@material-ui/core/CardActionArea";
 import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
 import IconButton from "@material-ui/core/IconButton";
+import Snackbar from "@material-ui/core/Snackbar";
+import SnackbarContent from "@material-ui/core/SnackbarContent";
 import Typography from "@material-ui/core/Typography";
 import Tooltip from "@material-ui/core/Tooltip";
+// import { Link }  from "react-router-dom";
 
-import StarBorder from "@material-ui/icons/StarBorder";
+import CheckCircleRoundedIcon from "@material-ui/icons/CheckCircleRounded";
 import Favorite from "@material-ui/icons/Favorite";
 import FavoriteBorder from "@material-ui/icons/FavoriteBorder";
+import StarBorder from "@material-ui/icons/StarBorder";
 
 import Rating from "@material-ui/lab/Rating";
+import { connect } from "react-redux";
 import useStyles from "./useStyles";
+import { addItemCart } from "../../store/actions/Cart";
+import {
+  wishlistAddItem,
+  wishlistDeleteItem,
+} from "../../store/actions/wishlist";
 
-const CardTooltipText = value => {
-  if (value === undefined) return "Not yet rated";
-
-  return `Rated ${value} out of 5`;
-};
-
-const ItemCard = ({ title, rate, price, img, inCart, inWishlist }) => {
+// eslint-disable-next-line no-shadow
+const ItemCard = ({
+  id,
+  itemNo,
+  title,
+  rate,
+  price,
+  img,
+  addItemCart,
+  wishlistAll,
+  wishlistAddItem,
+  wishlistDeleteItem,
+  isAuthenticated,
+}) => {
   const classes = useStyles();
-  const [wishlist, setWishlist] = useState(inWishlist);
-  const [cart, setCart] = useState(inCart);
+  const [snackbarAddToCart, setSnackbarAddToCart] = useState(false);
+
+  const CardTooltipText = value => {
+    if (value === undefined) return "Not yet rated";
+
+    return `Rated ${value.toFixed(2)} out of 5`;
+  };
+
+  const addItemToCart = () => {
+    addItemCart(id, itemNo);
+    setSnackbarAddToCart(true);
+  };
+
+  const snackbarClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setSnackbarAddToCart(false);
+  };
+
+  const handleDeleteItemFromWishlist = () => {
+    if (isAuthenticated) {
+      wishlistAddItem(id);
+    }
+  };
 
   return (
     <Card className={classes.card}>
-      {wishlist ? (
+      {/* eslint-disable-next-line no-nested-ternary */}
+      {!wishlistAll.every(el => el._id !== id) ? (
         <Tooltip arrow title="Remove from wishlist">
           <IconButton
             className={classes.wishList}
-            onClick={() => setWishlist(false)}
+            onClick={() => wishlistDeleteItem(id)}
           >
             <Favorite />
           </IconButton>
         </Tooltip>
       ) : (
-        <Tooltip arrow title="Add to wishlist">
+        // isAuthenticated ? (
+        <Tooltip
+          arrow
+          title={isAuthenticated ? "Add to wishlist" : "Only for logined user"}
+        >
           <IconButton
             className={classes.wishList}
-            onClick={() => setWishlist(true)}
+            onClick={() => handleDeleteItemFromWishlist()}
           >
             <FavoriteBorder />
           </IconButton>
         </Tooltip>
+        // ) : (
+        //   <Link to="/login">
+        //     <IconButton
+        //       className={classes.wishList}
+        //     >
+        //       <FavoriteBorder />
+        //     </IconButton>
+        //   </Link>
+        // )
       )}
       <CardActionArea
         classes={{
@@ -87,19 +141,45 @@ const ItemCard = ({ title, rate, price, img, inCart, inWishlist }) => {
             ${price.toFixed(2)}
           </Typography>
         </CardContent>
-        {cart && (
-          <Typography className={classes.inCart} align="center">
-            IN CART
-          </Typography>
-        )}
       </CardActionArea>
-      {!cart && (
-        <Button variant="text" fullWidth onClick={() => setCart(true)}>
-          + add to cart
-        </Button>
-      )}
+      <Button variant="text" fullWidth onClick={() => addItemToCart()}>
+        + add to cart
+      </Button>
+      <Snackbar
+        anchorOrigin={{
+          vertical: "top",
+          horizontal: "left",
+        }}
+        open={snackbarAddToCart}
+        onClose={snackbarClose}
+        autoHideDuration={1500}
+      >
+        <SnackbarContent
+          className={classes.snackbar}
+          role="alert"
+          message={
+            <Box>
+              <CheckCircleRoundedIcon />
+              <span className={classes.snackbarMessage}>
+                Added to your shopping cart!
+              </span>
+            </Box>
+          }
+        />
+      </Snackbar>
     </Card>
   );
 };
 
-export default ItemCard;
+function mapStateToProps(state) {
+  return {
+    wishlistAll: state.wishlistReducer.wishlist,
+    isAuthenticated: state.loginReducer.isAuthenticated,
+  };
+}
+
+export default connect(mapStateToProps, {
+  wishlistAddItem,
+  wishlistDeleteItem,
+  addItemCart,
+})(ItemCard);
