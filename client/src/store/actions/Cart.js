@@ -63,7 +63,7 @@ export const getCart = () => dispatch => {
     // };
 
     axios
-      .get("/cart")
+      .get("/api/cart")
       .then(response => {
         // eslint-disable-next-line no-console
         console.log(response.data);
@@ -81,7 +81,7 @@ export const getCart = () => dispatch => {
     });
     const actualizationProducts = { products: storeProductList };
     axios
-      .post("/products/actualization", actualizationProducts)
+      .post("/api/products/actualization", actualizationProducts)
       .then(response => {
         // eslint-disable-next-line no-console
         console.log(response.data);
@@ -120,7 +120,7 @@ export const addItemCartFailure = error => {
 export const addItemCart = (id, itemNo) => dispatch => {
   if (store.getState().loginReducer.isAuthenticated) {
     axios
-      .put(`/cart/${id}`)
+      .put(`/api/cart/${id}`)
       .then(response => {
         // eslint-disable-next-line no-console
         console.log(response.data);
@@ -133,7 +133,7 @@ export const addItemCart = (id, itemNo) => dispatch => {
       });
   } else {
     axios
-      .get(`/products/${itemNo}`)
+      .get(`/api/products/${itemNo}`)
       .then(response => {
         // eslint-disable-next-line no-console
         console.log(response.data);
@@ -166,7 +166,7 @@ export const decreaseItemCartFailure = error => {
 export const decreaseItemCart = id => dispatch => {
   if (store.getState().loginReducer.isAuthenticated) {
     axios
-      .delete(`/cart/product/${id}`)
+      .delete(`/api/cart/product/${id}`)
       .then(response => {
         // eslint-disable-next-line no-console
         console.log(response.data);
@@ -203,7 +203,7 @@ export const deleteItemCartFailure = error => {
 export const deleteItemCart = id => dispatch => {
   if (store.getState().loginReducer.isAuthenticated) {
     axios
-      .delete(`/cart/${id}`)
+      .delete(`/api/cart/${id}`)
       .then(response => {
         // eslint-disable-next-line no-console
         console.log(response.data);
@@ -247,7 +247,7 @@ export const changeItemCartQuantity = (id, cartQty) => dispatch => {
     });
     const updateProductList = { products: storeProductList };
     axios
-      .put("/cart", updateProductList)
+      .put("/api/cart", updateProductList)
       .then(response => {
         // eslint-disable-next-line no-console
         console.log(response.data);
