@@ -4,7 +4,7 @@ import * as constants from "../constants";
 export function getLinks() {
   return dispatch => {
     axios
-      .get("/links")
+      .get("/api/links")
       .then(links => {
         dispatch({
           type: constants.GET_LINKS_SUCCESS,

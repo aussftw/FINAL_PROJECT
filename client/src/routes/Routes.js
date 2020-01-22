@@ -82,7 +82,7 @@ const Routes = ({
         <SearchPage />
       </Route>
       <Route path="/shop">
-        <p>shop</p>
+        <Shop />
       </Route>
       {/* <Route path="/about-us"> */}
 

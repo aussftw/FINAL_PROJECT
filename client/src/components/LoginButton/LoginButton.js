@@ -7,18 +7,23 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 import { logOut } from "../../store/actions/loginActions";
 import { wishlistLogOut } from "../../store/actions/wishlist";
 import useStyles from "./useStyles";
-import setAuthToken from "../common/setAuthToken";
+// import setAuthToken from "../common/setAuthToken";
 
-// eslint-disable-next-line no-shadow
-const LoginButton = ({ logOut, isAuthenticated, user, wishlistLogOut }) => {
+const LoginButton = ({
+  // logOut,
+  // eslint-disable-next-line no-shadow
+  isAuthenticated,
+  user,
+  // wishlistLogOut
+}) => {
   const classes = useStyles();
 
-  const signOut = e => {
-    e.preventDefault();
-    setAuthToken(false);
-    logOut();
-    wishlistLogOut();
-  };
+  // const signOut = e => {
+  //   e.preventDefault();
+  //   setAuthToken(false);
+  //   logOut();
+  //   wishlistLogOut();
+  // };
 
   return (
     <>
@@ -32,14 +37,14 @@ const LoginButton = ({ logOut, isAuthenticated, user, wishlistLogOut }) => {
               <AccountCircle />
             </IconButton>
           </Link>
-          <Button
-            className={classes.btn}
-            variant="outlined"
-            type="button"
-            onClick={signOut}
-          >
-            Sign Out
-          </Button>
+          {/* <Button */}
+          {/*  className={classes.btn} */}
+          {/*  variant="outlined" */}
+          {/*  type="button" */}
+          {/*  onClick={signOut} */}
+          {/* > */}
+          {/*  Sign Out */}
+          {/* </Button> */}
         </>
       ) : (
         <Link to="/login" className={classes.link}>

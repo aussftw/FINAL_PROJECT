@@ -16,7 +16,7 @@ import LoginButton from "../LoginButton/LoginButton";
 import useStyles from "./useStyles";
 import CartMini from "./CartMini/CartMini";
 
-const Header = ({ isAuthenticated, wishlistCounter }) => {
+const Header = ({ isAuthenticated, wishlistCounter, cart }) => {
   const classes = useStyles();
 
   const [isCartOpened, toggleCart] = useState(false);
@@ -55,7 +55,7 @@ const Header = ({ isAuthenticated, wishlistCounter }) => {
               color="inherit"
               onClick={cartToggling}
             >
-              <Badge badgeContent={8} color="primary">
+              <Badge badgeContent={cart.length} color="primary">
                 <ShoppingCartOutlinedIcon />
               </Badge>
             </IconButton>
@@ -72,6 +72,7 @@ function mapStateToProps(state) {
     isAuthenticated: state.loginReducer.isAuthenticated,
     wishlistCounter: state.wishlistReducer.wishlist.length,
     error: state.wishlistReducer.error,
+    cart: state.cartReducer.cart,
   };
 }
 
