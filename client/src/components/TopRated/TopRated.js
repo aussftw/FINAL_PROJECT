@@ -17,6 +17,7 @@ const TopRated = () => {
       .get("/products/top")
       .then(response => {
         setProducts(response.data);
+        console.log(response.data);
       })
       .catch(err => {
         // eslint-disable-next-line no-console
@@ -64,11 +65,12 @@ const TopRated = () => {
               lgDown={result.lgDown}
             >
               <ItemCard
+                id={value._id}
+                itemNo={value.itemNo}
                 title={value.name}
                 rate={value.rate.rating}
                 price={value.currentPrice}
                 img={value.imageUrls[0]}
-                inCart={false}
                 inWishList={false}
               />
             </Hidden>

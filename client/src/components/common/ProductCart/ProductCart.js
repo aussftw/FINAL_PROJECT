@@ -8,56 +8,79 @@ import CloseIcon from "@material-ui/icons/Close";
 import Typography from "@material-ui/core/Typography";
 import Tooltip from "@material-ui/core/Tooltip";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
+import { connect } from "react-redux";
+import {
+  addItemCart,
+  decreaseItemCart,
+  deleteItemCart,
+  changeItemCartQuantity,
+} from "../../../store/actions/Cart";
 
 import useStyles from "./useStyles";
 
 const ProductCart = ({
   id,
-  itemIndex,
+  itemNo,
   title,
   price,
   img,
   cartQty,
   shopQty,
-  deleteItem,
+  // eslint-disable-next-line no-shadow
+  addItemCart,
+  decreaseItemCart,
+  deleteItemCart,
+  changeItemCartQuantity,
 }) => {
   const classes = useStyles();
   const matches = useMediaQuery(theme => theme.breakpoints.down("xs"));
 
-  const [cartQuantity, setCartQuantity] = useState(cartQty);
   const [subtotal, setSubtotal] = useState(cartQty * price);
-  const qId = `quantity-${id}`;
+  const [cartQtyInput, setCartQtyInput] = useState(cartQty);
+  const qId = `quantity-input-${id}`;
 
   const calculatePrice = useCallback(() => {
-    setSubtotal(Math.round(cartQuantity * price * 100) / 100);
-  }, [cartQuantity, price]);
+    setSubtotal(Math.round(cartQty * price * 100) / 100);
+  }, [cartQty, price]);
 
   const changeCartProductQuantity = event => {
-    if (event.target.value > shopQty) {
-      setCartQuantity(shopQty);
+    if (event.target.value >= shopQty) {
+      setCartQtyInput(shopQty);
+      changeItemCartQuantity(id, shopQty);
     } else if (event.target.value < 0) {
-      setCartQuantity(0);
+      changeItemCartQuantity(id, 0);
     } else if (event.target.value === "") {
-      setCartQuantity(1);
+      changeItemCartQuantity(id, 1);
     } else {
-      setCartQuantity(event.target.value);
+      changeItemCartQuantity(id, event.target.value);
+    }
+  };
+
+  const cartQtyInputHandler = event => {
+    setCartQtyInput(event.target.value);
+  };
+
+  const increaseCartProductQuantity = () => {
+    if (cartQty < shopQty) {
+      addItemCart(id, itemNo);
     }
   };
 
   const decreaseCartProductQuantity = () => {
-    if (cartQuantity > 0) {
-      setCartQuantity(+cartQuantity - 1);
-    }
+    decreaseItemCart(id);
   };
-  const increaseCartProductQuantity = () => {
-    if (cartQuantity < shopQty) {
-      setCartQuantity(+cartQuantity + 1);
-    }
+
+  const deleteCartProduct = () => {
+    deleteItemCart(id);
   };
 
   useEffect(() => {
     calculatePrice();
   }, [calculatePrice]);
+
+  useEffect(() => {
+    setCartQtyInput(cartQty);
+  }, [cartQty]);
 
   return (
     <Grid container className={classes.item} spacing={1}>
@@ -80,12 +103,7 @@ const ProductCart = ({
       {matches && (
         <Grid item xs={1} className={classes.closeBtnGrid}>
           <Tooltip title="remove">
-            <IconButton
-              aria-label="delete"
-              onClick={() => {
-                deleteItem(itemIndex);
-              }}
-            >
+            <IconButton aria-label="delete" onClick={deleteCartProduct}>
               <CloseIcon />
             </IconButton>
           </Tooltip>
@@ -106,8 +124,9 @@ const ProductCart = ({
           id={qId}
           name="quantity"
           type="number"
-          value={cartQuantity}
-          onChange={changeCartProductQuantity}
+          value={cartQtyInput}
+          onChange={cartQtyInputHandler}
+          onBlur={changeCartProductQuantity}
         />
         <Tooltip title="increase">
           <IconButton
@@ -126,12 +145,7 @@ const ProductCart = ({
       {!matches && (
         <Grid item xs={1} className={classes.closeBtnGrid}>
           <Tooltip title="remove">
-            <IconButton
-              aria-label="delete"
-              onClick={() => {
-                deleteItem(itemIndex);
-              }}
-            >
+            <IconButton aria-label="delete" onClick={deleteCartProduct}>
               <CloseIcon />
             </IconButton>
           </Tooltip>
@@ -142,4 +156,9 @@ const ProductCart = ({
   );
 };
 
-export default ProductCart;
+export default connect(null, {
+  addItemCart,
+  decreaseItemCart,
+  deleteItemCart,
+  changeItemCartQuantity,
+})(ProductCart);
