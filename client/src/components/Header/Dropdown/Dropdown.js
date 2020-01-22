@@ -24,7 +24,7 @@ const MenuListComposition = props => {
 
   const filter = category => {
     axios
-      .get(`/api/products/filter?categories=${category}`)
+      .get(`/products/filter?categories=${category}`)
       .then(products => {
         searchPhrases(products.data.products);
       })
