@@ -75,6 +75,14 @@ const useStyles = makeStyles(theme => ({
       fontSize: 12,
     },
   },
+  outstock: {
+    textAlign: "center",
+    fontSize: 14,
+    color: "red",
+    [theme.breakpoints.down("sm")]: {
+      fontSize: 12,
+    },
+  },
   closeBtnGrid: {
     display: "flex",
     justifyContent: "center",

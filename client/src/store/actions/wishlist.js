@@ -15,6 +15,7 @@ export const getWishlistFailure = err => {
 };
 
 export const getWishlist = () => dispatch => {
+  dispatch({ type: constants.WISHLIST_REQUEST });
   axios
     .get("/wishlist")
     .then(res => {
@@ -71,8 +72,6 @@ export const wishlistAddItem = id => dispatch => {
   axios
     .put(`/wishlist/${id}`)
     .then(res => {
-      // eslint-disable-next-line no-console
-      console.log(res);
       dispatch(addWishlistItemSuccess(res.data));
     })
     .catch(err => {

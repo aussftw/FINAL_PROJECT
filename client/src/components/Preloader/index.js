@@ -7,7 +7,6 @@ import useStyles from "./useStyles";
 const Preloader = () => {
   const classes = useStyles();
   const matches = useMediaQuery(theme => theme.breakpoints.up("md"));
-  console.log(matches);
 
   return (
     <>

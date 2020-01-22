@@ -51,12 +51,17 @@ const WishlistCard = ({
         </Grid>
       )}
       <Grid item xs={6} sm={1} className={classes.wrapperGrid}>
-        <Typography className={classes.stock}>
+        <Typography className={qty > 0 ? classes.stock : classes.outstock}>
           {qty > 0 ? "In Stock" : "Out Stock"}
         </Typography>
       </Grid>
       <Grid item xs={6} sm={3} className={classes.wrapperGrid}>
-        <Button className={classes.btn} variant="outlined" type="button">
+        <Button
+          className={classes.btn}
+          variant="outlined"
+          type="button"
+          disabled={!(qty > 0)}
+        >
           Add to cart
         </Button>
       </Grid>

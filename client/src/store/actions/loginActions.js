@@ -1,5 +1,4 @@
 import axios from "axios";
-// eslint-disable-next-line import/no-extraneous-dependencies
 import jwt from "jwt-decode";
 import * as constants from "../constants";
 import setAuthToken from "../../components/common/setAuthToken";
@@ -60,7 +59,6 @@ export const logIn = user => dispatch => {
         setAuthToken(response.data.token);
         dispatch(userFromJwt(jwt(response.data.token)));
       }
-      dispatch(getWishlist());
       dispatch(getUser());
       dispatch(getWishlist());
     })

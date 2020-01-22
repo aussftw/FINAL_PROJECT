@@ -1,5 +1,7 @@
 import axios from "axios";
+import jwt from "jwt-decode";
 import * as constants from "../constants";
+import { userFromJwt } from "./loginActions";
 
 export const editDataSuccess = data => {
   return {
@@ -31,6 +33,11 @@ export const saveUserData = (event, updatedCustomer) => dispatch => {
     })
     .catch(error => {
       dispatch(editDataFailure(error));
+      // eslint-disable-next-line no-undef
+      const token = localStorage.getItem("authToken");
+      if (token) {
+        dispatch(userFromJwt(jwt(token)));
+      }
     });
 };
 
