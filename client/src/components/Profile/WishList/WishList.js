@@ -4,10 +4,11 @@ import v4 from "uuid";
 import { connect } from "react-redux";
 import useStyles from "./useStyles";
 import WishlistCard from "./WishlistCard/WishlistCard";
-
+import Preloader from "../../Preloader";
 import { getWishlist } from "../../../store/actions/wishlist";
 
-function WishList({ wishlist, error }) {
+// eslint-disable-next-line no-shadow
+function WishList({ isLoading, wishlist, error }) {
   const classes = useStyles();
 
   const errorMessageArray = [
@@ -22,7 +23,9 @@ function WishList({ wishlist, error }) {
       : error
     : "";
 
-  return (
+  return isLoading ? (
+    <Preloader />
+  ) : (
     <div className={classes.root}>
       <h2 className={classes.title}>Wishlist</h2>
       {wishlist.length > 0 ? (
@@ -54,6 +57,7 @@ function WishList({ wishlist, error }) {
 
 function mapStateToProps(state) {
   return {
+    isLoading: state.wishlistReducer.isLoading,
     wishlist: state.wishlistReducer.wishlist,
     error: state.wishlistReducer.error,
   };

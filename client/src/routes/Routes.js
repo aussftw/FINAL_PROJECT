@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-// eslint-disable-next-line import/no-extraneous-dependencies
+// eslint-disable-next-line import/no-extraneous-dependencies,import/no-unresolved
 import jwt from "jwt-decode";
 
 import HomePage from "../pages/HomePage/HomePage";
@@ -12,7 +12,7 @@ import NotFound from "../pages/NotFound/NotFound";
 import RegistrationForm from "../components/RegistrationForm";
 import ItemDetailsPage from "../pages/ItemDetailsPage/ItemDetailsPage";
 import setAuthToken from "../components/common/setAuthToken";
-import Preloader from "../components/Preloader/Desktop";
+import Preloader from "../components/Preloader";
 import {
   getUser,
   preloaderClose,

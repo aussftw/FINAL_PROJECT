@@ -3,7 +3,7 @@ import * as axios from "axios";
 
 import Container from "@material-ui/core/Container";
 import useStyles from "./useStyles";
-import Preloader from "../../components/Preloader/Desktop";
+import Preloader from "../../components/Preloader";
 import ProductCart from "../../components/common/ProductCart/ProductCart";
 
 const Cart = () => {
