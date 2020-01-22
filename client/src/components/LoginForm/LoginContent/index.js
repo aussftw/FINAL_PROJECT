@@ -18,7 +18,7 @@ const LoginContent = ({
   handleChange,
   handleClickShowPassword,
   open,
-  userData,
+  user,
   showPassword,
   message,
 }) => {
@@ -42,17 +42,22 @@ const LoginContent = ({
           <ModalHeader />
           <div className={classes.wrapper}>
             <h3 className={classes.title}>Log In Form</h3>
+            {Boolean(message) && <p className={classes.errMsg}>{message}</p>}
             <ValidatorForm noValidate={false} onSubmit={submitLogin}>
               <TextValidator
                 label="Login or Email"
                 variant="outlined"
-                value={userData.loginOrEmail}
+                value={user.loginOrEmail}
                 onChange={handleChange("loginOrEmail")}
                 className={classes.textField}
-                validators={["required", "matchRegexp:^[a-zA-Z0-9]{3,22}$"]}
+                validators={[
+                  "required",
+                  `${"matchRegexp:^[a-zA-Z0-9]{3,22}" ||
+                    "matchRegexp: ^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\\.[a-zA-Z]{2,4}"}`,
+                ]}
                 errorMessages={[
                   "this field is required",
-                  "Your password must be 3-22 characters, including only latin letters and numbers",
+                  "Your Log in must be 3-22 characters, including latin letters and numbers or use your Email",
                 ]}
               />
 
@@ -60,7 +65,7 @@ const LoginContent = ({
                 className={classes.textField}
                 variant="outlined"
                 label="Password"
-                value={userData.password}
+                value={user.password}
                 onChange={handleChange("password")}
                 InputProps={{
                   type: showPassword ? "text" : "password",
@@ -71,11 +76,7 @@ const LoginContent = ({
                         onClick={handleClickShowPassword}
                         edge="end"
                       >
-                        {userData.showPassword ? (
-                          <Visibility />
-                        ) : (
-                          <VisibilityOff />
-                        )}
+                        {user.showPassword ? <Visibility /> : <VisibilityOff />}
                       </IconButton>
                     </InputAdornment>
                   ),
@@ -96,7 +97,6 @@ const LoginContent = ({
                 Login
               </Button>
             </ValidatorForm>
-            {Boolean(message) && <p className={classes.errMsg}>{message}</p>}
           </div>
         </div>
       </Fade>
