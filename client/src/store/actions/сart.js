@@ -71,29 +71,21 @@ export const mergeCarts = () => dispatch => {
       });
       const updateProductList = { products: mergedCart };
       axios
-        .put("/cart", updateProductList)
+        .put("/api/cart", updateProductList)
         .then(response => {
-          // eslint-disable-next-line no-console
-          console.log(response.data);
           dispatch(getCartSuccess(response.data));
         })
         .catch(error => {
-          // eslint-disable-next-line no-console
-          console.log(error.response);
           dispatch(getCartFailure(error));
         });
     }
   };
   axios
-    .get("/cart")
+    .get("/api/cart")
     .then(response => {
-      // eslint-disable-next-line no-console
-      console.log(response.data);
       merging(response.data);
     })
     .catch(error => {
-      // eslint-disable-next-line no-console
-      console.log(error.response);
       dispatch(getCartFailure(error));
     });
 };
@@ -101,15 +93,11 @@ export const mergeCarts = () => dispatch => {
 export const getCart = () => dispatch => {
   if (store.getState().loginReducer.isAuthenticated) {
     axios
-      .get("/cart")
+      .get("/api/cart")
       .then(response => {
-        // eslint-disable-next-line no-console
-        console.log(response.data);
         dispatch(getCartSuccess(response.data));
       })
       .catch(error => {
-        // eslint-disable-next-line no-console
-        console.log(error.response);
         dispatch(getCartFailure(error));
       });
   } else {
@@ -118,10 +106,8 @@ export const getCart = () => dispatch => {
     });
     const actualizationProducts = { products: storeProductList };
     axios
-      .post("/products/actualization", actualizationProducts)
+      .post("/api/products/actualization", actualizationProducts)
       .then(response => {
-        // eslint-disable-next-line no-console
-        console.log(response.data);
         dispatch(actualizationLocalCartSuccess(response.data));
       })
       .catch(error => {
@@ -157,23 +143,17 @@ export const addItemCartFailure = error => {
 export const addItemCart = (id, itemNo) => dispatch => {
   if (store.getState().loginReducer.isAuthenticated) {
     axios
-      .put(`/cart/${id}`)
+      .put(`/api/cart/${id}`)
       .then(response => {
-        // eslint-disable-next-line no-console
-        console.log(response.data);
         dispatch(addItemCartSuccess(response.data));
       })
       .catch(error => {
-        // eslint-disable-next-line no-console
-        console.log(error.response.data);
         dispatch(addItemCartFailure(error));
       });
   } else {
     axios
-      .get(`/products/${itemNo}`)
+      .get(`/api/products/${itemNo}`)
       .then(response => {
-        // eslint-disable-next-line no-console
-        console.log(response.data);
         dispatch(addItemCartLocalSuccess(response.data));
       })
       .catch(error => {
@@ -203,15 +183,11 @@ export const decreaseItemCartFailure = error => {
 export const decreaseItemCart = id => dispatch => {
   if (store.getState().loginReducer.isAuthenticated) {
     axios
-      .delete(`/cart/product/${id}`)
+      .delete(`/api/cart/product/${id}`)
       .then(response => {
-        // eslint-disable-next-line no-console
-        console.log(response.data);
         dispatch(decreaseItemCartSuccess(response.data));
       })
       .catch(error => {
-        // eslint-disable-next-line no-console
-        console.log(error.response.data);
         dispatch(decreaseItemCartFailure(error));
       });
   } else {
@@ -240,15 +216,11 @@ export const deleteItemCartFailure = error => {
 export const deleteItemCart = id => dispatch => {
   if (store.getState().loginReducer.isAuthenticated) {
     axios
-      .delete(`/cart/${id}`)
+      .delete(`/api/cart/${id}`)
       .then(response => {
-        // eslint-disable-next-line no-console
-        console.log(response.data);
         dispatch(deleteItemCartSuccess(response.data));
       })
       .catch(error => {
-        // eslint-disable-next-line no-console
-        console.log(error.response.data);
         dispatch(deleteItemCartFailure(error));
       });
   } else {
@@ -284,15 +256,11 @@ export const changeItemCartQuantity = (id, cartQty) => dispatch => {
     });
     const updateProductList = { products: storeProductList };
     axios
-      .put("/cart", updateProductList)
+      .put("/api/cart", updateProductList)
       .then(response => {
-        // eslint-disable-next-line no-console
-        console.log(response.data);
         dispatch(changeItemCartQuantitySuccess(response.data));
       })
       .catch(error => {
-        // eslint-disable-next-line no-console
-        console.log(error.response.data);
         dispatch(changeItemCartQuantityFailure(error));
       });
   } else {

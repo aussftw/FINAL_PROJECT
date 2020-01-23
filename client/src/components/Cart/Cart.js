@@ -59,9 +59,7 @@ const Cart = ({ cart, error, getCart }) => {
           }
           return (
             <ProductCart
-              /* eslint-disable-next-line no-underscore-dangle */
               id={value.product._id}
-              /* eslint-disable-next-line no-underscore-dangle */
               key={`cart-key-${value.product._id}`}
               itemNo={value.product.itemNo}
               title={value.product.name}

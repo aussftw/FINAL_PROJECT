@@ -19,11 +19,12 @@ import {
   userFromJwt,
 } from "../store/actions/loginActions";
 import { getWishlist } from "../store/actions/wishlist";
+import SearchPage from "../pages/SearchPage/SearchPage";
+import Shop from "../pages/Shop/Shop";
 
 // eslint-disable-next-line no-shadow
 const Routes = ({
   isAuthenticated,
-  getUser,
   getWishlist,
   preloaderClose,
   preloader,
@@ -41,7 +42,7 @@ const Routes = ({
     } else {
       preloaderClose();
     }
-  }, [getUser, getWishlist, preloaderClose, userFromJwt]);
+  }, [isAuthenticated, getWishlist, preloaderClose, userFromJwt]);
 
   // eslint-disable-next-line no-nested-ternary
   return preloader ? (
@@ -53,6 +54,15 @@ const Routes = ({
       </Route>
       <Route path="/cart">
         <CartPage />
+      </Route>
+      <Route path="/search">
+        <SearchPage />
+      </Route>
+      <Route path="/shop">
+        <Shop />
+      </Route>
+      <Route path="/notfound">
+        <NotFound />
       </Route>
       <Route path="/profile">
         <Profiler />
@@ -67,6 +77,15 @@ const Routes = ({
       <Route path="/cart">
         <CartPage />
       </Route>
+      <Route path="/search">
+        <SearchPage />
+      </Route>
+      <Route path="/shop">
+        <Shop />
+      </Route>
+      {/* <Route path="/about-us"> */}
+
+      {/* </Route> */}
       <Route path="/notfound">
         <NotFound />
       </Route>
