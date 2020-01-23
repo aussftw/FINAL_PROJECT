@@ -14,7 +14,7 @@ const Brands = () => {
 
   useEffect(() => {
     axios
-      .get("/partners")
+      .get("/api/partners")
       .then(response => {
         setBrands(response.data);
         setPreloader(false);
