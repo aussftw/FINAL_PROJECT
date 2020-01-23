@@ -1,72 +1,69 @@
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(theme => ({
-  card: {
-    position: "relative",
-    display: "inline-block",
-    flexGrow: 1,
-    margin: theme.spacing(1),
-    width: 240,
-    padding: theme.spacing(1),
-    transition: "box-shadow 0.2s ease-out",
-    "&:hover": {
-      boxShadow: "2px 3px 7px 0px rgba(0,0,0,0.24)",
-    },
-    "&:hover $mediaImage": {
-      transform: "scale(1)",
+  item: {
+    height: 100,
+    alignItems: "center",
+    justifyItems: "center",
+    border: "1px solid",
+    borderTop: "none",
+    borderColor: theme.palette.secondary.light,
+    [theme.breakpoints.down("xs")]: {
+      height: 200,
     },
   },
-  wishList: {
-    position: "absolute",
-    top: theme.spacing(1),
-    right: theme.spacing(1),
-    color: theme.palette.primary.main,
-    backgroundColor: "#ffffff",
-    zIndex: 2,
+  imageGrid: {
+    display: "flex",
+    justifyContent: "center",
   },
-  actionArea: {
-    "&:hover $focusHighlight": {
-      opacity: 0,
-    },
-  },
-  focusHighlight: {},
-  cardContent: {
-    paddingTop: theme.spacing(1),
-    paddingBottom: 0,
-  },
-  mediaImage: {
-    height: 200,
-    transform: "scale(0.9)",
-    transition: "transform 0.2s ease-out",
+  image: {
+    height: 92,
+    objectFit: "cover",
   },
   title: {
     fontSize: 14,
-    paddingBottom: 5,
     color: theme.palette.secondary.dark,
     "&:hover": {
       color: theme.palette.primary.main,
+      cursor: "pointer",
     },
   },
-  rating: {
-    paddingBottom: theme.spacing(1),
-    color: theme.palette.primary.main,
-    iconEmpty: {
-      color: theme.palette.primary.main,
+  titleGrid: {
+    [theme.breakpoints.down("xs")]: {
+      display: "flex",
+      justifyContent: "center",
     },
+  },
+  quantityNumber: {
+    margin: "0px 6px",
+    fontSize: 14,
+    width: 36,
+    textAlign: "center",
+    "&::-webkit-outer-spin-button, &::-webkit-inner-spin-button": {
+      "-webkit-appearance": "none",
+      margin: 0,
+    },
+    border: "1px solid",
+    borderColor: theme.palette.secondary.light,
+    "&:focus": {
+      outlineColor: theme.palette.primary.main,
+    },
+  },
+  quantityGrid: {
+    display: "flex",
+    justifyContent: "center",
   },
   price: {
+    textAlign: "right",
     fontSize: 14,
     fontWeight: 600,
-    "&:hover": {
-      color: theme.palette.primary.main,
-    },
   },
-  inCart: {
-    paddingTop: theme.spacing(1),
-    paddingBottom: 7,
-    fontSize: 13,
-    fontWeight: 700,
-    color: theme.palette.primary.main,
+  closeBtnGrid: {
+    display: "flex",
+    justifyContent: "center",
+    [theme.breakpoints.down("xs")]: {
+      alignSelf: "start",
+    },
   },
 }));
 

@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import jwt from "jwt-decode";
 
 import HomePage from "../pages/HomePage/HomePage";
-import Cart from "../pages/Cart/Cart";
+import CartPage from "../pages/CartPage/CartPage";
 import Profiler from "../pages/Profiler/Profiler";
 import LoginForm from "../components/LoginForm";
 import NotFound from "../pages/NotFound/NotFound";
@@ -19,6 +19,8 @@ import {
   userFromJwt,
 } from "../store/actions/loginActions";
 import { getWishlist } from "../store/actions/wishlist";
+import SearchPage from "../pages/SearchPage/SearchPage";
+import Shop from "../pages/Shop/Shop";
 
 // eslint-disable-next-line no-shadow
 const Routes = ({
@@ -52,7 +54,16 @@ const Routes = ({
         <HomePage />
       </Route>
       <Route path="/cart">
-        <Cart />
+        <CartPage />
+      </Route>
+      <Route path="/search">
+        <SearchPage />
+      </Route>
+      <Route path="/shop">
+        <Shop />
+      </Route>
+      <Route path="/notfound">
+        <NotFound />
       </Route>
       <Route path="/profile">
         <Profiler />
@@ -65,8 +76,17 @@ const Routes = ({
         <HomePage />
       </Route>
       <Route path="/cart">
-        <Cart />
+        <CartPage />
       </Route>
+      <Route path="/search">
+        <SearchPage />
+      </Route>
+      <Route path="/shop">
+        <Shop />
+      </Route>
+      {/* <Route path="/about-us"> */}
+
+      {/* </Route> */}
       <Route path="/notfound">
         <NotFound />
       </Route>

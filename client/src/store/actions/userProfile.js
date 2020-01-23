@@ -27,7 +27,7 @@ export const saveUserData = (event, updatedCustomer) => dispatch => {
   event.preventDefault();
 
   axios
-    .put("/customers", updatedCustomer)
+    .put("/api/customers", updatedCustomer)
     .then(updatedUser => {
       dispatch(editDataSuccess(updatedUser.data));
     })
