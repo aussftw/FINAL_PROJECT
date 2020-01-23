@@ -19,7 +19,6 @@ const useStyles = makeStyles(theme => ({
     },
   },
   paragraph: {
-    // textDecoration: 'none',
     textAlign: "left",
     color: "#989898",
     [theme.breakpoints.down("xs")]: {
