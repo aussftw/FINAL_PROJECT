@@ -25,49 +25,86 @@ export const actualizationLocalCartFailure = error => {
     payload: error,
   };
 };
+
+export const mergeCarts = () => dispatch => {
+  const merging = data => {
+    if (store.getState().cartReducer.cart.length === 0) {
+      dispatch(getCartSuccess(data));
+    } else {
+      const localCart = store.getState().cartReducer.cart.map(item => {
+        return {
+          product: item.product._id,
+          cartQuantity: item.cartQuantity,
+          isMatched: false,
+        };
+      });
+      const serverCart = data.products.map(item => {
+        return {
+          product: item.product._id,
+          cartQuantity: item.cartQuantity,
+          isMatched: false,
+        };
+      });
+      const mergedCart = [];
+      localCart.forEach((localItem, localIndex) => {
+        serverCart.forEach((serverItem, serverIndex) => {
+          if (localItem.product === serverItem.product) {
+            mergedCart.push({
+              product: serverItem.product,
+              cartQuantity: Math.max(
+                +localItem.cartQuantity,
+                +serverItem.cartQuantity
+              ),
+            });
+            serverCart[serverIndex].isMatched = true;
+            localCart[localIndex].isMatched = true;
+          }
+        });
+      });
+      localCart.concat(serverCart).forEach(item => {
+        if (!item.isMatched) {
+          mergedCart.push({
+            product: item.product,
+            cartQuantity: item.cartQuantity,
+          });
+        }
+      });
+      const updateProductList = { products: mergedCart };
+      axios
+        .put("/cart", updateProductList)
+        .then(response => {
+          // eslint-disable-next-line no-console
+          console.log(response.data);
+          dispatch(getCartSuccess(response.data));
+        })
+        .catch(error => {
+          // eslint-disable-next-line no-console
+          console.log(error.response);
+          dispatch(getCartFailure(error));
+        });
+    }
+  };
+  axios
+    .get("/cart")
+    .then(response => {
+      // eslint-disable-next-line no-console
+      console.log(response.data);
+      merging(response.data);
+    })
+    .catch(error => {
+      // eslint-disable-next-line no-console
+      console.log(error.response);
+      dispatch(getCartFailure(error));
+    });
+};
+
 export const getCart = () => dispatch => {
   if (store.getState().loginReducer.isAuthenticated) {
-    // const mergeCarts = data => {
-    //   if (store.getState().cartReducer.cart.length === 0) {
-    //     dispatch(getCartSuccess(data));
-    //   } else {
-    //     const mergedCart = [];
-    //       console.log("store: ",store.getState().cartReducer.cart);
-    //       console.log("server data: ", data);
-    //
-    //       const mergedArray = [...store.getState().cartReducer.cart, ...data];
-    //     mergedArray.forEach(mergedItem => {
-    //       let flagNoMatch = true;
-    //       data.forEach(serverItem => {
-    //         if (mergedItem.product._id === serverItem.product._id) {
-    //           flagNoMatch = false;
-    //           mergedCart.push({
-    //             product: serverItem.product._id,
-    //             cartQuantity: Math.max(
-    //               +mergedItem.cartQuantity,
-    //               +serverItem.cartQuantity
-    //             ),
-    //           });
-    //         }
-    //       });
-    //       if (flagNoMatch) {
-    //         mergedCart.push({
-    //           product: mergedItem.product._id,
-    //           cartQuantity: mergedItem.cartQuantity,
-    //         });
-    //       }
-    //     });
-    //     console.log(mergedCart);
-    //       dispatch(getCartSuccess(data));
-    //   }
-    // };
-
     axios
       .get("/cart")
       .then(response => {
         // eslint-disable-next-line no-console
         console.log(response.data);
-        // dispatch(mergeCarts(response.data));
         dispatch(getCartSuccess(response.data));
       })
       .catch(error => {
@@ -262,4 +299,10 @@ export const changeItemCartQuantity = (id, cartQty) => dispatch => {
     const data = { id, cartQuantity: cartQty };
     dispatch(changeItemCartQuantityLocal(data));
   }
+};
+
+export const clearCart = () => {
+  return {
+    type: "CLEAR_CART",
+  };
 };
