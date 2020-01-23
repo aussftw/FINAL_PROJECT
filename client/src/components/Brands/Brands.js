@@ -27,18 +27,13 @@ const Brands = () => {
       });
   }, []);
 
-  // eslint-disable-next-line
-  const { _id, url } = brands;
-
-  console.log("brands", brands);
-
   return (
     <Container className={classes.brandsContaier}>
       {brands.length === 0 ? (
         <PreloaderAdaptive />
       ) : (
         brands.map(brand => (
-          <Link href={url} key={_id}>
+          <Link href={brand.url} key={brand._id}>
             <Box>
               <img
                 src={`${brand.imageUrl}`}

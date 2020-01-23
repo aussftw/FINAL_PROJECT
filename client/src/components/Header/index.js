@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
+import { connect } from "react-redux";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
@@ -14,40 +14,54 @@ import LoginButton from "../LoginButton/LoginButton";
 
 import useStyles from "./useStyles";
 
-const Header = () => {
-  const classes = useStyles();
+const Header = () =>
+  // { isAuthenticated, wishlistCounter }
+  {
+    const classes = useStyles();
 
-  return (
-    <div>
-      <AppBar color="inherit" position="fixed">
-        <Toolbar className={classes.flex}>
-          <div className={classes.flex}>
-            <TemporaryDrawer />
-            <Link to="/">
-              <img src="./img/Logo.svg" alt="logo" className={classes.logo} />
-            </Link>
-          </div>
-          <div>
-            <CustomizedSearch className={classes.searchDesktop} />
-          </div>
-          <div>
-            <LoginButton />
-            <IconButton aria-label="show new mails" color="inherit">
-              <Badge badgeContent={8} color="primary">
-                <ShoppingCartOutlinedIcon />
-              </Badge>
-            </IconButton>
-            {/* <CartMini /> */}
-            {/* <IconButton aria-label="show 17 new notifications" color="inherit"> */}
-            {/*  <Badge badgeContent={5} color="primary"> */}
-            {/*    <FavoriteBorderIcon /> */}
-            {/*  </Badge> */}
-            {/* </IconButton> */}
-          </div>
-        </Toolbar>
-      </AppBar>
-    </div>
-  );
-};
+    return (
+      <div>
+        <AppBar color="inherit" position="fixed">
+          <Toolbar className={classes.flex}>
+            <div className={classes.flex}>
+              <TemporaryDrawer />
+              <Link to="/">
+                <img src="./img/Logo.svg" alt="logo" className={classes.logo} />
+              </Link>
+            </div>
+            <div>
+              <CustomizedSearch className={classes.searchDesktop} />
+            </div>
+            <div>
+              <LoginButton />
+              <IconButton
+                aria-label="show new products at cart"
+                color="inherit"
+              >
+                <Badge badgeContent={8} color="primary">
+                  <ShoppingCartOutlinedIcon />
+                </Badge>
+              </IconButton>
+              {/* <CartMini /> */}
+              {/* <IconButton aria-label="show new products at wishlist" color="inherit"> */}
+              {/*  <Badge badgeContent={wishlistCounter} color="primary"> */}
+              {/*    <FavoriteBorderIcon /> */}
+              {/*  </Badge> */}
+              {/* </IconButton> */}
+            </div>
+          </Toolbar>
+        </AppBar>
+      </div>
+    );
+  };
 
-export default Header;
+// function mapStateToProps(state) {
+//   return {
+//     isAuthenticated: state.loginReducer.isAuthenticated,
+//     wishlistCounter: state.wishlistReducer.wishlist.length,
+//     error: state.wishlistReducer.error,
+//   };
+// }
+
+export default connect()(Header);
+// mapStateToProps

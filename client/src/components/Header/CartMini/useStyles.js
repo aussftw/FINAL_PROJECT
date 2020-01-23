@@ -13,7 +13,6 @@ const useStyles = makeStyles({
     zIndex: 10,
     color: "#707070",
     boxShadow: "2px 2px 11px rgba(0,0,0,0.1)",
-    // transition: "height 3000ms cubic-bezier(0.4, 0, 0.2, 1) 0ms"
   },
   mini_cart_list: {
     listStyle: "none",
