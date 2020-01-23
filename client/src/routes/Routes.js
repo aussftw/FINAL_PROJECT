@@ -25,6 +25,7 @@ import Shop from "../pages/Shop/Shop";
 // eslint-disable-next-line no-shadow
 const Routes = ({
   isAuthenticated,
+  getUser,
   getWishlist,
   preloaderClose,
   preloader,
@@ -42,7 +43,7 @@ const Routes = ({
     } else {
       preloaderClose();
     }
-  }, [isAuthenticated, getWishlist, preloaderClose, userFromJwt]);
+  }, [getUser, getWishlist, preloaderClose, userFromJwt]);
 
   // eslint-disable-next-line no-nested-ternary
   return preloader ? (
