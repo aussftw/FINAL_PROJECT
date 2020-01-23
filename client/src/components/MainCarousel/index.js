@@ -21,17 +21,18 @@ const MainCarousel = () => {
 
   return (
     <Container maxWidth="lg">
-      <Carousel
-        autoPlay
-        infiniteLoop
-        showThumbs={false}
-        showStatus={false}
-        interval={2500}
-      >
-        {!slidesData ? (
-          <Preloader />
-        ) : (
-          slidesData.map(value => {
+      {!slidesData ? (
+        <Preloader />
+      ) : (
+        <Carousel
+          autoPlay
+          infiniteLoop
+          showThumbs={false}
+          showStatus={false}
+          interval={2500}
+          stopOnHover={false}
+        >
+          {slidesData.map(value => {
             return (
               <Slide
                 key={value._id}
@@ -40,9 +41,9 @@ const MainCarousel = () => {
                 subTitle={value.description}
               />
             );
-          })
-        )}
-      </Carousel>
+          })}
+        </Carousel>
+      )}
     </Container>
   );
 };
