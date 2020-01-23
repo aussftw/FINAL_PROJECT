@@ -10,7 +10,6 @@ import { connect } from "react-redux";
 import useStyles from "./useStyles";
 import { wishlistDeleteItem } from "../../../../store/actions/wishlist";
 import { addItemCart } from "../../../../store/actions/сart";
-// import {Link} from "react-router-dom";
 
 const WishlistCard = ({
   id,
@@ -19,9 +18,8 @@ const WishlistCard = ({
   price,
   img,
   qty,
-  // eslint-disable-next-line no-shadow
-  wishlistDeleteItem,
-  addItemCart,
+  deleteWishlistItem,
+  addCartItem,
 }) => {
   const classes = useStyles();
   const matches = useMediaQuery(theme => theme.breakpoints.down("xs"));
@@ -42,9 +40,7 @@ const WishlistCard = ({
           <Tooltip title="remove">
             <IconButton
               aria-label="delete"
-              onClick={() => {
-                wishlistDeleteItem(id);
-              }}
+              onClick={() => deleteWishlistItem(id)}
             >
               <CloseIcon />
             </IconButton>
@@ -62,7 +58,7 @@ const WishlistCard = ({
           variant={qty > 0 && "outlined"}
           type="button"
           disabled={!(qty > 0)}
-          onClick={() => addItemCart(id, itemNo)}
+          onClick={() => addCartItem(id, itemNo)}
         >
           Add to cart
         </Button>
@@ -72,7 +68,7 @@ const WishlistCard = ({
           <Tooltip title="remove">
             <IconButton
               aria-label="delete"
-              onClick={() => wishlistDeleteItem(id)}
+              onClick={() => deleteWishlistItem(id)}
             >
               <CloseIcon />
             </IconButton>
@@ -83,4 +79,7 @@ const WishlistCard = ({
   );
 };
 
-export default connect(null, { wishlistDeleteItem, addItemCart })(WishlistCard);
+export default connect(null, {
+  deleteWishlistItem: wishlistDeleteItem,
+  addCartItem: addItemCart,
+})(WishlistCard);

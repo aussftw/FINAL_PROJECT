@@ -2,7 +2,6 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyle = makeStyles(() => ({
   wrapper: {
-    // marginLeft: 200,
     display: "flex",
     justifyContent: "center",
     alignItems: "center",

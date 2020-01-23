@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-// eslint-disable-next-line import/no-extraneous-dependencies,import/no-unresolved
 import jwt from "jwt-decode";
 
 import HomePage from "../pages/HomePage/HomePage";
