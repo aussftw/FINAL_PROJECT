@@ -14,7 +14,7 @@ import {
   decreaseItemCart,
   deleteItemCart,
   changeItemCartQuantity,
-} from "../../../store/actions/Cart";
+} from "../../../store/actions/сart";
 
 import useStyles from "./useStyles";
 
