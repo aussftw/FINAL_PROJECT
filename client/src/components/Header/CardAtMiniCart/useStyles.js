@@ -3,6 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles({
   mini_cart_card: {
     display: "flex",
+    width: 273,
     margin: "0 0 10px",
     listStyle: "none",
     justifyContent: "space-between",
@@ -26,6 +27,7 @@ const useStyles = makeStyles({
     marginRight: 10,
   },
   mini_cart_card_title: {
+    textTransform: "capitalize",
     lineHeight: 1.5,
     color: "#707070",
     fontSize: 14,
