@@ -57,8 +57,8 @@ const WishlistCard = ({
       </Grid>
       <Grid item xs={6} sm={3} className={classes.wrapperGrid}>
         <Button
-          className={classes.btn}
-          variant="outlined"
+          className={qty > 0 ? classes.btn : classes.disabledBtn}
+          variant={qty > 0 && "outlined"}
           type="button"
           disabled={!(qty > 0)}
         >
@@ -79,16 +79,8 @@ const WishlistCard = ({
           </Tooltip>
         </Grid>
       )}
-      {/* {matches && <Grid item xs={1} />} */}
     </Grid>
   );
 };
 
-// eslint-disable-next-line no-unused-vars
-function mapStateToProps(state) {
-  return {
-    //     error: state.wishlistReducer.error,
-  };
-}
-
-export default connect(mapStateToProps, { wishlistDeleteItem })(WishlistCard);
+export default connect(null, { wishlistDeleteItem })(WishlistCard);

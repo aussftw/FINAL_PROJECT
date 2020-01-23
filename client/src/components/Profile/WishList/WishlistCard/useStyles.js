@@ -96,7 +96,6 @@ const useStyles = makeStyles(theme => ({
   },
   btn: {
     fontSize: "12px",
-    letterSpacing: "0,5px",
     color: "white",
     backgroundColor: theme.palette.primary.main,
     padding: "5px",
@@ -104,6 +103,13 @@ const useStyles = makeStyles(theme => ({
       color: "white",
       backgroundColor: theme.palette.primary.dark,
     },
+    [theme.breakpoints.down("sm")]: {
+      fontSize: 10,
+    },
+  },
+  disabledBtn: {
+    fontSize: "12px",
+    padding: "5px",
     [theme.breakpoints.down("sm")]: {
       fontSize: 10,
     },

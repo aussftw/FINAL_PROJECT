@@ -1,14 +1,11 @@
 import React from "react";
 import Card from "@material-ui/core/Card";
 import { Link } from "react-router-dom";
+import v4 from "uuid";
+import { connect } from "react-redux";
 import useStyles from "./useStyles";
 import CardAtMiniCart from "../CardAtMiniCart/CardAtMiniCart";
 import MainButton from "../../common/buttons/MainButton";
-
-import hardCodedGoods from "./HardCodedGoodsForCart";
-
-const hardCodedGoodsForCart = hardCodedGoods;
-// const hardCodedGoodsForCart = [];
 
 function numberWithCommas(x) {
   const parts = x.toString().split(".");
@@ -16,28 +13,40 @@ function numberWithCommas(x) {
   return parts.join(".");
 }
 
-const CartMini = ({ goodsAtCart = hardCodedGoodsForCart }) => {
+const CartMini = ({ cart }) => {
   const classes = useStyles();
-  const subTotal = goodsAtCart
-    .reduce(function(sum, current) {
-      return sum + current.price * current.qty;
-    }, 0)
-    .toFixed(2);
+  const subTotal =
+    cart.length > 0
+      ? cart
+          .reduce(function(sum, current) {
+            let cartQty = current.cartQuantity;
+            if (current.product.quantity < cartQty) {
+              cartQty = current.product.quantity;
+            }
+            return sum + current.product.currentPrice * cartQty;
+          }, 0)
+          .toFixed(2)
+      : 0;
   const subTotalWithComas = numberWithCommas(subTotal);
 
   return (
     <Card className={classes.card}>
-      {goodsAtCart.length > 0 ? (
+      {cart.length > 0 ? (
         <div>
           <ul className={classes.mini_cart_list}>
-            {goodsAtCart.map(item => {
+            {cart.map(item => {
+              let cartQty = item.cartQuantity;
+              if (item.product.quantity < cartQty) {
+                cartQty = item.product.quantity;
+              }
               return (
                 <CardAtMiniCart
-                  key={item.id}
-                  url={item.url}
-                  title={item.title}
-                  qty={item.qty}
-                  price={item.price}
+                  key={v4()}
+                  id={item.product._id}
+                  url={item.product.imageUrls[0]}
+                  title={item.product.name}
+                  qty={cartQty}
+                  price={item.product.currentPrice}
                 />
               );
             })}
@@ -60,4 +69,11 @@ const CartMini = ({ goodsAtCart = hardCodedGoodsForCart }) => {
   );
 };
 
-export default CartMini;
+function mapStateToProps(state) {
+  return {
+    isAuthenticated: state.loginReducer.isAuthenticated,
+    cart: state.cartReducer.cart,
+  };
+}
+
+export default connect(mapStateToProps)(CartMini);

@@ -162,7 +162,7 @@ exports.deleteProductFromWishlish = async (req, res, next) => {
       } else {
         if (!wishlist.products.includes(req.params.productId)) {
           res.status(400).json({
-            message: "Product is absent in wishlist"
+            message: `Product is absent in wishlist`
           });
 
           return;

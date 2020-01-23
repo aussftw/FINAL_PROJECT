@@ -1,7 +1,6 @@
 import React from "react";
-// eslint-disable-next-line import/no-extraneous-dependencies
-import v4 from "uuid";
 import { connect } from "react-redux";
+import v4 from "uuid";
 import useStyles from "./useStyles";
 import WishlistCard from "./WishlistCard/WishlistCard";
 import Preloader from "../../Preloader";

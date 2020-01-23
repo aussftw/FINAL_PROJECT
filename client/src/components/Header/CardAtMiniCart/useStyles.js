@@ -26,6 +26,7 @@ const useStyles = makeStyles({
     marginRight: 10,
   },
   mini_cart_card_title: {
+    textTransform: "capitalize",
     lineHeight: 1.5,
     color: "#707070",
     fontSize: 14,
