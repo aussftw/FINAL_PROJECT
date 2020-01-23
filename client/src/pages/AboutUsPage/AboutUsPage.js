@@ -16,8 +16,8 @@ const AboutUsPage = () => {
   useEffect(() => {
     axios
       .get(`/api/products/filter?categories=Palms`)
-      .then(() => {
-        // console.log(product.data.products);
+      .then(product => {
+        console.log(product.data.products);
         // Change(product.data.products)
       })
       .catch(err => {

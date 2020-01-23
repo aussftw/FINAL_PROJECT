@@ -269,6 +269,20 @@ exports.deleteProductFromCart = async (req, res, next) => {
 
         const updatedCart = queryCreator(cartData);
 
+        if(cartData.products.length === 0) {
+          return Cart.deleteOne({ customerId: req.user.id })
+            .then(deletedCount =>
+              res.status(200).json({
+                products: []
+              })
+            )
+            .catch(err =>
+              res.status(400).json({
+                message: `Error happened on server: "${err}" `
+              })
+            );
+        }
+
         Cart.findOneAndUpdate(
           { customerId: req.user.id },
           { $set: updatedCart },

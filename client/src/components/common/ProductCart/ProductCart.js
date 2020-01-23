@@ -18,6 +18,7 @@ import {
 
 import useStyles from "./useStyles";
 
+// eslint-disable-next-line no-shadow
 const ProductCart = ({
   id,
   itemNo,
@@ -26,8 +27,6 @@ const ProductCart = ({
   img,
   cartQty,
   shopQty,
-  // eslint-disable-next-line no-shadow
-  addItemCart,
   decreaseItemCart,
   deleteItemCart,
   changeItemCartQuantity,

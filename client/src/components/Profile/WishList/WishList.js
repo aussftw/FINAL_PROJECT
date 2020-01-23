@@ -1,7 +1,6 @@
 import React from "react";
-// eslint-disable-next-line import/no-extraneous-dependencies
-import v4 from "uuid";
 import { connect } from "react-redux";
+import v4 from "uuid";
 import useStyles from "./useStyles";
 import WishlistCard from "./WishlistCard/WishlistCard";
 import Preloader from "../../Preloader";
@@ -37,6 +36,7 @@ function WishList({ isLoading, wishlist, error }) {
               <WishlistCard
                 key={randomId}
                 id={item._id}
+                itemNo={item.itemNo}
                 img={item.imageUrls[0]}
                 title={item.name}
                 qty={item.quantity}

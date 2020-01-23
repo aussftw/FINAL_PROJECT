@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
@@ -35,9 +36,12 @@ const ItemCard = ({
   rate,
   price,
   img,
+  // eslint-disable-next-line
   addItemCart,
   wishlistAll,
+  // eslint-disable-next-line
   wishlistAddItem,
+  // eslint-disable-next-line
   wishlistDeleteItem,
   isAuthenticated,
 }) => {
@@ -103,45 +107,47 @@ const ItemCard = ({
         //   </Link>
         // )
       )}
-      <CardActionArea
-        classes={{
-          root: classes.actionArea,
-          focusHighlight: classes.focusHighlight,
-        }}
-      >
-        <CardMedia
-          className={classes.mediaImage}
-          image={img}
-          title={title}
-          component="div"
-        />
-        <CardContent className={classes.cardContent}>
-          <Typography className={classes.title} noWrap align="center">
-            {title
-              .split(" ")
-              .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-              .join(" ")}
-          </Typography>
-          <Tooltip placement="bottom-end" title={CardTooltipText(rate)}>
-            <Box align="center">
-              <Rating
-                className={classes.rating}
-                name="rating"
-                value={rate}
-                size="small"
-                precision={0.5}
-                readOnly
-                emptyIcon={
-                  <StarBorder color="primary" style={{ fontSize: 18 }} />
-                }
-              />
-            </Box>
-          </Tooltip>
-          <Typography className={classes.price} align="center">
-            ${price.toFixed(2)}
-          </Typography>
-        </CardContent>
-      </CardActionArea>
+      <Link to={`/products/${itemNo}`}>
+        <CardActionArea
+          classes={{
+            root: classes.actionArea,
+            focusHighlight: classes.focusHighlight,
+          }}
+        >
+          <CardMedia
+            className={classes.mediaImage}
+            image={img}
+            title={title}
+            component="div"
+          />
+          <CardContent className={classes.cardContent}>
+            <Typography className={classes.title} noWrap align="center">
+              {title
+                .split(" ")
+                .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+                .join(" ")}
+            </Typography>
+            <Tooltip placement="bottom-end" title={CardTooltipText(rate)}>
+              <Box align="center">
+                <Rating
+                  className={classes.rating}
+                  name="rating"
+                  value={rate}
+                  size="small"
+                  precision={0.5}
+                  readOnly
+                  emptyIcon={
+                    <StarBorder color="primary" style={{ fontSize: 18 }} />
+                  }
+                />
+              </Box>
+            </Tooltip>
+            <Typography className={classes.price} align="center">
+              {/* eslint-disable-next-line no-shadow */}${price.toFixed(2)}
+            </Typography>
+          </CardContent>
+        </CardActionArea>
+      </Link>
       <Button variant="text" fullWidth onClick={() => addItemToCart()}>
         + add to cart
       </Button>
