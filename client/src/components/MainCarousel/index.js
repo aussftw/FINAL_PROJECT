@@ -7,7 +7,7 @@ import Container from "@material-ui/core/Container";
 import Slide from "./slide";
 import Preloader from "../Preloader/Desktop";
 
-export default function MainCarousel() {
+const MainCarousel = () => {
   const [slidesData, setSlidesData] = useState(null);
 
   useEffect(() => {
@@ -34,7 +34,7 @@ export default function MainCarousel() {
           slidesData.map(value => {
             return (
               <Slide
-                key={value.mId}
+                key={value._id}
                 image={value.imageUrl}
                 title={value.title}
                 subTitle={value.description}
@@ -45,4 +45,5 @@ export default function MainCarousel() {
       </Carousel>
     </Container>
   );
-}
+};
+export default MainCarousel;

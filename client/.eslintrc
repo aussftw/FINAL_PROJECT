@@ -12,7 +12,8 @@
     "'react/jsx-one-expression-per-line": "off",
     "react/button-has-type": "off",
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-    "react/destructuring-assignment": ["warn", "always"],
+    "react/destructuring-assignment": ["warn","always"],
+    "no-shadow": "off",
     "no-underscore-dangle": "off",
     "padding-line-between-statements": [
       "error",
