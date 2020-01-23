@@ -72,12 +72,14 @@ const ItemDetails = ({ id, inCart, inWishList }) => {
   const {
     name,
     imageUrls,
-    _id,
+
     color,
     sizes,
     rate,
     currentPrice,
-    previousPrice,
+    // eslint-disable-next-line
+    //  _id,
+    // previousPrice,
     description,
   } = item;
 
@@ -120,16 +122,13 @@ const ItemDetails = ({ id, inCart, inWishList }) => {
           </Typography>
           <Divider variant="middle" />
           <List>
-            <ListItem className={classes.root}>
+            {/* <ListItem className={classes.root}>
               <ListItemText
                 className={classes.infoDetail}
                 primary="Product code:"
               />
-              <Typography className={classes.infoDetailValue}>
-                {/* eslint-disable-next-line */}
-                {_id}
-              </Typography>
-            </ListItem>
+              <Typography className={classes.infoDetailValue}>{_id}</Typography>
+            </ListItem> */}
             <ListItem className={classes.root}>
               <ListItemText className={classes.infoDetail} primary="Color:" />
               <Typography className={classes.infoDetailValue}>
@@ -160,13 +159,12 @@ const ItemDetails = ({ id, inCart, inWishList }) => {
           </Tooltip>
           <Divider variant="middle" />
           <List>
-            <ListItem className={classes.root}>
+            {/* <ListItem className={classes.root}>
               <ListItemText primary="Price:" className={classes.infoDetail} />
               <Typography className={classes.previousPrice}>
-                {/* eslint-disable-next-line */}
                 {previousPrice}$
               </Typography>
-            </ListItem>
+            </ListItem> */}
             <ListItem className={classes.root}>
               <ListItemText primary="Price:" className={classes.infoDetail} />
               <Typography className={classes.currentPrice}>
