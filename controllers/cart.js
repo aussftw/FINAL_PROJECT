@@ -172,7 +172,7 @@ exports.decreaseCartProductQuantity = async (req, res, next) => {
   Cart.findOne({ customerId: req.user.id })
     .then(cart => {
       if (!cart) {
-        res.status(400).json({ message: "Cart does not exists" });
+        res.status(400).json({ message: "CartPage does not exists" });
       } else {
         const cartData = {};
 

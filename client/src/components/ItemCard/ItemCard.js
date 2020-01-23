@@ -21,7 +21,7 @@ import StarBorder from "@material-ui/icons/StarBorder";
 import Rating from "@material-ui/lab/Rating";
 import { connect } from "react-redux";
 import useStyles from "./useStyles";
-import { addItemCart } from "../../store/actions/Cart";
+import { addItemCart } from "../../store/actions/сart";
 import {
   wishlistAddItem,
   wishlistDeleteItem,

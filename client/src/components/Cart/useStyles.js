@@ -3,6 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles(theme => ({
   cartContainer: {
     paddingTop: 30,
+    paddingBottom: 30,
   },
   cartTitle: {
     fontSize: 22,

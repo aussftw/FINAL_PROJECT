@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import jwt from "jwt-decode";
 
 import HomePage from "../pages/HomePage/HomePage";
-import Cart from "../pages/Cart/Cart";
+import CartPage from "../pages/CartPage/CartPage";
 import Profiler from "../pages/Profiler/Profiler";
 import LoginForm from "../components/LoginForm";
 import NotFound from "../pages/NotFound/NotFound";
@@ -54,7 +54,7 @@ const Routes = ({
         <HomePage />
       </Route>
       <Route path="/cart">
-        <Cart />
+        <CartPage />
       </Route>
       <Route path="/search">
         <SearchPage />
@@ -76,7 +76,7 @@ const Routes = ({
         <HomePage />
       </Route>
       <Route path="/cart">
-        <Cart />
+        <CartPage />
       </Route>
       <Route path="/search">
         <SearchPage />

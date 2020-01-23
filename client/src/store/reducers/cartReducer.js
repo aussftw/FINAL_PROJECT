@@ -115,9 +115,10 @@ const cartReducer = (state = initialState, action) => {
       };
     case "CHANGE_ITEM_CART_QUANTITY_SUCCESS":
       return { ...state, cart: action.payload.products, error: "" };
-
     case "CHANGE_ITEM_CART_QUANTITY_FAILURE":
       return { ...state, error: action.payload };
+    case "CLEAR_CART":
+      return { ...state, cart: [], error: "" };
     default:
       return state;
   }
