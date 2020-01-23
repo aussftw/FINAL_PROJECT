@@ -13,6 +13,7 @@ const MainCarousel = () => {
   useEffect(() => {
     axios.get("/slides").then(slides => {
       setSlidesData(slides.data);
+      console.log(slides.data);
     });
     // .catch(err => {
     //   console.log(err.response.data);
@@ -34,7 +35,7 @@ const MainCarousel = () => {
           slidesData.map(value => {
             return (
               <Slide
-                key={value.mId}
+                key={value._id}
                 image={value.imageUrl}
                 title={value.title}
                 subTitle={value.description}
