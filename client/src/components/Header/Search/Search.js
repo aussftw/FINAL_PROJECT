@@ -18,7 +18,7 @@ const CustomizedSearch = ({ searchPhrases }) => {
 
   function search() {
     axios
-      .post("/products/search", text)
+      .post("/api/products/search", text)
       .then(products => {
         searchPhrases(products.data);
       })

@@ -1,8 +1,8 @@
 // import React from 'react';
 
 export const imagesObj = {
-  fst: "img/banner1.jpg",
-  snd: "img/banner2.jpg",
+  fst: "/img/banner1.jpg",
+  snd: "/img/banner2.jpg",
 };
 export const textObj = {
   name: "New Collection 2020",

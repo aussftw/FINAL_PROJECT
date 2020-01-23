@@ -35,7 +35,7 @@ const RegistrationForm = () => {
   useEffect(() => {
     if (submitRegistration) {
       axios
-        .post("/customers", newUserData)
+        .post("/api/customers", newUserData)
         .then(response => {
           // eslint-disable-next-line no-console
           console.log(response);

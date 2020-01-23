@@ -20,6 +20,7 @@ import {
 } from "../store/actions/loginActions";
 import { getWishlist } from "../store/actions/wishlist";
 import SearchPage from "../pages/SearchPage/SearchPage";
+import Shop from "../pages/Shop/Shop";
 
 // eslint-disable-next-line no-shadow
 const Routes = ({
@@ -59,10 +60,7 @@ const Routes = ({
         <SearchPage />
       </Route>
       <Route path="/shop">
-        <p>shop</p>
-      </Route>
-      <Route path="/about-us">
-        <p>about us</p>
+        <Shop />
       </Route>
       <Route path="/notfound">
         <NotFound />
@@ -84,7 +82,7 @@ const Routes = ({
         <SearchPage />
       </Route>
       <Route path="/shop">
-        <p>shop</p>
+        <Shop />
       </Route>
       {/* <Route path="/about-us"> */}
 

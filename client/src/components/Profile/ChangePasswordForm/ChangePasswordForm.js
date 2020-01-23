@@ -26,7 +26,7 @@ export default function ChangePasswordForm() {
     setMessage("");
     if (newPasswordValue === confirmationNewPasswordValue) {
       axios
-        .put("/customers/password", passwords)
+        .put("/api/customers/password", passwords)
         .then(updatedCustomer => {
           if (updatedCustomer.data.password) {
             setMessage(updatedCustomer.data.password);

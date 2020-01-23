@@ -14,7 +14,7 @@ const TopRated = () => {
 
   useEffect(() => {
     axios
-      .get("/products/top")
+      .get("/api/products/top")
       .then(response => {
         setProducts(response.data);
       })

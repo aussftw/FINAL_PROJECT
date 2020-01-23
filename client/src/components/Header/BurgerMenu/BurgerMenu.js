@@ -65,6 +65,7 @@ const TemporaryDrawer = props => {
       </div>
 
       <Box>
+        //eslint-disable-next-line react/destructuring-assignment
         {props.links.links.map(item => {
           return item.links.length <= 1 ? (
             <Link

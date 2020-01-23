@@ -33,7 +33,7 @@ export const userFromJwt = data => {
 
 export const getUser = () => dispatch => {
   axios
-    .get("/customers/customer")
+    .get("/api/customers/customer")
     .then(response => {
       if (response.statusText === "OK" && response.data.success) {
         dispatch(userFromJwt(jwt(response.data.token)));
@@ -53,7 +53,7 @@ export const logOut = () => {
 
 export const logIn = user => dispatch => {
   axios
-    .post("/customers/login", user)
+    .post("/api/customers/login", user)
     .then(response => {
       if (response.statusText === "OK" && response.data.success) {
         setAuthToken(response.data.token);

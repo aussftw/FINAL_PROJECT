@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
@@ -15,7 +16,7 @@ import LoginButton from "../LoginButton/LoginButton";
 import useStyles from "./useStyles";
 import CartMini from "./CartMini/CartMini";
 
-const Header = ({ customer }) => {
+const Header = ({ isAuthenticated, wishlistCounter, cart }) => {
   const classes = useStyles();
 
   const [isCartOpened, toggleCart] = useState(false);
@@ -31,7 +32,7 @@ const Header = ({ customer }) => {
           <div className={classes.flex}>
             <TemporaryDrawer />
             <Link to="/">
-              <img src="./img/Logo.svg" alt="logo" className={classes.logo} />
+              <img src="/img/Logo.svg" alt="logo" className={classes.logo} />
             </Link>
           </div>
           <div>
@@ -40,10 +41,10 @@ const Header = ({ customer }) => {
           <div>
             <LoginButton />
 
-            {customer ? (
+            {isAuthenticated ? (
               <Link to="/profile" className={classes.link}>
                 <IconButton aria-label="show favourites" color="inherit">
-                  <Badge badgeContent={5} color="primary">
+                  <Badge badgeContent={wishlistCounter} color="primary">
                     <FavoriteBorderIcon />
                   </Badge>
                 </IconButton>
@@ -54,7 +55,7 @@ const Header = ({ customer }) => {
               color="inherit"
               onClick={cartToggling}
             >
-              <Badge badgeContent={8} color="primary">
+              <Badge badgeContent={cart.length} color="primary">
                 <ShoppingCartOutlinedIcon />
               </Badge>
             </IconButton>
@@ -68,7 +69,10 @@ const Header = ({ customer }) => {
 
 function mapStateToProps(state) {
   return {
-    customer: state.loginReducer.login,
+    isAuthenticated: state.loginReducer.isAuthenticated,
+    wishlistCounter: state.wishlistReducer.wishlist.length,
+    error: state.wishlistReducer.error,
+    cart: state.cartReducer.cart,
   };
 }
 
