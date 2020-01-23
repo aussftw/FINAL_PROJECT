@@ -35,6 +35,7 @@ const ItemCard = ({
   rate,
   price,
   img,
+  // eslint-disable-next-line no-shadow
   addItemCart,
   wishlistAll,
   wishlistAddItem,

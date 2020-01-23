@@ -3,6 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles({
   mini_cart_card: {
     display: "flex",
+    width: 273,
     margin: "0 0 10px",
     listStyle: "none",
     justifyContent: "space-between",

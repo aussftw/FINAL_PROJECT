@@ -53,6 +53,12 @@ const useStyles = makeStyles(theme => ({
     textAlign: "right",
     padding: "0 15px",
   },
+  links: {
+    textDecoration: "none",
+  },
+  btn: {
+    margin: "0 5px 0 5px",
+  },
 }));
 
 export default useStyles;

@@ -36,6 +36,7 @@ function WishList({ isLoading, wishlist, error }) {
               <WishlistCard
                 key={randomId}
                 id={item._id}
+                itemNo={item.itemNo}
                 img={item.imageUrls[0]}
                 title={item.name}
                 qty={item.quantity}

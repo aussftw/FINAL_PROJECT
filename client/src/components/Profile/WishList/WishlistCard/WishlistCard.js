@@ -5,22 +5,23 @@ import CloseIcon from "@material-ui/icons/Close";
 import Typography from "@material-ui/core/Typography";
 import Tooltip from "@material-ui/core/Tooltip";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
-import { connect } from "react-redux";
-
 import Button from "@material-ui/core/Button";
+import { connect } from "react-redux";
 import useStyles from "./useStyles";
-
 import { wishlistDeleteItem } from "../../../../store/actions/wishlist";
+import { addItemCart } from "../../../../store/actions/сart";
 // import {Link} from "react-router-dom";
 
 const WishlistCard = ({
   id,
+  itemNo,
   title,
   price,
   img,
   qty,
   // eslint-disable-next-line no-shadow
   wishlistDeleteItem,
+  addItemCart,
 }) => {
   const classes = useStyles();
   const matches = useMediaQuery(theme => theme.breakpoints.down("xs"));
@@ -61,6 +62,7 @@ const WishlistCard = ({
           variant={qty > 0 && "outlined"}
           type="button"
           disabled={!(qty > 0)}
+          onClick={() => addItemCart(id, itemNo)}
         >
           Add to cart
         </Button>
@@ -70,9 +72,7 @@ const WishlistCard = ({
           <Tooltip title="remove">
             <IconButton
               aria-label="delete"
-              onClick={() => {
-                wishlistDeleteItem(id);
-              }}
+              onClick={() => wishlistDeleteItem(id)}
             >
               <CloseIcon />
             </IconButton>
@@ -83,4 +83,4 @@ const WishlistCard = ({
   );
 };
 
-export default connect(null, { wishlistDeleteItem })(WishlistCard);
+export default connect(null, { wishlistDeleteItem, addItemCart })(WishlistCard);

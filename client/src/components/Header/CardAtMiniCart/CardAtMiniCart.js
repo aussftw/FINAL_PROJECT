@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import CloseIcon from "@material-ui/icons/Close";
 import Tooltip from "@material-ui/core/Tooltip";
 import { connect } from "react-redux";
+import { deleteItemCart } from "../../../store/actions/сart";
 import useStyles from "./useStyles";
-import { deleteItemCart } from "../../../store/actions/Cart";
 
 // eslint-disable-next-line no-shadow
 const CardAtMiniCart = ({ id, url, title, qty, price, deleteItemCart }) => {

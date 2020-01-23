@@ -14,6 +14,7 @@ import WishList from "./WishList/WishList";
 
 import { getUser, logOut } from "../../store/actions/loginActions";
 import { wishlistLogOut } from "../../store/actions/wishlist";
+import { clearCart } from "../../store/actions/сart";
 import setAuthToken from "../common/setAuthToken";
 
 function TabPanel(props) {
@@ -35,7 +36,7 @@ function TabPanel(props) {
 }
 
 // eslint-disable-next-line no-shadow
-const Profile = ({ getUser, logOut, wishlistLogOut }) => {
+const Profile = ({ getUser, logOut, wishlistLogOut, clearCart }) => {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
@@ -46,6 +47,7 @@ const Profile = ({ getUser, logOut, wishlistLogOut }) => {
     setAuthToken(false);
     wishlistLogOut();
     logOut();
+    clearCart();
   };
 
   return (
@@ -112,4 +114,6 @@ const Profile = ({ getUser, logOut, wishlistLogOut }) => {
   );
 };
 
-export default connect(null, { getUser, logOut, wishlistLogOut })(Profile);
+export default connect(null, { getUser, logOut, wishlistLogOut, clearCart })(
+  Profile
+);

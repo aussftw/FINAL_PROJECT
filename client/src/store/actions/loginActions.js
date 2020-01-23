@@ -2,6 +2,7 @@ import axios from "axios";
 import jwt from "jwt-decode";
 import * as constants from "../constants";
 import setAuthToken from "../../components/common/setAuthToken";
+import { mergeCarts } from "./сart";
 import { getWishlist } from "./wishlist";
 
 const logInSuccess = data => {
@@ -62,6 +63,7 @@ export const logIn = user => dispatch => {
       }
       dispatch(getUser());
       dispatch(getWishlist());
+      dispatch(mergeCarts());
     })
     .catch(error => {
       dispatch(logInFailure(error));

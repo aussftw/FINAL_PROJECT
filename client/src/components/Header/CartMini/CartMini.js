@@ -3,9 +3,9 @@ import Card from "@material-ui/core/Card";
 import { Link } from "react-router-dom";
 import v4 from "uuid";
 import { connect } from "react-redux";
+import Button from "@material-ui/core/Button";
 import useStyles from "./useStyles";
 import CardAtMiniCart from "../CardAtMiniCart/CardAtMiniCart";
-import MainButton from "../../common/buttons/MainButton";
 
 function numberWithCommas(x) {
   const parts = x.toString().split(".");
@@ -56,10 +56,16 @@ const CartMini = ({ cart }) => {
             <span className={classes.subtotal_price}>${subTotalWithComas}</span>
           </p>
           <p className={classes.mini_cart_buttons}>
-            <Link to="/cart">
-              <MainButton text="VIEW CART">VIEW CART</MainButton>
+            <Link to="/cart" className={classes.links}>
+              <Button variant="contained" className={classes.btn}>
+                VIEW CART
+              </Button>
             </Link>
-            <MainButton text="CHECKOUT">CHECKOUT</MainButton>
+            <Link to="/checkout" className={classes.links}>
+              <Button variant="contained" className={classes.btn}>
+                CHECKOUT
+              </Button>
+            </Link>
           </p>
         </div>
       ) : (

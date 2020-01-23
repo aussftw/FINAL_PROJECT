@@ -6,15 +6,15 @@ import IconButton from "@material-ui/core/IconButton";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import { logOut } from "../../store/actions/loginActions";
 import { wishlistLogOut } from "../../store/actions/wishlist";
+import { clearCart } from "../../store/actions/сart";
 import useStyles from "./useStyles";
 // import setAuthToken from "../common/setAuthToken";
 
+// eslint-disable-next-line no-shadow
 const LoginButton = ({
-  // logOut,
-  // eslint-disable-next-line no-shadow
   isAuthenticated,
   user,
-  // wishlistLogOut
+  // logOut, wishlistLogOut, clearCart
 }) => {
   const classes = useStyles();
 
@@ -23,6 +23,7 @@ const LoginButton = ({
   //   setAuthToken(false);
   //   logOut();
   //   wishlistLogOut();
+  //   clearCart();
   // };
 
   return (
@@ -38,12 +39,12 @@ const LoginButton = ({
             </IconButton>
           </Link>
           {/* <Button */}
-          {/*  className={classes.btn} */}
-          {/*  variant="outlined" */}
-          {/*  type="button" */}
-          {/*  onClick={signOut} */}
+          {/* className={classes.btn} */}
+          {/* variant="outlined" */}
+          {/* type="button" */}
+          {/* onClick={signOut} */}
           {/* > */}
-          {/*  Sign Out */}
+          {/* Sign Out */}
           {/* </Button> */}
         </>
       ) : (
@@ -64,6 +65,6 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { logOut, wishlistLogOut })(
+export default connect(mapStateToProps, { logOut, wishlistLogOut, clearCart })(
   LoginButton
 );
