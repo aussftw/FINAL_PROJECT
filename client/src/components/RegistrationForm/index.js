@@ -35,11 +35,11 @@ const RegistrationForm = () => {
   useEffect(() => {
     if (submitRegistration) {
       axios
-        .post("/customers", newUserData)
+        .post("/api/customers", newUserData)
         .then(response => {
           // eslint-disable-next-line no-console
           console.log(response);
-          if (response.statusText === "OK" && response.data.success) {
+          if (response.statusText === "OK") {
             setRegistration(true);
           }
         })

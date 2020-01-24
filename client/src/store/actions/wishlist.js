@@ -15,12 +15,11 @@ export const getWishlistFailure = err => {
 };
 
 export const getWishlist = () => dispatch => {
+  dispatch({ type: constants.WISHLIST_REQUEST });
   axios
-    .get("/wishlist")
+    .get("/api/wishlist")
     .then(res => {
       if (!res.data) {
-        // eslint-disable-next-line no-console
-        console.log("You don't have wishlist");
         return;
       }
       dispatch(getWishlistSuccess(res.data));
@@ -45,7 +44,7 @@ export const deleteWishlistItemtFailure = err => {
 
 export const wishlistDeleteItem = id => dispatch => {
   axios
-    .delete(`/wishlist/${id}`)
+    .delete(`/api/wishlist/${id}`)
     .then(res => {
       dispatch(deleteWishlistItemSuccess(res.data));
     })
@@ -69,10 +68,8 @@ export const addWishlistItemtFailure = err => {
 
 export const wishlistAddItem = id => dispatch => {
   axios
-    .put(`/wishlist/${id}`)
+    .put(`/api/wishlist/${id}`)
     .then(res => {
-      // eslint-disable-next-line no-console
-      console.log(res);
       dispatch(addWishlistItemSuccess(res.data));
     })
     .catch(err => {

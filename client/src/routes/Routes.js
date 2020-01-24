@@ -1,38 +1,47 @@
 import React, { useEffect } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
+import jwt from "jwt-decode";
 
 import HomePage from "../pages/HomePage/HomePage";
-import Cart from "../pages/Cart/Cart";
+import CartPage from "../pages/CartPage/CartPage";
 import Profiler from "../pages/Profiler/Profiler";
 import LoginForm from "../components/LoginForm";
 import NotFound from "../pages/NotFound/NotFound";
 import RegistrationForm from "../components/RegistrationForm";
 import ItemDetailsPage from "../pages/ItemDetailsPage/ItemDetailsPage";
 import setAuthToken from "../components/common/setAuthToken";
-import Preloader from "../components/Preloader/Desktop";
-import { getUser, preloaderClose } from "../store/actions/loginActions";
+import Preloader from "../components/Preloader";
+import {
+  getUser,
+  preloaderClose,
+  userFromJwt,
+} from "../store/actions/loginActions";
 import { getWishlist } from "../store/actions/wishlist";
+import SearchPage from "../pages/SearchPage/SearchPage";
+import Shop from "../pages/Shop/Shop";
 
-// eslint-disable-next-line no-shadow
 const Routes = ({
   isAuthenticated,
-  getUser,
-  getWishlist,
-  preloaderClose,
+  getUserData,
+  getWishlistData,
+  preloaderClosing,
   preloader,
+  userDataFromJwt,
 }) => {
   useEffect(() => {
     // eslint-disable-next-line no-undef
     const token = localStorage.getItem("authToken");
     if (token) {
+      userDataFromJwt(jwt(token));
+      preloaderClosing();
       setAuthToken(token);
-      getUser();
-      getWishlist();
+      getWishlistData();
+      getUserData();
     } else {
-      preloaderClose();
+      preloaderClosing();
     }
-  }, [getUser, getWishlist, preloaderClose]);
+  }, [getUserData, getWishlistData, preloaderClosing, userDataFromJwt]);
 
   // eslint-disable-next-line no-nested-ternary
   return preloader ? (
@@ -43,7 +52,16 @@ const Routes = ({
         <HomePage />
       </Route>
       <Route path="/cart">
-        <Cart />
+        <CartPage />
+      </Route>
+      <Route path="/search">
+        <SearchPage />
+      </Route>
+      <Route path="/shop">
+        <Shop />
+      </Route>
+      <Route path="/notfound">
+        <NotFound />
       </Route>
       <Route path="/profile">
         <Profiler />
@@ -56,8 +74,17 @@ const Routes = ({
         <HomePage />
       </Route>
       <Route path="/cart">
-        <Cart />
+        <CartPage />
       </Route>
+      <Route path="/search">
+        <SearchPage />
+      </Route>
+      <Route path="/shop">
+        <Shop />
+      </Route>
+      {/* <Route path="/about-us"> */}
+
+      {/* </Route> */}
       <Route path="/notfound">
         <NotFound />
       </Route>
@@ -84,7 +111,8 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps, {
-  getUser,
-  getWishlist,
-  preloaderClose,
+  getUserData: getUser,
+  getWishlistData: getWishlist,
+  preloaderClosing: preloaderClose,
+  userDataFromJwt: userFromJwt,
 })(Routes);

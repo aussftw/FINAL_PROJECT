@@ -1,6 +1,8 @@
 import axios from "axios";
+import jwt from "jwt-decode";
 import * as constants from "../constants";
 import setAuthToken from "../../components/common/setAuthToken";
+import { mergeCarts } from "./сart";
 import { getWishlist } from "./wishlist";
 
 const logInSuccess = data => {
@@ -23,12 +25,22 @@ export const preloaderClose = () => {
   };
 };
 
+export const userFromJwt = data => {
+  return {
+    type: constants.USER_FROM_JWT,
+    payload: data,
+  };
+};
+
 export const getUser = () => dispatch => {
   axios
-    .get("/customers/customer")
+    .get("/api/customers/customer")
     .then(response => {
+      if (response.statusText === "OK") {
+        // eslint-disable-next-line no-undef
+        localStorage.setItem("user", JSON.stringify(response.data));
+      }
       dispatch(logInSuccess(response.data));
-      dispatch(preloaderClose());
     })
     .catch(error => {
       dispatch(logInFailure(error));
@@ -43,13 +55,15 @@ export const logOut = () => {
 
 export const logIn = user => dispatch => {
   axios
-    .post("/customers/login", user)
+    .post("/api/customers/login", user)
     .then(response => {
       if (response.statusText === "OK" && response.data.success) {
         setAuthToken(response.data.token);
+        dispatch(userFromJwt(jwt(response.data.token)));
       }
       dispatch(getUser());
       dispatch(getWishlist());
+      dispatch(mergeCarts());
     })
     .catch(error => {
       dispatch(logInFailure(error));

@@ -25,12 +25,22 @@ export const saveUserData = (event, updatedCustomer) => dispatch => {
   event.preventDefault();
 
   axios
-    .put("/customers", updatedCustomer)
+    .put("/api/customers", updatedCustomer)
     .then(updatedUser => {
       dispatch(editDataSuccess(updatedUser.data));
+      // eslint-disable-next-line no-undef
+      localStorage.setItem("user", JSON.stringify(updatedUser.data));
     })
     .catch(error => {
       dispatch(editDataFailure(error));
+      // eslint-disable-next-line no-undef
+      const localUserData = JSON.parse(localStorage.getItem("user"));
+      if (localUserData) {
+        dispatch({
+          type: constants.GET_USER_DATA_FROM_LOCALSTORAGE,
+          payload: localUserData,
+        });
+      }
     });
 };
 

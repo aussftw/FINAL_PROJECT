@@ -9,8 +9,12 @@ import {
 } from "../../../store/actions/userProfile";
 import useStyles from "./useStyles";
 
-// eslint-disable-next-line no-shadow
-function PersonalData({ user, saveUserData, editInputsData, error }) {
+function PersonalData({
+  user,
+  saveUserPersonalData,
+  editInputsUserData,
+  error,
+}) {
   const classes = useStyles();
   const [isEditable, setIsEditable] = useState(false);
   const matches = useMediaQuery(theme => theme.breakpoints.down("xs"));
@@ -20,12 +24,14 @@ function PersonalData({ user, saveUserData, editInputsData, error }) {
     setIsEditable(true);
   };
   const saveData = event => {
-    saveUserData(event, user);
-    setIsEditable(false);
+    saveUserPersonalData(event, user);
+    if (!error) {
+      setIsEditable(false);
+    }
   };
 
   const handleChange = event => {
-    editInputsData(event, user);
+    editInputsUserData(event, user);
   };
 
   return (
@@ -123,7 +129,11 @@ function PersonalData({ user, saveUserData, editInputsData, error }) {
             </Button>
           )}
         </ValidatorForm>
-        {Boolean(error) && <p className={classes.message}>{error.message}</p>}
+        {Boolean(error) && (
+          <p className={classes.message}>
+            {`Data didn't save. Error: ${error.message}`}
+          </p>
+        )}
       </div>
     </div>
   );
@@ -136,6 +146,7 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { saveUserData, editInputsData })(
-  PersonalData
-);
+export default connect(mapStateToProps, {
+  saveUserPersonalData: saveUserData,
+  editInputsUserData: editInputsData,
+})(PersonalData);

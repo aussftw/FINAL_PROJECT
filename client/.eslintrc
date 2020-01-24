@@ -1,5 +1,5 @@
 {
-  "extends": ["airbnb","airbnb/hooks","prettier"],
+  "extends": ["airbnb", "airbnb/hooks", "prettier"],
   "plugins": ["prettier"],
   "rules": {
     "func-names": ["error", "never"],
@@ -9,11 +9,14 @@
     "no-duplicate-case": "error",
     "no-debugger": "error",
     "no-dupe-keys": "error",
+    "'react/jsx-one-expression-per-line": "off",
     "react/button-has-type": "off",
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "react/destructuring-assignment": ["warn","always"],
+    "no-shadow": "off",
     "no-underscore-dangle": "off",
-    "padding-line-between-statements": ["error",
+    "padding-line-between-statements": [
+      "error",
       { "blankLine": "always", "prev": "const", "next": "return" },
       { "blankLine": "always", "prev": "function", "next": "return" },
       { "blankLine": "always", "prev": "let", "next": "return" }

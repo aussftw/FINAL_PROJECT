@@ -6,7 +6,7 @@ import Hidden from "@material-ui/core/Hidden";
 
 import useStyles from "./useStyles";
 import ItemCard from "../ItemCard/ItemCard";
-import Preloader from "../Preloader/Desktop";
+import Preloader from "../Preloader";
 
 const TopRated = () => {
   const classes = useStyles();
@@ -14,13 +14,13 @@ const TopRated = () => {
 
   useEffect(() => {
     axios
-      .get("/products/top")
+      .get("/api/products/top")
       .then(response => {
         setProducts(response.data);
       })
       .catch(err => {
         // eslint-disable-next-line no-console
-        console.log(err.response.data);
+        console.log(err.response);
       });
   }, []);
 
@@ -56,21 +56,20 @@ const TopRated = () => {
 
           return (
             <Hidden
-              key={value._id}
+              key={`top-rated-key-${value._id}`}
               xsDown={result.xsDown}
               smDown={result.smDown}
               mdDown={result.mdDown}
               lgDown={result.lgDown}
             >
               <ItemCard
-                // key={value._id}
+                id={value._id}
+                itemNo={value.itemNo}
                 title={value.name}
                 rate={value.rate.rating}
                 price={value.currentPrice}
                 img={value.imageUrls[0]}
-                inCart={false}
-                inWishList={false}
-                id={value._id}
+                stock={value.quantity}
               />
             </Hidden>
           );

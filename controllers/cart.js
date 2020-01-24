@@ -172,7 +172,7 @@ exports.decreaseCartProductQuantity = async (req, res, next) => {
   Cart.findOne({ customerId: req.user.id })
     .then(cart => {
       if (!cart) {
-        res.status(400).json({ message: "Cart does not exists" });
+        res.status(400).json({ message: "CartPage does not exists" });
       } else {
         const cartData = {};
 
@@ -268,6 +268,20 @@ exports.deleteProductFromCart = async (req, res, next) => {
         );
 
         const updatedCart = queryCreator(cartData);
+
+        if(cartData.products.length === 0) {
+          return Cart.deleteOne({ customerId: req.user.id })
+            .then(deletedCount =>
+              res.status(200).json({
+                products: []
+              })
+            )
+            .catch(err =>
+              res.status(400).json({
+                message: `Error happened on server: "${err}" `
+              })
+            );
+        }
 
         Cart.findOneAndUpdate(
           { customerId: req.user.id },

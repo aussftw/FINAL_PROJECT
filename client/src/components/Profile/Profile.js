@@ -1,5 +1,4 @@
-import React from "react";
-// import PropTypes from 'prop-types';
+import React, { useState } from "react";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
@@ -13,8 +12,9 @@ import ChangePasswordForm from "./ChangePasswordForm/ChangePasswordForm";
 import DeliveryAddressForm from "./DeliveryAdressForm/DeliveryAddressForm";
 import WishList from "./WishList/WishList";
 
-import { logOut } from "../../store/actions/loginActions";
+import { getUser, logOut } from "../../store/actions/loginActions";
 import { wishlistLogOut } from "../../store/actions/wishlist";
+import { clearCart } from "../../store/actions/сart";
 import setAuthToken from "../common/setAuthToken";
 
 function TabPanel(props) {
@@ -35,26 +35,23 @@ function TabPanel(props) {
   );
 }
 
-// TabPanel.propTypes = {
-//   children: PropTypes.node,
-//   index: PropTypes.any.isRequired,
-//   value: PropTypes.any.isRequired,
-// };
-
-// eslint-disable-next-line no-shadow
-const Profile = ({ logOut, wishlistLogOut }) => {
+const Profile = ({
+  getUserData,
+  logOff,
+  wishlistLogOff,
+  clearPersonalCart,
+}) => {
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
   const profileLogOut = () => {
     setAuthToken(false);
-    // eslint-disable-next-line no-undef
-    localStorage.removeItem("authToken");
-    wishlistLogOut();
-    logOut();
+    wishlistLogOff();
+    logOff();
+    clearPersonalCart();
   };
 
   return (
@@ -76,11 +73,13 @@ const Profile = ({ logOut, wishlistLogOut }) => {
           label="Personal Details"
           id="vertical-tab-1"
           aria-controls="vertical-tabpanel-1"
+          onClick={() => getUserData()}
         />
         <Tab
           label="Delivery Address"
           id="vertical-tab-2"
           aria-controls="vertical-tabpanel-2"
+          onClick={() => getUserData()}
         />
         <Tab
           label="Order History"
@@ -119,4 +118,9 @@ const Profile = ({ logOut, wishlistLogOut }) => {
   );
 };
 
-export default connect(null, { logOut, wishlistLogOut })(Profile);
+export default connect(null, {
+  getUserData: getUser,
+  logOff: logOut,
+  wishlistLogOff: wishlistLogOut,
+  clearPersonalCart: clearCart,
+})(Profile);

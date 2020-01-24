@@ -54,6 +54,7 @@ const SubHeader = props => {
                 <MenuListComposition
                   key={item._id}
                   menuTitle={item.title}
+                  menuItems={item.links}
                   className={classes.link}
                 />
               );

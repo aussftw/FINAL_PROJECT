@@ -8,16 +8,20 @@ import {
   editInputsData,
 } from "../../../store/actions/userProfile";
 
-// eslint-disable-next-line no-shadow
-function DeliveryAddressForm({ user, saveUserData, editInputsData, error }) {
+function DeliveryAddressForm({
+  user,
+  saveUserPersonalData,
+  editInputsUserData,
+  error,
+}) {
   const classes = useStyles();
 
   const saveAddress = event => {
-    saveUserData(event, user);
+    saveUserPersonalData(event, user);
   };
 
   const handleChange = event => {
-    editInputsData(event, user);
+    editInputsUserData(event, user);
   };
 
   return (
@@ -54,7 +58,11 @@ function DeliveryAddressForm({ user, saveUserData, editInputsData, error }) {
             ADD ADDRESS
           </Button>
         </ValidatorForm>
-        {Boolean(error) && <p className={classes.message}>{error.message}</p>}
+        {Boolean(error) && (
+          <p className={classes.message}>
+            {`Data didn't save. Error: ${error.message}`}
+          </p>
+        )}
       </div>
     </div>
   );
@@ -67,6 +75,7 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { saveUserData, editInputsData })(
-  DeliveryAddressForm
-);
+export default connect(mapStateToProps, {
+  saveUserPersonalData: saveUserData,
+  editInputsUserData: editInputsData,
+})(DeliveryAddressForm);

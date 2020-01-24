@@ -5,22 +5,21 @@ import CloseIcon from "@material-ui/icons/Close";
 import Typography from "@material-ui/core/Typography";
 import Tooltip from "@material-ui/core/Tooltip";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
-import { connect } from "react-redux";
-
 import Button from "@material-ui/core/Button";
+import { connect } from "react-redux";
 import useStyles from "./useStyles";
-
 import { wishlistDeleteItem } from "../../../../store/actions/wishlist";
-// import {Link} from "react-router-dom";
+import { addItemCart } from "../../../../store/actions/сart";
 
 const WishlistCard = ({
   id,
+  itemNo,
   title,
   price,
   img,
   qty,
-  // eslint-disable-next-line no-shadow
-  wishlistDeleteItem,
+  deleteWishlistItem,
+  addCartItem,
 }) => {
   const classes = useStyles();
   const matches = useMediaQuery(theme => theme.breakpoints.down("xs"));
@@ -41,9 +40,7 @@ const WishlistCard = ({
           <Tooltip title="remove">
             <IconButton
               aria-label="delete"
-              onClick={() => {
-                wishlistDeleteItem(id);
-              }}
+              onClick={() => deleteWishlistItem(id)}
             >
               <CloseIcon />
             </IconButton>
@@ -51,12 +48,18 @@ const WishlistCard = ({
         </Grid>
       )}
       <Grid item xs={6} sm={1} className={classes.wrapperGrid}>
-        <Typography className={classes.stock}>
+        <Typography className={qty > 0 ? classes.stock : classes.outstock}>
           {qty > 0 ? "In Stock" : "Out Stock"}
         </Typography>
       </Grid>
       <Grid item xs={6} sm={3} className={classes.wrapperGrid}>
-        <Button className={classes.btn} variant="outlined" type="button">
+        <Button
+          className={qty > 0 ? classes.btn : classes.disabledBtn}
+          variant={qty > 0 && "outlined"}
+          type="button"
+          disabled={!(qty > 0)}
+          onClick={() => addCartItem(id, itemNo)}
+        >
           Add to cart
         </Button>
       </Grid>
@@ -65,25 +68,18 @@ const WishlistCard = ({
           <Tooltip title="remove">
             <IconButton
               aria-label="delete"
-              onClick={() => {
-                wishlistDeleteItem(id);
-              }}
+              onClick={() => deleteWishlistItem(id)}
             >
               <CloseIcon />
             </IconButton>
           </Tooltip>
         </Grid>
       )}
-      {/* {matches && <Grid item xs={1} />} */}
     </Grid>
   );
 };
 
-// eslint-disable-next-line no-unused-vars
-function mapStateToProps(state) {
-  return {
-    //     error: state.wishlistReducer.error,
-  };
-}
-
-export default connect(mapStateToProps, { wishlistDeleteItem })(WishlistCard);
+export default connect(null, {
+  deleteWishlistItem: wishlistDeleteItem,
+  addCartItem: addItemCart,
+})(WishlistCard);

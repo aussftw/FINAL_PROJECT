@@ -1,62 +1,50 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
-import { makeStyles } from "@material-ui/core/styles";
-import Grid from "@material-ui/core/Grid";
-// import Box from "@material-ui/core/Box";
 
-import { imagesObj } from "./const";
-import TextBlock from "./TextBlock";
+import * as axios from "axios";
+import Container from "@material-ui/core/Container";
+import Slide from "./slide";
+import Preloader from "../Preloader/Desktop";
 
-const useStyles = makeStyles(() => ({
-  root: {
-    flexGrow: 1,
-    border: "none",
-    marginBottom: 50,
-  },
-  block: {
-    marginTop: -250,
-    width: "50%",
-  },
-}));
+const MainCarousel = () => {
+  const [slidesData, setSlidesData] = useState(null);
 
-const images = imagesObj;
-
-export default function MainCarousel() {
-  // const [spacing] = React.useState(2);
-  const classes = useStyles();
+  useEffect(() => {
+    axios.get("/api/slides").then(slides => {
+      setSlidesData(slides.data);
+    });
+    // .catch(err => {
+    //   console.log(err.response.data);
+    // });
+  }, []);
 
   return (
-    <Carousel
-      autoPlay
-      infiniteLoop
-      showThumbs={false}
-      showStatus={false}
-      interval={2500}
-      // verticalSwipe="standard"
-    >
-      <div>
-        <img src={images.fst} alt="1" />
-        <Grid
-          xs={6}
-          justify="center"
-          alignItems="center"
-          className={classes.block}
+    <Container maxWidth="lg">
+      {!slidesData ? (
+        <Preloader />
+      ) : (
+        <Carousel
+          autoPlay
+          infiniteLoop
+          showThumbs={false}
+          showStatus={false}
+          interval={2500}
+          stopOnHover={false}
         >
-          <TextBlock />
-        </Grid>
-      </div>
-      <div>
-        <img src={images.snd} alt="2" />
-        <Grid
-          xs={6}
-          justify="center"
-          alignItems="center"
-          className={classes.block}
-        >
-          <TextBlock />
-        </Grid>
-      </div>
-    </Carousel>
+          {slidesData.map(value => {
+            return (
+              <Slide
+                key={value._id}
+                image={value.imageUrl}
+                title={value.title}
+                subTitle={value.description}
+              />
+            );
+          })}
+        </Carousel>
+      )}
+    </Container>
   );
-}
+};
+export default MainCarousel;
