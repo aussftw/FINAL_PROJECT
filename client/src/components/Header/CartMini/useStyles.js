@@ -28,7 +28,6 @@ const useStyles = makeStyles(theme => ({
     height: 64,
     justifyContent: "center",
     alignItems: "center",
-    // color: "#707070",
     fontSize: 13,
   },
   total: {

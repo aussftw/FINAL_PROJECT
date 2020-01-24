@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-// eslint-disable-next-line import/no-extraneous-dependencies,import/no-unresolved
 import jwt from "jwt-decode";
 
 import HomePage from "../pages/HomePage/HomePage";
@@ -22,28 +21,27 @@ import { getWishlist } from "../store/actions/wishlist";
 import SearchPage from "../pages/SearchPage/SearchPage";
 import Shop from "../pages/Shop/Shop";
 
-// eslint-disable-next-line no-shadow
 const Routes = ({
   isAuthenticated,
-  getUser,
-  getWishlist,
-  preloaderClose,
+  getUserData,
+  getWishlistData,
+  preloaderClosing,
   preloader,
-  userFromJwt,
+  userDataFromJwt,
 }) => {
   useEffect(() => {
     // eslint-disable-next-line no-undef
     const token = localStorage.getItem("authToken");
     if (token) {
-      userFromJwt(jwt(token));
-      preloaderClose();
+      userDataFromJwt(jwt(token));
+      preloaderClosing();
       setAuthToken(token);
-      getWishlist();
-      getUser();
+      getWishlistData();
+      getUserData();
     } else {
-      preloaderClose();
+      preloaderClosing();
     }
-  }, [getUser, getWishlist, preloaderClose, userFromJwt]);
+  }, [getUserData, getWishlistData, preloaderClosing, userDataFromJwt]);
 
   // eslint-disable-next-line no-nested-ternary
   return preloader ? (
@@ -113,8 +111,8 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps, {
-  getUser,
-  getWishlist,
-  preloaderClose,
-  userFromJwt,
+  getUserData: getUser,
+  getWishlistData: getWishlist,
+  preloaderClosing: preloaderClose,
+  userDataFromJwt: userFromJwt,
 })(Routes);

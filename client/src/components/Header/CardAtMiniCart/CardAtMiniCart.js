@@ -6,12 +6,11 @@ import { connect } from "react-redux";
 import { deleteItemCart } from "../../../store/actions/сart";
 import useStyles from "./useStyles";
 
-// eslint-disable-next-line no-shadow
-const CardAtMiniCart = ({ id, url, title, qty, price, deleteItemCart }) => {
+const CardAtMiniCart = ({ id, url, title, qty, price, deleteCartItem }) => {
   const classes = useStyles();
 
   function removeFromMiniCartBtn() {
-    deleteItemCart(id);
+    deleteCartItem(id);
   }
 
   return (
@@ -28,18 +27,18 @@ const CardAtMiniCart = ({ id, url, title, qty, price, deleteItemCart }) => {
           </p>
         </div>
       </Link>
-      {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */}
-      <div
-        className={classes.mini_cart_card_close}
-        onClick={removeFromMiniCartBtn}
-      >
-        <Tooltip title="close">
-          <CloseIcon fontSize="small" />
-        </Tooltip>
-      </div>
+      <Tooltip title="close">
+        <CloseIcon
+          fontSize="small"
+          className={classes.mini_cart_card_close}
+          onClick={removeFromMiniCartBtn}
+        />
+      </Tooltip>
     </li>
     // )
   );
 };
 
-export default connect(null, { deleteItemCart })(CardAtMiniCart);
+export default connect(null, { deleteCartItem: deleteItemCart })(
+  CardAtMiniCart
+);
