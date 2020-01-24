@@ -40,7 +40,7 @@ const ItemDetails = ({ id, inCart, inWishList }) => {
 
   useEffect(() => {
     axios
-      .get("/products/5269")
+      .get("/api/products/5269")
       .then(response => {
         setItem(response.data);
         setPreloader(false);

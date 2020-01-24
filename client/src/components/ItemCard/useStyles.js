@@ -61,12 +61,15 @@ const useStyles = makeStyles(theme => ({
       color: theme.palette.primary.main,
     },
   },
-  inCart: {
-    paddingTop: theme.spacing(1),
-    paddingBottom: 7,
-    fontSize: 13,
-    fontWeight: 700,
-    color: theme.palette.primary.main,
+  snackbar: {
+    position: "relative",
+    backgroundColor: theme.palette.primary.main,
+  },
+  snackbarMessage: {
+    position: "absolute",
+    top: 18,
+    left: 68,
+    fontSize: 15,
   },
 }));
 

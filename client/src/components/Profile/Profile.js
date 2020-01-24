@@ -1,15 +1,21 @@
 import React from "react";
-// import PropTypes from 'prop-types';
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
+import { connect } from "react-redux";
+
 import useStyles from "./useStyles";
 
 import PersonalData from "./PersonalData/PersonalData";
 import ChangePasswordForm from "./ChangePasswordForm/ChangePasswordForm";
 import DeliveryAddressForm from "./DeliveryAdressForm/DeliveryAddressForm";
 import WishList from "./WishList/WishList";
+
+import { getUser, logOut } from "../../store/actions/loginActions";
+import { wishlistLogOut } from "../../store/actions/wishlist";
+import { clearCart } from "../../store/actions/сart";
+import setAuthToken from "../common/setAuthToken";
 
 function TabPanel(props) {
   const { children, value, index } = props;
@@ -18,29 +24,30 @@ function TabPanel(props) {
   return (
     <Typography
       component="div"
-      className={classes.tabpanel}
       role="tabpanel"
       hidden={value !== index}
       id={`vertical-tabpanel-${index}`}
       aria-labelledby={`vertical-tab-${index}`}
+      className={classes.tabpanel}
     >
       {value === index && <Box p={1}>{children}</Box>}
     </Typography>
   );
 }
 
-// TabPanel.propTypes = {
-//   children: PropTypes.node,
-//   index: PropTypes.any.isRequired,
-//   value: PropTypes.any.isRequired,
-// };
-
-const Profile = () => {
+// eslint-disable-next-line no-shadow
+const Profile = ({ getUser, logOut, wishlistLogOut, clearCart }) => {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
+  };
+  const profileLogOut = () => {
+    setAuthToken(false);
+    wishlistLogOut();
+    logOut();
+    clearCart();
   };
 
   return (
@@ -54,19 +61,21 @@ const Profile = () => {
         className={classes.tabs}
       >
         <Tab
-          label="Personal Details"
+          label="Wishlist"
           id="vertical-tab-0"
           aria-controls="vertical-tabpanel-0"
         />
         <Tab
-          label="Delivery Address"
+          label="Personal Details"
           id="vertical-tab-1"
           aria-controls="vertical-tabpanel-1"
+          onClick={() => getUser()}
         />
         <Tab
-          label="Wishlist"
+          label="Delivery Address"
           id="vertical-tab-2"
           aria-controls="vertical-tabpanel-2"
+          onClick={() => getUser()}
         />
         <Tab
           label="Order History"
@@ -78,19 +87,25 @@ const Profile = () => {
           id="vertical-tab-4"
           aria-controls="vertical-tabpanel-4"
         />
+        <Tab
+          label="Log Out"
+          id="vertical-tab-5"
+          aria-controls="vertical-tabpanel-5"
+          onClick={() => profileLogOut()}
+        />
       </Tabs>
 
       <TabPanel value={value} index={0}>
-        <PersonalData />
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        <DeliveryAddressForm />
-      </TabPanel>
-      <TabPanel value={value} index={2}>
         <WishList />
       </TabPanel>
+      <TabPanel value={value} index={1}>
+        <PersonalData />
+      </TabPanel>
+      <TabPanel value={value} index={2}>
+        <DeliveryAddressForm />
+      </TabPanel>
       <TabPanel value={value} index={3}>
-        Cart
+        Orders history
       </TabPanel>
       <TabPanel value={value} index={4}>
         <ChangePasswordForm />
@@ -99,4 +114,6 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default connect(null, { getUser, logOut, wishlistLogOut, clearCart })(
+  Profile
+);

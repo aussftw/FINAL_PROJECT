@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Button from "@material-ui/core/Button";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import axios from "axios";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 import useStyles from "./useStyles";
 
 export default function ChangePasswordForm() {
@@ -13,6 +14,7 @@ export default function ChangePasswordForm() {
     setConfirmationNewPasswordValue,
   ] = useState("");
   const [message, setMessage] = useState("");
+  const matches = useMediaQuery(theme => theme.breakpoints.down("xs"));
 
   const passwords = {
     password: oldPasswordValue,
@@ -24,7 +26,7 @@ export default function ChangePasswordForm() {
     setMessage("");
     if (newPasswordValue === confirmationNewPasswordValue) {
       axios
-        .put("/customers/password", passwords)
+        .put("/api/customers/password", passwords)
         .then(updatedCustomer => {
           if (updatedCustomer.data.password) {
             setMessage(updatedCustomer.data.password);
@@ -53,15 +55,23 @@ export default function ChangePasswordForm() {
         <ValidatorForm
           className={classes.form}
           noValidate={false}
-          autoComplete="off"
+          autoComplete="on"
           onSubmit={savePassword}
         >
+          <input type="text" autoComplete="user-name" hidden />
           <TextValidator
             id="customer-old-password-input"
-            label="Input old password"
+            label="Old password"
+            InputLabelProps={{ className: classes.input }}
             value={oldPasswordValue}
+            size={matches ? "small" : null}
             variant="outlined"
-            inputProps={{ type: "password", minLength: 8, maxLength: 20 }}
+            inputProps={{
+              type: "password",
+              minLength: 8,
+              maxLength: 20,
+              autoComplete: "current-password",
+            }}
             onChange={event => setOldPasswordValue(event.target.value)}
             validators={["required", "matchRegexp:^[a-zA-Z0-9]{8,20}$"]}
             errorMessages={[
@@ -71,10 +81,17 @@ export default function ChangePasswordForm() {
           />
           <TextValidator
             id="customer-new-password-input"
-            label="Input new password"
+            label="New password"
+            InputLabelProps={{ className: classes.input }}
             value={newPasswordValue}
+            size={matches ? "small" : null}
             variant="outlined"
-            inputProps={{ type: "password", minLength: 8, maxLength: 20 }}
+            inputProps={{
+              type: "password",
+              minLength: 8,
+              maxLength: 20,
+              autoComplete: "new-password",
+            }}
             onChange={event => setNewPasswordValue(event.target.value)}
             validators={["required", "matchRegexp:^[a-zA-Z0-9]{8,20}$"]}
             errorMessages={[
@@ -84,10 +101,17 @@ export default function ChangePasswordForm() {
           />
           <TextValidator
             id="customer-confirm-password-input"
-            label="Confirm new password"
+            label="Confirm password"
+            InputLabelProps={{ className: classes.input }}
             value={confirmationNewPasswordValue}
+            size={matches ? "small" : null}
             variant="outlined"
-            inputProps={{ type: "password", minLength: 8, maxLength: 20 }}
+            inputProps={{
+              type: "password",
+              minLength: 8,
+              maxLength: 20,
+              autoComplete: "new-password",
+            }}
             onChange={event =>
               setConfirmationNewPasswordValue(event.target.value)
             }
@@ -102,7 +126,9 @@ export default function ChangePasswordForm() {
               "password mismatch",
             ]}
           />
-          <Button type="submit">SAVE PASSWORD</Button>
+          <Button className={classes.btn} type="submit">
+            SAVE PASSWORD
+          </Button>
         </ValidatorForm>
         {Boolean(message) && <p className={classes.message}>{message}</p>}
       </div>

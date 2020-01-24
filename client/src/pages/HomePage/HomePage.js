@@ -9,6 +9,7 @@ import BackToTop from "../../components/common/GoUpButton";
 import Footer from "../../components/Footer";
 // import ItemDetails from "../../components/ItemDetails/ItemDetails";
 import Stock from "../../components/Stock";
+import MainCarousel from "../../components/MainCarousel";
 import Subscribe from "../../components/Subscribe/Subscribe";
 import ProductCarousel from "../../components/ProductCarousel";
 
@@ -18,6 +19,7 @@ function HomePage() {
       <BackToTop />
       <Header />
       <SubHeader />
+      <MainCarousel />
       <TopRated />
       <ProductCarousel />
       <TilesContainer />

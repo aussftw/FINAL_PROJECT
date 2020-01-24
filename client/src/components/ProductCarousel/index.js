@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from "react";
 import * as axios from "axios";
 import InfiniteCarousel from "react-leaf-carousel";
-// import useStyles from "../ProductCarousel/useStyles";
+
 import Container from "@material-ui/core/Container";
 import ItemCard from "../ItemCard/ItemCard";
 
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-// import useStyles from "../TopRated/useStyles";
 
 import Preloader from "../Preloader/Desktop";
-// import Hidden from "@material-ui/core/Hidden";
 
 const ProductCarousel = () => {
   // const classes = useStyles();
@@ -17,7 +15,7 @@ const ProductCarousel = () => {
 
   useEffect(() => {
     axios
-      .get("/products/top")
+      .get("/api/products/top")
       .then(response => {
         setProductsV(response.data);
       })
@@ -35,25 +33,21 @@ const ProductCarousel = () => {
         <InfiniteCarousel
           breakpoints={[
             {
-              breakpoint: 500,
+              breakpoint: 960,
               settings: {
                 slidesToShow: 2,
                 slidesToScroll: 2,
               },
             },
             {
-              breakpoint: 768,
+              breakpoint: 1280,
               settings: {
                 slidesToShow: 3,
                 slidesToScroll: 3,
               },
             },
           ]}
-          // dots
-          // arrows={false}
-          showSides={false}
-          // sidesOpacity={.5}
-          sideSize={1.9}
+          slidesSpacing={1}
           slidesToScroll={4}
           slidesToShow={4}
           scrollOnDevice
