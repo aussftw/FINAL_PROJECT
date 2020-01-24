@@ -25,54 +25,79 @@ export const actualizationLocalCartFailure = error => {
     payload: error,
   };
 };
+
+export const mergeCarts = () => dispatch => {
+  const merging = data => {
+    if (store.getState().cartReducer.cart.length === 0) {
+      dispatch(getCartSuccess(data));
+    } else {
+      const localCart = store.getState().cartReducer.cart.map(item => {
+        return {
+          product: item.product._id,
+          cartQuantity: item.cartQuantity,
+          isMatched: false,
+        };
+      });
+      const serverCart = data.products.map(item => {
+        return {
+          product: item.product._id,
+          cartQuantity: item.cartQuantity,
+          isMatched: false,
+        };
+      });
+      const mergedCart = [];
+      localCart.forEach((localItem, localIndex) => {
+        serverCart.forEach((serverItem, serverIndex) => {
+          if (localItem.product === serverItem.product) {
+            mergedCart.push({
+              product: serverItem.product,
+              cartQuantity: Math.max(
+                +localItem.cartQuantity,
+                +serverItem.cartQuantity
+              ),
+            });
+            serverCart[serverIndex].isMatched = true;
+            localCart[localIndex].isMatched = true;
+          }
+        });
+      });
+      localCart.concat(serverCart).forEach(item => {
+        if (!item.isMatched) {
+          mergedCart.push({
+            product: item.product,
+            cartQuantity: item.cartQuantity,
+          });
+        }
+      });
+      const updateProductList = { products: mergedCart };
+      axios
+        .put("/api/cart", updateProductList)
+        .then(response => {
+          dispatch(getCartSuccess(response.data));
+        })
+        .catch(error => {
+          dispatch(getCartFailure(error));
+        });
+    }
+  };
+  axios
+    .get("/api/cart")
+    .then(response => {
+      merging(response.data);
+    })
+    .catch(error => {
+      dispatch(getCartFailure(error));
+    });
+};
+
 export const getCart = () => dispatch => {
   if (store.getState().loginReducer.isAuthenticated) {
-    // const mergeCarts = data => {
-    //   if (store.getState().cartReducer.cart.length === 0) {
-    //     dispatch(getCartSuccess(data));
-    //   } else {
-    //     const mergedCart = [];
-    //       console.log("store: ",store.getState().cartReducer.cart);
-    //       console.log("server data: ", data);
-    //
-    //       const mergedArray = [...store.getState().cartReducer.cart, ...data];
-    //     mergedArray.forEach(mergedItem => {
-    //       let flagNoMatch = true;
-    //       data.forEach(serverItem => {
-    //         if (mergedItem.product._id === serverItem.product._id) {
-    //           flagNoMatch = false;
-    //           mergedCart.push({
-    //             product: serverItem.product._id,
-    //             cartQuantity: Math.max(
-    //               +mergedItem.cartQuantity,
-    //               +serverItem.cartQuantity
-    //             ),
-    //           });
-    //         }
-    //       });
-    //       if (flagNoMatch) {
-    //         mergedCart.push({
-    //           product: mergedItem.product._id,
-    //           cartQuantity: mergedItem.cartQuantity,
-    //         });
-    //       }
-    //     });
-    //     console.log(mergedCart);
-    //       dispatch(getCartSuccess(data));
-    //   }
-    // };
-
     axios
       .get("/api/cart")
       .then(response => {
-        // eslint-disable-next-line no-console
-        console.log(response.data);
-        // dispatch(mergeCarts(response.data));
         dispatch(getCartSuccess(response.data));
       })
       .catch(error => {
-        // eslint-disable-next-line no-console
-        console.log(error.response);
         dispatch(getCartFailure(error));
       });
   } else {
@@ -83,9 +108,18 @@ export const getCart = () => dispatch => {
     axios
       .post("/api/products/actualization", actualizationProducts)
       .then(response => {
-        // eslint-disable-next-line no-console
-        console.log(response.data);
-        dispatch(actualizationLocalCartSuccess(response.data));
+        const updateLocalCart = [];
+        store.getState().cartReducer.cart.forEach(stateItem => {
+          response.data.forEach(actualItem => {
+            if (stateItem.product._id === actualItem._id) {
+              updateLocalCart.push({
+                product: actualItem,
+                cartQuantity: stateItem.cartQuantity,
+              });
+            }
+          });
+        });
+        dispatch(actualizationLocalCartSuccess(updateLocalCart));
       })
       .catch(error => {
         dispatch(actualizationLocalCartFailure(error));
@@ -122,22 +156,33 @@ export const addItemCart = (id, itemNo) => dispatch => {
     axios
       .put(`/api/cart/${id}`)
       .then(response => {
-        // eslint-disable-next-line no-console
-        console.log(response.data);
         dispatch(addItemCartSuccess(response.data));
       })
       .catch(error => {
-        // eslint-disable-next-line no-console
-        console.log(error.response.data);
         dispatch(addItemCartFailure(error));
       });
   } else {
     axios
       .get(`/api/products/${itemNo}`)
       .then(response => {
-        // eslint-disable-next-line no-console
-        console.log(response.data);
-        dispatch(addItemCartLocalSuccess(response.data));
+        let addNewProductInLocalCart = true;
+        let updateLocalCart = store.getState().cartReducer.cart.map(item => {
+          if (item.product._id === response.data._id) {
+            addNewProductInLocalCart = false;
+            return {
+              ...item,
+              cartQuantity: +item.cartQuantity + 1,
+            };
+          }
+          return item;
+        });
+        if (addNewProductInLocalCart) {
+          updateLocalCart = updateLocalCart.concat({
+            product: response.data,
+            cartQuantity: 1,
+          });
+        }
+        dispatch(addItemCartLocalSuccess(updateLocalCart));
       })
       .catch(error => {
         dispatch(addItemCartLocalFailure(error));
@@ -168,17 +213,26 @@ export const decreaseItemCart = id => dispatch => {
     axios
       .delete(`/api/cart/product/${id}`)
       .then(response => {
-        // eslint-disable-next-line no-console
-        console.log(response.data);
         dispatch(decreaseItemCartSuccess(response.data));
       })
       .catch(error => {
-        // eslint-disable-next-line no-console
-        console.log(error.response.data);
         dispatch(decreaseItemCartFailure(error));
       });
   } else {
-    dispatch(decreaseItemCartLocal(id));
+    const updateLocalCart = [];
+    store.getState().cartReducer.cart.forEach(item => {
+      if (item.product._id === id) {
+        if (+item.cartQuantity > 1) {
+          updateLocalCart.push({
+            product: item.product,
+            cartQuantity: +item.cartQuantity - 1,
+          });
+        }
+      } else {
+        updateLocalCart.push(item);
+      }
+    });
+    dispatch(decreaseItemCartLocal(updateLocalCart));
   }
 };
 
@@ -205,17 +259,19 @@ export const deleteItemCart = id => dispatch => {
     axios
       .delete(`/api/cart/${id}`)
       .then(response => {
-        // eslint-disable-next-line no-console
-        console.log(response.data);
         dispatch(deleteItemCartSuccess(response.data));
       })
       .catch(error => {
-        // eslint-disable-next-line no-console
-        console.log(error.response.data);
         dispatch(deleteItemCartFailure(error));
       });
   } else {
-    dispatch(deleteItemCartLocal(id));
+    const updateLocalCart = [];
+    store.getState().cartReducer.cart.forEach(item => {
+      if (item.product._id !== id) {
+        updateLocalCart.push(item);
+      }
+    });
+    dispatch(deleteItemCartLocal(updateLocalCart));
   }
 };
 
@@ -249,17 +305,27 @@ export const changeItemCartQuantity = (id, cartQty) => dispatch => {
     axios
       .put("/api/cart", updateProductList)
       .then(response => {
-        // eslint-disable-next-line no-console
-        console.log(response.data);
         dispatch(changeItemCartQuantitySuccess(response.data));
       })
       .catch(error => {
-        // eslint-disable-next-line no-console
-        console.log(error.response.data);
         dispatch(changeItemCartQuantityFailure(error));
       });
   } else {
-    const data = { id, cartQuantity: cartQty };
-    dispatch(changeItemCartQuantityLocal(data));
+    const updateLocalCart = store.getState().cartReducer.cart.map(item => {
+      if (item.product._id === id) {
+        return {
+          ...item,
+          cartQuantity: cartQty,
+        };
+      }
+      return item;
+    });
+    dispatch(changeItemCartQuantityLocal(updateLocalCart));
   }
+};
+
+export const clearCart = () => {
+  return {
+    type: "CLEAR_CART",
+  };
 };

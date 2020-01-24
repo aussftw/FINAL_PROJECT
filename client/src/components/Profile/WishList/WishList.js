@@ -1,27 +1,28 @@
 import React from "react";
-// eslint-disable-next-line import/no-extraneous-dependencies
-import v4 from "uuid";
 import { connect } from "react-redux";
+import v4 from "uuid";
 import useStyles from "./useStyles";
 import WishlistCard from "./WishlistCard/WishlistCard";
 import Preloader from "../../Preloader";
-import { getWishlist } from "../../../store/actions/wishlist";
 
-// eslint-disable-next-line no-shadow
 function WishList({ isLoading, wishlist, error }) {
   const classes = useStyles();
-
   const errorMessageArray = [
     "Product is absent in wishlist",
     "Product was added to wishlist before",
     "Wishlist does not exist",
   ];
-  // eslint-disable-next-line no-nested-ternary
-  const errorMessage = error
-    ? errorMessageArray.includes(error.response.data.message)
-      ? ""
-      : error
-    : "";
+
+  let errorMessage = "";
+  if (error) {
+    if (errorMessageArray.includes(error.response.data.message)) {
+      errorMessage = "";
+    } else {
+      errorMessage = error;
+    }
+  } else {
+    errorMessage = error;
+  }
 
   return isLoading ? (
     <Preloader />
@@ -37,6 +38,7 @@ function WishList({ isLoading, wishlist, error }) {
               <WishlistCard
                 key={randomId}
                 id={item._id}
+                itemNo={item.itemNo}
                 img={item.imageUrls[0]}
                 title={item.name}
                 qty={item.quantity}
@@ -62,4 +64,4 @@ function mapStateToProps(state) {
     error: state.wishlistReducer.error,
   };
 }
-export default connect(mapStateToProps, { getWishlist })(WishList);
+export default connect(mapStateToProps)(WishList);

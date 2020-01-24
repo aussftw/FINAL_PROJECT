@@ -9,6 +9,7 @@ const useStyles = makeStyles(theme => ({
     marginTop: 20,
   },
   tabs: {
+    color: theme.palette.primary.dark,
     borderRight: `1px solid ${theme.palette.divider}`,
     width: 200,
     minWidth: 90,

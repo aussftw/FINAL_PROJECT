@@ -20,7 +20,6 @@ const TopRated = () => {
       })
       .catch(err => {
         // eslint-disable-next-line no-console
-        // console.log(err.response.data);
         console.log(err.response);
       });
   }, []);
@@ -57,7 +56,6 @@ const TopRated = () => {
 
           return (
             <Hidden
-              /* eslint-disable-next-line no-underscore-dangle */
               key={`top-rated-key-${value._id}`}
               xsDown={result.xsDown}
               smDown={result.smDown}
@@ -71,6 +69,7 @@ const TopRated = () => {
                 rate={value.rate.rating}
                 price={value.currentPrice}
                 img={value.imageUrls[0]}
+                stock={value.quantity}
               />
             </Hidden>
           );

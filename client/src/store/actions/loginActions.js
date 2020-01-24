@@ -2,6 +2,7 @@ import axios from "axios";
 import jwt from "jwt-decode";
 import * as constants from "../constants";
 import setAuthToken from "../../components/common/setAuthToken";
+import { mergeCarts } from "./сart";
 import { getWishlist } from "./wishlist";
 
 const logInSuccess = data => {
@@ -37,6 +38,9 @@ export const getUser = () => dispatch => {
     .then(response => {
       if (response.statusText === "OK" && response.data.success) {
         dispatch(userFromJwt(jwt(response.data.token)));
+        // eslint-disable-next-line no-undef
+        localStorage.setItem("user", JSON.stringify(response.data));
+
       }
       dispatch(logInSuccess(response.data));
     })
@@ -59,8 +63,9 @@ export const logIn = user => dispatch => {
         setAuthToken(response.data.token);
         dispatch(userFromJwt(jwt(response.data.token)));
       }
-      dispatch(getUser());
       dispatch(getWishlist());
+      dispatch(getUser());
+      dispatch(mergeCarts());
     })
     .catch(error => {
       dispatch(logInFailure(error));

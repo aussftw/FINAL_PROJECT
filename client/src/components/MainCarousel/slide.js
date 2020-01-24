@@ -13,16 +13,18 @@ const Slide = ({ image, title, subTitle }) => {
     <div className={classes.slider}>
       <img className={classes.slider} src={image} alt="slide" />
       <Grid
-        xs={6}
-        justify="center"
+        container
         alignItems="center"
-        className={classes.block}
+        // justify="center"
       >
-        <Box justify="center" alignItems="center" className={classes.paragraph}>
-          <p>{title}</p>
-          <h1 className={classes.title}>{subTitle}</h1>
-          <Button className={classes.actionButton}>shop now</Button>
-        </Box>
+        <Grid item xs={6} className={classes.block}>
+          <Box className={classes.paragraph}>
+            <p>{title}</p>
+            <h1 className={classes.title}>{subTitle}</h1>
+            <Button className={classes.actionButton}>shop now</Button>
+          </Box>
+        </Grid>
+        <Grid item xs={6} />
       </Grid>
     </div>
   );

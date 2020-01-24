@@ -1,21 +1,31 @@
 {
-  "extends": ["airbnb","airbnb/hooks","prettier"],
+  "extends": ["airbnb", "airbnb/hooks", "prettier"],
   "plugins": ["prettier"],
   "rules": {
     "func-names": ["error", "never"],
     "no-console": "warn",
+    "no-shadow": [
+      "off",
+      {
+        "builtinGlobals": false,
+        "hoist": "functions",
+        "allow": []
+      }
+    ],
     "react/prop-types": 0,
     "no-dupe-args": "warn",
     "no-duplicate-case": "error",
     "no-debugger": "error",
     "no-dupe-keys": "error",
+    "'react/jsx-one-expression-per-line": "off",
     "react/button-has-type": "off",
+    "import/prefer-default-export": "off",
+    "react/jsx-props-no-spreading": "off",
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-    "react/destructuring-assignment": ["warn","always"],
-    "no-shadow": "off",
-    "react/jsx-one-expression-per-line": "off",
+    "react/destructuring-assignment": ["warn", "always"],
     "no-underscore-dangle": "off",
-    "padding-line-between-statements": ["error",
+    "padding-line-between-statements": [
+      "error",
       { "blankLine": "always", "prev": "const", "next": "return" },
       { "blankLine": "always", "prev": "function", "next": "return" },
       { "blankLine": "always", "prev": "let", "next": "return" }
