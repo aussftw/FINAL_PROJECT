@@ -27,7 +27,6 @@ import {
   wishlistDeleteItem,
 } from "../../store/actions/wishlist";
 
-// eslint-disable-next-line no-shadow
 const ItemCard = ({
   id,
   itemNo,
@@ -35,6 +34,8 @@ const ItemCard = ({
   rate,
   price,
   img,
+  stock,
+  // eslint-disable-next-line no-shadow
   addItemCart,
   wishlistAll,
   wishlistAddItem,
@@ -70,7 +71,6 @@ const ItemCard = ({
 
   return (
     <Card className={classes.card}>
-      {/* eslint-disable-next-line no-nested-ternary */}
       {!wishlistAll.every(el => el._id !== id) ? (
         <Tooltip arrow title="Remove from wishlist">
           <IconButton
@@ -81,27 +81,17 @@ const ItemCard = ({
           </IconButton>
         </Tooltip>
       ) : (
-        // isAuthenticated ? (
         <Tooltip
           arrow
           title={isAuthenticated ? "Add to wishlist" : "Only for logined user"}
         >
           <IconButton
             className={classes.wishList}
-            onClick={() => handleDeleteItemFromWishlist()}
+            onClick={handleDeleteItemFromWishlist}
           >
             <FavoriteBorder />
           </IconButton>
         </Tooltip>
-        // ) : (
-        //   <Link to="/login">
-        //     <IconButton
-        //       className={classes.wishList}
-        //     >
-        //       <FavoriteBorder />
-        //     </IconButton>
-        //   </Link>
-        // )
       )}
       <CardActionArea
         classes={{
@@ -117,10 +107,7 @@ const ItemCard = ({
         />
         <CardContent className={classes.cardContent}>
           <Typography className={classes.title} noWrap align="center">
-            {title
-              .split(" ")
-              .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-              .join(" ")}
+            {title}
           </Typography>
           <Tooltip placement="bottom-end" title={CardTooltipText(rate)}>
             <Box align="center">
@@ -142,9 +129,16 @@ const ItemCard = ({
           </Typography>
         </CardContent>
       </CardActionArea>
-      <Button variant="text" fullWidth onClick={() => addItemToCart()}>
-        + add to cart
-      </Button>
+      {stock === 0 ? (
+        <Typography className={classes.outOfStock} align="center">
+          out of stock
+        </Typography>
+      ) : (
+        <Button variant="text" fullWidth onClick={addItemToCart}>
+          + add to cart
+        </Button>
+      )}
+
       <Snackbar
         anchorOrigin={{
           vertical: "top",

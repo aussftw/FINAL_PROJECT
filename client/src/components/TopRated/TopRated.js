@@ -69,6 +69,7 @@ const TopRated = () => {
                 rate={value.rate.rating}
                 price={value.currentPrice}
                 img={value.imageUrls[0]}
+                stock={value.quantity}
               />
             </Hidden>
           );
