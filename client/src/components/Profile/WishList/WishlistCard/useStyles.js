@@ -25,6 +25,9 @@ const useStyles = makeStyles(theme => ({
     height: 50,
     objectFit: "cover",
   },
+  link: {
+    textDecoration: "none",
+  },
   name: {
     fontSize: 14,
     textTransform: "capitalize",

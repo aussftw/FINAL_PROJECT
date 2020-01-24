@@ -50,7 +50,7 @@ export default function ChangePasswordForm() {
 
   return (
     <div>
-      <h2 className={classes.title}>Password Change</h2>
+      <h2 className={classes.title}>Password change</h2>
       <div className={classes.root}>
         <ValidatorForm
           className={classes.form}

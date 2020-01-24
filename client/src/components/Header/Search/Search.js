@@ -65,7 +65,7 @@ const CustomizedSearch = ({ searchPhrases }) => {
             "this field is required",
             " Only latin letters, 3 characters and more",
           ]}
-          inputProps
+          // inputProps
         />
         <Button
           className={classes.iconButton}
