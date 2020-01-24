@@ -81,6 +81,9 @@ const Routes = ({
       <Route path="/profile">
         <Profiler />
       </Route>
+      <Route path="/login">
+        <LoginForm />
+      </Route>
       <Redirect to="/" />
     </Switch>
   ) : (

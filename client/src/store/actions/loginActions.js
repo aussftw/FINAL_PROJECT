@@ -5,12 +5,12 @@ import setAuthToken from "../../components/common/setAuthToken";
 import { mergeCarts } from "./сart";
 import { getWishlist } from "./wishlist";
 
-// const logInSuccess = data => {
-//   return {
-//     type: constants.LOG_IN_SUCCESS,
-//     payload: data,
-//   };
-// };
+const logInSuccess = data => {
+  return {
+    type: constants.LOG_IN_SUCCESS,
+    payload: data,
+  };
+};
 
 const logInFailure = error => {
   return {
@@ -38,8 +38,10 @@ export const getUser = () => dispatch => {
     .then(response => {
       if (response.statusText === "OK" && response.data.success) {
         dispatch(userFromJwt(jwt(response.data.token)));
+        // eslint-disable-next-line no-undef
+        localStorage.setItem("user", JSON.stringify(response.data));
       }
-      // dispatch(logInSuccess(response.data));
+      dispatch(logInSuccess(response.data));
     })
     .catch(error => {
       dispatch(logInFailure(error));
