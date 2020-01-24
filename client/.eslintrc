@@ -1,8 +1,4 @@
 {
-  "parserOptions": {
-    "ecmaVersion": 6,
-    "sourceType": "module"
-  },
   "extends": ["airbnb", "airbnb/hooks", "prettier"],
   "plugins": ["prettier"],
   "rules": {
@@ -21,6 +17,7 @@
     "no-duplicate-case": "error",
     "no-debugger": "error",
     "no-dupe-keys": "error",
+    "'react/jsx-one-expression-per-line": "off",
     "react/button-has-type": "off",
     "import/prefer-default-export": "off",
     "react/jsx-props-no-spreading": "off",

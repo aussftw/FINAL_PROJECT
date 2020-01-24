@@ -27,7 +27,7 @@ const Subscribe = () => {
     setError(false);
     const authOptions = {
       method: "POST",
-      url: "/subscribers",
+      url: "/api/subscribers",
       data: obj,
     };
 

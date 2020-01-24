@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
@@ -14,6 +14,7 @@ import WishList from "./WishList/WishList";
 
 import { getUser, logOut } from "../../store/actions/loginActions";
 import { wishlistLogOut } from "../../store/actions/wishlist";
+import { clearCart } from "../../store/actions/сart";
 import setAuthToken from "../common/setAuthToken";
 
 function TabPanel(props) {
@@ -34,18 +35,23 @@ function TabPanel(props) {
   );
 }
 
-// eslint-disable-next-line no-shadow
-const Profile = ({ getUser, logOut, wishlistLogOut }) => {
+const Profile = ({
+  getUserData,
+  logOff,
+  wishlistLogOff,
+  clearPersonalCart,
+}) => {
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
   const profileLogOut = () => {
     setAuthToken(false);
-    wishlistLogOut();
-    logOut();
+    wishlistLogOff();
+    logOff();
+    clearPersonalCart();
   };
 
   return (
@@ -67,13 +73,13 @@ const Profile = ({ getUser, logOut, wishlistLogOut }) => {
           label="Personal Details"
           id="vertical-tab-1"
           aria-controls="vertical-tabpanel-1"
-          onClick={() => getUser()}
+          onClick={() => getUserData()}
         />
         <Tab
           label="Delivery Address"
           id="vertical-tab-2"
           aria-controls="vertical-tabpanel-2"
-          onClick={() => getUser()}
+          onClick={() => getUserData()}
         />
         <Tab
           label="Order History"
@@ -112,4 +118,9 @@ const Profile = ({ getUser, logOut, wishlistLogOut }) => {
   );
 };
 
-export default connect(null, { getUser, logOut, wishlistLogOut })(Profile);
+export default connect(null, {
+  getUserData: getUser,
+  logOff: logOut,
+  wishlistLogOff: wishlistLogOut,
+  clearPersonalCart: clearCart,
+})(Profile);
