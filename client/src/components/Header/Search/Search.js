@@ -1,17 +1,20 @@
 import React, { useState } from "react";
 import axios from "axios";
-
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import Button from "@material-ui/core/Button";
 import SearchIcon from "@material-ui/icons/Search";
-import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
-
-import { connect } from "react-redux";
+// import { Tooltip } from "@material-ui/core";
 import useStyles from "./useStyles";
 // eslint-disable-next-line import/named
-import { searchPhrases } from "../../../store/actions";
+import {
+  searchPhrases,
+  searchPhrasesFailure,
+} from "../../../store/actions/Search";
 
 // eslint-disable-next-line no-shadow
-const CustomizedSearch = ({ searchPhrases }) => {
+const CustomizedSearch = ({ searchPhrases, searchPhrasesFailure }) => {
   const classes = useStyles();
 
   const [text, setText] = useState({ query: "" });
@@ -23,8 +26,7 @@ const CustomizedSearch = ({ searchPhrases }) => {
         searchPhrases(products.data);
       })
       .catch(err => {
-        // eslint-disable-next-line no-console
-        console.log(err);
+        searchPhrasesFailure(err);
       });
   }
 
@@ -48,33 +50,34 @@ const CustomizedSearch = ({ searchPhrases }) => {
 
       <ValidatorForm
         noValidate={false}
-        onSubmit={() => {
-          search();
-        }}
+        onSubmit={search}
         className={classes.form}
       >
         <TextValidator
           value={text.query}
           onChange={searchChange("query")}
-          // className={classes.input}
+          // classes={{ label: classes.input }}
+          className={classes.input}
           variant="outlined"
           size="small"
           placeholder="Search..."
           validators={["required", "matchRegexp:^[`'\"()A-Za-zd.s_-]{3,50}"]}
           errorMessages={[
-            "this field is required",
-            " Only latin letters, 3 characters and more",
+            "This field is required",
+            "Only latin letters, 3 characters and more",
           ]}
           // inputProps
         />
+
         <Button
           className={classes.iconButton}
           variant="contained"
           type="submit"
           aria-label="search"
-          // onClick={()=>{search()}}
-          // onMouseDown={search}
-          // href="/search"
+          component={Link}
+          to="/search"
+          onClick={search}
+          href="/#"
         >
           <SearchIcon />
         </Button>
@@ -83,4 +86,6 @@ const CustomizedSearch = ({ searchPhrases }) => {
   );
 };
 
-export default connect(null, { searchPhrases })(CustomizedSearch);
+export default connect(null, { searchPhrases, searchPhrasesFailure })(
+  CustomizedSearch
+);

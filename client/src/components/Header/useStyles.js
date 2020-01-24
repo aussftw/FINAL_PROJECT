@@ -18,6 +18,12 @@ const useStyles = makeStyles(theme => ({
       color: "theme. primary.dark",
     },
   },
+  mobileSearch:{
+    display: "inline-block",
+    [theme.breakpoints.up("sm")]: {
+      display: "none",
+    },
+  },
   searchDesktop: {
     display: "flex",
     // display: "none",

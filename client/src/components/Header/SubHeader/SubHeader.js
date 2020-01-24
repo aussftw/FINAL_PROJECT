@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import Box from "@material-ui/core/Box";
 import useStyles from "./useStyles";
 
-import { getLinks } from "../../../store/actions";
+import getLinks from "../../../store/actions/Links";
 import MenuListComposition from "../Dropdown/Dropdown";
 // import CustomizedSearch from "../Search/Search";
 

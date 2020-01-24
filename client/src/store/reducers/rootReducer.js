@@ -7,6 +7,7 @@ import linksReducer from "./linksReducer";
 import cartReducer from "./cartReducer";
 import wishlistReducer from "./wishlistReducer";
 import searchReducer from "./searchReducer";
+import filterReducer from "./filterReducer";
 
 const persistConfig = {
   key: "cart",
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
   wishlistReducer,
   cartReducer,
   searchReducer,
+  filterReducer
 });
 
 export default persistReducer(persistConfig, rootReducer);
