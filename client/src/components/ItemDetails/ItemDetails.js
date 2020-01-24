@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 // import { Carousel } from "react-responsive-carousel";
 
+import { useParams } from "react-router-dom";
+
 import { Gallery, GalleryImage } from "react-gesture-gallery";
 
 import axios from "axios";
@@ -29,6 +31,7 @@ import useStyles from "./useStyles";
 
 // eslint-disable-next-line
 const ItemDetails = ({ id, inCart, inWishList }) => {
+  const itemNo = useParams();
   const classes = useStyles();
   const [item, setItem] = useState({
     imageUrls: [],
@@ -40,7 +43,7 @@ const ItemDetails = ({ id, inCart, inWishList }) => {
 
   useEffect(() => {
     axios
-      .get("/api/products/5269")
+      .get(`/api/products/${itemNo.id}`)
       .then(response => {
         setItem(response.data);
         setPreloader(false);
@@ -52,7 +55,7 @@ const ItemDetails = ({ id, inCart, inWishList }) => {
         // eslint-disable-next-line
         console.log(error);
       });
-  }, []);
+  }, [itemNo]);
 
   // helpers
 

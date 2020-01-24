@@ -8,7 +8,7 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     flexDirection: "row",
     backgroundColor: theme.palette.primary.light,
-    padding: "0.2rem",
+    padding: "0.4rem",
     marginTop: "1.5rem",
   },
 
