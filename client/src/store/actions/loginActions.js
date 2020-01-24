@@ -40,7 +40,6 @@ export const getUser = () => dispatch => {
         dispatch(userFromJwt(jwt(response.data.token)));
         // eslint-disable-next-line no-undef
         localStorage.setItem("user", JSON.stringify(response.data));
-
       }
       dispatch(logInSuccess(response.data));
     })

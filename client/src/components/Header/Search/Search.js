@@ -66,7 +66,7 @@ const CustomizedSearch = ({ searchPhrases, searchPhrasesFailure }) => {
             "This field is required",
             "Only latin letters, 3 characters and more",
           ]}
-          inputProps
+          // inputProps
         />
 
         <Button

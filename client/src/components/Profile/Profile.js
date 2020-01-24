@@ -11,9 +11,10 @@ import PersonalData from "./PersonalData/PersonalData";
 import ChangePasswordForm from "./ChangePasswordForm/ChangePasswordForm";
 import DeliveryAddressForm from "./DeliveryAdressForm/DeliveryAddressForm";
 import WishList from "./WishList/WishList";
+import OrdersHistory from "./OrdersHistory/OrdersHistory";
 
 import { getUser, logOut } from "../../store/actions/loginActions";
-import { wishlistLogOut } from "../../store/actions/wishlist";
+import { getWishlist, wishlistLogOut } from "../../store/actions/wishlist";
 import { clearCart } from "../../store/actions/сart";
 import setAuthToken from "../common/setAuthToken";
 
@@ -37,6 +38,7 @@ function TabPanel(props) {
 
 const Profile = ({
   getUserData,
+  getWishlistData,
   logOff,
   wishlistLogOff,
   clearPersonalCart,
@@ -68,6 +70,7 @@ const Profile = ({
           label="Wishlist"
           id="vertical-tab-0"
           aria-controls="vertical-tabpanel-0"
+          onClick={() => getWishlistData()}
         />
         <Tab
           label="Personal Details"
@@ -82,7 +85,7 @@ const Profile = ({
           onClick={() => getUserData()}
         />
         <Tab
-          label="Order History"
+          label="Orders History"
           id="vertical-tab-3"
           aria-controls="vertical-tabpanel-3"
         />
@@ -109,7 +112,7 @@ const Profile = ({
         <DeliveryAddressForm />
       </TabPanel>
       <TabPanel value={value} index={3}>
-        Orders history
+        <OrdersHistory />
       </TabPanel>
       <TabPanel value={value} index={4}>
         <ChangePasswordForm />
@@ -120,6 +123,7 @@ const Profile = ({
 
 export default connect(null, {
   getUserData: getUser,
+  getWishlistData: getWishlist,
   logOff: logOut,
   wishlistLogOff: wishlistLogOut,
   clearPersonalCart: clearCart,

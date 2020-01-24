@@ -93,6 +93,13 @@ const theme = createMuiTheme({
         backgroundColor: "white",
       },
     },
+    MuiExpansionPanelSummary: {
+      content: {
+        justifyContent: "space-between",
+        alignItems: "center",
+        margin: 0,
+      },
+    },
   },
 });
 
