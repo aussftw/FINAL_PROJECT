@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
@@ -12,18 +12,31 @@ import Preloader from "../Preloader";
 import ProductCart from "../common/ProductCart/ProductCart";
 import { getCart } from "../../store/actions/сart";
 
-// eslint-disable-next-line no-unused-vars,no-shadow
-const Cart = ({ cart, error, getCart }) => {
+const Cart = ({ cart, getCartVar }) => {
   const classes = useStyles();
   const matches = useMediaQuery(theme => theme.breakpoints.down("xs"));
+  const [totalPrice, setTotalPrice] = useState(0);
+
+  const calcTotalPrice = useCallback(() => {
+    const result = cart.reduce((sum, item) => {
+      return sum + item.product.currentPrice * item.cartQuantity;
+    }, 0);
+    setTotalPrice(Math.round(result * 100) / 100);
+  }, [cart]);
 
   useEffect(() => {
-    getCart();
-  }, [getCart]);
+    getCartVar();
+  }, [getCartVar]);
+
+  useEffect(() => {
+    calcTotalPrice();
+  }, [calcTotalPrice]);
 
   return (
     <Container className={classes.cartContainer} maxWidth="lg">
       <Typography className={classes.cartTitle}>Cart</Typography>
+      {/* {cart.length === 0 ? ( */}
+      {/* <Typography className={classes.emptyCart}>You cart is empty</Typography> ) : ( <Typography>notWork</Typography>)} */}
       {!matches && (
         <Grid container spacing={1} className={classes.productHeaders}>
           <Grid item xs={2} />
@@ -79,7 +92,7 @@ const Cart = ({ cart, error, getCart }) => {
               Total
             </Typography>
             <Typography className={classes.title} component="span">
-              $1000
+              ${totalPrice.toFixed(2)}
             </Typography>
           </Box>
           <Button
@@ -111,4 +124,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { getCart })(Cart);
+export default connect(mapStateToProps, { getCartVar: getCart })(Cart);
