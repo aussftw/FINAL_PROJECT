@@ -41,6 +41,7 @@ const useStyles = makeStyles(theme => ({
   },
   title: {
     fontSize: 14,
+    textTransform: "capitalize",
     paddingBottom: 5,
     color: theme.palette.secondary.dark,
     "&:hover": {
@@ -60,6 +61,14 @@ const useStyles = makeStyles(theme => ({
     "&:hover": {
       color: theme.palette.primary.main,
     },
+  },
+  outOfStock: {
+    paddingTop: theme.spacing(1),
+    paddingBottom: 7,
+    textTransform: "uppercase",
+    fontSize: 13,
+    fontWeight: 700,
+    color: theme.palette.secondary.medium,
   },
   snackbar: {
     position: "relative",

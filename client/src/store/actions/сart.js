@@ -108,7 +108,18 @@ export const getCart = () => dispatch => {
     axios
       .post("/api/products/actualization", actualizationProducts)
       .then(response => {
-        dispatch(actualizationLocalCartSuccess(response.data));
+        const updateLocalCart = [];
+        store.getState().cartReducer.cart.forEach(stateItem => {
+          response.data.forEach(actualItem => {
+            if (stateItem.product._id === actualItem._id) {
+              updateLocalCart.push({
+                product: actualItem,
+                cartQuantity: stateItem.cartQuantity,
+              });
+            }
+          });
+        });
+        dispatch(actualizationLocalCartSuccess(updateLocalCart));
       })
       .catch(error => {
         dispatch(actualizationLocalCartFailure(error));
@@ -154,7 +165,24 @@ export const addItemCart = (id, itemNo) => dispatch => {
     axios
       .get(`/api/products/${itemNo}`)
       .then(response => {
-        dispatch(addItemCartLocalSuccess(response.data));
+        let addNewProductInLocalCart = true;
+        let updateLocalCart = store.getState().cartReducer.cart.map(item => {
+          if (item.product._id === response.data._id) {
+            addNewProductInLocalCart = false;
+            return {
+              ...item,
+              cartQuantity: +item.cartQuantity + 1,
+            };
+          }
+          return item;
+        });
+        if (addNewProductInLocalCart) {
+          updateLocalCart = updateLocalCart.concat({
+            product: response.data,
+            cartQuantity: 1,
+          });
+        }
+        dispatch(addItemCartLocalSuccess(updateLocalCart));
       })
       .catch(error => {
         dispatch(addItemCartLocalFailure(error));
@@ -191,7 +219,20 @@ export const decreaseItemCart = id => dispatch => {
         dispatch(decreaseItemCartFailure(error));
       });
   } else {
-    dispatch(decreaseItemCartLocal(id));
+    const updateLocalCart = [];
+    store.getState().cartReducer.cart.forEach(item => {
+      if (item.product._id === id) {
+        if (+item.cartQuantity > 1) {
+          updateLocalCart.push({
+            product: item.product,
+            cartQuantity: +item.cartQuantity - 1,
+          });
+        }
+      } else {
+        updateLocalCart.push(item);
+      }
+    });
+    dispatch(decreaseItemCartLocal(updateLocalCart));
   }
 };
 
@@ -224,7 +265,13 @@ export const deleteItemCart = id => dispatch => {
         dispatch(deleteItemCartFailure(error));
       });
   } else {
-    dispatch(deleteItemCartLocal(id));
+    const updateLocalCart = [];
+    store.getState().cartReducer.cart.forEach(item => {
+      if (item.product._id !== id) {
+        updateLocalCart.push(item);
+      }
+    });
+    dispatch(deleteItemCartLocal(updateLocalCart));
   }
 };
 
@@ -264,8 +311,16 @@ export const changeItemCartQuantity = (id, cartQty) => dispatch => {
         dispatch(changeItemCartQuantityFailure(error));
       });
   } else {
-    const data = { id, cartQuantity: cartQty };
-    dispatch(changeItemCartQuantityLocal(data));
+    const updateLocalCart = store.getState().cartReducer.cart.map(item => {
+      if (item.product._id === id) {
+        return {
+          ...item,
+          cartQuantity: cartQty,
+        };
+      }
+      return item;
+    });
+    dispatch(changeItemCartQuantityLocal(updateLocalCart));
   }
 };
 

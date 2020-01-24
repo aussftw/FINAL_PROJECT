@@ -11,6 +11,7 @@ import Footer from "../../components/Footer";
 import Stock from "../../components/Stock";
 import MainCarousel from "../../components/MainCarousel";
 import Subscribe from "../../components/Subscribe/Subscribe";
+import Navigation from "../../views/Navigation/Navigation";
 import ProductCarousel from "../../components/ProductCarousel";
 
 function HomePage() {
@@ -28,6 +29,7 @@ function HomePage() {
       <Brands />
       <Subscribe />
       <Footer />
+      <Navigation />
     </>
   );
 }

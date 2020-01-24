@@ -12,7 +12,6 @@ import Snackbar from "@material-ui/core/Snackbar";
 import SnackbarContent from "@material-ui/core/SnackbarContent";
 import Typography from "@material-ui/core/Typography";
 import Tooltip from "@material-ui/core/Tooltip";
-// import { Link }  from "react-router-dom";
 
 import CheckCircleRoundedIcon from "@material-ui/icons/CheckCircleRounded";
 import Favorite from "@material-ui/icons/Favorite";
@@ -28,7 +27,6 @@ import {
   wishlistDeleteItem,
 } from "../../store/actions/wishlist";
 
-// eslint-disable-next-line no-shadow
 const ItemCard = ({
   id,
   itemNo,
@@ -36,13 +34,11 @@ const ItemCard = ({
   rate,
   price,
   img,
-  // eslint-disable-next-line
-  addItemCart,
+  stock,
+  addCartItem,
   wishlistAll,
-  // eslint-disable-next-line
-  wishlistAddItem,
-  // eslint-disable-next-line
-  wishlistDeleteItem,
+  addWishlistItem,
+  deleteWishlistItem,
   isAuthenticated,
 }) => {
   const classes = useStyles();
@@ -55,7 +51,7 @@ const ItemCard = ({
   };
 
   const addItemToCart = () => {
-    addItemCart(id, itemNo);
+    addCartItem(id, itemNo);
     setSnackbarAddToCart(true);
   };
 
@@ -66,46 +62,35 @@ const ItemCard = ({
     setSnackbarAddToCart(false);
   };
 
-  const handleDeleteItemFromWishlist = () => {
+  const handleAddtemToWishlist = () => {
     if (isAuthenticated) {
-      wishlistAddItem(id);
+      addWishlistItem(id);
     }
   };
 
   return (
     <Card className={classes.card}>
-      {/* eslint-disable-next-line no-nested-ternary */}
       {!wishlistAll.every(el => el._id !== id) ? (
         <Tooltip arrow title="Remove from wishlist">
           <IconButton
             className={classes.wishList}
-            onClick={() => wishlistDeleteItem(id)}
+            onClick={() => deleteWishlistItem(id)}
           >
             <Favorite />
           </IconButton>
         </Tooltip>
       ) : (
-        // isAuthenticated ? (
         <Tooltip
           arrow
           title={isAuthenticated ? "Add to wishlist" : "Only for logined user"}
         >
           <IconButton
             className={classes.wishList}
-            onClick={() => handleDeleteItemFromWishlist()}
+            onClick={handleAddtemToWishlist}
           >
             <FavoriteBorder />
           </IconButton>
         </Tooltip>
-        // ) : (
-        //   <Link to="/login">
-        //     <IconButton
-        //       className={classes.wishList}
-        //     >
-        //       <FavoriteBorder />
-        //     </IconButton>
-        //   </Link>
-        // )
       )}
       <Link to={`/products/${itemNo}`}>
         <CardActionArea
@@ -122,10 +107,7 @@ const ItemCard = ({
           />
           <CardContent className={classes.cardContent}>
             <Typography className={classes.title} noWrap align="center">
-              {title
-                .split(" ")
-                .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-                .join(" ")}
+              {title}
             </Typography>
             <Tooltip placement="bottom-end" title={CardTooltipText(rate)}>
               <Box align="center">
@@ -143,14 +125,20 @@ const ItemCard = ({
               </Box>
             </Tooltip>
             <Typography className={classes.price} align="center">
-              {/* eslint-disable-next-line no-shadow */}${price.toFixed(2)}
+              ${price.toFixed(2)}
             </Typography>
           </CardContent>
         </CardActionArea>
       </Link>
-      <Button variant="text" fullWidth onClick={() => addItemToCart()}>
-        + add to cart
-      </Button>
+      {stock === 0 ? (
+        <Typography className={classes.outOfStock} align="center">
+          out of stock
+        </Typography>
+      ) : (
+        <Button variant="text" fullWidth onClick={addItemToCart}>
+          + add to cart
+        </Button>
+      )}
       <Snackbar
         anchorOrigin={{
           vertical: "top",
@@ -185,7 +173,7 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps, {
-  wishlistAddItem,
-  wishlistDeleteItem,
-  addItemCart,
+  addWishlistItem: wishlistAddItem,
+  deleteWishlistItem: wishlistDeleteItem,
+  addCartItem: addItemCart,
 })(ItemCard);

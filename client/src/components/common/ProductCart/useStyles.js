@@ -22,6 +22,7 @@ const useStyles = makeStyles(theme => ({
   },
   title: {
     fontSize: 14,
+    textTransform: "capitalize",
     color: theme.palette.secondary.dark,
     "&:hover": {
       color: theme.palette.primary.main,
