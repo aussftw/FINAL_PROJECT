@@ -1,24 +1,27 @@
 import axios from "axios";
+import * as constants from "../constants";
 
-// eslint-disable-next-line import/prefer-default-export
-export function getCategories() {
+export function getLinks() {
   return dispatch => {
-    // dispatch({
-    //   type: "GET_FRIENDS_REQUEST",
-    // })
     axios
-      .get("/catalog")
-      .then(catalog => {
+      .get("/api/links")
+      .then(links => {
         dispatch({
-          type: "GET_CATEGORIES_SUCCESS",
-          payload: catalog.data,
+          type: constants.GET_LINKS_SUCCESS,
+          payload: links.data,
         });
       })
       .catch(err => {
         dispatch({
-          type: "GET_CATEGORIES_ERROR",
+          type: constants.GET_LINKS_FAILURE,
           payload: err,
         });
       });
+  };
+}
+export function searchPhrases(data) {
+  return {
+    type: "SEARCH_SUCCESS",
+    payload: data,
   };
 }

@@ -1,12 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 import Slider from "@material-ui/core/Slider";
+import { connect } from "react-redux";
 import theme from "../../../theme";
 
+import {
+  selectPrice,
+  setCurrentPage 
+} from "../../../store/actions/Filters";
+
 const useStyles = makeStyles(() => ({
-  root: {
-    width: "90%",
-    maxWidth: 360,
+  rootMain: {
+    width: "180%",
+    maxWidth: 300,
     paddingTop: 8,
     backgroundColor: theme.palette.background.paper,
     boxShadow: "0 0 5px",
@@ -70,31 +76,69 @@ const PrettoSlider = withStyles({
   },
 })(Slider);
 
-const FilterByPrice = () => {
+
+
+const FilterByPrice = ({selectPrice,setCurrentPage }) => {
   const classes = useStyles();
 
-  const [value, setValue] = useState("");
+  // eslint-disable-next-line no-unused-vars
+  
   const ValueByPrice = (event, item) => {
-    setValue(item);
+    setCurrentPage(1)
+    selectPrice(item);
   };
   
+//   const [value, setValue] = React.useState([20, 120]);
+
+//   const handleChange = (event, newValue) => {
+//     setValue(newValue);  
+//   };
+
+//   function valuetext(value) {
+//   return `${value}°C`;
+// }
+
   return (
     <div className={classes.container}>
-      <div className={classes.root}>
+      <div className={classes.rootMain}>
         <h4 className={classes.title}>Filter By Price</h4>
         <div className={classes.line}>
           <div className={classes.subLine} />
         </div>
         <PrettoSlider
           onChangeCommitted={ValueByPrice}
-          valueLabelDisplay="on"
+          valueLabelDisplay="auto"
           aria-label="pretto slider"
-          defaultValue={120}
-          max={500}
+          defaultValue={50}
+          max={120}
         />
+        {/* <PrettoSlider
+        value={value}
+        onChange={handleChange}
+        valueLabelDisplay="auto"
+        aria-labelledby="range-slider"
+       getAriaValueText={valuetext}
+      /> */}
+       
       </div>
     </div>
   );
-};
+  };
 
-export default FilterByPrice;
+function mapStateToProps(state) {
+  return {
+    filters: state.filterReducer.filters,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    selectPrice: price => dispatch(selectPrice(price)),
+     setCurrentPage: currentPage => dispatch(setCurrentPage(currentPage)),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(FilterByPrice)
+
+
+

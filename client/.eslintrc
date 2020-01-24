@@ -1,9 +1,21 @@
 {
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module"
+  },
   "extends": ["airbnb", "airbnb/hooks", "prettier"],
   "plugins": ["prettier"],
   "rules": {
     "func-names": ["error", "never"],
     "no-console": "warn",
+    "no-shadow": [
+      "off",
+      {
+        "builtinGlobals": false,
+        "hoist": "functions",
+        "allow": []
+      }
+    ],
     "react/prop-types": 0,
     "no-dupe-args": "warn",
     "no-duplicate-case": "error",
@@ -12,9 +24,9 @@
     "react/button-has-type": "off",
     "import/prefer-default-export": "off",
     "react/jsx-props-no-spreading": "off",
-    "no-underscore-dangle": 0,
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "react/destructuring-assignment": ["warn", "always"],
+    "no-underscore-dangle": "off",
     "padding-line-between-statements": [
       "error",
       { "blankLine": "always", "prev": "const", "next": "return" },

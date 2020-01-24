@@ -1,107 +1,145 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import React, { useEffect } from "react";
+import { withRouter } from "react-router-dom";
+
 import ListSubheader from "@material-ui/core/ListSubheader";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import Collapse from "@material-ui/core/Collapse";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import DraftsIcon from "@material-ui/icons/Drafts";
 import SendIcon from "@material-ui/icons/Send";
-import ExpandLess from "@material-ui/icons/ExpandLess";
-import ExpandMore from "@material-ui/icons/ExpandMore";
-import StarBorder from "@material-ui/icons/StarBorder";
-
 import Card from "@material-ui/core/Card";
-
 import CardContent from "@material-ui/core/CardContent";
-import theme from "../../../theme";
+import { withStyles } from "@material-ui/styles";
+import EcoIcon from '@material-ui/icons/Eco';
 
-const useStyles = makeStyles(() => ({
+import { connect } from "react-redux";
+import { getCategories, selectCategory, setCurrentPage } from "../../../store/actions/Filters";
+
+const styles = theme => ({
   root: {
+    marginTop:100,
     width: "100%",
-    maxWidth: 310,
+    maxWidth: 300,
+    marginBottom: 40,
     backgroundColor: theme.palette.background.paper,
+    boxShadow: "0 0 5px",
+    borderRadius: 10,
+    paddingBottom: 20,
   },
-  nested: {
-    paddingLeft: theme.spacing(4),
+  line: {
+    margin: "10px 20px",
+    position: "relative",
+    width: "80%",
+    height: 5,
+    backgroundColor: "grey",
+    borderRadius: 10,
   },
-  card: {
-    margin: 25,
+  subLine: {
+    position: "absolute",
+    top: 50,
+    left: 20,
+    width: "60%",
+    height: 5,
+    backgroundColor: theme.palette.primary.main,
+    borderRadius: 10,
+  },
+  title: {
+    margin: "5px 20px",
+    fontSize: 20,
+  },
+  label: {   
     width: "100%",
-    maxWidth: 310,
   },
-}));
+  iconContainer:{
+    marginRight:-15
+  }
+});
 
-function FilterByCategory() {
-  const classes = useStyles();
-  const [open, setOpen] = React.useState(true);
-
-  const handleClick = () => {
-    setOpen(!open);
+const FilterByCategory = ({ classes, categoryListing,  getCategories, selectCategory, setCurrentPage }) => {
+  useEffect(() => {
+    getCategories();
+    // eslint-disable-next-line
+  }, []);
+  const handleCategoryClick = (event, category) => {
+    selectCategory(category);
+    setCurrentPage(1)
   };
 
+  let categoryList = [];
+  categoryList = categoryListing.map(category => {
+    return (
+      <ListItem
+        key={category._id}
+        button
+        onClick={event => {
+          handleCategoryClick(event, category.id);
+        }}
+      >
+        <ListItemIcon className = {classes.iconContainer} >
+          <EcoIcon />
+        </ListItemIcon>
+        <ListItemText primary={category.name} />
+      </ListItem>
+    );
+  });
   return (
-    <>
-      <Card className={classes.card}>
-        <CardContent>
-          <List
-            component="nav"
-            aria-labelledby="nested-list-subheader"
-            subheader={
-              <ListSubheader component="div" id="nested-list-subheader">
-                <h1>PRODUCTS CATEGORY</h1>
-              </ListSubheader>
-            }
-            className={classes.root}
-          >
-            <ListItem button>
-              <ListItemIcon>
-                <SendIcon />
-              </ListItemIcon>
-              <ListItemText primary="Shamrock" />
-            </ListItem>
-            <ListItem button>
-              <ListItemIcon>
-                <DraftsIcon />
-              </ListItemIcon>
-              <ListItemText primary="Geranimus" />
-            </ListItem>
-            <ListItem button onClick={handleClick}>
-              <ListItemIcon>
-                <InboxIcon />
-              </ListItemIcon>
-              <ListItemText primary="Bermuda" />
-              {open ? <ExpandLess /> : <ExpandMore />}
-            </ListItem>
-            <Collapse in={open} timeout="auto" unmountOnExit>
-              <List component="div" disablePadding>
-                <ListItem button className={classes.nested}>
-                  <ListItemIcon>
-                    <StarBorder />
-                  </ListItemIcon>
-                  <ListItemText primary="Bermuda_01" />
-                </ListItem>
-                <ListItem button className={classes.nested}>
-                  <ListItemIcon>
-                    <StarBorder />
-                  </ListItemIcon>
-                  <ListItemText primary="Bermuda_02" />
-                </ListItem>
-              </List>
-            </Collapse>
-            <ListItem button>
-              <ListItemIcon>
-                <DraftsIcon />
-              </ListItemIcon>
-              <ListItemText primary="Natural" />
-            </ListItem>
-          </List>
-        </CardContent>
-      </Card>
+      <>
+      <List
+        component="nav"
+        className={classes.root}
+        aria-label="mailbox folders"
+      >
+        <h4 className={classes.title}>Filter By Category</h4>
+        <div className={classes.line} />
+        <div className={classes.subLine} />
+       {categoryList}
+      </List>
     </>
+    // <>
+    //   <Card className={classes.card}>
+    //     <CardContent>
+    //       <List
+    //         component="nav"
+    //         aria-labelledby="nested-list-subheader"
+    //         subheader={
+    //           // eslint-disable-next-line react/jsx-wrap-multilines
+    //           <ListSubheader component="div" id="nested-list-subheader">
+    //             <h1>PRODUCTS CATEGORY</h1>
+    //           </ListSubheader>
+    //         }
+    //         className={classes.root}
+    //       >
+    //         <ListItem button>
+    //           <ListItemIcon>
+    //             <SendIcon />
+    //           </ListItemIcon>
+    //           <ListItemText primary="All" />
+    //         </ListItem>
+    //         {categoryList}
+    //       </List>
+    //     </CardContent>
+    //   </Card>
+    // </>
   );
-}
+};
 
-export default FilterByCategory;
+const mapStateToProps = state => {
+  return {
+    categoryListing: state.filterReducer.categoryListing,
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    getCategories: () => dispatch(getCategories()),
+    selectCategory: category => dispatch(selectCategory(category)),
+    setCurrentPage: currentPage => dispatch(setCurrentPage(currentPage)),
+  };
+};
+
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(withStyles(styles)(FilterByCategory))
+);

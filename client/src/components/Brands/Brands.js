@@ -16,7 +16,7 @@ const Brands = () => {
 
   useEffect(() => {
     axios
-      .get("/partners")
+      .get("/api/partners")
       .then(response => {
         setBrands(response.data);
         setPreloader(false);
@@ -27,43 +27,23 @@ const Brands = () => {
       });
   }, []);
 
-  // eslint-disable-next-line
-  const { _id, url } = brands;
-
   return (
     <Container className={classes.brandsContaier}>
-      {/* <Hidden smDown>
-        {brands.length === 0 ? (
-          <PreloaderAdaptive />
-        ) : (
-          brands.map(brand => (
-            <Link href={url} key={customId}>
-              <Box
-                className={classes.brand}
-                style={{
-                  backgroundImage: `url(${brand.imageUrl})`,
-                }}
-              />
-            </Link>
-          ))
-        )}
-      </Hidden> */}
-      {/* <Hidden mdUp> */}
       {brands.length === 0 ? (
         <PreloaderAdaptive />
       ) : (
         brands.map(brand => (
-          <Link href={url} key={_id}>
-            <Box
-              className={classes.brand}
-              style={{
-                backgroundImage: `url(${brand.imageUrl})`,
-              }}
-            />
+          <Link href={brand.url} key={brand._id}>
+            <Box>
+              <img
+                src={`${brand.imageUrl}`}
+                alt={`${brand.name}`}
+                className={classes.brand}
+              />
+            </Box>
           </Link>
         ))
       )}
-      {/* </Hidden> */}
     </Container>
   );
 };

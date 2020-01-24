@@ -3,8 +3,8 @@ import theme from "../../../theme";
 
 export const useStyles = makeStyles(() => ({
   root: {
-    width: "90%",
-    maxWidth: 360,
+    width: "100%",
+    maxWidth: 300,
     marginBottom: 40,
     backgroundColor: theme.palette.background.paper,
     boxShadow: "0 0 5px",
