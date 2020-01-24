@@ -8,7 +8,8 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     flexDirection: "row",
     backgroundColor: theme.palette.primary.light,
-    padding: 5,
+    padding: "0.4rem",
+    marginTop: "1.5rem",
   },
 
   linkIcon: {
@@ -85,7 +86,8 @@ const useStyles = makeStyles(theme => ({
   },
   descriptionText: {
     textAlign: "justify",
-    marginTop: 10,
+    marginTop: "1rem",
+    marginBottom: "4rem",
     fontSize: 14,
   },
   previousPrice: {
