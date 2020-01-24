@@ -11,7 +11,7 @@ export default function MainCarousel() {
   const [slidesData, setSlidesData] = useState(null);
 
   useEffect(() => {
-    axios.get("/slides").then(slides => {
+    axios.get("/api/slides").then(slides => {
       setSlidesData(slides.data);
     });
     // .catch(err => {

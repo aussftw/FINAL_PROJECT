@@ -12,12 +12,15 @@ import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import MenuIcon from "@material-ui/icons/Menu";
 import CloseIcon from "@material-ui/icons/Close";
 import axios from "axios";
-import { searchPhrases } from "../../../store/actions";
+import {
+  searchPhrases,
+  searchPhrasesFailure,
+} from "../../../store/actions/Search";
 import useStyles from "./useStyles";
 
 const TemporaryDrawer = props => {
   // eslint-disable-next-line no-shadow
-  const { searchPhrases } = props;
+  const { searchPhrases, searchPhrasesFailure } = props;
   const classes = useStyles();
 
   const [state, setState] = React.useState({
@@ -45,8 +48,7 @@ const TemporaryDrawer = props => {
         searchPhrases(products.data.products);
       })
       .catch(err => {
-        // eslint-disable-next-line no-console
-        console.log(err);
+        searchPhrasesFailure(err);
       });
   };
 
@@ -142,6 +144,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     searchPhrases: data => dispatch(searchPhrases(data)),
+    searchPhrasesFailure: err => dispatch(searchPhrasesFailure(err)),
   };
 }
 

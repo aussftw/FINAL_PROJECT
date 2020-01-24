@@ -26,23 +26,40 @@ const SearchResultsPage = ({ searchResult }) => {
               />
             );
           })}
+          <Typography
+            variant="h6"
+            className={classes.message}
+            component={Link}
+            to="/shop"
+          >
+            Continue shopping
+          </Typography>
         </>
       ) : (
         <>
-          <Typography align="center" variant="h6" className={classes.message}>
+          <Typography
+            variant="h6"
+            className={classes.message}
+            component={Link}
+            to="/"
+          >
             Sorry, no results
           </Typography>
-          <Typography align="center" variant="h6" className={classes.message}>
-            Go to&nbsp;
-            <Link to="/shop" className={classes.link}>
-              shop
-            </Link>
+          <Typography
+            variant="h6"
+            className={classes.message}
+            component={Link}
+            to="/shop"
+          >
+            Go to shop
           </Typography>
-          <Typography align="center" variant="h6" className={classes.message}>
-            Go to&nbsp;
-            <Link to="/" className={classes.link}>
-              Plantly&apos;s home page
-            </Link>
+          <Typography
+            variant="h6"
+            className={classes.message}
+            component={Link}
+            to="/"
+          >
+            Go to Plantly&apos;s home page
           </Typography>
         </>
       )}

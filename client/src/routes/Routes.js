@@ -20,9 +20,9 @@ import {
 } from "../store/actions/loginActions";
 import { getWishlist } from "../store/actions/wishlist";
 import SearchPage from "../pages/SearchPage/SearchPage";
+// const Shop = React.lazy(() => import('../pages/Shop/Shop')); // Lazy-loaded
 import Shop from "../pages/Shop/Shop";
 
-// eslint-disable-next-line no-shadow
 const Routes = ({
   isAuthenticated,
   getUser,
@@ -82,6 +82,9 @@ const Routes = ({
         <SearchPage />
       </Route>
       <Route path="/shop">
+        {/* <Suspense fallback={<Preloader />}> */}
+        {/* <Shop /> */}
+        {/* </Suspense> */}
         <Shop />
       </Route>
       {/* <Route path="/about-us"> */}

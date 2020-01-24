@@ -12,6 +12,8 @@
     "react/button-has-type": "off",
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "react/destructuring-assignment": ["warn","always"],
+    "no-shadow": "off",
+    "react/jsx-one-expression-per-line": "off",
     "no-underscore-dangle": "off",
     "padding-line-between-statements": ["error",
       { "blankLine": "always", "prev": "const", "next": "return" },
