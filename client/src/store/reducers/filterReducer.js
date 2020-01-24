@@ -1,4 +1,3 @@
-/* eslint-disable  Unexpected token ... */
 import * as constants from "../constants";
 
 const initialState = {
@@ -20,7 +19,7 @@ function filterReducer(state = initialState, action) {
   switch (action.type) {
     // Action на получение фильтров с бэка
     case constants.SEND_PRODUCT_REQUEST:
-      return{
+      return {
         ...state,
         isProductListing: false,
       };
@@ -133,7 +132,6 @@ function filterReducer(state = initialState, action) {
       };
 
     case constants.SELECT_PRICE:
-      console.log("REDUCER_SELECT_PRICE", action.payload);
       return {
         ...state,
         filters: {
@@ -143,7 +141,6 @@ function filterReducer(state = initialState, action) {
         },
       };
     case constants.SELECT_CURRENT_PAGE:
-      console.log("SELECT_CURRENT_PAGE", action.payload);
       return {
         ...state,
         currentPage: action.payload,
