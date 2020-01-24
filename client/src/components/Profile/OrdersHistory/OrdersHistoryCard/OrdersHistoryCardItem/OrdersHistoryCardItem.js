@@ -20,9 +20,7 @@ const OrdersHistoryCardItem = ({ itemNo, title, price, img, qty }) => {
         </Link>
       </Grid>
       <Grid item xs={3} sm={4}>
-        <Typography className={classes.price}>{`${qty} x $${price.toFixed(
-          2
-        )}`}</Typography>
+        <Typography className={classes.price}>{`${qty} x $${price.toFixed(2)}`}</Typography>
       </Grid>
     </Grid>
   );

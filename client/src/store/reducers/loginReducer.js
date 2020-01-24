@@ -15,18 +15,18 @@ const initialState = {
 
 const loginReducer = (state = initialState, action) => {
   switch (action.type) {
-    // case constants.LOG_IN_SUCCESS:
-    //   return {
-    //     ...state,
-    //     user: {
-    //       firstName: action.payload.firstName,
-    //       lastName: action.payload.lastName,
-    //       email: action.payload.email,
-    //       telephone: action.payload.telephone,
-    //       address: action.payload.address,
-    //     },
-    //     error: "",
-    //   };
+    case constants.LOG_IN_SUCCESS:
+      return {
+        ...state,
+        user: {
+          firstName: action.payload.firstName,
+          lastName: action.payload.lastName,
+          email: action.payload.email,
+          telephone: action.payload.telephone,
+          address: action.payload.address,
+        },
+        error: "",
+      };
     case constants.LOG_OUT:
       return {
         ...state,
