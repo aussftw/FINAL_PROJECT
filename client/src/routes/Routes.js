@@ -66,6 +66,7 @@ const Routes = ({
       <Route path="/profile">
         <Profiler />
       </Route>
+     
       <Redirect to="/" />
     </Switch>
   ) : (
