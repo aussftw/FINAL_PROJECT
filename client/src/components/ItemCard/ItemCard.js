@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
@@ -11,7 +12,6 @@ import Snackbar from "@material-ui/core/Snackbar";
 import SnackbarContent from "@material-ui/core/SnackbarContent";
 import Typography from "@material-ui/core/Typography";
 import Tooltip from "@material-ui/core/Tooltip";
-// import { Link }  from "react-router-dom";
 
 import CheckCircleRoundedIcon from "@material-ui/icons/CheckCircleRounded";
 import Favorite from "@material-ui/icons/Favorite";
@@ -35,11 +35,10 @@ const ItemCard = ({
   price,
   img,
   stock,
-  // eslint-disable-next-line no-shadow
-  addItemCart,
+  addCartItem,
   wishlistAll,
-  wishlistAddItem,
-  wishlistDeleteItem,
+  addWishlistItem,
+  deleteWishlistItem,
   isAuthenticated,
 }) => {
   const classes = useStyles();
@@ -52,7 +51,7 @@ const ItemCard = ({
   };
 
   const addItemToCart = () => {
-    addItemCart(id, itemNo);
+    addCartItem(id, itemNo);
     setSnackbarAddToCart(true);
   };
 
@@ -63,9 +62,9 @@ const ItemCard = ({
     setSnackbarAddToCart(false);
   };
 
-  const handleDeleteItemFromWishlist = () => {
+  const handleAddtemToWishlist = () => {
     if (isAuthenticated) {
-      wishlistAddItem(id);
+      addWishlistItem(id);
     }
   };
 
@@ -75,7 +74,7 @@ const ItemCard = ({
         <Tooltip arrow title="Remove from wishlist">
           <IconButton
             className={classes.wishList}
-            onClick={() => wishlistDeleteItem(id)}
+            onClick={() => deleteWishlistItem(id)}
           >
             <Favorite />
           </IconButton>
@@ -87,48 +86,50 @@ const ItemCard = ({
         >
           <IconButton
             className={classes.wishList}
-            onClick={handleDeleteItemFromWishlist}
+            onClick={handleAddtemToWishlist}
           >
             <FavoriteBorder />
           </IconButton>
         </Tooltip>
       )}
-      <CardActionArea
-        classes={{
-          root: classes.actionArea,
-          focusHighlight: classes.focusHighlight,
-        }}
-      >
-        <CardMedia
-          className={classes.mediaImage}
-          image={img}
-          title={title}
-          component="div"
-        />
-        <CardContent className={classes.cardContent}>
-          <Typography className={classes.title} noWrap align="center">
-            {title}
-          </Typography>
-          <Tooltip placement="bottom-end" title={CardTooltipText(rate)}>
-            <Box align="center">
-              <Rating
-                className={classes.rating}
-                name="rating"
-                value={rate}
-                size="small"
-                precision={0.5}
-                readOnly
-                emptyIcon={
-                  <StarBorder color="primary" style={{ fontSize: 18 }} />
-                }
-              />
-            </Box>
-          </Tooltip>
-          <Typography className={classes.price} align="center">
-            ${price.toFixed(2)}
-          </Typography>
-        </CardContent>
-      </CardActionArea>
+      <Link to={`/products/${itemNo}`}>
+        <CardActionArea
+          classes={{
+            root: classes.actionArea,
+            focusHighlight: classes.focusHighlight,
+          }}
+        >
+          <CardMedia
+            className={classes.mediaImage}
+            image={img}
+            title={title}
+            component="div"
+          />
+          <CardContent className={classes.cardContent}>
+            <Typography className={classes.title} noWrap align="center">
+              {title}
+            </Typography>
+            <Tooltip placement="bottom-end" title={CardTooltipText(rate)}>
+              <Box align="center">
+                <Rating
+                  className={classes.rating}
+                  name="rating"
+                  value={rate}
+                  size="small"
+                  precision={0.5}
+                  readOnly
+                  emptyIcon={
+                    <StarBorder color="primary" style={{ fontSize: 18 }} />
+                  }
+                />
+              </Box>
+            </Tooltip>
+            <Typography className={classes.price} align="center">
+              ${price.toFixed(2)}
+            </Typography>
+          </CardContent>
+        </CardActionArea>
+      </Link>
       {stock === 0 ? (
         <Typography className={classes.outOfStock} align="center">
           out of stock
@@ -138,7 +139,6 @@ const ItemCard = ({
           + add to cart
         </Button>
       )}
-
       <Snackbar
         anchorOrigin={{
           vertical: "top",
@@ -173,7 +173,7 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps, {
-  wishlistAddItem,
-  wishlistDeleteItem,
-  addItemCart,
+  addWishlistItem: wishlistAddItem,
+  deleteWishlistItem: wishlistDeleteItem,
+  addCartItem: addItemCart,
 })(ItemCard);

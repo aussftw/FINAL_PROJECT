@@ -6,15 +6,15 @@ const useStyles = makeStyles(theme => ({
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    [theme.breakpoints.up("sm")]: {
+    [theme.breakpoints.up("md")]: {
       flexDirection: "row",
     },
   },
   brand: {
     margin: "1rem",
-    [theme.breakpoints.up("sm")]: {
-      margin: "2rem",
-    },
+    // [theme.breakpoints.up("sm")]: {
+    //   margin: "2rem",
+    // },
     backgroundSize: "cover",
     overflow: "hidden",
   },

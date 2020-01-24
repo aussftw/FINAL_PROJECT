@@ -20,8 +20,6 @@ export const getWishlist = () => dispatch => {
     .get("/api/wishlist")
     .then(res => {
       if (!res.data) {
-        // eslint-disable-next-line no-console
-        console.log("You don't have wishlist");
         return;
       }
       dispatch(getWishlistSuccess(res.data));

@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react";
 
 import axios from "axios";
 
-// import { Gallery, GalleryImage } from "react-gesture-gallery";
-
 import { Container, Link, Box } from "@material-ui/core";
 import PreloaderAdaptive from "../Preloader/Adaptive";
 import useStyles from "./useStyles";
@@ -28,7 +26,7 @@ const Brands = () => {
   }, []);
 
   return (
-    <Container className={classes.brandsContaier}>
+    <Container className={classes.brandsContaier} maxWidth="xl">
       {brands.length === 0 ? (
         <PreloaderAdaptive />
       ) : (
