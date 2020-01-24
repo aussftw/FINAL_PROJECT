@@ -36,9 +36,11 @@ export const getUser = () => dispatch => {
   axios
     .get("/api/customers/customer")
     .then(response => {
-      if (response.statusText === "OK") {
+      if (response.statusText === "OK" && response.data.success) {
+        dispatch(userFromJwt(jwt(response.data.token)));
         // eslint-disable-next-line no-undef
         localStorage.setItem("user", JSON.stringify(response.data));
+
       }
       dispatch(logInSuccess(response.data));
     })
@@ -61,8 +63,8 @@ export const logIn = user => dispatch => {
         setAuthToken(response.data.token);
         dispatch(userFromJwt(jwt(response.data.token)));
       }
-      dispatch(getUser());
       dispatch(getWishlist());
+      dispatch(getUser());
       dispatch(mergeCarts());
     })
     .catch(error => {
