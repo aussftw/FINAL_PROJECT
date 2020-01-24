@@ -20,7 +20,7 @@ import useStyles from "./useStyles";
 
 const TemporaryDrawer = props => {
   // eslint-disable-next-line no-shadow
-  const { searchPhrases, searchPhrasesFailure } = props;
+  const { links, searchPhrases, searchPhrasesFailure } = props;
   const classes = useStyles();
 
   const [state, setState] = React.useState({
@@ -42,8 +42,9 @@ const TemporaryDrawer = props => {
   };
 
   const filter = category => {
+    setState({ ...state, left: false });
     axios
-      .get(`/products/filter?categories=${category}`)
+      .get(`/api/products/filter?categories=${category}`)
       .then(products => {
         searchPhrases(products.data.products);
       })
@@ -60,15 +61,14 @@ const TemporaryDrawer = props => {
           color="inherit"
           aria-label="close drawer"
           onClick={toggleDrawer(side, false)}
-          onKeyDown={toggleDrawer(side, false)}
         >
           <CloseIcon />
         </IconButton>
       </div>
 
       <Box>
-        //eslint-disable-next-line react/destructuring-assignment
-        {props.links.links.map(item => {
+
+        {links.map(item => {
           return item.links.length <= 1 ? (
             <Link
               key={item._id}
@@ -91,21 +91,13 @@ const TemporaryDrawer = props => {
                     key={menuItem._id}
                     className={classes.nestedList}
                   >
-                    <Typography>
-                      <Link
-                        className={classes.dropdownText}
-                        // onKeyPress={() => {
-                        //   filter(menuItem.description);
-                        //   toggleDrawer("left", false);
-                        // }}
-                        onClick={() => {
-                          toggleDrawer("left", false);
-                          filter(menuItem.description);
-                        }}
-                        to={menuItem.url}
-                      >
-                        {menuItem.description}
-                      </Link>
+                    <Typography
+                      component={Link}
+                      to={menuItem.url}
+                      onClick={()=>{filter(menuItem.description)}}
+                      className={classes.dropdownText}
+                    >
+                      {menuItem.description}
                     </Typography>
                   </ExpansionPanelDetails>
                 );
@@ -124,7 +116,7 @@ const TemporaryDrawer = props => {
         color="inherit"
         aria-label="open drawer"
         onClick={toggleDrawer("left", true)}
-        href="/#"
+        href=''
       >
         <MenuIcon />
       </IconButton>
@@ -137,7 +129,7 @@ const TemporaryDrawer = props => {
 
 function mapStateToProps(state) {
   return {
-    links: state.linksReducer,
+    links: state.linksReducer.links,
   };
 }
 

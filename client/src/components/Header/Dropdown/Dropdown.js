@@ -33,7 +33,7 @@ const MenuListComposition = props => {
 
   const filter = category => {
     axios
-      .get(`/products/filter?categories=${category}`)
+      .get(`/api/products/filter?categories=${category}`)
       .then(products => {
         searchPhrases(products.data.products);
       })

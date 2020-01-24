@@ -13,17 +13,21 @@ const SearchResultsPage = ({ searchResult }) => {
     <Container className={classes.container} maxWidth="xl">
       {searchResult.length > 0 ? (
         <>
-          {searchResult.map(product => {
+          {searchResult.map(value => {
             return (
-              <ItemCard
-                key={product._id}
-                title={product.name}
-                rate={product.rate.rating}
-                price={product.currentPrice}
-                img={product.imageUrls[0]}
-                inCart={false}
-                inWishList={false}
-              />
+              <>
+                <Link to={value.productUrl}>
+                  <ItemCard
+                    id={value._id}
+                    itemNo={value.itemNo}
+                    title={value.name}
+                    rate={value.rate.rating}
+                    price={value.currentPrice}
+                    img={value.imageUrls[0]}
+                    stock={value.quantity}
+                  />
+                </Link>
+              </>
             );
           })}
           <Typography
