@@ -11,6 +11,12 @@ const useStyles = makeStyles(theme => ({
     marginBottom: 30,
     textTransform: "uppercase",
   },
+  emptyCart: {
+    textAlign: "center",
+    fontSize: 18,
+    fontWeight: 600,
+    marginBottom: 30,
+  },
   productHeaders: {
     height: 50,
     alignItems: "center",

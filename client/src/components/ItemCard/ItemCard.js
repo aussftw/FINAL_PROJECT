@@ -34,6 +34,7 @@ const ItemCard = ({
   rate,
   price,
   img,
+  stock,
   addCartItem,
   wishlistAll,
   addWishlistItem,
@@ -106,10 +107,7 @@ const ItemCard = ({
           />
           <CardContent className={classes.cardContent}>
             <Typography className={classes.title} noWrap align="center">
-              {title
-                .split(" ")
-                .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-                .join(" ")}
+              {title}
             </Typography>
             <Tooltip placement="bottom-end" title={CardTooltipText(rate)}>
               <Box align="center">
@@ -127,14 +125,20 @@ const ItemCard = ({
               </Box>
             </Tooltip>
             <Typography className={classes.price} align="center">
-              {/* eslint-disable-next-line no-shadow */}${price.toFixed(2)}
+              ${price.toFixed(2)}
             </Typography>
           </CardContent>
         </CardActionArea>
       </Link>
-      <Button variant="text" fullWidth onClick={() => addItemToCart()}>
-        + add to cart
-      </Button>
+      {stock === 0 ? (
+        <Typography className={classes.outOfStock} align="center">
+          out of stock
+        </Typography>
+      ) : (
+        <Button variant="text" fullWidth onClick={addItemToCart}>
+          + add to cart
+        </Button>
+      )}
       <Snackbar
         anchorOrigin={{
           vertical: "top",

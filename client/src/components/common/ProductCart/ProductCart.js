@@ -18,7 +18,6 @@ import {
 
 import useStyles from "./useStyles";
 
-// eslint-disable-next-line no-shadow
 const ProductCart = ({
   id,
   itemNo,
@@ -27,9 +26,10 @@ const ProductCart = ({
   img,
   cartQty,
   shopQty,
-  decreaseItemCart,
-  deleteItemCart,
-  changeItemCartQuantity,
+  addItemCartVar,
+  decreaseItemCartVar,
+  deleteItemCartVar,
+  changeItemCartQuantityVar,
 }) => {
   const classes = useStyles();
   const matches = useMediaQuery(theme => theme.breakpoints.down("xs"));
@@ -45,32 +45,36 @@ const ProductCart = ({
   const changeCartProductQuantity = event => {
     if (event.target.value >= shopQty) {
       setCartQtyInput(shopQty);
-      changeItemCartQuantity(id, shopQty);
-    } else if (event.target.value < 0) {
-      changeItemCartQuantity(id, 0);
-    } else if (event.target.value === "") {
-      changeItemCartQuantity(id, 1);
+      changeItemCartQuantityVar(id, shopQty);
+    } else if (event.target.value === "" || event.target.value <= 0) {
+      changeItemCartQuantityVar(id, 1);
     } else {
-      changeItemCartQuantity(id, event.target.value);
+      changeItemCartQuantityVar(id, +event.target.value);
     }
   };
 
   const cartQtyInputHandler = event => {
-    setCartQtyInput(event.target.value);
+    if (event.target.value <= 0) {
+      setCartQtyInput(1);
+    } else {
+      setCartQtyInput(event.target.value);
+    }
   };
 
   const increaseCartProductQuantity = () => {
     if (cartQty < shopQty) {
-      addItemCart(id, itemNo);
+      addItemCartVar(id, itemNo);
     }
   };
 
   const decreaseCartProductQuantity = () => {
-    decreaseItemCart(id);
+    if (cartQty !== 1) {
+      decreaseItemCartVar(id);
+    }
   };
 
   const deleteCartProduct = () => {
-    deleteItemCart(id);
+    deleteItemCartVar(id);
   };
 
   useEffect(() => {
@@ -87,12 +91,7 @@ const ProductCart = ({
         <img className={classes.image} src={img} alt={title} />
       </Grid>
       <Grid item xs={5} sm={4} className={classes.titleGrid}>
-        <Typography className={classes.title}>
-          {title
-            .split(" ")
-            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-            .join(" ")}
-        </Typography>
+        <Typography className={classes.title}>{title}</Typography>
       </Grid>
       <Grid item xs={3} sm={1}>
         <Typography className={classes.price}>
@@ -156,8 +155,8 @@ const ProductCart = ({
 };
 
 export default connect(null, {
-  addItemCart,
-  decreaseItemCart,
-  deleteItemCart,
-  changeItemCartQuantity,
+  addItemCartVar: addItemCart,
+  decreaseItemCartVar: decreaseItemCart,
+  deleteItemCartVar: deleteItemCart,
+  changeItemCartQuantityVar: changeItemCartQuantity,
 })(ProductCart);
