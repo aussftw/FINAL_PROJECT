@@ -37,8 +37,6 @@ const RegistrationForm = () => {
       axios
         .post("/api/customers", newUserData)
         .then(response => {
-          // eslint-disable-next-line no-console
-          console.log(response);
           if (response.statusText === "OK") {
             setRegistration(true);
           }
@@ -47,7 +45,8 @@ const RegistrationForm = () => {
           setMessage(error);
         });
     }
-  }, [submitRegistration, newUserData]);
+    // eslint-disable-next-line
+  }, [submitRegistration]);
 
   return (
     <>

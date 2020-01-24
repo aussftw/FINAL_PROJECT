@@ -5,12 +5,12 @@ import setAuthToken from "../../components/common/setAuthToken";
 import { mergeCarts } from "./сart";
 import { getWishlist } from "./wishlist";
 
-const logInSuccess = data => {
-  return {
-    type: constants.LOG_IN_SUCCESS,
-    payload: data,
-  };
-};
+// const logInSuccess = data => {
+//   return {
+//     type: constants.LOG_IN_SUCCESS,
+//     payload: data,
+//   };
+// };
 
 const logInFailure = error => {
   return {
@@ -36,11 +36,10 @@ export const getUser = () => dispatch => {
   axios
     .get("/api/customers/customer")
     .then(response => {
-      if (response.statusText === "OK") {
-        // eslint-disable-next-line no-undef
-        localStorage.setItem("user", JSON.stringify(response.data));
+      if (response.statusText === "OK" && response.data.success) {
+        dispatch(userFromJwt(jwt(response.data.token)));
       }
-      dispatch(logInSuccess(response.data));
+      // dispatch(logInSuccess(response.data));
     })
     .catch(error => {
       dispatch(logInFailure(error));
@@ -61,8 +60,8 @@ export const logIn = user => dispatch => {
         setAuthToken(response.data.token);
         dispatch(userFromJwt(jwt(response.data.token)));
       }
-      dispatch(getUser());
       dispatch(getWishlist());
+      dispatch(getUser());
       dispatch(mergeCarts());
     })
     .catch(error => {

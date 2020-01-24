@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Backdrop from "@material-ui/core/Backdrop";
 import Button from "@material-ui/core/Button";
@@ -12,16 +12,21 @@ import ModalHeader from "../../common/ModalHeader";
 
 import useStyles from "./useStyles";
 
-const LoginContent = ({
-  handleOpen,
-  submitLogin,
-  handleChange,
-  handleClickShowPassword,
-  open,
-  user,
-  showPassword,
-  message,
-}) => {
+const LoginContent = ({ handleOpen, submitLogin, open, message }) => {
+  const [showPassword, setShowPassword] = useState(false);
+  const [user, setValues] = useState({
+    loginOrEmail: "",
+    password: "",
+  });
+
+  const handleChange = prop => event => {
+    setValues({ ...user, [prop]: event.target.value });
+  };
+
+  const handleClickShowPassword = () => {
+    setShowPassword(() => !showPassword);
+  };
+
   const classes = useStyles();
 
   return (
@@ -43,7 +48,10 @@ const LoginContent = ({
           <div className={classes.wrapper}>
             <h3 className={classes.title}>Log In Form</h3>
             {Boolean(message) && <p className={classes.errMsg}>{message}</p>}
-            <ValidatorForm noValidate={false} onSubmit={submitLogin}>
+            <ValidatorForm
+              noValidate={false}
+              onSubmit={e => submitLogin(e, user)}
+            >
               <TextValidator
                 label="Login or Email"
                 variant="outlined"
