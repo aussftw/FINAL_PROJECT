@@ -58,7 +58,7 @@ const Products = ({
     listProduct = productListing.map(value => {
       return (
         <ItemCard
-          key={value._id}
+          key={`top-rated-key-${value._id}`}
           id={value._id}
           itemNo={value.itemNo}
           title={value.name}

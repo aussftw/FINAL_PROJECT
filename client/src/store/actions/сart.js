@@ -224,14 +224,14 @@ export const decreaseItemCartFailure = error => {
 };
 export const decreaseItemCart = id => dispatch => {
   if (store.getState().loginReducer.isAuthenticated) {
-    axios
-      .delete(`/api/cart/product/${id}`)
-      .then(response => {
-        dispatch(decreaseItemCartSuccess(response.data));
-      })
-      .catch(error => {
-        dispatch(decreaseItemCartFailure(error));
-      });
+      axios
+          .delete(`/api/cart/product/${id}`)
+          .then(response => {
+            dispatch(decreaseItemCartSuccess(response.data));
+          })
+          .catch(error => {
+            dispatch(decreaseItemCartFailure(error));
+          });
   } else {
     const updateLocalCart = [];
     store.getState().cartReducer.cart.forEach(item => {
