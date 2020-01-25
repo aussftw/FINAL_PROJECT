@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react";
 
 import axios from "axios";
 
-// import { Gallery, GalleryImage } from "react-gesture-gallery";
-
 import { Container, Link, Box } from "@material-ui/core";
 import PreloaderAdaptive from "../Preloader/Adaptive";
 import useStyles from "./useStyles";
@@ -16,7 +14,7 @@ const Brands = () => {
 
   useEffect(() => {
     axios
-      .get("/partners")
+      .get("/api/partners")
       .then(response => {
         setBrands(response.data);
         setPreloader(false);
@@ -27,23 +25,20 @@ const Brands = () => {
       });
   }, []);
 
-  // eslint-disable-next-line
-  const { _id, url } = brands;
-
   return (
-    <Container className={classes.brandsContaier}>
+    <Container className={classes.brandsContaier} maxWidth="xl">
       {brands.length === 0 ? (
         <PreloaderAdaptive />
       ) : (
         brands.map(brand => (
-          <Link href={url}>
-            <Box
-              key={_id} // fix key error
-              className={classes.brand}
-              style={{
-                backgroundImage: `url(${brand.imageUrl})`,
-              }}
-            />
+          <Link href={brand.url} key={brand._id}>
+            <Box>
+              <img
+                src={`${brand.imageUrl}`}
+                alt={`${brand.name}`}
+                className={classes.brand}
+              />
+            </Box>
           </Link>
         ))
       )}

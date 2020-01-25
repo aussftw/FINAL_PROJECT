@@ -5,9 +5,9 @@ import { connect } from "react-redux";
 import Box from "@material-ui/core/Box";
 import useStyles from "./useStyles";
 
-import { getLinks } from "../../../store/actions";
+import getLinks from "../../../store/actions/Links";
 import MenuListComposition from "../Dropdown/Dropdown";
-import CustomizedSearch from "../Search/Search";
+// import CustomizedSearch from "../Search/Search";
 
 const SubHeader = props => {
   useEffect(() => {
@@ -30,7 +30,7 @@ const SubHeader = props => {
   return (
     <div>
       <div className={classes.searchMobileWrap}>
-        <CustomizedSearch className={classes.searchMobile} />
+        {/* <CustomizedSearch className={classes.searchMobile} /> */}
       </div>
       {/* eslint-disable-next-line react/destructuring-assignment */}
       {props.links.links.length > 0 ? (
@@ -54,6 +54,7 @@ const SubHeader = props => {
                 <MenuListComposition
                   key={item._id}
                   menuTitle={item.title}
+                  menuItems={item.links}
                   className={classes.link}
                 />
               );

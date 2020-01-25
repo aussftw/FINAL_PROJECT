@@ -1,59 +1,91 @@
-import React from "react";
-// import axios from "axios";
-
-import Paper from "@material-ui/core/Paper";
-import InputBase from "@material-ui/core/InputBase";
-import Divider from "@material-ui/core/Divider";
+import React, { useState } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import Button from "@material-ui/core/Button";
 import SearchIcon from "@material-ui/icons/Search";
-
-import MenuListComposition from "../Dropdown/Dropdown";
+// import { Tooltip } from "@material-ui/core";
 import useStyles from "./useStyles";
+// eslint-disable-next-line import/named
+import {
+  searchPhrases,
+  searchPhrasesFailure,
+} from "../../../store/actions/Search";
 
-const CustomizedSearch = props => {
-  const { className } = props;
+// eslint-disable-next-line no-shadow
+const CustomizedSearch = ({ searchPhrases, searchPhrasesFailure }) => {
   const classes = useStyles();
 
-  // const [text, setText] = useState('');
+  const [text, setText] = useState({ query: "" });
 
-  // function searchPhrases(phrase) {
-  //
-  // axios
-  //   .post("/products/search", phrase)
-  //   .then(products => {
-  //     console.log(products);
-  //   })
-  //   .catch(err => {
-  //     console.log(err);
-  //   });
+  function search() {
+    axios
+      .post("/api/products/search", text)
+      .then(products => {
+        searchPhrases(products.data);
+      })
+      .catch(err => {
+        searchPhrasesFailure(err);
+      });
+  }
+
+  // const someMiddleware = store => next => action => {
+  //   if(action.type === 'Нужный_вам_экшн'){
+  //     loadData(store.dispatch);
+  //   }
   // }
 
+  const searchChange = prop => event => {
+    setText({ ...text, [prop]: event.target.value });
+  };
+
   return (
-    <Paper component="form" className={`${classes.search} ${className}`}>
-      <MenuListComposition
-        menuTitle="All Categories"
-        className={classes.link}
-      />
-      <Divider className={classes.divider} orientation="vertical" />
-      <InputBase
-        className={classes.input}
-        placeholder="Search Products..."
-        inputProps={{ "aria-label": "search products" }}
-        rowsMin={4}
-        // value={text}
-        // onChange={event => setText({ text: event.target })}
-      />
-      <Button
-        className={classes.iconButton}
-        variant="contained"
-        type="submit"
-        aria-label="search"
-        // onSubmit={(e)=>{e.preventDefault(); searchPhrases()}}
+    <>
+      {/* <MenuListComposition */}
+      {/*  menuTitle="All Categories" */}
+      {/*  className={classes.link} */}
+      {/* /> */}
+      {/* <Divider className={classes.divider} orientation="vertical" /> */}
+
+      <ValidatorForm
+        noValidate={false}
+        onSubmit={search}
+        className={classes.form}
       >
-        <SearchIcon />
-      </Button>
-    </Paper>
+        <TextValidator
+          value={text.query}
+          onChange={searchChange("query")}
+          // classes={{ label: classes.input }}
+          className={classes.input}
+          variant="outlined"
+          size="small"
+          placeholder="Search..."
+          validators={["required", "matchRegexp:^[`'\"()A-Za-zd.s_-]{3,50}"]}
+          errorMessages={[
+            "This field is required",
+            "Only latin letters, 3 characters and more",
+          ]}
+          // inputProps
+        />
+
+        <Button
+          className={classes.iconButton}
+          variant="contained"
+          type="submit"
+          aria-label="search"
+          component={Link}
+          to="/search"
+          onClick={search}
+          href="/#"
+        >
+          <SearchIcon />
+        </Button>
+      </ValidatorForm>
+    </>
   );
 };
 
-export default CustomizedSearch;
+export default connect(null, { searchPhrases, searchPhrasesFailure })(
+  CustomizedSearch
+);

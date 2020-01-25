@@ -1,17 +1,30 @@
-import React from "react";
-import Toolbar from "@material-ui/core/Toolbar";
-// import IconButton from "@material-ui/core/IconButton";
-import AppBar from "@material-ui/core/AppBar";
-// import Badge from "@material-ui/core/Badge";
-// import MailIcon from "@material-ui/icons/Mail";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import IconButton from "@material-ui/core/IconButton";
+import Badge from "@material-ui/core/Badge";
+import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
+import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
+
+import SearchIcon from "@material-ui/icons/Search";
 import TemporaryDrawer from "./BurgerMenu/BurgerMenu";
 import CustomizedSearch from "./Search/Search";
 import LoginButton from "../LoginButton/LoginButton";
-import useStyles from "./useStyles";
 
-const Header = () => {
+import useStyles from "./useStyles";
+import CartMini from "./CartMini/CartMini";
+
+const Header = ({ isAuthenticated, wishlistCounter, cartCounter }) => {
   const classes = useStyles();
+
+  const [isCartOpened, toggleCart] = useState(false);
+
+  function cartToggling() {
+    toggleCart(!isCartOpened);
+  }
 
   return (
     <div>
@@ -20,35 +33,41 @@ const Header = () => {
           <div className={classes.flex}>
             <TemporaryDrawer />
             <Link to="/">
-              <img src="./img/Logo.svg" alt="logo" className={classes.logo} />
+              <img src="/img/Logo.svg" alt="logo" className={classes.logo} />
             </Link>
+            <IconButton
+              className={classes.mobileSearch}
+              aria-label="show search"
+              color="inherit"
+              // onClick={cartToggling}
+            >
+              <SearchIcon />
+            </IconButton>
           </div>
           <div>
             <CustomizedSearch className={classes.searchDesktop} />
           </div>
           <div>
             <LoginButton />
-            {/* <IconButton aria-label="show 4 new mails" color="inherit"> */}
-            {/*  <Badge badgeContent={8} color="secondary"> */}
-            {/*    <MailIcon /> */}
-            {/*  </Badge> */}
-            {/* </IconButton> */}
-            {/* <IconButton aria-label="show 17 new notifications" color="inherit"> */}
-            {/*  <Badge badgeContent={5} color="secondary"> */}
-            {/*    <NotificationsIcon /> */}
-            {/*  </Badge> */}
-            {/* </IconButton> */}
-
-            {/* <div className={classes.sectionMobile}> */}
-            {/*  <IconButton */}
-            {/*      aria-label="show more" */}
-            {/*      aria-controls={mobileMenuId} */}
-            {/*      aria-haspopup="true" */}
-            {/*      onClick={handleMobileMenuOpen} */}
-            {/*      color="inherit" */}
-            {/*  > */}
-            {/*    <MoreIcon /> */}
-            {/*  </IconButton> */}
+            {isAuthenticated && (
+              <Link to="/profile" className={classes.link}>
+                <IconButton aria-label="show favourites" color="inherit">
+                  <Badge badgeContent={wishlistCounter} color="primary">
+                    <FavoriteBorderIcon />
+                  </Badge>
+                </IconButton>
+              </Link>
+            )}
+            <IconButton
+              aria-label="show cart"
+              color="inherit"
+              onClick={cartToggling}
+            >
+              <Badge badgeContent={cartCounter} color="primary">
+                <ShoppingCartOutlinedIcon />
+              </Badge>
+            </IconButton>
+            {isCartOpened ? <CartMini /> : null}
           </div>
         </Toolbar>
       </AppBar>
@@ -56,4 +75,12 @@ const Header = () => {
   );
 };
 
-export default Header;
+function mapStateToProps(state) {
+  return {
+    isAuthenticated: state.loginReducer.isAuthenticated,
+    wishlistCounter: state.wishlistReducer.wishlist.length,
+    cartCounter: state.cartReducer.cart.length,
+  };
+}
+
+export default connect(mapStateToProps)(Header);

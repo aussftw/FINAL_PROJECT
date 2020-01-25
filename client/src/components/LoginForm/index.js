@@ -1,95 +1,62 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import axios from "axios";
-import { Redirect } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import LoginContent from "./LoginContent";
-import setAuthToken from "../common/setAuthToken";
-import { logIn } from "../../store/actions";
+import { logIn } from "../../store/actions/loginActions";
 
 // eslint-disable-next-line no-shadow
-const LoginForm = ({ logIn }) => {
+const LoginForm = ({ logIn, isAuthenticatedUser, error }) => {
   const [open, setOpen] = useState(true);
-  const [showPassword, setShowPassword] = useState(false);
-  const [userData, setValues] = useState({
-    loginOrEmail: "",
-    password: "",
-  });
-  const [message, setMessage] = useState("");
-  const [isLogin, setIsLogin] = useState(false);
+  // const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const history = useHistory();
+  console.log(history);
+  // eslint-disable-next-line no-shadow
+  const handleError = error => {
+    if (error.response.data.loginOrEmail) {
+      return error.response.data.loginOrEmail;
+    }
+    if (error.response.data.password) {
+      return error.response.data.password;
+    }
+    return error.message;
+  };
 
   const handleOpen = () => {
     setOpen(false);
   };
 
-  const handleChange = prop => event => {
-    setValues({ ...userData, [prop]: event.target.value });
-  };
-
-  const handleClickShowPassword = () => {
-    setShowPassword(() => !showPassword);
-  };
-
-  const getUser = () => {
-    axios
-      .get("/customers/customer")
-      .then(response => {
-        // eslint-disable-next-line no-console
-        console.log("Our User", response);
-        logIn(response.data);
-      })
-      .catch(err => {
-        // eslint-disable-next-line no-console
-        console.log(err);
-      });
-  };
-
-  const submitLogin = e => {
+  // eslint-disable-next-line no-shadow
+  const submitLogin = (e, user) => {
     e.preventDefault();
-    axios
-      .post("/customers/login", userData)
-      .then(response => {
-        // eslint-disable-next-line no-console
-        console.log(response.data.token);
-        if (response.statusText === "OK" && response.data.success) {
-          setIsLogin(true);
-          // eslint-disable-next-line no-console
-          console.log(response);
-          // eslint-disable-next-line no-undef
-          localStorage.setItem("authToken", response.data.token);
-          setAuthToken(response.data.token);
-          getUser();
-        }
-      })
-      .catch(err => {
-        // eslint-disable-next-line no-console
-        console.log(err.response.data);
-        setMessage(err.message);
-      });
+    logIn(user);
   };
 
   return (
     <>
       {/* eslint-disable-next-line no-nested-ternary */}
       {open ? (
-        isLogin ? (
-          <Redirect to="/" />
+        isAuthenticatedUser ? (
+          history.goBack()
         ) : (
           <LoginContent
             handleOpen={handleOpen}
             submitLogin={submitLogin}
-            handleChange={handleChange}
-            handleClickShowPassword={handleClickShowPassword}
             open={open}
-            userData={userData}
-            showPassword={showPassword}
-            message={message}
+            message={error !== "" ? handleError(error) : ""}
           />
         )
       ) : (
-        <Redirect to="/" />
+        history.goBack()
       )}
     </>
   );
 };
 
-export default connect(null, { logIn })(LoginForm);
+const mapStateToProps = state => {
+  return {
+    isAuthenticatedUser: state.loginReducer.isAuthenticated,
+    error: state.loginReducer.error,
+  };
+};
+
+export default connect(mapStateToProps, { logIn })(LoginForm);

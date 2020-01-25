@@ -9,7 +9,10 @@ import BackToTop from "../../components/common/GoUpButton";
 import Footer from "../../components/Footer";
 // import ItemDetails from "../../components/ItemDetails/ItemDetails";
 import Stock from "../../components/Stock";
+import MainCarousel from "../../components/MainCarousel";
 import Subscribe from "../../components/Subscribe/Subscribe";
+import Navigation from "../../views/Navigation/Navigation";
+import ProductCarousel from "../../components/ProductCarousel";
 
 function HomePage() {
   return (
@@ -17,12 +20,15 @@ function HomePage() {
       <BackToTop />
       <Header />
       <SubHeader />
+      <MainCarousel />
       <TopRated />
       <TilesContainer />
       <Stock />
+      <ProductCarousel />
       <Brands />
       <Subscribe />
       <Footer />
+      <Navigation />
     </>
   );
 }

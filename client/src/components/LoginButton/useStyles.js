@@ -15,10 +15,16 @@ const useStyles = makeStyles({
   },
   link: {
     textDecoration: "none",
+    color: "black",
   },
   icon: {
-    color: "black",
     fontSize: "24px",
+  },
+  span: {
+    display: "none",
+    [theme.breakpoints.up("md")]: {
+      display: "inline-block",
+    },
   },
 });
 

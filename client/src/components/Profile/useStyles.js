@@ -5,12 +5,17 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1,
     backgroundColor: theme.palette.background.paper,
     display: "flex",
-    height: 800,
+    minHeight: 800,
     marginTop: 20,
   },
   tabs: {
+    color: theme.palette.primary.dark,
     borderRight: `1px solid ${theme.palette.divider}`,
-    minWidth: 160,
+    width: 200,
+    minWidth: 90,
+  },
+  tabpanel: {
+    width: "100%",
   },
 }));
 

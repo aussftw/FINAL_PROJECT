@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 // import { Carousel } from "react-responsive-carousel";
 
+import { useParams } from "react-router-dom";
+
 import { Gallery, GalleryImage } from "react-gesture-gallery";
 
 import axios from "axios";
@@ -29,6 +31,7 @@ import useStyles from "./useStyles";
 
 // eslint-disable-next-line
 const ItemDetails = ({ id, inCart, inWishList }) => {
+  const itemNo = useParams();
   const classes = useStyles();
   const [item, setItem] = useState({
     imageUrls: [],
@@ -40,7 +43,7 @@ const ItemDetails = ({ id, inCart, inWishList }) => {
 
   useEffect(() => {
     axios
-      .get("/products/5269")
+      .get(`/api/products/${itemNo.id}`)
       .then(response => {
         setItem(response.data);
         setPreloader(false);
@@ -52,7 +55,7 @@ const ItemDetails = ({ id, inCart, inWishList }) => {
         // eslint-disable-next-line
         console.log(error);
       });
-  }, []);
+  }, [itemNo]);
 
   // helpers
 
@@ -72,12 +75,14 @@ const ItemDetails = ({ id, inCart, inWishList }) => {
   const {
     name,
     imageUrls,
-    _id,
+
     color,
     sizes,
     rate,
     currentPrice,
-    previousPrice,
+    // eslint-disable-next-line
+    //  _id,
+    // previousPrice,
     description,
   } = item;
 
@@ -120,16 +125,13 @@ const ItemDetails = ({ id, inCart, inWishList }) => {
           </Typography>
           <Divider variant="middle" />
           <List>
-            <ListItem className={classes.root}>
+            {/* <ListItem className={classes.root}>
               <ListItemText
                 className={classes.infoDetail}
                 primary="Product code:"
               />
-              <Typography className={classes.infoDetailValue}>
-                {/* eslint-disable-next-line */}
-                {_id}
-              </Typography>
-            </ListItem>
+              <Typography className={classes.infoDetailValue}>{_id}</Typography>
+            </ListItem> */}
             <ListItem className={classes.root}>
               <ListItemText className={classes.infoDetail} primary="Color:" />
               <Typography className={classes.infoDetailValue}>
@@ -160,13 +162,12 @@ const ItemDetails = ({ id, inCart, inWishList }) => {
           </Tooltip>
           <Divider variant="middle" />
           <List>
-            <ListItem className={classes.root}>
+            {/* <ListItem className={classes.root}>
               <ListItemText primary="Price:" className={classes.infoDetail} />
               <Typography className={classes.previousPrice}>
-                {/* eslint-disable-next-line */}
                 {previousPrice}$
               </Typography>
-            </ListItem>
+            </ListItem> */}
             <ListItem className={classes.root}>
               <ListItemText primary="Price:" className={classes.infoDetail} />
               <Typography className={classes.currentPrice}>

@@ -1,31 +1,67 @@
-import React, { useEffect } from "react";
-// import Button from "@material-ui/core/Button";
-import axios from "axios";
+import React from "react";
+import { connect } from "react-redux";
+import v4 from "uuid";
 import useStyles from "./useStyles";
+import WishlistCard from "./WishlistCard/WishlistCard";
+import Preloader from "../../Preloader";
 
-export default function WishList() {
+function WishList({ isLoading, wishlist, error }) {
   const classes = useStyles();
+  const errorMessageArray = [
+    "Product is absent in wishlist",
+    "Product was added to wishlist before",
+    "Wishlist does not exist",
+  ];
 
-  // const tokenAuth = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlMDc1NDlhMGM4OTBhMWQ1ODg3YzY2MCIsImZpcnN0TmFtZSI6IkV1Z2VuIiwibGFzdE5hbWUiOiJNYXJrb3YiLCJpc0FkbWluIjp0cnVlLCJpYXQiOjE1Nzg2ODE4OTgsImV4cCI6MTU3ODcxNzg5OH0.yfEejPI2Y7Z91PpdPfnUxR5XM6GP1fZ9ayuOuWbpcFQ";
+  let errorMessage = "";
+  if (error) {
+    if (errorMessageArray.includes(error.response.data.message)) {
+      errorMessage = "";
+    } else {
+      errorMessage = error;
+    }
+  } else {
+    errorMessage = error;
+  }
 
-  useEffect(() => {
-    // axios.defaults.headers.common.Authorization = tokenAuth;
-    axios
-      .get("/wishlist")
-      // eslint-disable-next-line no-console
-      .then(wishlist => console.log(wishlist))
-      .catch(err => {
-        // eslint-disable-next-line no-console
-        console.log(err);
-      });
-  }, []);
-
-  return (
-    <div>
+  return isLoading ? (
+    <Preloader />
+  ) : (
+    <div className={classes.root}>
       <h2 className={classes.title}>Wishlist</h2>
-      <div className={classes.root}>
-        <div className={classes.list}>{}</div>
-      </div>
+      {wishlist.length > 0 ? (
+        <div>
+          {wishlist.map(item => {
+            const randomId = v4();
+
+            return (
+              <WishlistCard
+                key={randomId}
+                id={item._id}
+                itemNo={item.itemNo}
+                img={item.imageUrls[0]}
+                title={item.name}
+                qty={item.quantity}
+                price={item.currentPrice}
+              />
+            );
+          })}
+        </div>
+      ) : (
+        <p className={classes.message}>Your wishlist is empty</p>
+      )}
+      {Boolean(errorMessage) && (
+        <p className={classes.message}>{`${errorMessage.message}`}</p>
+      )}
     </div>
   );
 }
+
+function mapStateToProps(state) {
+  return {
+    isLoading: state.wishlistReducer.isLoading,
+    wishlist: state.wishlistReducer.wishlist,
+    error: state.wishlistReducer.error,
+  };
+}
+export default connect(mapStateToProps)(WishList);

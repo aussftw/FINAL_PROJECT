@@ -7,12 +7,29 @@ const useStyles = makeStyles(theme => ({
   },
   logo: {
     height: "40px",
-  },
-  searchDesktop: {
     display: "none",
-    [theme.breakpoints.up("md")]: {
+    [theme.breakpoints.up("sm")]: {
       display: "flex",
     },
+  },
+  link: {
+    color: "black",
+    "&$visited": {
+      color: "theme. primary.dark",
+    },
+  },
+  mobileSearch:{
+    display: "inline-block",
+    [theme.breakpoints.up("sm")]: {
+      display: "none",
+    },
+  },
+  searchDesktop: {
+    display: "flex",
+    // display: "none",
+    // [theme.breakpoints.up("md")]: {
+    //   display: "flex",
+    // },
   },
 }));
 export default useStyles;

@@ -25,6 +25,7 @@ const useStyles = makeStyles(theme => ({
     zIndex: 2,
   },
   actionArea: {
+    color: theme.palette.primary.main,
     "&:hover $focusHighlight": {
       opacity: 0,
     },
@@ -36,11 +37,12 @@ const useStyles = makeStyles(theme => ({
   },
   mediaImage: {
     height: 200,
-    transform: "scale(0.9)",
+    transform: "scale(0.95)",
     transition: "transform 0.2s ease-out",
   },
   title: {
     fontSize: 14,
+    textTransform: "capitalize",
     paddingBottom: 5,
     color: theme.palette.secondary.dark,
     "&:hover": {
@@ -57,16 +59,34 @@ const useStyles = makeStyles(theme => ({
   price: {
     fontSize: 14,
     fontWeight: 600,
+    color: theme.palette.secondary.main,
     "&:hover": {
       color: theme.palette.primary.main,
     },
   },
-  inCart: {
+  link: {
+    textDecoration: "none",
+    "&:focus, &:hover, &:visited, &:link, &:active": {
+      textDecoration: "none",
+    },
+  },
+  outOfStock: {
     paddingTop: theme.spacing(1),
     paddingBottom: 7,
+    textTransform: "uppercase",
     fontSize: 13,
     fontWeight: 700,
-    color: theme.palette.primary.main,
+    color: theme.palette.secondary.medium,
+  },
+  snackbar: {
+    position: "relative",
+    backgroundColor: theme.palette.primary.main,
+  },
+  snackbarMessage: {
+    position: "absolute",
+    top: 18,
+    left: 68,
+    fontSize: 15,
   },
 }));
 

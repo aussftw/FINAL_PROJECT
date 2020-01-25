@@ -1,51 +1,52 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import CloseIcon from "@material-ui/icons/Close";
 import Tooltip from "@material-ui/core/Tooltip";
+import { connect } from "react-redux";
+import { deleteItemCart } from "../../../store/actions/сart";
 import useStyles from "./useStyles";
 
-const CardAtMiniCart = ({ url, title, qty, price }) => {
+const CardAtMiniCart = ({
+  id,
+  itemNo,
+  url,
+  title,
+  qty,
+  price,
+  deleteCartItem,
+}) => {
   const classes = useStyles();
-  const [isAddedToCart, setAddedToCart] = useState(true);
 
   function removeFromMiniCartBtn() {
-    setAddedToCart(!isAddedToCart);
-    // if(localStorage.getItem(`AddedToCart${id}`)){
-    //     localStorage.removeItem(`AddedToCart${id}`);
-    // }
+    deleteCartItem(id);
   }
 
   return (
-    isAddedToCart && (
-      <li className={classes.mini_cart_card}>
-        <Link to="/" className={classes.mini_cart_card_link}>
-          <img
-            src={`${url}`}
-            className={classes.mini_cart_card_img}
-            alt="img"
-          />
-          <div>
-            <p className={classes.mini_cart_card_title}>{title}</p>
-            <p>
-              {qty} x{" "}
-              <span className={classes.mini_cart_card_price}>
-                ${price.toFixed(2)}
-              </span>
-            </p>
-          </div>
-        </Link>
-        {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */}
-        <div
+    <li className={classes.mini_cart_card}>
+      <Link to={`/products/${itemNo}`} className={classes.mini_cart_card_link}>
+        <img src={`${url}`} className={classes.mini_cart_card_img} alt="img" />
+        <div>
+          <p className={classes.mini_cart_card_title}>{title}</p>
+          <p>
+            {`${qty} x `}
+            <span className={classes.mini_cart_card_price}>
+              ${price.toFixed(2)}
+            </span>
+          </p>
+        </div>
+      </Link>
+      <Tooltip title="close">
+        <CloseIcon
+          fontSize="small"
           className={classes.mini_cart_card_close}
           onClick={removeFromMiniCartBtn}
-        >
-          <Tooltip title="close">
-            <CloseIcon fontSize="small" />
-          </Tooltip>
-        </div>
-      </li>
-    )
+        />
+      </Tooltip>
+    </li>
+    // )
   );
 };
 
-export default CardAtMiniCart;
+export default connect(null, { deleteCartItem: deleteItemCart })(
+  CardAtMiniCart
+);

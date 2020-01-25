@@ -4,6 +4,7 @@ import Fade from "@material-ui/core/Fade";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import IconButton from "@material-ui/core/IconButton";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
+
 import Button from "@material-ui/core/Button";
 import Modal from "@material-ui/core/Modal";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
@@ -12,7 +13,7 @@ import useStyles from "./useStyles";
 
 const RegistrationContent = ({
   handleClose,
-  submitRegistration,
+  setSubmitRegistration,
   handleChange,
   handleClickShowPassword,
   open,
@@ -40,7 +41,10 @@ const RegistrationContent = ({
           <ModalHeader />
           <div className={classes.wrapper}>
             <h3 className={classes.title}>Registration Form</h3>
-            <ValidatorForm noValidate={false} onSubmit={submitRegistration}>
+            <ValidatorForm
+              noValidate={false}
+              onSubmit={() => setSubmitRegistration(true)}
+            >
               <TextValidator
                 label="First Name"
                 variant="outlined"

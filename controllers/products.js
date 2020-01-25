@@ -182,6 +182,28 @@ exports.searchProducts = async (req, res, next) => {
   res.send(matchedProducts);
 };
 
+exports.actualizationProducts = async (req, res, next) => {
+  if (!req.body) {
+    res.status(400).json({ message: "Query string is empty" });
+  }
+  let query = req.body.products.map(value => {
+    return {"_id": value}
+  });
+
+  Product.find(
+      {$or: query}
+      )
+      .then(product => {
+        if (!product) {
+          res.status(400).json({
+            message: `Products is not found`
+          });
+        } else {
+          res.json(product);
+        }
+      });
+};
+
 exports.getTopRatedProducts = (req, res, next) => {
   const topRatedProducts = {"rate.rating": -1};
   const startPage = 8;
