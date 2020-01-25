@@ -2,21 +2,19 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(theme => ({
   container: {
-    position: "relative",
-    display: "inline-block",
-    margin: "5rem auto",
+    maxWidth: "85%",
+    textAlign: "center",
+    margin: "3rem auto",
     [theme.breakpoints.up("md")]: {
-      margin: "8rem auto",
+      margin: "4rem auto",
     },
-    padding: "0 1rem",
-  },
-
-  link: {
-    color: theme.palette.primary.main,
-    textDecoration: "none",
   },
   message: {
     marginTop: "1rem",
+    display: "inherit",
+    color: theme.palette.primary.main,
+    textDecoration: "none",
   },
 }));
+
 export default useStyles;
