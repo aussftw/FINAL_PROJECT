@@ -30,8 +30,8 @@ const LoginButton = ({
     <>
       {isAuthenticated ? (
         <>
-          <span className={classes.span}>Welcome, </span>
-          <span className={classes.span}>{`${user.firstName} ${user.lastName}`}</span>
+          <span>Welcome, </span>
+          <span>{`${user.firstName} ${user.lastName} `}</span>
           <Link to="/profile" className={classes.link}>
             <IconButton>
               <AccountCircle />

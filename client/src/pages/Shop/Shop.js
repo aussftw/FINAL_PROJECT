@@ -5,20 +5,20 @@ import BackToTop from "../../components/common/GoUpButton";
 import Filters from "../../components/Filters";
 import Footer from "../../components/Footer";
 import Subscribe from "../../components/Subscribe/Subscribe";
+import Products from "../../components/Filters";
+
 
 function Shop() {
 
   return (
-    <div>
-      <>
-        <BackToTop />
-        <Header />
-        <SubHeader />
-        <Filters />
-        <Subscribe />
-        <Footer /> 
-      </>
-    </div>
+    <>
+      <BackToTop />
+      <Header />
+      <SubHeader />
+      <Products />
+      <Subscribe />
+      <Footer />
+    </>
   );
 }
 
