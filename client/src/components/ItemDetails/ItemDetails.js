@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 // import { Carousel } from "react-responsive-carousel";
 
+import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
 
 import { Gallery, GalleryImage } from "react-gesture-gallery";
@@ -19,18 +20,30 @@ import {
   Tooltip,
 } from "@material-ui/core";
 import HomeIcon from "@material-ui/icons/HomeSharp";
+
 import FavoriteBorderSharpIcon from "@material-ui/icons/FavoriteBorderSharp";
 import StarBorder from "@material-ui/icons/StarBorder";
-
 import FavoriteSharpIcon from "@material-ui/icons/FavoriteSharp";
 import Rating from "@material-ui/lab/Rating";
 import QtyCounter from "../common/QtyCounter";
 import PreloaderAdaptive from "../Preloader/Adaptive";
 
+import { addItemCart } from "../../store/actions/сart";
+import {
+  wishlistAddItem,
+  wishlistDeleteItem,
+} from "../../store/actions/wishlist";
+
 import useStyles from "./useStyles";
 
 // eslint-disable-next-line
-const ItemDetails = ({ id, inCart, inWishList }) => {
+const ItemDetails = ({
+  wishlistAll,
+  addWishlistItem,
+  deleteWishlistItem,
+  isAuthenticated,
+  addCartItem,
+}) => {
   const itemNo = useParams();
   const classes = useStyles();
   const [item, setItem] = useState({
@@ -40,6 +53,7 @@ const ItemDetails = ({ id, inCart, inWishList }) => {
   });
   const [index, setIndex] = useState(0);
   const [preloader, setPreloader] = useState(true);
+  // const [snackbarAddToCart, setSnackbarAddToCart] = useState(false);
 
   useEffect(() => {
     axios
@@ -75,16 +89,25 @@ const ItemDetails = ({ id, inCart, inWishList }) => {
   const {
     name,
     imageUrls,
-
     color,
     sizes,
     rate,
     currentPrice,
     // eslint-disable-next-line
-    //  _id,
+    _id,
     // previousPrice,
     description,
   } = item;
+
+  const addItemToCart = () => {
+    addCartItem(item._id, item.ItemNo);
+  };
+
+  const handleAddtemToWishlist = () => {
+    if (isAuthenticated) {
+      addWishlistItem(_id);
+    }
+  };
 
   const title = upperName(name);
 
@@ -183,21 +206,21 @@ const ItemDetails = ({ id, inCart, inWishList }) => {
             <Button
               className={classes.actionButton}
               // eslint-disable-next-line
-              onClick={console.log("add to cart function here")}
+              onClick={addItemToCart}
               variant="contained"
             >
-              {inCart ? "Remove from cart" : "Add to cart"}
+              Add to cart
             </Button>
             <Button aria-label="Add to wishlist" variant="contained">
-              {inWishList ? (
+              {!wishlistAll.every(el => el._id !== _id) ? (
                 <FavoriteSharpIcon
                   // eslint-disable-next-line
-                  onClick={console.log("add to wishlist function here")}
+                  onClick={() => deleteWishlistItem(_id)}
                 />
               ) : (
                 <FavoriteBorderSharpIcon
                   // eslint-disable-next-line
-                  onClick={console.log("add to wishlist function here")}
+                  onClick={handleAddtemToWishlist}
                 />
               )}
             </Button>
@@ -216,4 +239,15 @@ const ItemDetails = ({ id, inCart, inWishList }) => {
   );
 };
 
-export default ItemDetails;
+function mapStateToProps(state) {
+  return {
+    wishlistAll: state.wishlistReducer.wishlist,
+    isAuthenticated: state.loginReducer.isAuthenticated,
+  };
+}
+
+export default connect(mapStateToProps, {
+  addWishlistItem: wishlistAddItem,
+  deleteWishlistItem: wishlistDeleteItem,
+  addCartItem: addItemCart,
+})(ItemDetails);

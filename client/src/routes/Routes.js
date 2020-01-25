@@ -66,6 +66,9 @@ const Routes = ({
       <Route path="/profile">
         <Profiler />
       </Route>
+      <Route path="/products/:id">
+        <ItemDetailsPage />
+      </Route>
       <Redirect to="/" />
     </Switch>
   ) : (
