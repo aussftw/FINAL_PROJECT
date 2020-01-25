@@ -6,7 +6,6 @@ import useStyles from "./useStyles";
 
 const TilesItem = ({ text, img }) => {
   const classes = useStyles();
-  console.log(text);
   const link = text.toLowerCase();
 
   return (

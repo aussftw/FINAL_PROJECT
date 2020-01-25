@@ -4,13 +4,10 @@ import { useHistory } from "react-router-dom";
 import LoginContent from "./LoginContent";
 import { logIn } from "../../store/actions/loginActions";
 
-// eslint-disable-next-line no-shadow
 const LoginForm = ({ logIn, isAuthenticatedUser, error }) => {
   const [open, setOpen] = useState(true);
-  // const [isAuthenticated, setIsAuthenticated] = useState(false);
   const history = useHistory();
-  console.log(history);
-  // eslint-disable-next-line no-shadow
+
   const handleError = error => {
     if (error.response.data.loginOrEmail) {
       return error.response.data.loginOrEmail;
@@ -25,7 +22,6 @@ const LoginForm = ({ logIn, isAuthenticatedUser, error }) => {
     setOpen(false);
   };
 
-  // eslint-disable-next-line no-shadow
   const submitLogin = (e, user) => {
     e.preventDefault();
     logIn(user);

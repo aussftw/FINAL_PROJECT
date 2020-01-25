@@ -72,7 +72,7 @@ const formValidationRules = [
     field: "login",
     method: "isLength",
     validWhen: true,
-    args: [{ min: 3, max: 10 }],
+    args: [{ min: 3, max: 22 }],
     message: "Login must be between 3 and 10 characters"
   },
   {
