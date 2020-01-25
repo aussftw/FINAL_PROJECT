@@ -59,13 +59,13 @@ const Products = ({
       return (
         <ItemCard
           key={value._id}
-          title={value.name
-            .split(" ")
-            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-            .join(" ")}
+          id={value._id}
+          itemNo={value.itemNo}
+          title={value.name}
+          rate={value.rate.rating}
           price={value.currentPrice}
-          inCart={false}
-          inWishList={false}
+          img={value.imageUrls[0]}
+          stock={value.quantity}
         />
       );
     });
