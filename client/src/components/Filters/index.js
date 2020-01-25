@@ -13,7 +13,6 @@ import Pagination from "./Pagination";
 import { getProducts, setCurrentPage } from "../../store/actions/Filters";
 
 import ItemCard from "../ItemCard/ItemCard";
-import Hidden from "@material-ui/core/Hidden";
 
 const useStyles = makeStyles(() => ({
   main: {

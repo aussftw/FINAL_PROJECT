@@ -18,6 +18,7 @@ const SearchResultsPage = ({ searchResult }) => {
               <>
                 <Link to={value.productUrl}>
                   <ItemCard
+                    key={`card-key-${value._id}`}
                     id={value._id}
                     itemNo={value.itemNo}
                     title={value.name}
