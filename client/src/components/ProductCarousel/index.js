@@ -48,8 +48,8 @@ const ProductCarousel = () => {
               }
               buttonsDisabled={true}
               autoPlay={true}
-              autoPlayInterval={1500}
-              duration={500}
+              autoPlayInterval={1800}
+              duration={600}
           >
             {productsV.slice(0, 8).map(value => {
               return (
