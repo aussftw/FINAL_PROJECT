@@ -4,6 +4,7 @@ import { Carousel } from "react-responsive-carousel";
 
 import * as axios from "axios";
 import Container from "@material-ui/core/Container";
+import Box from "@material-ui/core/Container";
 import Slide from "./slide";
 import Preloader from "../Preloader/Desktop";
 
@@ -20,31 +21,31 @@ const MainCarousel = () => {
   }, []);
 
   return (
-    <Container maxWidth="lg">
-      {!slidesData ? (
-        <Preloader />
-      ) : (
-        <Carousel
-          autoPlay
-          infiniteLoop
-          showThumbs={false}
-          showStatus={false}
-          interval={2500}
-          stopOnHover={false}
-        >
-          {slidesData.map(value => {
-            return (
-              <Slide
-                key={value._id}
-                image={value.imageUrl}
-                title={value.title}
-                subTitle={value.description}
-              />
-            );
-          })}
-        </Carousel>
-      )}
-    </Container>
+        <Container disableGutters>
+          {!slidesData ? (
+              <Preloader />
+          ) : (
+              <Carousel
+                  autoPlay
+                  infiniteLoop
+                  showThumbs={false}
+                  showStatus={false}
+                  interval={2500}
+                  stopOnHover={false}
+              >
+                {slidesData.map(value => {
+                  return (
+                      <Slide
+                          key={value._id}
+                          image={value.imageUrl}
+                          title={value.title}
+                          subTitle={value.description}
+                      />
+                  );
+                })}
+              </Carousel>
+          )}
+        </Container>
   );
 };
 export default MainCarousel;
