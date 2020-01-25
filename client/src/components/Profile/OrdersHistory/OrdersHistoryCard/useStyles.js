@@ -31,10 +31,17 @@ const useStyles = makeStyles(theme => ({
     },
   },
   img_wrapper: {
-    width: 60,
+    width: 150,
     display: "flex",
+    justifyContent: "center"
   },
   img: {
+    height: 40,
+  },
+  after_img: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "flex-end",
     height: 40,
   },
   products: {

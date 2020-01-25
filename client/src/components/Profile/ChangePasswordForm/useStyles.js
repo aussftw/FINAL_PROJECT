@@ -14,6 +14,8 @@ const useStyles = makeStyles(theme => ({
     margin: "0px 0px 5px 0",
     padding: 5,
     textAlign: "center",
+    fontSize: 24,
+    fontWeight: 700,
     [theme.breakpoints.down("xs")]: {
       fontSize: 20,
     },
@@ -42,6 +44,7 @@ const useStyles = makeStyles(theme => ({
     },
   },
   message: {
+    marginTop: 5,
     textAlign: "center",
   },
 }));

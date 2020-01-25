@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import {
@@ -36,7 +37,7 @@ function PersonalData({
 
   return (
     <div>
-      <h2 className={classes.title}>Personal details</h2>
+      <Typography className={classes.title}>Personal details</Typography>
       <div className={classes.root}>
         <ValidatorForm
           className={classes.form}
@@ -130,9 +131,9 @@ function PersonalData({
           )}
         </ValidatorForm>
         {Boolean(error) && (
-          <p className={classes.message}>
+          <Typography className={classes.message}>
             {`Data didn't save. Error: ${error.message}`}
-          </p>
+          </Typography>
         )}
       </div>
     </div>

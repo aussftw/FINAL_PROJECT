@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import v4 from "uuid";
+import Typography from "@material-ui/core/Typography";
 import useStyles from "./useStyles";
 import WishlistCard from "./WishlistCard/WishlistCard";
 import Preloader from "../../Preloader";
@@ -48,10 +49,10 @@ function WishList({ isLoading, wishlist, error }) {
           })}
         </div>
       ) : (
-        <p className={classes.message}>Your wishlist is empty</p>
+        <Typography className={classes.message}>Your wishlist is empty</Typography>
       )}
       {Boolean(errorMessage) && (
-        <p className={classes.message}>{`${errorMessage.message}`}</p>
+        <Typography className={classes.message}>{`${errorMessage.message}`}</Typography>
       )}
     </div>
   );
