@@ -16,6 +16,7 @@ export default function Stock() {
 
   return (
     <Container maxWidth="lg">
+      <h2 className={classes.title}>Our collection</h2>
       <Grid container className={classes.root} spacing={2}>
         <Grid container justify="center" spacing={spacing}>
           <GridElem xs={12} sm={5} image={images.fst} />
