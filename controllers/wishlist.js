@@ -244,7 +244,13 @@ exports.getWishlist = (req, res, next) => {
   Wishlist.findOne({ customerId: req.user.id })
     .populate("products")
     .populate("customerId")
-    .then(wishlist => res.json(wishlist))
+    .then(wishlist => {
+      if (!wishlist) {
+        res.status(400).json({ message: `Wishlist does not exist` });
+      } else {
+        res.json(wishlist)
+      }
+    })
     .catch(err =>
       res.status(400).json({
         message: `Error happened on server: "${err}" `

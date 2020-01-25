@@ -18,8 +18,13 @@ const useStyles = makeStyles({
     color: "black",
   },
   icon: {
-    color: "black",
     fontSize: "24px",
+  },
+  span: {
+    display: "none",
+    [theme.breakpoints.up("md")]: {
+      display: "inline-block",
+    },
   },
 });
 

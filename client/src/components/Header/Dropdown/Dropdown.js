@@ -11,12 +11,21 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import { connect } from "react-redux";
 import axios from "axios";
-import { searchPhrases } from "../../../store/actions";
+import {
+  searchPhrases,
+  searchPhrasesFailure,
+} from "../../../store/actions/Search";
 import useStyles from "./useStyles";
 
 const MenuListComposition = props => {
   // eslint-disable-next-line no-shadow
-  const { menuTitle, menuItems, className, searchPhrases } = props;
+  const {
+    menuTitle,
+    menuItems,
+    className,
+    searchPhrases,
+    searchPhrasesFailure,
+  } = props;
 
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
@@ -24,13 +33,12 @@ const MenuListComposition = props => {
 
   const filter = category => {
     axios
-      .get(`/products/filter?categories=${category}`)
+      .get(`/api/products/filter?categories=${category}`)
       .then(products => {
         searchPhrases(products.data.products);
       })
       .catch(err => {
-        // eslint-disable-next-line no-console
-        console.log(err);
+        searchPhrasesFailure(err);
       });
   };
 
@@ -192,5 +200,7 @@ const MenuListComposition = props => {
 //     searchPhrases: () => dispatch(searchPhrases()),
 //   };
 // }
-export default connect(null, { searchPhrases })(MenuListComposition);
+export default connect(null, { searchPhrases, searchPhrasesFailure })(
+  MenuListComposition
+);
 // export default connect(  mapStateToProps,  mapDispatchToProps)(MenuListComposition);

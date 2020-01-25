@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
@@ -11,9 +11,10 @@ import PersonalData from "./PersonalData/PersonalData";
 import ChangePasswordForm from "./ChangePasswordForm/ChangePasswordForm";
 import DeliveryAddressForm from "./DeliveryAdressForm/DeliveryAddressForm";
 import WishList from "./WishList/WishList";
+import OrdersHistory from "./OrdersHistory/OrdersHistory";
 
 import { getUser, logOut } from "../../store/actions/loginActions";
-import { wishlistLogOut } from "../../store/actions/wishlist";
+import { getWishlist, wishlistLogOut } from "../../store/actions/wishlist";
 import { clearCart } from "../../store/actions/сart";
 import setAuthToken from "../common/setAuthToken";
 
@@ -35,19 +36,24 @@ function TabPanel(props) {
   );
 }
 
-// eslint-disable-next-line no-shadow
-const Profile = ({ getUser, logOut, wishlistLogOut, clearCart }) => {
+const Profile = ({
+  getUserData,
+  getWishlistData,
+  logOff,
+  wishlistLogOff,
+  clearPersonalCart,
+}) => {
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
   const profileLogOut = () => {
     setAuthToken(false);
-    wishlistLogOut();
-    logOut();
-    clearCart();
+    wishlistLogOff();
+    logOff();
+    clearPersonalCart();
   };
 
   return (
@@ -64,21 +70,22 @@ const Profile = ({ getUser, logOut, wishlistLogOut, clearCart }) => {
           label="Wishlist"
           id="vertical-tab-0"
           aria-controls="vertical-tabpanel-0"
+          onClick={() => getWishlistData()}
         />
         <Tab
           label="Personal Details"
           id="vertical-tab-1"
           aria-controls="vertical-tabpanel-1"
-          onClick={() => getUser()}
+          onClick={() => getUserData()}
         />
         <Tab
           label="Delivery Address"
           id="vertical-tab-2"
           aria-controls="vertical-tabpanel-2"
-          onClick={() => getUser()}
+          onClick={() => getUserData()}
         />
         <Tab
-          label="Order History"
+          label="Orders History"
           id="vertical-tab-3"
           aria-controls="vertical-tabpanel-3"
         />
@@ -105,7 +112,7 @@ const Profile = ({ getUser, logOut, wishlistLogOut, clearCart }) => {
         <DeliveryAddressForm />
       </TabPanel>
       <TabPanel value={value} index={3}>
-        Orders history
+        <OrdersHistory />
       </TabPanel>
       <TabPanel value={value} index={4}>
         <ChangePasswordForm />
@@ -114,6 +121,10 @@ const Profile = ({ getUser, logOut, wishlistLogOut, clearCart }) => {
   );
 };
 
-export default connect(null, { getUser, logOut, wishlistLogOut, clearCart })(
-  Profile
-);
+export default connect(null, {
+  getUserData: getUser,
+  getWishlistData: getWishlist,
+  logOff: logOut,
+  wishlistLogOff: wishlistLogOut,
+  clearPersonalCart: clearCart,
+})(Profile);

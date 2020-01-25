@@ -7,10 +7,10 @@ import Tooltip from "@material-ui/core/Tooltip";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import Button from "@material-ui/core/Button";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import useStyles from "./useStyles";
 import { wishlistDeleteItem } from "../../../../store/actions/wishlist";
 import { addItemCart } from "../../../../store/actions/сart";
-// import {Link} from "react-router-dom";
 
 const WishlistCard = ({
   id,
@@ -19,9 +19,8 @@ const WishlistCard = ({
   price,
   img,
   qty,
-  // eslint-disable-next-line no-shadow
-  wishlistDeleteItem,
-  addItemCart,
+  deleteWishlistItem,
+  addCartItem,
 }) => {
   const classes = useStyles();
   const matches = useMediaQuery(theme => theme.breakpoints.down("xs"));
@@ -29,10 +28,14 @@ const WishlistCard = ({
   return (
     <Grid container className={classes.item} spacing={1}>
       <Grid item xs={3} sm={2} className={classes.imageGrid}>
-        <img className={classes.image} src={img} alt={title} />
+        <Link to={`/products/${itemNo}`} className={classes.link}>
+          <img className={classes.image} src={img} alt={title} />
+        </Link>
       </Grid>
       <Grid item xs={5} sm={3} className={classes.titleGrid}>
-        <Typography className={classes.name}>{title}</Typography>
+        <Link to={`/products/${itemNo}`} className={classes.link}>
+          <Typography className={classes.name}>{title}</Typography>
+        </Link>
       </Grid>
       <Grid item xs={3} sm={1}>
         <Typography className={classes.price}>${price.toFixed(2)}</Typography>
@@ -42,9 +45,7 @@ const WishlistCard = ({
           <Tooltip title="remove">
             <IconButton
               aria-label="delete"
-              onClick={() => {
-                wishlistDeleteItem(id);
-              }}
+              onClick={() => deleteWishlistItem(id)}
             >
               <CloseIcon />
             </IconButton>
@@ -62,7 +63,7 @@ const WishlistCard = ({
           variant={qty > 0 && "outlined"}
           type="button"
           disabled={!(qty > 0)}
-          onClick={() => addItemCart(id, itemNo)}
+          onClick={() => addCartItem(id, itemNo)}
         >
           Add to cart
         </Button>
@@ -72,7 +73,7 @@ const WishlistCard = ({
           <Tooltip title="remove">
             <IconButton
               aria-label="delete"
-              onClick={() => wishlistDeleteItem(id)}
+              onClick={() => deleteWishlistItem(id)}
             >
               <CloseIcon />
             </IconButton>
@@ -83,4 +84,7 @@ const WishlistCard = ({
   );
 };
 
-export default connect(null, { wishlistDeleteItem, addItemCart })(WishlistCard);
+export default connect(null, {
+  deleteWishlistItem: wishlistDeleteItem,
+  addCartItem: addItemCart,
+})(WishlistCard);

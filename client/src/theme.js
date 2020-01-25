@@ -26,6 +26,7 @@ const theme = createMuiTheme({
     secondary: {
       main: grey[700], // main grey
       dark: grey[900], // black
+      medium: grey[500], // medium
       light: grey[200], // maybe
     },
   },
@@ -90,6 +91,13 @@ const theme = createMuiTheme({
       outlined: {
         fontWeight: 800,
         backgroundColor: "white",
+      },
+    },
+    MuiExpansionPanelSummary: {
+      content: {
+        justifyContent: "space-between",
+        alignItems: "center",
+        margin: 0,
       },
     },
   },

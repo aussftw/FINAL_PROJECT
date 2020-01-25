@@ -19,11 +19,6 @@ export const getWishlist = () => dispatch => {
   axios
     .get("/api/wishlist")
     .then(res => {
-      if (!res.data) {
-        // eslint-disable-next-line no-console
-        console.log("You don't have wishlist");
-        return;
-      }
       dispatch(getWishlistSuccess(res.data));
     })
     .catch(err => {
