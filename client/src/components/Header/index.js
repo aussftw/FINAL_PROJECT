@@ -10,13 +10,13 @@ import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 
 import SearchIcon from "@material-ui/icons/Search";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 import TemporaryDrawer from "./BurgerMenu/BurgerMenu";
 import CustomizedSearch from "./Search/Search";
 import LoginButton from "../LoginButton/LoginButton";
 
 import useStyles from "./useStyles";
 import CartMini from "./CartMini/CartMini";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 const Header = ({ isAuthenticated, wishlistCounter, cartCounter }) => {
   const classes = useStyles();
