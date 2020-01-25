@@ -30,7 +30,6 @@ const useStyles = makeStyles(theme => ({
       opacity: 0,
     },
   },
-  focusVisible: {},
   focusHighlight: {},
   cardContent: {
     paddingTop: theme.spacing(1),

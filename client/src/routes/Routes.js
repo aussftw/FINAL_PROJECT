@@ -11,14 +11,17 @@ import NotFound from "../pages/NotFound/NotFound";
 import RegistrationForm from "../components/RegistrationForm";
 import ItemDetailsPage from "../pages/ItemDetailsPage/ItemDetailsPage";
 import setAuthToken from "../components/common/setAuthToken";
+import isExpired from "../components/common/isExpired/isExpired";
 import Preloader from "../components/Preloader";
 import {
   getUser,
+  logOut,
   preloaderClose,
   userFromJwt,
 } from "../store/actions/loginActions";
 import { getWishlist } from "../store/actions/wishlist";
 import SearchPage from "../pages/SearchPage/SearchPage";
+// const Shop = React.lazy(() => import('../pages/Shop/Shop')); // Lazy-loaded
 import Shop from "../pages/Shop/Shop";
 
 const Routes = ({
@@ -28,20 +31,33 @@ const Routes = ({
   preloaderClosing,
   preloader,
   userDataFromJwt,
+  LogOutUser,
 }) => {
   useEffect(() => {
     // eslint-disable-next-line no-undef
     const token = localStorage.getItem("authToken");
     if (token) {
-      userDataFromJwt(jwt(token));
-      preloaderClosing();
-      setAuthToken(token);
-      getWishlistData();
-      getUserData();
+      const isExpiredToken = isExpired(jwt(token));
+      if (isExpiredToken) {
+        userDataFromJwt(jwt(token));
+        preloaderClosing();
+        setAuthToken(token);
+        getWishlistData();
+        getUserData();
+      } else {
+        LogOutUser();
+        preloaderClosing();
+      }
     } else {
       preloaderClosing();
     }
-  }, [getUserData, getWishlistData, preloaderClosing, userDataFromJwt]);
+  }, [
+    getUserData,
+    getWishlistData,
+    preloaderClosing,
+    userDataFromJwt,
+    LogOutUser,
+  ]);
 
   // eslint-disable-next-line no-nested-ternary
   return preloader ? (
@@ -66,6 +82,9 @@ const Routes = ({
       <Route path="/profile">
         <Profiler />
       </Route>
+      <Route path="/login">
+        <LoginForm />
+      </Route>
       <Redirect to="/" />
     </Switch>
   ) : (
@@ -80,6 +99,9 @@ const Routes = ({
         <SearchPage />
       </Route>
       <Route path="/shop">
+        {/* <Suspense fallback={<Preloader />}> */}
+        {/* <Shop /> */}
+        {/* </Suspense> */}
         <Shop />
       </Route>
       {/* <Route path="/about-us"> */}
@@ -115,4 +137,5 @@ export default connect(mapStateToProps, {
   getWishlistData: getWishlist,
   preloaderClosing: preloaderClose,
   userDataFromJwt: userFromJwt,
+  LogOutUser: logOut,
 })(Routes);

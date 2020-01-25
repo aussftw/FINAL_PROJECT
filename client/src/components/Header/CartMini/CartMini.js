@@ -46,6 +46,7 @@ const CartMini = ({ cart }) => {
                   <CardAtMiniCart
                     key={v4()}
                     id={item.product._id}
+                    itemNo={item.product.itemNo}
                     url={item.product.imageUrls[0]}
                     title={item.product.name}
                     qty={cartQty}

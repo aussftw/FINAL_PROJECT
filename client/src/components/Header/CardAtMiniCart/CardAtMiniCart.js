@@ -6,7 +6,15 @@ import { connect } from "react-redux";
 import { deleteItemCart } from "../../../store/actions/сart";
 import useStyles from "./useStyles";
 
-const CardAtMiniCart = ({ id, url, title, qty, price, deleteCartItem }) => {
+const CardAtMiniCart = ({
+  id,
+  itemNo,
+  url,
+  title,
+  qty,
+  price,
+  deleteCartItem,
+}) => {
   const classes = useStyles();
 
   function removeFromMiniCartBtn() {
@@ -15,7 +23,7 @@ const CardAtMiniCart = ({ id, url, title, qty, price, deleteCartItem }) => {
 
   return (
     <li className={classes.mini_cart_card}>
-      <Link to="/" className={classes.mini_cart_card_link}>
+      <Link to={`/products/${itemNo}`} className={classes.mini_cart_card_link}>
         <img src={`${url}`} className={classes.mini_cart_card_img} alt="img" />
         <div>
           <p className={classes.mini_cart_card_title}>{title}</p>
