@@ -13,6 +13,7 @@ import Pagination from "./Pagination";
 import { getProducts, setCurrentPage } from "../../store/actions/Filters";
 
 import ItemCard from "../ItemCard/ItemCard";
+import Hidden from "@material-ui/core/Hidden";
 
 const useStyles = makeStyles(() => ({
   main: {
@@ -58,14 +59,14 @@ const Products = ({
     listProduct = productListing.map(value => {
       return (
         <ItemCard
-          key={value._id}
-          title={value.name
-            .split(" ")
-            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-            .join(" ")}
+          key={`top-rated-key-${value._id}`}
+          id={value._id}
+          itemNo={value.itemNo}
+          title={value.name}
+          rate={value.rate.rating}
           price={value.currentPrice}
-          inCart={false}
-          inWishList={false}
+          img={value.imageUrls[0]}
+          stock={value.quantity}
         />
       );
     });

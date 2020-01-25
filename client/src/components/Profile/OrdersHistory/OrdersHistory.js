@@ -12,6 +12,7 @@ const OrdersHistory = () =>
   // {cart, user}
   {
     const classes = useStyles();
+    const [message, setMessage] = useState("");
     // const token = localStorage.getItem("authToken");
     // console.log(jwt(token).id);
 
@@ -46,16 +47,19 @@ const OrdersHistory = () =>
         .get("/api/orders")
         .then(ordered => {
           console.log(ordered);
+          if (!ordered) {
+            return;
+          }
           setOrders(ordered.data);
         })
-        .catch(err => {
-          console.log(err);
+        .catch(error => {
+          setMessage(`Error: ${error.message}`);
         });
     }, []);
 
     return (
       <Container className={classes.ordersContainer} maxWidth="lg">
-        <h2 className={classes.title}>Orders history</h2>
+        <Typography className={classes.title}>Orders history</Typography>
         {orders.length > 0 ? (
           <div className={classes.root}>
             {orders.map(item => {
@@ -76,6 +80,7 @@ const OrdersHistory = () =>
             You do not have orders
           </Typography>
         )}
+        {Boolean(message) && <Typography className={classes.message}>{message}</Typography>}
       </Container>
     );
   };

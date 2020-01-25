@@ -16,9 +16,11 @@ import LoginButton from "../LoginButton/LoginButton";
 
 import useStyles from "./useStyles";
 import CartMini from "./CartMini/CartMini";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 const Header = ({ isAuthenticated, wishlistCounter, cartCounter }) => {
   const classes = useStyles();
+  const matches = useMediaQuery(theme => theme.breakpoints.up("sm"));
 
   const [isCartOpened, toggleCart] = useState(false);
 
@@ -58,15 +60,21 @@ const Header = ({ isAuthenticated, wishlistCounter, cartCounter }) => {
                 </IconButton>
               </Link>
             )}
-            <IconButton
-              aria-label="show cart"
-              color="inherit"
-              onClick={cartToggling}
-            >
-              <Badge badgeContent={cartCounter} color="primary">
-                <ShoppingCartOutlinedIcon />
-              </Badge>
-            </IconButton>
+            {matches ? (
+              <IconButton aria-label="show cart" color="inherit" onClick={cartToggling}>
+                <Badge badgeContent={cartCounter} color="primary">
+                  <ShoppingCartOutlinedIcon />
+                </Badge>
+              </IconButton>
+            ) : (
+              <Link to="/cart" className={classes.link}>
+                <IconButton aria-label="show cart" color="inherit">
+                  <Badge badgeContent={cartCounter} color="primary">
+                    <ShoppingCartOutlinedIcon />
+                  </Badge>
+                </IconButton>
+              </Link>
+              )}
             {isCartOpened ? <CartMini /> : null}
           </div>
         </Toolbar>
