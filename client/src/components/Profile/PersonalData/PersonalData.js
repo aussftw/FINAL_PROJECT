@@ -36,7 +36,7 @@ function PersonalData({
 
   return (
     <div>
-      <h2 className={classes.title}>Personal Details</h2>
+      <h2 className={classes.title}>Personal details</h2>
       <div className={classes.root}>
         <ValidatorForm
           className={classes.form}

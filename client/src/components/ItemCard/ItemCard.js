@@ -70,7 +70,7 @@ const ItemCard = ({
 
   return (
     <Card className={classes.card}>
-      {!wishlistAll.every(el => el._id !== id) ? (
+      {wishlistAll.some(el => el._id === id) ? (
         <Tooltip arrow title="Remove from wishlist">
           <IconButton
             className={classes.wishList}
@@ -82,7 +82,9 @@ const ItemCard = ({
       ) : (
         <Tooltip
           arrow
-          title={isAuthenticated ? "Add to wishlist" : "Only for logined user"}
+          title={
+            isAuthenticated ? "Add to wishlist" : "Only for authorized user"
+          }
         >
           <IconButton
             className={classes.wishList}
@@ -92,7 +94,7 @@ const ItemCard = ({
           </IconButton>
         </Tooltip>
       )}
-      <Link to={`/products/${itemNo}`}>
+      <Link className={classes.link} to={`/products/${itemNo}`}>
         <CardActionArea
           classes={{
             root: classes.actionArea,

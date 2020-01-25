@@ -26,7 +26,7 @@ function DeliveryAddressForm({
 
   return (
     <div>
-      <h2 className={classes.title}>Delivery Address</h2>
+      <h2 className={classes.title}>Delivery address</h2>
       <div className={classes.root}>
         <ValidatorForm
           className={classes.form}

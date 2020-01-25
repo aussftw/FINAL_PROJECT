@@ -93,7 +93,7 @@ const RegistrationForm = () => {
         });
     }
   }, [submitRegistration , updateUser]);
-
+  
   return (
     <>
       {/* eslint-disable-next-line no-nested-ternary */}

@@ -1,27 +1,28 @@
 import axios from "axios";
+import * as constants from "../constants";
 import { store } from "../index";
 
 export const getCartSuccess = data => {
   return {
-    type: "GET_CART_SUCCESS",
+    type: constants.GET_CART_SUCCESS,
     payload: data,
   };
 };
 export const getCartFailure = error => {
   return {
-    type: "GET_CART_FAILURE",
+    type: constants.GET_CART_FAILURE,
     payload: error,
   };
 };
 export const actualizationLocalCartSuccess = data => {
   return {
-    type: "ACTUALIZATION_LOCAL_CART_SUCCESS",
+    type: constants.ACTUALIZATION_LOCAL_CART_SUCCESS,
     payload: data,
   };
 };
 export const actualizationLocalCartFailure = error => {
   return {
-    type: "ACTUALIZATION_LOCAL_CART_FAILURE",
+    type: constants.ACTUALIZATION_LOCAL_CART_FAILURE,
     payload: error,
   };
 };
@@ -129,25 +130,25 @@ export const getCart = () => dispatch => {
 
 export const addItemCartLocalSuccess = data => {
   return {
-    type: "ADD_ITEM_CART_LOCAL_SUCCESS",
+    type: constants.ADD_ITEM_CART_LOCAL_SUCCESS,
     payload: data,
   };
 };
 export const addItemCartLocalFailure = error => {
   return {
-    type: "ADD_ITEM_CART_LOCAL_FAILURE",
+    type: constants.ADD_ITEM_CART_LOCAL_FAILURE,
     payload: error,
   };
 };
 export const addItemCartSuccess = data => {
   return {
-    type: "ADD_ITEM_CART_SUCCESS",
+    type: constants.ADD_ITEM_CART_SUCCESS,
     payload: data,
   };
 };
 export const addItemCartFailure = error => {
   return {
-    type: "ADD_ITEM_CART_FAILURE",
+    type: constants.ADD_ITEM_CART_FAILURE,
     payload: error,
   };
 };
@@ -192,32 +193,32 @@ export const addItemCart = (id, itemNo) => dispatch => {
 
 export const decreaseItemCartLocal = data => {
   return {
-    type: "DECREASE_ITEM_CART_LOCAL",
+    type: constants.DECREASE_ITEM_CART_LOCAL,
     payload: data,
   };
 };
 export const decreaseItemCartSuccess = data => {
   return {
-    type: "DECREASE_ITEM_CART_SUCCESS",
+    type: constants.DECREASE_ITEM_CART_SUCCESS,
     payload: data,
   };
 };
 export const decreaseItemCartFailure = error => {
   return {
-    type: "DECREASE_ITEM_CART_FAILURE",
+    type: constants.DECREASE_ITEM_CART_FAILURE,
     payload: error,
   };
 };
 export const decreaseItemCart = id => dispatch => {
   if (store.getState().loginReducer.isAuthenticated) {
-    axios
-      .delete(`/api/cart/product/${id}`)
-      .then(response => {
-        dispatch(decreaseItemCartSuccess(response.data));
-      })
-      .catch(error => {
-        dispatch(decreaseItemCartFailure(error));
-      });
+      axios
+          .delete(`/api/cart/product/${id}`)
+          .then(response => {
+            dispatch(decreaseItemCartSuccess(response.data));
+          })
+          .catch(error => {
+            dispatch(decreaseItemCartFailure(error));
+          });
   } else {
     const updateLocalCart = [];
     store.getState().cartReducer.cart.forEach(item => {
@@ -227,6 +228,8 @@ export const decreaseItemCart = id => dispatch => {
             product: item.product,
             cartQuantity: +item.cartQuantity - 1,
           });
+        } else {
+          updateLocalCart.push(item);
         }
       } else {
         updateLocalCart.push(item);
@@ -238,19 +241,19 @@ export const decreaseItemCart = id => dispatch => {
 
 export const deleteItemCartLocal = data => {
   return {
-    type: "DELETE_ITEM_CART_LOCAL",
+    type: constants.DELETE_ITEM_CART_LOCAL,
     payload: data,
   };
 };
 export const deleteItemCartSuccess = data => {
   return {
-    type: "DELETE_ITEM_CART_SUCCESS",
+    type: constants.DELETE_ITEM_CART_SUCCESS,
     payload: data,
   };
 };
 export const deleteItemCartFailure = error => {
   return {
-    type: "DELETE_ITEM_CART_FAILURE",
+    type: constants.DELETE_ITEM_CART_FAILURE,
     payload: error,
   };
 };
@@ -277,19 +280,19 @@ export const deleteItemCart = id => dispatch => {
 
 export const changeItemCartQuantityLocal = data => {
   return {
-    type: "CHANGE_ITEM_CART_QUANTITY_LOCAL",
+    type: constants.CHANGE_ITEM_CART_QUANTITY_LOCAL,
     payload: data,
   };
 };
 export const changeItemCartQuantitySuccess = data => {
   return {
-    type: "CHANGE_ITEM_CART_QUANTITY_SUCCESS",
+    type: constants.CHANGE_ITEM_CART_QUANTITY_SUCCESS,
     payload: data,
   };
 };
 export const changeItemCartQuantityFailure = error => {
   return {
-    type: "CHANGE_ITEM_CART_QUANTITY_FAILURE",
+    type: constants.CHANGE_ITEM_CART_QUANTITY_FAILURE,
     payload: error,
   };
 };
@@ -326,6 +329,6 @@ export const changeItemCartQuantity = (id, cartQty) => dispatch => {
 
 export const clearCart = () => {
   return {
-    type: "CLEAR_CART",
+    type: constants.CLEAR_CART,
   };
 };

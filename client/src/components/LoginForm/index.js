@@ -7,7 +7,6 @@ import { logIn } from "../../store/actions/loginActions";
 const LoginForm = ({ logIn, isAuthenticatedUser, error }) => {
   const [open, setOpen] = useState(true);
   const history = useHistory();
-
   const handleError = error => {
     if (error.response.data.loginOrEmail) {
       return error.response.data.loginOrEmail;
@@ -21,7 +20,7 @@ const LoginForm = ({ logIn, isAuthenticatedUser, error }) => {
   const handleOpen = () => {
     setOpen(false);
   };
-
+  
   const submitLogin = (e, user) => {
     e.preventDefault();
     logIn(user);

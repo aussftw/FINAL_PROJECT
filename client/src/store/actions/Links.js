@@ -1,7 +1,7 @@
 import axios from "axios";
 import * as constants from "../constants";
 
-export function getLinks() {
+export default function getLinks() {
   return dispatch => {
     axios
       .get("/api/links")
@@ -17,11 +17,5 @@ export function getLinks() {
           payload: err,
         });
       });
-  };
-}
-export function searchPhrases(data) {
-  return {
-    type: "SEARCH_SUCCESS",
-    payload: data,
   };
 }

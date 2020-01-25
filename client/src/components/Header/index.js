@@ -9,6 +9,7 @@ import Badge from "@material-ui/core/Badge";
 import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 
+import SearchIcon from "@material-ui/icons/Search";
 import TemporaryDrawer from "./BurgerMenu/BurgerMenu";
 import CustomizedSearch from "./Search/Search";
 import LoginButton from "../LoginButton/LoginButton";
@@ -34,6 +35,14 @@ const Header = ({ isAuthenticated, wishlistCounter, cartCounter }) => {
             <Link to="/">
               <img src="/img/Logo.svg" alt="logo" className={classes.logo} />
             </Link>
+            <IconButton
+              className={classes.mobileSearch}
+              aria-label="show search"
+              color="inherit"
+              // onClick={cartToggling}
+            >
+              <SearchIcon />
+            </IconButton>
           </div>
           <div>
             <CustomizedSearch className={classes.searchDesktop} />
