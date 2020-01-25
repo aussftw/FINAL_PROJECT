@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import * as axios from "axios";
+// import * as axios from "axios";
 
 import AliceCarousel from 'react-alice-carousel'
 import 'react-alice-carousel/lib/alice-carousel.css'
@@ -9,7 +9,6 @@ import ItemCard from "../ItemCard/ItemCard";
 
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import useStyles from "./useStyles";
-import Preloader from "../Preloader/Desktop";
 
 const ProductCarousel = () => {
     const classes = useStyles();
