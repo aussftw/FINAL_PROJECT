@@ -92,7 +92,7 @@ const ItemCard = ({
           </IconButton>
         </Tooltip>
       )}
-      <Link to={`/products/${itemNo}`}>
+      <Link className={classes.link} to={`/products/${itemNo}`}>
         <CardActionArea
           classes={{
             root: classes.actionArea,

@@ -25,10 +25,12 @@ const useStyles = makeStyles(theme => ({
     zIndex: 2,
   },
   actionArea: {
+    color: theme.palette.primary.main,
     "&:hover $focusHighlight": {
       opacity: 0,
     },
   },
+  focusVisible: {},
   focusHighlight: {},
   cardContent: {
     paddingTop: theme.spacing(1),
@@ -36,7 +38,7 @@ const useStyles = makeStyles(theme => ({
   },
   mediaImage: {
     height: 200,
-    transform: "scale(0.9)",
+    transform: "scale(0.95)",
     transition: "transform 0.2s ease-out",
   },
   title: {
@@ -58,8 +60,15 @@ const useStyles = makeStyles(theme => ({
   price: {
     fontSize: 14,
     fontWeight: 600,
+    color: theme.palette.secondary.main,
     "&:hover": {
       color: theme.palette.primary.main,
+    },
+  },
+  link: {
+    textDecoration: "none",
+    "&:focus, &:hover, &:visited, &:link, &:active": {
+      textDecoration: "none",
     },
   },
   outOfStock: {
