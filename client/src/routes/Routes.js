@@ -88,6 +88,7 @@ const Routes = ({
       <Route path="/products/:id">
         <ItemDetailsPage />
       </Route>
+
       <Redirect to="/" />
     </Switch>
   ) : (
