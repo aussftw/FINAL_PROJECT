@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
 import * as axios from "axios";
-import InfiniteCarousel from "react-leaf-carousel";
+
+import AliceCarousel from 'react-alice-carousel'
+import 'react-alice-carousel/lib/alice-carousel.css'
 
 import Container from "@material-ui/core/Container";
 import ItemCard from "../ItemCard/ItemCard";
 
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-
+import useStyles from "./useStyles";
 import Preloader from "../Preloader/Desktop";
 
 const ProductCarousel = () => {
-  // const classes = useStyles();
+  const classes = useStyles();
   const [productsV, setProductsV] = useState(null);
 
   useEffect(() => {
@@ -27,49 +29,44 @@ const ProductCarousel = () => {
 
   return (
     <Container maxWidth="lg">
+      <h2 className={classes.title}>Our TOP products</h2>
       {!productsV ? (
-        <Preloader />
+          <Preloader />
       ) : (
-        <InfiniteCarousel
-          breakpoints={[
-            {
-              breakpoint: 960,
-              settings: {
-                slidesToShow: 2,
-                slidesToScroll: 2,
+          <AliceCarousel
+              responsive={
+               { 960: {
+                items: 2,
               },
-            },
-            {
-              breakpoint: 1280,
-              settings: {
-                slidesToShow: 3,
-                slidesToScroll: 3,
+                1280: {
+                items: 4
               },
-            },
-          ]}
-          slidesSpacing={1}
-          slidesToScroll={4}
-          slidesToShow={4}
-          scrollOnDevice
-        >
-          {productsV.slice(0, 8).map(value => {
-            return (
-              <ItemCard
-                title={value.name
-                  .split(" ")
-                  .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-                  .join(" ")}
-                rate={value.rate.rating}
-                price={value.currentPrice}
-                img={value.imageUrls[0]}
-                inCart={false}
-                inWishList={false}
-              />
-            );
-          })}
-        </InfiniteCarousel>
+              1960: {
+                 items: 4
+              }
+               }
+              }
+              buttonsDisabled={true}
+              autoPlay={true}
+              autoPlayInterval={1500}
+              duration={500}
+          >
+            {productsV.slice(0, 8).map(value => {
+              return (
+                  <ItemCard
+                      id={value._id}
+                      itemNo={value.itemNo}
+                      title={value.name}
+                      rate={value.rate.rating}
+                      price={value.currentPrice}
+                      img={value.imageUrls[0]}
+                      stock={value.quantity}
+                  />
+              );
+            })}
+          </AliceCarousel>
       )}
-    </Container>
+       </Container>
   );
 };
 

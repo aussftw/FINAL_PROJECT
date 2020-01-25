@@ -22,10 +22,9 @@ function HomePage() {
       <SubHeader />
       <MainCarousel />
       <TopRated />
-      <ProductCarousel />
       <TilesContainer />
       <Stock />
-
+      <ProductCarousel />
       <Brands />
       <Subscribe />
       <Footer />
