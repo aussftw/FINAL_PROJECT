@@ -20,7 +20,7 @@ const LoginForm = ({ logIn, isAuthenticatedUser, error }) => {
   const handleOpen = () => {
     setOpen(false);
   };
-  
+
   const submitLogin = (e, user) => {
     e.preventDefault();
     logIn(user);
