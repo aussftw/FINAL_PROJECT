@@ -44,7 +44,7 @@ const LoginContent = ({ handleOpen, submitLogin, open, message }) => {
     >
       <Fade in={open}>
         <div className={classes.paper}>
-          <ModalHeader />
+          <ModalHeader login reg={false} />
           <div className={classes.wrapper}>
             <h3 className={classes.title}>Log In Form</h3>
             {Boolean(message) && <p className={classes.errMsg}>{message}</p>}
