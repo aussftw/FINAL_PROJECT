@@ -58,7 +58,7 @@ const CartMini = ({ cart }) => {
             <p className={classes.total}>
               <span className={classes.subtotal}>Subtotal: </span>
               <span className={classes.subtotal_price}>
-                ${subTotalWithComas}
+                {`$${subTotalWithComas}`}
               </span>
             </p>
             <p className={classes.mini_cart_buttons}>
