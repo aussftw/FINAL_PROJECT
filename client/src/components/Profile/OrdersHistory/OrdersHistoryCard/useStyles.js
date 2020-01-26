@@ -26,14 +26,12 @@ const useStyles = makeStyles(theme => ({
     fontSize: 11,
     marginRight: 10,
     color: theme.palette.text.secondary,
-    [theme.breakpoints.up("sm")]: {
-      fontSize: 14,
-    },
+
   },
   img_wrapper: {
     width: 150,
     display: "flex",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   img: {
     height: 40,

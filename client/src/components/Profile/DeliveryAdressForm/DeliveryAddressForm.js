@@ -27,7 +27,7 @@ function DeliveryAddressForm({
 
   return (
     <div>
-      <Typography className={classes.title}>Delivery address</Typography>
+      <Typography className={classes.title} variant="h3">Delivery address</Typography>
       <div className={classes.root}>
         <ValidatorForm
           className={classes.form}
