@@ -3,7 +3,7 @@ import theme from "../../../theme";
 
 const useStyles = makeStyles({
   btn: {
-    fontSize: "14px",
+    fontSize: "1rem",
     letterSpacing: "0,5px",
     color: theme.palette.secondary.dark,
     backgroundColor: theme.palette.secondary.light,
@@ -11,7 +11,7 @@ const useStyles = makeStyles({
     padding: "11px 0 9px",
     width: "50%",
     position: "absolute",
-    bottom: 20,
+    bottom: "10%",
     left: "25%",
     "&:hover": {
       color: theme.palette.primary.main,
