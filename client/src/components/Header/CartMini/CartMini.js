@@ -46,6 +46,7 @@ const CartMini = ({ cart }) => {
                   <CardAtMiniCart
                     key={v4()}
                     id={item.product._id}
+                    itemNo={item.product.itemNo}
                     url={item.product.imageUrls[0]}
                     title={item.product.name}
                     qty={cartQty}
@@ -57,7 +58,7 @@ const CartMini = ({ cart }) => {
             <p className={classes.total}>
               <span className={classes.subtotal}>Subtotal: </span>
               <span className={classes.subtotal_price}>
-                ${subTotalWithComas}
+                {`$${subTotalWithComas}`}
               </span>
             </p>
             <p className={classes.mini_cart_buttons}>

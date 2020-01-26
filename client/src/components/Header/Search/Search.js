@@ -5,9 +5,9 @@ import { connect } from "react-redux";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import Button from "@material-ui/core/Button";
 import SearchIcon from "@material-ui/icons/Search";
-
-// import { Tooltip } from "@material-ui/core";
 import useStyles from "./useStyles";
+// import { Tooltip } from "@material-ui/core";
+
 import {
   searchPhrases,
   searchPhrasesFailure,

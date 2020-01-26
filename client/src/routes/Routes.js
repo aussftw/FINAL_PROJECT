@@ -85,6 +85,9 @@ const Routes = ({
       <Route path="/login">
         <LoginForm />
       </Route>
+      <Route path="/products/:id">
+        <ItemDetailsPage />
+      </Route>
       <Redirect to="/" />
     </Switch>
   ) : (

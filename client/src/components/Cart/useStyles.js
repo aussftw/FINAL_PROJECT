@@ -5,17 +5,13 @@ const useStyles = makeStyles(theme => ({
     paddingTop: 30,
     paddingBottom: 30,
   },
-  cartTitle: {
-    fontSize: 22,
-    fontWeight: 700,
-    marginBottom: 30,
-    textTransform: "uppercase",
-  },
   emptyCart: {
     textAlign: "center",
     fontSize: 18,
-    fontWeight: 600,
-    marginBottom: 30,
+    fontWeight: 500,
+    marginTop: 90,
+    marginBottom: 120,
+    color: theme.palette.secondary.main,
   },
   productHeaders: {
     height: 50,
@@ -48,6 +44,9 @@ const useStyles = makeStyles(theme => ({
   continueButton: {
     marginTop: 20,
   },
+  emptyCartContinueButton: {
+    width: 200,
+  }
 }));
 
 export default useStyles;

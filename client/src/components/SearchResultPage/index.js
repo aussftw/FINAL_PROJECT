@@ -17,7 +17,7 @@ const SearchResultsPage = ({ searchResult }) => {
           {searchResult.map(value => {
             return (
               <ItemCard
-                key={value._id}
+                key={`card-key-${value._id}`}
                 id={value._id}
                 itemNo={value.itemNo}
                 title={value.name}

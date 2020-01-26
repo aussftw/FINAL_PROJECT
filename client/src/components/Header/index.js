@@ -10,6 +10,7 @@ import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 
 import SearchIcon from "@material-ui/icons/Search";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 import TemporaryDrawer from "./BurgerMenu/BurgerMenu";
 import CustomizedSearch from "./Search/Search";
 import LoginButton from "../LoginButton/LoginButton";
@@ -19,6 +20,7 @@ import CartMini from "./CartMini/CartMini";
 
 const Header = ({ isAuthenticated, wishlistCounter, cartCounter }) => {
   const classes = useStyles();
+  const matches = useMediaQuery(theme => theme.breakpoints.up("sm"));
 
   const [isCartOpened, toggleCart] = useState(false);
 
@@ -58,15 +60,21 @@ const Header = ({ isAuthenticated, wishlistCounter, cartCounter }) => {
                 </IconButton>
               </Link>
             )}
-            <IconButton
-              aria-label="show cart"
-              color="inherit"
-              onClick={cartToggling}
-            >
-              <Badge badgeContent={cartCounter} color="primary">
-                <ShoppingCartOutlinedIcon />
-              </Badge>
-            </IconButton>
+            {matches ? (
+              <IconButton aria-label="show cart" color="inherit" onClick={cartToggling}>
+                <Badge badgeContent={cartCounter} color="primary">
+                  <ShoppingCartOutlinedIcon />
+                </Badge>
+              </IconButton>
+            ) : (
+              <Link to="/cart" className={classes.link}>
+                <IconButton aria-label="show cart" color="inherit">
+                  <Badge badgeContent={cartCounter} color="primary">
+                    <ShoppingCartOutlinedIcon />
+                  </Badge>
+                </IconButton>
+              </Link>
+              )}
             {isCartOpened ? <CartMini /> : null}
           </div>
         </Toolbar>
