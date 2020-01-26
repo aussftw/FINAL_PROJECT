@@ -30,46 +30,57 @@ export const actualizationLocalCartFailure = error => {
 export const mergeCarts = () => dispatch => {
   const merging = data => {
     if (store.getState().cartReducer.cart.length === 0) {
-      dispatch(getCartSuccess(data));
+      if (data !== null) {
+        dispatch(getCartSuccess(data));
+      }
     } else {
-      const localCart = store.getState().cartReducer.cart.map(item => {
-        return {
-          product: item.product._id,
-          cartQuantity: item.cartQuantity,
-          isMatched: false,
-        };
-      });
-      const serverCart = data.products.map(item => {
-        return {
-          product: item.product._id,
-          cartQuantity: item.cartQuantity,
-          isMatched: false,
-        };
-      });
-      const mergedCart = [];
-      localCart.forEach((localItem, localIndex) => {
-        serverCart.forEach((serverItem, serverIndex) => {
-          if (localItem.product === serverItem.product) {
+      let mergedCart = [];
+      if (data !== null) {
+        const localCart = store.getState().cartReducer.cart.map(item => {
+          return {
+            product: item.product._id,
+            cartQuantity: item.cartQuantity,
+            isMatched: false,
+          };
+        });
+        const serverCart = data.products.map(item => {
+          return {
+            product: item.product._id,
+            cartQuantity: item.cartQuantity,
+            isMatched: false,
+          };
+        });
+        localCart.forEach((localItem, localIndex) => {
+          serverCart.forEach((serverItem, serverIndex) => {
+            if (localItem.product === serverItem.product) {
+              mergedCart.push({
+                product: serverItem.product,
+                cartQuantity: Math.max(
+                  +localItem.cartQuantity,
+                  +serverItem.cartQuantity
+                ),
+              });
+              serverCart[serverIndex].isMatched = true;
+              localCart[localIndex].isMatched = true;
+            }
+          });
+        });
+        localCart.concat(serverCart).forEach(item => {
+          if (!item.isMatched) {
             mergedCart.push({
-              product: serverItem.product,
-              cartQuantity: Math.max(
-                +localItem.cartQuantity,
-                +serverItem.cartQuantity
-              ),
+              product: item.product,
+              cartQuantity: item.cartQuantity,
             });
-            serverCart[serverIndex].isMatched = true;
-            localCart[localIndex].isMatched = true;
           }
         });
-      });
-      localCart.concat(serverCart).forEach(item => {
-        if (!item.isMatched) {
-          mergedCart.push({
-            product: item.product,
+      } else {
+        mergedCart = store.getState().cartReducer.cart.map(item => {
+          return {
+            product: item.product._id,
             cartQuantity: item.cartQuantity,
-          });
-        }
-      });
+          };
+        });
+      }
       const updateProductList = { products: mergedCart };
       axios
         .put("/api/cart", updateProductList)
@@ -96,12 +107,14 @@ export const getCart = () => dispatch => {
     axios
       .get("/api/cart")
       .then(response => {
-        dispatch(getCartSuccess(response.data));
+        if (response.data !== null) {
+          dispatch(getCartSuccess(response.data));
+        }
       })
       .catch(error => {
         dispatch(getCartFailure(error));
       });
-  } else {
+  } else if (store.getState().cartReducer.cart.length !== 0) {
     const storeProductList = store.getState().cartReducer.cart.map(item => {
       return item.product._id;
     });
