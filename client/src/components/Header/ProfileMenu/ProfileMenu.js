@@ -6,10 +6,12 @@ import Popper from "@material-ui/core/Popper";
 import MenuItem from "@material-ui/core/MenuItem";
 import MenuList from "@material-ui/core/MenuList";
 import IconButton from "@material-ui/core/IconButton";
-import {connect} from "react-redux";
 import AccountCircle from "@material-ui/icons/AccountCircle";
+
+import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 import useStyles from "./useStyles"
+
 import setAuthToken from "../../common/setAuthToken";
 import {logOut} from "../../../store/actions/loginActions";
 import {wishlistLogOut} from "../../../store/actions/wishlist";
