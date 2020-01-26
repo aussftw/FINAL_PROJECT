@@ -1,9 +1,10 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { Redirect } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import RegistrationContent from './RegistrationContent';
 
 const RegistrationForm = () => {
+  const history = useHistory();
   const [userData, setUserData] = useState({
     firstName: '',
     lastName: '',
@@ -17,7 +18,7 @@ const RegistrationForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [open, setOpen] = useState(true);
   const [registration, setRegistration] = useState(false);
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState('');
   const [submitRegistration, setSubmitRegistration] = useState(false);
 
   const updateUser = useCallback(() => {
@@ -92,14 +93,14 @@ const RegistrationForm = () => {
          setSubmitRegistration(false);
         });
     }
-  }, [submitRegistration, updateUser]);
+  }, [submitRegistration , updateUser]);
 
   return (
     <>
       {/* eslint-disable-next-line no-nested-ternary */}
       {open ? (
         registration ? (
-          <Redirect to="/login" />
+          history.push("login")
         ) : (
           <RegistrationContent
             handleClose={handleClose}
@@ -113,7 +114,7 @@ const RegistrationForm = () => {
           />
         )
       ) : (
-        <Redirect to="/" />
+        history.push("/")
       )}
     </>
   );
