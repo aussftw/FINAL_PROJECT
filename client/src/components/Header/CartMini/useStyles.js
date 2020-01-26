@@ -4,7 +4,7 @@ const useStyles = makeStyles(theme => ({
   card: {
     position: "absolute",
     maxHeight: "85vh",
-    top: 70,
+    top: 60,
     right: 0,
     width: 310,
     textAlign: "center",
