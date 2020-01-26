@@ -6,6 +6,9 @@ const useStyles = makeStyles(theme => ({
     border: "none",
     marginBottom: 50,
   },
+  title: {
+    textAlign: "center",
+  },
   visible: {
     [theme.breakpoints.down("sm")]: {
       display: "none",

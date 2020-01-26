@@ -10,6 +10,24 @@ import { lightGreen, grey } from "@material-ui/core/colors";
 // };
 
 const theme = createMuiTheme({
+  typography: {
+    h3: {
+      fontSize: 22,
+      fontWeight: 700,
+      marginBottom: 30,
+      textTransform: "uppercase",
+      color: grey[900]
+    },
+    h4: {
+      fontSize: 20,
+      fontWeight: 600,
+      margin: 30,
+      marginBottom: 8,
+      textTransform: "uppercase",
+      textAlign: "center",
+      color: grey[900]
+    }
+  },
   breakpoints: {
     xs: 0,
     sm: 576,
@@ -91,6 +109,13 @@ const theme = createMuiTheme({
       outlined: {
         fontWeight: 800,
         backgroundColor: "white",
+      },
+    },
+    MuiExpansionPanelSummary: {
+      content: {
+        justifyContent: "space-between",
+        alignItems: "center",
+        margin: 0,
       },
     },
   },

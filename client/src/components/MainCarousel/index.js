@@ -20,7 +20,7 @@ const MainCarousel = () => {
   }, []);
 
   return (
-    <Container maxWidth="lg">
+    <Container disableGutters>
       {!slidesData ? (
         <Preloader />
       ) : (

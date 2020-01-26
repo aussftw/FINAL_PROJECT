@@ -1,20 +1,15 @@
 import { makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({
-  search: {
-    alignItems: "center",
-    boxShadow: "none",
-    border: "1px solid grey",
-  },
-  link: {
-    display: "none",
-    [theme.breakpoints.up("md")]: {
-      display: "flex",
-    },
-    color: theme.palette.secondary.main,
-    textDecoration: "none",
-    padding: 9,
-  },
+  // link: {
+  //   display: "none",
+  //   [theme.breakpoints.up("md")]: {
+  //     display: "flex",
+  //   },
+  //   color: theme.palette.secondary.main,
+  //   textDecoration: "none",
+  //   padding: 9,
+  // },
   form: {
     display: "none",
     [theme.breakpoints.up("sm")]: {
@@ -23,6 +18,15 @@ const useStyles = makeStyles(theme => ({
   },
   iconButton: {
     padding: 8,
+    // backgroundColor: theme.palette.primary.main,
+    // color: "white",
+    // textDecoration: "none",
+    "&$visited": {
+      backgroundColor: theme.palette.primary.main,
+    },
+  },
+  input: {
+    borderRadius: "none",
   },
   // divider: {
   //   height: 28,

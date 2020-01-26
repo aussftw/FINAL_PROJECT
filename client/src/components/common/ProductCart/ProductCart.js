@@ -1,5 +1,8 @@
 import React, { useState, useEffect, useCallback } from "react";
+import { connect } from "react-redux";
+import {Link} from "react-router-dom";
 
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
 import AddIcon from "@material-ui/icons/Add";
@@ -7,8 +10,7 @@ import RemoveIcon from "@material-ui/icons/Remove";
 import CloseIcon from "@material-ui/icons/Close";
 import Typography from "@material-ui/core/Typography";
 import Tooltip from "@material-ui/core/Tooltip";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
-import { connect } from "react-redux";
+
 import {
   addItemCart,
   decreaseItemCart,
@@ -91,11 +93,15 @@ const ProductCart = ({
         <img className={classes.image} src={img} alt={title} />
       </Grid>
       <Grid item xs={5} sm={4} className={classes.titleGrid}>
-        <Typography className={classes.title}>{title}</Typography>
+        <Link className={classes.link} to={`/products/${itemNo}`}>
+          <Typography className={classes.title}>{title}</Typography>
+        </Link>
       </Grid>
       <Grid item xs={3} sm={1}>
         <Typography className={classes.price}>
-          {matches && "Price: "}${price.toFixed(2)}
+          {matches && "Price: "}
+$
+          {price.toFixed(2)}
         </Typography>
       </Grid>
       {matches && (
@@ -107,37 +113,47 @@ const ProductCart = ({
           </Tooltip>
         </Grid>
       )}
-      {matches && <Grid item xs={3} />}
-      <Grid item xs={5} sm={3} className={classes.quantityGrid}>
-        <Tooltip title="decrease">
-          <IconButton
-            aria-label="decrease"
-            onClick={decreaseCartProductQuantity}
-          >
-            <RemoveIcon />
-          </IconButton>
-        </Tooltip>
-        <input
-          className={classes.quantityNumber}
-          id={qId}
-          name="quantity"
-          type="number"
-          value={cartQtyInput}
-          onChange={cartQtyInputHandler}
-          onBlur={changeCartProductQuantity}
-        />
-        <Tooltip title="increase">
-          <IconButton
-            aria-label="increase"
-            onClick={increaseCartProductQuantity}
-          >
-            <AddIcon />
-          </IconButton>
-        </Tooltip>
-      </Grid>
+      {matches && (<Grid item xs={3} />)}
+      {shopQty > 0 ? (
+        <Grid item xs={5} sm={3} className={classes.quantityGrid}>
+          <Tooltip title="decrease">
+            <IconButton
+              aria-label="decrease"
+              onClick={decreaseCartProductQuantity}
+            >
+              <RemoveIcon />
+            </IconButton>
+          </Tooltip>
+          <input
+            className={classes.quantityNumber}
+            id={qId}
+            name="quantity"
+            type="number"
+            value={cartQtyInput}
+            onChange={cartQtyInputHandler}
+            onBlur={changeCartProductQuantity}
+          />
+          <Tooltip title="increase">
+            <IconButton
+              aria-label="increase"
+              onClick={increaseCartProductQuantity}
+            >
+              <AddIcon />
+            </IconButton>
+          </Tooltip>
+        </Grid>
+      ):(
+        <Grid item xs={5} sm={3} className={classes.quantityGrid}>
+          <Typography className={classes.outOfStock}>
+            Out of stock
+          </Typography>
+        </Grid>
+      )}
       <Grid item xs={3} sm={1}>
         <Typography className={classes.price}>
-          {matches && "Subtotal: "}${subtotal}
+          {matches && "Subtotal: "}
+$
+          {subtotal.toFixed(2)}
         </Typography>
       </Grid>
       {!matches && (
