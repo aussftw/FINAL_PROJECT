@@ -2,6 +2,9 @@ import { makeStyles } from "@material-ui/core";
 import theme from "../../theme";
 
 const useStyles = makeStyles({
+  wrapper: {
+    display: "inline-flex"
+  },
   btn: {
     fontSize: "14px",
     letterSpacing: "0,5px",
@@ -18,8 +21,14 @@ const useStyles = makeStyles({
     color: "black",
   },
   icon: {
-    color: "black",
     fontSize: "24px",
+  },
+  span: {
+    display: "none",
+    [theme.breakpoints.up("md")]: {
+      display: "inline-flex",
+      alignItems: "center",
+    },
   },
 });
 

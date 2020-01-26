@@ -19,9 +19,6 @@ export const getWishlist = () => dispatch => {
   axios
     .get("/api/wishlist")
     .then(res => {
-      if (!res.data) {
-        return;
-      }
       dispatch(getWishlistSuccess(res.data));
     })
     .catch(err => {

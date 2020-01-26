@@ -1,19 +1,12 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import LoginContent from "./LoginContent";
 import { logIn } from "../../store/actions/loginActions";
 
-// eslint-disable-next-line no-shadow
-const LoginForm = ({ logIn, isAuthenticated, error }) => {
+const LoginForm = ({ logIn, isAuthenticatedUser, error }) => {
   const [open, setOpen] = useState(true);
-  const [showPassword, setShowPassword] = useState(false);
-  const [user, setValues] = useState({
-    loginOrEmail: "",
-    password: "",
-  });
-
-  // eslint-disable-next-line no-shadow
+  const history = useHistory();
   const handleError = error => {
     if (error.response.data.loginOrEmail) {
       return error.response.data.loginOrEmail;
@@ -28,16 +21,7 @@ const LoginForm = ({ logIn, isAuthenticated, error }) => {
     setOpen(false);
   };
 
-  const handleChange = prop => event => {
-    setValues({ ...user, [prop]: event.target.value });
-  };
-
-  const handleClickShowPassword = () => {
-    setShowPassword(() => !showPassword);
-  };
-
-  // eslint-disable-next-line no-shadow
-  const submitLogin = e => {
+  const submitLogin = (e, user) => {
     e.preventDefault();
     logIn(user);
   };
@@ -46,22 +30,18 @@ const LoginForm = ({ logIn, isAuthenticated, error }) => {
     <>
       {/* eslint-disable-next-line no-nested-ternary */}
       {open ? (
-        isAuthenticated ? (
-          <Redirect to="/" />
+        isAuthenticatedUser ? (
+          history.goBack()
         ) : (
           <LoginContent
             handleOpen={handleOpen}
             submitLogin={submitLogin}
-            handleChange={handleChange}
-            handleClickShowPassword={handleClickShowPassword}
             open={open}
-            user={user}
-            showPassword={showPassword}
             message={error !== "" ? handleError(error) : ""}
           />
         )
       ) : (
-        <Redirect to="/" />
+        history.goBack()
       )}
     </>
   );
@@ -69,7 +49,7 @@ const LoginForm = ({ logIn, isAuthenticated, error }) => {
 
 const mapStateToProps = state => {
   return {
-    isAuthenticated: state.loginReducer.isAuthenticated,
+    isAuthenticatedUser: state.loginReducer.isAuthenticated,
     error: state.loginReducer.error,
   };
 };

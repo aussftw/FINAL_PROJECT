@@ -13,36 +13,58 @@ const SearchResultsPage = ({ searchResult }) => {
     <Container className={classes.container} maxWidth="xl">
       {searchResult.length > 0 ? (
         <>
-          {searchResult.map(product => {
+          {searchResult.map(value => {
             return (
-              <ItemCard
-                key={product._id}
-                title={product.name}
-                rate={product.rate.rating}
-                price={product.currentPrice}
-                img={product.imageUrls[0]}
-                inCart={false}
-                inWishList={false}
-              />
+              <>
+                <Link to={value.productUrl}>
+                  <ItemCard
+                    key={`card-key-${value._id}`}
+                    id={value._id}
+                    itemNo={value.itemNo}
+                    title={value.name}
+                    rate={value.rate.rating}
+                    price={value.currentPrice}
+                    img={value.imageUrls[0]}
+                    stock={value.quantity}
+                  />
+                </Link>
+              </>
             );
           })}
+          <Typography
+            variant="h6"
+            className={classes.message}
+            component={Link}
+            to="/shop"
+          >
+            Continue shopping
+          </Typography>
         </>
       ) : (
         <>
-          <Typography align="center" variant="h6" className={classes.message}>
+          <Typography
+            variant="h6"
+            className={classes.message}
+            component={Link}
+            to="/"
+          >
             Sorry, no results
           </Typography>
-          <Typography align="center" variant="h6" className={classes.message}>
-            Go to&nbsp;
-            <Link to="/shop" className={classes.link}>
-              shop
-            </Link>
+          <Typography
+            variant="h6"
+            className={classes.message}
+            component={Link}
+            to="/shop"
+          >
+            Go to shop
           </Typography>
-          <Typography align="center" variant="h6" className={classes.message}>
-            Go to&nbsp;
-            <Link to="/" className={classes.link}>
-              Plantly&apos;s home page
-            </Link>
+          <Typography
+            variant="h6"
+            className={classes.message}
+            component={Link}
+            to="/"
+          >
+            Go to Plantly&apos;s home page
           </Typography>
         </>
       )}
