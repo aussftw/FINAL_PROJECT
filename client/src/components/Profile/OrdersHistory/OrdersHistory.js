@@ -5,7 +5,9 @@ import v4 from "uuid";
 import Container from "@material-ui/core/Container";
 import { Typography } from "@material-ui/core";
 // import jwt from "jwt-decode";
+
 import OrdersHistoryCard from "./OrdersHistoryCard/OrdersHistoryCard";
+import PreloaderAdaptive from "../../Preloader/Adaptive";
 import useStyles from "./useStyles";
 
 const OrdersHistory = () =>
@@ -13,6 +15,7 @@ const OrdersHistory = () =>
   {
     const classes = useStyles();
     const [message, setMessage] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
     // const token = localStorage.getItem("authToken");
     // console.log(jwt(token).id);
 
@@ -43,44 +46,48 @@ const OrdersHistory = () =>
     // createOrder();
 
     useEffect(() => {
+      setIsLoading(true);
       axios
         .get("/api/orders")
         .then(ordered => {
-          console.log(ordered);
+          setIsLoading(false);
           if (!ordered) {
             return;
           }
           setOrders(ordered.data);
         })
         .catch(error => {
+          setIsLoading(false);
           setMessage(`Error: ${error.message}`);
         });
     }, []);
 
-    return (
-      <Container className={classes.ordersContainer} maxWidth="lg">
-        <Typography className={classes.title}>Orders history</Typography>
-        {orders.length > 0 ? (
-          <div className={classes.root}>
-            {orders.map(item => {
-              return (
-                <OrdersHistoryCard
-                  key={v4()}
-                  orderNo={item.orderNo}
-                  date={item.date.slice(0, 10)}
-                  status={item.status}
-                  totalSum={item.totalSum}
-                  products={item.products}
-                />
-              );
-            })}
-          </div>
-        ) : (
-          <Typography className={classes.message}>You do not have orders</Typography>
-        )}
-        {Boolean(message) && <Typography className={classes.message}>{message}</Typography>}
-      </Container>
-    );
+    return ( isLoading ? (
+      <PreloaderAdaptive />
+      ) : (
+        <Container className={classes.ordersContainer} maxWidth="lg">
+          <Typography className={classes.title} variant="h3">Orders history</Typography>
+          {orders.length > 0 ? (
+            <div className={classes.root}>
+              {orders.map(item => {
+            return (
+              <OrdersHistoryCard
+                key={v4()}
+                orderNo={item.orderNo}
+                date={item.date.slice(0, 10)}
+                status={item.status}
+                totalSum={item.totalSum}
+                products={item.products}
+              />
+            );
+          })}
+            </div>
+          ) : (
+            <Typography className={classes.message}>You do not have orders</Typography>
+          )}
+          {Boolean(message) && <Typography className={classes.message}>{message}</Typography>}
+        </Container>
+    ));
   };
 
 const mapStateToProps = state => {
