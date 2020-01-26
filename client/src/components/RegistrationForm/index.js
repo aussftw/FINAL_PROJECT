@@ -74,6 +74,7 @@ const RegistrationForm = () => {
     setShowPassword(() => !showPassword);
   };
 
+
   useEffect(() => {
     if (submitRegistration) {
       const user = updateUser();
