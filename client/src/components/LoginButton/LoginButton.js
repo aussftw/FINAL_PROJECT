@@ -8,23 +8,13 @@ import { logOut } from "../../store/actions/loginActions";
 import { wishlistLogOut } from "../../store/actions/wishlist";
 import { clearCart } from "../../store/actions/сart";
 import useStyles from "./useStyles";
-// import setAuthToken from "../common/setAuthToken";
 
-// eslint-disable-next-line no-shadow
+
 const LoginButton = ({
   isAuthenticated,
   user,
-  // logOut, wishlistLogOut, clearCart
 }) => {
   const classes = useStyles();
-
-  // const signOut = e => {
-  //   e.preventDefault();
-  //   setAuthToken(false);
-  //   logOut();
-  //   wishlistLogOut();
-  //   clearCart();
-  // };
 
   return (
     <>
@@ -37,14 +27,6 @@ const LoginButton = ({
               <AccountCircle />
             </IconButton>
           </Link>
-          {/* <Button */}
-          {/* className={classes.btn} */}
-          {/* variant="outlined" */}
-          {/* type="button" */}
-          {/* onClick={signOut} */}
-          {/* > */}
-          {/* Sign Out */}
-          {/* </Button> */}
         </>
       ) : (
         <Link to="/login" className={classes.link}>
