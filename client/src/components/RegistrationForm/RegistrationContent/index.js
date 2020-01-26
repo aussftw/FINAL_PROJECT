@@ -38,7 +38,7 @@ const RegistrationContent = ({
     >
       <Fade in={open}>
         <div className={classes.paper}>
-          <ModalHeader />
+          <ModalHeader login={false} reg />
           <div className={classes.wrapper}>
             <h3 className={classes.title}>Registration Form</h3>
             <ValidatorForm

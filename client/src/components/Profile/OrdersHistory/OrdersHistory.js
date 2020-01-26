@@ -76,9 +76,7 @@ const OrdersHistory = () =>
             })}
           </div>
         ) : (
-          <Typography className={classes.message} component="p">
-            You do not have orders
-          </Typography>
+          <Typography className={classes.message}>You do not have orders</Typography>
         )}
         {Boolean(message) && <Typography className={classes.message}>{message}</Typography>}
       </Container>

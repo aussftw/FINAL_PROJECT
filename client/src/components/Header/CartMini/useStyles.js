@@ -12,7 +12,7 @@ const useStyles = makeStyles(theme => ({
     borderColor: theme.palette.secondary.light,
     borderRadius: 5,
     zIndex: 10,
-    color: "#707070",
+    color: theme.palette.secondary.medium,
     boxShadow: "2px 2px 11px rgba(0,0,0,0.1)",
   },
   mini_cart_list: {
@@ -40,6 +40,7 @@ const useStyles = makeStyles(theme => ({
     fontSize: 13,
   },
   subtotal: {
+    color: theme.palette.secondary.medium,
     fontWeight: 700,
   },
   subtotal_price: {
