@@ -36,7 +36,6 @@ import {
 
 import useStyles from "./useStyles";
 
-// eslint-disable-next-line
 const ItemDetails = ({
   wishlistAll,
   addWishlistItem,
@@ -62,7 +61,7 @@ const ItemDetails = ({
         setItem(response.data);
         setPreloader(false);
         // eslint-disable-next-line
-        // console.log(response.data);
+        console.log(response.data);
       })
 
       .catch(error => {
@@ -73,10 +72,9 @@ const ItemDetails = ({
 
   // helpers
 
-  // eslint-disable-next-line
-  const CardTooltipText = rating => {
-    if (item.rate.rating === undefined) return "Not yet rated";
-    return `Rated ${item.rating} out of 5`;
+  const CardTooltipText = rate => {
+    if (rate.rating === undefined) return "Not yet rated";
+    return `Rated ${rate.rating} out of 5`;
   };
 
   const upperName = string => {
@@ -93,14 +91,16 @@ const ItemDetails = ({
     sizes,
     rate,
     currentPrice,
-    // eslint-disable-next-line
     _id,
     // previousPrice,
     description,
+    quantity,
   } = item;
 
+  console.log(item);
+
   const addItemToCart = () => {
-    addCartItem(item._id, item.ItemNo);
+    addCartItem(item._id, item.itemNo);
   };
 
   const handleAddtemToWishlist = () => {
@@ -113,7 +113,7 @@ const ItemDetails = ({
 
   return (
     <Container className={classes.brandsContaier} maxWidth="lg">
-      {preloader && PreloaderAdaptive}
+      {preloader && <PreloaderAdaptive />}
       <Box className={classes.detailsHeader}>
         <Link href="/#" className={classes.linkIcon}>
           <HomeIcon style={{ fontSize: "30px", color: "black" }} />
@@ -174,7 +174,7 @@ const ItemDetails = ({
             <Box className={classes.rating}>
               <Rating
                 name="size-medium"
-                value={rate}
+                value={rate.rating}
                 size="medium"
                 precision={0.5}
                 emptyIcon={
@@ -205,21 +205,19 @@ const ItemDetails = ({
           <Box className={classes.buttonsBar}>
             <Button
               className={classes.actionButton}
-              // eslint-disable-next-line
               onClick={addItemToCart}
-              variant="contained"
+              disabled={!(quantity > 0)}
+              variant={quantity > 0 ? " contained" : "text"}
             >
               Add to cart
             </Button>
             <Button aria-label="Add to wishlist" variant="contained">
               {!wishlistAll.every(el => el._id !== _id) ? (
                 <FavoriteSharpIcon
-                  // eslint-disable-next-line
                   onClick={() => deleteWishlistItem(_id)}
                 />
               ) : (
                 <FavoriteBorderSharpIcon
-                  // eslint-disable-next-line
                   onClick={handleAddtemToWishlist}
                 />
               )}
