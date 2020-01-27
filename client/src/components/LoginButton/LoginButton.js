@@ -32,7 +32,6 @@ const LoginButton = ({
         <>
           <span>Welcome, </span>
           <span>{`${user.firstName} ${user.lastName} `}</span>
-
           <Link to="/profile" className={classes.link}>
             <IconButton>
               <AccountCircle />

@@ -1,18 +1,40 @@
 import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
 
-const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
+const useStyles = makeStyles(() => ({
+    table: {
+      listStyle: "none",
+      display: "flex",
+      width: "15%",
+      margin: "20px 30%",
+    },
+    tableItem: {
+      border: "1px solid green",
+      padding: "5px 12px",
+    },
+    itemLink: {
+      textDecoration: "none",
+      color: "black",
+      fontWeight: 500,
+    }
+
+  })
+);
+const Pagination = ({ productsPerPage, totalProducts, paginate }) => {
+  const classes = useStyles();
+  
   const pageNumbers = [];
-
-  for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i += 1) {
+  
+  for (let i = 1; i <= Math.ceil(totalProducts / productsPerPage); i += 1) {
     pageNumbers.push(i);
   }
   return (
     <nav>
-      <ul>
+      <ul className={classes.table}>
         {pageNumbers.map(number => (
-          <li key={number}>
+          <li className={classes.tableItem} key={number}>
             {/* eslint-disable-next-line */}
-            <a onClick={() => paginate(number)} href="#">
+            <a className={classes.itemLink} onClick={() => paginate(number)} href="#">
               {number}
             </a>
           </li>
