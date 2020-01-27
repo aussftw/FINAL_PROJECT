@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import * as axios from "axios";
 
 import AliceCarousel from "react-alice-carousel";
 import "react-alice-carousel/lib/alice-carousel.css";
@@ -11,7 +10,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import useStyles from "./useStyles";
 import Preloader from "../Preloader/Desktop";
 
-const ProductCarousel = () => {
+const LastViewCarousel = ({ lastView }) => {
   const classes = useStyles();
   const [productsL, setProductsL] = useState(null);
 
@@ -37,22 +36,30 @@ const ProductCarousel = () => {
         autoPlayInterval={1800}
         duration={600}
       >
-        {productsL.slice(0, 8).map(value => {
-          return (
-            <ItemCard
-              id={value._id}
-              itemNo={value.itemNo}
-              title={value.name}
-              rate={value.rate.rating}
-              price={value.currentPrice}
-              img={value.imageUrls[0]}
-              stock={value.quantity}
-            />
-          );
-        })}
+        {lastView
+          ? lastView.slice(0, 8).map(value => {
+              return (
+                <ItemCard
+                  id={value._id}
+                  itemNo={value.itemNo}
+                  title={value.name}
+                  rate={value.rate.rating}
+                  price={value.currentPrice}
+                  img={value.imageUrls[0]}
+                  stock={value.quantity}
+                />
+              );
+            })
+          : console.log("NOPE")}
       </AliceCarousel>
     </Container>
   );
 };
 
-export default ProductCarousel;
+function mapStateToProps(state) {
+  return {
+    lastView: state.lastViewReducer.lastView,
+  };
+}
+
+export default LastViewCarousel;
