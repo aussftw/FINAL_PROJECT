@@ -13,6 +13,7 @@ import MainCarousel from "../../components/MainCarousel";
 import Subscribe from "../../components/Subscribe/Subscribe";
 import Navigation from "../../views/Navigation/Navigation";
 import ProductCarousel from "../../components/ProductCarousel";
+import LastViewCarousel from "../../components/LastView";
 
 function HomePage() {
   return (
@@ -20,6 +21,7 @@ function HomePage() {
       <BackToTop />
       <Header />
       <SubHeader />
+        <LastViewCarousel />
       <MainCarousel />
       <TopRated />
       <TilesContainer />

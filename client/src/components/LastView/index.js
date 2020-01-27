@@ -9,55 +9,51 @@ import ItemCard from "../ItemCard/ItemCard";
 
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import useStyles from "./useStyles";
+import RenderCards from "./renderCards";
 import {connect} from "react-redux";
 import {addToLastView} from "../../store/actions/addToLastView";
 
 
 
 const LastViewCarousel = ({ lastView }) => {
-  const classes = useStyles();
-  const [productsL, setProductsL] = useState(null);
+  // const classes = useStyles();
+  const [productsLV, setProductsLV] = useState( []);
+  //   const productsLV = [];
+    // lastView = ["148884", "5269"];
 
-  useEffect(() => {}, []);
-  console.log("1234567");
+    console.log(lastView);
+
+    useEffect( () => {
+        if (lastView.length > 0) {
+            const lastViewArr = [];
+            lastView.map(value => {
+                console.log(value);
+                axios
+                    .get(`/api/products/${value}`)
+                    .then(response => {
+                        // setProductsLV(productsLV.concat((response.data)));
+                        lastViewArr.push((response.data));
+                        console.log(lastViewArr);
+                        // let newArray = update(productsLV, {$push: [response.data]});
+                        console.log(response.data);
+                        setProductsLV(lastViewArr);
+                        console.log(productsLV);
+                    })
+                    .catch(err => {
+                        // eslint-disable-next-line no-console
+                        console.log(err);
+                    });
+            })
+        }
+
+    },
+         []);
+
+
 
   return (
-    <Container maxWidth="lg">
-      <h2 className={classes.title}>Last View</h2>
-      <AliceCarousel
-        responsive={{
-          960: {
-            items: 2,
-          },
-          1280: {
-            items: 4,
-          },
-          1960: {
-            items: 4,
-          },
-        }}
-        buttonsDisabled={true}
-        autoPlay={true}
-        autoPlayInterval={1800}
-        duration={600}
-      >
-        {lastView
-          ? lastView.slice(0, 8).map(value => {
-              return (
-                <ItemCard
-                  id={value._id}
-                  itemNo={value.itemNo}
-                  title={value.name}
-                  rate={value.rate.rating}
-                  price={value.currentPrice}
-                  img={value.imageUrls[0]}
-                  stock={value.quantity}
-                />
-              );
-            })
-          : console.log("NOPE")}
-      </AliceCarousel>
-    </Container>
+    <RenderCards
+    productsLV={productsLV} />
   );
 };
 

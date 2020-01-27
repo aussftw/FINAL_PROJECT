@@ -73,7 +73,7 @@ const ItemCard = ({
   };
 
   return (
-    <Card onClick={() => addToLastViewCard(id)} className={classes.card}>
+    <Card onClick={() => addToLastViewCard(itemNo)} className={classes.card}>
       {wishlistAll.some(el => el._id === id) ? (
         <Tooltip arrow title="Remove from wishlist">
           <IconButton
