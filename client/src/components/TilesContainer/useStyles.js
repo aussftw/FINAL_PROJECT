@@ -16,6 +16,10 @@ const useStyles = makeStyles({
     },
     [theme.breakpoints.down('sm')]: {
       display: 'flex',
+      flexWrap: 'nowrap',
+    },
+    [theme.breakpoints.down('xs')]: {
+      display: 'flex',
       flexWrap: 'wrap',
     },
   },

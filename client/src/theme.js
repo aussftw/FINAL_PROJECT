@@ -48,7 +48,7 @@ const theme = createMuiTheme({
         height:"auto"
       },
       tile: {
-        padding: "15px 15px",
+        padding: "0.5em 0.5em",
         height:"auto",
       },
     },
