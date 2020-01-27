@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-// import * as axios from "axios";
+import * as axios from "axios";
 
 import AliceCarousel from "react-alice-carousel";
 import "react-alice-carousel/lib/alice-carousel.css";

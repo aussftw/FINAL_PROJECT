@@ -60,7 +60,7 @@ const WishlistCard = ({
       <Grid item xs={6} sm={3} className={classes.wrapperGrid}>
         <Button
           className={qty > 0 ? classes.btn : classes.disabledBtn}
-          variant={qty > 0 && "outlined"}
+          variant={qty > 0 ? "outlined" : "text"}
           type="button"
           disabled={!(qty > 0)}
           onClick={() => addCartItem(id, itemNo)}

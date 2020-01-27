@@ -35,22 +35,15 @@ const OrdersHistoryCard = ({ orderNo, date, products, totalSum, status }) => {
         <Typography className={classes.order}>{`№ ${orderNo}`}</Typography>
         <Typography className={classes.data}>{date}</Typography>
         {matches && (
-          <img
-            src={products[0].product.imageUrls[0]}
-            className={classes.img}
-            alt={products[0].product.name}
-          />
+          <div className={classes.img_wrapper}>
+            <img src={products[0].product.imageUrls[0]} className={classes.img} alt={products[0].product.name} />
+            {products.length > 1 && (<img src={products[1].product.imageUrls[0]} className={classes.img} alt={products[1].product.name} />)}
+            {products.length > 2 && (<img src={products[2].product.imageUrls[0]} className={classes.img} alt={products[2].product.name} />)}
+            {products.length > 3 && (<Typography className={classes.after_img}>...</Typography>)}
+          </div>
         )}
-        {matches && (
-          <Typography className={classes.data}>{`Total: $${totalSum.toFixed(
-            2
-          )}`}</Typography>
-        )}
-        {equal && (
-          <Typography
-            className={classes.data}
-          >{`Status: ${status}`}</Typography>
-        )}
+        {matches && (<Typography className={classes.data}>{`Total: $${totalSum.toFixed(2)}`}</Typography>)}
+        {equal && (<Typography className={classes.data}>{`Status: ${status}`}</Typography>)}
       </ExpansionPanelSummary>
       <ExpansionPanelDetails className={classes.products}>
         {products.map(item => {
@@ -67,12 +60,8 @@ const OrdersHistoryCard = ({ orderNo, date, products, totalSum, status }) => {
           );
         })}
         <div className={classes.footer}>
-          <Typography
-            className={classes.status}
-          >{`Status: ${status}`}</Typography>
-          <Typography className={classes.total}>{`Total: $${totalSum.toFixed(
-            2
-          )}`}</Typography>
+          <Typography className={classes.status}>{`Status: ${status}`}</Typography>
+          <Typography className={classes.total}>{`Total: $${totalSum.toFixed(2)}`}</Typography>
         </div>
       </ExpansionPanelDetails>
     </ExpansionPanel>
