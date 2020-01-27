@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from "react";
-<<<<<<< HEAD
 // import * as axios from "axios";
-=======
->>>>>>> 6cd93024ea1652903b21b653eca63bbc5465cecc
 
 import AliceCarousel from "react-alice-carousel";
 import "react-alice-carousel/lib/alice-carousel.css";
@@ -12,12 +9,17 @@ import ItemCard from "../ItemCard/ItemCard";
 
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import useStyles from "./useStyles";
+import {connect} from "react-redux";
+import {addToLastView} from "../../store/actions/addToLastView";
+
+
 
 const LastViewCarousel = ({ lastView }) => {
   const classes = useStyles();
   const [productsL, setProductsL] = useState(null);
 
   useEffect(() => {}, []);
+  console.log("1234567");
 
   return (
     <Container maxWidth="lg">
@@ -65,4 +67,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default LastViewCarousel;
+export default connect(mapStateToProps, { getLastViewVar: addToLastView })(LastViewCarousel);

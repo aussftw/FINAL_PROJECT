@@ -27,7 +27,6 @@ import {
   wishlistDeleteItem,
 } from "../../store/actions/wishlist";
 import { addToLastView } from "../../store/actions/addToLastView";
-import LastViewCarousel from "../LastView";
 
 const ItemCard = ({
   id,
@@ -166,7 +165,6 @@ const ItemCard = ({
           }
         />
       </Snackbar>
-      <LastViewCarousel />
     </Card>
   );
 };
