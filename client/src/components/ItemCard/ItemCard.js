@@ -26,6 +26,7 @@ import {
   wishlistAddItem,
   wishlistDeleteItem,
 } from "../../store/actions/wishlist";
+import { addToLastView } from "../../store/actions/addToLastView";
 
 const ItemCard = ({
   id,
@@ -40,6 +41,7 @@ const ItemCard = ({
   addWishlistItem,
   deleteWishlistItem,
   isAuthenticated,
+  addToLastViewCard,
 }) => {
   const classes = useStyles();
   const [snackbarAddToCart, setSnackbarAddToCart] = useState(false);
@@ -69,7 +71,7 @@ const ItemCard = ({
   };
 
   return (
-    <Card className={classes.card}>
+    <Card onClick={() => addToLastViewCard(id)} className={classes.card}>
       {wishlistAll.some(el => el._id === id) ? (
         <Tooltip arrow title="Remove from wishlist">
           <IconButton
@@ -178,4 +180,5 @@ export default connect(mapStateToProps, {
   addWishlistItem: wishlistAddItem,
   deleteWishlistItem: wishlistDeleteItem,
   addCartItem: addItemCart,
+  addToLastViewCard: addToLastView,
 })(ItemCard);
