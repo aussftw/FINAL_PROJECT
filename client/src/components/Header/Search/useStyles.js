@@ -21,7 +21,7 @@ const useStyles = makeStyles(theme => ({
     // backgroundColor: theme.palette.primary.main,
     // color: "white",
     // textDecoration: "none",
-    "&$visited": {
+    "&:visited": {
       backgroundColor: theme.palette.primary.main,
     },
   },
