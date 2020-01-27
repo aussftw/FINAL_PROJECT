@@ -27,7 +27,7 @@ const useStyles = makeStyles(theme => ({
   actionArea: {
     color: theme.palette.primary.main,
     "&:hover $focusHighlight": {
-      opacity: 0,
+      opacity: 0.5,
     },
   },
   focusHighlight: {},

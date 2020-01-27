@@ -7,18 +7,20 @@ const useStyles = makeStyles(theme => ({
     marginBottom: 50,
   },
   slider: {
-    minHeight: 200,
+    // maxHeight: 200,
+    backgroundColor: "#fff",
   },
   block: {
+    backgroundColor: "#fff",
     marginTop: -250,
     width: "50%",
     marginLeft: 33,
-
     [theme.breakpoints.down("sm")]: {
       marginTop: -150,
     },
   },
   paragraph: {
+    backgroundColor: "#fff",
     textAlign: "left",
     color: "#989898",
     [theme.breakpoints.down("xs")]: {
@@ -52,6 +54,16 @@ const useStyles = makeStyles(theme => ({
       height: 30,
     },
   },
+  // carouselBack: {
+  //   // color: theme.palette.primary.main,
+  //   "&$carousel &$slide $legend": {
+  //     backgroundColor: "#f0f",
+  //     // hidden: true,
+  //     // minHeight: 222
+  //   },
+  // },
+  legend: {},
+
 }));
 
 export default useStyles;

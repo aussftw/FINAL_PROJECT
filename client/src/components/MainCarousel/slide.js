@@ -5,12 +5,19 @@ import { Button } from "@material-ui/core";
 import Box from "@material-ui/core/Box";
 
 import useStyles from "./useStyles";
+import {Carousel} from "react-responsive-carousel";
 
 const Slide = ({ image, title, subTitle }) => {
   const classes = useStyles();
 
   return (
-    <div className={classes.slider}>
+    <div
+        className={classes.slider}
+        // classes={{
+        //   root: classes.carouselBack,
+        //   legend: classes.legend,
+        // }}
+    >
       <img className={classes.slider} src={image} alt="slide" />
       <Grid
         container
