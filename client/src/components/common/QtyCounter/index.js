@@ -11,7 +11,6 @@ import {
 import AddSharpIcon from "@material-ui/icons/AddSharp";
 import RemoveSharpIcon from "@material-ui/icons/RemoveSharp";
 import useStyles from "./useStyles";
-import {TextValidator} from "react-material-ui-form-validator";
 
 const QtyCounter = () => {
   const classes = useStyles();

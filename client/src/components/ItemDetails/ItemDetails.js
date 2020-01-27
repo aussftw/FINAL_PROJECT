@@ -7,25 +7,15 @@ import { useParams } from "react-router-dom";
 import { Gallery, GalleryImage } from "react-gesture-gallery";
 
 import axios from "axios";
-import {
-  Container,
-  Typography,
-  Divider,
-  Box,
-  Link,
-  Button,
-  List,
-  ListItem,
-  ListItemText,
-  Tooltip,
-} from "@material-ui/core";
+import { Container, Typography, Divider, Box, Link, Button, IconButton, InputBase, List, ListItem, ListItemText, Tooltip } from "@material-ui/core";
 import HomeIcon from "@material-ui/icons/HomeSharp";
-
 import FavoriteBorderSharpIcon from "@material-ui/icons/FavoriteBorderSharp";
 import StarBorder from "@material-ui/icons/StarBorder";
 import FavoriteSharpIcon from "@material-ui/icons/FavoriteSharp";
+import AddSharpIcon from "@material-ui/icons/AddSharp";
+import RemoveSharpIcon from "@material-ui/icons/RemoveSharp";
 import Rating from "@material-ui/lab/Rating";
-import QtyCounter from "../common/QtyCounter";
+// import QtyCounter from "../common/QtyCounter";
 import PreloaderAdaptive from "../Preloader/Adaptive";
 
 import { addItemCart } from "../../store/actions/сart";
@@ -63,25 +53,16 @@ const ItemDetails = ({
         // eslint-disable-next-line
         console.log(response.data);
       })
-
       .catch(error => {
         // eslint-disable-next-line
         console.log(error);
       });
-  }, [itemNo]);
+  }, [itemNo.id]);
 
   // helpers
-
   const CardTooltipText = rate => {
     if (rate.rating === undefined) return "Not yet rated";
     return `Rated ${rate.rating} out of 5`;
-  };
-
-  const upperName = string => {
-    return string
-      .split(" ")
-      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(" ");
   };
 
   const {
@@ -109,7 +90,27 @@ const ItemDetails = ({
     }
   };
 
-  const title = upperName(name);
+  const [qty, setQty] = useState(1);
+
+  const inc = () => {
+    if (qty < 99) {
+      setQty(qty + 1);
+    }
+  };
+
+  const dec = () => {
+    if (qty > 0 && qty !== 1) {
+      setQty(qty - 1);
+    }
+  };
+
+  const changeQuantity = (e) => {
+    // eslint-disable-next-line no-restricted-globals
+    if (!isNaN(+e.target.value) && e.target.value !== "0" && e.target.value !== "")  {
+      setQty(+e.target.value)
+    }
+  };
+
 
   return (
     <Container className={classes.brandsContaier} maxWidth="lg">
@@ -120,7 +121,7 @@ const ItemDetails = ({
         </Link>
         <Divider orientation="vertical" />
         <Typography variant="h6" className={classes.detailsTitle}>
-          {title}
+          {name}
         </Typography>
       </Box>
       <Box className={classes.detailsBody}>
@@ -144,7 +145,7 @@ const ItemDetails = ({
         </Container>
         <Box className={classes.infoContainer}>
           <Typography variant="h6" className={classes.infoTitle}>
-            {title}
+            {name}
           </Typography>
           <Divider variant="middle" />
           <List>
@@ -158,14 +159,12 @@ const ItemDetails = ({
             <ListItem className={classes.root}>
               <ListItemText className={classes.infoDetail} primary="Color:" />
               <Typography className={classes.infoDetailValue}>
-                {/* eslint-disable-next-line */}
                 {color}
               </Typography>
             </ListItem>
             <ListItem className={classes.root}>
               <ListItemText className={classes.infoDetail} primary="Size:" />
               <Typography className={classes.infoDetailValue}>
-                {/* eslint-disable-next-line */}
                 {sizes}
               </Typography>
             </ListItem>
@@ -200,18 +199,38 @@ const ItemDetails = ({
             </ListItem>
           </List>
           <Divider variant="middle" />
-          <QtyCounter />
+          <Container className={classes.qty_wrapper}>
+            <Typography> Qty:</Typography>
+            <Box>
+              <IconButton aria-label="Less" onClick={() => dec()}>
+                <RemoveSharpIcon />
+              </IconButton>
+              <InputBase
+                className={classes.input}
+                onChange={e => changeQuantity(e)}
+                value={qty}
+                type="tel"
+                inputProps={{
+                  maxLength: 2,
+                  pattern: "[0-9]",
+                }}
+              />
+              <IconButton aria-label="More" onClick={() => inc()}>
+                <AddSharpIcon />
+              </IconButton>
+            </Box>
+          </Container>
           <Divider variant="middle" />
           <Box className={classes.buttonsBar}>
             <Button
               className={classes.actionButton}
               onClick={addItemToCart}
               disabled={!(quantity > 0)}
-              variant={quantity > 0 ? " contained" : "text"}
+              variant={quantity > 0 ? "contained" : "text"}
             >
               Add to cart
             </Button>
-            <Button aria-label="Add to wishlist" variant="contained">
+            <Button className={classes.actionButton} aria-label="Add to wishlist" variant="contained">
               {!wishlistAll.every(el => el._id !== _id) ? (
                 <FavoriteSharpIcon
                   onClick={() => deleteWishlistItem(_id)}
