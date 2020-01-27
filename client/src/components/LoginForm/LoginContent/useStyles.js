@@ -53,7 +53,16 @@ const useStyles = makeStyles({
     border: `5px solid ${theme.palette.primary.main}`,
     borderRadius: "8px",
     boxShadow: theme.shadows[5],
-    width: "40vw",
+    maxWidth: "40vw",
+    [theme.breakpoints.down("lg")]:{
+      maxWidth: "50vw",
+    },
+    [theme.breakpoints.down("md")]:{
+      maxWidth: "70vw",
+    },
+    [theme.breakpoints.down("xs")]:{
+      maxWidth: "90vw",
+    },
   },
   errMsg: {
     fontSize: "24px",

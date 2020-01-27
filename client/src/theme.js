@@ -45,9 +45,11 @@ const theme = createMuiTheme({
     MuiGridListTile: {
       root: {
         position: "relative",
+        height:"auto"
       },
       tile: {
-        padding: "0 15px",
+        padding: "0.5em 0.5em",
+        height:"auto",
       },
     },
 
