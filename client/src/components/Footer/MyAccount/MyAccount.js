@@ -24,7 +24,7 @@ const MyAccount = () => {
       <Hidden mdUp>
         <ExpansionPanel className={classes.mainContainer}>
           <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-            <Typography className={classes}>MY ACCOUNT</Typography>
+            <Typography>MY ACCOUNT</Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
             <Link color="secondary" to="/">

@@ -51,7 +51,7 @@ export default function ChangePasswordForm() {
 
   return (
     <div>
-      <Typography className={classes.title}>Password change</Typography>
+      <Typography className={classes.title} variant="h3">Password change</Typography>
       <div className={classes.root}>
         <ValidatorForm
           className={classes.form}

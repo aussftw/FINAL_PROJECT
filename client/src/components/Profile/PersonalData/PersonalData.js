@@ -37,7 +37,7 @@ function PersonalData({
 
   return (
     <div>
-      <Typography className={classes.title}>Personal details</Typography>
+      <Typography className={classes.title} variant="h3">Personal details</Typography>
       <div className={classes.root}>
         <ValidatorForm
           className={classes.form}
