@@ -3,7 +3,7 @@ import { lightGreen, grey } from "@material-ui/core/colors";
 
 const theme = createMuiTheme({
   typography: {
-    titleBlock: {
+    h3: {
       fontSize: 22,
       fontWeight: 700,
       marginBottom: 30,
