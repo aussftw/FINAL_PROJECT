@@ -28,6 +28,7 @@ import {
   wishlistAddItem,
   wishlistDeleteItem,
 } from "../../store/actions/wishlist";
+import { addToLastView } from "../../store/actions/addToLastView";
 
 const ItemCard = ({
   id,
@@ -42,14 +43,15 @@ const ItemCard = ({
   addWishlistItem,
   deleteWishlistItem,
   isAuthenticated,
+  addToLastViewCard,
 }) => {
   const classes = useStyles();
   const [snackbarAddToCart, setSnackbarAddToCart] = useState(false);
 
   const CardTooltipText = value => {
-    if (value === undefined) return "Not yet rated";
+    if (value === undefined || value === 0) return "not yet rated";
 
-    return `Rated ${value.toFixed(2)} out of 5`;
+    return `rated ${value.toFixed(2)} out of 5`;
   };
 
   const addItemToCart = () => {
@@ -71,7 +73,7 @@ const ItemCard = ({
   };
 
   return (
-    <Card className={classes.card}>
+    <Card onClick={() => addToLastViewCard(id)} className={classes.card}>
       {wishlistAll.some(el => el._id === id) ? (
         <Tooltip arrow title="Remove from wishlist">
           <IconButton
@@ -181,4 +183,5 @@ export default connect(mapStateToProps, {
   addWishlistItem: wishlistAddItem,
   deleteWishlistItem: wishlistDeleteItem,
   addCartItem: addItemCart,
+  addToLastViewCard: addToLastView,
 })(ItemCard);
