@@ -1,17 +1,17 @@
 import React from "react";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 import Slider from "@material-ui/core/Slider";
-import { connect } from "react-redux";
 import theme from "../../../theme";
 
 import {
   selectPrice,
   setCurrentPage 
 } from "../../../store/actions/Filters";
+import { connect } from "react-redux";
 
 const useStyles = makeStyles(() => ({
   rootMain: {
-    width: "180%",
+    width: "100%",
     maxWidth: 300,
     paddingTop: 8,
     backgroundColor: theme.palette.background.paper,
@@ -76,28 +76,15 @@ const PrettoSlider = withStyles({
   },
 })(Slider);
 
-
-
 const FilterByPrice = ({selectPrice,setCurrentPage }) => {
   const classes = useStyles();
 
   // eslint-disable-next-line no-unused-vars
-  
   const ValueByPrice = (event, item) => {
     setCurrentPage(1)
     selectPrice(item);
   };
   
-//   const [value, setValue] = React.useState([20, 120]);
-
-//   const handleChange = (event, newValue) => {
-//     setValue(newValue);  
-//   };
-
-//   function valuetext(value) {
-//   return `${value}°C`;
-// }
-
   return (
     <div className={classes.container}>
       <div className={classes.rootMain}>
@@ -112,14 +99,6 @@ const FilterByPrice = ({selectPrice,setCurrentPage }) => {
           defaultValue={50}
           max={120}
         />
-        {/* <PrettoSlider
-        value={value}
-        onChange={handleChange}
-        valueLabelDisplay="auto"
-        aria-labelledby="range-slider"
-       getAriaValueText={valuetext}
-      /> */}
-       
       </div>
     </div>
   );
