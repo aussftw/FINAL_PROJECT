@@ -178,8 +178,7 @@ const ItemDetails = ({
             <ListItem className={classes.root}>
               <ListItemText primary="Price:" className={classes.infoDetail} />
               <Typography className={classes.currentPrice}>
-                {/* eslint-disable-next-line */}
-                {currentPrice}$
+                {`$${currentPrice}`}
               </Typography>
             </ListItem>
           </List>
@@ -232,7 +231,6 @@ const ItemDetails = ({
 
       <Box className={classes.detailsDescription}>
         <span className={classes.descriptionTitle}>Description: </span>
-        {/* eslint-disable-next-line */}
         <Typography className={classes.descriptionText}>
           {description}
         </Typography>
