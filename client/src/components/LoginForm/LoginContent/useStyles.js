@@ -53,15 +53,15 @@ const useStyles = makeStyles({
     border: `5px solid ${theme.palette.primary.main}`,
     borderRadius: "8px",
     boxShadow: theme.shadows[5],
-    maxWidth: "40vw",
+    width: "40vw",
     [theme.breakpoints.down("lg")]:{
-      maxWidth: "50vw",
+      width: "50vw",
     },
     [theme.breakpoints.down("md")]:{
-      maxWidth: "70vw",
+      width: "70vw",
     },
     [theme.breakpoints.down("xs")]:{
-      maxWidth: "90vw",
+      width: "90vw",
     },
   },
   errMsg: {
