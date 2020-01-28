@@ -16,7 +16,7 @@ const RatingModule = ({id, rate, isAuthenticated}) => {
     const cardTooltipText = () => {
         if (!voted) { return "please rate this product" }
         if (rating === undefined || rating === 0) { return "not yet rated" }
-        return `rated ${rating.toFixed(2)} out of 5`;
+        return (`rated ${rating.toFixed(2)} out of 5`);
     };
 
     const ratingHandler = (event) => {

@@ -3,7 +3,7 @@ import { lightGreen, grey } from "@material-ui/core/colors";
 
 const theme = createMuiTheme({
   typography: {
-    titleBlock: {
+    h3: {
       fontSize: 22,
       fontWeight: 700,
       marginBottom: 30,
@@ -85,9 +85,9 @@ const theme = createMuiTheme({
         fontWeight: 600,
       },
       text: {
-        color: grey[900],
+        color: grey[700],
         "&:hover": {
-          color: lightGreen[700],
+          color: lightGreen[900],
           backgroundColor: lightGreen[100],
         },
       },
@@ -96,6 +96,13 @@ const theme = createMuiTheme({
         backgroundColor: lightGreen[700],
         "&:hover": {
           backgroundColor: lightGreen[900],
+        },
+      },
+      outlined: {
+        color: lightGreen[700],
+        "&:hover": {
+          color: lightGreen[900],
+          backgroundColor: lightGreen[100]
         },
       },
     },
