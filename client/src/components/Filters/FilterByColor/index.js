@@ -7,13 +7,14 @@ import ListItem from "@material-ui/core/ListItem";
 import { green } from "@material-ui/core/colors";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
-import { connect } from "react-redux";
 import { useStyles } from "./useStyles";
+
 import { setCurrentPage ,
   getColors,
   selectColor,
   removeColor,
 } from "../../../store/actions/Filters";
+import { connect } from "react-redux";
 
 
 
@@ -32,8 +33,10 @@ const GreenCheckbox = withStyles({
 const FilterByColor = ({ filters, colorListing, getColors,
   selectColor,
   removeColor,
-setCurrentPage }) => {
+  setCurrentPage }) => {
+
   const classes = useStyles();
+  
   useEffect(() => {
     getColors();
     // eslint-disable-next-line
