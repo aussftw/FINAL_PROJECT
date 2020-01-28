@@ -190,18 +190,21 @@ exports.actualizationProducts = async (req, res, next) => {
     return {"_id": value}
   });
 
-  Product.find(
-      {$or: query}
-      )
-      .then(product => {
-        if (!product) {
+  Product.find({$or: query})
+      .then(products => {
+        if (!products) {
           res.status(400).json({
             message: `Products is not found`
           });
         } else {
-          res.json(product);
+          res.json(products);
         }
-      });
+      })
+      .catch(err =>
+      res.status(400).json({
+        message: `Error happened on server: "${err}" `
+      })
+  );
 };
 
 exports.getTopRatedProducts = (req, res, next) => {
