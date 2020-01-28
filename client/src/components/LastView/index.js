@@ -10,51 +10,43 @@ import ItemCard from "../ItemCard/ItemCard";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import useStyles from "./useStyles";
 import RenderCards from "./renderCards";
-import {connect} from "react-redux";
-import {addToLastView} from "../../store/actions/addToLastView";
-
-
+import { connect } from "react-redux";
+import { addToLastView } from "../../store/actions/addToLastView";
 
 const LastViewCarousel = ({ lastView }) => {
   // const classes = useStyles();
-  const [productsLV, setProductsLV] = useState( []);
+  const [productsLV, setProductsLV] = useState([]);
   //   const productsLV = [];
-    // lastView = ["148884", "5269"];
+  // lastView = ["148884", "5269"];
 
-    console.log(lastView);
+  console.log("lastViewInComponent", lastView);
 
-    useEffect( () => {
-        if (lastView.length > 0) {
-            const lastViewArr = [];
-            lastView.map(value => {
-                console.log(value);
-                axios
-                    .get(`/api/products/${value}`)
-                    .then(response => {
-                        // setProductsLV(productsLV.concat((response.data)));
-                        lastViewArr.push((response.data));
-                        console.log(lastViewArr);
-                        // let newArray = update(productsLV, {$push: [response.data]});
-                        console.log(response.data);
-                        setProductsLV(lastViewArr);
-                        console.log(productsLV);
-                    })
-                    .catch(err => {
-                        // eslint-disable-next-line no-console
-                        console.log(err);
-                    });
-            })
-        }
+  useEffect(() => {
+    if (lastView.length > 0) {
+      const lastViewArr = [];
+      lastView.map(value => {
+        console.log("value", value);
+        axios
+          .get(`/api/products/${value}`)
+          .then(response => {
+            // setProductsLV(productsLV.concat((response.data)));
+            lastViewArr.push(response.data);
+            console.log("lastViewArr", lastViewArr);
+            // let newArray = update(productsLV, {$push: [response.data]});
 
-    },
-         []);
+            // setProductsLV(lastViewArr);
+            setProductsLV([...productsLV, ...lastViewArr]);
+            console.log("productsLV", productsLV);
+          })
+          .catch(err => {
+            // eslint-disable-next-line no-console
+            console.log(err);
+          });
+      });
+    }
+  }, [lastView]);
 
-
-
-  return (
-    <RenderCards
-    productsLV={productsLV} />
-  );
+  return <RenderCards productsLV={productsLV} />;
 };
 
 function mapStateToProps(state) {
@@ -63,4 +55,6 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { getLastViewVar: addToLastView })(LastViewCarousel);
+export default connect(mapStateToProps, { getLastViewVar: addToLastView })(
+  LastViewCarousel
+);

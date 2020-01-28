@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
 
 import { Gallery, GalleryImage } from "react-gesture-gallery";
+import LastViewCarousel from "../LastView";
 
 import axios from "axios";
 import {
@@ -227,7 +228,6 @@ const ItemDetails = ({
           </Box>
         </Box>
       </Box>
-
       <Box className={classes.detailsDescription}>
         <span className={classes.descriptionTitle}>Description: </span>
         {/* eslint-disable-next-line */}
@@ -235,6 +235,7 @@ const ItemDetails = ({
           {description}
         </Typography>
       </Box>
+      <LastViewCarousel />
     </Container>
   );
 };
