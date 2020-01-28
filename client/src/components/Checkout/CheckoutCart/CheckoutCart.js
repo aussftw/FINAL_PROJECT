@@ -4,11 +4,9 @@ import v4 from "uuid";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import {Link} from "react-router-dom";
+import Button from "@material-ui/core/Button";
 import CheckoutCartCard from "./CheckoutCartCard/CheckoutCartCard";
 import useStyles from "./useStyles";
-import Button from "@material-ui/core/Button";
-import {ValidatorForm} from "react-material-ui-form-validator";
-
 
 const CheckoutCart = ( {cart} ) => {
   const classes = useStyles();
@@ -24,7 +22,7 @@ const CheckoutCart = ( {cart} ) => {
           return sum + current.product.currentPrice * cartQty;
         }, 0)
         .toFixed(2)
-      : 0;
+      : "0,00";
 
   function numberWithCommas(x) {
     const parts = x.toString().split(".");
