@@ -5,7 +5,6 @@ const initialState = {
   categoryListing: [],
   colorListing: [],
   sizeListing: [],
-  isProductListing: false,
   filters: {
     color: undefined,
     sizes: undefined,
@@ -18,23 +17,10 @@ const initialState = {
 function filterReducer(state = initialState, action) {
   switch (action.type) {
     // Action на получение фильтров с бэка
-    case constants.SEND_PRODUCT_REQUEST:
-      return {
-        ...state,
-        isProductListing: false,
-      };
-
     case constants.GET_PRODUCT_LISTING:
       return {
         ...state,
         productListing: action.payload,
-        isProductListing: true,
-      };
-
-    case constants.SEND_GET_CATEGORY_LISTING:
-      return {
-        ...state,
-        isProductListing: true,
       };
 
     case constants.GET_CATEGORY_LISTING:
@@ -43,22 +29,10 @@ function filterReducer(state = initialState, action) {
         categoryListing: action.payload,
       };
 
-    case constants.SEND_GET_COLOR_LISTING:
-      return {
-        ...state,
-        isProductListing: !true,
-      };
-
     case constants.GET_COLOR_LISTING:
       return {
         ...state,
         colorListing: action.payload,
-      };
-
-    case constants.SEND_GET_SIZE_LISTING:
-      return {
-        ...state,
-        isProductListing: true,
       };
 
     case constants.GET_SIZE_LISTING:

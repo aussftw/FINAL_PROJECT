@@ -9,12 +9,12 @@ import Container from "@material-ui/core/Container";
 import ItemCard from "../ItemCard/ItemCard";
 
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import useStyles from "./useStyles";
+// import useStyles from "./useStyles";
 import Preloader from "../Preloader/Desktop";
 
 
 const ProductCarousel = () => {
-    const classes = useStyles();
+    // const classes = useStyles();
     const [productsV, setProductsV] = useState(null);
 
     useEffect(() => {

@@ -52,9 +52,6 @@ const useStyles = makeStyles(theme => ({
   rating: {
     paddingBottom: theme.spacing(1),
     color: theme.palette.primary.main,
-    iconEmpty: {
-      color: theme.palette.primary.main,
-    },
   },
   price: {
     fontSize: 14,

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { connect } from "react-redux";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import Grid from "@material-ui/core/Grid";
@@ -99,9 +99,7 @@ const ProductCart = ({
       </Grid>
       <Grid item xs={3} sm={1}>
         <Typography className={classes.price}>
-          {matches && "Price: "}
-$
-          {price.toFixed(2)}
+          {matches && "Price: "}${price.toFixed(2)}
         </Typography>
       </Grid>
       {matches && (
@@ -113,17 +111,24 @@ $
           </Tooltip>
         </Grid>
       )}
-      {matches && (<Grid item xs={3} />)}
+      {matches && <Grid item xs={3} />}
       {shopQty > 0 ? (
         <Grid item xs={5} sm={3} className={classes.quantityGrid}>
-          <Tooltip title="decrease">
-            <IconButton
-              aria-label="decrease"
-              onClick={decreaseCartProductQuantity}
-            >
+          {cartQty > 1 ? (
+            <Tooltip title="decrease">
+              <IconButton
+                aria-label="decrease"
+                onClick={decreaseCartProductQuantity}
+              >
+                <RemoveIcon />
+              </IconButton>
+            </Tooltip>
+          ) : (
+            <IconButton disabled>
               <RemoveIcon />
             </IconButton>
-          </Tooltip>
+          )}
+
           <input
             className={classes.quantityNumber}
             id={qId}
@@ -133,27 +138,29 @@ $
             onChange={cartQtyInputHandler}
             onBlur={changeCartProductQuantity}
           />
-          <Tooltip title="increase">
-            <IconButton
-              aria-label="increase"
-              onClick={increaseCartProductQuantity}
-            >
+          {cartQty < shopQty ? (
+            <Tooltip title="increase">
+              <IconButton
+                aria-label="increase"
+                onClick={increaseCartProductQuantity}
+              >
+                <AddIcon />
+              </IconButton>
+            </Tooltip>
+          ) : (
+            <IconButton disabled>
               <AddIcon />
             </IconButton>
-          </Tooltip>
+          )}
         </Grid>
-      ):(
+      ) : (
         <Grid item xs={5} sm={3} className={classes.quantityGrid}>
-          <Typography className={classes.outOfStock}>
-            Out of stock
-          </Typography>
+          <Typography className={classes.outOfStock}>Out of stock</Typography>
         </Grid>
       )}
       <Grid item xs={3} sm={1}>
         <Typography className={classes.price}>
-          {matches && "Subtotal: "}
-$
-          {subtotal.toFixed(2)}
+          {matches && "Subtotal: "}${subtotal.toFixed(2)}
         </Typography>
       </Grid>
       {!matches && (

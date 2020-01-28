@@ -8,25 +8,14 @@ import { Gallery, GalleryImage } from "react-gesture-gallery";
 import LastViewCarousel from "../LastView";
 
 import axios from "axios";
-import {
-  Container,
-  Typography,
-  Divider,
-  Box,
-  Link,
-  Button,
-  List,
-  ListItem,
-  ListItemText,
-  Tooltip,
-} from "@material-ui/core";
+import { Container, Typography, Divider, Box, Link, Button, IconButton, InputBase, List, ListItem, ListItemText } from "@material-ui/core";
 import HomeIcon from "@material-ui/icons/HomeSharp";
-
 import FavoriteBorderSharpIcon from "@material-ui/icons/FavoriteBorderSharp";
-import StarBorder from "@material-ui/icons/StarBorder";
 import FavoriteSharpIcon from "@material-ui/icons/FavoriteSharp";
-import Rating from "@material-ui/lab/Rating";
-import QtyCounter from "../common/QtyCounter";
+import AddSharpIcon from "@material-ui/icons/AddSharp";
+import RemoveSharpIcon from "@material-ui/icons/RemoveSharp";
+import RatingModule from "../common/RatingModule/RatingModule";
+// import QtyCounter from "../common/QtyCounter";
 import PreloaderAdaptive from "../Preloader/Adaptive";
 
 import { addItemCart } from "../../store/actions/сart";
@@ -37,7 +26,6 @@ import {
 
 import useStyles from "./useStyles";
 
-// eslint-disable-next-line
 const ItemDetails = ({
   wishlistAll,
   addWishlistItem,
@@ -65,43 +53,31 @@ const ItemDetails = ({
         // eslint-disable-next-line
         // console.log(response.data);
       })
-
       .catch(error => {
         // eslint-disable-next-line
         console.log(error);
+        setPreloader(false);
       });
-  }, [itemNo]);
+  }, [itemNo.id]);
 
   // helpers
-
-  // eslint-disable-next-line
-  const CardTooltipText = rating => {
-    if (item.rate.rating === undefined) return "Not yet rated";
-    return `Rated ${item.rating} out of 5`;
-  };
-
-  const upperName = string => {
-    return string
-      .split(" ")
-      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(" ");
-  };
 
   const {
     name,
     imageUrls,
     color,
     sizes,
-    rate,
     currentPrice,
-    // eslint-disable-next-line
     _id,
     // previousPrice,
     description,
+    quantity,
   } = item;
 
+  console.log(item);
+
   const addItemToCart = () => {
-    addCartItem(item._id, item.ItemNo);
+    addCartItem(item._id, item.itemNo);
   };
 
   const handleAddtemToWishlist = () => {
@@ -110,18 +86,37 @@ const ItemDetails = ({
     }
   };
 
-  const title = upperName(name);
+  const [qty, setQty] = useState(1);
 
-  return (
+  const inc = () => {
+    if (qty < 99) {
+      setQty(qty + 1);
+    }
+  };
+
+  const dec = () => {
+    if (qty > 0 && qty !== 1) {
+      setQty(qty - 1);
+    }
+  };
+
+  const changeQuantity = (e) => {
+    // eslint-disable-next-line no-restricted-globals
+    if (!isNaN(+e.target.value) && e.target.value !== "0" && e.target.value !== "")  {
+      setQty(+e.target.value)
+    }
+  };
+
+
+  return ( preloader ? (<PreloaderAdaptive />) : (
     <Container className={classes.brandsContaier} maxWidth="lg">
-      {preloader && PreloaderAdaptive}
       <Box className={classes.detailsHeader}>
         <Link href="/#" className={classes.linkIcon}>
           <HomeIcon style={{ fontSize: "30px", color: "black" }} />
         </Link>
         <Divider orientation="vertical" />
         <Typography variant="h6" className={classes.detailsTitle}>
-          {title}
+          {name}
         </Typography>
       </Box>
       <Box className={classes.detailsBody}>
@@ -145,7 +140,7 @@ const ItemDetails = ({
         </Container>
         <Box className={classes.infoContainer}>
           <Typography variant="h6" className={classes.infoTitle}>
-            {title}
+            {name}
           </Typography>
           <Divider variant="middle" />
           <List>
@@ -159,31 +154,20 @@ const ItemDetails = ({
             <ListItem className={classes.root}>
               <ListItemText className={classes.infoDetail} primary="Color:" />
               <Typography className={classes.infoDetailValue}>
-                {/* eslint-disable-next-line */}
                 {color}
               </Typography>
             </ListItem>
             <ListItem className={classes.root}>
               <ListItemText className={classes.infoDetail} primary="Size:" />
               <Typography className={classes.infoDetailValue}>
-                {/* eslint-disable-next-line */}
                 {sizes}
               </Typography>
             </ListItem>
           </List>
-          <Tooltip title={CardTooltipText(rate)}>
-            <Box className={classes.rating}>
-              <Rating
-                name="size-medium"
-                value={rate}
-                size="medium"
-                precision={0.5}
-                emptyIcon={
-                  <StarBorder color="primary" style={{ fontSize: 24 }} />
-                }
-              />
-            </Box>
-          </Tooltip>
+          <RatingModule
+            id={item._id}
+            rate={item.rate.rating}
+          />
           <Divider variant="middle" />
           <List>
             {/* <ListItem className={classes.root}>
@@ -195,32 +179,49 @@ const ItemDetails = ({
             <ListItem className={classes.root}>
               <ListItemText primary="Price:" className={classes.infoDetail} />
               <Typography className={classes.currentPrice}>
-                {/* eslint-disable-next-line */}
-                {currentPrice}$
+                {`$${currentPrice}`}
               </Typography>
             </ListItem>
           </List>
           <Divider variant="middle" />
-          <QtyCounter />
+          <Container className={classes.qty_wrapper}>
+            <Typography> Qty:</Typography>
+            <Box>
+              <IconButton aria-label="Less" onClick={() => dec()}>
+                <RemoveSharpIcon />
+              </IconButton>
+              <InputBase
+                className={classes.input}
+                onChange={e => changeQuantity(e)}
+                value={qty}
+                type="tel"
+                inputProps={{
+                  maxLength: 2,
+                  pattern: "[0-9]",
+                }}
+              />
+              <IconButton aria-label="More" onClick={() => inc()}>
+                <AddSharpIcon />
+              </IconButton>
+            </Box>
+          </Container>
           <Divider variant="middle" />
           <Box className={classes.buttonsBar}>
             <Button
               className={classes.actionButton}
-              // eslint-disable-next-line
               onClick={addItemToCart}
-              variant="contained"
+              disabled={!(quantity > 0)}
+              variant={quantity > 0 ? "contained" : "text"}
             >
               Add to cart
             </Button>
-            <Button aria-label="Add to wishlist" variant="contained">
+            <Button className={classes.actionButton} aria-label="Add to wishlist" variant="contained">
               {!wishlistAll.every(el => el._id !== _id) ? (
                 <FavoriteSharpIcon
-                  // eslint-disable-next-line
                   onClick={() => deleteWishlistItem(_id)}
                 />
               ) : (
                 <FavoriteBorderSharpIcon
-                  // eslint-disable-next-line
                   onClick={handleAddtemToWishlist}
                 />
               )}
@@ -230,13 +231,13 @@ const ItemDetails = ({
       </Box>
       <Box className={classes.detailsDescription}>
         <span className={classes.descriptionTitle}>Description: </span>
-        {/* eslint-disable-next-line */}
         <Typography className={classes.descriptionText}>
           {description}
         </Typography>
       </Box>
       <LastViewCarousel />
     </Container>
+   )
   );
 };
 
