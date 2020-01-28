@@ -8,6 +8,7 @@ import cartReducer from "./cartReducer";
 import wishlistReducer from "./wishlistReducer";
 import searchReducer from "./searchReducer";
 import filterReducer from "./filterReducer";
+import lastViewReducer from "./lastViewReducer";
 
 const persistConfig = {
   key: "cart",
@@ -22,7 +23,8 @@ const rootReducer = combineReducers({
   wishlistReducer,
   cartReducer,
   searchReducer,
-  filterReducer
+  filterReducer,
+  lastViewReducer,
 });
 
 export default persistReducer(persistConfig, rootReducer);

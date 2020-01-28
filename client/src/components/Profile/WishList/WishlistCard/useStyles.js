@@ -43,7 +43,6 @@ const useStyles = makeStyles(theme => ({
   titleGrid: {
     [theme.breakpoints.down("xs")]: {
       display: "flex",
-      justifyContent: "center",
     },
   },
   quantityNumber: {

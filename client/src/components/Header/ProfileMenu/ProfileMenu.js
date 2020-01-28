@@ -57,7 +57,7 @@ const ProfileMenu = ( {logOff, wishlistLogOff, clearPersonalCart } ) => {
       >
         <AccountCircle />
       </IconButton>
-      <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
+      <Popper className={classes.paper} open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
         {({ TransitionProps, placement }) => (
           <Grow
             {...TransitionProps}
@@ -65,7 +65,7 @@ const ProfileMenu = ( {logOff, wishlistLogOff, clearPersonalCart } ) => {
           >
             <Paper>
               <ClickAwayListener onClickAway={handleClose}>
-                <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
+                <MenuList className={classes.list} autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
                   <Link to="/profile" className={classes.text}>
                     <MenuItem onClick={handleClose}>Profile</MenuItem>
                   </Link>

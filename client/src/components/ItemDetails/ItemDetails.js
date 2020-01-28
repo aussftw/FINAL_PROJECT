@@ -27,12 +27,12 @@ import {
 import useStyles from "./useStyles";
 
 const ItemDetails = ({
-                       wishlistAll,
-                       addWishlistItem,
-                       deleteWishlistItem,
-                       isAuthenticated,
-                       addCartItem,
-                     }) => {
+  wishlistAll,
+  addWishlistItem,
+  deleteWishlistItem,
+  isAuthenticated,
+  addCartItem,
+}) => {
   const itemNo = useParams();
   const classes = useStyles();
   const [item, setItem] = useState({
@@ -46,17 +46,17 @@ const ItemDetails = ({
 
   useEffect(() => {
     axios
-        .get(`/api/products/${itemNo.id}`)
-        .then(response => {
-          setItem(response.data);
-          setPreloader(false);
-          // eslint-disable-next-line
-          console.log(response.data);
-        })
-        .catch(error => {
-          // eslint-disable-next-line
-          console.log(error);
-        });
+      .get(`/api/products/${itemNo.id}`)
+      .then(response => {
+        setItem(response.data);
+        setPreloader(false);
+        // eslint-disable-next-line
+        console.log(response.data);
+      })
+      .catch(error => {
+        // eslint-disable-next-line
+        console.log(error);
+      });
   }, [itemNo.id]);
 
   // helpers
@@ -129,8 +129,8 @@ const ItemDetails = ({
           <Gallery
             index={index}
             onRequestChange={i => {
-                  setIndex(i);
-                }}
+              setIndex(i);
+            }}
           >
             {imageUrls.map(image => (
               <GalleryImage
@@ -138,8 +138,9 @@ const ItemDetails = ({
                 objectFit="contain"
                 src={image}
                 alt="flower_picture"
+                // className={classes.imgScale}
               />
-              ))}
+            ))}
           </Gallery>
         </Container>
         <Box className={classes.infoContainer}>
@@ -177,7 +178,7 @@ const ItemDetails = ({
                 precision={0.5}
                 emptyIcon={
                   <StarBorder color="primary" style={{ fontSize: 24 }} />
-                    }
+                }
               />
             </Box>
           </Tooltip>
@@ -193,7 +194,7 @@ const ItemDetails = ({
               <ListItemText primary="Price:" className={classes.infoDetail} />
               <Typography className={classes.currentPrice}>
                 {/* eslint-disable-next-line */}
-                  {currentPrice}$
+                {currentPrice}$
               </Typography>
             </ListItem>
           </List>
@@ -210,9 +211,9 @@ const ItemDetails = ({
                 value={qty}
                 type="tel"
                 inputProps={{
-                      maxLength: 2,
-                      pattern: "[0-9]",
-                    }}
+                  maxLength: 2,
+                  pattern: "[0-9]",
+                }}
               />
               <IconButton aria-label="More" onClick={() => inc()}>
                 <AddSharpIcon />
@@ -227,18 +228,18 @@ const ItemDetails = ({
               disabled={!(quantity > 0)}
               variant={quantity > 0 ? "contained" : "text"}
             >
-                Add to cart
+              Add to cart
             </Button>
             <Button className={classes.actionButton} aria-label="Add to wishlist" variant="contained">
               {!wishlistAll.every(el => el._id !== _id) ? (
                 <FavoriteSharpIcon
                   onClick={() => deleteWishlistItem(_id)}
                 />
-                ) : (
-                  <FavoriteBorderSharpIcon
-                    onClick={handleAddtemToWishlist}
-                  />
-                )}
+              ) : (
+                <FavoriteBorderSharpIcon
+                  onClick={handleAddtemToWishlist}
+                />
+              )}
             </Button>
           </Box>
         </Box>
@@ -247,9 +248,9 @@ const ItemDetails = ({
       <Box className={classes.detailsDescription}>
         <span className={classes.descriptionTitle}>Description: </span>
         {/* eslint-disable-next-line */}
-          <Typography className={classes.descriptionText}>
-            {description}
-          </Typography>
+        <Typography className={classes.descriptionText}>
+          {description}
+        </Typography>
       </Box>
     </Container>
   );
