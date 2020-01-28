@@ -50,11 +50,12 @@ const ItemDetails = ({
         setItem(response.data);
         setPreloader(false);
         // eslint-disable-next-line
-        console.log(response.data);
+        // console.log(response.data);
       })
       .catch(error => {
         // eslint-disable-next-line
         console.log(error);
+        setPreloader(false);
       });
   }, [itemNo.id]);
 
@@ -106,9 +107,8 @@ const ItemDetails = ({
   };
 
 
-  return (
+  return ( preloader ? (<PreloaderAdaptive />) : (
     <Container className={classes.brandsContaier} maxWidth="lg">
-      {preloader && <PreloaderAdaptive />}
       <Box className={classes.detailsHeader}>
         <Link href="/#" className={classes.linkIcon}>
           <HomeIcon style={{ fontSize: "30px", color: "black" }} />
@@ -228,7 +228,6 @@ const ItemDetails = ({
           </Box>
         </Box>
       </Box>
-
       <Box className={classes.detailsDescription}>
         <span className={classes.descriptionTitle}>Description: </span>
         <Typography className={classes.descriptionText}>
@@ -236,6 +235,7 @@ const ItemDetails = ({
         </Typography>
       </Box>
     </Container>
+   )
   );
 };
 
