@@ -19,8 +19,6 @@ const LastViewCarousel = ({ lastView }) => {
   // const classes = useStyles();
   const [productsLV, setProductsLV] = useState( []);
   //   const productsLV = [];
-    // lastView = ["148884", "5269"];
-
     console.log(lastView);
 
     useEffect( () => {
@@ -47,7 +45,7 @@ const LastViewCarousel = ({ lastView }) => {
         }
 
     },
-         []);
+         [lastView]);
 
 
 
@@ -63,4 +61,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { getLastViewVar: addToLastView })(LastViewCarousel);
+export default connect(mapStateToProps, { getLastView: addToLastView })(LastViewCarousel);

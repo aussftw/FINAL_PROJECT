@@ -7,6 +7,7 @@ import 'react-alice-carousel/lib/alice-carousel.css'
 
 import Container from "@material-ui/core/Container";
 import ItemCard from "../ItemCard/ItemCard";
+import ItemCardLite from "../ItemCardLite/ItemCardLite";
 
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import useStyles from "./useStyles";
@@ -43,7 +44,7 @@ const RenderCards = ({productsLV}) => {
                         console.log(productsLV);
                         console.log(value.itemNo);
                         return (
-                            <ItemCard
+                            <ItemCardLite
                                 id={value._id}
                                 itemNo={value.itemNo}
                                 title={value.name}
