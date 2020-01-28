@@ -44,12 +44,10 @@ const CustomizedSearch = ({ searchPhrases, searchPhrasesFailure }) => {
       <ValidatorForm
         noValidate={false}
         onSubmit={search}
-        className={classes.form}
       >
         <TextValidator
           value={text.query}
           onChange={searchChange("query")}
-          // classes={{ label: classes.input }}
           className={classes.input}
           variant="outlined"
           size="small"
@@ -79,6 +77,4 @@ const CustomizedSearch = ({ searchPhrases, searchPhrasesFailure }) => {
   );
 };
 
-export default connect(null, { searchPhrases, searchPhrasesFailure })(
-  CustomizedSearch
-);
+export default connect(null, { searchPhrases, searchPhrasesFailure })(CustomizedSearch);

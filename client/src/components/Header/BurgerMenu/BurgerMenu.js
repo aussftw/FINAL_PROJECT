@@ -11,16 +11,11 @@ import Box from "@material-ui/core/Box";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import MenuIcon from "@material-ui/icons/Menu";
 import CloseIcon from "@material-ui/icons/Close";
-import axios from "axios";
-import {
-  searchPhrases,
-  searchPhrasesFailure,
-} from "../../../store/actions/Search";
+import {selectCategory} from "../../../store/actions/Filters";
 import useStyles from "./useStyles";
 
 const TemporaryDrawer = props => {
-  // eslint-disable-next-line no-shadow
-  const { links, searchPhrases, searchPhrasesFailure } = props;
+  const { links, selectCategory} = props;
   const classes = useStyles();
 
   const [state, setState] = React.useState({
@@ -43,14 +38,7 @@ const TemporaryDrawer = props => {
 
   const filter = category => {
     setState({ ...state, left: false });
-    axios
-      .get(`/api/products/filter?categories=${category}`)
-      .then(products => {
-        searchPhrases(products.data.products);
-      })
-      .catch(err => {
-        searchPhrasesFailure(err);
-      });
+      selectCategory(category)
   };
 
   const sideList = side => (
@@ -78,7 +66,10 @@ const TemporaryDrawer = props => {
               {item.title}
             </Link>
           ) : (
-            <ExpansionPanel key={item._id} style={{ boxShadow: "none" }}>
+            <ExpansionPanel
+              key={item._id}
+              className={classes.expPanel}
+            >
               <ExpansionPanelSummary
                 expandIcon={<ArrowDropDownIcon />}
                 href="/#"
@@ -135,8 +126,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    searchPhrases: data => dispatch(searchPhrases(data)),
-    searchPhrasesFailure: err => dispatch(searchPhrasesFailure(err)),
+    selectCategory: data => dispatch(selectCategory(data)),
   };
 }
 
