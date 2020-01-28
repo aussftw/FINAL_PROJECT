@@ -1,8 +1,14 @@
 import React from "react";
 import {connect} from "react-redux";
+import v4 from "uuid";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
+import {Link} from "react-router-dom";
+import CheckoutCartCard from "./CheckoutCartCard/CheckoutCartCard";
 import useStyles from "./useStyles";
+import Button from "@material-ui/core/Button";
+import {ValidatorForm} from "react-material-ui-form-validator";
+
 
 const CheckoutCart = ( {cart} ) => {
   const classes = useStyles();
@@ -31,22 +37,33 @@ const CheckoutCart = ( {cart} ) => {
   return (
     <div>
       <Grid container className={classes.cartHeader}>
-        <Grid item xs={4}>
+        <Grid item xs={6}>
           <Typography className={classes.title} align="left">
             Product
           </Typography>
         </Grid>
-        <Grid item xs={4}>
-          <Typography className={classes.title} align="center">
-            Quantity
-          </Typography>
-        </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={6}>
           <Typography className={classes.title} align="right">
             Subtotal
           </Typography>
         </Grid>
       </Grid>
+      {cart.map(item => {
+        let cartQty = item.cartQuantity;
+        if (item.product.quantity < cartQty) {
+          cartQty = item.product.quantity;
+        }
+        return (
+          <CheckoutCartCard
+            key={v4()}
+            price={item.product.currentPrice}
+            cartQty={cartQty}
+            itemNo={item.product.itemNo}
+            title={item.product.name}
+            img={item.product.imageUrls[0]}
+          />
+        )
+      })}
       <Grid container className={classes.cartFooter}>
         <Grid item xs={6}>
           <Typography className={classes.title} align="left">
@@ -59,6 +76,11 @@ const CheckoutCart = ( {cart} ) => {
           </Typography>
         </Grid>
       </Grid>
+      <Link to="/cart" className={classes.links}>
+        <Button variant="contained" className={classes.btn}>
+          EDIT ORDER
+        </Button>
+      </Link>
     </div>
   )
 };
@@ -66,7 +88,6 @@ const CheckoutCart = ( {cart} ) => {
 function mapStateToProps(state) {
   return {
     cart: state.cartReducer.cart,
-    error: state.cartReducer.error,
   };
 }
 

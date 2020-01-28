@@ -20,7 +20,7 @@ const useStyles = makeStyles(theme => ({
     borderColor: theme.palette.secondary.light,
   },
   title: {
-    fontSize: 12,
+    fontSize: 14,
     fontWeight: 600,
     textTransform: "uppercase",
     color: theme.palette.secondary.dark,
