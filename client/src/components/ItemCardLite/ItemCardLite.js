@@ -8,20 +8,15 @@ import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
-import IconButton from "@material-ui/core/IconButton";
 import Snackbar from "@material-ui/core/Snackbar";
 import SnackbarContent from "@material-ui/core/SnackbarContent";
 import Typography from "@material-ui/core/Typography";
-// import Tooltip from "@material-ui/core/Tooltip";
 
 import CheckCircleRoundedIcon from "@material-ui/icons/CheckCircleRounded";
-
 
 import useStyles from "./useStyles";
 
 import { addItemCart } from "../../store/actions/сart";
-
-// import { addToLastView } from "../../store/actions/addToLastView";
 
 const ItemCardLite = ({
   id,
@@ -31,11 +26,9 @@ const ItemCardLite = ({
   img,
   stock,
   addCartItem,
-  // isAuthenticated,
 }) => {
   const classes = useStyles();
   const [snackbarAddToCart, setSnackbarAddToCart] = useState(false);
-
 
   const addItemToCart = () => {
     addCartItem(id, itemNo);
@@ -48,7 +41,6 @@ const ItemCardLite = ({
     }
     setSnackbarAddToCart(false);
   };
-
 
   return (
     <Card className={classes.card}>
