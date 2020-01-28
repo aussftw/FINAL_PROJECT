@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import * as axios from "axios";
 
-
+import {uniq} from "lodash/uniq";
 import "react-alice-carousel/lib/alice-carousel.css";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
