@@ -14,7 +14,6 @@ const TilesPanel = ({ selectCategory }) => {
   const classes = useStyles();
   const [isLoad, setLoad] = useState(false);
   const [catalog, setCatalog] = useState([]);
-  const [category, setCategory] = useState('');
 
   const handleCategory = ( e , text ) => {
     e.preventDefault();
