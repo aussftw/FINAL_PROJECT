@@ -24,6 +24,7 @@ const shippingMethods = require("./routes/shippingMethods");
 const paymentMethods = require("./routes/paymentMethods");
 const partners = require("./routes/partners");
 const mainRoute = require("./routes/index");
+const rating = require("./routes/rating");
 
 const app = express();
 
@@ -65,6 +66,7 @@ app.use("/api/comments", comments);
 app.use("/api/shipping-methods", shippingMethods);
 app.use("/api/payment-methods", paymentMethods);
 app.use("/api/partners", partners);
+app.use("/api/rating", rating);
 app.use("/api/", mainRoute);
 
 // Server static assets if in production
