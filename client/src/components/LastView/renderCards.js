@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
+import uniqBy from "lodash/uniqBy";
+// import * as _ from "lodash";
 import AliceCarousel from "react-alice-carousel";
 import "react-alice-carousel/lib/alice-carousel.css";
 
@@ -12,49 +14,54 @@ import useStyles from "./useStyles";
 
 const RenderCards = ({ productsLV }) => {
   const classes = useStyles();
+  // const newArr = uniqBy(productsLV, 'itemNo');
 
-  return (
-    <Container maxWidth="lg">
-      <h2 className={classes.title}>Last View</h2>
-      <AliceCarousel
-        responsive={{
-            600: {
-                items: 2,
-            },
-          960: {
-            items: 3,
-          },
-          1280: {
-            items: 4,
-          },
-          1960: {
-            items: 4,
-          },
-        }}
-        buttonsDisabled={true}
-        autoPlay={true}
-        autoPlayInterval={1800}
-        duration={600}
-      >
-        {productsLV
-          ? productsLV.slice(0, 8).map(value => {
-              return (
-                <ItemCardLite
-                  id={value._id}
-                  itemNo={value.itemNo}
-                  title={value.name}
-                  rate={value.rate.rating}
-                  price={value.currentPrice}
-                  img={value.imageUrls[0]}
-                  stock={value.quantity}
-                />
-              );
-            })
-          : console.log("none")}
-      </AliceCarousel>
-    </Container>
-  );
-
+    if (productsLV.length > 0) {
+    return (
+        <Container maxWidth="lg">
+            <h2 className={classes.title}>Last View</h2>
+            <AliceCarousel
+                responsive={{
+                    600: {
+                        items: 2,
+                    },
+                    960: {
+                        items: 3,
+                    },
+                    1280: {
+                        items: 4,
+                    },
+                    1960: {
+                        items: 4,
+                    },
+                }}
+                buttonsDisabled={true}
+                autoPlay={true}
+                autoPlayInterval={1800}
+                duration={600}
+            >
+                {productsLV
+                    ? uniqBy(productsLV, 'itemNo').slice(0, 8).map(value => {
+                        return (
+                            <ItemCardLite
+                                id={value._id}
+                                itemNo={value.itemNo}
+                                title={value.name}
+                                rate={value.rate.rating}
+                                price={value.currentPrice}
+                                img={value.imageUrls[0]}
+                                stock={value.quantity}
+                            />
+                        );
+                    })
+                    : console.log("none")}
+            </AliceCarousel>
+        </Container>
+    );
+}
+    else {
+return null
+    }
 };
 
 export default RenderCards;
