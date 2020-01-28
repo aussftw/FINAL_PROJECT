@@ -4,10 +4,12 @@ import Header from "../../components/Header";
 import SubHeader from "../../components/Header/SubHeader/SubHeader";
 import Footer from "../../components/Footer";
 import Checkout from "../../components/Checkout/Checkout";
+import ScrollOnTop from '../../ScrollOnTop/ScrollOnTop';
 
 const CheckoutPage = () => {
   return (
     <>
+      <ScrollOnTop />
       <BackToTop />
       <Header />
       <SubHeader />
