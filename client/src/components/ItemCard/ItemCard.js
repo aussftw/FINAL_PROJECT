@@ -47,9 +47,9 @@ const ItemCard = ({
   const [snackbarAddToCart, setSnackbarAddToCart] = useState(false);
 
   const CardTooltipText = value => {
-    if (value === undefined) return "Not yet rated";
+    if (value === undefined || value === 0) return "not yet rated";
 
-    return `Rated ${value.toFixed(2)} out of 5`;
+    return `rated ${value.toFixed(2)} out of 5`;
   };
 
   const addItemToCart = () => {

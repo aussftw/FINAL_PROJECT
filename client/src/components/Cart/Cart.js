@@ -1,14 +1,14 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-
+import { connect } from "react-redux";
 import useMediaQuery from "@material-ui/core/useMediaQuery/useMediaQuery";
+
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
-
 import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
-import { connect } from "react-redux";
+
 import useStyles from "./useStyles";
 import Preloader from "../Preloader";
 import ProductCart from "../common/ProductCart/ProductCart";
