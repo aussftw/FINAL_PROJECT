@@ -19,16 +19,16 @@ const logInFailure = error => {
   };
 };
 
-export const preloaderClose = () => {
-  return {
-    type: constants.PRELOADER_CLOSE,
-  };
-};
-
 export const userFromJwt = data => {
   return {
     type: constants.USER_FROM_JWT,
     payload: data,
+  };
+};
+
+export const preloaderClose = () => {
+  return {
+    type: constants.PRELOADER_CLOSE,
   };
 };
 

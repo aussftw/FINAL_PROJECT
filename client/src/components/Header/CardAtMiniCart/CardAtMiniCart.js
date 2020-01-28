@@ -1,12 +1,21 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Typography from "@material-ui/core/Typography";
 import CloseIcon from "@material-ui/icons/Close";
 import Tooltip from "@material-ui/core/Tooltip";
 import { connect } from "react-redux";
 import { deleteItemCart } from "../../../store/actions/сart";
 import useStyles from "./useStyles";
 
-const CardAtMiniCart = ({ id, url, title, qty, price, deleteCartItem }) => {
+const CardAtMiniCart = ({
+  id,
+  itemNo,
+  url,
+  title,
+  qty,
+  price,
+  deleteCartItem,
+}) => {
   const classes = useStyles();
 
   function removeFromMiniCartBtn() {
@@ -15,16 +24,16 @@ const CardAtMiniCart = ({ id, url, title, qty, price, deleteCartItem }) => {
 
   return (
     <li className={classes.mini_cart_card}>
-      <Link to="/" className={classes.mini_cart_card_link}>
+      <Link to={`/products/${itemNo}`} className={classes.mini_cart_card_link}>
         <img src={`${url}`} className={classes.mini_cart_card_img} alt="img" />
         <div>
-          <p className={classes.mini_cart_card_title}>{title}</p>
-          <p>
+          <Typography className={classes.mini_cart_card_title}>{title}</Typography>
+          <Typography className={classes.mini_cart_card_quantity}>
             {`${qty} x `}
-            <span className={classes.mini_cart_card_price}>
-              ${price.toFixed(2)}
-            </span>
-          </p>
+            <Typography className={classes.mini_cart_card_price} component="span">
+              {`$${price.toFixed(2)}`}
+            </Typography>
+          </Typography>
         </div>
       </Link>
       <Tooltip title="close">
@@ -35,7 +44,6 @@ const CardAtMiniCart = ({ id, url, title, qty, price, deleteCartItem }) => {
         />
       </Tooltip>
     </li>
-    // )
   );
 };
 

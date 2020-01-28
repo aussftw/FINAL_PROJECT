@@ -11,11 +11,10 @@ const useStyles = makeStyles(theme => ({
     },
   },
   title: {
-    margin: "0px 0px 5px 0",
     padding: 5,
     textAlign: "center",
     [theme.breakpoints.down("xs")]: {
-      fontSize: 20,
+      fontSize: 18,
     },
   },
   form: {
@@ -42,6 +41,7 @@ const useStyles = makeStyles(theme => ({
     },
   },
   message: {
+    marginTop: 5,
     textAlign: "center",
   },
 }));

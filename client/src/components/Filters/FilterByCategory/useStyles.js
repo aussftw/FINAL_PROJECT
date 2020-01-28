@@ -11,6 +11,16 @@ export const useStyles = makeStyles(() => ({
     boxShadow: "0 0 5px",
     borderRadius: 10,
     paddingBottom: 20,
+    [theme.breakpoints.down("md")]:{
+      width: "100%",
+      maxWidth: "300px",
+      boxShadow: "none", 
+      marginTop: 0, 
+      borderRadius:0, 
+      marginBottom: 20,
+      paddingBottom: 0,
+      backgroundColor: theme.palette.primary.light,
+    },
   },
   line: {
     margin: "10px 20px",

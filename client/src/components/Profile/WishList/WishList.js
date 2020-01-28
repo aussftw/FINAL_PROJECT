@@ -1,9 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
 import v4 from "uuid";
+import Typography from "@material-ui/core/Typography";
 import useStyles from "./useStyles";
 import WishlistCard from "./WishlistCard/WishlistCard";
-import Preloader from "../../Preloader";
+import PreloaderAdaptive from "../../Preloader/Adaptive";
 
 function WishList({ isLoading, wishlist, error }) {
   const classes = useStyles();
@@ -25,10 +26,10 @@ function WishList({ isLoading, wishlist, error }) {
   }
 
   return isLoading ? (
-    <Preloader />
+    <PreloaderAdaptive />
   ) : (
     <div className={classes.root}>
-      <h2 className={classes.title}>Wishlist</h2>
+      <Typography className={classes.title} variant="h3">Wishlist</Typography>
       {wishlist.length > 0 ? (
         <div>
           {wishlist.map(item => {
@@ -48,10 +49,10 @@ function WishList({ isLoading, wishlist, error }) {
           })}
         </div>
       ) : (
-        <p className={classes.message}>Your wishlist is empty</p>
+        <Typography className={classes.message}>Your wishlist is empty</Typography>
       )}
       {Boolean(errorMessage) && (
-        <p className={classes.message}>{`${errorMessage.message}`}</p>
+        <Typography className={classes.message}>{`${errorMessage.message}`}</Typography>
       )}
     </div>
   );

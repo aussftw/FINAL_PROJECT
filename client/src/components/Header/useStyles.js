@@ -8,14 +8,20 @@ const useStyles = makeStyles(theme => ({
   logo: {
     height: "40px",
     display: "none",
-    [theme.breakpoints.up("sm")]: {
+    [theme.breakpoints.up("md")]: {
       display: "flex",
     },
   },
   link: {
     color: "black",
-    "&$visited": {
+    "&visited": {
       color: "theme. primary.dark",
+    },
+  },
+  mobileSearch:{
+    display: "inline-block",
+    [theme.breakpoints.up("sm")]: {
+      display: "none",
     },
   },
   searchDesktop: {

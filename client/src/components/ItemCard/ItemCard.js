@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
 import Box from "@material-ui/core/Box";
@@ -19,8 +20,9 @@ import FavoriteBorder from "@material-ui/icons/FavoriteBorder";
 import StarBorder from "@material-ui/icons/StarBorder";
 
 import Rating from "@material-ui/lab/Rating";
-import { connect } from "react-redux";
+
 import useStyles from "./useStyles";
+
 import { addItemCart } from "../../store/actions/сart";
 import {
   wishlistAddItem,
@@ -62,7 +64,7 @@ const ItemCard = ({
     setSnackbarAddToCart(false);
   };
 
-  const handleAddtemToWishlist = () => {
+  const handleAddItemToWishlist = () => {
     if (isAuthenticated) {
       addWishlistItem(id);
     }
@@ -70,7 +72,7 @@ const ItemCard = ({
 
   return (
     <Card className={classes.card}>
-      {!wishlistAll.every(el => el._id !== id) ? (
+      {wishlistAll.some(el => el._id === id) ? (
         <Tooltip arrow title="Remove from wishlist">
           <IconButton
             className={classes.wishList}
@@ -82,17 +84,19 @@ const ItemCard = ({
       ) : (
         <Tooltip
           arrow
-          title={isAuthenticated ? "Add to wishlist" : "Only for logined user"}
+          title={
+            isAuthenticated ? "Add to wishlist" : "Only for authorized user"
+          }
         >
           <IconButton
             className={classes.wishList}
-            onClick={handleAddtemToWishlist}
+            onClick={handleAddItemToWishlist}
           >
             <FavoriteBorder />
           </IconButton>
         </Tooltip>
       )}
-      <Link to={`/products/${itemNo}`}>
+      <Link className={classes.link} to={`/products/${itemNo}`}>
         <CardActionArea
           classes={{
             root: classes.actionArea,
@@ -125,7 +129,8 @@ const ItemCard = ({
               </Box>
             </Tooltip>
             <Typography className={classes.price} align="center">
-              ${price.toFixed(2)}
+              $
+              {price.toFixed(2)}
             </Typography>
           </CardContent>
         </CardActionArea>
@@ -151,14 +156,14 @@ const ItemCard = ({
         <SnackbarContent
           className={classes.snackbar}
           role="alert"
-          message={
+          message={(
             <Box>
               <CheckCircleRoundedIcon />
               <span className={classes.snackbarMessage}>
                 Added to your shopping cart!
               </span>
             </Box>
-          }
+          )}
         />
       </Snackbar>
     </Card>

@@ -6,7 +6,9 @@ import Footer from "../../components/Footer";
 import Subscribe from "../../components/Subscribe/Subscribe";
 import Products from "../../components/Filters";
 
+
 function Shop() {
+
   return (
     <>
       <BackToTop />

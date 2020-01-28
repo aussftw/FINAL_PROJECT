@@ -8,6 +8,7 @@ import FilterByColor from "./FilterByColor";
 import FilterBySize from "./FilterBySize";
 import FilterByPrice from "./FilterByPrice";
 import Pagination from "./Pagination";
+import ModalFiltersAdaptive from "./ModalFiltersAdaptive";
 import ItemCard from "../ItemCard/ItemCard";
 
 import { getProducts, setCurrentPage } from "../../store/actions/Filters";
@@ -34,15 +35,15 @@ const Products = ({
     listProduct = productListing.map(value => {
       return (
         <ItemCard
-                id={value._id}
-                itemNo={value.itemNo}
-                title={value.name}
-                rate={value.rate.rating}
-                price={value.currentPrice}
-                img={value.imageUrls[0]}
-                stock={value.quantity}
-              />
-        
+          key={value._id}
+          id={value._id}
+          itemNo={value.itemNo}
+          title={value.name}
+          rate={value.rate.rating}
+          price={value.currentPrice}
+          img={value.imageUrls[0]}
+          stock={value.quantity}
+        />
       );
     });
   }
@@ -65,14 +66,17 @@ const Products = ({
         <FilterByPrice />
       </div>
       <div className={classes.items}>
-        {currentProduct}
-      </div>
-    </Container>
+        <div style={{textAlign: "center"}}>
+         <ModalFiltersAdaptive />
+          {currentProduct}
+        </div>
        <Pagination
           productsPerPage={productsPerPage}
           totalProducts={productListing.length}
           paginate={paginate}
         />
+      </div>
+    </Container>
     </>
   );
 };

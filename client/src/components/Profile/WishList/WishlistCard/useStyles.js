@@ -25,6 +25,9 @@ const useStyles = makeStyles(theme => ({
     height: 50,
     objectFit: "cover",
   },
+  link: {
+    textDecoration: "none",
+  },
   name: {
     fontSize: 14,
     textTransform: "capitalize",
@@ -40,7 +43,6 @@ const useStyles = makeStyles(theme => ({
   titleGrid: {
     [theme.breakpoints.down("xs")]: {
       display: "flex",
-      justifyContent: "center",
     },
   },
   quantityNumber: {

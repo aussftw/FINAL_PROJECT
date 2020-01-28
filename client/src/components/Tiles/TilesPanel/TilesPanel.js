@@ -33,7 +33,7 @@ const TilesPanel = () => {
     <>
       {isLoad ? (
         <div className={classes.box}>
-          <GridList cellHeight={245} className={classes.tileBox}>
+          <GridList cellHeight="auto" className={classes.tileBox}>
             <GridListTile cols={2} rows={2}>
               <TilesItem text={catalog[0].name} img={catalog[0].imgUrl} />
             </GridListTile>
@@ -41,7 +41,7 @@ const TilesPanel = () => {
               <TilesItem text={catalog[1].name} img={catalog[1].imgUrl} />
             </GridListTile>
           </GridList>
-          <GridList className={classes.tileBox} cellHeight={245}>
+          <GridList className={classes.tileBox} cellHeight="auto">
             <GridListTile cols={1} rows={1}>
               <TilesItem text={catalog[2].name} img={catalog[2].imgUrl} />
             </GridListTile>

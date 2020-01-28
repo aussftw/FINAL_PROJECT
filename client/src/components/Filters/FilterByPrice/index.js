@@ -11,7 +11,7 @@ import { connect } from "react-redux";
 
 const useStyles = makeStyles(() => ({
   rootMain: {
-    width: "180%",
+    width: "100%",
     maxWidth: 300,
     paddingTop: 8,
     backgroundColor: theme.palette.background.paper,

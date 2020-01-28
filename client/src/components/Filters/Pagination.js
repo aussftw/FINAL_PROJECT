@@ -9,17 +9,24 @@ const useStyles = makeStyles(() => ({
       margin: "20px 30%",
     },
     tableItem: {
-      border: "1px solid green",
+      margin: "5px",
       padding: "5px 12px",
-    },
-    itemLink: {
+      cursor: "pointer",
+      backgroundColor: "#689f38",
+      borderRadius: "50%",
+      transition: "0.5s ease",
+      "&:hover":{
+          backgroundColor: "#33691e",
+      },
+    "& a": {
       textDecoration: "none",
-      color: "black",
       fontWeight: 500,
+      color: "white",
+      }
     }
-
   })
 );
+
 const Pagination = ({ productsPerPage, totalProducts, paginate }) => {
   const classes = useStyles();
   
@@ -32,9 +39,9 @@ const Pagination = ({ productsPerPage, totalProducts, paginate }) => {
     <nav>
       <ul className={classes.table}>
         {pageNumbers.map(number => (
-          <li className={classes.tableItem} key={number}>
+          <li className={classes.tableItem} key={number} onClick={() => paginate(number)}>
             {/* eslint-disable-next-line */}
-            <a className={classes.itemLink} onClick={() => paginate(number)} href="#">
+            <a className={classes.itemLink}  href="#">
               {number}
             </a>
           </li>
