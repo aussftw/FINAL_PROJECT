@@ -67,9 +67,6 @@ exports.addProductToRating = async (req, res, next) => {
                 });
             }
 
-            console.log("req.body: ", Number(req.body.value));
-            console.log("NEW RATING: ", newProductRating);
-
             // const updateProduct = queryCreator(newProductRating); //                         ??????
 
             Product.findOneAndUpdate(
@@ -78,7 +75,6 @@ exports.addProductToRating = async (req, res, next) => {
                 { new: true }
             )
                 .then(product => {
-                    console.log("PRODUCT UPDATED!");
                     res.json(product)
                 })
                 .catch(err =>
@@ -155,17 +151,17 @@ exports.addProductToRating = async (req, res, next) => {
 };
 
 exports.deleteRating = (req, res, next) => {
-    Rating.findOne({ customerId: req.user.id }).then(async rating => {
+    Rating.findOne({ customerId: req.body.userId }).then(async rating => {
         if (!rating) {
             return res
                 .status(400)
                 .json({ message: `Rating for this customer is not found.` });
         } else {
             const ratingToDelete = await Rating.findOne({
-                customerId: req.user.id
+                customerId: req.body.userId
             });
 
-            Rating.deleteOne({ customerId: req.user.id })
+            Rating.deleteOne({ customerId: req.body.userId })
                 .then(deletedCount =>
                     res.status(200).json({
                         message: `Rating list with id "${ratingToDelete._id}" is successfully deletes from DB `

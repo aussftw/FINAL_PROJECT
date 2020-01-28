@@ -17,6 +17,7 @@ e --abort
 # from server .gitignore:
 
 # dependencies
+.vscode
 /node_modules
 node_modules
 /.pnp

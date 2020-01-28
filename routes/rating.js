@@ -33,7 +33,7 @@ router.put(
 // @access  Private
 router.delete(
     "/",
-    passport.authenticate("jwt", { session: false }),
+    passport.authenticate("jwt-admin", { session: false }),
     deleteRating
 );
 

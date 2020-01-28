@@ -118,7 +118,6 @@ const Cart = ({ cart, getCartVar }) => {
             <Button
               variant="text"
               fullWidth
-              color="secondary"
               className={classes.continueButton}
               onClick={history.goBack}
             >
