@@ -11,13 +11,10 @@ const useStyles = makeStyles(theme => ({
     width: "100%",
   },
   title: {
-    margin: "0px 0px 5px 0",
     padding: 5,
     textAlign: "center",
-    fontSize: 24,
-    fontWeight: 700,
     [theme.breakpoints.down("xs")]: {
-      fontSize: 20,
+      fontSize: 18,
     },
   },
   message: {

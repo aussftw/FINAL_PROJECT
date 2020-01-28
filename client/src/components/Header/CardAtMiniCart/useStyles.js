@@ -1,6 +1,6 @@
 import { makeStyles } from "@material-ui/core/styles";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   mini_cart_card: {
     display: "flex",
     width: 273,
@@ -8,7 +8,8 @@ const useStyles = makeStyles({
     listStyle: "none",
     justifyContent: "space-between",
     textAlign: "left",
-    borderBottom: "1px solid #e4e4e4",
+    borderBottom: "1px solid",
+    borderBottomColor: theme.palette.secondary.light,
     paddingBottom: 10,
     "&:last-child": {
       borderBottom: 0,
@@ -16,7 +17,7 @@ const useStyles = makeStyles({
     },
   },
   mini_cart_card_link: {
-    color: "#707070",
+    color: theme.palette.secondary.medium,
     textDecoration: "none",
     display: "flex",
     fontSize: 14,
@@ -27,22 +28,27 @@ const useStyles = makeStyles({
     marginRight: 10,
   },
   mini_cart_card_title: {
+    width: 152,
     textTransform: "capitalize",
     lineHeight: 1.5,
-    color: "#707070",
+    color: theme.palette.secondary.medium,
     fontSize: 14,
     margin: 0,
     "&:hover": {
-      color: "#6ea820",
+      color: theme.palette.primary.main,
     },
   },
+  mini_cart_card_quantity: {
+    fontSize: 14,
+  },
   mini_cart_card_price: {
+    fontSize: 14,
     fontWeight: 600,
-    color: "#000000",
+    color: theme.palette.secondary.dark,
   },
   mini_cart_card_close: {
     cursor: "pointer",
   },
-});
+}));
 
 export default useStyles;
