@@ -3,11 +3,7 @@ import * as constants from "../constants";
 
 // Получение с бэка фильтров
 export const getProducts = filters => dispatch => {
-  dispatch({
-    type: constants.SEND_PRODUCT_REQUEST,
-  });
-  axios
-    .get("/api/products/filter", {
+  axios.get("/api/products/filter", {
       params: filters,
     })
     .then(list => {
@@ -19,10 +15,6 @@ export const getProducts = filters => dispatch => {
 };
 
 export const getCategories = () => dispatch => {
-  dispatch({
-    type: constants.SEND_GET_CATEGORY_LISTING,
-  });
-
   axios.get("/api/catalog").then(list => {
     dispatch({
       type: constants.GET_CATEGORY_LISTING,
@@ -32,10 +24,6 @@ export const getCategories = () => dispatch => {
 };
 
 export const getColors = () => dispatch => {
-  dispatch({
-    type: constants.SEND_GET_COLOR_LISTING,
-  });
-
   axios.get("/api/colors").then(list => {
     dispatch({
       type: constants.GET_COLOR_LISTING,
@@ -45,10 +33,6 @@ export const getColors = () => dispatch => {
 };
 
 export const getSizes = () => dispatch => {
-  dispatch({
-    type: constants.SEND_GET_SIZE_LISTING,
-  });
-
   axios.get("/api/sizes").then(list => {
     dispatch({
       type: constants.GET_SIZE_LISTING,
