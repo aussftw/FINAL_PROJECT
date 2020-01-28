@@ -18,21 +18,20 @@ const TilesPanel = ({ selectCategory }) => {
 
   const handleCategory = ( e , text ) => {
     e.preventDefault();
-    setCategory(text);
+    selectCategory(text);
+    history.push("/shop")
   };
 
   useEffect(() => {
    axios.get('/api/catalog')
      .then(result => {
        setCatalog(result.data);
-       setLoad(true);
-     })
+     }).then(() => {
+     setLoad(true);
+     }
+   )
      .catch(err => console.log(err));
-    if(category !== ''){
-      selectCategory(category);
-      history.push("/shop")
-    }
-  } ,[selectCategory, category]);
+  } ,[]);
 
   return (
     <>
