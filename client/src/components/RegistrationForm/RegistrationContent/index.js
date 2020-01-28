@@ -149,9 +149,6 @@ const RegistrationContent = ({
                 value={newUserData.address}
                 onChange={handleChange}
                 className={classes.textField}
-                validators={["matchRegexp:^[a-zA-Z0-9]{5,40}$"]}
-                errorMessages={[
-                  "Your address must be 5-40 characters, including only latin letters and numbers"]}
               />
               <Button type="submit" variant="outlined" className={classes.btn}>
                 Registration

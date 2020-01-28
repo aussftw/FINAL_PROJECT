@@ -2,17 +2,25 @@ import { makeStyles } from "@material-ui/core/styles";
 import theme from "../../../theme";
 
 export const useStyles = makeStyles(() => ({
-  root: {
+    root: {
+    marginTop:100,
     width: "100%",
     maxWidth: 300,
     marginBottom: 40,
     backgroundColor: theme.palette.background.paper,
     boxShadow: "0 0 5px",
     borderRadius: 10,
-    paddingBottom: 0,
+    paddingBottom: 20,
     [theme.breakpoints.down("md")]:{
+      width: "100%",
+      maxWidth: "300px",
+      boxShadow: "none", 
+      marginTop: 0, 
+      borderRadius:0, 
       marginBottom: 20,
-    }
+      paddingBottom: 0,
+      backgroundColor: theme.palette.primary.light,
+    },
   },
   line: {
     margin: "10px 20px",
@@ -35,7 +43,11 @@ export const useStyles = makeStyles(() => ({
     margin: "5px 20px",
     fontSize: 20,
   },
-  label: {
+  label: {   
     width: "100%",
   },
-}));
+  iconContainer:{
+    marginRight:-15
+  }
+    })
+);

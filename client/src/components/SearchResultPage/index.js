@@ -16,7 +16,7 @@ const SearchResultsPage = ({ searchResult }) => {
           {searchResult.map(value => {
             return (
               <>
-                <Link to={value.productUrl}>
+                <Link to={value.productUrl} key={`card-key-${value._id}`}>
                   <ItemCard
                     key={`card-key-${value._id}`}
                     id={value._id}
