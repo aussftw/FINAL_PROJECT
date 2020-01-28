@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import Grid from "@material-ui/core/Grid";
+import Box from "@material-ui/core/Box";
 import IconButton from "@material-ui/core/IconButton";
 import AddIcon from "@material-ui/icons/Add";
 import RemoveIcon from "@material-ui/icons/Remove";
@@ -99,7 +100,9 @@ const ProductCart = ({
       </Grid>
       <Grid item xs={3} sm={1}>
         <Typography className={classes.price}>
-          {matches && "Price: "}${price.toFixed(2)}
+          {matches && "Price: "}
+$
+          {price.toFixed(2)}
         </Typography>
       </Grid>
       {matches && (
@@ -124,9 +127,11 @@ const ProductCart = ({
               </IconButton>
             </Tooltip>
           ) : (
-            <IconButton disabled>
-              <RemoveIcon />
-            </IconButton>
+            <Box style={{cursor: "not-allowed", borderRadius: "50%"}}>
+              <IconButton disabled>
+                <RemoveIcon />
+              </IconButton>
+            </Box>
           )}
 
           <input
@@ -148,9 +153,11 @@ const ProductCart = ({
               </IconButton>
             </Tooltip>
           ) : (
-            <IconButton disabled>
-              <AddIcon />
-            </IconButton>
+            <Box style={{cursor: "not-allowed", borderRadius: "50%"}}>
+              <IconButton disabled>
+                <AddIcon />
+              </IconButton>
+            </Box>
           )}
         </Grid>
       ) : (
@@ -160,7 +167,9 @@ const ProductCart = ({
       )}
       <Grid item xs={3} sm={1}>
         <Typography className={classes.price}>
-          {matches && "Subtotal: "}${subtotal.toFixed(2)}
+          {matches && "Subtotal: "}
+$
+          {subtotal.toFixed(2)}
         </Typography>
       </Grid>
       {!matches && (

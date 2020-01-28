@@ -11,10 +11,10 @@ import filterReducer from "./filterReducer";
 import lastViewReducer from "./lastViewReducer";
 
 const persistConfig = {
-  key: "cart",
+  key: "root",
   storage,
   version: 0,
-  whitelist: ["cartReducer"],
+  whitelist: ["cartReducer", "lastViewReducer"],
 };
 
 const rootReducer = combineReducers({
