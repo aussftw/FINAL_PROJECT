@@ -48,7 +48,7 @@ export const useStyles = makeStyles(() => ({
       outline: "none",
       color: "white",
       cursor: "pointer",
-      margin: "20px 3.5em 20px auto ",
+      margin: "20px 4.5em 20px auto ",
       backgroundColor: theme.palette.primary.main,
       "&:active":{
         boxShadow: "1px 1px black"
