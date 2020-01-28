@@ -221,3 +221,18 @@ exports.getTopRatedProducts = (req, res, next) => {
             })
         );
 };
+
+exports.getNewestProducts = (req, res, next) => {
+  const newestProducts = {"date": -1};
+  const startPage = 8;
+
+  Product.find()
+      .sort(newestProducts)
+      .limit(startPage)
+      .then(products => res.send(products))
+      .catch(err =>
+          res.status(400).json({
+            message: `Error happened on server: "${err}" `
+          })
+      );
+};
