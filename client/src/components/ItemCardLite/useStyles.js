@@ -3,9 +3,10 @@ import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles(theme => ({
   card: {
     position: "relative",
-    display: "inline-block",
+    display: 'flex',
+    flexDirection: 'row',
     flexGrow: 1,
-    margin: theme.spacing(2),
+    margin: theme.spacing(1),
     width: 240,
     padding: theme.spacing(1),
     transition: "box-shadow 0.2s ease-out",
@@ -16,15 +17,8 @@ const useStyles = makeStyles(theme => ({
       transform: "scale(1)",
     },
   },
-  wishList: {
-    position: "absolute",
-    top: theme.spacing(1),
-    right: theme.spacing(1),
-    color: theme.palette.primary.main,
-    backgroundColor: "#ffffff",
-    zIndex: 2,
-  },
   actionArea: {
+    width: 160,
     color: theme.palette.primary.main,
     "&:hover $focusHighlight": {
       opacity: 0.5,
@@ -36,9 +30,9 @@ const useStyles = makeStyles(theme => ({
     paddingBottom: 0,
   },
   mediaImage: {
-    height: 200,
+    height: 150,
     transform: "scale(0.95)",
-    transition: "transform 0.2s ease-out",
+    transition: "transform 0.15s ease-out",
   },
   title: {
     fontSize: 14,
@@ -48,10 +42,6 @@ const useStyles = makeStyles(theme => ({
     "&:hover": {
       color: theme.palette.primary.main,
     },
-  },
-  rating: {
-    paddingBottom: theme.spacing(1),
-    color: theme.palette.primary.main,
   },
   price: {
     fontSize: 14,
@@ -66,6 +56,14 @@ const useStyles = makeStyles(theme => ({
     "&:focus, &:hover, &:visited, &:link, &:active": {
       textDecoration: "none",
     },
+  },
+  outOfStock: {
+    paddingTop: theme.spacing(1),
+    paddingBottom: 7,
+    textTransform: "uppercase",
+    fontSize: 13,
+    fontWeight: 700,
+    color: theme.palette.secondary.medium,
   },
   snackbar: {
     position: "relative",
