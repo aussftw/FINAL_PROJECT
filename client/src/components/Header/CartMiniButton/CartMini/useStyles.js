@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles(theme => ({
   card: {
     position: "absolute",
-    maxHeight: "81vh",
+    maxHeight: "490px",
     top: 0,
     right: -45,
     width: 310,
@@ -18,7 +18,7 @@ const useStyles = makeStyles(theme => ({
   mini_cart_list: {
     listStyle: "none",
     margin: 0,
-    maxHeight: "65vh",
+    maxHeight: "370px",
     overflow: "hidden",
     overflowY: "auto",
     padding: 10,
@@ -29,6 +29,9 @@ const useStyles = makeStyles(theme => ({
     justifyContent: "center",
     alignItems: "center",
     fontSize: 13,
+  },
+  footer: {
+    height: 90,
   },
   total: {
     textAlign: "right",

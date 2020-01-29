@@ -56,24 +56,26 @@ const CartMini = ({ cart }) => {
                 );
               })}
             </ul>
-            <Typography className={classes.total}>
-              <Typography component="span" className={classes.subtotal}>Total: </Typography>
-              <Typography component="span" className={classes.subtotal_price}>
-                {`$${totalWithComas}`}
+            <div className={classes.footer}>
+              <Typography className={classes.total}>
+                <Typography component="span" className={classes.subtotal}>Total: </Typography>
+                <Typography component="span" className={classes.subtotal_price}>
+                  {`$${totalWithComas}`}
+                </Typography>
               </Typography>
-            </Typography>
-            <Typography className={classes.mini_cart_buttons}>
-              <Link to="/cart" className={classes.links}>
-                <Button variant="contained" className={classes.btn}>
-                  VIEW CART
-                </Button>
-              </Link>
-              <Link to="/checkout" className={classes.links}>
-                <Button variant="contained" className={classes.btn}>
-                  CHECKOUT
-                </Button>
-              </Link>
-            </Typography>
+              <Typography className={classes.mini_cart_buttons}>
+                <Link to="/cart" className={classes.links}>
+                  <Button variant="contained" className={classes.btn}>
+                    VIEW CART
+                  </Button>
+                </Link>
+                <Link to="/checkout" className={classes.links}>
+                  <Button variant="contained" className={classes.btn}>
+                    CHECKOUT
+                  </Button>
+                </Link>
+              </Typography>
+            </div>
           </div>
         ) : (
           <Typography className={classes.empty_mini_cart}>No products in the cart.</Typography>

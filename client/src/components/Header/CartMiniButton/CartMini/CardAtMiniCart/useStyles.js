@@ -30,7 +30,6 @@ const useStyles = makeStyles(theme => ({
     marginRight: 10,
   },
   mini_cart_card_img: {
-
     height: 77,
   },
   mini_cart_card_title: {

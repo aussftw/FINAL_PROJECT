@@ -2,8 +2,11 @@ import { makeStyles } from "@material-ui/core/styles";
 
 
 const useStyles = makeStyles(theme => ({
+  root: {
+    margin: "20px 10px 20px 10px"
+  },
   cartHeader: {
-    height: 50,
+    height: 56,
     alignItems: "center",
     border: "1px solid",
     borderColor: theme.palette.secondary.light,
@@ -13,12 +16,12 @@ const useStyles = makeStyles(theme => ({
     fontWeight: 600,
     color: theme.palette.secondary.dark,
     margin: "0 15px 0 15px",
-    // [theme.breakpoints.up("sm")]: {
-    //   margin: "0 5px 0 5px",
-    // },
+    [theme.breakpoints.up("sm")]: {
+      margin: "0 30px 0 50px",
+    },
   },
   cartFooter: {
-    height: 50,
+    height: 56,
     alignItems: "center",
     border: "1px solid",
     borderColor: theme.palette.secondary.light,
@@ -30,9 +33,6 @@ const useStyles = makeStyles(theme => ({
   btn: {
     marginTop: 10,
     fontSize: "14px",
-    // [theme.breakpoints.down("sm")]: {
-    //   fontSize: 10,
-    // },
   },
 }));
 
