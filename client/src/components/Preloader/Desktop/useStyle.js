@@ -7,7 +7,6 @@ const useStyle = makeStyles(() => ({
   },
   wrapper: {
     position: "relative",
-    // marginLeft: 300,
     marginTop: 250,
   },
   inner: {
@@ -27,7 +26,7 @@ const useStyle = makeStyles(() => ({
     height: 124,
     opacity: 0,
     animationName: "$plant",
-    animation: "0.5s ease-in-out infinite",
+    animation: "2s ease-in-out infinite",
     background:
       'url("http://booky.io/models/site-templates/images/plant.png") no-repeat scroll 0 -666px transparent',
   },
@@ -55,7 +54,7 @@ const useStyle = makeStyles(() => ({
     width: 121,
     height: 115,
     animationName: "$leaf-left",
-    animation: "0.5s ease-in-out infinite",
+    animation: "2s ease-in-out infinite",
     transform: "scale(0.7)",
     transformOrigin: "right bottom",
     background:
@@ -69,7 +68,7 @@ const useStyle = makeStyles(() => ({
     width: 60,
     height: 129,
     animationName: "$leaf-right",
-    animation: "0.5s ease-in-out infinite",
+    animation: "2s ease-in-out infinite",
     transform: "scale(0.7)",
     transformOrigin: "10px bottom",
     background:
@@ -84,7 +83,7 @@ const useStyle = makeStyles(() => ({
     width: 73,
     opacity: 0,
     animationName: "$leaf-left-first",
-    animation: "0.5s ease-in-out infinite",
+    animation: "2s ease-in-out infinite",
     transform: "scale(0.7)",
     transformOrigin: "70px bottom",
     background:

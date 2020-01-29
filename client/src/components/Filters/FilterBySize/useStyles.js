@@ -10,6 +10,9 @@ export const useStyles = makeStyles(() => ({
     boxShadow: "0 0 5px",
     borderRadius: 10,
     paddingBottom: 0,
+    [theme.breakpoints.down("md")]:{
+      marginBottom: 20,
+    }
   },
   line: {
     margin: "10px 20px",

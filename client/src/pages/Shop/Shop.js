@@ -5,8 +5,8 @@ import BackToTop from "../../components/common/GoUpButton";
 import Footer from "../../components/Footer";
 import Subscribe from "../../components/Subscribe/Subscribe";
 import Products from "../../components/Filters";
-import ScrollOnTop from '../../components/common/ScrollOnTop/ScrollOnTop';
-
+import ScrollOnTop from '../../ScrollOnTop/ScrollOnTop';
+import LastViewCarousel from "../../components/LastView"
 
 function Shop() {
 
@@ -17,6 +17,7 @@ function Shop() {
       <Header />
       <SubHeader />
       <Products />
+      <LastViewCarousel />
       <Subscribe />
       <Footer />
     </>

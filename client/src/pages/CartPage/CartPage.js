@@ -4,8 +4,7 @@ import Header from "../../components/Header";
 import SubHeader from "../../components/Header/SubHeader/SubHeader";
 import Footer from "../../components/Footer";
 import Cart from "../../components/Cart/Cart";
-import ScrollOnTop from '../../components/common/ScrollOnTop/ScrollOnTop';
-
+import ScrollOnTop from '../../ScrollOnTop/ScrollOnTop';
 
 const CartPage = () => {
   return (

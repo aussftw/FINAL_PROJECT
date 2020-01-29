@@ -8,51 +8,27 @@ import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
-import IconButton from "@material-ui/core/IconButton";
 import Snackbar from "@material-ui/core/Snackbar";
 import SnackbarContent from "@material-ui/core/SnackbarContent";
 import Typography from "@material-ui/core/Typography";
-import Tooltip from "@material-ui/core/Tooltip";
 
 import CheckCircleRoundedIcon from "@material-ui/icons/CheckCircleRounded";
-import Favorite from "@material-ui/icons/Favorite";
-import FavoriteBorder from "@material-ui/icons/FavoriteBorder";
-import StarBorder from "@material-ui/icons/StarBorder";
-
-import Rating from "@material-ui/lab/Rating";
 
 import useStyles from "./useStyles";
 
 import { addItemCart } from "../../store/actions/сart";
-import {
-  wishlistAddItem,
-  wishlistDeleteItem,
-} from "../../store/actions/wishlist";
-import { addToLastView } from "../../store/actions/addToLastView";
 
-const ItemCard = ({
+const ItemCardLite = ({
   id,
   itemNo,
   title,
-  rate,
   price,
   img,
   stock,
   addCartItem,
-  wishlistAll,
-  addWishlistItem,
-  deleteWishlistItem,
-  isAuthenticated,
-  addToLastViewCard,
 }) => {
   const classes = useStyles();
   const [snackbarAddToCart, setSnackbarAddToCart] = useState(false);
-
-  const CardTooltipText = value => {
-    if (value === undefined || value === 0) return "not yet rated";
-
-    return `rated ${value.toFixed(2)} out of 5`;
-  };
 
   const addItemToCart = () => {
     addCartItem(id, itemNo);
@@ -66,38 +42,9 @@ const ItemCard = ({
     setSnackbarAddToCart(false);
   };
 
-  const handleAddItemToWishlist = () => {
-    if (isAuthenticated) {
-      addWishlistItem(id);
-    }
-  };
-
   return (
-    <Card onClick={() => addToLastViewCard(itemNo)} className={classes.card}>
-      {wishlistAll.some(el => el._id === id) ? (
-        <Tooltip arrow title="Remove from wishlist">
-          <IconButton
-            className={classes.wishList}
-            onClick={() => deleteWishlistItem(id)}
-          >
-            <Favorite />
-          </IconButton>
-        </Tooltip>
-      ) : (
-        <Tooltip
-          arrow
-          title={
-            isAuthenticated ? "Add to wishlist" : "Only for authorized user"
-          }
-        >
-          <IconButton
-            className={classes.wishList}
-            onClick={handleAddItemToWishlist}
-          >
-            <FavoriteBorder />
-          </IconButton>
-        </Tooltip>
-      )}
+    <Card className={classes.card}>
+
       <Link className={classes.link} to={`/products/${itemNo}`}>
         <CardActionArea
           classes={{
@@ -115,21 +62,7 @@ const ItemCard = ({
             <Typography className={classes.title} noWrap align="center">
               {title}
             </Typography>
-            <Tooltip placement="bottom-end" title={CardTooltipText(rate)}>
-              <Box align="center">
-                <Rating
-                  className={classes.rating}
-                  name="rating"
-                  value={rate}
-                  size="small"
-                  precision={0.5}
-                  readOnly
-                  emptyIcon={
-                    <StarBorder color="primary" style={{ fontSize: 18 }} />
-                  }
-                />
-              </Box>
-            </Tooltip>
+
             <Typography className={classes.price} align="center">
               $
               {price.toFixed(2)}
@@ -138,9 +71,9 @@ const ItemCard = ({
         </CardActionArea>
       </Link>
       {stock === 0 ? (
-        <Button variant="text" fullWidth disabled>
+        <Typography className={classes.outOfStock} align="center">
           out of stock
-        </Button>
+        </Typography>
       ) : (
         <Button variant="text" fullWidth onClick={addItemToCart}>
           + add to cart
@@ -174,14 +107,10 @@ const ItemCard = ({
 
 function mapStateToProps(state) {
   return {
-    wishlistAll: state.wishlistReducer.wishlist,
     isAuthenticated: state.loginReducer.isAuthenticated,
   };
 }
 
 export default connect(mapStateToProps, {
-  addWishlistItem: wishlistAddItem,
-  deleteWishlistItem: wishlistDeleteItem,
-  addCartItem: addItemCart,
-  addToLastViewCard: addToLastView,
-})(ItemCard);
+  addCartItem: addItemCart
+})(ItemCardLite);

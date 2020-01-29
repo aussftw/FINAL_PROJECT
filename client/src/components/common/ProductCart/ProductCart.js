@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { connect } from "react-redux";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import Grid from "@material-ui/core/Grid";
+import Box from "@material-ui/core/Box";
 import IconButton from "@material-ui/core/IconButton";
 import AddIcon from "@material-ui/icons/Add";
 import RemoveIcon from "@material-ui/icons/Remove";
@@ -113,17 +114,26 @@ $
           </Tooltip>
         </Grid>
       )}
-      {matches && (<Grid item xs={3} />)}
+      {matches && <Grid item xs={3} />}
       {shopQty > 0 ? (
         <Grid item xs={5} sm={3} className={classes.quantityGrid}>
-          <Tooltip title="decrease">
-            <IconButton
-              aria-label="decrease"
-              onClick={decreaseCartProductQuantity}
-            >
-              <RemoveIcon />
-            </IconButton>
-          </Tooltip>
+          {cartQty > 1 ? (
+            <Tooltip title="decrease">
+              <IconButton
+                aria-label="decrease"
+                onClick={decreaseCartProductQuantity}
+              >
+                <RemoveIcon />
+              </IconButton>
+            </Tooltip>
+          ) : (
+            <Box style={{cursor: "not-allowed", borderRadius: "50%"}}>
+              <IconButton disabled>
+                <RemoveIcon />
+              </IconButton>
+            </Box>
+          )}
+
           <input
             className={classes.quantityNumber}
             id={qId}
@@ -133,20 +143,26 @@ $
             onChange={cartQtyInputHandler}
             onBlur={changeCartProductQuantity}
           />
-          <Tooltip title="increase">
-            <IconButton
-              aria-label="increase"
-              onClick={increaseCartProductQuantity}
-            >
-              <AddIcon />
-            </IconButton>
-          </Tooltip>
+          {cartQty < shopQty ? (
+            <Tooltip title="increase">
+              <IconButton
+                aria-label="increase"
+                onClick={increaseCartProductQuantity}
+              >
+                <AddIcon />
+              </IconButton>
+            </Tooltip>
+          ) : (
+            <Box style={{cursor: "not-allowed", borderRadius: "50%"}}>
+              <IconButton disabled>
+                <AddIcon />
+              </IconButton>
+            </Box>
+          )}
         </Grid>
-      ):(
+      ) : (
         <Grid item xs={5} sm={3} className={classes.quantityGrid}>
-          <Typography className={classes.outOfStock}>
-            Out of stock
-          </Typography>
+          <Typography className={classes.outOfStock}>Out of stock</Typography>
         </Grid>
       )}
       <Grid item xs={3} sm={1}>

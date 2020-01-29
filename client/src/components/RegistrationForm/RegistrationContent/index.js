@@ -112,7 +112,6 @@ const RegistrationContent = ({
               'Your password must be 8-16 characters, including only latin letters and numbers',
             ]}
           />
-
           <TextValidator
             label="Telephone"
             variant="outlined"

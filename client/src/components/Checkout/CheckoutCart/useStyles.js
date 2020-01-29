@@ -13,9 +13,8 @@ const useStyles = makeStyles(theme => ({
     fontWeight: 600,
     color: theme.palette.secondary.dark,
     margin: "0 10px 0 10px",
-    textAlign: "center",
     [theme.breakpoints.up("sm")]: {
-      margin: 0,
+      margin: "0 5px 0 5px",
     },
   },
   cartFooter: {
@@ -23,8 +22,18 @@ const useStyles = makeStyles(theme => ({
     alignItems: "center",
     border: "1px solid",
     borderColor: theme.palette.secondary.light,
+    borderTop: "none",
   },
-
+  links: {
+    textDecoration: "none",
+  },
+  btn: {
+    marginTop: 10,
+    fontSize: "12px",
+    [theme.breakpoints.down("sm")]: {
+      fontSize: 10,
+    },
+  },
 }));
 
 export default useStyles;

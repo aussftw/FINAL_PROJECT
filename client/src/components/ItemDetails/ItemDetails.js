@@ -5,16 +5,16 @@ import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
 
 import { Gallery, GalleryImage } from "react-gesture-gallery";
+import LastViewCarousel from "../LastView";
 
 import axios from "axios";
-import { Container, Typography, Divider, Box, Link, Button, IconButton, InputBase, List, ListItem, ListItemText, Tooltip } from "@material-ui/core";
+import { Container, Typography, Divider, Box, Link, Button, IconButton, InputBase, List, ListItem, ListItemText } from "@material-ui/core";
 import HomeIcon from "@material-ui/icons/HomeSharp";
 import FavoriteBorderSharpIcon from "@material-ui/icons/FavoriteBorderSharp";
-import StarBorder from "@material-ui/icons/StarBorder";
 import FavoriteSharpIcon from "@material-ui/icons/FavoriteSharp";
 import AddSharpIcon from "@material-ui/icons/AddSharp";
 import RemoveSharpIcon from "@material-ui/icons/RemoveSharp";
-import Rating from "@material-ui/lab/Rating";
+import RatingModule from "../common/RatingModule/RatingModule";
 // import QtyCounter from "../common/QtyCounter";
 import PreloaderAdaptive from "../Preloader/Adaptive";
 
@@ -51,26 +51,22 @@ const ItemDetails = ({
         setItem(response.data);
         setPreloader(false);
         // eslint-disable-next-line
-        console.log(response.data);
+        // console.log(response.data);
       })
       .catch(error => {
         // eslint-disable-next-line
         console.log(error);
+        setPreloader(false);
       });
   }, [itemNo.id]);
 
   // helpers
-  const CardTooltipText = rate => {
-    if (rate.rating === undefined) return "Not yet rated";
-    return `Rated ${rate.rating} out of 5`;
-  };
 
   const {
     name,
     imageUrls,
     color,
     sizes,
-    rate,
     currentPrice,
     _id,
     // previousPrice,
@@ -112,9 +108,8 @@ const ItemDetails = ({
   };
 
 
-  return (
+  return ( preloader ? (<PreloaderAdaptive />) : (
     <Container className={classes.brandsContaier} maxWidth="lg">
-      {preloader && <PreloaderAdaptive />}
       <Box className={classes.detailsHeader}>
         <Link href="/#" className={classes.linkIcon}>
           <HomeIcon style={{ fontSize: "30px", color: "black" }} />
@@ -169,19 +164,10 @@ const ItemDetails = ({
               </Typography>
             </ListItem>
           </List>
-          <Tooltip title={CardTooltipText(rate)}>
-            <Box className={classes.rating}>
-              <Rating
-                name="size-medium"
-                value={rate.rating}
-                size="medium"
-                precision={0.5}
-                emptyIcon={
-                  <StarBorder color="primary" style={{ fontSize: 24 }} />
-                }
-              />
-            </Box>
-          </Tooltip>
+          <RatingModule
+            id={item._id}
+            rate={item.rate.rating}
+          />
           <Divider variant="middle" />
           <List>
             {/* <ListItem className={classes.root}>
@@ -243,7 +229,6 @@ const ItemDetails = ({
           </Box>
         </Box>
       </Box>
-
       <Box className={classes.detailsDescription}>
         <span className={classes.descriptionTitle}>Description: </span>
         <Typography className={classes.descriptionText}>
@@ -251,6 +236,7 @@ const ItemDetails = ({
         </Typography>
       </Box>
     </Container>
+   )
   );
 };
 

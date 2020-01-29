@@ -9,12 +9,12 @@ import Container from "@material-ui/core/Container";
 import ItemCard from "../ItemCard/ItemCard";
 
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import useStyles from "./useStyles";
-import Preloader from "../Preloader/Desktop";
+// import useStyles from "./useStyles";
+import PreloaderAdaptive from "../Preloader/Adaptive";
 
 
 const ProductCarousel = () => {
-    const classes = useStyles();
+    // const classes = useStyles();
     const [productsV, setProductsV] = useState(null);
 
     useEffect(() => {
@@ -33,7 +33,7 @@ const ProductCarousel = () => {
       <Container maxWidth="lg">
         <Typography variant="h3">Our TOP products</Typography>
         {!productsV ? (
-          <Preloader />
+          <PreloaderAdaptive />
             ) : (
               <AliceCarousel
                 responsive={
@@ -58,7 +58,7 @@ const ProductCarousel = () => {
                 {productsV.slice(0, 8).map(value => {
                         return (
                           <ItemCard
-                            key={value._id}
+                              key={`product-carousel-${value._id}`}
                             id={value._id}
                             itemNo={value.itemNo}
                             title={value.name}
