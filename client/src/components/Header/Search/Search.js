@@ -5,15 +5,14 @@ import { connect } from "react-redux";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import Button from "@material-ui/core/Button";
 import SearchIcon from "@material-ui/icons/Search";
-// import { Tooltip } from "@material-ui/core";
 import useStyles from "./useStyles";
-// eslint-disable-next-line import/named
+// import { Tooltip } from "@material-ui/core";
+
 import {
   searchPhrases,
   searchPhrasesFailure,
 } from "../../../store/actions/Search";
 
-// eslint-disable-next-line no-shadow
 const CustomizedSearch = ({ searchPhrases, searchPhrasesFailure }) => {
   const classes = useStyles();
 
@@ -30,12 +29,6 @@ const CustomizedSearch = ({ searchPhrases, searchPhrasesFailure }) => {
       });
   }
 
-  // const someMiddleware = store => next => action => {
-  //   if(action.type === 'Нужный_вам_экшн'){
-  //     loadData(store.dispatch);
-  //   }
-  // }
-
   const searchChange = prop => event => {
     setText({ ...text, [prop]: event.target.value });
   };
@@ -51,22 +44,20 @@ const CustomizedSearch = ({ searchPhrases, searchPhrasesFailure }) => {
       <ValidatorForm
         noValidate={false}
         onSubmit={search}
-        className={classes.form}
       >
         <TextValidator
           value={text.query}
           onChange={searchChange("query")}
-          // classes={{ label: classes.input }}
           className={classes.input}
           variant="outlined"
           size="small"
           placeholder="Search..."
           validators={["required", "matchRegexp:^[`'\"()A-Za-zd.s_-]{3,50}"]}
-          errorMessages={[
-            "This field is required",
-            "Only latin letters, 3 characters and more",
-          ]}
-          // inputProps
+          // errorMessages={[
+          //   "This field is required",
+          //   "Only latin letters, 3 characters and more",
+          // ]}
+          FormHelperTextProps={{className: classes.helper}}
         />
 
         <Button
@@ -86,6 +77,4 @@ const CustomizedSearch = ({ searchPhrases, searchPhrasesFailure }) => {
   );
 };
 
-export default connect(null, { searchPhrases, searchPhrasesFailure })(
-  CustomizedSearch
-);
+export default connect(null, { searchPhrases, searchPhrasesFailure })(CustomizedSearch);

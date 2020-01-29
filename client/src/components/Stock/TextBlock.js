@@ -30,10 +30,9 @@ export default function TextBlock() {
   return (
     <div className={classes.paragraph}>
       <p>{text.name}</p>
-      <Typography variant="h4">
+      <Typography variant="h3">
         {text.title}
       </Typography>
-      <h4 className={classes.title}>{text.title}</h4>
       <Box display={{ xs: "none", md: "block" }}>
         <p>{text.desc}</p>
       </Box>

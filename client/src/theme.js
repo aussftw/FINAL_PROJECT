@@ -41,6 +41,7 @@ const theme = createMuiTheme({
     },
   },
   spacing: 8,
+
   overrides: {
     MuiGridListTile: {
       root: {
@@ -62,6 +63,7 @@ const theme = createMuiTheme({
         color: lightGreen[700],
       },
     },
+
     MuiIconButton: {
       root: {
         "&:hover": {
@@ -85,9 +87,9 @@ const theme = createMuiTheme({
         fontWeight: 600,
       },
       text: {
-        color: grey[900],
+        color: grey[700],
         "&:hover": {
-          color: lightGreen[700],
+          color: lightGreen[900],
           backgroundColor: lightGreen[100],
         },
       },
@@ -96,6 +98,13 @@ const theme = createMuiTheme({
         backgroundColor: lightGreen[700],
         "&:hover": {
           backgroundColor: lightGreen[900],
+        },
+      },
+      outlined: {
+        color: lightGreen[700],
+        "&:hover": {
+          color: lightGreen[900],
+          backgroundColor: lightGreen[100]
         },
       },
     },

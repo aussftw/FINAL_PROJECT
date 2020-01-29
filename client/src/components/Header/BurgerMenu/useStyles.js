@@ -28,6 +28,12 @@ const useStyles = makeStyles(theme => ({
   nestedList: {
     paddingLeft: "15%",
   },
+  expPanel: {
+    boxShadow: "none",
+    "&:before": {
+      height: 0,
+    },
+  },
   burgerMenuMobile: {
     display: "flex",
     [theme.breakpoints.up("md")]: {

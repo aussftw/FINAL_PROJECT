@@ -13,25 +13,26 @@ const LoginButton = ({
   user,
 }) => {
   const classes = useStyles();
-  
+
   return (
     <div className={classes.wrapper}>
       {isAuthenticated ? (
         <div className={classes.wrapper}>
           <div className={classes.span}>
-            <Typography component="span">Welcome,</Typography>
+            <Typography component="span">Welcome,&nbsp;</Typography>
             <Typography component="span">{` ${user.firstName} ${user.lastName}`}</Typography>
+            {/* className={classes.span} */}
           </div>
-          {/*<Link to="/profile" className={classes.link}>*/}
-          {/*  <IconButton>*/}
-          {/*    <AccountCircle />*/}
-          {/*  </IconButton>*/}
-          {/*</Link>*/}
+          {/* <Link to="/profile" className={classes.link}> */}
+          {/*  <IconButton> */}
+          {/*    <AccountCircle /> */}
+          {/*  </IconButton> */}
+          {/* </Link> */}
           <ProfileMenu />
         </div>
       ) : (
         <Link to="/login" className={classes.link}>
-          <Button className={classes.btn} variant="outlined" type="button">
+          <Button variant="contained" type="button">
             Sign In
           </Button>
         </Link>
