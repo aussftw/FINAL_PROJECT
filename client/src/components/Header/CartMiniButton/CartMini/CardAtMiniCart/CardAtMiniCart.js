@@ -4,7 +4,7 @@ import Typography from "@material-ui/core/Typography";
 import CloseIcon from "@material-ui/icons/Close";
 import Tooltip from "@material-ui/core/Tooltip";
 import { connect } from "react-redux";
-import { deleteItemCart } from "../../../store/actions/сart";
+import { deleteItemCart } from "../../../../../store/actions/сart";
 import useStyles from "./useStyles";
 
 const CardAtMiniCart = ({
@@ -25,7 +25,9 @@ const CardAtMiniCart = ({
   return (
     <li className={classes.mini_cart_card}>
       <Link to={`/products/${itemNo}`} className={classes.mini_cart_card_link}>
-        <img src={`${url}`} className={classes.mini_cart_card_img} alt="img" />
+        <div className={classes.mini_cart_card_img_wrapper}>
+          <img src={`${url}`} className={classes.mini_cart_card_img} alt="img" />
+        </div>
         <div>
           <Typography className={classes.mini_cart_card_title}>{title}</Typography>
           <Typography className={classes.mini_cart_card_quantity}>

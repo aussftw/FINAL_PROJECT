@@ -2,11 +2,9 @@ import React, { useState } from 'react';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-import Cards from 'react-credit-cards';
+import withStyles from '@material-ui/core/styles/withStyles';
 import useStyles from "./useStyles";
 import theme from '../../../../theme';
-import 'react-credit-cards/es/styles-compiled.css';
-import withStyles from '@material-ui/core/styles/withStyles';
 
 const GreenCheckbox = withStyles({
   root: {
@@ -37,13 +35,13 @@ const CheckoutPayments = () => {
         <p className={classes.paymentText}>Choose payment : </p>
         <FormControlLabel
           className={classes.checkboxLabel}
-          control={
+          control={(
             <GreenCheckbox
               checked={state.cash}
               onChange={e => handleChange(e)}
               value="cash"
             />
-          }
+          )}
           label="Cash"
         />
         <FormControlLabel

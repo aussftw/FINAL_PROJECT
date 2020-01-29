@@ -246,7 +246,9 @@ exports.getWishlist = (req, res, next) => {
     .populate("customerId")
     .then(wishlist => {
       if (!wishlist) {
-        res.status(400).json({ message: `Wishlist does not exist` });
+        res.status(200).json({
+          products: []
+        })
       } else {
         res.json(wishlist)
       }

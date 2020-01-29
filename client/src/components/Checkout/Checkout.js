@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
+import { connect } from 'react-redux';
 import CheckoutCart from "./CheckoutCart/CheckoutCart";
 import CheckoutOrder from './CheckoutOrder/CheckoutOrder';
 import useStyles from  "./useStyles";
-import { connect } from 'react-redux';
 
 
 const Checkout = ({userData , isAuthenticated}) => {

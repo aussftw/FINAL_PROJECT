@@ -2,15 +2,12 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(theme => ({
   item: {
-    height: 63,
+    height: 56,
     alignItems: "center",
     justifyItems: "center",
     border: "1px solid",
     borderTop: "none",
     borderColor: theme.palette.secondary.light,
-    [theme.breakpoints.down("xs")]: {
-      height: 50,
-    },
   },
   imageGrid: {
     display: "flex",
@@ -27,7 +24,7 @@ const useStyles = makeStyles(theme => ({
     },
   },
   title: {
-    fontSize: 11,
+    fontSize: 12,
     textTransform: "capitalize",
     color: theme.palette.secondary.dark,
     "&:hover": {
@@ -39,16 +36,33 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     justifyContent: "center",
   },
+  subtotal: {
+    [theme.breakpoints.up("sm")]: {
+      display: "flex",
+      flexDirection: "row",
+      justifyContent: "flex-end",
+    },
+    [theme.breakpoints.up("md")]: {
+      display: "flex",
+      flexDirection: "column",
+    },
+  },
   quantity: {
-    marginRight: 5,
+    marginRight: 15,
     textAlign: "right",
-    fontSize: 11,
+    fontSize: 12,
+    // [theme.breakpoints.up("sm")]: {
+    //   marginRight: 30,
+    // },
   },
   price: {
-    marginRight: 5,
+    marginRight: 15,
     textAlign: "right",
-    fontSize: 11,
+    fontSize: 12,
     fontWeight: 600,
+    // [theme.breakpoints.up("sm")]: {
+    //   marginRight: 30,
+    // },
   },
 }));
 
