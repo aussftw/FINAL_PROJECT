@@ -6,9 +6,11 @@ import * as axios from "axios";
 import Container from "@material-ui/core/Container";
 import Slide from "./slide";
 import Preloader from "../Preloader/Desktop";
+import useStyles from "./useStyles";
 
 const MainCarousel = () => {
   const [slidesData, setSlidesData] = useState(null);
+  const classes = useStyles;
 
   useEffect(() => {
     axios.get("/api/slides").then(slides => {
@@ -31,6 +33,10 @@ const MainCarousel = () => {
           showStatus={false}
           interval={2500}
           stopOnHover={false}
+          classes={{
+            root: classes.carouselBack,
+            legend: classes.legend,
+          }}
         >
           {slidesData.map(value => {
             return (
