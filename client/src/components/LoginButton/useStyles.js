@@ -3,7 +3,7 @@ import theme from "../../theme";
 
 const useStyles = makeStyles({
   wrapper: {
-    display: "inline-flex"
+    display: "inline-flex",
   },
   // btn: {
   //   fontSize: "14px",
@@ -17,6 +17,7 @@ const useStyles = makeStyles({
   //   },
   // },
   link: {
+    marginRight: "20px",
     textDecoration: "none",
     color: "black",
   },
@@ -26,8 +27,10 @@ const useStyles = makeStyles({
   span: {
     display: "none",
     [theme.breakpoints.up("md")]: {
+      marginRight: "15px",
       display: "inline-flex",
       alignItems: "center",
+      cursor: "default",
     },
   },
 });

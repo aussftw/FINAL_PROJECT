@@ -12,6 +12,7 @@ const useStyles = makeStyles(theme => ({
     marginTop: 90,
     marginBottom: 120,
     color: theme.palette.secondary.main,
+    cursor: "default",
   },
   productHeaders: {
     height: 50,
@@ -20,10 +21,11 @@ const useStyles = makeStyles(theme => ({
     borderColor: theme.palette.secondary.light,
   },
   title: {
-    fontSize: 12,
+    fontSize: 14,
     fontWeight: 600,
     textTransform: "uppercase",
     color: theme.palette.secondary.dark,
+    cursor: "default",
   },
   totalContainer: {
     display: "flex",
