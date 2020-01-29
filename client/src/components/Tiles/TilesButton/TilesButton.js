@@ -5,6 +5,6 @@ import useStyles from "./useStyles";
 const TilesButton = ({ text }) => {
   const classes = useStyles();
 
-  return <Button className={classes.btn}>{text}</Button>;
+  return <Button variant='text' className={classes.btn}>{text}</Button>;
 };
 export default TilesButton;
