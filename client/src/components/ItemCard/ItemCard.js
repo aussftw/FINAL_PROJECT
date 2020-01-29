@@ -44,6 +44,7 @@ const ItemCard = ({
   deleteWishlistItem,
   isAuthenticated,
   addToLastViewCard,
+  lastView
 }) => {
   const classes = useStyles();
   const [snackbarAddToCart, setSnackbarAddToCart] = useState(false);
@@ -73,7 +74,10 @@ const ItemCard = ({
   };
 
   return (
-    <Card onClick={() => addToLastViewCard(itemNo)} className={classes.card}>
+    <Card
+      onClick={() => addToLastViewCard(lastView,itemNo)}
+      className={classes.card}
+    >
       {wishlistAll.some(el => el._id === id) ? (
         <Tooltip arrow title="Remove from wishlist">
           <IconButton
@@ -131,8 +135,7 @@ const ItemCard = ({
               </Box>
             </Tooltip>
             <Typography className={classes.price} align="center">
-              $
-              {price.toFixed(2)}
+              ${price.toFixed(2)}
             </Typography>
           </CardContent>
         </CardActionArea>
@@ -158,14 +161,14 @@ const ItemCard = ({
         <SnackbarContent
           className={classes.snackbar}
           role="alert"
-          message={(
+          message={
             <Box>
               <CheckCircleRoundedIcon />
               <span className={classes.snackbarMessage}>
                 Added to your shopping cart!
               </span>
             </Box>
-          )}
+          }
         />
       </Snackbar>
     </Card>
@@ -176,6 +179,7 @@ function mapStateToProps(state) {
   return {
     wishlistAll: state.wishlistReducer.wishlist,
     isAuthenticated: state.loginReducer.isAuthenticated,
+    lastView: state.lastViewReducer.lastView,
   };
 }
 
@@ -184,4 +188,5 @@ export default connect(mapStateToProps, {
   deleteWishlistItem: wishlistDeleteItem,
   addCartItem: addItemCart,
   addToLastViewCard: addToLastView,
+  
 })(ItemCard);
