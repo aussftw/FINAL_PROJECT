@@ -235,7 +235,6 @@ const ItemDetails = ({
           {description}
         </Typography>
       </Box>
-      <LastViewCarousel />
     </Container>
    )
   );
