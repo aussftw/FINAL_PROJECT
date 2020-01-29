@@ -10,7 +10,7 @@ import ItemCard from "../ItemCard/ItemCard";
 
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 // import useStyles from "./useStyles";
-import Preloader from "../Preloader/Desktop";
+import PreloaderAdaptive from "../Preloader/Adaptive";
 
 
 const ProductCarousel = () => {
@@ -33,7 +33,7 @@ const ProductCarousel = () => {
       <Container maxWidth="lg">
         <Typography variant="h3">Our TOP products</Typography>
         {!productsV ? (
-          <Preloader />
+          <PreloaderAdaptive />
             ) : (
               <AliceCarousel
                 responsive={
