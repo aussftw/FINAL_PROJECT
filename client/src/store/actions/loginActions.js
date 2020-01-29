@@ -19,16 +19,16 @@ const logInFailure = error => {
   };
 };
 
-export const preloaderClose = () => {
-  return {
-    type: constants.PRELOADER_CLOSE,
-  };
-};
-
 export const userFromJwt = data => {
   return {
     type: constants.USER_FROM_JWT,
     payload: data,
+  };
+};
+
+export const preloaderClose = () => {
+  return {
+    type: constants.PRELOADER_CLOSE,
   };
 };
 
@@ -40,6 +40,7 @@ export const getUser = () => dispatch => {
         dispatch(userFromJwt(jwt(response.data.token)));
         // eslint-disable-next-line no-undef
         localStorage.setItem("user", JSON.stringify(response.data));
+
       }
       dispatch(logInSuccess(response.data));
     })

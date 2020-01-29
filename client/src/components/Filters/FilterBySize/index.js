@@ -7,7 +7,6 @@ import { green } from "@material-ui/core/colors";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import { withStyles } from "@material-ui/core/styles";
-import { connect } from "react-redux";
 import { useStyles } from "./useStyles";
 
 import {
@@ -16,6 +15,7 @@ import {
   removeSizes,
   setCurrentPage 
 } from "../../../store/actions/Filters";
+import { connect } from "react-redux";
 
 const GreenCheckbox = withStyles({
   root: {
@@ -29,11 +29,16 @@ const GreenCheckbox = withStyles({
   <Checkbox color="default" inputProps={{ name: "sizes" }} {...props} />
 ));
 
-const FilterBySize = ({ sizeListing, filters, getSizes,
+const FilterBySize = ({ 
+  sizeListing,
+  filters,
+  getSizes,
   selectSizes,
   removeSizes, 
-setCurrentPage }) => {
+  setCurrentPage }) => {
+  
   const classes = useStyles();
+  
   useEffect(() => {
     getSizes();
     // eslint-disable-next-line

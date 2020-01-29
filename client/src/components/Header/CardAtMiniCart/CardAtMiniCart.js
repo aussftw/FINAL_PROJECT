@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Typography from "@material-ui/core/Typography";
 import CloseIcon from "@material-ui/icons/Close";
 import Tooltip from "@material-ui/core/Tooltip";
 import { connect } from "react-redux";
@@ -26,13 +27,13 @@ const CardAtMiniCart = ({
       <Link to={`/products/${itemNo}`} className={classes.mini_cart_card_link}>
         <img src={`${url}`} className={classes.mini_cart_card_img} alt="img" />
         <div>
-          <p className={classes.mini_cart_card_title}>{title}</p>
-          <p>
+          <Typography className={classes.mini_cart_card_title}>{title}</Typography>
+          <Typography className={classes.mini_cart_card_quantity}>
             {`${qty} x `}
-            <span className={classes.mini_cart_card_price}>
-              ${price.toFixed(2)}
-            </span>
-          </p>
+            <Typography className={classes.mini_cart_card_price} component="span">
+              {`$${price.toFixed(2)}`}
+            </Typography>
+          </Typography>
         </div>
       </Link>
       <Tooltip title="close">
@@ -43,7 +44,6 @@ const CardAtMiniCart = ({
         />
       </Tooltip>
     </li>
-    // )
   );
 };
 

@@ -1,15 +1,25 @@
 import { createMuiTheme } from "@material-ui/core/styles";
 import { lightGreen, grey } from "@material-ui/core/colors";
 
-// const breakePointsValues = {
-//   xs: 0,
-//   sm: 576,
-//   md: 768,
-//   lg: 992,
-//   xl: 1200,
-// };
-
 const theme = createMuiTheme({
+  typography: {
+    h3: {
+      fontSize: 22,
+      fontWeight: 700,
+      marginBottom: 30,
+      textTransform: "uppercase",
+      color: grey[900]
+    },
+    h4: {
+      fontSize: 20,
+      fontWeight: 600,
+      margin: 30,
+      marginBottom: 8,
+      textTransform: "uppercase",
+      textAlign: "center",
+      color: grey[900]
+    }
+  },
   breakpoints: {
     xs: 0,
     sm: 576,
@@ -31,13 +41,16 @@ const theme = createMuiTheme({
     },
   },
   spacing: 8,
+
   overrides: {
     MuiGridListTile: {
       root: {
         position: "relative",
+        height:"auto"
       },
       tile: {
-        padding: "0 15px",
+        padding: "0.5em 0.5em",
+        height:"auto",
       },
     },
 
@@ -50,6 +63,7 @@ const theme = createMuiTheme({
         color: lightGreen[700],
       },
     },
+
     MuiIconButton: {
       root: {
         "&:hover": {
@@ -73,9 +87,9 @@ const theme = createMuiTheme({
         fontWeight: 600,
       },
       text: {
-        color: grey[900],
+        color: grey[700],
         "&:hover": {
-          color: lightGreen[700],
+          color: lightGreen[900],
           backgroundColor: lightGreen[100],
         },
       },
@@ -84,6 +98,13 @@ const theme = createMuiTheme({
         backgroundColor: lightGreen[700],
         "&:hover": {
           backgroundColor: lightGreen[900],
+        },
+      },
+      outlined: {
+        color: lightGreen[700],
+        "&:hover": {
+          color: lightGreen[900],
+          backgroundColor: lightGreen[100]
         },
       },
     },

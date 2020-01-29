@@ -20,13 +20,18 @@ const useStyles = makeStyles(theme => ({
     height: 92,
     objectFit: "cover",
   },
+  link: {
+    textDecoration: "none",
+    "&:focus, &:hover, &:visited, &:link, &:active": {
+      textDecoration: "none",
+    },
+  },
   title: {
     fontSize: 14,
     textTransform: "capitalize",
     color: theme.palette.secondary.dark,
     "&:hover": {
       color: theme.palette.primary.main,
-      cursor: "pointer",
     },
   },
   titleGrid: {
@@ -58,6 +63,7 @@ const useStyles = makeStyles(theme => ({
     textAlign: "right",
     fontSize: 14,
     fontWeight: 600,
+    cursor: "default",
   },
   closeBtnGrid: {
     display: "flex",
@@ -66,6 +72,10 @@ const useStyles = makeStyles(theme => ({
       alignSelf: "start",
     },
   },
+  outOfStock: {
+    fontSize: 15,
+    color: theme.palette.secondary.medium,
+  }
 }));
 
 export default useStyles;

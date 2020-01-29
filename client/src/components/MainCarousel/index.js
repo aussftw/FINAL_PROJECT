@@ -5,10 +5,12 @@ import { Carousel } from "react-responsive-carousel";
 import * as axios from "axios";
 import Container from "@material-ui/core/Container";
 import Slide from "./slide";
-import Preloader from "../Preloader/Desktop";
+import PreloaderAdaptive from "../Preloader/Adaptive";
+import useStyles from "./useStyles";
 
 const MainCarousel = () => {
   const [slidesData, setSlidesData] = useState(null);
+  const classes = useStyles;
 
   useEffect(() => {
     axios.get("/api/slides").then(slides => {
@@ -22,7 +24,7 @@ const MainCarousel = () => {
   return (
     <Container disableGutters>
       {!slidesData ? (
-        <Preloader />
+        <PreloaderAdaptive />
       ) : (
         <Carousel
           autoPlay
@@ -31,6 +33,10 @@ const MainCarousel = () => {
           showStatus={false}
           interval={2500}
           stopOnHover={false}
+          classes={{
+            root: classes.carouselBack,
+            legend: classes.legend,
+          }}
         >
           {slidesData.map(value => {
             return (

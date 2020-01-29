@@ -26,15 +26,20 @@ const useStyles = makeStyles(theme => ({
     fontSize: 11,
     marginRight: 10,
     color: theme.palette.text.secondary,
-    [theme.breakpoints.up("sm")]: {
-      fontSize: 14,
-    },
+
   },
   img_wrapper: {
-    width: 60,
+    width: 150,
     display: "flex",
+    justifyContent: "center",
   },
   img: {
+    height: 40,
+  },
+  after_img: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "flex-end",
     height: 40,
   },
   products: {

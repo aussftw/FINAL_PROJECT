@@ -32,7 +32,7 @@ const ContactUs = () => {
       <Hidden mdUp>
         <ExpansionPanel className={classes.mainContainer}>
           <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-            <Typography className={classes}>CONTACT US</Typography>
+            <Typography>CONTACT US</Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
             <DraftsIcon className={classes.contactUsIcon} />

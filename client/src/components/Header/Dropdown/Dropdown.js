@@ -10,36 +10,18 @@ import MenuList from "@material-ui/core/MenuList";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import { connect } from "react-redux";
-import axios from "axios";
-import {
-  searchPhrases,
-  searchPhrasesFailure,
-} from "../../../store/actions/Search";
+import {selectCategory} from "../../../store/actions/Filters";
 import useStyles from "./useStyles";
 
 const MenuListComposition = props => {
-  // eslint-disable-next-line no-shadow
-  const {
-    menuTitle,
-    menuItems,
-    className,
-    searchPhrases,
-    searchPhrasesFailure,
-  } = props;
+  const {menuTitle,menuItems,className,selectCategory} = props;
 
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
 
   const filter = category => {
-    axios
-      .get(`/api/products/filter?categories=${category}`)
-      .then(products => {
-        searchPhrases(products.data.products);
-      })
-      .catch(err => {
-        searchPhrasesFailure(err);
-      });
+    selectCategory(category)
   };
 
   const handleToggle = () => {
@@ -70,15 +52,9 @@ const MenuListComposition = props => {
     prevOpen.current = open;
   }, [open]);
 
-  // useEffect(() => {
-  //   props.getCategories();
-  //   // eslint-disable-next-line
-  // }, []);
-
   return (
     <div className={classes.root}>
       {menuItems.length > 0 ? (
-        // {props.categories.categories.length > 0 ? (
         <div>
           {/* ? : если в коллекции новые поступления есть */}
           {/* <Tooltip title="New" placement="top" arrow> */}
@@ -112,7 +88,6 @@ const MenuListComposition = props => {
           >
             {({ TransitionProps, placement }) => (
               <Grow
-                // eslint-disable-next-line
                 {...TransitionProps}
                 style={{
                   transformOrigin:
@@ -128,24 +103,12 @@ const MenuListComposition = props => {
                     >
                       {menuItems.map(menuItem => {
                         return (
-                          <MenuItem key={menuItem.id} onClick={handleClose}>
+                          <MenuItem key={menuItem._id} onClick={handleClose}>
                             <Link
-                              key={menuItem._id}
                               to={menuItem.url}
                               onClick={() => {
                                 filter(menuItem.description);
                               }}
-                              // onKeyDown={() => {
-                              //   filter(menuItem.description);
-                              // }}
-                              // onKeyPress={() => {
-                              //   filter(menuItem.description);
-                              // }}
-                              // onKeyPress={(ev) => {
-                              //   if (ev.ctrlKey && ev.key === 'Enter') {
-                              //     filter(menuItem.description);
-                              //   }
-                              // }}
                               className={className}
                             >
                               {menuItem.description}
@@ -153,26 +116,6 @@ const MenuListComposition = props => {
                           </MenuItem>
                         );
                       })}
-                      {/* {props.categories.categories.map(menuItem => { */}
-                      {/*  return ( */}
-                      {/*    <MenuItem key={menuItem.id} onClick={handleClose}> */}
-                      {/*      <Link */}
-                      {/*        to="/#" */}
-                      {/*        onClick={e => { */}
-                      {/*          e.preventDefault(); */}
-                      {/*          filter(menuItem.name); */}
-                      {/*        }} */}
-                      {/*        onKeyDown={e => { */}
-                      {/*          e.preventDefault(); */}
-                      {/*          filter(menuItem.name); */}
-                      {/*        }} */}
-                      {/*        className={className} */}
-                      {/*      > */}
-                      {/*        {menuItem.name} */}
-                      {/*      </Link> */}
-                      {/*    </MenuItem> */}
-                      {/*  ); */}
-                      {/* })} */}
                     </MenuList>
                   </ClickAwayListener>
                 </Paper>
@@ -187,20 +130,4 @@ const MenuListComposition = props => {
   );
 };
 
-// function mapStateToProps(state) {
-//   return {
-//     categories: state.categoriesReducer,
-//     // searchResult: state.searchReducer,
-//   };
-// }
-//
-// function mapDispatchToProps(dispatch) {
-//   return {
-//     getCategories: () => dispatch(getCategories()),
-//     searchPhrases: () => dispatch(searchPhrases()),
-//   };
-// }
-export default connect(null, { searchPhrases, searchPhrasesFailure })(
-  MenuListComposition
-);
-// export default connect(  mapStateToProps,  mapDispatchToProps)(MenuListComposition);
+export default connect(null, {selectCategory})(MenuListComposition);

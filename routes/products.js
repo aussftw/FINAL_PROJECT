@@ -14,6 +14,7 @@ const {
   getProductsFilterParams,
   searchProducts,
   getTopRatedProducts,
+  getNewestProducts,
   actualizationProducts
 } = require("../controllers/products");
 
@@ -90,6 +91,11 @@ router.get("/", getProducts);
 // @desc    GET top rated products
 // @access  Public
 router.get("/top", getTopRatedProducts);
+
+// @route   GET /products/newest
+// @desc    GET newest products
+// @access  Public
+router.get("/newest", getNewestProducts);
 
 // @route   POST /products/actualization
 // @desc    POST appropriate to search query products

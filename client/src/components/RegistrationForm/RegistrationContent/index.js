@@ -38,18 +38,20 @@ const RegistrationContent = ({
     >
       <Fade in={open}>
         <div className={classes.paper}>
-          <ModalHeader />
+          <ModalHeader login={false} reg />
           <div className={classes.wrapper}>
             <h3 className={classes.title}>Registration Form</h3>
             <ValidatorForm
               noValidate={false}
               onSubmit={() => setSubmitRegistration(true)}
+              autoComplete="off"
             >
               <TextValidator
                 label="First Name"
                 variant="outlined"
+                name="firstName"
                 value={newUserData.firstName}
-                onChange={handleChange("firstName")}
+                onChange={handleChange}
                 className={classes.textField}
                 validators={[
                   "required",
@@ -63,8 +65,9 @@ const RegistrationContent = ({
               <TextValidator
                 label="Last Name"
                 variant="outlined"
+                name="lastName"
                 value={newUserData.lastName}
-                onChange={handleChange("lastName")}
+                onChange={handleChange}
                 className={classes.textField}
                 validators={[
                   "matchRegexp:^[`'\"()A-Za-zd.s_-]{2,50}$",
@@ -78,20 +81,22 @@ const RegistrationContent = ({
               <TextValidator
                 label="Login"
                 variant="outlined"
+                name="login"
                 value={newUserData.login}
-                onChange={handleChange("login")}
+                onChange={handleChange}
                 className={classes.textField}
                 validators={["required", "matchRegexp:^[a-zA-Z0-9]{3,22}$"]}
                 errorMessages={[
                   "this field is required",
-                  "Your password must be 3-22 characters, including only latin letters and numbers",
+                  "Your login must be 3-22 characters, including only latin letters and numbers",
                 ]}
               />
               <TextValidator
                 label="Email"
                 variant="outlined"
+                name="email"
                 value={newUserData.email}
-                onChange={handleChange("email")}
+                onChange={handleChange}
                 className={classes.textField}
                 validators={["required", "isEmail"]}
                 errorMessages={["this field is required", "email is not valid"]}
@@ -101,8 +106,9 @@ const RegistrationContent = ({
                 className={classes.textField}
                 variant="outlined"
                 label="Password"
+                name="password"
                 value={newUserData.password}
-                onChange={handleChange("password")}
+                onChange={handleChange}
                 InputProps={{
                   type: showPassword ? "text" : "password",
                   endAdornment: (
@@ -131,18 +137,17 @@ const RegistrationContent = ({
               <TextValidator
                 label="Telephone"
                 variant="outlined"
-                type="tel"
+                name="telephone"
                 value={newUserData.telephone}
-                onChange={handleChange("telephone")}
+                onChange={handleChange}
                 className={classes.textField}
-                validators={["matchRegexp:^[0-9-+\\s()]{10,18}$"]}
-                errorMessages={["phone is not valid"]}
               />
               <TextValidator
                 label="Address"
                 variant="outlined"
+                name="address"
                 value={newUserData.address}
-                onChange={handleChange("address")}
+                onChange={handleChange}
                 className={classes.textField}
               />
               <Button type="submit" variant="outlined" className={classes.btn}>

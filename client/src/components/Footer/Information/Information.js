@@ -20,11 +20,11 @@ const Information = () => {
   const classes = useStyles();
 
   return (
-    <Grid item xs={12} lg={3} md={12} className={classes}>
+    <Grid item xs={12} lg={3} md={12}>
       <Hidden mdUp>
         <ExpansionPanel className={classes.mainContainer}>
           <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-            <Typography className={classes}>INFORMATION</Typography>
+            <Typography>INFORMATION</Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
             <Link href="/#" color="secondary">

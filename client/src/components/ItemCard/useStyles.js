@@ -5,7 +5,7 @@ const useStyles = makeStyles(theme => ({
     position: "relative",
     display: "inline-block",
     flexGrow: 1,
-    margin: theme.spacing(1),
+    margin: theme.spacing(2),
     width: 240,
     padding: theme.spacing(1),
     transition: "box-shadow 0.2s ease-out",
@@ -27,7 +27,7 @@ const useStyles = makeStyles(theme => ({
   actionArea: {
     color: theme.palette.primary.main,
     "&:hover $focusHighlight": {
-      opacity: 0,
+      opacity: 0.5,
     },
   },
   focusHighlight: {},
@@ -52,9 +52,6 @@ const useStyles = makeStyles(theme => ({
   rating: {
     paddingBottom: theme.spacing(1),
     color: theme.palette.primary.main,
-    iconEmpty: {
-      color: theme.palette.primary.main,
-    },
   },
   price: {
     fontSize: 14,
@@ -69,14 +66,6 @@ const useStyles = makeStyles(theme => ({
     "&:focus, &:hover, &:visited, &:link, &:active": {
       textDecoration: "none",
     },
-  },
-  outOfStock: {
-    paddingTop: theme.spacing(1),
-    paddingBottom: 7,
-    textTransform: "uppercase",
-    fontSize: 13,
-    fontWeight: 700,
-    color: theme.palette.secondary.medium,
   },
   snackbar: {
     position: "relative",

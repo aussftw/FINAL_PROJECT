@@ -1,5 +1,6 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import { connect } from "react-redux";
 import useStyles from "./useStyles";
@@ -26,7 +27,7 @@ function DeliveryAddressForm({
 
   return (
     <div>
-      <h2 className={classes.title}>Delivery address</h2>
+      <Typography className={classes.title} variant="h3">Delivery address</Typography>
       <div className={classes.root}>
         <ValidatorForm
           className={classes.form}
@@ -59,9 +60,9 @@ function DeliveryAddressForm({
           </Button>
         </ValidatorForm>
         {Boolean(error) && (
-          <p className={classes.message}>
+          <Typography className={classes.message}>
             {`Data didn't save. Error: ${error.message}`}
-          </p>
+          </Typography>
         )}
       </div>
     </div>
