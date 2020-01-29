@@ -41,6 +41,7 @@ const theme = createMuiTheme({
     },
   },
   spacing: 8,
+
   overrides: {
     MuiGridListTile: {
       root: {
@@ -62,6 +63,7 @@ const theme = createMuiTheme({
         color: lightGreen[700],
       },
     },
+
     MuiIconButton: {
       root: {
         "&:hover": {

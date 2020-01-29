@@ -177,7 +177,7 @@ exports.decreaseCartProductQuantity = async (req, res, next) => {
         const cartData = {};
 
         const isProductExistInCart = cart.products.some(
-          item => item.product.toString() === req.params.productId
+          item => item.product.toString() === req.params.productId && item.cartQuantity > 1
         );
 
         if (isProductExistInCart) {
@@ -185,7 +185,6 @@ exports.decreaseCartProductQuantity = async (req, res, next) => {
             if (item.product.toString() === req.params.productId) {
               item.cartQuantity -= 1;
             }
-
             return item;
           });
 
