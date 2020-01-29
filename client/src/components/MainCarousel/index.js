@@ -5,7 +5,7 @@ import { Carousel } from "react-responsive-carousel";
 import * as axios from "axios";
 import Container from "@material-ui/core/Container";
 import Slide from "./slide";
-import Preloader from "../Preloader/Desktop";
+import PreloaderAdaptive from "../Preloader/Adaptive";
 import useStyles from "./useStyles";
 
 const MainCarousel = () => {
@@ -24,7 +24,7 @@ const MainCarousel = () => {
   return (
     <Container disableGutters>
       {!slidesData ? (
-        <Preloader />
+        <PreloaderAdaptive />
       ) : (
         <Carousel
           autoPlay
