@@ -40,7 +40,7 @@ const Cart = ({ cart, getCartVar }) => {
 
   return (
     <Container className={classes.cartContainer} maxWidth="lg">
-      <Typography variant="h3">Cart</Typography>
+      <Typography variant="h3" style={{cursor: "default"}}>Cart</Typography>
       {cart.length === 0 && (
         <Typography className={classes.emptyCart}>
           Your cart is empty
