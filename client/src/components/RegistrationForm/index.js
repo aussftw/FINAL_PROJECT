@@ -16,7 +16,6 @@ const RegistrationForm = () => {
     isAdmin: false,
   });
   const [showPassword, setShowPassword] = useState(false);
-  const [open, setOpen] = useState(true);
   const [registration, setRegistration] = useState(false);
   const [message, setMessage] = useState('');
   const [submitRegistration, setSubmitRegistration] = useState(false);
@@ -39,7 +38,7 @@ const RegistrationForm = () => {
       newUserData.address = userData.address;
     }
     return newUserData;
-  },[userData]);
+  }, [userData]);
 
   const handleError = error => {
     switch (error) {
@@ -62,10 +61,6 @@ const RegistrationForm = () => {
     }
   };
 
-  const handleClose = () => {
-    setOpen(false);
-  };
-
   const handleChange = event => {
     setUserData({ ...userData, [event.target.name]: event.target.value });
   };
@@ -86,36 +81,30 @@ const RegistrationForm = () => {
           }
         })
         .catch(error => {
-          if (error.statusText === "Not Found" && error.status === 404){
+          console.log(error);
+          if (error.statusText === 'Not Found' && error.status === 404) {
             setMessage(error.message);
-          }else {
+          } else {
             setMessage(handleError(error));
           }
-         setSubmitRegistration(false);
+          setSubmitRegistration(false);
         });
     }
-  }, [submitRegistration , updateUser]);
+  }, [submitRegistration, updateUser]);
 
   return (
     <>
-      {/* eslint-disable-next-line no-nested-ternary */}
-      {open ? (
-        registration ? (
-          history.push("login")
-        ) : (
-          <RegistrationContent
-            handleClose={handleClose}
-            setSubmitRegistration={setSubmitRegistration}
-            handleChange={handleChange}
-            handleClickShowPassword={handleClickShowPassword}
-            open={open}
-            newUserData={userData}
-            showPassword={showPassword}
-            message={message}
-          />
-        )
+      {registration ? (
+      history.goBack()
       ) : (
-        history.push("/")
+      <RegistrationContent
+        setSubmitRegistration={setSubmitRegistration}
+        handleChange={handleChange}
+        handleClickShowPassword={handleClickShowPassword}
+        newUserData={userData}
+        showPassword={showPassword}
+        message={message}
+      />
       )}
     </>
   );
