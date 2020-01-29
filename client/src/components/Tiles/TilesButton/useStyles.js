@@ -3,19 +3,26 @@ import theme from "../../../theme";
 
 const useStyles = makeStyles({
   btn: {
-    fontSize: "14px",
-    letterSpacing: "0,5px",
+    letterSpacing: "0.5px",
     color: theme.palette.secondary.dark,
     backgroundColor: theme.palette.secondary.light,
     textTransform: "capitalize",
-    padding: "11px 0 9px",
+    padding: "1em 0 1em",
     width: "50%",
     position: "absolute",
-    bottom: 20,
+    bottom: "10%",
     left: "25%",
-    "&:hover": {
-      color: theme.palette.primary.main,
-      backgroundColor: theme.palette.secondary.light,
+    // "&:hover": {
+    //   color: theme.palette.primary.main,
+    //   backgroundColor: theme.palette.secondary.light,
+    // },
+    [theme.breakpoints.down("xs")]: {
+      fontSize:"8px",
+      padding: "0.5em 0 0.5em",
+    },
+    [theme.breakpoints.down("sm")]: {
+      fontSize:"13px",
+      padding: "0.5em 0 0.5em",
     },
   },
 });

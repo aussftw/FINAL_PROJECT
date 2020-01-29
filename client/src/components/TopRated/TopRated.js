@@ -3,8 +3,9 @@ import * as axios from "axios";
 
 import Container from "@material-ui/core/Container";
 import Hidden from "@material-ui/core/Hidden";
-
+import Typography from "@material-ui/core/Typography";
 import useStyles from "./useStyles";
+
 import ItemCard from "../ItemCard/ItemCard";
 import Preloader from "../Preloader";
 
@@ -25,9 +26,11 @@ const TopRated = () => {
   }, []);
 
   return (
-    <Container className={classes.topRatedContainer} maxWidth="lg">
-      {!products ? (
-        <Preloader />
+    <>
+      <Typography variant="h4">Top rated</Typography>
+      <Container className={classes.topRatedContainer} maxWidth="lg">
+        {!products ? (
+          <Preloader />
       ) : (
         products.slice(0, 8).map((value, index) => {
           let result;
@@ -75,7 +78,8 @@ const TopRated = () => {
           );
         })
       )}
-    </Container>
+      </Container>
+    </>
   );
 };
 

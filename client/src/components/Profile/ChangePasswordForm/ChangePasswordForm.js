@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import axios from "axios";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
@@ -50,7 +51,7 @@ export default function ChangePasswordForm() {
 
   return (
     <div>
-      <h2 className={classes.title}>Password change</h2>
+      <Typography className={classes.title} variant="h3">Password change</Typography>
       <div className={classes.root}>
         <ValidatorForm
           className={classes.form}
@@ -112,9 +113,7 @@ export default function ChangePasswordForm() {
               maxLength: 20,
               autoComplete: "new-password",
             }}
-            onChange={event =>
-              setConfirmationNewPasswordValue(event.target.value)
-            }
+            onChange={event => setConfirmationNewPasswordValue(event.target.value)}
             validators={[
               "required",
               "matchRegexp:^[a-zA-Z0-9]{8,20}$",
@@ -130,7 +129,7 @@ export default function ChangePasswordForm() {
             SAVE PASSWORD
           </Button>
         </ValidatorForm>
-        {Boolean(message) && <p className={classes.message}>{message}</p>}
+        {Boolean(message) && <Typography className={classes.message}>{message}</Typography>}
       </div>
     </div>
   );

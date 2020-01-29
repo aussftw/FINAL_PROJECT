@@ -5,7 +5,7 @@ const useStyles = makeStyles(theme => ({
     position: "relative",
     display: "inline-block",
     flexGrow: 1,
-    margin: theme.spacing(1),
+    margin: theme.spacing(2),
     width: 240,
     padding: theme.spacing(1),
     transition: "box-shadow 0.2s ease-out",
@@ -25,8 +25,9 @@ const useStyles = makeStyles(theme => ({
     zIndex: 2,
   },
   actionArea: {
+    color: theme.palette.primary.main,
     "&:hover $focusHighlight": {
-      opacity: 0,
+      opacity: 0.5,
     },
   },
   focusHighlight: {},
@@ -36,7 +37,7 @@ const useStyles = makeStyles(theme => ({
   },
   mediaImage: {
     height: 200,
-    transform: "scale(0.9)",
+    transform: "scale(0.95)",
     transition: "transform 0.2s ease-out",
   },
   title: {
@@ -51,24 +52,20 @@ const useStyles = makeStyles(theme => ({
   rating: {
     paddingBottom: theme.spacing(1),
     color: theme.palette.primary.main,
-    iconEmpty: {
-      color: theme.palette.primary.main,
-    },
   },
   price: {
     fontSize: 14,
     fontWeight: 600,
+    color: theme.palette.secondary.main,
     "&:hover": {
       color: theme.palette.primary.main,
     },
   },
-  outOfStock: {
-    paddingTop: theme.spacing(1),
-    paddingBottom: 7,
-    textTransform: "uppercase",
-    fontSize: 13,
-    fontWeight: 700,
-    color: theme.palette.secondary.medium,
+  link: {
+    textDecoration: "none",
+    "&:focus, &:hover, &:visited, &:link, &:active": {
+      textDecoration: "none",
+    },
   },
   snackbar: {
     position: "relative",

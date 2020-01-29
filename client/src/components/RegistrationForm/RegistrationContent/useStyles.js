@@ -46,7 +46,15 @@ const useStyles = makeStyles({
     border: `5px solid ${theme.palette.primary.main}`,
     borderRadius: "8px",
     boxShadow: theme.shadows[5],
-    maxWidth: "50vw",
+    maxWidth: "40vw",
+    maxHeight:"90vh",
+    overflowX : 'auto',
+    [theme.breakpoints.down("lg")]:{
+      maxWidth: "65vw",
+    },
+    [theme.breakpoints.down("xs")]:{
+      maxWidth: "90vw",
+    },
   },
   errText: {
     fontSize: "24px",

@@ -1,50 +1,27 @@
 import React, { useState, useEffect } from "react";
-import { makeStyles } from "@material-ui/core/styles";
 
 import Container from "@material-ui/core/Container";
-import { connect } from "react-redux";
+import { useStyles } from "./useStyles";
 
 import FilterByCategory from "./FilterByCategory";
 import FilterByColor from "./FilterByColor";
 import FilterBySize from "./FilterBySize";
 import FilterByPrice from "./FilterByPrice";
 import Pagination from "./Pagination";
-
-import { getProducts, setCurrentPage } from "../../store/actions/Filters";
-
+import ModalFiltersAdaptive from "./ModalFiltersAdaptive";
 import ItemCard from "../ItemCard/ItemCard";
 
-const useStyles = makeStyles(() => ({
-  main: {
-    width: "100%",
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "start",
-  },
-  allFilters: {
-    width: "30%",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "start",
-  },
-  items: {
-    marginTop: 93,
-    width: "70%",
-    display: "flex",
-    flexWrap: "wrap",
-    alignItems: "start",
-  },
-}));
+import { getProducts, setCurrentPage } from "../../store/actions/Filters";
+import { connect } from "react-redux";
 
 const Products = ({
   productListing,
-  isProductListing,
   filters,
   currentPage,
   getProducts,
   setCurrentPage,
 }) => {
-  const [postsPerPage] = useState(9);
+  const [productsPerPage] = useState(9);
 
   const classes = useStyles();
 
@@ -59,27 +36,28 @@ const Products = ({
       return (
         <ItemCard
           key={value._id}
-          title={value.name
-            .split(" ")
-            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-            .join(" ")}
+          id={value._id}
+          itemNo={value.itemNo}
+          title={value.name}
+          rate={value.rate.rating}
           price={value.currentPrice}
-          inCart={false}
-          inWishList={false}
+          img={value.imageUrls[0]}
+          stock={value.quantity}
         />
       );
     });
   }
 
-  // Get current posts
-  const indexLastPosts = currentPage * postsPerPage;
-  const indexOfFirstPost = indexLastPosts - postsPerPage;
-  const currentPost = listProduct.slice(indexOfFirstPost, indexLastPosts);
+  // Get current products
+  const indexLastProducts = currentPage * productsPerPage;
+  const indexOfFirstProducts = indexLastProducts - productsPerPage;
+  const currentProduct = listProduct.slice(indexOfFirstProducts, indexLastProducts);
 
   // Change page
   const paginate = pageNumber => setCurrentPage(pageNumber);
 
   return (
+    <>
     <Container className={classes.main}>
       <div className={classes.allFilters}>
         <FilterByCategory />
@@ -88,14 +66,18 @@ const Products = ({
         <FilterByPrice />
       </div>
       <div className={classes.items}>
-        {isProductListing ? <div>Loading...</div> : currentPost}
-        <Pagination
-          postsPerPage={postsPerPage}
-          totalPosts={productListing.length}
+        <div style={{textAlign: "center"}}>
+         <ModalFiltersAdaptive />
+          {currentProduct}
+        </div>
+       <Pagination
+          productsPerPage={productsPerPage}
+          totalProducts={productListing.length}
           paginate={paginate}
         />
       </div>
     </Container>
+    </>
   );
 };
 

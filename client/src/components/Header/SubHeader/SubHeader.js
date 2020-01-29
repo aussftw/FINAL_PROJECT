@@ -1,47 +1,40 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-
 import Box from "@material-ui/core/Box";
+import MenuListComposition from "../Dropdown/Dropdown";
+import getLinks from "../../../store/actions/Links";
 import useStyles from "./useStyles";
 
-import getLinks from "../../../store/actions/Links";
-import MenuListComposition from "../Dropdown/Dropdown";
+
+
 // import CustomizedSearch from "../Search/Search";
 
-const SubHeader = props => {
-  useEffect(() => {
-    props.getLinks();
-    // eslint-disable-next-line
-  }, []);
+const SubHeader = ({getLinks, links}) => {
+
+    useEffect(() => {
+      if(links.length === 0 ){
+      getLinks();
+      }
+    }, [getLinks])
+
+
 
   const classes = useStyles();
-
-  // const renderLink = React.useMemo(
-  //     () =>
-  //         React.forwardRef((linkProps, ref) => (
-  //             // With react-router-dom@^6.0.0 use `ref` instead of `innerRef`
-  //             // See https://github.com/ReactTraining/react-router/issues/6056
-  //             <Link to={to} {...linkProps} innerRef={ref} />
-  //         )),
-  //     [to],
-  // );
 
   return (
     <div>
       <div className={classes.searchMobileWrap}>
         {/* <CustomizedSearch className={classes.searchMobile} /> */}
       </div>
-      {/* eslint-disable-next-line react/destructuring-assignment */}
-      {props.links.links.length > 0 ? (
+      {links.length > 0 ? (
         <Box
           display="flex"
           justifyContent="center"
           className={classes.subheader}
         >
           <Box>
-            {/* eslint-disable-next-line react/destructuring-assignment */}
-            {props.links.links.map(item => {
+            {links.map(item => {
               return item.links.length === 1 ? (
                 <Link
                   key={item._id}
@@ -70,7 +63,7 @@ const SubHeader = props => {
 
 function mapStateToProps(state) {
   return {
-    links: state.linksReducer,
+    links: state.linksReducer.links,
   };
 }
 

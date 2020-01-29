@@ -10,6 +10,7 @@ import LoginForm from "../components/LoginForm";
 import NotFound from "../pages/NotFound/NotFound";
 import RegistrationForm from "../components/RegistrationForm";
 import ItemDetailsPage from "../pages/ItemDetailsPage/ItemDetailsPage";
+import CheckoutPage from "../pages/CheckoutPage/CheckoutPage"
 import setAuthToken from "../components/common/setAuthToken";
 import isExpired from "../components/common/isExpired/isExpired";
 import Preloader from "../components/Preloader";
@@ -85,6 +86,12 @@ const Routes = ({
       <Route path="/login">
         <LoginForm />
       </Route>
+      <Route path="/products/:id">
+        <ItemDetailsPage />
+      </Route>
+      <Route path="/checkout">
+        <CheckoutPage />
+      </Route>
       <Redirect to="/" />
     </Switch>
   ) : (
@@ -119,8 +126,12 @@ const Routes = ({
       <Route path="/products/:id">
         <ItemDetailsPage />
       </Route>
+      <Route path="/checkout">
+        <CheckoutPage />
+      </Route>
       <Redirect to="/" />
     </Switch>
+
   );
 };
 

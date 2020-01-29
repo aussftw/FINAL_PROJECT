@@ -17,7 +17,7 @@ function numberWithCommas(x) {
 const CartMini = ({ cart }) => {
   const classes = useStyles();
   const matches = useMediaQuery(theme => theme.breakpoints.up("sm"));
-  const subTotal =
+  const total =
     cart.length > 0
       ? cart
           .reduce(function(sum, current) {
@@ -29,7 +29,7 @@ const CartMini = ({ cart }) => {
           }, 0)
           .toFixed(2)
       : 0;
-  const subTotalWithComas = numberWithCommas(subTotal);
+  const totalWithComas = numberWithCommas(total);
 
   return (
     matches && (
@@ -56,9 +56,9 @@ const CartMini = ({ cart }) => {
               })}
             </ul>
             <p className={classes.total}>
-              <span className={classes.subtotal}>Subtotal: </span>
+              <span className={classes.subtotal}>Total: </span>
               <span className={classes.subtotal_price}>
-                ${subTotalWithComas}
+                {`$${totalWithComas}`}
               </span>
             </p>
             <p className={classes.mini_cart_buttons}>

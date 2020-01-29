@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
 import Box from "@material-ui/core/Box";
@@ -19,13 +20,15 @@ import FavoriteBorder from "@material-ui/icons/FavoriteBorder";
 import StarBorder from "@material-ui/icons/StarBorder";
 
 import Rating from "@material-ui/lab/Rating";
-import { connect } from "react-redux";
+
 import useStyles from "./useStyles";
+
 import { addItemCart } from "../../store/actions/сart";
 import {
   wishlistAddItem,
   wishlistDeleteItem,
 } from "../../store/actions/wishlist";
+import { addToLastView } from "../../store/actions/addToLastView";
 
 const ItemCard = ({
   id,
@@ -40,14 +43,15 @@ const ItemCard = ({
   addWishlistItem,
   deleteWishlistItem,
   isAuthenticated,
+  addToLastViewCard,
 }) => {
   const classes = useStyles();
   const [snackbarAddToCart, setSnackbarAddToCart] = useState(false);
 
   const CardTooltipText = value => {
-    if (value === undefined) return "Not yet rated";
+    if (value === undefined || value === 0) return "not yet rated";
 
-    return `Rated ${value.toFixed(2)} out of 5`;
+    return `rated ${value.toFixed(2)} out of 5`;
   };
 
   const addItemToCart = () => {
@@ -62,14 +66,14 @@ const ItemCard = ({
     setSnackbarAddToCart(false);
   };
 
-  const handleAddtemToWishlist = () => {
+  const handleAddItemToWishlist = () => {
     if (isAuthenticated) {
       addWishlistItem(id);
     }
   };
 
   return (
-    <Card className={classes.card}>
+    <Card onClick={() => addToLastViewCard(itemNo)} className={classes.card}>
       {wishlistAll.some(el => el._id === id) ? (
         <Tooltip arrow title="Remove from wishlist">
           <IconButton
@@ -88,13 +92,13 @@ const ItemCard = ({
         >
           <IconButton
             className={classes.wishList}
-            onClick={handleAddtemToWishlist}
+            onClick={handleAddItemToWishlist}
           >
             <FavoriteBorder />
           </IconButton>
         </Tooltip>
       )}
-      <Link to={`/products/${itemNo}`}>
+      <Link className={classes.link} to={`/products/${itemNo}`}>
         <CardActionArea
           classes={{
             root: classes.actionArea,
@@ -127,15 +131,16 @@ const ItemCard = ({
               </Box>
             </Tooltip>
             <Typography className={classes.price} align="center">
-              ${price.toFixed(2)}
+              $
+              {price.toFixed(2)}
             </Typography>
           </CardContent>
         </CardActionArea>
       </Link>
       {stock === 0 ? (
-        <Typography className={classes.outOfStock} align="center">
+        <Button variant="text" fullWidth disabled>
           out of stock
-        </Typography>
+        </Button>
       ) : (
         <Button variant="text" fullWidth onClick={addItemToCart}>
           + add to cart
@@ -153,14 +158,14 @@ const ItemCard = ({
         <SnackbarContent
           className={classes.snackbar}
           role="alert"
-          message={
+          message={(
             <Box>
               <CheckCircleRoundedIcon />
               <span className={classes.snackbarMessage}>
                 Added to your shopping cart!
               </span>
             </Box>
-          }
+          )}
         />
       </Snackbar>
     </Card>
@@ -178,4 +183,5 @@ export default connect(mapStateToProps, {
   addWishlistItem: wishlistAddItem,
   deleteWishlistItem: wishlistDeleteItem,
   addCartItem: addItemCart,
+  addToLastViewCard: addToLastView,
 })(ItemCard);
