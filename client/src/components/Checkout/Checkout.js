@@ -13,10 +13,10 @@ const Checkout = () => {
     <Container className={classes.checkoutContainer} maxWidth="lg">
       <Typography variant="h3">Checkout</Typography>
       <Grid container>
-        <Grid item xs={12} sm={8}>
+        <Grid item xs={12} md={8}>
           Form
         </Grid>
-        <Grid item xs={12} sm={4}>
+        <Grid item xs={12} md={4}>
           <CheckoutCart />
         </Grid>
       </Grid>

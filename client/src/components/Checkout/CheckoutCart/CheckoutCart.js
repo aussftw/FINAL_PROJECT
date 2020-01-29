@@ -35,12 +35,13 @@ const CheckoutCart = ( {cart} ) => {
   return (
     <div>
       <Grid container className={classes.cartHeader}>
-        <Grid item xs={6}>
-          <Typography className={classes.title} align="left">
+        <Grid item xs={4}>
+          <Typography className={classes.title} align="center">
             Product
           </Typography>
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={4} />
+        <Grid item xs={4}>
           <Typography className={classes.title} align="right">
             Subtotal
           </Typography>
@@ -63,12 +64,13 @@ const CheckoutCart = ( {cart} ) => {
         )
       })}
       <Grid container className={classes.cartFooter}>
-        <Grid item xs={6}>
-          <Typography className={classes.title} align="left">
+        <Grid item xs={4}>
+          <Typography className={classes.title} align="center">
             Total
           </Typography>
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={4} />
+        <Grid item xs={4}>
           <Typography className={classes.title} align="right">
             {`$${totalWithComas}`}
           </Typography>

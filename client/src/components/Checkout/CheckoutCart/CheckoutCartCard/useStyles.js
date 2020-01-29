@@ -27,7 +27,7 @@ const useStyles = makeStyles(theme => ({
     },
   },
   title: {
-    fontSize: 11,
+    fontSize: 12,
     textTransform: "capitalize",
     color: theme.palette.secondary.dark,
     "&:hover": {
@@ -40,14 +40,14 @@ const useStyles = makeStyles(theme => ({
     justifyContent: "center",
   },
   quantity: {
-    marginRight: 5,
+    marginRight: 15,
     textAlign: "right",
-    fontSize: 11,
+    fontSize: 12,
   },
   price: {
-    marginRight: 5,
+    marginRight: 15,
     textAlign: "right",
-    fontSize: 11,
+    fontSize: 12,
     fontWeight: 600,
   },
 }));

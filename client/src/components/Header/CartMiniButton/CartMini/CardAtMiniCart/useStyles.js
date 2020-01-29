@@ -22,10 +22,16 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     fontSize: 14,
   },
-  mini_cart_card_img: {
+  mini_cart_card_img_wrapper: {
+    display: "flex",
+    justifyContent: "center",
     width: 88,
     height: 77,
     marginRight: 10,
+  },
+  mini_cart_card_img: {
+
+    height: 77,
   },
   mini_cart_card_title: {
     width: 152,
