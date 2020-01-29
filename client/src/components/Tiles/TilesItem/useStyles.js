@@ -19,8 +19,8 @@ const useStyles = makeStyles({
     overflow:"hidden",
     cursor:"pointer",
     "&:hover > button": {
-      color: theme.palette.primary.main,
-      backgroundColor: theme.palette.secondary.light,
+      color: theme.palette.primary.dark,
+      backgroundColor: theme.palette.primary.light,
     },
   },
 });
