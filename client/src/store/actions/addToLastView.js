@@ -8,29 +8,26 @@ export const addToLastViewSuccess = data => {
   };
 };
 
-export const addToLastView = data => dispatch => {
-  let query = [];
-
-  if (store.getState().lastViewReducer.lastView.length < 1) {
-    query.push(data);
-    dispatch(addToLastViewSuccess(query));
+export const addToLastView = (arr, data) => dispatch => {
+  if (!arr.length) {
+    const newArr = [...arr, ...[data]];
+    dispatch(addToLastViewSuccess(newArr));
+    console.log("IF_STATE_EMPTY", newArr);
   } else {
-    query = store.getState().lastViewReducer.lastView.map(item => {
-      if (item !== data) {
-        return item;
-      }
-      console.log("query", query);
-      return false;
-    });
-
-    query.unshift(data);
-
-    let newQuery = [];
-    if (query.length > 4) {
-      newQuery = query.slice(0, 3);
+    const newArr = [...arr, ...[data]];
+    const unique = [...new Set(newArr)];
+    console.log("unique", unique);
+    let current = [];
+    if (unique.includes(data)) {
+      current = unique.filter(x => x !== data);
+      current = [...current, ...[data]];
     }
-    console.log("newQuery", newQuery);
+    console.log("current", current);
 
-    dispatch(addToLastViewSuccess(newQuery));
+    const lastSlice = current[current.length - 1];
+    console.log("lastSlice", lastSlice);
+    const test = current.filter(x => x);
+
+    dispatch(addToLastViewSuccess(current));
   }
 };

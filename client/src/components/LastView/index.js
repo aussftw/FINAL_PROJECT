@@ -1,19 +1,18 @@
 import React, { useEffect, useState } from "react";
 import * as axios from "axios";
 
-
 import "react-alice-carousel/lib/alice-carousel.css";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
-import RenderCards from "./renderCards";
 import { connect } from "react-redux";
+import RenderCards from "./renderCards";
 import { addToLastView } from "../../store/actions/addToLastView";
 
 const LastViewCarousel = ({ lastView }) => {
-
   const [productsLV, setProductsLV] = useState([]);
 
   useEffect(() => {
+    console.log("lastView", lastView);
     if (lastView.length > 0) {
       const lastViewArr = [];
       lastView.map(value => {
@@ -22,7 +21,6 @@ const LastViewCarousel = ({ lastView }) => {
           .then(response => {
             lastViewArr.push(response.data);
             setProductsLV([...productsLV, ...lastViewArr]);
-
           })
           .catch(err => {
             // eslint-disable-next-line no-console
@@ -30,6 +28,7 @@ const LastViewCarousel = ({ lastView }) => {
           });
       });
     }
+    // eslint-disable-next-line
   }, [lastView]);
   return <RenderCards productsLV={productsLV} />;
 };
@@ -39,4 +38,6 @@ function mapStateToProps(state) {
     lastView: state.lastViewReducer.lastView,
   };
 }
-export default connect(mapStateToProps, { getLastView: addToLastView })(LastViewCarousel);
+export default connect(mapStateToProps, { getLastView: addToLastView })(
+  LastViewCarousel
+);
