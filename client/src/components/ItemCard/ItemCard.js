@@ -138,9 +138,9 @@ const ItemCard = ({
         </CardActionArea>
       </Link>
       {stock === 0 ? (
-        <Typography className={classes.outOfStock} align="center">
+        <Button variant="text" fullWidth disabled>
           out of stock
-        </Typography>
+        </Button>
       ) : (
         <Button variant="text" fullWidth onClick={addItemToCart}>
           + add to cart
