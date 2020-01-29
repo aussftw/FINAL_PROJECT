@@ -44,6 +44,7 @@ const RenderCards = ({ productsLV }) => {
                     ? uniqBy(productsLV, 'itemNo').slice(0, 8).map(value => {
                         return (
                             <ItemCardLite
+                                key={`last-view-${value._id}`}
                                 id={value._id}
                                 itemNo={value.itemNo}
                                 title={value.name}

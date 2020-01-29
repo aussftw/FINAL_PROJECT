@@ -58,7 +58,7 @@ const ProductCarousel = () => {
                 {productsV.slice(0, 8).map(value => {
                         return (
                           <ItemCard
-                            key={value._id}
+                              key={`product-carousel-${value._id}`}
                             id={value._id}
                             itemNo={value.itemNo}
                             title={value.name}

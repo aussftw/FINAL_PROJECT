@@ -9,10 +9,8 @@ const useStyles = makeStyles(theme => ({
   },
   slider: {
     // maxHeight: 200,
-    backgroundColor: "#fff",
   },
   block: {
-    backgroundColor: "#fff",
     marginTop: -250,
     width: "50%",
     marginLeft: 33,
@@ -21,7 +19,6 @@ const useStyles = makeStyles(theme => ({
     },
   },
   paragraph: {
-    backgroundColor: "#fff",
     textAlign: "left",
     color: "#989898",
     [theme.breakpoints.down("xs")]: {
