@@ -5,9 +5,10 @@ const useStyles = makeStyles(theme => ({
     position: "relative",
     display: "inline-block",
     flexGrow: 1,
-    margin: theme.spacing(2),
     width: 240,
+    height: 315,
     padding: theme.spacing(1),
+    margin: theme.spacing(2),
     transition: "box-shadow 0.2s ease-out",
     "&:hover": {
       boxShadow: "2px 3px 7px 0px rgba(0,0,0,0.24)",
@@ -27,7 +28,7 @@ const useStyles = makeStyles(theme => ({
   actionArea: {
     color: theme.palette.primary.main,
     "&:hover $focusHighlight": {
-      opacity: 0.5,
+      opacity: 0,
     },
   },
   focusHighlight: {},
@@ -77,6 +78,16 @@ const useStyles = makeStyles(theme => ({
     left: 68,
     fontSize: 15,
   },
+  cardSkeleton: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-around",
+    alignItems: "center",
+    width: 240,
+    height: 315,
+    padding: theme.spacing(1),
+    margin: theme.spacing(2),
+  }
 }));
 
 export default useStyles;
