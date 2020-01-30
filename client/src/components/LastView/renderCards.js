@@ -1,7 +1,7 @@
 import React from "react";
 
-import uniqBy from "lodash/uniqBy";
-// import * as _ from "lodash";
+// import uniqBy from "lodash/uniqBy";
+
 import AliceCarousel from "react-alice-carousel";
 import "react-alice-carousel/lib/alice-carousel.css";
 
@@ -20,8 +20,8 @@ const RenderCards = ({ productsLV }) => {
     return (
       <Container maxWidth="lg">
         <h2 className={classes.title}>Last View</h2>
-        {/* <AliceCarousel */}
-        {/* responsive=
+    <AliceCarousel
+    responsive=
         {{
           600: {
             items: 2,
@@ -39,11 +39,10 @@ const RenderCards = ({ productsLV }) => {
         buttonsDisabled autoPlay autoPlayInterval=
         {1800}
         duration=
-        {600}> */}
+        {600}>
+
         {productsLV
-          ? uniqBy(productsLV, "itemNo")
-              .slice(0, 8)
-              .map(value => {
+          ? productsLV.map(value => {
                 return (
                   <ItemCardLite
                     key={`last-view-${value._id}`}
@@ -58,7 +57,7 @@ const RenderCards = ({ productsLV }) => {
                 );
               })
           : console.log("none")}
-        {/* </AliceCarousel> */}
+</AliceCarousel>
       </Container>
     );
   }
