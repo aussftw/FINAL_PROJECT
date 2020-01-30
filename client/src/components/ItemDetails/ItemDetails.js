@@ -5,7 +5,6 @@ import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
 
 import { Gallery, GalleryImage } from "react-gesture-gallery";
-import LastViewCarousel from "../LastView";
 
 import axios from "axios";
 import { Container, Typography, Divider, Box, Link, Button, IconButton, InputBase, List, ListItem, ListItemText } from "@material-ui/core";

@@ -13,14 +13,15 @@ import Snackbar from "@material-ui/core/Snackbar";
 import SnackbarContent from "@material-ui/core/SnackbarContent";
 import Typography from "@material-ui/core/Typography";
 import Tooltip from "@material-ui/core/Tooltip";
+import Rating from "@material-ui/lab/Rating";
+import Skeleton from "@material-ui/lab/Skeleton";
 
 import CheckCircleRoundedIcon from "@material-ui/icons/CheckCircleRounded";
 import Favorite from "@material-ui/icons/Favorite";
 import FavoriteBorder from "@material-ui/icons/FavoriteBorder";
 import StarBorder from "@material-ui/icons/StarBorder";
 
-import Rating from "@material-ui/lab/Rating";
-
+import { Hidden } from "@material-ui/core";
 import useStyles from "./useStyles";
 
 import { addItemCart } from "../../store/actions/сart";
@@ -38,6 +39,7 @@ const ItemCard = ({
   price,
   img,
   stock,
+  hidden = {},
   addCartItem,
   wishlistAll,
   addWishlistItem,
@@ -74,104 +76,119 @@ const ItemCard = ({
   };
 
   return (
-    <Card
-      onClick={() => addToLastViewCard(lastView,id)}
-      className={classes.card}
+    <Hidden
+      xsDown={hidden.xsDown}
+      smDown={hidden.smDown}
+      mdDown={hidden.mdDown}
     >
-      {wishlistAll.some(el => el._id === id) ? (
-        <Tooltip arrow title="Remove from wishlist">
-          <IconButton
-            className={classes.wishList}
-            onClick={() => deleteWishlistItem(id)}
-          >
-            <Favorite />
-          </IconButton>
-        </Tooltip>
-      ) : (
-        <Tooltip
-          arrow
-          title={
-            isAuthenticated ? "Add to wishlist" : "Only for authorized user"
-          }
-        >
-          <IconButton
-            className={classes.wishList}
-            onClick={handleAddItemToWishlist}
-          >
-            <FavoriteBorder />
-          </IconButton>
-        </Tooltip>
-      )}
-      <Link className={classes.link} to={`/products/${itemNo}`}>
-        <CardActionArea
-          classes={{
-            root: classes.actionArea,
-            focusHighlight: classes.focusHighlight,
-          }}
-        >
-          <CardMedia
-            className={classes.mediaImage}
-            image={img}
-            title={title}
-            component="div"
-          />
-          <CardContent className={classes.cardContent}>
-            <Typography className={classes.title} noWrap align="center">
-              {title}
-            </Typography>
-            <Tooltip placement="bottom-end" title={CardTooltipText(rate)}>
-              <Box align="center">
-                <Rating
-                  className={classes.rating}
-                  name="rating"
-                  value={rate}
-                  size="small"
-                  precision={0.5}
-                  readOnly
-                  emptyIcon={
-                    <StarBorder color="primary" style={{ fontSize: 18 }} />
-                  }
-                />
-              </Box>
+      {id ? (
+        <Card className={classes.card}>
+          {wishlistAll.some(el => el._id === id) ? (
+            <Tooltip arrow title="Remove from wishlist">
+              <IconButton
+                className={classes.wishList}
+                onClick={() => deleteWishlistItem(id)}
+              >
+                <Favorite />
+              </IconButton>
             </Tooltip>
-            <Typography className={classes.price} align="center">
-              ${price.toFixed(2)}
-            </Typography>
-          </CardContent>
-        </CardActionArea>
-      </Link>
-      {stock === 0 ? (
-        <Button variant="text" fullWidth disabled>
-          out of stock
-        </Button>
+          ) : (
+            <Tooltip
+              arrow
+              title={
+                isAuthenticated ? "Add to wishlist" : "Only for authorized user"
+              }
+            >
+              <IconButton
+                className={classes.wishList}
+                onClick={handleAddItemToWishlist}
+              >
+                <FavoriteBorder />
+              </IconButton>
+            </Tooltip>
+          )}
+          <Link className={classes.link} to={`/products/${itemNo}`}>
+            <CardActionArea
+              onClick={() => addToLastViewCard(itemNo)}
+              classes={{
+                root: classes.actionArea,
+                focusHighlight: classes.focusHighlight,
+              }}
+            >
+              <CardMedia
+                className={classes.mediaImage}
+                image={img}
+                title={title}
+                component="div"
+              />
+              <CardContent className={classes.cardContent}>
+                <Typography className={classes.title} noWrap align="center">
+                  {title}
+                </Typography>
+                <Tooltip placement="bottom-end" title={CardTooltipText(rate)}>
+                  <Box align="center">
+                    <Rating
+                      className={classes.rating}
+                      name="rating"
+                      value={rate}
+                      size="small"
+                      precision={0.5}
+                      readOnly
+                      emptyIcon={
+                        <StarBorder color="primary" style={{ fontSize: 18 }} />
+                      }
+                    />
+                  </Box>
+                </Tooltip>
+                <Typography className={classes.price} align="center">
+                  $
+                  {price.toFixed(2)}
+                </Typography>
+              </CardContent>
+            </CardActionArea>
+          </Link>
+          {stock === 0 ? (
+            <Button variant="text" fullWidth disabled>
+              out of stock
+            </Button>
+          ) : (
+            <Button variant="text" fullWidth onClick={addItemToCart}>
+              + add to cart
+            </Button>
+          )}
+          <Snackbar
+            anchorOrigin={{
+              vertical: "top",
+              horizontal: "left",
+            }}
+            open={snackbarAddToCart}
+            onClose={snackbarClose}
+            autoHideDuration={1500}
+          >
+            <SnackbarContent
+              className={classes.snackbar}
+              role="alert"
+              message={(
+                <Box>
+                  <CheckCircleRoundedIcon />
+                  <span className={classes.snackbarMessage}>
+                    Added to your shopping cart!
+                  </span>
+                </Box>
+              )}
+            />
+          </Snackbar>
+        </Card>
       ) : (
-        <Button variant="text" fullWidth onClick={addItemToCart}>
-          + add to cart
-        </Button>
+        <Box className={classes.cardSkeleton}>
+          <Skeleton variant="rect" animation="pulse" width={140} height={140} component="div" />
+          <Skeleton variant="text" animation="pulse" width={160} component="p" />
+          <Skeleton variant="text" animation="pulse" width={100} component="p" />
+          <Skeleton variant="text" animation="pulse" width={60} component="p" />
+          <Skeleton variant="text" animation="pulse" width={160} component="p" />
+        </Box>
       )}
-      <Snackbar
-        anchorOrigin={{
-          vertical: "top",
-          horizontal: "left",
-        }}
-        open={snackbarAddToCart}
-        onClose={snackbarClose}
-        autoHideDuration={1500}
-      >
-        <SnackbarContent
-          className={classes.snackbar}
-          role="alert"
-          message={
-            <Box>
-              <CheckCircleRoundedIcon />
-              <span className={classes.snackbarMessage}>
-                Added to your shopping cart!
-              </span>
-            </Box>
-          }
-        />
-      </Snackbar>
-    </Card>
+    </Hidden>
   );
 };
 
@@ -188,5 +205,5 @@ export default connect(mapStateToProps, {
   deleteWishlistItem: wishlistDeleteItem,
   addCartItem: addItemCart,
   addToLastViewCard: addToLastView,
-  
+
 })(ItemCard);

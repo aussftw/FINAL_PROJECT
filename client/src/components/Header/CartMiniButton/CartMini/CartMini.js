@@ -4,9 +4,10 @@ import { Link } from "react-router-dom";
 import v4 from "uuid";
 import { connect } from "react-redux";
 import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import useStyles from "./useStyles";
-import CardAtMiniCart from "../CardAtMiniCart/CardAtMiniCart";
+import CardAtMiniCart from "./CardAtMiniCart/CardAtMiniCart";
 
 function numberWithCommas(x) {
   const parts = x.toString().split(".");
@@ -55,27 +56,29 @@ const CartMini = ({ cart }) => {
                 );
               })}
             </ul>
-            <p className={classes.total}>
-              <span className={classes.subtotal}>Total: </span>
-              <span className={classes.subtotal_price}>
-                {`$${totalWithComas}`}
-              </span>
-            </p>
-            <p className={classes.mini_cart_buttons}>
-              <Link to="/cart" className={classes.links}>
-                <Button variant="contained" className={classes.btn}>
-                  VIEW CART
-                </Button>
-              </Link>
-              <Link to="/checkout" className={classes.links}>
-                <Button variant="contained" className={classes.btn}>
-                  CHECKOUT
-                </Button>
-              </Link>
-            </p>
+            <div className={classes.footer}>
+              <Typography className={classes.total}>
+                <Typography component="span" className={classes.subtotal}>Total: </Typography>
+                <Typography component="span" className={classes.subtotal_price}>
+                  {`$${totalWithComas}`}
+                </Typography>
+              </Typography>
+              <Typography className={classes.mini_cart_buttons}>
+                <Link to="/cart" className={classes.links}>
+                  <Button variant="contained" className={classes.btn}>
+                    VIEW CART
+                  </Button>
+                </Link>
+                <Link to="/checkout" className={classes.links}>
+                  <Button variant="contained" className={classes.btn}>
+                    CHECKOUT
+                  </Button>
+                </Link>
+              </Typography>
+            </div>
           </div>
         ) : (
-          <p className={classes.empty_mini_cart}>No products in the cart.</p>
+          <Typography className={classes.empty_mini_cart}>No products in the cart.</Typography>
         )}
       </Card>
     )
