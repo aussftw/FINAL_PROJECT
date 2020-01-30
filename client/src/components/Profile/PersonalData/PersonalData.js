@@ -4,35 +4,39 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
-import {
-  saveUserData,
-  editInputsData,
-} from "../../../store/actions/userProfile";
+import { saveUserData } from "../../../store/actions/userProfile";
 import useStyles from "./useStyles";
 
 function PersonalData({
   user,
   saveUserPersonalData,
-  editInputsUserData,
   error,
 }) {
   const classes = useStyles();
   const [isEditable, setIsEditable] = useState(false);
+  const [userData, setUserData] = useState({
+    firstName: user.firstName,
+    lastName: user.lastName,
+    email: user.email,
+    telephone: user.telephone,
+  });
+
   const matches = useMediaQuery(theme => theme.breakpoints.down("xs"));
 
   const editData = event => {
     event.preventDefault();
     setIsEditable(true);
   };
+
   const saveData = event => {
-    saveUserPersonalData(event, user);
+    saveUserPersonalData(event, userData);
     if (!error) {
       setIsEditable(false);
     }
   };
 
   const handleChange = event => {
-    editInputsUserData(event, user);
+    setUserData({ ...userData, [event.target.name]: event.target.value });
   };
 
   return (
@@ -50,7 +54,7 @@ function PersonalData({
             disabled={!isEditable}
             label="First Name"
             InputLabelProps={{ className: classes.input }}
-            value={user.firstName}
+            value={userData.firstName}
             size={matches ? "small" : null}
             variant={isEditable ? "outlined" : "standard"}
             inputProps={{
@@ -70,7 +74,7 @@ function PersonalData({
             disabled={!isEditable}
             label="Last Name"
             InputLabelProps={{ className: classes.input }}
-            value={user.lastName}
+            value={userData.lastName}
             size={matches ? "small" : null}
             variant={isEditable ? "outlined" : "standard"}
             inputProps={{
@@ -90,7 +94,7 @@ function PersonalData({
             disabled={!isEditable}
             label="Email"
             InputLabelProps={{ className: classes.input }}
-            value={user.email}
+            value={userData.email}
             size={matches ? "small" : null}
             variant={isEditable ? "outlined" : "standard"}
             inputProps={{
@@ -106,7 +110,7 @@ function PersonalData({
             label="Phone Number"
             InputLabelProps={{ className: classes.input }}
             type="tel"
-            value={user.telephone}
+            value={userData.telephone}
             size={matches ? "small" : null}
             variant={isEditable ? "outlined" : "standard"}
             inputProps={{
@@ -114,11 +118,8 @@ function PersonalData({
               type: "tel",
             }}
             onChange={handleChange}
-            validators={["required", "matchRegexp:^[0-9-+\\s()]{13}$"]}
-            errorMessages={[
-              "this field is required",
-              "phone is not valid, need +380... format",
-            ]}
+            validators={["matchRegexp:^[0-9-+\\s()]{13}$"]}
+            errorMessages={["phone is not valid, need +380... format",]}
           />
           {isEditable ? (
             <Button className={classes.btn} type="submit">
@@ -147,7 +148,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, {
-  saveUserPersonalData: saveUserData,
-  editInputsUserData: editInputsData,
-})(PersonalData);
+export default connect(mapStateToProps, { saveUserPersonalData: saveUserData })(PersonalData);
