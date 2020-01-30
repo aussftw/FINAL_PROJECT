@@ -12,6 +12,10 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     flexDirection: "row",
   },
+  containerTittle: {
+    fontWeight: 500,
+    fontSize: 18,
+  },
 }));
 
 export default useStyles;

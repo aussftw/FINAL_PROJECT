@@ -14,7 +14,7 @@ const useStyles = makeStyles(theme => ({
       flexDirection: "row",
       justifyContent: "center",
       alignItems: "center",
-      margin: "0rem 8rem",
+      margin: "0rem 4rem",
       padding: "1rem 0",
     },
   },

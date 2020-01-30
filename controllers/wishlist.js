@@ -167,7 +167,7 @@ exports.deleteProductFromWishlish = async (req, res, next) => {
 
           return;
         }
-
+        // console.log(wishlist.products);
         const wishlistData = {};
 
         wishlistData.products = wishlist.products.filter(
