@@ -75,7 +75,7 @@ const ItemCard = ({
 
   return (
     <Card
-      onClick={() => addToLastViewCard(lastView,itemNo)}
+      onClick={() => addToLastViewCard(lastView,id)}
       className={classes.card}
     >
       {wishlistAll.some(el => el._id === id) ? (

@@ -14,19 +14,29 @@ const LastViewCarousel = ({ lastView }) => {
   useEffect(() => {
     console.log("lastView", lastView);
     if (lastView.length > 0) {
-      const lastViewArr = [];
-      lastView.map(value => {
-        axios
-          .get(`/api/products/${value}`)
+      const lastViewObj = { products: lastView };
+
+      axios
+          .post("/api/products/actualization", lastViewObj)
           .then(response => {
-            lastViewArr.push(response.data);
-            setProductsLV([...productsLV, ...lastViewArr]);
-          })
+            console.log(response.data);
+            setProductsLV([...productsLV, ...response.data]);
+            })
           .catch(err => {
-            // eslint-disable-next-line no-console
             console.log(err);
           });
-      });
+      // lastView.map(value => {
+      //   axios
+      //     .get(`/api/products/${value}`)
+      //     .then(response => {
+      //       lastViewArr.push(response.data);
+      //       setProductsLV([...productsLV, ...lastViewArr]);
+      //     })
+      //     .catch(err => {
+      //       // eslint-disable-next-line no-console
+      //       console.log(err);
+      //     });
+      // });
     }
     // eslint-disable-next-line
   }, [lastView]);
