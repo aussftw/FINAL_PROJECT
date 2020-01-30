@@ -46,6 +46,7 @@ const ItemCard = ({
   deleteWishlistItem,
   isAuthenticated,
   addToLastViewCard,
+  lastView
 }) => {
   const classes = useStyles();
   const [snackbarAddToCart, setSnackbarAddToCart] = useState(false);
@@ -108,7 +109,7 @@ const ItemCard = ({
           )}
           <Link className={classes.link} to={`/products/${itemNo}`}>
             <CardActionArea
-              onClick={() => addToLastViewCard(itemNo)}
+              onClick={() => addToLastViewCard(id)}
               classes={{
                 root: classes.actionArea,
                 focusHighlight: classes.focusHighlight,
@@ -195,6 +196,7 @@ function mapStateToProps(state) {
   return {
     wishlistAll: state.wishlistReducer.wishlist,
     isAuthenticated: state.loginReducer.isAuthenticated,
+    lastView: state.lastViewReducer.lastView,
   };
 }
 
@@ -203,4 +205,5 @@ export default connect(mapStateToProps, {
   deleteWishlistItem: wishlistDeleteItem,
   addCartItem: addItemCart,
   addToLastViewCard: addToLastView,
+
 })(ItemCard);

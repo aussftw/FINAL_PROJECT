@@ -190,6 +190,10 @@ exports.actualizationProducts = async (req, res, next) => {
     return {"_id": value}
   });
 
+    // let query = req.body.map(value => {
+    //     return {"_id": value}
+    // });
+
   Product.find({$or: query})
       .then(products => {
         if (!products) {
