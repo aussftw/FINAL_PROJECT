@@ -16,7 +16,7 @@ const SubHeader = ({getLinks, links}) => {
       if(links.length === 0 ){
       getLinks();
       }
-    }, [getLinks])
+    }, [getLinks, links.length])
 
 
 
@@ -24,9 +24,7 @@ const SubHeader = ({getLinks, links}) => {
 
   return (
     <div>
-      <div className={classes.searchMobileWrap}>
-        {/* <CustomizedSearch className={classes.searchMobile} /> */}
-      </div>
+      <div className={classes.MarginTopWrap} />
       {links.length > 0 ? (
         <Box
           display="flex"
@@ -55,7 +53,7 @@ const SubHeader = ({getLinks, links}) => {
           </Box>
         </Box>
       ) : (
-        <div />
+        <div className={classes.subheader} />
       )}
     </div>
   );

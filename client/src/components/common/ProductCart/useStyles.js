@@ -32,7 +32,6 @@ const useStyles = makeStyles(theme => ({
     color: theme.palette.secondary.dark,
     "&:hover": {
       color: theme.palette.primary.main,
-      cursor: "pointer",
     },
   },
   titleGrid: {
@@ -64,6 +63,7 @@ const useStyles = makeStyles(theme => ({
     textAlign: "right",
     fontSize: 14,
     fontWeight: 600,
+    cursor: "default",
   },
   closeBtnGrid: {
     display: "flex",

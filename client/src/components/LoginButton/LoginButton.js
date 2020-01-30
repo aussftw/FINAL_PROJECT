@@ -13,7 +13,7 @@ const LoginButton = ({
   user,
 }) => {
   const classes = useStyles();
-  
+
   return (
     <div className={classes.wrapper}>
       {isAuthenticated ? (
