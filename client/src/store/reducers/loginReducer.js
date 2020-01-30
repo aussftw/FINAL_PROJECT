@@ -11,6 +11,7 @@ const initialState = {
     address: "",
   },
   error: "",
+  modalOpen:false,
 };
 
 const loginReducer = (state = initialState, action) => {
@@ -94,6 +95,11 @@ const loginReducer = (state = initialState, action) => {
           telephone: action.payload.telephone,
           address: action.payload.address,
         },
+      };
+    case constants.MODAL_OPEN:
+      return {
+        ...state,
+        modalOpen: true,
       };
     default:
       return state;
