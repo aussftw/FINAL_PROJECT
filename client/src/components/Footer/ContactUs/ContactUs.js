@@ -28,11 +28,11 @@ const ContactUs = () => {
   const classes = useStyles();
 
   return (
-    <Grid>
+    <Grid item xs={12} lg={4} md={12}>
       <Hidden mdUp>
         <ExpansionPanel className={classes.mainContainer}>
           <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-            <Typography>CONTACT US</Typography>
+            <Typography className={classes.containerTittle}>CONTACT US</Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
             <DraftsIcon className={classes.contactUsIcon} />
