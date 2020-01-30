@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 import Popper from '@material-ui/core/Popper';
 import Fade from '@material-ui/core/Fade';
 import IconButton from "@material-ui/core/IconButton";
@@ -8,10 +8,14 @@ import useStyles from "./useStyles"
 
 const MobileSearch = (  ) => {
   const classes = useStyles();
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
 
   const handleClick = event => {
-    setAnchorEl(anchorEl ? null : event.currentTarget);
+    if(anchorEl){
+      setAnchorEl(null)
+    }else {
+      setAnchorEl(event.currentTarget)
+    }
   };
 
   const open = Boolean(anchorEl);

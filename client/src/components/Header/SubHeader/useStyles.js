@@ -29,7 +29,7 @@ const useStyles = makeStyles(theme => ({
       display: "none",
     },
   },
-  searchMobileWrap: {
+  MarginTopWrap: {
     marginTop: "65px",
     display: "flex",
     justifyContent: "center",

@@ -1,9 +1,12 @@
 import { makeStyles } from "@material-ui/core";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   iconButton: {
     height: "40px",
     borderRadius: "0 4px 4px 0",
+    "&:hover": {
+      backgroundColor: theme.palette.primary.dark,
+    },
   },
   input: {
     "& fieldset": {
@@ -16,6 +19,6 @@ const useStyles = makeStyles({
   // divider: {
   //   height: 28,
   // },
-});
+}));
 
 export default useStyles;
