@@ -2,24 +2,7 @@ import { createMuiTheme } from '@material-ui/core/styles';
 import { lightGreen, grey } from '@material-ui/core/colors';
 
 const theme = createMuiTheme({
-  typography: {
-    h3: {
-      fontSize: 22,
-      fontWeight: 700,
-      marginBottom: 30,
-      textTransform: 'uppercase',
-      color: grey[900],
-    },
-    h4: {
-      fontSize: 20,
-      fontWeight: 600,
-      margin: 30,
-      marginBottom: 8,
-      textTransform: 'uppercase',
-      textAlign: 'center',
-      color: grey[900],
-    },
-  },
+
   breakpoints: {
     xs: 0,
     sm: 576,
@@ -35,28 +18,47 @@ const theme = createMuiTheme({
     },
     secondary: {
       main: grey[700], // main grey
-      dark: grey[900], // black
+      dark: grey[800], // black
       medium: grey[500], // medium
       light: grey[200], // maybe
     },
   },
   spacing: 8,
 
+  typography: {
+    h3: {
+      fontSize: 22,
+      fontWeight: 700,
+      marginBottom: 30,
+      textTransform: "uppercase",
+      color: grey[800]
+    },
+    h4: {
+      fontSize: 20,
+      fontWeight: 600,
+      margin: 30,
+      marginBottom: 8,
+      textTransform: "uppercase",
+      textAlign: "center",
+      color: grey[800]
+    }
+  },
+
   overrides: {
     MuiGridListTile: {
       root: {
-        position: 'relative',
-        height: 'auto',
+        position: "relative",
+        height:"auto"
       },
       tile: {
-        padding: '0.5em 0.5em',
-        height: 'auto',
+        padding: "0.5em 0.5em",
+        height:"auto",
       },
     },
 
     MuiTooltip: {
       tooltip: {
-        fontSize: '13px',
+        fontSize: "13px",
         backgroundColor: lightGreen[700],
       },
       arrow: {
@@ -66,17 +68,16 @@ const theme = createMuiTheme({
 
     MuiIconButton: {
       root: {
-        '&:hover': {
+        "&:hover": {
           backgroundColor: lightGreen[100],
         },
       },
     },
-    
 
     MuiFab: {
       secondary: {
         backgroundColor: lightGreen[700],
-        '&:hover': {
+        "&:hover": {
           backgroundColor: lightGreen[900],
         },
       },
@@ -95,9 +96,9 @@ const theme = createMuiTheme({
         },
       },
       contained: {
-        color: 'white',
+        color: "white",
         backgroundColor: lightGreen[700],
-        '&:hover': {
+        "&:hover": {
           backgroundColor: lightGreen[900],
         },
       },
@@ -112,13 +113,13 @@ const theme = createMuiTheme({
     MuiInputLabel: {
       outlined: {
         fontWeight: 800,
-        backgroundColor: 'white',
+        backgroundColor: "white",
       },
     },
     MuiExpansionPanelSummary: {
       content: {
-        justifyContent: 'space-between',
-        alignItems: 'center',
+        justifyContent: "space-between",
+        alignItems: "center",
         margin: 0,
       },
     },
