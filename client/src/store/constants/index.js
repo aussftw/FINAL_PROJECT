@@ -20,7 +20,9 @@ export const WISHLIST_DELETE_ITEM_SUCCESS = "WISHLIST_DELETE_ITEM_SUCCESS";
 export const WISHLIST_DELETE_ITEM_FAILURE = "WISHLIST_DELETE_ITEM_FAILURE";
 export const WISHLIST_LOG_OUT = "WISHLIST_LOG_OUT";
 export const USER_FROM_JWT = "USER_FROM_JWT";
-export const ADD_TO_LAST_VIEW = "ADD_TO_LAST_VIEW";
+
+// ----------- Last-view -----------
+export const ADD_TO_LAST_VIEW_SUCCESS = "ADD_TO_LAST_VIEW_SUCCESS";
 
 // ----------- Filters -----------
 export const GET_PRODUCT_LISTING = "GET_PRODUCT_LISTING";
