@@ -5,7 +5,7 @@ import jwt from "jwt-decode";
 
 import HomePage from "../pages/HomePage/HomePage";
 import CartPage from "../pages/CartPage/CartPage";
-import Profiler from "../pages/Profiler/Profiler";
+import ProfilePage from "../pages/ProfilePage/ProfilePage";
 import LoginForm from "../components/LoginForm";
 import NotFound from "../pages/NotFound/NotFound";
 import RegistrationForm from "../components/RegistrationForm";
@@ -21,6 +21,7 @@ import {
   userFromJwt,
 } from "../store/actions/loginActions";
 import { getWishlist } from "../store/actions/wishlist";
+
 import SearchPage from "../pages/SearchPage/SearchPage";
 // const Shop = React.lazy(() => import('../pages/Shop/Shop')); // Lazy-loaded
 import Shop from "../pages/Shop/Shop";
@@ -81,7 +82,7 @@ const Routes = ({
         <NotFound />
       </Route>
       <Route path="/profile">
-        <Profiler />
+        <ProfilePage />
       </Route>
       <Route path="/login">
         <LoginForm />

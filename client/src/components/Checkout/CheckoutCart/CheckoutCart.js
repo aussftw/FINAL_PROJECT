@@ -33,14 +33,15 @@ const CheckoutCart = ( {cart} ) => {
   const totalWithComas = numberWithCommas(total);
 
   return (
-    <div>
+    <div className={classes.root}>
       <Grid container className={classes.cartHeader}>
-        <Grid item xs={6}>
+        <Grid item xs={4}>
           <Typography className={classes.title} align="left">
             Product
           </Typography>
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={4} />
+        <Grid item xs={4}>
           <Typography className={classes.title} align="right">
             Subtotal
           </Typography>
@@ -63,12 +64,13 @@ const CheckoutCart = ( {cart} ) => {
         )
       })}
       <Grid container className={classes.cartFooter}>
-        <Grid item xs={6}>
+        <Grid item xs={4}>
           <Typography className={classes.title} align="left">
             Total
           </Typography>
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={4} />
+        <Grid item xs={4}>
           <Typography className={classes.title} align="right">
             {`$${totalWithComas}`}
           </Typography>

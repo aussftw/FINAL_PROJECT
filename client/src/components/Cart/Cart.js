@@ -129,7 +129,6 @@ const Cart = ({ cart, getCartVar }) => {
         <Box className={classes.totalContainer}>
           <Button
             variant="outlined"
-            color="primary"
             className={classes.emptyCartContinueButton}
             onClick={history.goBack}
           >

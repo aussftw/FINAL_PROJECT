@@ -3,9 +3,9 @@ import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles(theme => ({
   card: {
     position: "absolute",
-    maxHeight: "85vh",
-    top: 60,
-    right: 0,
+    maxHeight: "490px",
+    top: 0,
+    right: -45,
     width: 310,
     textAlign: "center",
     border: "1px solid",
@@ -18,7 +18,7 @@ const useStyles = makeStyles(theme => ({
   mini_cart_list: {
     listStyle: "none",
     margin: 0,
-    maxHeight: "65vh",
+    maxHeight: "370px",
     overflow: "hidden",
     overflowY: "auto",
     padding: 10,
@@ -30,14 +30,17 @@ const useStyles = makeStyles(theme => ({
     alignItems: "center",
     fontSize: 13,
   },
+  footer: {
+    height: 90,
+  },
   total: {
     textAlign: "right",
     height: 15,
     borderTop: "1px solid",
     borderColor: theme.palette.secondary.light,
-    margin: 0,
+    margin: "0 5px 0 5px",
     padding: 15,
-    fontSize: 13,
+    fontSize: 14,
   },
   subtotal: {
     color: theme.palette.secondary.medium,
@@ -45,7 +48,7 @@ const useStyles = makeStyles(theme => ({
   },
   subtotal_price: {
     color: theme.palette.secondary.dark,
-    fontWeight: 500,
+    fontWeight: 700,
   },
   mini_cart_buttons: {
     height: 50,
