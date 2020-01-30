@@ -12,33 +12,20 @@ const LastViewCarousel = ({ lastView }) => {
   const [productsLV, setProductsLV] = useState([]);
 
   useEffect(() => {
-    console.log("lastView", lastView);
+    // console.log("lastView", lastView);
     if (lastView.length > 0) {
-      const lastViewObj = { products: lastView };
+        const lastViewObj = {products: lastView};
 
-      axios
-          .post("/api/products/actualization", lastViewObj)
-          .then(response => {
-            console.log(response.data);
-            setProductsLV([...productsLV, ...response.data]);
+        axios
+            .post("/api/products/actualization", lastViewObj)
+            .then(response => {
+                // console.log(response.data);
+                setProductsLV([...productsLV, ...response.data]);
             })
-          .catch(err => {
-            console.log(err);
-          });
-      // lastView.map(value => {
-      //   axios
-      //     .get(`/api/products/${value}`)
-      //     .then(response => {
-      //       lastViewArr.push(response.data);
-      //       setProductsLV([...productsLV, ...lastViewArr]);
-      //     })
-      //     .catch(err => {
-      //       // eslint-disable-next-line no-console
-      //       console.log(err);
-      //     });
-      // });
+            .catch(err => {
+                console.log(err);
+            });
     }
-    // eslint-disable-next-line
   }, [lastView]);
   return <RenderCards productsLV={productsLV} />;
 };

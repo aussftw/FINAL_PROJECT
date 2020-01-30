@@ -1,5 +1,5 @@
 import * as constants from "../constants";
-// import { store } from "../index";
+import { store } from "../index";
 
 export const addToLastViewSuccess = data => {
     return {
@@ -8,8 +8,10 @@ export const addToLastViewSuccess = data => {
     };
 };
 
-export const addToLastView = (arr, data) => dispatch => {
-        let current = [];
+export const addToLastView = (data) => dispatch => {
+    const arr = store.getState().lastViewReducer.lastView;
+    // console.log(arr);
+    let current = [];
         if (arr.includes(data)) {
             current = arr.filter(x => x !== data);
             current = [...current, ...[data]];
