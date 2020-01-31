@@ -1,15 +1,22 @@
-import React from "react";
-// import PropTypes from 'prop-types';
+import React, { useState } from "react";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
+import { connect } from "react-redux";
+
 import useStyles from "./useStyles";
 
 import PersonalData from "./PersonalData/PersonalData";
 import ChangePasswordForm from "./ChangePasswordForm/ChangePasswordForm";
 import DeliveryAddressForm from "./DeliveryAdressForm/DeliveryAddressForm";
 import WishList from "./WishList/WishList";
+import OrdersHistory from "./OrdersHistory/OrdersHistory";
+
+import { getUser, logOut } from "../../store/actions/loginActions";
+import { getWishlist, wishlistLogOut } from "../../store/actions/wishlist";
+import { clearCart } from "../../store/actions/сart";
+import setAuthToken from "../common/setAuthToken";
 
 function TabPanel(props) {
   const { children, value, index } = props;
@@ -29,18 +36,24 @@ function TabPanel(props) {
   );
 }
 
-// TabPanel.propTypes = {
-//   children: PropTypes.node,
-//   index: PropTypes.any.isRequired,
-//   value: PropTypes.any.isRequired,
-// };
-
-const Profile = () => {
+const Profile = ({
+  getUserData,
+  getWishlistData,
+  logOff,
+  wishlistLogOff,
+  clearPersonalCart,
+}) => {
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
+  };
+  const profileLogOut = () => {
+    setAuthToken(false);
+    wishlistLogOff();
+    logOff();
+    clearPersonalCart();
   };
 
   return (
@@ -57,19 +70,22 @@ const Profile = () => {
           label="Wishlist"
           id="vertical-tab-0"
           aria-controls="vertical-tabpanel-0"
+          onClick={() => getWishlistData()}
         />
         <Tab
           label="Personal Details"
           id="vertical-tab-1"
           aria-controls="vertical-tabpanel-1"
+          onClick={() => getUserData()}
         />
         <Tab
           label="Delivery Address"
           id="vertical-tab-2"
           aria-controls="vertical-tabpanel-2"
+          onClick={() => getUserData()}
         />
         <Tab
-          label="Order History"
+          label="Orders History"
           id="vertical-tab-3"
           aria-controls="vertical-tabpanel-3"
         />
@@ -77,6 +93,12 @@ const Profile = () => {
           label="Password Change"
           id="vertical-tab-4"
           aria-controls="vertical-tabpanel-4"
+        />
+        <Tab
+          label="Log Out"
+          id="vertical-tab-5"
+          aria-controls="vertical-tabpanel-5"
+          onClick={() => profileLogOut()}
         />
       </Tabs>
 
@@ -90,7 +112,7 @@ const Profile = () => {
         <DeliveryAddressForm />
       </TabPanel>
       <TabPanel value={value} index={3}>
-        Cart
+        <OrdersHistory />
       </TabPanel>
       <TabPanel value={value} index={4}>
         <ChangePasswordForm />
@@ -99,4 +121,10 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default connect(null, {
+  getUserData: getUser,
+  getWishlistData: getWishlist,
+  logOff: logOut,
+  wishlistLogOff: wishlistLogOut,
+  clearPersonalCart: clearCart,
+})(Profile);

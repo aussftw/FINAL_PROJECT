@@ -182,6 +182,35 @@ exports.searchProducts = async (req, res, next) => {
   res.send(matchedProducts);
 };
 
+exports.actualizationProducts = async (req, res, next) => {
+  if (!req.body) {
+    res.status(400).json({ message: "Query string is empty" });
+  }
+  let query = req.body.products.map(value => {
+    return {"_id": value}
+  });
+
+    // let query = req.body.map(value => {
+    //     return {"_id": value}
+    // });
+
+  Product.find({$or: query})
+      .then(products => {
+        if (!products) {
+          res.status(400).json({
+            message: `Products is not found`
+          });
+        } else {
+          res.json(products);
+        }
+      })
+      .catch(err =>
+      res.status(400).json({
+        message: `Error happened on server: "${err}" `
+      })
+  );
+};
+
 exports.getTopRatedProducts = (req, res, next) => {
   const topRatedProducts = {"rate.rating": -1};
   const startPage = 8;
@@ -195,4 +224,19 @@ exports.getTopRatedProducts = (req, res, next) => {
               message: `Error happened on server: "${err}" `
             })
         );
+};
+
+exports.getNewestProducts = (req, res, next) => {
+  const newestProducts = {"date": -1};
+  const startPage = 8;
+
+  Product.find()
+      .sort(newestProducts)
+      .limit(startPage)
+      .then(products => res.send(products))
+      .catch(err =>
+          res.status(400).json({
+            message: `Error happened on server: "${err}" `
+          })
+      );
 };

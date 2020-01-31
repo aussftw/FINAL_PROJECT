@@ -8,9 +8,9 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     flexDirection: "row",
     backgroundColor: theme.palette.primary.light,
-    padding: 5,
+    padding: "0.4rem",
+    marginTop: "1.5rem",
   },
-
   linkIcon: {
     marginRight: theme.spacing(1),
     // "&:hover": {
@@ -20,7 +20,6 @@ const useStyles = makeStyles(theme => ({
   icon: {
     fontSize: "large",
   },
-
   imagesContainer: {
     marginTop: theme.spacing(5),
   },
@@ -29,6 +28,7 @@ const useStyles = makeStyles(theme => ({
   //   width: 200,
   // },
   detailsTitle: {
+    textTransform: "capitalize",
     fontSize: 16,
     marginTop: 5,
     // "&:hover": {
@@ -43,6 +43,7 @@ const useStyles = makeStyles(theme => ({
   },
 
   infoTitle: {
+    textTransform: "capitalize",
     fontWeight: 600,
     marginTop: 15,
     marginBottom: 10,
@@ -57,7 +58,26 @@ const useStyles = makeStyles(theme => ({
       flexDirection: "row",
     },
   },
-
+  qty_wrapper: {
+    display: "flex",
+    flexDirection: "row",
+    marginTop: 15,
+    padding: 2,
+    [theme.breakpoints.up("sm")]: {
+      flexDirection: "column",
+    },
+  },
+  input: {
+    backgroundColor: "#fff",
+    paddingLeft: 13,
+    // paddingRight: 10,
+    paddingTop: 2,
+    paddingBottom: 2,
+    width: "35px",
+    borderRadius: "5px",
+    border: 2,
+    textAlign: "center",
+  },
   rating: {
     alignItems: "center",
     justifyContent: "center",
@@ -76,8 +96,8 @@ const useStyles = makeStyles(theme => ({
     marginBottom: 15,
   },
   actionButton: {
-    marginLeft: 4,
-    marginRight: 4,
+    height: 38,
+    margin: 4,
   },
   detailsDescription: {
     marginTop: 15,
@@ -85,7 +105,8 @@ const useStyles = makeStyles(theme => ({
   },
   descriptionText: {
     textAlign: "justify",
-    marginTop: 10,
+    marginTop: "1rem",
+    marginBottom: "4rem",
     fontSize: 14,
   },
   previousPrice: {

@@ -1,95 +1,52 @@
-import React, { useState } from "react";
+import React from "react";
 import { connect } from "react-redux";
-import axios from "axios";
-import { Redirect } from "react-router-dom";
 import LoginContent from "./LoginContent";
-import setAuthToken from "../common/setAuthToken";
-import { logIn } from "../../store/actions";
+import { logIn, modalClose } from '../../store/actions/loginActions';
 
-// eslint-disable-next-line no-shadow
-const LoginForm = ({ logIn }) => {
-  const [open, setOpen] = useState(true);
-  const [showPassword, setShowPassword] = useState(false);
-  const [userData, setValues] = useState({
-    loginOrEmail: "",
-    password: "",
-  });
-  const [message, setMessage] = useState("");
-  const [isLogin, setIsLogin] = useState(false);
+const LoginForm = ({ logIn, isAuthenticatedUser, error , modal , modalClose }) => {
+  const handleError = error => {
+    if (error.response.data.loginOrEmail) {
+      return error.response.data.loginOrEmail;
+    }
+    if (error.response.data.password) {
+      return error.response.data.password;
+    }
+    return error.message;
+  };
 
   const handleOpen = () => {
-    setOpen(false);
+    modalClose();
   };
 
-  const handleChange = prop => event => {
-    setValues({ ...userData, [prop]: event.target.value });
-  };
-
-  const handleClickShowPassword = () => {
-    setShowPassword(() => !showPassword);
-  };
-
-  const getUser = () => {
-    axios
-      .get("/customers/customer")
-      .then(response => {
-        // eslint-disable-next-line no-console
-        console.log("Our User", response);
-        logIn(response.data);
-      })
-      .catch(err => {
-        // eslint-disable-next-line no-console
-        console.log(err);
-      });
-  };
-
-  const submitLogin = e => {
+  const submitLogin = (e, user) => {
     e.preventDefault();
-    axios
-      .post("/customers/login", userData)
-      .then(response => {
-        // eslint-disable-next-line no-console
-        console.log(response.data.token);
-        if (response.statusText === "OK" && response.data.success) {
-          setIsLogin(true);
-          // eslint-disable-next-line no-console
-          console.log(response);
-          // eslint-disable-next-line no-undef
-          localStorage.setItem("authToken", response.data.token);
-          setAuthToken(response.data.token);
-          getUser();
-        }
-      })
-      .catch(err => {
-        // eslint-disable-next-line no-console
-        console.log(err.response.data);
-        setMessage(err.message);
-      });
+    logIn(user);
   };
 
   return (
     <>
-      {/* eslint-disable-next-line no-nested-ternary */}
-      {open ? (
-        isLogin ? (
-          <Redirect to="/" />
+      {modal ? (
+        isAuthenticatedUser ? (
+            handleOpen()
         ) : (
           <LoginContent
             handleOpen={handleOpen}
             submitLogin={submitLogin}
-            handleChange={handleChange}
-            handleClickShowPassword={handleClickShowPassword}
-            open={open}
-            userData={userData}
-            showPassword={showPassword}
-            message={message}
+            open={modal}
+            message={error !== "" ? handleError(error) : ""}
           />
         )
-      ) : (
-        <Redirect to="/" />
-      )}
+      ) : handleOpen()}
     </>
-  );
+  )
 };
 
-export default connect(null, { logIn })(LoginForm);
+const mapStateToProps = state => {
+  return {
+    isAuthenticatedUser: state.loginReducer.isAuthenticated,
+    error: state.loginReducer.error,
+    modal:state.loginReducer.modalOpen,
+  };
+};
+
+export default connect(mapStateToProps, { logIn , modalClose })(LoginForm);

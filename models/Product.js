@@ -67,7 +67,11 @@ const ProductSchema = new Schema(
       rating: {
         type: Number,
         default: 0
-      }
+      },
+      voters: {
+        type: Number,
+        default: 0
+      },
     }
   },
   { strict: false }

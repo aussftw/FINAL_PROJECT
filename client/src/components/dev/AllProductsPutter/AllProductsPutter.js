@@ -8,7 +8,7 @@ const AllProductsPutter = () => {
 
   useEffect(() => {
     axios
-      .get("/products")
+      .get("/api/products")
       .then(response => {
         setProducts(response.data);
         // eslint-disable-next-line no-console
@@ -31,7 +31,7 @@ const AllProductsPutter = () => {
       axios
         .put(
           // eslint-disable-next-line no-underscore-dangle
-          `/products/${products[i]._id}`,
+          `/api/products/${products[i]._id}`,
           { key: "value" },
           {
             headers: {

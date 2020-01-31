@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import axios from "axios";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
@@ -26,7 +27,7 @@ export default function ChangePasswordForm() {
     setMessage("");
     if (newPasswordValue === confirmationNewPasswordValue) {
       axios
-        .put("/customers/password", passwords)
+        .put("/api/customers/password", passwords)
         .then(updatedCustomer => {
           if (updatedCustomer.data.password) {
             setMessage(updatedCustomer.data.password);
@@ -50,21 +51,28 @@ export default function ChangePasswordForm() {
 
   return (
     <div>
-      <h2 className={classes.title}>Password Change</h2>
+      <Typography className={classes.title} variant="h3">Password change</Typography>
       <div className={classes.root}>
         <ValidatorForm
           className={classes.form}
           noValidate={false}
-          autoComplete="off"
+          autoComplete="on"
           onSubmit={savePassword}
         >
+          <input type="text" autoComplete="user-name" hidden />
           <TextValidator
             id="customer-old-password-input"
             label="Old password"
+            InputLabelProps={{ className: classes.input }}
             value={oldPasswordValue}
             size={matches ? "small" : null}
             variant="outlined"
-            inputProps={{ type: "password", minLength: 8, maxLength: 20 }}
+            inputProps={{
+              type: "password",
+              minLength: 8,
+              maxLength: 20,
+              autoComplete: "current-password",
+            }}
             onChange={event => setOldPasswordValue(event.target.value)}
             validators={["required", "matchRegexp:^[a-zA-Z0-9]{8,20}$"]}
             errorMessages={[
@@ -75,10 +83,16 @@ export default function ChangePasswordForm() {
           <TextValidator
             id="customer-new-password-input"
             label="New password"
+            InputLabelProps={{ className: classes.input }}
             value={newPasswordValue}
             size={matches ? "small" : null}
             variant="outlined"
-            inputProps={{ type: "password", minLength: 8, maxLength: 20 }}
+            inputProps={{
+              type: "password",
+              minLength: 8,
+              maxLength: 20,
+              autoComplete: "new-password",
+            }}
             onChange={event => setNewPasswordValue(event.target.value)}
             validators={["required", "matchRegexp:^[a-zA-Z0-9]{8,20}$"]}
             errorMessages={[
@@ -89,13 +103,17 @@ export default function ChangePasswordForm() {
           <TextValidator
             id="customer-confirm-password-input"
             label="Confirm password"
+            InputLabelProps={{ className: classes.input }}
             value={confirmationNewPasswordValue}
             size={matches ? "small" : null}
             variant="outlined"
-            inputProps={{ type: "password", minLength: 8, maxLength: 20 }}
-            onChange={event =>
-              setConfirmationNewPasswordValue(event.target.value)
-            }
+            inputProps={{
+              type: "password",
+              minLength: 8,
+              maxLength: 20,
+              autoComplete: "new-password",
+            }}
+            onChange={event => setConfirmationNewPasswordValue(event.target.value)}
             validators={[
               "required",
               "matchRegexp:^[a-zA-Z0-9]{8,20}$",
@@ -111,7 +129,7 @@ export default function ChangePasswordForm() {
             SAVE PASSWORD
           </Button>
         </ValidatorForm>
-        {Boolean(message) && <p className={classes.message}>{message}</p>}
+        {Boolean(message) && <Typography className={classes.message}>{message}</Typography>}
       </div>
     </div>
   );

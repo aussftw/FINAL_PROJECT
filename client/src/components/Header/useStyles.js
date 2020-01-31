@@ -8,16 +8,21 @@ const useStyles = makeStyles(theme => ({
   logo: {
     height: "40px",
     display: "none",
-    [theme.breakpoints.up("sm")]: {
+    [theme.breakpoints.up("md")]: {
       display: "flex",
     },
   },
+  link: {
+    color: "black",
+    "&visited": {
+      color: "theme. primary.dark",
+    },
+  },
   searchDesktop: {
-    display: "flex",
-    // display: "none",
-    // [theme.breakpoints.up("md")]: {
-    //   display: "flex",
-    // },
+    display: "none",
+    [theme.breakpoints.up("sm")]: {
+      display: "flex",
+    },
   },
 }));
 export default useStyles;

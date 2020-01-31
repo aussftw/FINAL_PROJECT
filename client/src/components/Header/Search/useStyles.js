@@ -1,28 +1,20 @@
 import { makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({
-  search: {
-    alignItems: "center",
-    boxShadow: "none",
-    border: "1px solid grey",
-  },
-  link: {
-    display: "none",
-    [theme.breakpoints.up("md")]: {
-      display: "flex",
-    },
-    color: theme.palette.secondary.main,
-    textDecoration: "none",
-    padding: 9,
-  },
-  form: {
-    display: "none",
-    [theme.breakpoints.up("sm")]: {
-      display: "flex",
-    },
-  },
   iconButton: {
-    padding: 8,
+    height: "40px",
+    borderRadius: "0 4px 4px 0",
+    "&:hover": {
+      backgroundColor: theme.palette.primary.dark,
+    },
+  },
+  input: {
+    "& fieldset": {
+      borderRadius: "4px 0 0 4px",
+    },
+  },
+  helper: {
+    display: "none"
   },
   // divider: {
   //   height: 28,

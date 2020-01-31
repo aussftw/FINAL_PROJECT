@@ -1,36 +1,47 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
-import {
-  saveUserData,
-  editInputsData,
-} from "../../../store/actions/UserProfile";
+import { saveUserData } from "../../../store/actions/userProfile";
 import useStyles from "./useStyles";
 
-// eslint-disable-next-line no-shadow
-function PersonalData({ user, saveUserData, editInputsData, error }) {
+function PersonalData({
+  user,
+  saveUserPersonalData,
+  error,
+}) {
   const classes = useStyles();
   const [isEditable, setIsEditable] = useState(false);
+  const [userData, setUserData] = useState({
+    firstName: user.firstName,
+    lastName: user.lastName,
+    email: user.email,
+    telephone: user.telephone,
+  });
+
   const matches = useMediaQuery(theme => theme.breakpoints.down("xs"));
 
   const editData = event => {
     event.preventDefault();
     setIsEditable(true);
   };
+
   const saveData = event => {
-    saveUserData(event, user);
-    setIsEditable(false);
+    saveUserPersonalData(event, userData);
+    if (!error) {
+      setIsEditable(false);
+    }
   };
 
   const handleChange = event => {
-    editInputsData(event, user);
+    setUserData({ ...userData, [event.target.name]: event.target.value });
   };
 
   return (
     <div>
-      <h2 className={classes.title}>Personal Details</h2>
+      <Typography className={classes.title} variant="h3">Personal details</Typography>
       <div className={classes.root}>
         <ValidatorForm
           className={classes.form}
@@ -42,7 +53,8 @@ function PersonalData({ user, saveUserData, editInputsData, error }) {
             id="customer-name-input"
             disabled={!isEditable}
             label="First Name"
-            value={user.firstName}
+            InputLabelProps={{ className: classes.input }}
+            value={userData.firstName}
             size={matches ? "small" : null}
             variant={isEditable ? "outlined" : "standard"}
             inputProps={{
@@ -61,7 +73,8 @@ function PersonalData({ user, saveUserData, editInputsData, error }) {
             id="customer-last-name-input"
             disabled={!isEditable}
             label="Last Name"
-            value={user.lastName}
+            InputLabelProps={{ className: classes.input }}
+            value={userData.lastName}
             size={matches ? "small" : null}
             variant={isEditable ? "outlined" : "standard"}
             inputProps={{
@@ -80,7 +93,8 @@ function PersonalData({ user, saveUserData, editInputsData, error }) {
             id="customer-email-input"
             disabled={!isEditable}
             label="Email"
-            value={user.email}
+            InputLabelProps={{ className: classes.input }}
+            value={userData.email}
             size={matches ? "small" : null}
             variant={isEditable ? "outlined" : "standard"}
             inputProps={{
@@ -94,8 +108,9 @@ function PersonalData({ user, saveUserData, editInputsData, error }) {
             id="customer-phone-input"
             disabled={!isEditable}
             label="Phone Number"
+            InputLabelProps={{ className: classes.input }}
             type="tel"
-            value={user.telephone}
+            value={userData.telephone}
             size={matches ? "small" : null}
             variant={isEditable ? "outlined" : "standard"}
             inputProps={{
@@ -103,11 +118,8 @@ function PersonalData({ user, saveUserData, editInputsData, error }) {
               type: "tel",
             }}
             onChange={handleChange}
-            validators={["required", "matchRegexp:^[0-9-+\\s()]{13}$"]}
-            errorMessages={[
-              "this field is required",
-              "phone is not valid, need +380... format",
-            ]}
+            validators={["matchRegexp:^[0-9-+\\s()]{13}$"]}
+            errorMessages={["phone is not valid, need +380... format",]}
           />
           {isEditable ? (
             <Button className={classes.btn} type="submit">
@@ -119,7 +131,11 @@ function PersonalData({ user, saveUserData, editInputsData, error }) {
             </Button>
           )}
         </ValidatorForm>
-        {Boolean(error) && <p className={classes.message}>{error.message}</p>}
+        {Boolean(error) && (
+          <Typography className={classes.message}>
+            {`Data didn't save. Error: ${error.message}`}
+          </Typography>
+        )}
       </div>
     </div>
   );
@@ -132,6 +148,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { saveUserData, editInputsData })(
-  PersonalData
-);
+export default connect(mapStateToProps, { saveUserPersonalData: saveUserData })(PersonalData);

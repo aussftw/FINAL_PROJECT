@@ -2,23 +2,25 @@ import { makeStyles } from "@material-ui/core";
 import theme from "../../theme";
 
 const useStyles = makeStyles({
-  btn: {
-    fontSize: "14px",
-    letterSpacing: "0,5px",
-    color: "white",
-    backgroundColor: theme.palette.primary.main,
-    padding: "5px",
-    "&:hover": {
-      color: "white",
-      backgroundColor: theme.palette.primary.dark,
-    },
+  wrapper: {
+    display: "inline-flex",
   },
   link: {
+    marginRight: "20px",
     textDecoration: "none",
+    color: "black",
   },
   icon: {
-    color: "black",
     fontSize: "24px",
+  },
+  span: {
+    display: "none",
+    [theme.breakpoints.up("md")]: {
+      marginRight: "15px",
+      display: "inline-flex",
+      alignItems: "center",
+      cursor: "default",
+    },
   },
 });
 

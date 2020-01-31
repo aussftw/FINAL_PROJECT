@@ -28,11 +28,11 @@ const ContactUs = () => {
   const classes = useStyles();
 
   return (
-    <Grid>
+    <Grid item xs={12} lg={4} md={12}>
       <Hidden mdUp>
         <ExpansionPanel className={classes.mainContainer}>
           <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-            <Typography className={classes}>CONTACT US</Typography>
+            <Typography className={classes.containerTittle}>CONTACT US</Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
             <DraftsIcon className={classes.contactUsIcon} />
@@ -57,7 +57,7 @@ const ContactUs = () => {
       <Hidden smDown>
         <Container className={classes.mainContainer}>
           <Link href="/#" className={classes.logoContainer}>
-            <img src="./img/Logo.svg" alt="logo" className={classes.logo} />
+            <img src="/img/Logo.svg" alt="logo" className={classes.logo} />
           </Link>
           <Box className={classes.itemContainer}>
             <DraftsIcon className={classes.contactUsIcon} />

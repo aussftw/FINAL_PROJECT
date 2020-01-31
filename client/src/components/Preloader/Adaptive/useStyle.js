@@ -2,7 +2,11 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyle = makeStyles(() => ({
   wrapper: {
-    marginLeft: 200,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    height: 180,
+    marginTop: 100,
   },
   adaptive: {
     display: "inline-block",
@@ -14,7 +18,7 @@ const useStyle = makeStyles(() => ({
     "border-top-left-radius": 99,
     "border-bottom-right-radius": 99,
     animationName: "$flower",
-    animation: "2s ease-in-out infinite alternate",
+    animation: "1s ease-in-out infinite alternate",
     "&::nth-child(odd)": {
       transform: "rotate(90deg)",
       animationDelay: "-1.5s",

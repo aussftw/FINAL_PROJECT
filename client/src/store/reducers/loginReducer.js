@@ -1,5 +1,8 @@
+import * as constants from "../constants";
+
 const initialState = {
-  login: false,
+  loginPreloader: true,
+  isAuthenticated: false,
   user: {
     firstName: "",
     lastName: "",
@@ -8,14 +11,14 @@ const initialState = {
     address: "",
   },
   error: "",
+  modalOpen:false,
 };
 
 const loginReducer = (state = initialState, action) => {
   switch (action.type) {
-    case "LOG_IN":
+    case constants.LOG_IN_SUCCESS:
       return {
         ...state,
-        login: true,
         user: {
           firstName: action.payload.firstName,
           lastName: action.payload.lastName,
@@ -23,11 +26,12 @@ const loginReducer = (state = initialState, action) => {
           telephone: action.payload.telephone,
           address: action.payload.address,
         },
+        error: "",
       };
-    case "LOG_OUT":
+    case constants.LOG_OUT:
       return {
         ...state,
-        login: false,
+        isAuthenticated: false,
         user: {
           firstName: "",
           lastName: "",
@@ -35,8 +39,9 @@ const loginReducer = (state = initialState, action) => {
           telephone: "",
           address: "",
         },
+        error: "",
       };
-    case "EDIT_USER_DATA_SUCCESS":
+    case constants.EDIT_USER_DATA_SUCCESS:
       return {
         ...state,
         user: {
@@ -46,10 +51,16 @@ const loginReducer = (state = initialState, action) => {
           telephone: action.payload.telephone,
           address: action.payload.address,
         },
+        error: "",
       };
-    case "EDIT_USER_DATA_FAILURE":
+    case constants.EDIT_USER_DATA_FAILURE:
       return { ...state, error: action.payload };
-    case "EDIT_USER_DATA_LOCAL":
+    case constants.LOG_IN_FAILURE:
+      return {
+        ...state,
+        error: action.payload,
+      };
+    case constants.EDIT_USER_DATA_LOCAL:
       return {
         ...state,
         user: {
@@ -59,6 +70,41 @@ const loginReducer = (state = initialState, action) => {
           telephone: action.payload.telephone,
           address: action.payload.address,
         },
+      };
+    case constants.PRELOADER_CLOSE:
+      return {
+        ...state,
+        loginPreloader: false,
+      };
+    case constants.USER_FROM_JWT:
+      return {
+        ...state,
+        isAuthenticated: true,
+        user: {
+          firstName: action.payload.firstName,
+          lastName: action.payload.lastName,
+        },
+      };
+    case constants.GET_USER_DATA_FROM_LOCALSTORAGE:
+      return {
+        ...state,
+        user: {
+          firstName: action.payload.firstName,
+          lastName: action.payload.lastName,
+          email: action.payload.email,
+          telephone: action.payload.telephone,
+          address: action.payload.address,
+        },
+      };
+    case constants.MODAL_OPEN:
+      return {
+        ...state,
+        modalOpen: true,
+      };
+    case constants.MODAL_CLOSE:
+      return {
+        ...state,
+        modalOpen: false,
       };
     default:
       return state;

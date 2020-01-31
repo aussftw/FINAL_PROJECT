@@ -1,76 +1,80 @@
 import React, { useState } from "react";
 import axios from "axios";
-
-import Paper from "@material-ui/core/Paper";
-// import Divider from "@material-ui/core/Divider";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import Button from "@material-ui/core/Button";
 import SearchIcon from "@material-ui/icons/Search";
-import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
-
-import MenuListComposition from "../Dropdown/Dropdown";
 import useStyles from "./useStyles";
+// import { Tooltip } from "@material-ui/core";
 
-const CustomizedSearch = props => {
-  const { className } = props;
+import {
+  searchPhrases,
+  searchPhrasesFailure,
+} from "../../../store/actions/Search";
+
+const CustomizedSearch = ({ searchPhrases, searchPhrasesFailure }) => {
   const classes = useStyles();
 
   const [text, setText] = useState({ query: "" });
 
-  const searchPhrases = e => {
-    e.preventDefault();
+  function search() {
     axios
-      .post("/products/search", text)
+      .post("/api/products/search", text)
       .then(products => {
-        // eslint-disable-next-line no-console
-        console.log(products);
+        searchPhrases(products.data);
       })
       .catch(err => {
-        // eslint-disable-next-line no-console
-        console.log(err);
+        searchPhrasesFailure(err);
       });
-  };
+  }
 
   const searchChange = prop => event => {
     setText({ ...text, [prop]: event.target.value });
   };
 
   return (
-    <Paper component="form" className={`${classes.search} ${className}`}>
-      <MenuListComposition
-        menuTitle="All Categories"
-        className={classes.link}
-      />
+    <>
+      {/* <MenuListComposition */}
+      {/*  menuTitle="All Categories" */}
+      {/*  className={classes.link} */}
+      {/* /> */}
       {/* <Divider className={classes.divider} orientation="vertical" /> */}
 
       <ValidatorForm
         noValidate={false}
-        onSubmit={searchPhrases}
-        className={classes.form}
+        onSubmit={search}
       >
         <TextValidator
           value={text.query}
           onChange={searchChange("query")}
-          // className={classes.input}
+          className={classes.input}
           variant="outlined"
           size="small"
           placeholder="Search..."
           validators={["required", "matchRegexp:^[`'\"()A-Za-zd.s_-]{3,50}"]}
-          errorMessages={[
-            "this field is required",
-            " Only latin letters, 3 characters and more",
-          ]}
+          // errorMessages={[
+          //   "This field is required",
+          //   "Only latin letters, 3 characters and more",
+          // ]}
+          FormHelperTextProps={{className: classes.helper}}
         />
+
         <Button
           className={classes.iconButton}
           variant="contained"
           type="submit"
           aria-label="search"
+          component={Link}
+          to="/search"
+          onClick={search}
+          href="/#"
         >
           <SearchIcon />
         </Button>
       </ValidatorForm>
-    </Paper>
+    </>
   );
 };
 
-export default CustomizedSearch;
+export default connect(null, { searchPhrases, searchPhrasesFailure })(CustomizedSearch);

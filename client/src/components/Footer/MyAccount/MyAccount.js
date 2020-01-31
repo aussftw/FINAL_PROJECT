@@ -1,5 +1,4 @@
 import React from "react";
-// import theme from "../../../theme";
 
 import {
   Grid,
@@ -20,30 +19,25 @@ const MyAccount = () => {
   const classes = useStyles();
 
   return (
-    <Grid item xs={12} lg={3} md={12}>
+    <Grid item xs={12} lg={4} md={12} className={classes.accountGrid}>
       <Hidden mdUp>
         <ExpansionPanel className={classes.mainContainer}>
           <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-            <Typography className={classes}>MY ACCOUNT</Typography>
+            <Typography className={classes.containerTittle}>MY ACCOUNT</Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
-            <Link color="secondary" href="/">
+            <Link color="secondary" href="/profile">
               Whishlist
             </Link>
           </ExpansionPanelDetails>
           <ExpansionPanelDetails>
-            <Link color="secondary" href="/">
+            <Link color="secondary" href="/checkout">
               Checkout
             </Link>
           </ExpansionPanelDetails>
           <ExpansionPanelDetails>
-            <Link color="secondary" href="/">
-              Gallery
-            </Link>
-          </ExpansionPanelDetails>
-          <ExpansionPanelDetails>
-            <Link color="secondary" href="/">
-              Service
+            <Link color="secondary" href="/registration">
+              Registration
             </Link>
           </ExpansionPanelDetails>
         </ExpansionPanel>
@@ -54,23 +48,18 @@ const MyAccount = () => {
             MY ACCOUNT
           </Typography>
           <Box className={classes.myAccountItem}>
-            <Link color="secondary" href="/">
+            <Link color="secondary" href="/profile">
               Whishlist
             </Link>
           </Box>
           <Box className={classes.myAccountItem}>
-            <Link color="secondary" href="/">
+            <Link color="secondary" href="/checkout">
               Checkout
             </Link>
           </Box>
           <Box className={classes.myAccountItem}>
-            <Link color="secondary" href="/">
-              Gallery
-            </Link>
-          </Box>
-          <Box className={classes.myAccountItem}>
-            <Link color="secondary" href="/">
-              Service
+            <Link color="secondary" href="/registration">
+              Registration
             </Link>
           </Box>
         </Container>

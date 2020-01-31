@@ -1,28 +1,33 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import { connect } from "react-redux";
 import useStyles from "./useStyles";
 import {
   saveUserData,
   editInputsData,
-} from "../../../store/actions/UserProfile";
+} from "../../../store/actions/userProfile";
 
-// eslint-disable-next-line no-shadow
-function DeliveryAddressForm({ user, saveUserData, editInputsData, error }) {
+function DeliveryAddressForm({
+  user,
+  saveUserPersonalData,
+  editInputsUserData,
+  error,
+}) {
   const classes = useStyles();
 
   const saveAddress = event => {
-    saveUserData(event, user);
+    saveUserPersonalData(event, user);
   };
 
   const handleChange = event => {
-    editInputsData(event, user);
+    editInputsUserData(event, user);
   };
 
   return (
     <div>
-      <h2 className={classes.title}>Delivery Address</h2>
+      <Typography className={classes.title} variant="h3">Delivery address</Typography>
       <div className={classes.root}>
         <ValidatorForm
           className={classes.form}
@@ -33,6 +38,7 @@ function DeliveryAddressForm({ user, saveUserData, editInputsData, error }) {
           <TextValidator
             id="delivery-address-input"
             label="Delivery address"
+            InputLabelProps={{ className: classes.input }}
             value={user.address}
             variant="outlined"
             multiline
@@ -53,7 +59,11 @@ function DeliveryAddressForm({ user, saveUserData, editInputsData, error }) {
             ADD ADDRESS
           </Button>
         </ValidatorForm>
-        {Boolean(error) && <p className={classes.message}>{error.message}</p>}
+        {Boolean(error) && (
+          <Typography className={classes.message}>
+            {`Data didn't save. Error: ${error.message}`}
+          </Typography>
+        )}
       </div>
     </div>
   );
@@ -66,6 +76,7 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { saveUserData, editInputsData })(
-  DeliveryAddressForm
-);
+export default connect(mapStateToProps, {
+  saveUserPersonalData: saveUserData,
+  editInputsUserData: editInputsData,
+})(DeliveryAddressForm);

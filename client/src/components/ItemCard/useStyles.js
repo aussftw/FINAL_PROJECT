@@ -5,9 +5,10 @@ const useStyles = makeStyles(theme => ({
     position: "relative",
     display: "inline-block",
     flexGrow: 1,
-    margin: theme.spacing(1),
     width: 240,
+    height: 315,
     padding: theme.spacing(1),
+    margin: theme.spacing(2),
     transition: "box-shadow 0.2s ease-out",
     "&:hover": {
       boxShadow: "2px 3px 7px 0px rgba(0,0,0,0.24)",
@@ -25,6 +26,7 @@ const useStyles = makeStyles(theme => ({
     zIndex: 2,
   },
   actionArea: {
+    color: theme.palette.primary.main,
     "&:hover $focusHighlight": {
       opacity: 0,
     },
@@ -36,11 +38,12 @@ const useStyles = makeStyles(theme => ({
   },
   mediaImage: {
     height: 200,
-    transform: "scale(0.9)",
+    transform: "scale(0.95)",
     transition: "transform 0.2s ease-out",
   },
   title: {
     fontSize: 14,
+    textTransform: "capitalize",
     paddingBottom: 5,
     color: theme.palette.secondary.dark,
     "&:hover": {
@@ -50,24 +53,41 @@ const useStyles = makeStyles(theme => ({
   rating: {
     paddingBottom: theme.spacing(1),
     color: theme.palette.primary.main,
-    iconEmpty: {
-      color: theme.palette.primary.main,
-    },
   },
   price: {
     fontSize: 14,
     fontWeight: 600,
+    color: theme.palette.secondary.main,
     "&:hover": {
       color: theme.palette.primary.main,
     },
   },
-  inCart: {
-    paddingTop: theme.spacing(1),
-    paddingBottom: 7,
-    fontSize: 13,
-    fontWeight: 700,
-    color: theme.palette.primary.main,
+  link: {
+    textDecoration: "none",
+    "&:focus, &:hover, &:visited, &:link, &:active": {
+      textDecoration: "none",
+    },
   },
+  snackbar: {
+    position: "relative",
+    backgroundColor: theme.palette.primary.main,
+  },
+  snackbarMessage: {
+    position: "absolute",
+    top: 18,
+    left: 68,
+    fontSize: 15,
+  },
+  cardSkeleton: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-around",
+    alignItems: "center",
+    width: 240,
+    height: 315,
+    padding: theme.spacing(1),
+    margin: theme.spacing(2),
+  }
 }));
 
 export default useStyles;

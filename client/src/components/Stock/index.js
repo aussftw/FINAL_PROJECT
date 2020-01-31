@@ -2,6 +2,7 @@ import React from "react";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import Container from "@material-ui/core/Container";
+import Typography from "@material-ui/core/Typography";
 
 import useStyles from "./useStyles";
 import TextBlock from "./TextBlock";
@@ -16,6 +17,7 @@ export default function Stock() {
 
   return (
     <Container maxWidth="lg">
+      <Typography variant="h4">Our collection</Typography>
       <Grid container className={classes.root} spacing={2}>
         <Grid container justify="center" spacing={spacing}>
           <GridElem xs={12} sm={5} image={images.fst} />

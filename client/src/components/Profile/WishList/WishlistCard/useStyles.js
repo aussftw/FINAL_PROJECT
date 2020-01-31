@@ -25,6 +25,9 @@ const useStyles = makeStyles(theme => ({
     height: 50,
     objectFit: "cover",
   },
+  link: {
+    textDecoration: "none",
+  },
   name: {
     fontSize: 14,
     textTransform: "capitalize",
@@ -40,7 +43,6 @@ const useStyles = makeStyles(theme => ({
   titleGrid: {
     [theme.breakpoints.down("xs")]: {
       display: "flex",
-      justifyContent: "center",
     },
   },
   quantityNumber: {
@@ -75,6 +77,14 @@ const useStyles = makeStyles(theme => ({
       fontSize: 12,
     },
   },
+  outstock: {
+    textAlign: "center",
+    fontSize: 14,
+    color: "red",
+    [theme.breakpoints.down("sm")]: {
+      fontSize: 12,
+    },
+  },
   closeBtnGrid: {
     display: "flex",
     justifyContent: "center",
@@ -88,7 +98,6 @@ const useStyles = makeStyles(theme => ({
   },
   btn: {
     fontSize: "12px",
-    letterSpacing: "0,5px",
     color: "white",
     backgroundColor: theme.palette.primary.main,
     padding: "5px",
@@ -96,6 +105,13 @@ const useStyles = makeStyles(theme => ({
       color: "white",
       backgroundColor: theme.palette.primary.dark,
     },
+    [theme.breakpoints.down("sm")]: {
+      fontSize: 10,
+    },
+  },
+  disabledBtn: {
+    fontSize: "12px",
+    padding: "5px",
     [theme.breakpoints.down("sm")]: {
       fontSize: 10,
     },

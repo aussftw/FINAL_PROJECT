@@ -118,6 +118,13 @@ exports.addProductToWishlist = async (req, res, next) => {
               })
             );
         } else {
+
+          if (wishlist.products.includes(req.params.productId)) {
+            res.status(400).json({
+              message: "Product was added to wishlist before"
+            });
+            return
+          }
           const wishlistData = {};
           wishlistData.products = wishlist.products.concat(
             req.params.productId
@@ -155,12 +162,12 @@ exports.deleteProductFromWishlish = async (req, res, next) => {
       } else {
         if (!wishlist.products.includes(req.params.productId)) {
           res.status(400).json({
-            message: `Product with _id "${req.params.productId}" is absent in wishlist.`
+            message: `Product is absent in wishlist`
           });
 
           return;
         }
-
+        // console.log(wishlist.products);
         const wishlistData = {};
 
         wishlistData.products = wishlist.products.filter(
@@ -182,8 +189,6 @@ exports.deleteProductFromWishlish = async (req, res, next) => {
               })
             );
         }
-        console.log("updatedWishlist", updatedWishlist);
-
 
         Wishlist.findOneAndUpdate(
           { customerId: req.user.id },
@@ -193,7 +198,6 @@ exports.deleteProductFromWishlish = async (req, res, next) => {
           .populate("products")
           .populate("customerId")
           .then(wishlist => {
-            console.log(wishlist);
             res.json(wishlist);
           })
           .catch(err =>
@@ -240,7 +244,15 @@ exports.getWishlist = (req, res, next) => {
   Wishlist.findOne({ customerId: req.user.id })
     .populate("products")
     .populate("customerId")
-    .then(wishlist => res.json(wishlist))
+    .then(wishlist => {
+      if (!wishlist) {
+        res.status(200).json({
+          products: []
+        })
+      } else {
+        res.json(wishlist)
+      }
+    })
     .catch(err =>
       res.status(400).json({
         message: `Error happened on server: "${err}" `

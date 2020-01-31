@@ -11,11 +11,10 @@ const useStyles = makeStyles(theme => ({
     },
   },
   title: {
-    margin: "0px 0px 5px 0",
     padding: 5,
     textAlign: "center",
     [theme.breakpoints.down("xs")]: {
-      fontSize: 20,
+      fontSize: 18,
     },
   },
   form: {
@@ -23,12 +22,16 @@ const useStyles = makeStyles(theme => ({
     flexDirection: "column",
     alignItems: "center",
   },
+  input: {
+    fontWeight: 400,
+  },
   btn: {
     width: 160,
     fontSize: "12px",
     letterSpacing: "0,5px",
     color: "white",
     backgroundColor: theme.palette.primary.main,
+    marginTop: 10,
     padding: "5px",
     "&:hover": {
       color: "white",
@@ -39,6 +42,7 @@ const useStyles = makeStyles(theme => ({
     },
   },
   message: {
+    marginTop: 5,
     textAlign: "center",
   },
 }));
