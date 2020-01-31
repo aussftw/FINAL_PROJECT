@@ -54,6 +54,9 @@ const useStyles = makeStyles({
     borderRadius: "8px",
     boxShadow: theme.shadows[5],
     width: "40vw",
+    "&:focus": {
+      outline:"none",
+    },
     [theme.breakpoints.down("lg")]:{
       width: "50vw",
     },

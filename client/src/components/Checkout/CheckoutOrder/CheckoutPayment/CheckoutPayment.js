@@ -35,13 +35,13 @@ const CheckoutPayments = () => {
         <p className={classes.paymentText}>Choose payment : </p>
         <FormControlLabel
           className={classes.checkboxLabel}
-          control={(
+          control={
             <GreenCheckbox
               checked={state.cash}
               onChange={e => handleChange(e)}
               value="cash"
             />
-          )}
+          }
           label="Cash"
         />
         <FormControlLabel
