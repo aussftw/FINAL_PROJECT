@@ -12,6 +12,11 @@ const useStyles = makeStyles({
     position: "absolute",
     bottom: "10%",
     left: "25%",
+    "&:hover": {
+      transform:"scale(1.2)",
+      color: theme.palette.primary.dark,
+      backgroundColor: theme.palette.primary.light,
+    },
     [theme.breakpoints.down("xs")]: {
       fontSize:"8px",
       padding: "0.5em 0 0.5em",
