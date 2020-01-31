@@ -25,6 +25,7 @@ export const USER_FROM_JWT = "USER_FROM_JWT";
 
 // ----------- Last-view -----------
 export const ADD_TO_LAST_VIEW_SUCCESS = "ADD_TO_LAST_VIEW_SUCCESS";
+export const ADD_CURRENT_ID = "ADD_CURRENT_ID";
 
 // ----------- Filters -----------
 export const GET_PRODUCT_LISTING = "GET_PRODUCT_LISTING";
