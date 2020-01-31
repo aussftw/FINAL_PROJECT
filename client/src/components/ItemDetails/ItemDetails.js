@@ -7,7 +7,19 @@ import { useParams } from "react-router-dom";
 import { Gallery, GalleryImage } from "react-gesture-gallery";
 
 import axios from "axios";
-import { Container, Typography, Divider, Box, Link, Button, IconButton, InputBase, List, ListItem, ListItemText } from "@material-ui/core";
+import {
+  Container,
+  Typography,
+  Divider,
+  Box,
+  Link,
+  Button,
+  IconButton,
+  InputBase,
+  List,
+  ListItem,
+  ListItemText,
+} from "@material-ui/core";
 import HomeIcon from "@material-ui/icons/HomeSharp";
 import FavoriteBorderSharpIcon from "@material-ui/icons/FavoriteBorderSharp";
 import FavoriteSharpIcon from "@material-ui/icons/FavoriteSharp";
@@ -99,15 +111,20 @@ const ItemDetails = ({
     }
   };
 
-  const changeQuantity = (e) => {
+  const changeQuantity = e => {
     // eslint-disable-next-line no-restricted-globals
-    if (!isNaN(+e.target.value) && e.target.value !== "0" && e.target.value !== "")  {
-      setQty(+e.target.value)
+    if (
+      !isNaN(+e.target.value) &&
+      e.target.value !== "0" &&
+      e.target.value !== ""
+    ) {
+      setQty(+e.target.value);
     }
   };
 
-
-  return ( preloader ? (<PreloaderAdaptive />) : (
+  return preloader ? (
+    <PreloaderAdaptive />
+  ) : (
     <Container className={classes.brandsContaier} maxWidth="lg">
       <Box className={classes.detailsHeader}>
         <Link href="/#" className={classes.linkIcon}>
@@ -163,10 +180,7 @@ const ItemDetails = ({
               </Typography>
             </ListItem>
           </List>
-          <RatingModule
-            id={item._id}
-            rate={item.rate.rating}
-          />
+          <RatingModule id={item._id} rate={item.rate.rating} />
           <Divider variant="middle" />
           <List>
             {/* <ListItem className={classes.root}>
@@ -214,15 +228,15 @@ const ItemDetails = ({
             >
               Add to cart
             </Button>
-            <Button className={classes.actionButton} aria-label="Add to wishlist" variant="contained">
+            <Button
+              className={classes.actionButton}
+              aria-label="Add to wishlist"
+              variant="contained"
+            >
               {!wishlistAll.every(el => el._id !== _id) ? (
-                <FavoriteSharpIcon
-                  onClick={() => deleteWishlistItem(_id)}
-                />
+                <FavoriteSharpIcon onClick={() => deleteWishlistItem(_id)} />
               ) : (
-                <FavoriteBorderSharpIcon
-                  onClick={handleAddtemToWishlist}
-                />
+                <FavoriteBorderSharpIcon onClick={handleAddtemToWishlist} />
               )}
             </Button>
           </Box>
@@ -235,7 +249,6 @@ const ItemDetails = ({
         </Typography>
       </Box>
     </Container>
-   )
   );
 };
 
