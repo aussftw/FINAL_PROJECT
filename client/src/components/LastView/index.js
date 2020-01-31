@@ -18,7 +18,6 @@ const LastViewCarousel = ({ lastView, currentId }) => {
       axios
         .post("/api/products/actualization", lastViewObj)
         .then(response => {
-          // console.log(response.data);
           setProductsLV([...productsLV, ...response.data]);
         })
         .catch(err => {

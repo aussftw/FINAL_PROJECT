@@ -20,18 +20,13 @@ export const addToLastView = data => dispatch => {
   const arr = store.getState().lastViewReducer.lastView;
 
   let current = [];
-  // if (arr.includes(data)) {
-  // current = arr.filter(x => x !== data);
-  // current = [...current, ...[data]];
-  // } else {
+
   if (arr.length >= 5) {
     const arrLenght = arr.length - 4;
-    console.log("arrLenght", arrLenght);
+
     arr.shift(arrLenght);
   }
   current = [...arr, ...[data]];
-  // }
-  console.log("current", current);
-  // const test = current.filter(x => x);
+
   dispatch(addToLastViewSuccess(current));
 };
