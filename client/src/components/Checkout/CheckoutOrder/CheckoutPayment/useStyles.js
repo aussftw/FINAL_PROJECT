@@ -3,7 +3,6 @@ import makeStyles from '@material-ui/core/styles/makeStyles';
 const useStyles = makeStyles(theme => ({
   paymentWrapper:{
     marginBottom:"1.5em",
-
   },
   checkboxForm: {
     width:"90%",
@@ -11,8 +10,12 @@ const useStyles = makeStyles(theme => ({
     display:"flex",
     justifyContent:"space-evenly",
     textAlign:"center",
+    [theme.breakpoints.down("xs")]: {
+      flexDirection: "column"
+    }
   },
   paymentText: {
+    alignSelf: "center",
     color:theme.palette.primary.main,
     fontSize:"1.2 em",
     fontWeight:"bold",
@@ -39,6 +42,7 @@ const useStyles = makeStyles(theme => ({
     boxShadow: "10px 0 40px rgba(0,0,0,0.3)",
     boxSizing: "border-box",
     [theme.breakpoints.down("xs")]: {
+      padding: 8,
       width: 300,
       height: 200,
       marginRight: 0,
@@ -48,7 +52,10 @@ const useStyles = makeStyles(theme => ({
     margin: "12px 0",
     display: "flex",
     flexDirection: "row",
-    justifyContent: "flex-end"
+    justifyContent: "flex-end",
+    [theme.breakpoints.down("xs")]: {
+      margin: "0 0 8px 0",
+    },
   },
   paymentMethod: {
     marginRight: 12,
@@ -58,6 +65,21 @@ const useStyles = makeStyles(theme => ({
     textTransform: "uppercase",
     color: "white",
     marginBottom: 10,
+    [theme.breakpoints.down("xs")]: {
+      fontSize: 12,
+      display: "flex",
+      justifyContent: "space-between"
+    },
+  },
+  creditCardTitleCV: {
+    display: "none",
+    [theme.breakpoints.down("xs")]: {
+      display: "flex",
+      fontSize: 12,
+      textTransform: "uppercase",
+      color: "white",
+      marginRight: 10,
+    },
   },
   creditCardNumbersItem: {
     color: "white",
@@ -70,12 +92,19 @@ const useStyles = makeStyles(theme => ({
   },
   creditCardDataGroup: {
     display: "flex",
+    justifyContent: "space-between",
+  },
+  creditCardDataGroupBox: {
+    display: "flex",
   },
   creditCardBox: {
     marginLeft: 20,
     display: "flex",
     flexDirection: "column",
     justifyContent: "flex-start",
+    [theme.breakpoints.down("xs")]: {
+      marginLeft: 10,
+    },
   },
   creditCardDatesItem: {
     color: "white",
@@ -105,7 +134,6 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.down("xs")]: {
       display: "none",
     }
-
   },
   creditCardBackMagneticStripe: {
     marginTop: 25,
@@ -126,13 +154,49 @@ const useStyles = makeStyles(theme => ({
     bottom: 45,
     right: 10,
   },
-  creditCardCVInput: {
-    width: 55,
-  },
-  creditCardInput: {
-    width: 55,
+  creditCardDateInput: {
+    padding: "10px 14px",
+    fontSize: 16,
+    width: 45,
     color: "white",
     background: "#191919",
+    [theme.breakpoints.down("xs")]: {
+      padding: "8px 16px",
+      fontSize: 14,
+    }
+  },
+  creditCardCVInputBox: {
+    width: 55,
+  },
+  creditCardCVInputBoxMini: {
+    display: "none",
+    [theme.breakpoints.down("xs")]: {
+      marginRight: 20,
+      display: "block",
+    }
+  },
+  creditCardCVInput: {
+    padding: "10px 14px",
+    fontSize: 16,
+    width: 45,
+    color: "white",
+    background: "#191919",
+    [theme.breakpoints.down("xs")]: {
+      width: 26,
+      padding: "8px 13px",
+      fontSize: 14,
+    }
+  },
+  creditCardInput: {
+    padding: "10px 14px",
+    fontSize: 16,
+    width: 45,
+    color: "white",
+    background: "#191919",
+    [theme.breakpoints.down("xs")]: {
+      padding: "8px 13px",
+      fontSize: 14,
+    }
   },
 
 }));

@@ -29,10 +29,10 @@ const CheckoutPayments = () => {
     card: false,
   });
   const [cardData, setCardData] = useState({
-    input1: "0000",
-    input2: "0000",
-    input3: "0000",
-    input4: "0000",
+    cardNumber1: "0000",
+    cardNumber2: "0000",
+    cardNumber3: "0000",
+    cardNumber4: "0000",
     month: "01",
     year: "20",
     CV: "000",
@@ -58,30 +58,32 @@ const CheckoutPayments = () => {
   return (
     <div className={classes.paymentWrapper}>
       <FormGroup row className={classes.checkboxForm}>
-        <p className={classes.paymentText}>Choose payment : </p>
-        <FormControlLabel
-          className={classes.checkboxLabel}
-          control={
-            <GreenCheckbox
-              checked={state.cash}
-              onChange={e => handleChange(e)}
-              value="cash"
-            />
-          }
-          label="Cash"
-        />
-        <FormControlLabel
-          className={classes.checkboxLabel}
-          control={(
-            <GreenCheckbox
-              checked={state.card}
-              onChange={e => handleChange(e)}
-              value="card"
-              className={classes.checkbox}
-            />
-          )}
-          label="Card"
-        />
+        <Typography className={classes.paymentText}>Choose payment : </Typography>
+        <div>
+          <FormControlLabel
+            className={classes.checkboxLabel}
+            control={(
+              <GreenCheckbox
+                checked={state.cash}
+                onChange={e => handleChange(e)}
+                value="cash"
+              />
+            )}
+            label="Cash"
+          />
+          <FormControlLabel
+            className={classes.checkboxLabel}
+            control={(
+              <GreenCheckbox
+                checked={state.card}
+                onChange={e => handleChange(e)}
+                value="card"
+                className={classes.checkbox}
+              />
+            )}
+            label="Card"
+          />
+        </div>
       </FormGroup>
       <>
         {state.card && (
@@ -98,8 +100,8 @@ const CheckoutPayments = () => {
                   <Typography className={classes.creditCardTitle}>CARD NUMBER</Typography>
                   <div className={classes.creditCardNumbersGroup}>
                     <TextValidator
-                      value={cardData.input1}
-                      name="input1"
+                      value={cardData.cardNumber1}
+                      name="cardNumber1"
                       onChange={event => handleInputsChange(event)}
                       className={classes.creditCardNumbersItem}
                       size="small"
@@ -112,8 +114,8 @@ const CheckoutPayments = () => {
                       errorMessages={[]}
                     />
                     <TextValidator
-                      value={cardData.input2}
-                      name="input2"
+                      value={cardData.cardNumber2}
+                      name="cardNumber2"
                       onChange={event => handleInputsChange(event)}
                       className={classes.creditCardNumbersItem}
                       size="small"
@@ -126,8 +128,8 @@ const CheckoutPayments = () => {
                       errorMessages={[]}
                     />
                     <TextValidator
-                      value={cardData.input3}
-                      name="input3"
+                      value={cardData.cardNumber3}
+                      name="cardNumber3"
                       onChange={event => handleInputsChange(event)}
                       className={classes.creditCardNumbersItem}
                       size="small"
@@ -140,8 +142,8 @@ const CheckoutPayments = () => {
                       errorMessages={[]}
                     />
                     <TextValidator
-                      value={cardData.input4}
-                      name="input4"
+                      value={cardData.cardNumber4}
+                      name="cardNumber4"
                       onChange={event => handleInputsChange(event)}
                       className={classes.creditCardNumbersItem}
                       size="small"
@@ -154,35 +156,54 @@ const CheckoutPayments = () => {
                       errorMessages={[]}
                     />
                   </div>
-                  <Typography className={classes.creditCardTitle}>VALID THRU</Typography>
+                  <Typography className={classes.creditCardTitle}>
+                    VALID THRU
+                    <Typography component="span" className={classes.creditCardTitleCV}>CVC2 / CVV2</Typography>
+                  </Typography>
                   <div className={classes.creditCardDataGroup}>
+                    <div className={classes.creditCardDataGroupBox}>
+                      <TextValidator
+                        value={cardData.month}
+                        name="month"
+                        onChange={event => handleInputsChange(event)}
+                        className={classes.creditCardDatesItem}
+                        size="small"
+                        variant="outlined"
+                        inputProps={{
+                          className: classes.creditCardDateInput,
+                          maxLength: 2,
+                        }}
+                        validators={["required", "matchRegexp:^0[1-9]$|^1[0-2]$"]}
+                        errorMessages={[]}
+                      />
+                      <Typography component="span" className={classes.creditCardSpan}>/</Typography>
+                      <TextValidator
+                        value={cardData.year}
+                        name="year"
+                        onChange={event => handleInputsChange(event)}
+                        className={classes.creditCardDatesItem}
+                        size="small"
+                        variant="outlined"
+                        inputProps={{
+                          className: classes.creditCardDateInput,
+                          maxLength: 2,
+                        }}
+                        validators={["required", "matchRegexp:^2[0-9]$"]}
+                        errorMessages={[]}
+                      />
+                    </div>
                     <TextValidator
-                      value={cardData.month}
-                      name="month"
+                      value={cardData.CV}
+                      name="CV"
                       onChange={event => handleInputsChange(event)}
-                      className={classes.creditCardDatesItem}
+                      className={classes.creditCardCVInputBoxMini}
                       size="small"
                       variant="outlined"
                       inputProps={{
-                        className: classes.creditCardInput,
-                        maxLength: 2,
+                        className: classes.creditCardCVInput,
+                        maxLength: 3,
                       }}
-                      validators={["required", "matchRegexp:^0[1-9]$|^1[0-2]$"]}
-                      errorMessages={[]}
-                    />
-                    <Typography component="span" className={classes.creditCardSpan}>/</Typography>
-                    <TextValidator
-                      value={cardData.year}
-                      name="year"
-                      onChange={event => handleInputsChange(event)}
-                      className={classes.creditCardDatesItem}
-                      size="small"
-                      variant="outlined"
-                      inputProps={{
-                        className: classes.creditCardInput,
-                        maxLength: 2,
-                      }}
-                      validators={["required", "matchRegexp:^2[0-9]$"]}
+                      validators={["required", "matchRegexp:^[0-9]{3}$"]}
                       errorMessages={[]}
                     />
                   </div>
@@ -197,21 +218,19 @@ const CheckoutPayments = () => {
                     value={cardData.CV}
                     name="CV"
                     onChange={event => handleInputsChange(event)}
-                    className={classes.creditCardCVInput}
+                    className={classes.creditCardCVInputBox}
                     size="small"
                     variant="outlined"
                     inputProps={{
-                      className: classes.creditCardInput,
+                      className: classes.creditCardCVInput,
                       maxLength: 3,
                     }}
                     validators={["required", "matchRegexp:^[0-9]{3}$"]}
                     errorMessages={[]}
                   />
                 </div>
-
               </div>
             </div>
-
           </div>
         )}
       </>

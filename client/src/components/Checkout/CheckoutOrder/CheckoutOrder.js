@@ -36,7 +36,7 @@ const CheckoutOrder = ({ user, isAuthenticated, handleChange, handleSubmit }) =>
             className={classes.textField}
             validators={[
               'required',
-              'matchRegexp:^[`\'"()A-Za-zd.s_-]{2,50}$',
+              'matchRegexp:^[`\'"()A-Za-zd.s_-]{2,25}$',
             ]}
             errorMessages={[
               'this field is required',
@@ -74,7 +74,7 @@ const CheckoutOrder = ({ user, isAuthenticated, handleChange, handleSubmit }) =>
             onChange={e => handleChange(e)}
             className={classes.textField}
           />
-          <CheckoutPayments/>
+          <CheckoutPayments />
           <Button className={classes.submitBtn} type="submit">Checkout</Button>
         </ValidatorForm>
       </>
