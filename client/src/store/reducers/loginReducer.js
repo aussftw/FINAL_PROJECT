@@ -101,6 +101,11 @@ const loginReducer = (state = initialState, action) => {
         ...state,
         modalOpen: true,
       };
+    case constants.MODAL_CLOSE:
+      return {
+        ...state,
+        modalOpen: false,
+      };
     default:
       return state;
   }

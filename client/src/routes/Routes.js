@@ -6,9 +6,8 @@ import jwt from "jwt-decode";
 import HomePage from "../pages/HomePage/HomePage";
 import CartPage from "../pages/CartPage/CartPage";
 import Profiler from "../pages/Profiler/Profiler";
-import LoginForm from "../components/LoginForm";
 import NotFound from "../pages/NotFound/NotFound";
-import RegistrationForm from "../components/RegistrationForm";
+import RegistrationPage from '../pages/RegistrationPage/RegistrationPage';
 import ItemDetailsPage from "../pages/ItemDetailsPage/ItemDetailsPage";
 import CheckoutPage from "../pages/CheckoutPage/CheckoutPage"
 import setAuthToken from "../components/common/setAuthToken";
@@ -83,11 +82,11 @@ const Routes = ({
       <Route path="/profile">
         <Profiler />
       </Route>
-      <Route path="/login">
-        <LoginForm />
-      </Route>
       <Route path="/products/:id">
         <ItemDetailsPage />
+      </Route>
+      <Route path="/registration">
+        <RegistrationPage />
       </Route>
       <Route path="/checkout">
         <CheckoutPage />
@@ -117,11 +116,8 @@ const Routes = ({
       <Route path="/notfound">
         <NotFound />
       </Route>
-      <Route path="/login">
-        <LoginForm />
-      </Route>
       <Route path="/registration">
-        <RegistrationForm />
+        <RegistrationPage />
       </Route>
       <Route path="/products/:id">
         <ItemDetailsPage />
@@ -131,7 +127,6 @@ const Routes = ({
       </Route>
       <Redirect to="/" />
     </Switch>
-
   );
 };
 

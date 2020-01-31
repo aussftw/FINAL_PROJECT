@@ -14,6 +14,8 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 import TemporaryDrawer from "./BurgerMenu/BurgerMenu";
 import CustomizedSearch from "./Search/Search";
 import LoginButton from "../LoginButton/LoginButton";
+import LoginForm from '../LoginForm';
+
 
 import useStyles from "./useStyles";
 import CartMini from "./CartMini/CartMini";
@@ -79,6 +81,7 @@ const Header = ({ isAuthenticated, wishlistCounter, cartCounter }) => {
           </div>
         </Toolbar>
       </AppBar>
+      <LoginForm />
     </div>
   );
 };
