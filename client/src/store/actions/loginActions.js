@@ -19,6 +19,18 @@ const logInFailure = error => {
   };
 };
 
+export const modalOpen = () => {
+  return{
+    type: constants.MODAL_OPEN,
+  }
+};
+
+export const modalClose = () => {
+  return{
+    type: constants.MODAL_CLOSE,
+  }
+};
+
 export const userFromJwt = data => {
   return {
     type: constants.USER_FROM_JWT,

@@ -2,8 +2,10 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import RegistrationContent from './RegistrationContent';
+import { modalOpen } from '../../store/actions/loginActions';
+import { connect } from 'react-redux';
 
-const RegistrationForm = () => {
+const RegistrationForm = ({ modalOpen }) => {
   const history = useHistory();
   const [userData, setUserData] = useState({
     firstName: '',
@@ -77,11 +79,11 @@ const RegistrationForm = () => {
         .post('/api/customers', user)
         .then(response => {
           if (response.statusText === 'OK') {
+            modalOpen();
             setRegistration(true);
           }
         })
         .catch(error => {
-          console.log(error);
           if (error.statusText === 'Not Found' && error.status === 404) {
             setMessage(error.message);
           } else {
@@ -90,7 +92,7 @@ const RegistrationForm = () => {
           setSubmitRegistration(false);
         });
     }
-  }, [submitRegistration, updateUser]);
+  }, [submitRegistration, updateUser , modalOpen]);
 
   return (
     <>
@@ -110,4 +112,4 @@ const RegistrationForm = () => {
   );
 };
 
-export default RegistrationForm;
+export default connect ( null, { modalOpen })(RegistrationForm);
