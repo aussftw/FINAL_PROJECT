@@ -4,10 +4,10 @@ import { Carousel } from "react-responsive-carousel";
 
 import * as axios from "axios";
 import Container from "@material-ui/core/Container";
+import Box from '@material-ui/core/Box';
 import Slide from "./slide";
 import PreloaderAdaptive from "../Preloader/Adaptive";
 // import useStyles from "./useStyles";
-import Box from '@material-ui/core/Box';
 
 const MainCarousel = () => {
   const [slidesData, setSlidesData] = useState(null);
@@ -29,9 +29,9 @@ const MainCarousel = () => {
     <Container disableGutters style={fakeStyle} maxWidth="xl">
 
       {!slidesData ? (
-          <Box width="100vw" style={fakeStyle2}>
-              <PreloaderAdaptive />
-          </Box>
+        <Box width="100vw" style={fakeStyle2}>
+          <PreloaderAdaptive />
+        </Box>
       ) : (
         <Carousel
           autoPlay
