@@ -8,7 +8,6 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import IconButton from "@material-ui/core/IconButton";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
-import ModalHeader from "../../common/ModalHeader";
 
 import useStyles from "./useStyles";
 
@@ -44,7 +43,6 @@ const LoginContent = ({ handleOpen, submitLogin, open, message }) => {
     >
       <Fade in={open}>
         <div className={classes.paper}>
-          <ModalHeader login reg={false} />
           <div className={classes.wrapper}>
             <h3 className={classes.title}>Log In Form</h3>
             {Boolean(message) && <p className={classes.errMsg}>{message}</p>}
@@ -97,7 +95,7 @@ const LoginContent = ({ handleOpen, submitLogin, open, message }) => {
               />
               <p className={classes.text}>
                 Have not an account yet ? &nbsp;
-                <Link to="/registration">
+                <Link to="/registration" onClick={handleOpen}>
                   <span className={classes.regLink}>Registration</span>
                 </Link>
               </p>

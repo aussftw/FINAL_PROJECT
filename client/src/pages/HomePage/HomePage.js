@@ -12,7 +12,7 @@ import MainCarousel from "../../components/MainCarousel";
 import Subscribe from "../../components/Subscribe/Subscribe";
 import Navigation from "../../views/Navigation/Navigation";
 import ProductCarousel from "../../components/ProductCarousel";
-import ScrollOnTop from '../../ScrollOnTop/ScrollOnTop';
+import ScrollOnTop from '../../components/common/ScrollOnTop/ScrollOnTop';
 
 
 function HomePage() {

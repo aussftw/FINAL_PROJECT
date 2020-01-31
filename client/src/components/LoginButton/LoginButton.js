@@ -1,15 +1,20 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import ProfileMenu from "../Header/ProfileMenu/ProfileMenu";
+import { modalOpen } from '../../store/actions/loginActions';
 import useStyles from "./useStyles";
 
 const LoginButton = ({
   isAuthenticated,
   user,
+  modalOpen
 }) => {
+  const handleModal = () => {
+    modalOpen();
+  };
+
   const classes = useStyles();
 
   return (
@@ -19,15 +24,14 @@ const LoginButton = ({
           <div className={classes.span}>
             <Typography component="span">Welcome,&nbsp;</Typography>
             <Typography component="span" noWrap>{` ${user.firstName}`}</Typography>
+            <Typography component="span">{` ${user.firstName}`}</Typography>
           </div>
           <ProfileMenu />
         </div>
       ) : (
-        <Link to="/login" className={classes.link}>
-          <Button variant="contained" type="button">
+          <Button className={classes.btn} variant="contained" type="button" onClick={handleModal}>
             Sign In
           </Button>
-        </Link>
       )}
     </div>
   );
@@ -40,6 +44,6 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(
+export default connect(mapStateToProps , { modalOpen })(
   LoginButton
 );
