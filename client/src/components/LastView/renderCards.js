@@ -12,37 +12,52 @@ import ItemCardLite from "../ItemCardLite/ItemCardLite";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import useStyles from "./useStyles";
 
-const RenderCards = ({ productsLV }) => {
+const RenderCards = ({ productsLV, currentId }) => {
   const classes = useStyles();
-  // const newArr = uniqBy(productsLV, 'itemNo');
+  const inputData = productsLV;
 
-  if (productsLV.length > 0) {
+  const inputId = inputData.map(item => {
+    return item._id;
+  });
+
+  let sortId = [];
+  if (inputId.includes(currentId)) {
+    sortId = inputId.filter(el => el !== currentId);
+    sortId = [...sortId, ...[currentId]];
+  }
+
+  const sortObj = [];
+  const result = sortId.map(item => {
+    const x = inputData.find(el => el._id === item);
+    sortObj.push(x);
+  });
+
+  if (sortObj.length) {
     return (
       <Container maxWidth="lg">
         <h2 className={classes.title}>Last View</h2>
-    <AliceCarousel
-    responsive=
-        {{
-          600: {
-            items: 2,
-          },
-          960: {
-            items: 3,
-          },
-          1280: {
-            items: 4,
-          },
-          1960: {
-            items: 4,
-          },
-        }}
-        buttonsDisabled autoPlay autoPlayInterval=
-        {1800}
-        duration=
-        {600}>
-
-        {productsLV
-          ? productsLV.map(value => {
+        <AliceCarousel
+          responsive={{
+            600: {
+              items: 2,
+            },
+            960: {
+              items: 3,
+            },
+            1280: {
+              items: 4,
+            },
+            1960: {
+              items: 4,
+            },
+          }}
+          buttonsDisabled
+          autoPlay
+          autoPlayInterval={1800}
+          duration={600}
+        >
+          {sortObj
+            ? sortObj.map((value, index) => {
                 return (
                   <ItemCardLite
                     key={`last-view-${value._id}`}
@@ -56,8 +71,8 @@ const RenderCards = ({ productsLV }) => {
                   />
                 );
               })
-          : console.log("none")}
-</AliceCarousel>
+            : console.log("none")}
+        </AliceCarousel>
       </Container>
     );
   }

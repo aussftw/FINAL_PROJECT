@@ -1,12 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { connect } from "react-redux";
-import { useHistory } from "react-router-dom";
 import LoginContent from "./LoginContent";
-import { logIn } from "../../store/actions/loginActions";
+import { logIn, modalClose } from '../../store/actions/loginActions';
 
-const LoginForm = ({ logIn, isAuthenticatedUser, error }) => {
-  const [open, setOpen] = useState(true);
-  const history = useHistory();
+const LoginForm = ({ logIn, isAuthenticatedUser, error , modal , modalClose }) => {
   const handleError = error => {
     if (error.response.data.loginOrEmail) {
       return error.response.data.loginOrEmail;
@@ -18,7 +15,7 @@ const LoginForm = ({ logIn, isAuthenticatedUser, error }) => {
   };
 
   const handleOpen = () => {
-    setOpen(false);
+    modalClose();
   };
 
   const submitLogin = (e, user) => {
@@ -28,30 +25,28 @@ const LoginForm = ({ logIn, isAuthenticatedUser, error }) => {
 
   return (
     <>
-      {/* eslint-disable-next-line no-nested-ternary */}
-      {open ? (
+      {modal ? (
         isAuthenticatedUser ? (
-          history.goBack()
+            handleOpen()
         ) : (
           <LoginContent
             handleOpen={handleOpen}
             submitLogin={submitLogin}
-            open={open}
+            open={modal}
             message={error !== "" ? handleError(error) : ""}
           />
         )
-      ) : (
-        history.goBack()
-      )}
+      ) : handleOpen()}
     </>
-  );
+  )
 };
 
 const mapStateToProps = state => {
   return {
     isAuthenticatedUser: state.loginReducer.isAuthenticated,
     error: state.loginReducer.error,
+    modal:state.loginReducer.modalOpen,
   };
 };
 
-export default connect(mapStateToProps, { logIn })(LoginForm);
+export default connect(mapStateToProps, { logIn , modalClose })(LoginForm);

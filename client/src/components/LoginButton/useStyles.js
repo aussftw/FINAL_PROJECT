@@ -5,17 +5,6 @@ const useStyles = makeStyles({
   wrapper: {
     display: "inline-flex",
   },
-  // btn: {
-  //   fontSize: "14px",
-  //   letterSpacing: "0,5px",
-  //   color: "white",
-  //   backgroundColor: theme.palette.primary.main,
-  //   padding: "5px",
-  //   "&:hover": {
-  //     color: "white",
-  //     backgroundColor: theme.palette.primary.dark,
-  //   },
-  // },
   link: {
     marginRight: "20px",
     textDecoration: "none",

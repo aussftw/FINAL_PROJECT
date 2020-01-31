@@ -1,6 +1,8 @@
 export const LOG_IN_SUCCESS = "LOG_IN_SUCCESS";
 export const LOG_IN_FAILURE = "LOG_IN_FAILURE";
 export const LOG_OUT = "LOG_OUT";
+export const MODAL_OPEN = "MODAL_OPEN";
+export const MODAL_CLOSE = "MODAL_CLOSE";
 export const GET_LINKS_SUCCESS = "GET_LINKS_SUCCESS";
 export const GET_LINKS_FAILURE = "GET_LINKS_FAILURE";
 export const SEARCH_SUCCESS = "SEARCH_SUCCESS";
@@ -23,6 +25,7 @@ export const USER_FROM_JWT = "USER_FROM_JWT";
 
 // ----------- Last-view -----------
 export const ADD_TO_LAST_VIEW_SUCCESS = "ADD_TO_LAST_VIEW_SUCCESS";
+export const ADD_CURRENT_ID = "ADD_CURRENT_ID";
 
 // ----------- Filters -----------
 export const GET_PRODUCT_LISTING = "GET_PRODUCT_LISTING";

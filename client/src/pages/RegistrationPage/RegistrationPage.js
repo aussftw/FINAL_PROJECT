@@ -3,20 +3,20 @@ import BackToTop from "../../components/common/GoUpButton";
 import Header from "../../components/Header";
 import SubHeader from "../../components/Header/SubHeader/SubHeader";
 import Footer from "../../components/Footer";
-import Profile from "../../components/Profile/Profile";
+import RegistrationForm from '../../components/RegistrationForm';
 import ScrollOnTop from '../../components/common/ScrollOnTop/ScrollOnTop';
 
-const Profiler = () => {
+const RegistrationPage = () => {
   return (
     <>
       <ScrollOnTop />
       <BackToTop />
       <Header />
       <SubHeader />
-      <Profile />
+      <RegistrationForm />
       <Footer />
     </>
   );
 };
 
-export default Profiler;
+export default RegistrationPage;
