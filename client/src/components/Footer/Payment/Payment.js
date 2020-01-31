@@ -21,10 +21,10 @@ const Payment = () => {
 
   return (
     <Hidden mdUp>
-      <Grid item xs={12} lg={3} md={12}>
+      <Grid item xs={12} lg={4} md={12}>
         <ExpansionPanel className={classes.bg}>
           <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-            <Typography>PAYMENT</Typography>
+            <Typography className={classes.containerTittle}>PAYMENT</Typography>
           </ExpansionPanelSummary>
           <Box className={classes.paymentMethods}>
             <ExpansionPanelDetails className={classes.root}>
