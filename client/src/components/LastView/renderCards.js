@@ -14,47 +14,29 @@ import useStyles from "./useStyles";
 
 const RenderCards = ({ productsLV, currentId }) => {
   const classes = useStyles();
-
   const inputData = productsLV;
-  console.log("inputData", inputData);
-  console.log("currentId", currentId);
+
   const inputId = inputData.map(item => {
     return item._id;
   });
-  console.log("inputId", inputId);
-  const sortedId = inputId;
-  // sortedId.push(currentId);
-  // if (inputId.includes(currentId)) {
-  //   // sortedId = inputId.shift();
-  //   // sortedId.push(currentId);
-  //   sortedId = inputId.filter(x => x !== currentId);
-  //   // sortedId = [...new Set(inputId)];
-  // }
-  // const sliceArr = sortedId.map((value, index) => {
-  //   return index === sortedId.length - 1 ? null : value;
-  // });
-  // console.log("sliceArr", sliceArr);
-  // eslint-disable-next-line
-  let sortedObj = [];
-  // if (sortedObj.length) {
-  const result = sortedId.map(item => {
+
+  let sortId = [];
+  if (inputId.includes(currentId)) {
+    sortId = inputId.filter(el => el !== currentId);
+    sortId = [...sortId, ...[currentId]];
+  }
+
+  const sortObj = [];
+  const result = sortId.map(item => {
     const x = inputData.find(el => el._id === item);
-    sortedObj.push(x);
-  });
-  // }
-
-  console.log("sortedObj", sortedObj);
-  console.log("sortedObjLength", sortedObj.length);
-  console.log("sortedObjLength - 1", sortedObj.length - 1);
-  sortedObj.map((value, index) => {
-    console.log("index", index);
+    sortObj.push(x);
   });
 
-  if (sortedObj.length) {
+  if (sortObj.length) {
     return (
       <Container maxWidth="lg">
         <h2 className={classes.title}>Last View</h2>
-        {/* <AliceCarousel
+        <AliceCarousel
           responsive={{
             600: {
               items: 2,
@@ -73,38 +55,24 @@ const RenderCards = ({ productsLV, currentId }) => {
           autoPlay
           autoPlayInterval={1800}
           duration={600}
-        > */}
-        {sortedObj
-          ? sortedObj.map((value, index) => {
-              return index === sortedObj.length - 1 ? (
-                ""
-              ) : (
-                <ItemCardLite
-                  key={`last-view-${value._id}`}
-                  id={value._id}
-                  itemNo={value.itemNo}
-                  title={value.name}
-                  rate={value.rate.rating}
-                  price={value.currentPrice}
-                  img={value.imageUrls[0]}
-                  stock={value.quantity}
-                />
-              );
-              // return (
-              //   <ItemCardLite
-              //     key={`last-view-${value._id}`}
-              //     id={value._id}
-              //     itemNo={value.itemNo}
-              //     title={value.name}
-              //     rate={value.rate.rating}
-              //     price={value.currentPrice}
-              //     img={value.imageUrls[0]}
-              //     stock={value.quantity}
-              //   />
-              // );
-            })
-          : console.log("none")}
-        {/* </AliceCarousel> */}
+        >
+          {sortObj
+            ? sortObj.map((value, index) => {
+                return (
+                  <ItemCardLite
+                    key={`last-view-${value._id}`}
+                    id={value._id}
+                    itemNo={value.itemNo}
+                    title={value.name}
+                    rate={value.rate.rating}
+                    price={value.currentPrice}
+                    img={value.imageUrls[0]}
+                    stock={value.quantity}
+                  />
+                );
+              })
+            : console.log("none")}
+        </AliceCarousel>
       </Container>
     );
   }
