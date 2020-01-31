@@ -8,7 +8,8 @@ const useStyles = makeStyles(() => ({
         display: "flex",
         alignContent: "center",
         width: 500
-    }
+    },
+
 }));
 
 export default useStyles;
