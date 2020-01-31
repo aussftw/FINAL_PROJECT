@@ -9,6 +9,7 @@ export const addToLastViewSuccess = data => {
 };
 
 export const addToLastView = (data) => dispatch => {
+    console.log("!!!");
     const arr = store.getState().lastViewReducer.lastView;
     // console.log(arr);
     let current = [];

@@ -29,7 +29,7 @@ import {
   wishlistAddItem,
   wishlistDeleteItem,
 } from "../../store/actions/wishlist";
-import { addToLastView } from "../../store/actions/addToLastView";
+// import { addToLastView } from "../../store/actions/addToLastView";
 
 const ItemCard = ({
   id,
@@ -109,7 +109,7 @@ const ItemCard = ({
           )}
           <Link className={classes.link} to={`/products/${itemNo}`}>
             <CardActionArea
-              onClick={() => addToLastViewCard(id)}
+              // onClick={() => addToLastViewCard(id)}
               classes={{
                 root: classes.actionArea,
                 focusHighlight: classes.focusHighlight,
@@ -204,6 +204,6 @@ export default connect(mapStateToProps, {
   addWishlistItem: wishlistAddItem,
   deleteWishlistItem: wishlistDeleteItem,
   addCartItem: addItemCart,
-  addToLastViewCard: addToLastView,
+  // addToLastViewCard: addToLastView,
 
 })(ItemCard);

@@ -22,6 +22,7 @@ import {
   wishlistAddItem,
   wishlistDeleteItem,
 } from "../../store/actions/wishlist";
+import { addToLastView } from "../../store/actions/addToLastView";
 
 import useStyles from "./useStyles";
 
@@ -43,7 +44,7 @@ const ItemDetails = ({
   const [preloader, setPreloader] = useState(true);
   // const [snackbarAddToCart, setSnackbarAddToCart] = useState(false);
 
-  useEffect(() => {
+  useEffect((addToLastViewCard) => {
     axios
       .get(`/api/products/${itemNo.id}`)
       .then(response => {
@@ -57,6 +58,7 @@ const ItemDetails = ({
         console.log(error);
         setPreloader(false);
       });
+    () => addToLastViewCard
   }, [itemNo.id]);
 
   // helpers
@@ -72,6 +74,8 @@ const ItemDetails = ({
     description,
     quantity,
   } = item;
+
+
 
   console.log(item);
 
@@ -250,4 +254,5 @@ export default connect(mapStateToProps, {
   addWishlistItem: wishlistAddItem,
   deleteWishlistItem: wishlistDeleteItem,
   addCartItem: addItemCart,
+  addToLastViewCard: addToLastView,
 })(ItemDetails);
