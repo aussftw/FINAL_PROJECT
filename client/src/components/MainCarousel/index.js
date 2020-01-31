@@ -29,7 +29,7 @@ const MainCarousel = () => {
     <Container disableGutters style={fakeStyle} maxWidth="xl">
 
       {!slidesData ? (
-          <Box component="p" width="100vw" style={fakeStyle2}>
+          <Box width="100vw" style={fakeStyle2}>
               <PreloaderAdaptive />
           </Box>
       ) : (
