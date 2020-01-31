@@ -7,11 +7,12 @@ const useStyles = makeStyles(theme => ({
   },
   contactUsItem: {
     fontSize: 16,
-    [theme.breakpoints.up("sm")]: {
-      marginTop: "-2rem",
-    },
+    // [theme.breakpoints.up("sm")]: {
+    //   marginTop: "-2rem",
+    // },
   },
   itemContainer: {
+    display: "flex",
     margin: "1rem 0",
   },
   mainContainer: {
@@ -26,6 +27,10 @@ const useStyles = makeStyles(theme => ({
     paddingTop: "1rem",
     marginLeft: "-2rem",
   },
+  containerTittle: {
+    fontWeight: 500,
+    fontSize: 18,
+  },
   logo: {
     height: 50,
     width: 170,
@@ -33,10 +38,10 @@ const useStyles = makeStyles(theme => ({
 
   paymentMethods: {
     marginTop: "1.5rem",
-    marginRight: "2.5rem",
+    // marginRight: "2.5rem",
   },
   paymentMethod: {
-    marginRight: "1rem",
+    marginRight: 12,
   },
 }));
 
