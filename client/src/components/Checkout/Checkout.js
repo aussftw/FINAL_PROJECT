@@ -6,7 +6,6 @@ import { connect } from 'react-redux';
 import CheckoutCart from "./CheckoutCart/CheckoutCart";
 import CheckoutOrder from './CheckoutOrder/CheckoutOrder';
 import useStyles from  "./useStyles";
-import { connect } from 'react-redux';
 
 
 const Checkout = ({userData , isAuthenticated}) => {

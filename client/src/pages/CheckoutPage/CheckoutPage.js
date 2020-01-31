@@ -4,6 +4,7 @@ import Header from "../../components/Header";
 import SubHeader from "../../components/Header/SubHeader/SubHeader";
 import Footer from "../../components/Footer";
 import Checkout from "../../components/Checkout/Checkout";
+import ScrollOnTop from '../../components/common/ScrollOnTop/ScrollOnTop';
 
 const CheckoutPage = () => {
   return (
