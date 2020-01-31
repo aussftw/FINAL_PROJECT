@@ -5,7 +5,6 @@ import Footer from "../../components/Footer";
 import ItemDetails from "../../components/ItemDetails/ItemDetails";
 import SubHeader from "../../components/Header/SubHeader/SubHeader";
 import LastViewCarousel from "../../components/LastView";
-import {Container} from "@material-ui/core";
 import ScrollOnTop from '../../components/common/ScrollOnTop/ScrollOnTop';
 
 const ItemDetailsPage = () => {

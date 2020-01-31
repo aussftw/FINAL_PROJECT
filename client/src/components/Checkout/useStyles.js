@@ -4,8 +4,6 @@ const useStyles = makeStyles({
   checkoutContainer: {
     paddingTop: 30,
     paddingBottom: 30,
-    paddingRight: 10,
-    paddingLeft: 10,
   },
 });
 

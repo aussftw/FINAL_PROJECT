@@ -4,7 +4,6 @@ import SubHeader from "../../components/Header/SubHeader/SubHeader";
 import BackToTop from "../../components/common/GoUpButton";
 import Footer from "../../components/Footer";
 import Subscribe from "../../components/Subscribe/Subscribe";
-
 // import SearchResultsPage from "../../components/SearchResultPage";
 import ScrollOnTop from '../../components/common/ScrollOnTop/ScrollOnTop';
 import Preloader from "../../components/Preloader";
@@ -17,12 +16,11 @@ function SearchPage() {
       <BackToTop />
       <Header />
       <SubHeader />
+       <Suspense fallback={<Preloader />}>
+       <SearchResultsPage />
+       </Suspense>
 
-      {/* <Suspense fallback={<Preloader />}> */}
-      {/* <SearchResultsPage /> */}
-      {/* </Suspense> */}
-
-      <SearchResultsPage />
+      {/*<SearchResultsPage />*/}
       <Subscribe />
       <Footer />
     </>

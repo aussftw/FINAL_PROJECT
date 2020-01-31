@@ -24,7 +24,7 @@ const CheckoutCartCard = ({title, cartQty, price, itemNo, img}) => {
           <Typography className={classes.title}>{title}</Typography>
         </Link>
       </Grid>
-      <Grid item xs={3} sm={3}>
+      <Grid item xs={3} sm={3} className={classes.subtotal}>
         <Typography className={classes.quantity}>
           {`Quantity: ${cartQty}`}
         </Typography>

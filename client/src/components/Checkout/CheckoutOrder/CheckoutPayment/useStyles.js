@@ -4,6 +4,7 @@ import theme from '../../../../theme';
 const useStyles = makeStyles({
   paymentWrapper:{
     marginBottom:"1.5em",
+
   },
   checkboxForm: {
     width:"90%",

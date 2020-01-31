@@ -10,6 +10,11 @@ const useStyles = makeStyles(theme => ({
   slider: {
     // maxHeight: 200,
   },
+  fake: {
+    width: "100vw",
+    // height: "calc(100vw / 1920 * 700)",
+    height: "720px",
+  },
   block: {
     marginTop: -250,
     width: "50%",
@@ -60,7 +65,7 @@ const useStyles = makeStyles(theme => ({
   //     // minHeight: 222
   //   },
   // },
-  legend: {},
+  // legend: {},
 
 }));
 
