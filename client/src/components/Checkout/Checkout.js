@@ -8,6 +8,7 @@ import jwt from 'jwt-decode';
 import { Redirect } from  "react-router-dom";
 import CheckoutCart from './CheckoutCart/CheckoutCart';
 import CheckoutOrder from './CheckoutOrder/CheckoutOrder';
+import jwt from 'jwt-decode';
 import useStyles from './useStyles';
 
 
