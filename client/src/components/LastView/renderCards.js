@@ -22,11 +22,11 @@ const RenderCards = ({ productsLV, currentId }) => {
 
   let sortId = [];
 
-  if (inputId.includes(currentId)) {
-    console.log("INCLUDES");
-  } else {
-    console.log("NE_INCLUDES");
-  }
+  // if (inputId.includes(currentId)) {
+  //   console.log("INCLUDES");
+  // } else {
+  //   console.log("NE_INCLUDES");
+  // }
 
   if (inputId.includes(currentId)) {
     sortId = inputId.filter(el => el !== currentId);
