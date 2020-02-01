@@ -92,6 +92,9 @@ const Routes = ({
       <Route path="/checkout">
         <CheckoutPage />
       </Route>
+      <Route path="/orders/:id">
+        <ItemDetailsPage />
+      </Route>
       <Redirect to="/" />
     </Switch>
   ) : (
@@ -125,6 +128,9 @@ const Routes = ({
       </Route>
       <Route path="/checkout">
         <CheckoutPage />
+      </Route>
+      <Route path="/orders/:id">
+        <ItemDetailsPage />
       </Route>
       <Redirect to="/" />
     </Switch>
