@@ -21,12 +21,20 @@ const RenderCards = ({ productsLV, currentId }) => {
   });
 
   let sortId = [];
+
+  // if (inputId.includes(currentId)) {
+  //   console.log("INCLUDES");
+  // } else {
+  //   console.log("NE_INCLUDES");
+  // }
+
   if (inputId.includes(currentId)) {
     sortId = inputId.filter(el => el !== currentId);
     sortId = [...sortId, ...[currentId]];
   }
 
   const sortObj = [];
+  // eslint-disable-next-line
   const result = sortId.map(item => {
     const x = inputData.find(el => el._id === item);
     sortObj.push(x);
