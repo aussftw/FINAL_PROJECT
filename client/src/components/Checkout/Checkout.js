@@ -51,7 +51,7 @@ const Checkout = ({ userData, isAuthenticated, cartProducts }) => {
     mobile: user.telephone,
     deliveryAddress: JSON.stringify(user.address),
     letterSubject: "Thank you for order! You are welcome!",
-    letterHtml: `<h1>Your order is placed. Hi Max!</h1>`,
+    letterHtml: `<h1>Your order is placed.</h1>`,
     canceled: false,
   };
 
