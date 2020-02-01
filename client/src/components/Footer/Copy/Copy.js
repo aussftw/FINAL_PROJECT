@@ -9,7 +9,7 @@ const Copy = () => {
     <Grid item xs={12} className={classes.copyHeader}>
       <Divider variant="middle" />
       <Typography className={classes.textedFooter}>
-        Designed by Webibazaar Theme All rights reserved. © 2020
+        Suhak Brothers Inc. © 2020
       </Typography>
     </Grid>
   );

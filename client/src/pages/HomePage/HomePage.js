@@ -11,8 +11,7 @@ import Stock from "../../components/Stock";
 import MainCarousel from "../../components/MainCarousel";
 import Subscribe from "../../components/Subscribe/Subscribe";
 import ProductCarousel from "../../components/ProductCarousel";
-import ScrollOnTop from '../../ScrollOnTop/ScrollOnTop';
-
+import ScrollOnTop from "../../components/common/ScrollOnTop/ScrollOnTop";
 
 function HomePage() {
   return (
