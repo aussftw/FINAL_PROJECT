@@ -75,7 +75,7 @@ const CheckoutOrder = ({ user, isAuthenticated, handleChange, handleSubmit }) =>
             className={classes.textField}
           />
           <CheckoutPayments />
-          <Button className={classes.submitBtn} type="submit">Checkout</Button>
+          <Button className={classes.submitBtn} type="submit">place order</Button>
         </ValidatorForm>
       </>
   );

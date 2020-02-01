@@ -65,7 +65,7 @@ exports.placeOrder = async (req, res, next) => {
     } else {
       const subscriberMail = req.body.email;
       const letterSubject = req.body.letterSubject;
-      const letterHtml = req.body.letterHtml;
+      const letterHtml = `<h1>Hello, ${order.name}.</h1><div>${req.body.letterHtml}</div><h1>OrderNo is ${order.orderNo}.</h1>`;
 
       const { errors, isValid } = validateOrderForm(req.body);
 

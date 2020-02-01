@@ -59,7 +59,6 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up("sm")]: {
       flexDirection: "row",
       justifyContent: "space-between",
-
     },
   },
   total: {
@@ -72,14 +71,12 @@ const useStyles = makeStyles(theme => ({
   },
   details: {
     fontSize: 12,
-    // fontWeight: 600,
     [theme.breakpoints.up("sm")]: {
       fontSize: 14,
     },
   },
   status: {
     fontSize: 12,
-    // fontWeight: 600,
     [theme.breakpoints.up("sm")]: {
       fontSize: 14,
     },

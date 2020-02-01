@@ -34,22 +34,24 @@ const Checkout = ({ userData, isAuthenticated, cartProducts }) => {
   }, [userData]);
 
   const newOrder = isAuthenticated ? {
-    customerId: jwt(localStorage.getItem('authToken')).id,
-    status: 'In progress',
+    name: user.firstName,
+    customerId: jwt(localStorage.getItem("authToken")).id,
+    status: "In progress",
     email: user.email,
     mobile: user.telephone,
     deliveryAddress: JSON.stringify(user.address),
-    letterSubject: 'Thank you for order! You are welcome!',
-    letterHtml: '<h1>Your order is placed. OrderNo is 023689452.</h1>',
+    letterSubject: "Thank you for order! You are welcome!",
+    letterHtml: `<h1>Your order is placed.</h1>`,
     canceled: false,
   } : {
+    name: user.firstName,
     products: JSON.stringify(cartProducts),
     status: 'In progress',
     email: user.email,
     mobile: user.telephone,
     deliveryAddress: JSON.stringify(user.address),
-    letterSubject: 'Thank you for order! You are welcome!',
-    letterHtml: '<h1>Your order is placed. OrderNo is 023689452.</h1>',
+    letterSubject: "Thank you for order! You are welcome!",
+    letterHtml: `<h1>Your order is placed. Hi Max!</h1>`,
     canceled: false,
   };
 

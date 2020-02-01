@@ -188,13 +188,13 @@ const useStyles = makeStyles(theme => ({
     }
   },
   creditCardInput: {
-    padding: "10px 14px",
+    padding: "10px 10px",
     fontSize: 16,
     width: 45,
     color: "white",
     background: "#191919",
     [theme.breakpoints.down("xs")]: {
-      padding: "8px 13px",
+      padding: "8px 10px",
       fontSize: 14,
     }
   },
