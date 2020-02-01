@@ -43,6 +43,7 @@ export const addToLastView = data => dispatch => {
   //     return item;
   //   }
   // });
+  // eslint-disable-next-line
   let lastViewedProducts = current;
 
   const updateLastViewedProducts = (lastViewedProducts, newProduct) => {
