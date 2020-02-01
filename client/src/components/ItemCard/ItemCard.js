@@ -118,7 +118,8 @@ const ItemCard = ({
                 className={classes.mediaImage}
                 image={img}
                 title={title}
-                component="div"
+                component="img"
+                align="center"
               />
               <CardContent className={classes.cardContent}>
                 <Typography className={classes.title} noWrap align="center">
