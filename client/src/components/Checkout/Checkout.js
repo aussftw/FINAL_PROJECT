@@ -1,24 +1,25 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import { connect } from 'react-redux';
-import jwt from 'jwt-decode';
-import CheckoutCart from './CheckoutCart/CheckoutCart';
-import CheckoutOrder from './CheckoutOrder/CheckoutOrder';
-import useStyles from './useStyles';
+import Container from "@material-ui/core/Container";
+import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
+import { connect } from "react-redux";
+import jwt from "jwt-decode";
+import { Redirect } from  "react-router-dom";
+import CheckoutCart from "./CheckoutCart/CheckoutCart";
+import CheckoutOrder from "./CheckoutOrder/CheckoutOrder";
+import useStyles from "./useStyles";
 
 
 const Checkout = ({ userData, isAuthenticated, cartProducts }) => {
   const classes = useStyles();
 
   const [user, setUserData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    telephone: '',
-    address: '',
+    firstName: "",
+    lastName: "",
+    email: "",
+    telephone: "",
+    address: "",
   });
 
   useEffect(() => {
@@ -46,7 +47,7 @@ const Checkout = ({ userData, isAuthenticated, cartProducts }) => {
   } : {
     name: user.firstName,
     products: JSON.stringify(cartProducts),
-    status: 'In progress',
+    status: "In progress",
     email: user.email,
     mobile: user.telephone,
     deliveryAddress: JSON.stringify(user.address),
@@ -55,11 +56,14 @@ const Checkout = ({ userData, isAuthenticated, cartProducts }) => {
     canceled: false,
   };
 
+  const [link, setLink] = useState(null);
   const handleSubmit = () => {
     axios
       .post("/api/orders" , newOrder)
       .then(response => {
-        console.log(response);
+        console.log(response)
+        setLink(response.data.order.orderNo);
+        ;
       })
       .catch(error => {
         console.log(error.response);
@@ -71,22 +75,23 @@ const Checkout = ({ userData, isAuthenticated, cartProducts }) => {
   };
 
   return (
-    <Container className={classes.checkoutContainer} maxWidth="lg">
-      <Typography variant="h3">Checkout</Typography>
-      {cartProducts.length > 0 ? (
-        <Grid container>
-          <Grid item xs={12} md={6}>
-            <CheckoutOrder
-              isAuthenticated={isAuthenticated}
-              user={user}
-              handleChange={handleChange}
-              handleSubmit={handleSubmit}
-            />
+    link ? (<Redirect to={`/orders/${link}`} />) : (
+      <Container className={classes.checkoutContainer} maxWidth="lg">
+        <Typography variant="h3">Checkout</Typography>
+        {cartProducts.length > 0 ? (
+          <Grid container>
+            <Grid item xs={12} md={6}>
+              <CheckoutOrder
+                isAuthenticated={isAuthenticated}
+                user={user}
+                handleChange={handleChange}
+                handleSubmit={handleSubmit}
+              />
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <CheckoutCart />
+            </Grid>
           </Grid>
-          <Grid item xs={12} md={6}>
-            <CheckoutCart />
-          </Grid>
-        </Grid>
       ) : (
         <div className={classes.messagesWrapper}>
           <Typography variant="h4" align="center" className={classes.mainMessage}>
@@ -97,7 +102,8 @@ const Checkout = ({ userData, isAuthenticated, cartProducts }) => {
           </Typography>
         </div>
       )}
-    </Container>
+      </Container>
+)
   );
 };
 
