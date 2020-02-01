@@ -4,9 +4,9 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { connect } from 'react-redux';
+import jwt from 'jwt-decode';
 import CheckoutCart from './CheckoutCart/CheckoutCart';
 import CheckoutOrder from './CheckoutOrder/CheckoutOrder';
-import jwt from 'jwt-decode';
 import useStyles from './useStyles';
 
 
@@ -34,20 +34,24 @@ const Checkout = ({ userData, isAuthenticated, cartProducts }) => {
   }, [userData]);
 
   const newOrder = isAuthenticated ? {
-    customerId: jwt(localStorage.getItem('authToken')).id,
-    status: 'In progress',
+    name: user.firstName,
+    customerId: jwt(localStorage.getItem("authToken")).id,
+    status: "In progress",
     email: user.email,
     mobile: user.telephone,
-    letterSubject: 'Thank you for order! You are welcome!',
-    letterHtml: '<h1>Your order is placed. OrderNo is 023689452.</h1>',
+    deliveryAddress: JSON.stringify(user.address),
+    letterSubject: "Thank you for order! You are welcome!",
+    letterHtml: `<h1>Your order is placed.</h1>`,
     canceled: false,
   } : {
+    name: user.firstName,
     products: JSON.stringify(cartProducts),
     status: 'In progress',
     email: user.email,
     mobile: user.telephone,
-    letterSubject: 'Thank you for order! You are welcome!',
-    letterHtml: '<h1>Your order is placed. OrderNo is 023689452.</h1>',
+    deliveryAddress: JSON.stringify(user.address),
+    letterSubject: "Thank you for order! You are welcome!",
+    letterHtml: `<h1>Your order is placed.</h1>`,
     canceled: false,
   };
 
@@ -80,7 +84,7 @@ const Checkout = ({ userData, isAuthenticated, cartProducts }) => {
             />
           </Grid>
           <Grid item xs={12} md={6}>
-            <CheckoutCart/>
+            <CheckoutCart />
           </Grid>
         </Grid>
       ) : (

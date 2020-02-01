@@ -25,17 +25,17 @@ const GreenCheckbox = withStyles({
 
 const CheckoutPayments = () => {
   const [state, setState] = useState({
-    cash: false,
+    cash: true,
     card: false,
   });
   const [cardData, setCardData] = useState({
-    cardNumber1: "0000",
-    cardNumber2: "0000",
-    cardNumber3: "0000",
-    cardNumber4: "0000",
+    cardNumber1: "",
+    cardNumber2: "",
+    cardNumber3: "",
+    cardNumber4: "",
     month: "01",
     year: "20",
-    CV: "000",
+    CV: "",
   });
 
   const handleChange = event => {
@@ -44,7 +44,6 @@ const CheckoutPayments = () => {
     } else {
       setState({ ...state, [event.target.value]: event.target.checked, cash: !event.target.checked});
     }
-
   };
   const handleInputsChange = event => {
     // eslint-disable-next-line no-restricted-globals

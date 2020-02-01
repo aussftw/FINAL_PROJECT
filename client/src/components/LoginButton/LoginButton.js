@@ -24,7 +24,6 @@ const LoginButton = ({
           <div className={classes.span}>
             <Typography component="span">Welcome,&nbsp;</Typography>
             <Typography component="span" noWrap>{` ${user.firstName}`}</Typography>
-            <Typography component="span">{` ${user.firstName}`}</Typography>
           </div>
           <ProfileMenu />
         </div>
