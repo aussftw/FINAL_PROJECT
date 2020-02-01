@@ -14,18 +14,8 @@ export const useStyles = makeStyles(() => ({
       marginBottom: 20,
     }
   },
-  line: {
-    margin: "10px 20px",
-    position: "relative",
-    width: "80%",
-    height: 5,
-    backgroundColor: "grey",
-    borderRadius: 10,
-  },
   subLine: {
-    position: "absolute",
-    top: 50,
-    left: 20,
+    margin: "10px 20px",
     width: "60%",
     height: 5,
     backgroundColor: theme.palette.primary.main,

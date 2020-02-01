@@ -8,9 +8,14 @@ export const useStyles = makeStyles(() => ({
     flexDirection: "row",
     alignItems: "start",
     marginBottom: "20px",
+    justifyContent: "space-around",
+  },
+  itemCard:{
+    display: "grid",
+    gridTemplateColumns: "repeat(3, 1fr)",
   },
   allFilters: {
-    width: "30%",
+    width: "20%",
     display: "flex",
     flexDirection: "column",
     alignItems: "start",
@@ -20,6 +25,7 @@ export const useStyles = makeStyles(() => ({
   },
   items: {
     width: "70%",
+    marginTop: 85,
      [theme.breakpoints.down("md")]: {
        width: "100%",
      },

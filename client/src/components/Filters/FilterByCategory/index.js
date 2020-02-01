@@ -6,9 +6,9 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import EcoIcon from '@material-ui/icons/Eco';
 import { useStyles } from "./useStyles";
+import { connect } from "react-redux";
 
 import { getCategories, selectCategory, setCurrentPage } from "../../../store/actions/Filters";
-import { connect } from "react-redux";
 
 const FilterByCategory = ({ categoryListing,  getCategories, selectCategory, setCurrentPage }) => {
   const classes = useStyles();
@@ -48,7 +48,6 @@ const FilterByCategory = ({ categoryListing,  getCategories, selectCategory, set
         aria-label="mailbox folders"
       >
         <h4 className={classes.title}>Filter By Category</h4>
-        <div className={classes.line} />
         <div className={classes.subLine} />
         <ListItem button>
           <ListItemIcon className = {classes.iconContainer}>

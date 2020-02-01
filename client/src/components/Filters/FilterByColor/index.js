@@ -7,6 +7,7 @@ import ListItem from "@material-ui/core/ListItem";
 import { green } from "@material-ui/core/colors";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
+import { connect } from "react-redux";
 import { useStyles } from "./useStyles";
 
 import { setCurrentPage ,
@@ -14,7 +15,6 @@ import { setCurrentPage ,
   selectColor,
   removeColor,
 } from "../../../store/actions/Filters";
-import { connect } from "react-redux";
 
 
 
@@ -82,7 +82,6 @@ const FilterByColor = ({ filters, colorListing, getColors,
         aria-label="mailbox folders"
       >
         <h4 className={classes.title}>Filter By Color</h4>
-        <div className={classes.line} />
         <div className={classes.subLine} />
         {colorsList}
       </List>

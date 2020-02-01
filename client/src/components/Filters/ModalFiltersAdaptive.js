@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import Modal from '@material-ui/core/Modal';
-import Backdrop from '@material-ui/core/Backdrop';
-import Fade from '@material-ui/core/Fade';
+import React, { useState } from "react";
+import Modal from "@material-ui/core/Modal";
+import Backdrop from "@material-ui/core/Backdrop";
+import Fade from "@material-ui/core/Fade";
 
 import FilterByCategory from "./FilterByCategory";
 import FilterByColor from "./FilterByColor";
@@ -23,11 +23,11 @@ const ModalFiltersAdaptive = () => {
   };
 
   return (
-    <div>
+    <>
       <button className={classes.btn} type="button" onClick={handleOpen}>
         Filters
       </button>
-      
+
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
@@ -42,16 +42,15 @@ const ModalFiltersAdaptive = () => {
       >
         <Fade in={open}>
           <div className={classes.paper}>
-        <FilterByCategory />
-        <FilterByColor />
-        <FilterBySize />
-        <FilterByPrice />
+            <FilterByCategory />
+            <FilterByColor />
+            <FilterBySize />
+            <FilterByPrice />
           </div>
         </Fade>
       </Modal>
-    </div>
+    </>
   );
-}
-
+};
 
 export default ModalFiltersAdaptive;

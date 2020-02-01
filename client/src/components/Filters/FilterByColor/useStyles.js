@@ -10,22 +10,12 @@ export const useStyles = makeStyles(() => ({
     boxShadow: "0 0 5px",
     borderRadius: 10,
     paddingBottom: 0,
-    [theme.breakpoints.down("md")]:{
+    [theme.breakpoints.down("md")]: {
       marginBottom: 20,
-    }
-  },
-  line: {
-    margin: "10px 20px",
-    position: "relative",
-    width: "80%",
-    height: 5,
-    backgroundColor: "grey",
-    borderRadius: 10,
+    },
   },
   subLine: {
-    position: "absolute",
-    top: 50,
-    left: 20,
+    margin: "10px 20px",
     width: "60%",
     height: 5,
     backgroundColor: theme.palette.primary.main,
