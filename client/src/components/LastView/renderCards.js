@@ -14,33 +14,8 @@ import useStyles from "./useStyles";
 
 const RenderCards = ({ productsLV, currentId }) => {
   const classes = useStyles();
-  const inputData = productsLV;
 
-  const inputId = inputData.map(item => {
-    return item._id;
-  });
-
-  let sortId = [];
-
-  // if (inputId.includes(currentId)) {
-  //   console.log("INCLUDES");
-  // } else {
-  //   console.log("NE_INCLUDES");
-  // }
-
-  if (inputId.includes(currentId)) {
-    sortId = inputId.filter(el => el !== currentId);
-    sortId = [...sortId, ...[currentId]];
-  }
-
-  const sortObj = [];
-  // eslint-disable-next-line
-  const result = sortId.map(item => {
-    const x = inputData.find(el => el._id === item);
-    sortObj.push(x);
-  });
-
-  if (sortObj.length) {
+  if (productsLV.length) {
     return (
       <Container maxWidth="lg">
         <h2 className={classes.title}>Last View</h2>
@@ -64,9 +39,11 @@ const RenderCards = ({ productsLV, currentId }) => {
           autoPlayInterval={1800}
           duration={600}
         >
-          {sortObj
-            ? sortObj.map((value, index) => {
-                return (
+          {productsLV
+            ? productsLV.map((value, index) => {
+                return index === productsLV.length - 1 ? (
+                  ""
+                ) : (
                   <ItemCardLite
                     key={`last-view-${value._id}`}
                     id={value._id}

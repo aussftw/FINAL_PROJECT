@@ -19,7 +19,7 @@ export const addToLastView = data => dispatch => {
   dispatch(addCurrentId(data));
   const arr = store.getState().lastViewReducer.lastView;
 
-  let lastViewedProducts = arr;
+  let lastViewedProducts = [];
 
   if (arr.length >= 5) {
     const arrLenght = arr.length - 4;
@@ -27,26 +27,35 @@ export const addToLastView = data => dispatch => {
     arr.shift(arrLenght);
   }
 
-  const dataObj = {
-    id: data,
-    date: new Date().getTime(),
-  };
+  // const dataObj = {
+  //   id: data,
+  //   date: new Date().getTime(),
+  // };
+
+  const inputId = data;
 
   const updateLastViewedProducts = (lastViewedProducts, newProduct) => {
-    if (lastViewedProducts.some(item => item.id === newProduct.id)) {
+    console.log("arrInFunc", arr);
+    if (arr.some(item => item === newProduct)) {
       console.log("SOVPADENIE");
-      return lastViewedProducts
-        .filter(item => item.id !== newProduct.id)
-        .concat(newProduct);
+      // eslint-disable-next-line
+      return (lastViewedProducts = arr
+        .filter(item => item !== newProduct)
+        .concat(newProduct));
     }
-    console.log("NET_SOVPADENIE");
+    console.log("NE_SOVPALO");
     // eslint-disable-next-line
     return (lastViewedProducts = [...arr, ...[newProduct]]);
   };
-
-  lastViewedProducts = updateLastViewedProducts(lastViewedProducts, dataObj);
-
+  lastViewedProducts = updateLastViewedProducts(lastViewedProducts, inputId);
   console.log("lastViewedProducts", lastViewedProducts);
+
+  // const sortProductsByDate = (lastViewedProducts, newProduct) => {
+  //   const LVsort = lastViewedProducts.sort(function(a, b) {
+  //     return new Date(a.date) - new Date(b.date);
+  //   });
+  // };
+  // sortProductsByDate(lastViewedProducts, dataObj);
 
   dispatch(addToLastViewSuccess(lastViewedProducts));
 };

@@ -14,11 +14,17 @@ const LastViewCarousel = ({ lastView, currentId }) => {
     // console.log("lastView", lastView);
     if (lastView.length > 0) {
       const lastViewObj = { products: lastView };
-
       axios
         .post("/api/products/actualization", lastViewObj)
         .then(response => {
-          setProductsLV([...productsLV, ...response.data]);
+          const responseData = response.data;
+          const sortData = [];
+          // eslint-disable-next-line
+          const result = lastView.map(item => {
+            const x = responseData.find(el => el._id === item);
+            sortData.push(x);
+          });
+          setProductsLV([...productsLV, ...sortData]);
         })
         .catch(err => {
           console.log(err);
