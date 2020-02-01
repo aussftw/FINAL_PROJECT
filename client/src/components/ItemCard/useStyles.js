@@ -6,7 +6,7 @@ const useStyles = makeStyles(theme => ({
     display: "inline-block",
     flexGrow: 1,
     width: 240,
-    height: 315,
+    height: 320,
     padding: theme.spacing(1),
     margin: theme.spacing(2),
     transition: "box-shadow 0.2s ease-out",
@@ -33,11 +33,11 @@ const useStyles = makeStyles(theme => ({
   },
   focusHighlight: {},
   cardContent: {
-    paddingTop: theme.spacing(1),
+    paddingTop: 6,
     paddingBottom: 0,
   },
   mediaImage: {
-    height: 200,
+    height: 210,
     transform: "scale(0.95)",
     transition: "transform 0.2s ease-out",
   },
@@ -51,7 +51,7 @@ const useStyles = makeStyles(theme => ({
     },
   },
   rating: {
-    paddingBottom: theme.spacing(1),
+    paddingBottom: 6,
     color: theme.palette.primary.main,
   },
   price: {
@@ -84,7 +84,7 @@ const useStyles = makeStyles(theme => ({
     justifyContent: "space-around",
     alignItems: "center",
     width: 240,
-    height: 315,
+    height: 320,
     padding: theme.spacing(1),
     margin: theme.spacing(2),
   }

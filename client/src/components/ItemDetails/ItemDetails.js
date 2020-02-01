@@ -28,6 +28,7 @@ import RemoveSharpIcon from "@material-ui/icons/RemoveSharp";
 import RatingModule from "../common/RatingModule/RatingModule";
 // import QtyCounter from "../common/QtyCounter";
 import PreloaderAdaptive from "../Preloader/Adaptive";
+import ItemTabs from "../common/ItemTabs/ItemTabs";
 
 import { addItemCart } from "../../store/actions/сart";
 import {
@@ -81,7 +82,6 @@ const ItemDetails = ({
     currentPrice,
     _id,
     // previousPrice,
-    description,
     quantity,
   } = item;
 
@@ -242,12 +242,10 @@ const ItemDetails = ({
           </Box>
         </Box>
       </Box>
-      <Box className={classes.detailsDescription}>
-        <span className={classes.descriptionTitle}>Description: </span>
-        <Typography className={classes.descriptionText}>
-          {description}
-        </Typography>
-      </Box>
+      <ItemTabs
+        description={item.description}
+        id={item._id}
+      />
     </Container>
   );
 };
