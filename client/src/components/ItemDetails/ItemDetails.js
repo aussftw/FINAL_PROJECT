@@ -63,7 +63,7 @@ const ItemDetails = ({
         setItem(response.data);
         setPreloader(false);
         // eslint-disable-next-line
-        // console.log(response.data);
+        console.log(response);
       })
       .catch(error => {
         // eslint-disable-next-line
@@ -113,11 +113,7 @@ const ItemDetails = ({
 
   const changeQuantity = e => {
     // eslint-disable-next-line no-restricted-globals
-    if (
-      !isNaN(+e.target.value) &&
-      e.target.value !== "0" &&
-      e.target.value !== ""
-    ) {
+    if (!isNaN(+e.target.value) && e.target.value !== "0" && e.target.value !== "") {
       setQty(+e.target.value);
     }
   };

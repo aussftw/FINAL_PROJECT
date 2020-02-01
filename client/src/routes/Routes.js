@@ -7,8 +7,9 @@ import HomePage from "../pages/HomePage/HomePage";
 import CartPage from "../pages/CartPage/CartPage";
 import ProfilePage from "../pages/ProfilePage/ProfilePage";
 import NotFound from "../pages/NotFound/NotFound";
-import RegistrationPage from '../pages/RegistrationPage/RegistrationPage';
+import RegistrationPage from "../pages/RegistrationPage/RegistrationPage";
 import ItemDetailsPage from "../pages/ItemDetailsPage/ItemDetailsPage";
+import OrderDetailsPage from "../pages/OrderDetailsPage/OrderDetailsPage";
 import CheckoutPage from "../pages/CheckoutPage/CheckoutPage"
 import setAuthToken from "../components/common/setAuthToken";
 import isExpired from "../components/common/isExpired/isExpired";
@@ -92,8 +93,8 @@ const Routes = ({
       <Route path="/checkout">
         <CheckoutPage />
       </Route>
-      <Route path="/orders/:id">
-        <ItemDetailsPage />
+      <Route path="/orders/:orderNo">
+        <OrderDetailsPage />
       </Route>
       <Redirect to="/" />
     </Switch>
@@ -129,8 +130,8 @@ const Routes = ({
       <Route path="/checkout">
         <CheckoutPage />
       </Route>
-      <Route path="/orders/:id">
-        <ItemDetailsPage />
+      <Route path="/orders/:orderNo">
+        <OrderDetailsPage />
       </Route>
       <Redirect to="/" />
     </Switch>

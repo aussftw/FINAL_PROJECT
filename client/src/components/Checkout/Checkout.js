@@ -1,26 +1,25 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import { connect } from 'react-redux';
-import jwt from 'jwt-decode';
+import Container from "@material-ui/core/Container";
+import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
+import { connect } from "react-redux";
+import jwt from "jwt-decode";
 import { Redirect } from  "react-router-dom";
-import CheckoutCart from './CheckoutCart/CheckoutCart';
-import CheckoutOrder from './CheckoutOrder/CheckoutOrder';
-import jwt from 'jwt-decode';
-import useStyles from './useStyles';
+import CheckoutCart from "./CheckoutCart/CheckoutCart";
+import CheckoutOrder from "./CheckoutOrder/CheckoutOrder";
+import useStyles from "./useStyles";
 
 
 const Checkout = ({ userData, isAuthenticated, cartProducts }) => {
   const classes = useStyles();
 
   const [user, setUserData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    telephone: '',
-    address: '',
+    firstName: "",
+    lastName: "",
+    email: "",
+    telephone: "",
+    address: "",
   });
 
   useEffect(() => {
@@ -48,7 +47,7 @@ const Checkout = ({ userData, isAuthenticated, cartProducts }) => {
   } : {
     name: user.firstName,
     products: JSON.stringify(cartProducts),
-    status: 'In progress',
+    status: "In progress",
     email: user.email,
     mobile: user.telephone,
     deliveryAddress: JSON.stringify(user.address),
