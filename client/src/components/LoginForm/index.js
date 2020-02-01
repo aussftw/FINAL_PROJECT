@@ -1,9 +1,9 @@
 import React from "react";
-import { connect } from "react-redux";
+import {connect} from "react-redux";
 import LoginContent from "./LoginContent";
-import { logIn, modalClose } from '../../store/actions/loginActions';
+import {logIn, modalClose} from '../../store/actions/loginActions';
 
-const LoginForm = ({ logIn, isAuthenticatedUser, error , modal , modalClose }) => {
+const LoginForm = ({logIn, isAuthenticatedUser, error, modal, modalClose}) => {
   const handleError = error => {
     if (error.response.data.loginOrEmail) {
       return error.response.data.loginOrEmail;
@@ -25,18 +25,12 @@ const LoginForm = ({ logIn, isAuthenticatedUser, error , modal , modalClose }) =
 
   return (
     <>
-      {modal ? (
-        isAuthenticatedUser ? (
-            handleOpen()
-        ) : (
-          <LoginContent
-            handleOpen={handleOpen}
-            submitLogin={submitLogin}
-            open={modal}
-            message={error !== "" ? handleError(error) : ""}
-          />
-        )
-      ) : handleOpen()}
+      <LoginContent
+        handleOpen={handleOpen}
+        submitLogin={submitLogin}
+        open={modal}
+        message={error !== "" ? handleError(error) : ""}
+      />
     </>
   )
 };
@@ -45,8 +39,8 @@ const mapStateToProps = state => {
   return {
     isAuthenticatedUser: state.loginReducer.isAuthenticated,
     error: state.loginReducer.error,
-    modal:state.loginReducer.modalOpen,
+    modal: state.loginReducer.modalOpen,
   };
 };
 
-export default connect(mapStateToProps, { logIn , modalClose })(LoginForm);
+export default connect(mapStateToProps, {logIn, modalClose})(LoginForm);

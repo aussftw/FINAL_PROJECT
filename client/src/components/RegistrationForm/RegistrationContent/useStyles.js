@@ -40,7 +40,6 @@ const useStyles = makeStyles({
   },
   paper: {
     maxWidth: "100vw",
-    height:"100vh",
   },
   errText: {
     fontSize: "24px",
