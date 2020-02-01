@@ -55,6 +55,7 @@ const OrdersHistory = () =>
             return;
           }
           setOrders(ordered.data);
+          console.log(ordered.data);
         })
         .catch(error => {
           setIsLoading(false);
@@ -75,6 +76,11 @@ const OrdersHistory = () =>
                 key={v4()}
                 orderNo={item.orderNo}
                 date={item.date.slice(0, 10)}
+                name={item.customerId.firstName}
+                lastName={item.customerId.lastName}
+                phone={item.mobile}
+                email={item.email}
+                address={item.deliveryAddress}
                 status={item.status}
                 totalSum={item.totalSum}
                 products={item.products}

@@ -4,9 +4,9 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { connect } from 'react-redux';
+import jwt from 'jwt-decode';
 import CheckoutCart from './CheckoutCart/CheckoutCart';
 import CheckoutOrder from './CheckoutOrder/CheckoutOrder';
-import jwt from 'jwt-decode';
 import useStyles from './useStyles';
 
 
@@ -38,6 +38,7 @@ const Checkout = ({ userData, isAuthenticated, cartProducts }) => {
     status: 'In progress',
     email: user.email,
     mobile: user.telephone,
+    deliveryAddress: JSON.stringify(user.address),
     letterSubject: 'Thank you for order! You are welcome!',
     letterHtml: '<h1>Your order is placed. OrderNo is 023689452.</h1>',
     canceled: false,
@@ -46,6 +47,7 @@ const Checkout = ({ userData, isAuthenticated, cartProducts }) => {
     status: 'In progress',
     email: user.email,
     mobile: user.telephone,
+    deliveryAddress: JSON.stringify(user.address),
     letterSubject: 'Thank you for order! You are welcome!',
     letterHtml: '<h1>Your order is placed. OrderNo is 023689452.</h1>',
     canceled: false,
@@ -80,7 +82,7 @@ const Checkout = ({ userData, isAuthenticated, cartProducts }) => {
             />
           </Grid>
           <Grid item xs={12} md={6}>
-            <CheckoutCart/>
+            <CheckoutCart />
           </Grid>
         </Grid>
       ) : (
