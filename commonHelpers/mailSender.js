@@ -7,6 +7,9 @@ module.exports = async (subscriberMail, letterSubject, letterHtml, res) => {
 
   //authorization for sending email
   let transporter = nodemailer.createTransport({
+     tls:{
+        rejectUnauthorized: false
+    },
     service:
       process.env.NODE_ENV === "production"
         ? configs.production.email.mailService

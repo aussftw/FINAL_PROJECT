@@ -26,7 +26,47 @@ export const addToLastView = data => dispatch => {
 
     arr.shift(arrLenght);
   }
-  current = [...arr, ...[data]];
+
+  const dataObj = {
+    id: data,
+    date: new Date().getTime(),
+  };
+  // console.log("dataObj", dataObj);
+
+  // eslint-disable-next-line
+  current = [...arr, ...[dataObj]];
+  // console.log("current", current);
+
+  // const cleanArr = current.map(item => {
+  //   if (item.id === dataObj.id && item.data > dataObj.data) {
+  //     console.log("sovpadenie!");
+  //     return item;
+  //   }
+  // });
+  let lastViewedProducts = current;
+
+  const updateLastViewedProducts = (lastViewedProducts, newProduct) => {
+    // Проверяем, есть ли в текущем массиве тот продукт, на который мы кликнули
+    if (
+      lastViewedProducts.some(
+        item => item.id === newProduct.id && item.date < newProduct.date
+      )
+    ) {
+      // Если такой продукт в массиве уже есть, то мы просто возвращаем новый массив, где он перенесен в конец списка, путем банальных манипуляций с использованием стандартных методов массивов
+      return lastViewedProducts
+        .filter(item => item.id !== newProduct.id)
+        .concat(newProduct);
+    }
+    // Если такого продукта в массиве нет, то просто добавляем его в массив
+    return lastViewedProducts.concat(newProduct);
+  };
+
+  lastViewedProducts = updateLastViewedProducts(current, dataObj);
+
+  // console.log("lastViewedProducts", lastViewedProducts);
+
+  // const unique = [...new Set(current)];
+  // console.log("unique", unique);
 
   dispatch(addToLastViewSuccess(current));
 };
