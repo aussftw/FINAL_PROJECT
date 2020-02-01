@@ -7,7 +7,8 @@ export const useStyles = makeStyles(() => ({
     maxWidth: 300,
     marginBottom: 40,
     backgroundColor: theme.palette.background.paper,
-    boxShadow: "0 0 5px",
+    boxShadow:
+      "0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.2), 0px 1px 3px 0px rgba(0,0,0,0.2)",
     borderRadius: 10,
     paddingBottom: 0,
     [theme.breakpoints.down("md")]: {

@@ -58,7 +58,8 @@ const Comments = ({ comments, id, isAuthenticated }) => {
               <Box className={classes.commentBox}>
                 <Box className={classes.customerNameBox}>
                   <Typography className={classes.customerName} component="span">
-                    {item.customer.firstName} {item.customer.lastName}
+                    {item.customer.firstName}
+                    {item.customer.lastName}
                   </Typography>
                   <Typography className={classes.commentDate} component="span">
                     {dateFormat}

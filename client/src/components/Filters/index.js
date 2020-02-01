@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import Container from "@material-ui/core/Container";
+import Typography from "@material-ui/core/Typography";
 
 import { connect } from "react-redux";
 import FilterByCategory from "./FilterByCategory";
@@ -62,6 +63,12 @@ const Products = ({
   return (
     <>
       <Container className={classes.main}>
+        <Typography
+          variant="h3"
+          style={{ cursor: "default", position: "absolute" }}
+        >
+          Shop
+        </Typography>
         <div className={classes.allFilters}>
           <FilterByCategory />
           <FilterByColor />
@@ -70,9 +77,7 @@ const Products = ({
         </div>
         <div className={classes.items}>
           <ModalFiltersAdaptive />
-          <div className={classes.itemCard}>
-            {currentProduct}
-          </div>
+          <div className={classes.itemCard}>{currentProduct}</div>
           <Pagination
             productsPerPage={productsPerPage}
             totalProducts={productListing.length}

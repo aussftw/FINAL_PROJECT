@@ -24,6 +24,7 @@ import { getWishlist } from "../store/actions/wishlist";
 import SearchPage from "../pages/SearchPage/SearchPage";
 // const Shop = React.lazy(() => import('../pages/Shop/Shop')); // Lazy-loaded
 import Shop from "../pages/Shop/Shop";
+import Contact from "../pages/Contact/Contact";
 
 const Routes = ({
   isAuthenticated,
@@ -77,6 +78,9 @@ const Routes = ({
       <Route path="/shop">
         <Shop />
       </Route>
+      <Route path="/contacts">
+        <Contact />
+      </Route>
       <Route path="/notfound">
         <NotFound />
       </Route>
@@ -110,6 +114,9 @@ const Routes = ({
         {/* <Shop /> */}
         {/* </Suspense> */}
         <Shop />
+      </Route>
+      <Route path="/contacts">
+        <Contact />
       </Route>
       {/* <Route path="/about-us"> */}
 

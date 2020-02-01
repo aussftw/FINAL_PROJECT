@@ -12,7 +12,8 @@ const useStyles = makeStyles(() => ({
     maxWidth: 300,
     paddingTop: 8,
     backgroundColor: theme.palette.background.paper,
-    boxShadow: "0 0 5px",
+    boxShadow:
+      "0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.2), 0px 1px 3px 0px rgba(0,0,0,0.2)",
     borderRadius: 10,
     paddingBottom: 0,
   },
@@ -75,7 +76,7 @@ const FilterByPrice = ({ selectPrice, setCurrentPage }) => {
 
   return (
     <div className={classes.rootMain}>
-      <h4 className={classes.title}>Filter By Price</h4>
+      <h4 className={classes.title}>Price</h4>
       <div className={classes.subLine} />
       <PrettoSlider
         onChangeCommitted={ValueByPrice}

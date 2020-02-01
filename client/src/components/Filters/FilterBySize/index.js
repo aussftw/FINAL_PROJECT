@@ -82,7 +82,7 @@ const FilterBySize = ({
         className={classes.root}
         aria-label="mailbox folders"
       >
-        <h4 className={classes.title}>Filter By Size</h4>
+        <h4 className={classes.title}>Size</h4>
         <div className={classes.subLine} />
         {sizeList}
       </List>

@@ -81,7 +81,7 @@ const FilterByColor = ({ filters, colorListing, getColors,
         className={classes.root}
         aria-label="mailbox folders"
       >
-        <h4 className={classes.title}>Filter By Color</h4>
+        <h4 className={classes.title}>Color</h4>
         <div className={classes.subLine} />
         {colorsList}
       </List>
