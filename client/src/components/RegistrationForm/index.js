@@ -2,8 +2,10 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import RegistrationContent from './RegistrationContent';
+import { modalOpen } from '../../store/actions/loginActions';
+import { connect } from 'react-redux';
 
-const RegistrationForm = () => {
+const RegistrationForm = ({ modalOpen }) => {
   const history = useHistory();
   const [userData, setUserData] = useState({
     firstName: '',
@@ -16,7 +18,6 @@ const RegistrationForm = () => {
     isAdmin: false,
   });
   const [showPassword, setShowPassword] = useState(false);
-  const [open, setOpen] = useState(true);
   const [registration, setRegistration] = useState(false);
   const [message, setMessage] = useState('');
   const [submitRegistration, setSubmitRegistration] = useState(false);
@@ -39,7 +40,7 @@ const RegistrationForm = () => {
       newUserData.address = userData.address;
     }
     return newUserData;
-  },[userData]);
+  }, [userData]);
 
   const handleError = error => {
     switch (error) {
@@ -62,10 +63,6 @@ const RegistrationForm = () => {
     }
   };
 
-  const handleClose = () => {
-    setOpen(false);
-  };
-
   const handleChange = event => {
     setUserData({ ...userData, [event.target.name]: event.target.value });
   };
@@ -82,43 +79,37 @@ const RegistrationForm = () => {
         .post('/api/customers', user)
         .then(response => {
           if (response.statusText === 'OK') {
+            modalOpen();
             setRegistration(true);
           }
         })
         .catch(error => {
-          if (error.statusText === "Not Found" && error.status === 404){
+          if (error.statusText === 'Not Found' && error.status === 404) {
             setMessage(error.message);
-          }else {
+          } else {
             setMessage(handleError(error));
           }
-         setSubmitRegistration(false);
+          setSubmitRegistration(false);
         });
     }
-  }, [submitRegistration , updateUser]);
+  }, [submitRegistration, updateUser , modalOpen]);
 
   return (
     <>
-      {/* eslint-disable-next-line no-nested-ternary */}
-      {open ? (
-        registration ? (
-          history.push("login")
-        ) : (
-          <RegistrationContent
-            handleClose={handleClose}
-            setSubmitRegistration={setSubmitRegistration}
-            handleChange={handleChange}
-            handleClickShowPassword={handleClickShowPassword}
-            open={open}
-            newUserData={userData}
-            showPassword={showPassword}
-            message={message}
-          />
-        )
+      {registration ? (
+      history.goBack()
       ) : (
-        history.push("/")
+      <RegistrationContent
+        setSubmitRegistration={setSubmitRegistration}
+        handleChange={handleChange}
+        handleClickShowPassword={handleClickShowPassword}
+        newUserData={userData}
+        showPassword={showPassword}
+        message={message}
+      />
       )}
     </>
   );
 };
 
-export default RegistrationForm;
+export default connect ( null, { modalOpen })(RegistrationForm);

@@ -31,6 +31,7 @@ const useStyles = makeStyles(theme => ({
     letterSpacing: "0,5px",
     color: "white",
     backgroundColor: theme.palette.primary.main,
+    marginTop: 10,
     padding: "5px",
     "&:hover": {
       color: "white",

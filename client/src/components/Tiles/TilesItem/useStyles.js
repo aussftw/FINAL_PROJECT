@@ -1,5 +1,4 @@
 import { makeStyles } from "@material-ui/core";
-import theme from '../../../theme';
 
 const useStyles = makeStyles({
   img: {
@@ -18,11 +17,7 @@ const useStyles = makeStyles({
     height: "auto",
     overflow:"hidden",
     cursor:"pointer",
-    "&:hover > button": {
-      color: theme.palette.primary.main,
-      backgroundColor: theme.palette.secondary.light,
-    },
-  },
+}
 });
 
 export default useStyles;

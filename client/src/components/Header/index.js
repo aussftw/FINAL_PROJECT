@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
@@ -13,20 +13,16 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 import TemporaryDrawer from "./BurgerMenu/BurgerMenu";
 import CustomizedSearch from "./Search/Search";
 import LoginButton from "../LoginButton/LoginButton";
-
+import LoginForm from '../LoginForm';
+import CartMiniButton from "./CartMiniButton/CartMiniButton";
 import useStyles from "./useStyles";
-import CartMini from "./CartMini/CartMini";
+
+
 import MobileSearch from "./MobileSearch/MobileSearch";
 
 const Header = ({ isAuthenticated, wishlistCounter, cartCounter }) => {
   const classes = useStyles();
   const matches = useMediaQuery(theme => theme.breakpoints.up("sm"));
-
-  const [isCartOpened, toggleCart] = useState(false);
-
-  function cartToggling() {
-    toggleCart(!isCartOpened);
-  }
 
   return (
     <div>
@@ -54,11 +50,7 @@ const Header = ({ isAuthenticated, wishlistCounter, cartCounter }) => {
               </Link>
             )}
             {matches ? (
-              <IconButton aria-label="show cart" color="inherit" onClick={cartToggling}>
-                <Badge badgeContent={cartCounter} color="primary">
-                  <ShoppingCartOutlinedIcon />
-                </Badge>
-              </IconButton>
+              <CartMiniButton />
             ) : (
               <Link to="/cart" className={classes.link}>
                 <IconButton aria-label="show cart" color="inherit">
@@ -68,10 +60,10 @@ const Header = ({ isAuthenticated, wishlistCounter, cartCounter }) => {
                 </IconButton>
               </Link>
               )}
-            {isCartOpened ? <CartMini /> : null}
           </div>
         </Toolbar>
       </AppBar>
+      <LoginForm />
     </div>
   );
 };
