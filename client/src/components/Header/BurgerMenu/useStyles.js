@@ -6,6 +6,7 @@ const useStyles = makeStyles(theme => ({
     padding: "20px 10px",
   },
   sideMenuTitle: {
+    fontWeight: 700,
     margin: "0",
     alignSelf: "center",
   },

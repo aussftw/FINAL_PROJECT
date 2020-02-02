@@ -44,8 +44,8 @@ const Checkout = ({ userData, isAuthenticated, cartProducts }) => {
     email: user.email,
     mobile: user.telephone,
     deliveryAddress: JSON.stringify(user.address),
-    letterSubject: "Thank you for order! You are welcome!",
-    letterHtml: `<h1>Your order is placed.</h1>`,
+    letterSubject: "Congratulations! You’re now a part of the Plantly Shop family.",
+    letterHtml: `<h1>Thank you for your order! Our product is so much more than the packaging.</h1>`,
     canceled: false,
   } : {
     name: user.firstName,
@@ -54,13 +54,14 @@ const Checkout = ({ userData, isAuthenticated, cartProducts }) => {
     email: user.email,
     mobile: user.telephone,
     deliveryAddress: JSON.stringify(user.address),
-    letterSubject: "Thank you for order! You are welcome!",
-    letterHtml: `<h1>Your order is placed.</h1>`,
+    letterSubject: "Congratulations! You’re now a part of the Plantly Shop family.",
+    letterHtml: `<h1>Thank you for your order! Our product is so much more than the packaging.</h1>`,
     canceled: false,
   };
 
   const [link, setLink] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [message, setMessage] = useState("");
 
   const {CancelToken} = axios;
   const source = CancelToken.source();
@@ -72,14 +73,11 @@ const Checkout = ({ userData, isAuthenticated, cartProducts }) => {
     axios
       .post("/api/orders" , newOrder, { cancelToken: source.token })
       .then(response => {
-        console.log(response);
-        // setIsLoading(false);
-        setIsLoading(false);
         setLink(response.data.order.orderNo);
       })
       .catch(error => {
         setIsLoading(false);
-        console.log(error.response);
+        setMessage(error.message);
       });
   };
 
@@ -110,7 +108,6 @@ const Checkout = ({ userData, isAuthenticated, cartProducts }) => {
                   isAuthenticated={isAuthenticated}
                   user={user}
                   handleChange={handleChange}
-                  // handleSubmit={handleSubmit}
                   isLoading={isLoading}
                 />
               </Grid>
@@ -119,6 +116,7 @@ const Checkout = ({ userData, isAuthenticated, cartProducts }) => {
               </Grid>
               {isLoading ? <PreloaderAdaptiveSmall /> : <Button className={classes.submitBtn} type="submit">place order</Button>}
             </Grid>
+            {Boolean(message) && <Typography className={classes.errorMessage}>{message}</Typography>}
           </ValidatorForm>
       ) : (
         <div className={classes.messagesWrapper}>
