@@ -1,24 +1,14 @@
 import React, {useEffect, useState} from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import {
-  Container,
-  Typography,
-  // Box,
-  // Link,
-  // Button,
-  // IconButton,
-  // List,
-  // ListItem,
-  // ListItemText,
-} from "@material-ui/core";
-
+import { Container, Typography, Grid } from "@material-ui/core";
 import PreloaderAdaptive from "../Preloader/Adaptive";
 import useStyles from "./useStyles";
+import OrderCart from "./OrderCart/OrderCart";
 
-const OrderDaetails = () => {
+const OrderDetails = () => {
   const classes = useStyles();
-  const order = useParams();
+  const orderNumber = useParams();
   const [ orderDetails, setOrderDetails ] =  useState({
     name: "",
     status: "",
@@ -27,23 +17,35 @@ const OrderDaetails = () => {
     deliveryAddress: "",
     products: [],
   });
+  const [message, setMessage] = useState("");
   const [preloader, setPreloader] = useState(false);
-  console.log(order.orderNo);
+
   useEffect(() => {
+    const {CancelToken} = axios;
+    const source = CancelToken.source();
     setPreloader(true);
+
     axios
-      .get(`/api/orders/${order.orderNo}`)
+      .get(`/api/orders/${orderNumber.orderNo}`, { cancelToken: source.token })
       .then( order => {
+        if(!order.data) {
+          setPreloader(false);
+          setMessage(`Order with №${orderNumber.orderNo} does not exist`);
+          return;
+        }
         console.log(order);
         setPreloader(false);
         setOrderDetails(order.data);
       })
       .catch(error => {
-        console.log(error.response);
+        setMessage(`Error: ${error.message}`);
         setPreloader(false);
-      })
-  },[order.orderNo]);
+      });
 
+    return () => {
+      source.cancel();
+    };
+  },[orderNumber.orderNo]);
 
 
   return (preloader ? (
@@ -51,12 +53,25 @@ const OrderDaetails = () => {
     ) : (
       <Container className={classes.orderDetailsContainer} maxWidth="lg">
         <Typography variant="h3">Order details</Typography>
-        <Typography>
-          {`Hi ${orderDetails.name}, your order №${orderDetails.orderNo} has been successfully placed at Plantly Shop. Order details are below.`}
-        </Typography>
+        { message ? (
+          <Typography>{message}</Typography>
+        ) : (
+          <div>
+            <Typography className={classes.mainText}>
+              {`Hi ${orderDetails.name}, your order №${orderDetails.orderNo} has been successfully placed at Plantly Shop. Order details are below.`}
+            </Typography>
+            <Typography className={classes.details}>{`Status: ${orderDetails.status}`}</Typography>
+            <Typography className={classes.details}>{`Phone: ${orderDetails.mobile}`}</Typography>
+            <Typography className={classes.details}>{`Email: ${orderDetails.email}`}</Typography>
+            <Typography className={classes.details}>{`Delivery address: ${orderDetails.deliveryAddress}`}</Typography>
+            <Grid container>
+              <OrderCart cart={orderDetails.products} />
+            </Grid>
+          </div>
+        )}
       </Container>
     )
   )
 };
 
-export default OrderDaetails;
+export default OrderDetails;

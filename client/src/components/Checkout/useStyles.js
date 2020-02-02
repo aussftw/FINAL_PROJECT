@@ -16,6 +16,17 @@ const useStyles = makeStyles({
   },
   mainMessage:{
     color: theme.palette.primary.dark,
+  },
+  submitBtn:{
+    width: "50%",
+    backgroundColor: theme.palette.primary.light,
+    color:theme.palette.primary.dark,
+    padding:"1em",
+    margin: "20px auto",
+    "&:hover":{
+      backgroundColor: theme.palette.primary.main,
+      color:"white",
+    },
   }
 });
 

@@ -4,18 +4,19 @@ const useStyles = makeStyles(theme => ({
   orderDetailsContainer: {
     paddingTop: 30,
     paddingBottom: 30,
+    minHeight: "calc( 100vh - 200px)",
   },
-  // messagesWrapper:{
-  //   margin:"8.75em auto"
-  // },
-  // message:{
-  //   fontSize:"1.1em",
-  //   marginTop:"1em",
-  //   color: theme.palette.primary.main,
-  // },
-  mainMessage:{
-    color: theme.palette.primary.dark,
-  }
+  mainText: {
+    textAlign: "justify"
+  },
+  details: {
+    margin: 10,
+    fontSize: 12,
+    textAlign: "justify",
+    [theme.breakpoints.up("sm")]: {
+      fontSize: 14,
+    },
+  },
 }));
 
 export default useStyles;
