@@ -44,8 +44,8 @@ const Checkout = ({ userData, isAuthenticated, cartProducts }) => {
     email: user.email,
     mobile: user.telephone,
     deliveryAddress: JSON.stringify(user.address),
-    letterSubject: "Thank you for order! You are welcome!",
-    letterHtml: `<h1>Your order is placed.</h1>`,
+    letterSubject: "Congratulations! You’re now a part of the Plantly Shop family.",
+    letterHtml: `<h1>Thank you for your order! Our product is so much more than the packaging.</h1>`,
     canceled: false,
   } : {
     name: user.firstName,
@@ -54,8 +54,8 @@ const Checkout = ({ userData, isAuthenticated, cartProducts }) => {
     email: user.email,
     mobile: user.telephone,
     deliveryAddress: JSON.stringify(user.address),
-    letterSubject: "Thank you for order! You are welcome!",
-    letterHtml: `<h1>Your order is placed.</h1>`,
+    letterSubject: "Congratulations! You’re now a part of the Plantly Shop family.",
+    letterHtml: `<h1>Thank you for your order! Our product is so much more than the packaging.</h1>`,
     canceled: false,
   };
 
