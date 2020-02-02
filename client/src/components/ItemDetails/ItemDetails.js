@@ -32,6 +32,7 @@ const ItemDetails = ({
   deleteWishlistItem,
   isAuthenticated,
   addCartItem,
+   addToLastViewCard,
 }) => {
   const itemNo = useParams();
   const classes = useStyles();
@@ -43,22 +44,19 @@ const ItemDetails = ({
   const [index, setIndex] = useState(0);
   const [preloader, setPreloader] = useState(true);
   // const [snackbarAddToCart, setSnackbarAddToCart] = useState(false);
-
-  useEffect((addToLastViewCard) => {
+  useEffect(() => {
     axios
       .get(`/api/products/${itemNo.id}`)
       .then(response => {
         setItem(response.data);
         setPreloader(false);
-        // eslint-disable-next-line
-        // console.log(response.data);
+        addToLastViewCard(response.data);
       })
       .catch(error => {
         // eslint-disable-next-line
         console.log(error);
         setPreloader(false);
       });
-    () => addToLastViewCard
   }, [itemNo.id]);
 
   // helpers
@@ -112,7 +110,10 @@ const ItemDetails = ({
 
 
   return ( preloader ? (<PreloaderAdaptive />) : (
-    <Container className={classes.brandsContaier} maxWidth="lg">
+    <Container
+        // onLoad={() => addToLastViewCard(item)}
+        className={classes.brandsContaier}
+        maxWidth="lg">
       <Box className={classes.detailsHeader}>
         <Link href="/#" className={classes.linkIcon}>
           <HomeIcon style={{ fontSize: "30px", color: "black" }} />
@@ -247,6 +248,7 @@ function mapStateToProps(state) {
   return {
     wishlistAll: state.wishlistReducer.wishlist,
     isAuthenticated: state.loginReducer.isAuthenticated,
+    lastView: state.lastViewReducer.lastView,
   };
 }
 

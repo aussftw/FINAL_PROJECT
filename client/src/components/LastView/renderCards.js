@@ -1,7 +1,5 @@
 import React from "react";
 
-// import uniqBy from "lodash/uniqBy";
-
 import AliceCarousel from "react-alice-carousel";
 import "react-alice-carousel/lib/alice-carousel.css";
 
@@ -14,7 +12,6 @@ import useStyles from "./useStyles";
 
 const RenderCards = ({ productsLV }) => {
   const classes = useStyles();
-  // const newArr = uniqBy(productsLV, 'itemNo');
 
   if (productsLV.length > 0) {
     return (
@@ -61,7 +58,6 @@ const RenderCards = ({ productsLV }) => {
       </Container>
     );
   }
-
   return null;
 };
 

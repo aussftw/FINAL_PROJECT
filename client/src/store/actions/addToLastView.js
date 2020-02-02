@@ -9,24 +9,20 @@ export const addToLastViewSuccess = data => {
 };
 
 export const addToLastView = (data) => dispatch => {
-    console.log("!!!");
     const arr = store.getState().lastViewReducer.lastView;
-    // console.log(arr);
     let current = [];
-        if (arr.includes(data)) {
-            current = arr.filter(x => x !== data);
+        if (
+            arr.some(e => e.itemNo === data.itemNo)
+        ) {
+            current = arr.filter(x => x.itemNo !== data.itemNo);
             current = [...current, ...[data]];
         }
         else {
             if (arr.length >= 4) {
                     const arrLenght = arr.length - 3;
-                    console.log("arrLenght", arrLenght);
                     arr.shift(arrLenght);
                 }
             current = [...arr, ...[data]];
         }
-        console.log("current", current);
-        // const test = current.filter(x => x);
         dispatch(addToLastViewSuccess(current));
-
 };
