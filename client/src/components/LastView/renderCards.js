@@ -10,7 +10,7 @@ import ItemCardLite from "../ItemCardLite/ItemCardLite";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import useStyles from "./useStyles";
 
-const RenderCards = ({ productsLV }) => {
+const RenderCards = ({ productsLV, currentId }) => {
   const classes = useStyles();
 
   if (productsLV.length > 0) {

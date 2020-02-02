@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
     color: theme.palette.secondary.dark,
     margin: "0 15px 0 15px",
     [theme.breakpoints.up("sm")]: {
-      margin: "0 30px 0 50px",
+      margin: "0 15px 0 67px",
     },
   },
   cartFooter: {
@@ -28,10 +28,13 @@ const useStyles = makeStyles(theme => ({
     borderTop: "none",
   },
   links: {
+    display: "block",
+    width: 123,
+    margin: "10px auto",
     textDecoration: "none",
   },
   btn: {
-    marginTop: 10,
+    margin: "10px auto",
     fontSize: "14px",
   },
 }));

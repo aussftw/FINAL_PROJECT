@@ -5,7 +5,7 @@ import { Button } from "@material-ui/core";
 import Box from "@material-ui/core/Box";
 import { Link } from "react-router-dom";
 import useStyles from "./useStyles";
-import {Carousel} from "react-responsive-carousel";
+// import {Carousel} from "react-responsive-carousel";
 
 const Slide = ({ image, title, subTitle }) => {
   const classes = useStyles();

@@ -1,13 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
-import {
-  Typography,
-  Divider,
-  Container,
-  InputBase,
-  Box,
-  Button,
-} from "@material-ui/core";
+import { Typography, Divider, Container, Button } from "@material-ui/core";
+import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import useStyles from "./useStyles";
 
 const Subscribe = () => {
@@ -20,7 +14,7 @@ const Subscribe = () => {
     email,
     letterSubject:
       "Congratulations you have successfully subscribed to Planty newsletter",
-    letterHtml: "fancyLetter",
+    letterHtml: "Plantly newsletter",
   };
 
   const sentUserEmail = async () => {
@@ -41,8 +35,6 @@ const Subscribe = () => {
         // eslint-disable-next-line
         console.log(error.response);
       });
-
-    // await setUserEmail("");
   };
 
   const handleKeyPress = e => {
@@ -54,21 +46,27 @@ const Subscribe = () => {
   return (
     <Container className={classes.subscribeContainer} maxWidth="xl">
       <Typography className={classes.subscribeTitle}>NEWSLETTER</Typography>
-      <Box className={classes.subscribeBar}>
-        <InputBase
+      <ValidatorForm
+        className={classes.subscribeBar}
+        onSubmit={() => sentUserEmail()}
+      >
+        <TextValidator
           className={classes.input}
           placeholder="Your email address"
           onChange={e => setUserEmail(e.target.value)}
           onKeyPress={handleKeyPress}
+          validators={["isEmail", "required"]}
+          errorMessages={["This email is not valid"]}
+          variant="outlined"
         />
         <Button
           className={classes.actionButton}
-          onClick={sentUserEmail}
           variant="contained"
+          type="submit"
         >
           Subscribe
         </Button>
-      </Box>
+      </ValidatorForm>
       <Divider variant="middle" />
     </Container>
   );
