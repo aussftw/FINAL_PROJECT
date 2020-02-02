@@ -111,10 +111,12 @@ exports.getCustomerComments = (req, res, next) => {
 };
 
 exports.getProductComments = (req, res, next) => {
+  const newestComments = {"date": -1};
   Comment.find({ product: req.params.productId })
     .populate("product")
     .populate("category")
     .populate("customer")
+    .sort(newestComments)
     .then(comments => res.status(200).json(comments))
     .catch(err =>
       res.status(400).json({

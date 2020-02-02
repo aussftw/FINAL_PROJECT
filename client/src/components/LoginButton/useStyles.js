@@ -15,9 +15,11 @@ const useStyles = makeStyles({
   },
   span: {
     display: "none",
+    width: 250,
     [theme.breakpoints.up("md")]: {
       marginRight: "15px",
       display: "inline-flex",
+      justifyContent: "flex-end",
       alignItems: "center",
       cursor: "default",
     },

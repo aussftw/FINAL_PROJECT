@@ -28,6 +28,7 @@ import RemoveSharpIcon from "@material-ui/icons/RemoveSharp";
 import RatingModule from "../common/RatingModule/RatingModule";
 // import QtyCounter from "../common/QtyCounter";
 import PreloaderAdaptive from "../Preloader/Adaptive";
+import ItemTabs from "../common/ItemTabs/ItemTabs";
 
 import { addItemCart } from "../../store/actions/сart";
 import {
@@ -52,23 +53,30 @@ const ItemDetails = ({
     rate: { rating: 0 },
   });
   const [index, setIndex] = useState(0);
-  const [preloader, setPreloader] = useState(true);
+  const [preloader, setPreloader] = useState(false);
   // const [snackbarAddToCart, setSnackbarAddToCart] = useState(false);
 
   useEffect(() => {
+    const {CancelToken} = axios;
+    const source = CancelToken.source();
+    setPreloader(true);
     axios
-      .get(`/api/products/${itemNo.id}`)
+      .get(`/api/products/${itemNo.id}`, { cancelToken: source.token })
       .then(response => {
-        setItem(response.data);
         setPreloader(false);
+        setItem(response.data);
         // eslint-disable-next-line
-        // console.log(response.data);
+        console.log(response);
       })
       .catch(error => {
+        setPreloader(false);
         // eslint-disable-next-line
         console.log(error);
-        setPreloader(false);
       });
+
+    return () => {
+      source.cancel();
+    };
   }, [itemNo.id]);
 
   // helpers
@@ -81,7 +89,6 @@ const ItemDetails = ({
     currentPrice,
     _id,
     // previousPrice,
-    description,
     quantity,
   } = item;
 
@@ -113,11 +120,7 @@ const ItemDetails = ({
 
   const changeQuantity = e => {
     // eslint-disable-next-line no-restricted-globals
-    if (
-      !isNaN(+e.target.value) &&
-      e.target.value !== "0" &&
-      e.target.value !== ""
-    ) {
+    if (!isNaN(+e.target.value) && e.target.value !== "0" && e.target.value !== "") {
       setQty(+e.target.value);
     }
   };
@@ -242,12 +245,10 @@ const ItemDetails = ({
           </Box>
         </Box>
       </Box>
-      <Box className={classes.detailsDescription}>
-        <span className={classes.descriptionTitle}>Description: </span>
-        <Typography className={classes.descriptionText}>
-          {description}
-        </Typography>
-      </Box>
+      <ItemTabs
+        description={item.description}
+        id={item._id}
+      />
     </Container>
   );
 };
