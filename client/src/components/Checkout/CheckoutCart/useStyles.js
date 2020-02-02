@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
     color: theme.palette.secondary.dark,
     margin: "0 15px 0 15px",
     [theme.breakpoints.up("sm")]: {
-      margin: "0 15px 0 50px",
+      margin: "0 15px 0 67px",
     },
   },
   cartFooter: {

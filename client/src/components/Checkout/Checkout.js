@@ -73,6 +73,7 @@ const Checkout = ({ userData, isAuthenticated, cartProducts }) => {
       .post("/api/orders" , newOrder, { cancelToken: source.token })
       .then(response => {
         console.log(response);
+        // setIsLoading(false);
         setIsLoading(false);
         setLink(response.data.order.orderNo);
       })
