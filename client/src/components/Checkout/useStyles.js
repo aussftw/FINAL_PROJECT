@@ -27,7 +27,11 @@ const useStyles = makeStyles({
       backgroundColor: theme.palette.primary.main,
       color:"white",
     },
-  }
+  },
+  errorMessage: {
+    marginTop: 5,
+    textAlign: "center",
+  },
 });
 
 export default useStyles;

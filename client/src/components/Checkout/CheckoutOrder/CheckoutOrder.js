@@ -4,9 +4,7 @@ import { Typography } from "@material-ui/core";
 import CheckoutPayments from "./CheckoutPayment/CheckoutPayment";
 import useStyles from "./useStyles";
 
-const CheckoutOrder = ({ user, isAuthenticated, handleChange,
-                         // handleSubmit
-}) => {
+const CheckoutOrder = ({ user, isAuthenticated, handleChange }) => {
   const classes = useStyles();
 
   return (
@@ -23,12 +21,6 @@ const CheckoutOrder = ({ user, isAuthenticated, handleChange,
             <Typography className={classes.infoForUser}>Fill in this form, please.</Typography>
           </>
         )}
-      {/*  <ValidatorForm */}
-      {/*  noValidate={false} */}
-      {/*  autoComplete="off" */}
-      {/*  className={classes.form} */}
-      {/*  onSubmit={handleSubmit} */}
-      {/* > */}
       <TextValidator
         label="First Name"
         variant="outlined"
@@ -85,8 +77,6 @@ const CheckoutOrder = ({ user, isAuthenticated, handleChange,
           ]}
       />
       <CheckoutPayments />
-      {/* <Button className={classes.submitBtn} type="submit">place order</Button>} */}
-      {/* </ValidatorForm> */}
     </>
   );
 };
