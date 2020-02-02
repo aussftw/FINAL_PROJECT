@@ -39,18 +39,7 @@ const useStyles = makeStyles({
     },
   },
   paper: {
-    backgroundColor: theme.palette.background.paper,
-    borderRadius: "8px",
-    boxShadow: theme.shadows[5],
     maxWidth: "100vw",
-    height:"99vh",
-    // overflowX : 'auto',
-    [theme.breakpoints.down("lg")]:{
-      maxWidth: "75vw",
-    },
-    [theme.breakpoints.down("xs")]:{
-      maxWidth: "90vw",
-    },
   },
   errText: {
     fontSize: "24px",

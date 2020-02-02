@@ -9,7 +9,7 @@ const useStyles = makeStyles(theme => ({
     borderTop: "none",
     borderColor: theme.palette.secondary.light,
     [theme.breakpoints.down("xs")]: {
-      height: 60,
+      height: 88,
     },
     minWidth: 200,
     "&:first-child": {

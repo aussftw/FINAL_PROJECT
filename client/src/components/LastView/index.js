@@ -1,42 +1,40 @@
 import React, { useEffect, useState } from "react";
 import * as axios from "axios";
 
-
 import "react-alice-carousel/lib/alice-carousel.css";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
-import RenderCards from "./renderCards";
 import { connect } from "react-redux";
+import RenderCards from "./renderCards";
 import { addToLastView } from "../../store/actions/addToLastView";
 
-const LastViewCarousel = ({ lastView }) => {
-
+const LastViewCarousel = ({ lastView, currentId }) => {
   const [productsLV, setProductsLV] = useState([]);
-
   useEffect(() => {
+    // console.log("lastView", lastView);
     if (lastView.length > 0) {
-      const lastViewArr = [];
-      lastView.map(value => {
-        axios
-          .get(`/api/products/${value}`)
-          .then(response => {
-            lastViewArr.push(response.data);
-            setProductsLV([...productsLV, ...lastViewArr]);
+      const lastViewObj = { products: lastView };
 
-          })
-          .catch(err => {
-            // eslint-disable-next-line no-console
-            console.log(err);
-          });
-      });
+      axios
+        .post("/api/products/actualization", lastViewObj)
+        .then(response => {
+          setProductsLV([...productsLV, ...response.data]);
+        })
+        .catch(err => {
+          console.log(err);
+        });
     }
+    // eslint-disable-next-line
   }, [lastView]);
-  return <RenderCards productsLV={productsLV} />;
+  return <RenderCards productsLV={productsLV} currentId={currentId} />;
 };
 
 function mapStateToProps(state) {
   return {
     lastView: state.lastViewReducer.lastView,
+    currentId: state.lastViewReducer.currentId,
   };
 }
-export default connect(mapStateToProps, { getLastView: addToLastView })(LastViewCarousel);
+export default connect(mapStateToProps, { getLastView: addToLastView })(
+  LastViewCarousel
+);

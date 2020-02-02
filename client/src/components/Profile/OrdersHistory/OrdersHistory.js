@@ -55,6 +55,7 @@ const OrdersHistory = () =>
             return;
           }
           setOrders(ordered.data);
+          console.log(ordered.data);
         })
         .catch(error => {
           setIsLoading(false);
@@ -69,12 +70,17 @@ const OrdersHistory = () =>
           <Typography className={classes.title} variant="h3">Orders history</Typography>
           {orders.length > 0 ? (
             <div className={classes.root}>
-              {orders.map(item => {
+              {orders.reverse().map(item => {
             return (
               <OrdersHistoryCard
                 key={v4()}
                 orderNo={item.orderNo}
                 date={item.date.slice(0, 10)}
+                name={item.customerId.firstName}
+                lastName={item.customerId.lastName}
+                phone={item.mobile}
+                email={item.email}
+                address={item.deliveryAddress}
                 status={item.status}
                 totalSum={item.totalSum}
                 products={item.products}

@@ -4,7 +4,7 @@ import Header from "../../components/Header";
 import SubHeader from "../../components/Header/SubHeader/SubHeader";
 import Footer from "../../components/Footer";
 import Profile from "../../components/Profile/Profile";
-import ScrollOnTop from '../../ScrollOnTop/ScrollOnTop';
+import ScrollOnTop from '../../components/common/ScrollOnTop/ScrollOnTop';
 
 const Profiler = () => {
   return (

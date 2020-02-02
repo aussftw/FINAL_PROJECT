@@ -6,10 +6,10 @@ import jwt from "jwt-decode";
 import HomePage from "../pages/HomePage/HomePage";
 import CartPage from "../pages/CartPage/CartPage";
 import ProfilePage from "../pages/ProfilePage/ProfilePage";
-import LoginForm from "../components/LoginForm";
 import NotFound from "../pages/NotFound/NotFound";
-import RegistrationForm from "../components/RegistrationForm";
+import RegistrationPage from "../pages/RegistrationPage/RegistrationPage";
 import ItemDetailsPage from "../pages/ItemDetailsPage/ItemDetailsPage";
+import OrderDetailsPage from "../pages/OrderDetailsPage/OrderDetailsPage";
 import CheckoutPage from "../pages/CheckoutPage/CheckoutPage"
 import setAuthToken from "../components/common/setAuthToken";
 import isExpired from "../components/common/isExpired/isExpired";
@@ -84,14 +84,17 @@ const Routes = ({
       <Route path="/profile">
         <ProfilePage />
       </Route>
-      <Route path="/login">
-        <LoginForm />
-      </Route>
       <Route path="/products/:id">
         <ItemDetailsPage />
       </Route>
+      <Route path="/registration">
+        <RegistrationPage />
+      </Route>
       <Route path="/checkout">
         <CheckoutPage />
+      </Route>
+      <Route path="/orders/:orderNo">
+        <OrderDetailsPage />
       </Route>
       <Redirect to="/" />
     </Switch>
@@ -118,11 +121,8 @@ const Routes = ({
       <Route path="/notfound">
         <NotFound />
       </Route>
-      <Route path="/login">
-        <LoginForm />
-      </Route>
       <Route path="/registration">
-        <RegistrationForm />
+        <RegistrationPage />
       </Route>
       <Route path="/products/:id">
         <ItemDetailsPage />
@@ -130,9 +130,11 @@ const Routes = ({
       <Route path="/checkout">
         <CheckoutPage />
       </Route>
+      <Route path="/orders/:orderNo">
+        <OrderDetailsPage />
+      </Route>
       <Redirect to="/" />
     </Switch>
-
   );
 };
 

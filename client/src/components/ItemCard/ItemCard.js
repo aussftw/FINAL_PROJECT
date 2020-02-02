@@ -46,6 +46,7 @@ const ItemCard = ({
   deleteWishlistItem,
   isAuthenticated,
   addToLastViewCard,
+  lastView,
 }) => {
   const classes = useStyles();
   const [snackbarAddToCart, setSnackbarAddToCart] = useState(false);
@@ -108,7 +109,7 @@ const ItemCard = ({
           )}
           <Link className={classes.link} to={`/products/${itemNo}`}>
             <CardActionArea
-              onClick={() => addToLastViewCard(itemNo)}
+              onClick={() => addToLastViewCard(id)}
               classes={{
                 root: classes.actionArea,
                 focusHighlight: classes.focusHighlight,
@@ -118,7 +119,8 @@ const ItemCard = ({
                 className={classes.mediaImage}
                 image={img}
                 title={title}
-                component="div"
+                component="img"
+                align="center"
               />
               <CardContent className={classes.cardContent}>
                 <Typography className={classes.title} noWrap align="center">
@@ -140,8 +142,7 @@ const ItemCard = ({
                   </Box>
                 </Tooltip>
                 <Typography className={classes.price} align="center">
-                  $
-                  {price.toFixed(2)}
+                  ${price.toFixed(2)}
                 </Typography>
               </CardContent>
             </CardActionArea>
@@ -167,24 +168,45 @@ const ItemCard = ({
             <SnackbarContent
               className={classes.snackbar}
               role="alert"
-              message={(
+              message={
                 <Box>
                   <CheckCircleRoundedIcon />
                   <span className={classes.snackbarMessage}>
                     Added to your shopping cart!
                   </span>
                 </Box>
-              )}
+              }
             />
           </Snackbar>
         </Card>
       ) : (
         <Box className={classes.cardSkeleton}>
-          <Skeleton variant="rect" animation="pulse" width={140} height={140} component="div" />
-          <Skeleton variant="text" animation="pulse" width={160} component="p" />
-          <Skeleton variant="text" animation="pulse" width={100} component="p" />
+          <Skeleton
+            variant="rect"
+            animation="pulse"
+            width={140}
+            height={140}
+            component="div"
+          />
+          <Skeleton
+            variant="text"
+            animation="pulse"
+            width={160}
+            component="p"
+          />
+          <Skeleton
+            variant="text"
+            animation="pulse"
+            width={100}
+            component="p"
+          />
           <Skeleton variant="text" animation="pulse" width={60} component="p" />
-          <Skeleton variant="text" animation="pulse" width={160} component="p" />
+          <Skeleton
+            variant="text"
+            animation="pulse"
+            width={160}
+            component="p"
+          />
         </Box>
       )}
     </Hidden>
@@ -195,6 +217,7 @@ function mapStateToProps(state) {
   return {
     wishlistAll: state.wishlistReducer.wishlist,
     isAuthenticated: state.loginReducer.isAuthenticated,
+    lastView: state.lastViewReducer.lastView,
   };
 }
 
