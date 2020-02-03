@@ -137,8 +137,7 @@ const mapStateToProps = state => {
   return {
     userData: state.loginReducer.user,
     isAuthenticated: state.loginReducer.isAuthenticated,
-    cartProducts: state.cartReducer.cart,
-  };
+  }
 };
 
 export default connect(mapStateToProps, {})(Checkout);
