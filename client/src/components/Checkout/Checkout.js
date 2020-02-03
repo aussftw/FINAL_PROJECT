@@ -45,7 +45,7 @@ const Checkout = ({ userData, isAuthenticated, cartProducts }) => {
     mobile: user.telephone,
     deliveryAddress: JSON.stringify(user.address),
     letterSubject: "Congratulations! You’re now a part of the Plantly Shop family.",
-    letterHtml: `<h1>Thank you for your order! Our product is so much more than the packaging.</h1>`,
+    letterHtml: `<h2>Thank you for your order! Our product is so much more than the packaging.</h2>`,
     canceled: false,
   } : {
     name: user.firstName,
@@ -55,7 +55,7 @@ const Checkout = ({ userData, isAuthenticated, cartProducts }) => {
     mobile: user.telephone,
     deliveryAddress: JSON.stringify(user.address),
     letterSubject: "Congratulations! You’re now a part of the Plantly Shop family.",
-    letterHtml: `<h1>Thank you for your order! Our product is so much more than the packaging.</h1>`,
+    letterHtml: `<h2>Thank you for your order! Our product is so much more than the packaging.</h2>`,
     canceled: false,
   };
 
@@ -73,6 +73,7 @@ const Checkout = ({ userData, isAuthenticated, cartProducts }) => {
     axios
       .post("/api/orders" , newOrder, { cancelToken: source.token })
       .then(response => {
+        setIsLoading(false);
         setLink(response.data.order.orderNo);
       })
       .catch(error => {
@@ -83,6 +84,7 @@ const Checkout = ({ userData, isAuthenticated, cartProducts }) => {
 
   useEffect(() => {
     return () => {
+      // setIsLoading(false);
       source.cancel();
     };
   });

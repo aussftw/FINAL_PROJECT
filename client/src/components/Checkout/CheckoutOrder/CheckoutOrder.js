@@ -52,7 +52,7 @@ const CheckoutOrder = ({ user, isAuthenticated, handleChange }) => {
         variant="outlined"
         name="telephone"
         value={user.telephone}
-        onChange={handleChange}
+        onChange={e => handleChange(e)}
         className={classes.textField}
         validators={["required", "matchRegexp:^[0-9-+\\s()]{13}$"]}
         errorMessages={[

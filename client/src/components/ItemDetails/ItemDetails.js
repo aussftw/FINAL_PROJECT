@@ -53,13 +53,12 @@ const ItemDetails = ({
     rate: { rating: 0 },
   });
   const [index, setIndex] = useState(0);
-  const [preloader, setPreloader] = useState(false);
+  const [preloader, setPreloader] = useState(true);
   // const [snackbarAddToCart, setSnackbarAddToCart] = useState(false);
 
   useEffect(() => {
     const {CancelToken} = axios;
     const source = CancelToken.source();
-    setPreloader(true);
     axios
       .get(`/api/products/${itemNo.id}`, { cancelToken: source.token })
       .then(response => {
