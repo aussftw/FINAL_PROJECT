@@ -19,31 +19,7 @@ const RenderCards = ({ productsLV }) => {
     (value, index) => index !== productsLV.length - 1
   );
 
-<<<<<<< HEAD
   if (gallery.length) {
-=======
-  let sortId = [];
-
-  // if (inputId.includes(currentId)) {
-  //   console.log("INCLUDES");
-  // } else {
-  //   console.log("NE_INCLUDES");
-  // }
-
-  if (inputId.includes(currentId)) {
-    sortId = inputId.filter(el => el !== currentId);
-    sortId = [...sortId, ...[currentId]];
-  }
-
-  const sortObj = [];
-  // eslint-disable-next-line
-  const result = sortId.map(item => {
-    const x = inputData.find(el => el._id === item);
-    sortObj.push(x);
-  });
-
-  if (sortObj.length) {
->>>>>>> origin/dev
     return (
       <Container maxWidth="lg">
         <h2 className={classes.title}>Last View</h2>
