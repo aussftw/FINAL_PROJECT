@@ -62,10 +62,8 @@ const ItemDetails = ({
     axios
       .get(`/api/products/${itemNo.id}`, { cancelToken: source.token })
       .then(response => {
-        setPreloader(false);
         setItem(response.data);
-        // eslint-disable-next-line
-        console.log(response);
+        setPreloader(false);
       })
       .catch(error => {
         setPreloader(false);
@@ -87,11 +85,8 @@ const ItemDetails = ({
     sizes,
     currentPrice,
     _id,
-    // previousPrice,
     quantity,
   } = item;
-
-  console.log(item);
 
   const addItemToCart = () => {
     addCartItem(item._id, item.itemNo);

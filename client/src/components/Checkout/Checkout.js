@@ -84,7 +84,6 @@ const Checkout = ({ userData, isAuthenticated, cartProducts }) => {
 
   useEffect(() => {
     return () => {
-      // setIsLoading(false);
       source.cancel();
     };
   });
