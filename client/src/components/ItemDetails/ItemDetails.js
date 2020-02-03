@@ -7,7 +7,19 @@ import { useParams } from "react-router-dom";
 import { Gallery, GalleryImage } from "react-gesture-gallery";
 
 import axios from "axios";
-import { Container, Typography, Divider, Box, Link, Button, IconButton, InputBase, List, ListItem, ListItemText } from "@material-ui/core";
+import {
+  Container,
+  Typography,
+  Divider,
+  Box,
+  Link,
+  Button,
+  IconButton,
+  InputBase,
+  List,
+  ListItem,
+  ListItemText,
+} from "@material-ui/core";
 import HomeIcon from "@material-ui/icons/HomeSharp";
 import FavoriteBorderSharpIcon from "@material-ui/icons/FavoriteBorderSharp";
 import FavoriteSharpIcon from "@material-ui/icons/FavoriteSharp";
@@ -16,6 +28,7 @@ import RemoveSharpIcon from "@material-ui/icons/RemoveSharp";
 import RatingModule from "../common/RatingModule/RatingModule";
 // import QtyCounter from "../common/QtyCounter";
 import PreloaderAdaptive from "../Preloader/Adaptive";
+import ItemTabs from "../common/ItemTabs/ItemTabs";
 
 import { addItemCart } from "../../store/actions/сart";
 import {
@@ -44,19 +57,23 @@ const ItemDetails = ({
   // const [snackbarAddToCart, setSnackbarAddToCart] = useState(false);
 
   useEffect(() => {
+    const {CancelToken} = axios;
+    const source = CancelToken.source();
     axios
-      .get(`/api/products/${itemNo.id}`)
+      .get(`/api/products/${itemNo.id}`, { cancelToken: source.token })
       .then(response => {
         setItem(response.data);
         setPreloader(false);
-        // eslint-disable-next-line
-        // console.log(response.data);
       })
       .catch(error => {
+        setPreloader(false);
         // eslint-disable-next-line
         console.log(error);
-        setPreloader(false);
       });
+
+    return () => {
+      source.cancel();
+    };
   }, [itemNo.id]);
 
   // helpers
@@ -68,12 +85,8 @@ const ItemDetails = ({
     sizes,
     currentPrice,
     _id,
-    // previousPrice,
-    description,
     quantity,
   } = item;
-
-  console.log(item);
 
   const addItemToCart = () => {
     addCartItem(item._id, item.itemNo);
@@ -99,15 +112,16 @@ const ItemDetails = ({
     }
   };
 
-  const changeQuantity = (e) => {
+  const changeQuantity = e => {
     // eslint-disable-next-line no-restricted-globals
-    if (!isNaN(+e.target.value) && e.target.value !== "0" && e.target.value !== "")  {
-      setQty(+e.target.value)
+    if (!isNaN(+e.target.value) && e.target.value !== "0" && e.target.value !== "") {
+      setQty(+e.target.value);
     }
   };
 
-
-  return ( preloader ? (<PreloaderAdaptive />) : (
+  return preloader ? (
+    <PreloaderAdaptive />
+  ) : (
     <Container className={classes.brandsContaier} maxWidth="lg">
       <Box className={classes.detailsHeader}>
         <Link href="/#" className={classes.linkIcon}>
@@ -163,10 +177,7 @@ const ItemDetails = ({
               </Typography>
             </ListItem>
           </List>
-          <RatingModule
-            id={item._id}
-            rate={item.rate.rating}
-          />
+          <RatingModule id={item._id} rate={item.rate.rating} />
           <Divider variant="middle" />
           <List>
             {/* <ListItem className={classes.root}>
@@ -214,28 +225,25 @@ const ItemDetails = ({
             >
               Add to cart
             </Button>
-            <Button className={classes.actionButton} aria-label="Add to wishlist" variant="contained">
+            <Button
+              className={classes.actionButton}
+              aria-label="Add to wishlist"
+              variant="contained"
+            >
               {!wishlistAll.every(el => el._id !== _id) ? (
-                <FavoriteSharpIcon
-                  onClick={() => deleteWishlistItem(_id)}
-                />
+                <FavoriteSharpIcon onClick={() => deleteWishlistItem(_id)} />
               ) : (
-                <FavoriteBorderSharpIcon
-                  onClick={handleAddtemToWishlist}
-                />
+                <FavoriteBorderSharpIcon onClick={handleAddtemToWishlist} />
               )}
             </Button>
           </Box>
         </Box>
       </Box>
-      <Box className={classes.detailsDescription}>
-        <span className={classes.descriptionTitle}>Description: </span>
-        <Typography className={classes.descriptionText}>
-          {description}
-        </Typography>
-      </Box>
+      <ItemTabs
+        description={item.description}
+        id={item._id}
+      />
     </Container>
-   )
   );
 };
 

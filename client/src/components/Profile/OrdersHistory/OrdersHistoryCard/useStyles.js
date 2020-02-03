@@ -54,6 +54,7 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     width: "100%",
     flexDirection: "column",
+    alignItems: "center",
     marginTop: 5,
     [theme.breakpoints.up("sm")]: {
       flexDirection: "row",
@@ -63,15 +64,21 @@ const useStyles = makeStyles(theme => ({
   total: {
     fontSize: 14,
     fontWeight: 600,
+    textAlign: "center",
     [theme.breakpoints.up("sm")]: {
       fontSize: 17,
     },
   },
-  status: {
-    fontSize: 14,
-    fontWeight: 600,
+  details: {
+    fontSize: 12,
     [theme.breakpoints.up("sm")]: {
-      fontSize: 17,
+      fontSize: 14,
+    },
+  },
+  status: {
+    fontSize: 12,
+    [theme.breakpoints.up("sm")]: {
+      fontSize: 14,
     },
   },
 }));

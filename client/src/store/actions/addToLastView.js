@@ -2,30 +2,45 @@ import * as constants from "../constants";
 import { store } from "../index";
 
 export const addToLastViewSuccess = data => {
-    return {
-        type: constants.ADD_TO_LAST_VIEW_SUCCESS,
-        payload: data,
-    };
+  return {
+    type: constants.ADD_TO_LAST_VIEW_SUCCESS,
+    payload: data,
+  };
 };
 
-export const addToLastView = (data) => dispatch => {
-    const arr = store.getState().lastViewReducer.lastView;
-    // console.log(arr);
-    let current = [];
-        if (arr.includes(data)) {
-            current = arr.filter(x => x !== data);
-            current = [...current, ...[data]];
-        }
-        else {
-            if (arr.length >= 4) {
-                    const arrLenght = arr.length - 3;
-                    console.log("arrLenght", arrLenght);
-                    arr.shift(arrLenght);
-                }
-            current = [...arr, ...[data]];
-        }
-        console.log("current", current);
-        // const test = current.filter(x => x);
-        dispatch(addToLastViewSuccess(current));
+export const addCurrentId = data => {
+  return {
+    type: constants.ADD_CURRENT_ID,
+    payload: data,
+  };
+};
 
+export const addToLastView = data => dispatch => {
+  dispatch(addCurrentId(data));
+  const arr = store.getState().lastViewReducer.lastView;
+
+  let lastViewedProducts = [];
+
+  if (arr.length >= 5) {
+    const arrLenght = arr.length - 4;
+
+    arr.shift(arrLenght);
+  }
+
+  const inputId = data;
+
+  const updateLastViewedProducts = (lastViewedProducts, newProduct) => {
+    if (arr.some(item => item === newProduct)) {
+      // eslint-disable-next-line
+      return (lastViewedProducts = arr
+        .filter(item => item !== newProduct)
+        .concat(newProduct));
+    }
+
+    // eslint-disable-next-line
+    return (lastViewedProducts = [...arr, ...[newProduct]]);
+  };
+  lastViewedProducts = updateLastViewedProducts(lastViewedProducts, inputId);
+
+  dispatch(addToLastViewSuccess(lastViewedProducts));
 };

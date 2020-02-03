@@ -78,11 +78,6 @@ const useStyles = makeStyles(theme => ({
     border: 2,
     textAlign: "center",
   },
-  rating: {
-    alignItems: "center",
-    justifyContent: "center",
-    marginBottom: theme.spacing(1),
-  },
   infoDetail: {
     maxWidth: 120,
     margin: 0,
@@ -103,12 +98,6 @@ const useStyles = makeStyles(theme => ({
     marginTop: 15,
     marginBottom: 10,
   },
-  descriptionText: {
-    textAlign: "justify",
-    marginTop: "1rem",
-    marginBottom: "4rem",
-    fontSize: 14,
-  },
   previousPrice: {
     fontWeight: 600,
     "&:before": {
@@ -120,7 +109,7 @@ const useStyles = makeStyles(theme => ({
       position: "absolute",
       bottom: 0,
       left: 0,
-      transform: "rotate(-7deg",
+      transform: "rotate(-7deg)",
     },
   },
 }));

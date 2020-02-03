@@ -6,26 +6,22 @@ const useStyles = makeStyles(theme => ({
     paddingTop: 20,
     paddingBottom: 10,
   },
-
   subscribeTitle: {
     alignItems: "center",
     textAlign: "center",
     marginBottom: 10,
     fontWeight: 600,
   },
-
   input: {
     backgroundColor: "#fff",
-    paddingLeft: 15,
-    paddingRight: 15,
-    paddingTop: 6,
-    paddingBottom: 2,
-
     marginBottom: 15,
-    borderRadius: "5px",
-    height: 50,
+    borderRadius: "4px 0 0 4px",
     [theme.breakpoints.up("sm")]: {
       width: "60%",
+    },
+    borderColor: theme.palette.primary.light,
+    "& fieldset": {
+      borderRadius: "4px 0 0 4px",
     },
   },
 
@@ -35,7 +31,8 @@ const useStyles = makeStyles(theme => ({
     paddingRight: 20,
     color: "#fff",
     backgroundColor: theme.palette.primary.main,
-    height: 50,
+    height: 54.9,
+    borderRadius: "0 4px 4px 0",
   },
 
   subscribeBar: {

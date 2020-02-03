@@ -8,31 +8,36 @@ import { connect } from "react-redux";
 import RenderCards from "./renderCards";
 import { addToLastView } from "../../store/actions/addToLastView";
 
-const LastViewCarousel = ({ lastView }) => {
+const LastViewCarousel = ({ lastView, currentId }) => {
   const [productsLV, setProductsLV] = useState([]);
-
   useEffect(() => {
-    // console.log("lastView", lastView);
     if (lastView.length > 0) {
-        const lastViewObj = {products: lastView};
-
-        axios
-            .post("/api/products/actualization", lastViewObj)
-            .then(response => {
-                // console.log(response.data);
-                setProductsLV([...productsLV, ...response.data]);
-            })
-            .catch(err => {
-                console.log(err);
-            });
+      const lastViewObj = { products: lastView };
+      axios
+        .post("/api/products/actualization", lastViewObj)
+        .then(response => {
+          const responseData = response.data;
+          const sortData = [];
+          // eslint-disable-next-line
+          const result = lastView.map(item => {
+            const x = responseData.find(el => el._id === item);
+            sortData.push(x);
+          });
+          setProductsLV([...productsLV, ...sortData]);
+        })
+        .catch(err => {
+          console.log(err);
+        });
     }
+    // eslint-disable-next-line
   }, [lastView]);
-  return <RenderCards productsLV={productsLV} />;
+  return <RenderCards productsLV={productsLV} currentId={currentId} />;
 };
 
 function mapStateToProps(state) {
   return {
     lastView: state.lastViewReducer.lastView,
+    currentId: state.lastViewReducer.currentId,
   };
 }
 export default connect(mapStateToProps, { getLastView: addToLastView })(

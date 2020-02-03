@@ -75,6 +75,7 @@ export const logIn = user => dispatch => {
         setAuthToken(response.data.token);
         dispatch(userFromJwt(jwt(response.data.token)));
       }
+      dispatch(modalClose());
       dispatch(getWishlist());
       dispatch(getUser());
       dispatch(mergeCarts());

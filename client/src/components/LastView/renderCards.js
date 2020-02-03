@@ -14,50 +14,50 @@ import useStyles from "./useStyles";
 
 const RenderCards = ({ productsLV }) => {
   const classes = useStyles();
-  // const newArr = uniqBy(productsLV, 'itemNo');
 
-  if (productsLV.length > 0) {
+  const gallery = productsLV.filter(
+    (value, index) => index !== productsLV.length - 1
+  );
+
+  if (gallery.length) {
     return (
       <Container maxWidth="lg">
         <h2 className={classes.title}>Last View</h2>
-    <AliceCarousel
-    responsive=
-        {{
-          600: {
-            items: 2,
-          },
-          960: {
-            items: 3,
-          },
-          1280: {
-            items: 4,
-          },
-          1960: {
-            items: 4,
-          },
-        }}
-        buttonsDisabled autoPlay autoPlayInterval=
-        {1800}
-        duration=
-        {600}>
-
-        {productsLV
-          ? productsLV.map(value => {
-                return (
-                  <ItemCardLite
-                    key={`last-view-${value._id}`}
-                    id={value._id}
-                    itemNo={value.itemNo}
-                    title={value.name}
-                    rate={value.rate.rating}
-                    price={value.currentPrice}
-                    img={value.imageUrls[0]}
-                    stock={value.quantity}
-                  />
-                );
-              })
-          : console.log("none")}
-</AliceCarousel>
+        <AliceCarousel
+          responsive={{
+            600: {
+              items: 2,
+            },
+            960: {
+              items: 3,
+            },
+            1280: {
+              items: 4,
+            },
+            1960: {
+              items: 4,
+            },
+          }}
+          buttonsDisabled
+          autoPlay
+          autoPlayInterval={1800}
+          duration={600}
+        >
+          {gallery.map(value => {
+            return (
+              <ItemCardLite
+                key={`last-view-${value._id}`}
+                id={value._id}
+                itemNo={value.itemNo}
+                title={value.name}
+                rate={value.rate.rating}
+                price={value.currentPrice}
+                img={value.imageUrls[0]}
+                stock={value.quantity}
+              />
+            );
+          })}
+        </AliceCarousel>
       </Container>
     );
   }

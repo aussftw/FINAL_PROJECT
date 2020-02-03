@@ -44,7 +44,7 @@ const TemporaryDrawer = props => {
   const sideList = side => (
     <div className={classes.list} role="presentation">
       <div className={classes.sideMenuHeader}>
-        <h5 className={classes.sideMenuTitle}>Menu</h5>
+        <Typography className={classes.sideMenuTitle}>Menu</Typography>
         <IconButton
           color="inherit"
           aria-label="close drawer"
