@@ -53,23 +53,30 @@ const ItemDetails = ({
     rate: { rating: 0 },
   });
   const [index, setIndex] = useState(0);
-  const [preloader, setPreloader] = useState(true);
+  const [preloader, setPreloader] = useState(false);
   // const [snackbarAddToCart, setSnackbarAddToCart] = useState(false);
 
   useEffect(() => {
+    const {CancelToken} = axios;
+    const source = CancelToken.source();
+    setPreloader(true);
     axios
-      .get(`/api/products/${itemNo.id}`)
+      .get(`/api/products/${itemNo.id}`, { cancelToken: source.token })
       .then(response => {
-        setItem(response.data);
         setPreloader(false);
+        setItem(response.data);
         // eslint-disable-next-line
         console.log(response);
       })
       .catch(error => {
+        setPreloader(false);
         // eslint-disable-next-line
         console.log(error);
-        setPreloader(false);
       });
+
+    return () => {
+      source.cancel();
+    };
   }, [itemNo.id]);
 
   // helpers

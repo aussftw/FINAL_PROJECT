@@ -6,9 +6,12 @@ import Typography from "@material-ui/core/Typography";
 import { connect } from "react-redux";
 import jwt from "jwt-decode";
 import { Redirect } from  "react-router-dom";
+import {Button} from "@material-ui/core";
+import {ValidatorForm} from "react-material-ui-form-validator";
 import CheckoutCart from "./CheckoutCart/CheckoutCart";
 import CheckoutOrder from "./CheckoutOrder/CheckoutOrder";
 import useStyles from "./useStyles";
+import PreloaderAdaptiveSmall from "../Preloader/AdaptiveSmall";
 
 
 const Checkout = ({ userData, isAuthenticated, cartProducts }) => {
@@ -41,8 +44,8 @@ const Checkout = ({ userData, isAuthenticated, cartProducts }) => {
     email: user.email,
     mobile: user.telephone,
     deliveryAddress: JSON.stringify(user.address),
-    letterSubject: "Thank you for order! You are welcome!",
-    letterHtml: `<h1>Your order is placed.</h1>`,
+    letterSubject: "Congratulations! You’re now a part of the Plantly Shop family.",
+    letterHtml: `<h1>Thank you for your order! Our product is so much more than the packaging.</h1>`,
     canceled: false,
   } : {
     name: user.firstName,
@@ -51,24 +54,38 @@ const Checkout = ({ userData, isAuthenticated, cartProducts }) => {
     email: user.email,
     mobile: user.telephone,
     deliveryAddress: JSON.stringify(user.address),
-    letterSubject: "Thank you for order! You are welcome!",
-    letterHtml: `<h1>Your order is placed.</h1>`,
+    letterSubject: "Congratulations! You’re now a part of the Plantly Shop family.",
+    letterHtml: `<h1>Thank you for your order! Our product is so much more than the packaging.</h1>`,
     canceled: false,
   };
 
   const [link, setLink] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [message, setMessage] = useState("");
+
+  const {CancelToken} = axios;
+  const source = CancelToken.source();
+
   const handleSubmit = () => {
+    setIsLoading(true);
+    const {CancelToken} = axios;
+    const source = CancelToken.source();
     axios
-      .post("/api/orders" , newOrder)
+      .post("/api/orders" , newOrder, { cancelToken: source.token })
       .then(response => {
-        console.log(response)
         setLink(response.data.order.orderNo);
-        ;
       })
       .catch(error => {
-        console.log(error.response);
-      })
+        setIsLoading(false);
+        setMessage(error.message);
+      });
   };
+
+  useEffect(() => {
+    return () => {
+      source.cancel();
+    };
+  });
 
   const handleChange = event => {
     setUserData({ ...user, [event.target.name]: event.target.value });
@@ -79,19 +96,28 @@ const Checkout = ({ userData, isAuthenticated, cartProducts }) => {
       <Container className={classes.checkoutContainer} maxWidth="lg">
         <Typography variant="h3">Checkout</Typography>
         {cartProducts.length > 0 ? (
-          <Grid container>
-            <Grid item xs={12} md={6}>
-              <CheckoutOrder
-                isAuthenticated={isAuthenticated}
-                user={user}
-                handleChange={handleChange}
-                handleSubmit={handleSubmit}
-              />
+          <ValidatorForm
+            noValidate={false}
+            autoComplete="off"
+            className={classes.form}
+            onSubmit={handleSubmit}
+          >
+            <Grid container>
+              <Grid item xs={12} md={6}>
+                <CheckoutOrder
+                  isAuthenticated={isAuthenticated}
+                  user={user}
+                  handleChange={handleChange}
+                  isLoading={isLoading}
+                />
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <CheckoutCart />
+              </Grid>
+              {isLoading ? <PreloaderAdaptiveSmall /> : <Button className={classes.submitBtn} type="submit">place order</Button>}
             </Grid>
-            <Grid item xs={12} md={6}>
-              <CheckoutCart />
-            </Grid>
-          </Grid>
+            {Boolean(message) && <Typography className={classes.errorMessage}>{message}</Typography>}
+          </ValidatorForm>
       ) : (
         <div className={classes.messagesWrapper}>
           <Typography variant="h4" align="center" className={classes.mainMessage}>
@@ -103,7 +129,7 @@ const Checkout = ({ userData, isAuthenticated, cartProducts }) => {
         </div>
       )}
       </Container>
-)
+    )
   );
 };
 
