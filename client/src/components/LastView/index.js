@@ -11,7 +11,6 @@ import { addToLastView } from "../../store/actions/addToLastView";
 const LastViewCarousel = ({ lastView, currentId }) => {
   const [productsLV, setProductsLV] = useState([]);
   useEffect(() => {
-    // console.log("lastView", lastView);
     if (lastView.length > 0) {
       const lastViewObj = { products: lastView };
       axios

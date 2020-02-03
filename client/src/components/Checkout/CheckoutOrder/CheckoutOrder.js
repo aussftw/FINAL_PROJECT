@@ -4,7 +4,12 @@ import { Button, Typography } from "@material-ui/core";
 import CheckoutPayments from "./CheckoutPayment/CheckoutPayment";
 import useStyles from "./useStyles";
 
-const CheckoutOrder = ({ user, isAuthenticated, handleChange, handleSubmit }) => {
+const CheckoutOrder = ({
+  user,
+  isAuthenticated,
+  handleChange,
+  handleSubmit,
+}) => {
   const classes = useStyles();
 
   return (
@@ -15,12 +20,16 @@ const CheckoutOrder = ({ user, isAuthenticated, handleChange, handleSubmit }) =>
             {`${user.firstName}, fill in this form, please.`}
           </Typography>
         </>
-        ) : (
-          <>
-            <Typography className={classes.infoForUser}>You are new User.</Typography>
-            <Typography className={classes.infoForUser}>Fill in this form, please.</Typography>
-          </>
-        )}
+      ) : (
+        <>
+          <Typography className={classes.infoForUser}>
+            You are new User.
+          </Typography>
+          <Typography className={classes.infoForUser}>
+            Fill in this form, please.
+          </Typography>
+        </>
+      )}
       <ValidatorForm
         noValidate={false}
         autoComplete="off"
@@ -34,14 +43,11 @@ const CheckoutOrder = ({ user, isAuthenticated, handleChange, handleSubmit }) =>
           value={user.firstName}
           onChange={e => handleChange(e)}
           className={classes.textField}
-          validators={[
-              "required",
-            "matchRegexp:^[a-zA-Zа-яА-Я]{2,25}$",
-            ]}
+          validators={["required", "matchRegexp:^[a-zA-Zа-яА-Я]{2,25}$"]}
           errorMessages={[
-              "this field is required",
-              "Your name must be more then 2 characters, including only latin letters",
-            ]}
+            "this field is required",
+            "Your name must be more then 2 characters, including only latin letters",
+          ]}
         />
         <TextValidator
           label="Email"
@@ -58,13 +64,13 @@ const CheckoutOrder = ({ user, isAuthenticated, handleChange, handleSubmit }) =>
           variant="outlined"
           name="telephone"
           value={user.telephone}
-          onChange={handleChange}
+          onChange={e => handleChange(e)}
           className={classes.textField}
           validators={["required", "matchRegexp:^[0-9-+\\s()]{13}$"]}
           errorMessages={[
-              "this field is required",
-              "phone is not valid, need +380... format",
-            ]}
+            "this field is required",
+            "phone is not valid, need +380... format",
+          ]}
         />
         <TextValidator
           label="Delivery address"
@@ -83,7 +89,9 @@ const CheckoutOrder = ({ user, isAuthenticated, handleChange, handleSubmit }) =>
           ]}
         />
         <CheckoutPayments />
-        <Button className={classes.submitBtn} type="submit">place order</Button>
+        <Button className={classes.submitBtn} type="submit">
+          place order
+        </Button>
       </ValidatorForm>
     </>
   );

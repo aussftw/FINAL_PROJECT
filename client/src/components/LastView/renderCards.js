@@ -12,10 +12,14 @@ import ItemCardLite from "../ItemCardLite/ItemCardLite";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import useStyles from "./useStyles";
 
-const RenderCards = ({ productsLV, currentId }) => {
+const RenderCards = ({ productsLV }) => {
   const classes = useStyles();
 
-  if (productsLV.length) {
+  const gallery = productsLV.filter(
+    (value, index) => index !== productsLV.length - 1
+  );
+
+  if (gallery.length) {
     return (
       <Container maxWidth="lg">
         <h2 className={classes.title}>Last View</h2>
@@ -39,24 +43,20 @@ const RenderCards = ({ productsLV, currentId }) => {
           autoPlayInterval={1800}
           duration={600}
         >
-          {productsLV
-            ? productsLV.map((value, index) => {
-                return index === productsLV.length - 1 ? (
-                  ""
-                ) : (
-                  <ItemCardLite
-                    key={`last-view-${value._id}`}
-                    id={value._id}
-                    itemNo={value.itemNo}
-                    title={value.name}
-                    rate={value.rate.rating}
-                    price={value.currentPrice}
-                    img={value.imageUrls[0]}
-                    stock={value.quantity}
-                  />
-                );
-              })
-            : console.log("none")}
+          {gallery.map(value => {
+            return (
+              <ItemCardLite
+                key={`last-view-${value._id}`}
+                id={value._id}
+                itemNo={value.itemNo}
+                title={value.name}
+                rate={value.rate.rating}
+                price={value.currentPrice}
+                img={value.imageUrls[0]}
+                stock={value.quantity}
+              />
+            );
+          })}
         </AliceCarousel>
       </Container>
     );

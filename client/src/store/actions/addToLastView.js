@@ -27,35 +27,20 @@ export const addToLastView = data => dispatch => {
     arr.shift(arrLenght);
   }
 
-  // const dataObj = {
-  //   id: data,
-  //   date: new Date().getTime(),
-  // };
-
   const inputId = data;
 
   const updateLastViewedProducts = (lastViewedProducts, newProduct) => {
-    console.log("arrInFunc", arr);
     if (arr.some(item => item === newProduct)) {
-      // console.log("SOVPADENIE");
       // eslint-disable-next-line
       return (lastViewedProducts = arr
         .filter(item => item !== newProduct)
         .concat(newProduct));
     }
-    // console.log("NE_SOVPALO");
+
     // eslint-disable-next-line
     return (lastViewedProducts = [...arr, ...[newProduct]]);
   };
   lastViewedProducts = updateLastViewedProducts(lastViewedProducts, inputId);
-  console.log("lastViewedProducts", lastViewedProducts);
-
-  // const sortProductsByDate = (lastViewedProducts, newProduct) => {
-  //   const LVsort = lastViewedProducts.sort(function(a, b) {
-  //     return new Date(a.date) - new Date(b.date);
-  //   });
-  // };
-  // sortProductsByDate(lastViewedProducts, dataObj);
 
   dispatch(addToLastViewSuccess(lastViewedProducts));
 };
