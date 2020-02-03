@@ -23,20 +23,15 @@ const useStyles = makeStyles(theme => ({
   imagesContainer: {
     marginTop: theme.spacing(5),
   },
-  imgBox: {
-    height: "400px !important",
-    minWidth: 300,
-    [theme.breakpoints.down("md")]: {
-      width: 300,
-    },
-  },
+  // imgBox: {
+  //   height: "400px !important",
+  //   minWidth: 300,
+  //   [theme.breakpoints.down("md")]: {
+  //     width: 300,
+  //   },
+  // },
   imgScale: {
     maxHeight: 500,
-    // height: "400px !important",
-    // minWidth: 300,
-    // [theme.breakpoints.down("md")]: {
-    //   height: "360px !important",
-    // },
   },
   detailsTitle: {
     textTransform: "capitalize",
