@@ -53,20 +53,17 @@ const ItemDetails = ({
     rate: { rating: 0 },
   });
   const [index, setIndex] = useState(0);
-  const [preloader, setPreloader] = useState(false);
+  const [preloader, setPreloader] = useState(true);
   // const [snackbarAddToCart, setSnackbarAddToCart] = useState(false);
 
   useEffect(() => {
     const {CancelToken} = axios;
     const source = CancelToken.source();
-    setPreloader(true);
     axios
       .get(`/api/products/${itemNo.id}`, { cancelToken: source.token })
       .then(response => {
-        setPreloader(false);
         setItem(response.data);
-        // eslint-disable-next-line
-        console.log(response);
+        setPreloader(false);
       })
       .catch(error => {
         setPreloader(false);
@@ -88,11 +85,8 @@ const ItemDetails = ({
     sizes,
     currentPrice,
     _id,
-    // previousPrice,
     quantity,
   } = item;
-
-  console.log(item);
 
   const addItemToCart = () => {
     addCartItem(item._id, item.itemNo);
