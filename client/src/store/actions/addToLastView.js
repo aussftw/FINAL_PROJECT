@@ -19,7 +19,7 @@ export const addToLastView = data => dispatch => {
   dispatch(addCurrentId(data));
   const arr = store.getState().lastViewReducer.lastView;
 
-  let current = [];
+  let lastViewedProducts = [];
 
   if (arr.length >= 5) {
     const arrLenght = arr.length - 4;
@@ -27,47 +27,20 @@ export const addToLastView = data => dispatch => {
     arr.shift(arrLenght);
   }
 
-  const dataObj = {
-    id: data,
-    date: new Date().getTime(),
-  };
-  // console.log("dataObj", dataObj);
-
-  // eslint-disable-next-line
-  current = [...arr, ...[dataObj]];
-  // console.log("current", current);
-
-  // const cleanArr = current.map(item => {
-  //   if (item.id === dataObj.id && item.data > dataObj.data) {
-  //     console.log("sovpadenie!");
-  //     return item;
-  //   }
-  // });
-  // eslint-disable-next-line
-  let lastViewedProducts = current;
+  const inputId = data;
 
   const updateLastViewedProducts = (lastViewedProducts, newProduct) => {
-    // Проверяем, есть ли в текущем массиве тот продукт, на который мы кликнули
-    if (
-      lastViewedProducts.some(
-        item => item.id === newProduct.id && item.date < newProduct.date
-      )
-    ) {
-      // Если такой продукт в массиве уже есть, то мы просто возвращаем новый массив, где он перенесен в конец списка, путем банальных манипуляций с использованием стандартных методов массивов
-      return lastViewedProducts
-        .filter(item => item.id !== newProduct.id)
-        .concat(newProduct);
+    if (arr.some(item => item === newProduct)) {
+      // eslint-disable-next-line
+      return (lastViewedProducts = arr
+        .filter(item => item !== newProduct)
+        .concat(newProduct));
     }
-    // Если такого продукта в массиве нет, то просто добавляем его в массив
-    return lastViewedProducts.concat(newProduct);
+
+    // eslint-disable-next-line
+    return (lastViewedProducts = [...arr, ...[newProduct]]);
   };
+  lastViewedProducts = updateLastViewedProducts(lastViewedProducts, inputId);
 
-  lastViewedProducts = updateLastViewedProducts(current, dataObj);
-
-  // console.log("lastViewedProducts", lastViewedProducts);
-
-  // const unique = [...new Set(current)];
-  // console.log("unique", unique);
-
-  dispatch(addToLastViewSuccess(current));
+  dispatch(addToLastViewSuccess(lastViewedProducts));
 };
