@@ -37,13 +37,13 @@ export const addToLastView = data => dispatch => {
   const updateLastViewedProducts = (lastViewedProducts, newProduct) => {
     console.log("arrInFunc", arr);
     if (arr.some(item => item === newProduct)) {
-      console.log("SOVPADENIE");
+      // console.log("SOVPADENIE");
       // eslint-disable-next-line
       return (lastViewedProducts = arr
         .filter(item => item !== newProduct)
         .concat(newProduct));
     }
-    console.log("NE_SOVPALO");
+    // console.log("NE_SOVPALO");
     // eslint-disable-next-line
     return (lastViewedProducts = [...arr, ...[newProduct]]);
   };
