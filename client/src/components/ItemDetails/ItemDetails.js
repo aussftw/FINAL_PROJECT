@@ -57,19 +57,23 @@ const ItemDetails = ({
   // const [snackbarAddToCart, setSnackbarAddToCart] = useState(false);
 
   useEffect(() => {
+    const {CancelToken} = axios;
+    const source = CancelToken.source();
     axios
-      .get(`/api/products/${itemNo.id}`)
+      .get(`/api/products/${itemNo.id}`, { cancelToken: source.token })
       .then(response => {
         setItem(response.data);
         setPreloader(false);
-        // eslint-disable-next-line
-        // console.log(response.data);
       })
       .catch(error => {
+        setPreloader(false);
         // eslint-disable-next-line
         console.log(error);
-        setPreloader(false);
       });
+
+    return () => {
+      source.cancel();
+    };
   }, [itemNo.id]);
 
   // helpers
@@ -81,11 +85,8 @@ const ItemDetails = ({
     sizes,
     currentPrice,
     _id,
-    // previousPrice,
     quantity,
   } = item;
-
-  console.log(item);
 
   const addItemToCart = () => {
     addCartItem(item._id, item.itemNo);
@@ -113,11 +114,7 @@ const ItemDetails = ({
 
   const changeQuantity = e => {
     // eslint-disable-next-line no-restricted-globals
-    if (
-      !isNaN(+e.target.value) &&
-      e.target.value !== "0" &&
-      e.target.value !== ""
-    ) {
+    if (!isNaN(+e.target.value) && e.target.value !== "0" && e.target.value !== "") {
       setQty(+e.target.value);
     }
   };

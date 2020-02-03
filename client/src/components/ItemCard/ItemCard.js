@@ -46,7 +46,6 @@ const ItemCard = ({
   deleteWishlistItem,
   isAuthenticated,
   addToLastViewCard,
-  lastView,
 }) => {
   const classes = useStyles();
   const [snackbarAddToCart, setSnackbarAddToCart] = useState(false);
@@ -142,7 +141,8 @@ const ItemCard = ({
                   </Box>
                 </Tooltip>
                 <Typography className={classes.price} align="center">
-                  ${price.toFixed(2)}
+                  $
+                  {price.toFixed(2)}
                 </Typography>
               </CardContent>
             </CardActionArea>
@@ -168,14 +168,14 @@ const ItemCard = ({
             <SnackbarContent
               className={classes.snackbar}
               role="alert"
-              message={
+              message={(
                 <Box>
                   <CheckCircleRoundedIcon />
                   <span className={classes.snackbarMessage}>
                     Added to your shopping cart!
                   </span>
                 </Box>
-              }
+              )}
             />
           </Snackbar>
         </Card>

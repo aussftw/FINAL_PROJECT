@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import { connect } from "react-redux";
 import moment from "moment-timezone";
 import * as axios from "axios";
@@ -11,8 +11,9 @@ import Collapse from "@material-ui/core/Collapse";
 import Fade from "@material-ui/core/Fade";
 
 import useStyles from "./useStyles";
+import {modalOpen} from "../../../store/actions/loginActions";
 
-const Comments = ({ comments, id, isAuthenticated }) => {
+const Comments = ({ comments, id, isAuthenticated, modalOpen }) => {
   const classes = useStyles();
   const [allComments, setAllComments] = useState([]);
   const [perPage, setPerPage] = useState(10);
@@ -21,9 +22,18 @@ const Comments = ({ comments, id, isAuthenticated }) => {
   const [customerCommentText, setCustomerCommentText] = useState("");
   const [customerCommentError, setCustomerCommentError] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const commentInput = useRef(null);
+
+  const handleModal = () => {
+    modalOpen();
+  };
 
   const writeHandler = () => {
     setWrite(!write);
+    setTimeout(() => {
+      commentInput.current.focus();
+    }, 200);
+
   };
 
   const customerCommentTextHandler = event => {
@@ -93,15 +103,15 @@ const Comments = ({ comments, id, isAuthenticated }) => {
         .post(`/api/comments`, request)
         .then(response => {
           commentsGenerator(response.data);
-          setWrite(!write);
+          setWrite(false);
+          setCustomerCommentText("");
           submittedThanksHandler();
         })
         .catch(err => {
           // eslint-disable-next-line no-console
           console.log(err.response);
         });
-        setWrite(!write);
-        submittedThanksHandler();
+
     } else {
       setCustomerCommentError("Comment too short write more please");
       setTimeout(customerTextErrorOff, 3000);
@@ -127,20 +137,22 @@ const Comments = ({ comments, id, isAuthenticated }) => {
           write comment
         </Button>
       ) : (
-        <Typography className={classes.mustLogin} component="p">
-          Please login to leave a comment.
-        </Typography>
+        <Button variant="text" onClick={handleModal}>
+          Please login to leave a comment
+        </Button>
       )}
       <Collapse in={write}>
         <>
           <TextField
             id="customer-comment"
+            inputRef={commentInput}
             label="Write your comment here"
             multiline
             rows="4"
             variant="outlined"
             fullWidth
             margin="normal"
+            value={customerCommentText}
             error={!!customerCommentError}
             helperText={customerCommentError}
             onChange={customerCommentTextHandler}
@@ -153,7 +165,7 @@ const Comments = ({ comments, id, isAuthenticated }) => {
             >
               Submit comment
             </Button>
-            <Button variant="text" onClick={writeHandler}>
+            <Button variant="text" onClick={()=>{setWrite(false)}}>
               Cancel
             </Button>
           </Box>
@@ -192,4 +204,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(Comments);
+export default connect(mapStateToProps, { modalOpen })(Comments);

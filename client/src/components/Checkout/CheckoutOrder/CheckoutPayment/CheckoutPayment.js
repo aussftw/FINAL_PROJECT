@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
-import FormGroup from '@material-ui/core/FormGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import withStyles from '@material-ui/core/styles/withStyles';
+import React, { useState } from "react";
+import FormGroup from "@material-ui/core/FormGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Checkbox from "@material-ui/core/Checkbox";
+import withStyles from "@material-ui/core/styles/withStyles";
 import { Box, Typography } from "@material-ui/core";
 import {TextValidator} from "react-material-ui-form-validator";
 import useStyles from "./useStyles";
-import theme from '../../../../theme';
-import AmericanExpress from "../../../Footer/Payment/pics/AmericanExpress.png";
-import PayPal from "../../../Footer/Payment/pics/PayPal.png";
-import MasterCard from "../../../Footer/Payment/pics/mastercard.png";
-import Visa from "../../../Footer/Payment/pics/visa.png";
+import theme from "../../../../theme";
+import AmericanExpress from "./pics/AmericanExpress.png";
+import PayPal from "./pics/PayPal.png";
+import MasterCard from "./pics/mastercard.png";
+import Visa from "./pics/visa.png";
 
 const GreenCheckbox = withStyles({
   root: {
@@ -109,7 +109,7 @@ const CheckoutPayments = () => {
                         className: classes.creditCardInput,
                         maxLength: 4,
                       }}
-                      validators={["required", "matchRegexp:^[0-9]{4}$"]}
+                      validators={["required", "matchRegexp:^3[47][0-9]{2}|4[0-9]{3}|5[1-5][0-9]{2}$"]}
                       errorMessages={[]}
                     />
                     <TextValidator
