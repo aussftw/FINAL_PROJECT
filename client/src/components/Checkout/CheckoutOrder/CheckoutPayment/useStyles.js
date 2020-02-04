@@ -39,7 +39,7 @@ const useStyles = makeStyles(theme => ({
     height: 240,
     marginRight: -280,
     float: "left",
-    boxShadow: "10px 0 40px rgba(0,0,0,0.3)",
+    boxShadow: "7px 0 10px rgba(0,0,0,0.3)",
     boxSizing: "border-box",
     [theme.breakpoints.down("xs")]: {
       padding: 8,
@@ -129,7 +129,7 @@ const useStyles = makeStyles(theme => ({
     height: 240,
     float: "left",
     // right: 10,
-    boxShadow: "10px 0 40px rgba(0,0,0,0.3)",
+    boxShadow: "7px 0 10px rgba(0,0,0,0.3)",
     boxSizing: "border-box",
     [theme.breakpoints.down("xs")]: {
       display: "none",
@@ -166,7 +166,7 @@ const useStyles = makeStyles(theme => ({
     }
   },
   creditCardCVInputBox: {
-    width: 55,
+    width: 47,
   },
   creditCardCVInputBoxMini: {
     display: "none",
@@ -182,7 +182,7 @@ const useStyles = makeStyles(theme => ({
     color: "white",
     background: "#191919",
     [theme.breakpoints.down("xs")]: {
-      width: 26,
+      width: 16,
       padding: "8px 13px",
       fontSize: 14,
     }

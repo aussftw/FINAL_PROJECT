@@ -13,9 +13,6 @@ const useStyles = makeStyles(theme => ({
       borderRadius: "4px 0 0 4px",
     },
   },
-  helper: {
-    display: "none"
-  },
   // divider: {
   //   height: 28,
   // },

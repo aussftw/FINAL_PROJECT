@@ -73,6 +73,7 @@ const ItemDetails = ({
 
     return () => {
       source.cancel();
+      setIndex(0);
     };
   }, [itemNo.id]);
 
