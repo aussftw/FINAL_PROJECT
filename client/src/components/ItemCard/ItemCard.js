@@ -95,7 +95,7 @@ const ItemCard = ({
             <Tooltip
               arrow
               title={
-                isAuthenticated ? "Add to wishlist" : "Only for authorized user"
+                isAuthenticated ? "Add to wishlist" : "Only for authorized users"
               }
             >
               <IconButton

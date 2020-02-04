@@ -18,16 +18,22 @@
 - Project architecture: Alexander Suhak & Alexander Kaminskiy.
 - Data structures architecture: Alexander Suhak & Glib Slivko. 
 - Project navigation: Alexander Suhak, Eugen Markov & Max Yevtushenko. 
+- Header: Alina Yehanian.
+- Login & Registration Forms: Max Yevtushenko.
 - Client profile: Eugen Markov.
--  Login & Registration Forms: Max Yevtushenko.
-- Checkout page: Max Yevtushenko & Eugen Markov.
-- Cart page: Eugen Markov & Alexander Suhak.
 - Wishlist page: Eugen Markov.
-- Filtering: Andrew Yakovenko & Glib Slivko.
-- Items page: Alexander Suhak.
-- Item Detail page: Alexander Kaminskiy & Eugen Markov.
-- Stocks Page: Yuriy Suhak. 
+- Cart page: Alexander Suhak.
+- Dropdown cart: Eugen Markov.
 - Main Carousel: Yuriy Suhak.
+- Item Card: Alexander Suhak.
+- Top Rated: Alexander Suhak.
+- Tiles: Max Yevtushenko.
+- Stocks Page: Yuriy Suhak.
+- Checkout page: Max Yevtushenko & Eugen Markov.
+- Rating + rating backend: Alexander Suhak.
+- Filtering: Andrew Yakovenko & Glib Slivko.
+- Item Detail page: Alexander Kaminskiy & Eugen Markov.
+- Comments: Alexander Suhak.
 - Preloader: Andrew Yakovenko.
 - Database engineers: Alina Yehanian & Alexander Suhak.
 

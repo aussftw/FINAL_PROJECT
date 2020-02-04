@@ -139,6 +139,7 @@ const ItemDetails = ({
             onRequestChange={i => {
               setIndex(i);
             }}
+            // className={classes.imgBox}
           >
             {imageUrls.map(image => (
               <GalleryImage
@@ -146,7 +147,7 @@ const ItemDetails = ({
                 objectFit="contain"
                 src={image}
                 alt="flower_picture"
-                // className={classes.imgScale}
+                className={classes.imgScale}
               />
             ))}
           </Gallery>
@@ -189,13 +190,13 @@ const ItemDetails = ({
             <ListItem className={classes.root}>
               <ListItemText primary="Price:" className={classes.infoDetail} />
               <Typography className={classes.currentPrice}>
-                {`$${currentPrice}`}
+                {`$${currentPrice.toFixed(2)}`}
               </Typography>
             </ListItem>
           </List>
           <Divider variant="middle" />
           <Container className={classes.qty_wrapper}>
-            <Typography> Qty:</Typography>
+            <Typography>Quantity:</Typography>
             <Box>
               <IconButton aria-label="Less" onClick={() => dec()}>
                 <RemoveSharpIcon />
