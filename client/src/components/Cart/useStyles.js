@@ -48,7 +48,10 @@ const useStyles = makeStyles(theme => ({
   },
   emptyCartContinueButton: {
     width: 200,
-  }
+  },
+  links: {
+    textDecoration: "none",
+  },
 }));
 
 export default useStyles;
