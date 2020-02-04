@@ -73,6 +73,7 @@ const ItemDetails = ({
 
     return () => {
       source.cancel();
+      setIndex(0);
     };
   }, [itemNo.id]);
 
@@ -139,7 +140,6 @@ const ItemDetails = ({
             onRequestChange={i => {
               setIndex(i);
             }}
-            // className={classes.imgBox}
           >
             {imageUrls.map(image => (
               <GalleryImage
@@ -158,13 +158,6 @@ const ItemDetails = ({
           </Typography>
           <Divider variant="middle" />
           <List>
-            {/* <ListItem className={classes.root}>
-              <ListItemText
-                className={classes.infoDetail}
-                primary="Product code:"
-              />
-              <Typography className={classes.infoDetailValue}>{_id}</Typography>
-            </ListItem> */}
             <ListItem className={classes.root}>
               <ListItemText className={classes.infoDetail} primary="Color:" />
               <Typography className={classes.infoDetailValue}>
@@ -181,12 +174,6 @@ const ItemDetails = ({
           <RatingModule id={item._id} rate={item.rate.rating} />
           <Divider variant="middle" />
           <List>
-            {/* <ListItem className={classes.root}>
-              <ListItemText primary="Price:" className={classes.infoDetail} />
-              <Typography className={classes.previousPrice}>
-                {previousPrice}$
-              </Typography>
-            </ListItem> */}
             <ListItem className={classes.root}>
               <ListItemText primary="Price:" className={classes.infoDetail} />
               <Typography className={classes.currentPrice}>
