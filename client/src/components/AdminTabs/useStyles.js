@@ -6,6 +6,16 @@ const useStyles = makeStyles(theme => ({
         paddingTop: 30,
         paddingBottom: 30,
     },
+    tabsComponent: {
+        flexGrow: 1,
+    },
+    tabsList: {
+        color: theme.palette.primary.main,
+        marginBottom: theme.spacing(2),
+    },
+    tabText: {
+        color: theme.palette.secondary.dark,
+    },
 }));
 
 export default useStyles;

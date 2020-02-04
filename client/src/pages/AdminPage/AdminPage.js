@@ -4,7 +4,7 @@ import Header from "../../components/Header";
 import SubHeader from "../../components/Header/SubHeader/SubHeader";
 import Footer from "../../components/Footer";
 import ScrollOnTop from '../../components/common/ScrollOnTop/ScrollOnTop';
-import AdminProducts from "../../components/AdminProducts/AdminProducts";
+import AdminTabs from "../../components/AdminTabs/AdminTabs";
 
 
 const AdminPage = () => {
@@ -14,7 +14,7 @@ const AdminPage = () => {
         <BackToTop />
         <Header />
         <SubHeader />
-        <AdminProducts />
+        <AdminTabs />
         <Footer />
       </>
     );
