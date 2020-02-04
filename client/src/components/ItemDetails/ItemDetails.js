@@ -73,6 +73,7 @@ const ItemDetails = ({
 
     return () => {
       source.cancel();
+      setIndex(0);
     };
   }, [itemNo.id]);
 
@@ -146,7 +147,7 @@ const ItemDetails = ({
                 objectFit="contain"
                 src={image}
                 alt="flower_picture"
-                // className={classes.imgScale}
+                className={classes.imgScale}
               />
             ))}
           </Gallery>
@@ -157,13 +158,6 @@ const ItemDetails = ({
           </Typography>
           <Divider variant="middle" />
           <List>
-            {/* <ListItem className={classes.root}>
-              <ListItemText
-                className={classes.infoDetail}
-                primary="Product code:"
-              />
-              <Typography className={classes.infoDetailValue}>{_id}</Typography>
-            </ListItem> */}
             <ListItem className={classes.root}>
               <ListItemText className={classes.infoDetail} primary="Color:" />
               <Typography className={classes.infoDetailValue}>
@@ -180,22 +174,16 @@ const ItemDetails = ({
           <RatingModule id={item._id} rate={item.rate.rating} />
           <Divider variant="middle" />
           <List>
-            {/* <ListItem className={classes.root}>
-              <ListItemText primary="Price:" className={classes.infoDetail} />
-              <Typography className={classes.previousPrice}>
-                {previousPrice}$
-              </Typography>
-            </ListItem> */}
             <ListItem className={classes.root}>
               <ListItemText primary="Price:" className={classes.infoDetail} />
               <Typography className={classes.currentPrice}>
-                {`$${currentPrice}`}
+                {`$${currentPrice.toFixed(2)}`}
               </Typography>
             </ListItem>
           </List>
           <Divider variant="middle" />
           <Container className={classes.qty_wrapper}>
-            <Typography> Qty:</Typography>
+            <Typography>Quantity:</Typography>
             <Box>
               <IconButton aria-label="Less" onClick={() => dec()}>
                 <RemoveSharpIcon />

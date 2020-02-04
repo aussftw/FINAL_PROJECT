@@ -26,7 +26,7 @@ const LastViewCarousel = ({ lastView, currentId }) => {
           setProductsLV([...productsLV, ...sortData]);
         })
         .catch(err => {
-          console.log("this is ", err);
+          console.log(err.response);
         });
     }
     // eslint-disable-next-line

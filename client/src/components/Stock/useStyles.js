@@ -4,6 +4,7 @@ const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
     border: "none",
+    marginTop: 24,
     marginBottom: 50,
   },
   title: {
