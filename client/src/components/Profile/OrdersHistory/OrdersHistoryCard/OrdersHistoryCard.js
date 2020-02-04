@@ -9,15 +9,19 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 import OrdersHistoryCardItem from "./OrdersHistoryCardItem/OrdersHistoryCardItem";
 import useStyles from "./useStyles";
 
-const OrdersHistoryCard = ({ orderNo, date, products, totalSum, status }) => {
+const OrdersHistoryCard = ({ orderNo, date, products, name, lastName, phone, email, address, totalSum, status }) => {
   const classes = useStyles();
   const matches = useMediaQuery(theme => theme.breakpoints.up("md"));
   const equal = useMediaQuery(theme => theme.breakpoints.up("sm"));
 
   const [expanded, setExpanded] = useState(false);
+  const [expandedInner, setExpandedInner] = useState(false);
 
   const handleChange = panel => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
+  };
+  const handleChangeInner = panel => (event, isExpanded) => {
+    setExpandedInner(isExpanded ? panel : false);
   };
 
   return (
@@ -60,7 +64,27 @@ const OrdersHistoryCard = ({ orderNo, date, products, totalSum, status }) => {
           );
         })}
         <div className={classes.footer}>
-          <Typography className={classes.status}>{`Status: ${status}`}</Typography>
+          <ExpansionPanel
+            expanded={expandedInner === "panel1"}
+            onChange={handleChangeInner("panel1")}
+            className={classes.panel}
+          >
+            <ExpansionPanelSummary
+              className={classes.content}
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel1bh-content"
+              id="panel1bh-header"
+            >
+              <Typography className={classes.order}>order details</Typography>
+            </ExpansionPanelSummary>
+            <ExpansionPanelDetails className={classes.products}>
+              <Typography className={classes.details}>{`Status: ${status}`}</Typography>
+              <Typography className={classes.details}>{`Customer: ${name} ${lastName}`}</Typography>
+              <Typography className={classes.details}>{`Phone: ${phone}`}</Typography>
+              <Typography className={classes.details}>{`Email: ${email}`}</Typography>
+              <Typography className={classes.details}>{`Delivery address: ${address}`}</Typography>
+            </ExpansionPanelDetails>
+          </ExpansionPanel>
           <Typography className={classes.total}>{`Total: $${totalSum.toFixed(2)}`}</Typography>
         </div>
       </ExpansionPanelDetails>

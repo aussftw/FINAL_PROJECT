@@ -1,9 +1,9 @@
 import { makeStyles } from "@material-ui/core/styles";
 
-
 const useStyles = makeStyles(theme => ({
   root: {
-    margin: "20px 10px 20px 10px"
+    minWidth: 250,
+    margin: "20px auto",
   },
   cartHeader: {
     height: 56,
@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
     color: theme.palette.secondary.dark,
     margin: "0 15px 0 15px",
     [theme.breakpoints.up("sm")]: {
-      margin: "0 15px 0 67px",
+      margin: "0 15px 0 50px",
     },
   },
   cartFooter: {
@@ -26,16 +26,6 @@ const useStyles = makeStyles(theme => ({
     border: "1px solid",
     borderColor: theme.palette.secondary.light,
     borderTop: "none",
-  },
-  links: {
-    display: "block",
-    width: 123,
-    margin: "10px auto",
-    textDecoration: "none",
-  },
-  btn: {
-    margin: "10px auto",
-    fontSize: "14px",
   },
 }));
 

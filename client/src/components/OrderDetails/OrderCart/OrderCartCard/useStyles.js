@@ -2,57 +2,60 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(theme => ({
   item: {
-    height: 75,
+    height: 56,
     alignItems: "center",
     justifyItems: "center",
     border: "1px solid",
     borderTop: "none",
     borderColor: theme.palette.secondary.light,
-    [theme.breakpoints.down("xs")]: {
-      height: 88,
-    },
-    minWidth: 200,
-    "&:first-child": {
-      border: "1px solid",
-      borderColor: theme.palette.secondary.light,
-    },
   },
   imageGrid: {
     display: "flex",
     justifyContent: "center",
   },
   image: {
-    height: 50,
+    height: 40,
     objectFit: "cover",
   },
   link: {
     textDecoration: "none",
+    "&:focus, &:hover, &:visited, &:link, &:active": {
+      textDecoration: "none",
+    },
   },
-  name: {
-    fontSize: 14,
+  title: {
+    fontSize: 12,
     textTransform: "capitalize",
     color: theme.palette.secondary.dark,
     "&:hover": {
       color: theme.palette.primary.main,
       cursor: "pointer",
     },
-    [theme.breakpoints.down("sm")]: {
-      fontSize: 12,
+  },
+  quantityGrid: {
+    display: "flex",
+    justifyContent: "center",
+  },
+  subtotal: {
+    [theme.breakpoints.up("sm")]: {
+      display: "flex",
+      flexDirection: "row",
+      justifyContent: "space-between",
+    },
+    [theme.breakpoints.up("md")]: {
+      justifyContent: "space-between",
     },
   },
-  titleGrid: {
-    [theme.breakpoints.down("xs")]: {
-      display: "flex",
-      justifyContent: "flex-start",
-    },
+  quantity: {
+    marginRight: 15,
+    textAlign: "right",
+    fontSize: 12,
   },
   price: {
+    marginRight: 15,
     textAlign: "right",
-    fontSize: 14,
+    fontSize: 12,
     fontWeight: 600,
-    [theme.breakpoints.down("sm")]: {
-      fontSize: 11,
-    },
   },
 }));
 

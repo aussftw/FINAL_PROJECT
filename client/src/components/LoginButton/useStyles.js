@@ -24,6 +24,9 @@ const useStyles = makeStyles({
       cursor: "default",
     },
   },
+  btn: {
+    marginRight: 24,
+  },
 });
 
 export default useStyles;

@@ -19,14 +19,28 @@ export const addToLastView = data => dispatch => {
   dispatch(addCurrentId(data));
   const arr = store.getState().lastViewReducer.lastView;
 
-  let current = [];
+  let lastViewedProducts = [];
 
   if (arr.length >= 5) {
     const arrLenght = arr.length - 4;
 
     arr.shift(arrLenght);
   }
-  current = [...arr, ...[data]];
 
-  dispatch(addToLastViewSuccess(current));
+  const inputId = data;
+
+  const updateLastViewedProducts = (lastViewedProducts, newProduct) => {
+    if (arr.some(item => item === newProduct)) {
+      // eslint-disable-next-line
+      return (lastViewedProducts = arr
+        .filter(item => item !== newProduct)
+        .concat(newProduct));
+    }
+
+    // eslint-disable-next-line
+    return (lastViewedProducts = [...arr, ...[newProduct]]);
+  };
+  lastViewedProducts = updateLastViewedProducts(lastViewedProducts, inputId);
+
+  dispatch(addToLastViewSuccess(lastViewedProducts));
 };

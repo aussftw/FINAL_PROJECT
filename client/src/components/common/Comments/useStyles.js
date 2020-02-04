@@ -43,12 +43,6 @@ const useStyles = makeStyles(theme => ({
     color: theme.palette.secondary.main,
     cursor: "default",
   },
-  mustLogin: {
-    marginLeft: theme.spacing(2),
-    fontSize: 16,
-    color: theme.palette.secondary.dark,
-    cursor: "default",
-  },
   commentButtons: {
     margin: "4px 8px 16px 0px",
   },

@@ -24,14 +24,13 @@ const LoginButton = ({
           <div className={classes.span}>
             <Typography component="span">Welcome,&nbsp;</Typography>
             <Typography component="span" noWrap>{` ${user.firstName}`}</Typography>
-            <Typography component="span">{` ${user.firstName}`}</Typography>
           </div>
           <ProfileMenu />
         </div>
       ) : (
-          <Button className={classes.btn} variant="contained" type="button" onClick={handleModal}>
+        <Button className={classes.btn} variant="contained" type="button" onClick={handleModal}>
             Sign In
-          </Button>
+        </Button>
       )}
     </div>
   );
