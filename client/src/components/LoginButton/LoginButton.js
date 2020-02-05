@@ -28,9 +28,9 @@ const LoginButton = ({
           <ProfileMenu />
         </div>
       ) : (
-          <Button className={classes.btn} variant="contained" type="button" onClick={handleModal}>
+        <Button className={classes.btn} variant="contained" type="button" onClick={handleModal}>
             Sign In
-          </Button>
+        </Button>
       )}
     </div>
   );

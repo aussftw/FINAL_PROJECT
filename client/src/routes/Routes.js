@@ -70,11 +70,6 @@ const Routes = ({
       <Route exact path="/">
         <HomePage />
       </Route>
-
-      <Route path="/orders">
-        <Orders />
-      </Route>
-
       <Route path="/cart">
         <CartPage />
       </Route>
@@ -112,11 +107,6 @@ const Routes = ({
       <Route path="/cart">
         <CartPage />
       </Route>
-
-      <Route path="/orders">
-        <Orders />
-      </Route>
-
       <Route path="/search">
         <SearchPage />
       </Route>
