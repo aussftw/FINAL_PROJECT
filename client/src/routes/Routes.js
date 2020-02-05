@@ -29,6 +29,7 @@ import Shop from "../pages/Shop/Shop";
 
 const Routes = ({
   isAuthenticated,
+                  isAdmin,
   getUserData,
   getWishlistData,
   preloaderClosing,
@@ -97,9 +98,11 @@ const Routes = ({
       <Route path="/orders/:orderNo">
         <OrderDetailsPage />
       </Route>
+      {isAdmin && (
       <Route path="/admin">
         <AdminPage />
       </Route>
+      )}
       <Redirect to="/" />
     </Switch>
   ) : (
@@ -145,7 +148,7 @@ const Routes = ({
 function mapStateToProps(state) {
   return {
     isAuthenticated: state.loginReducer.isAuthenticated,
-    user: state.loginReducer.user,
+    isAdmin: state.loginReducer.user.isAdmin,
     preloader: state.loginReducer.loginPreloader,
   };
 }

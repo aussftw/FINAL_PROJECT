@@ -28,7 +28,6 @@ import RemoveSharpIcon from "@material-ui/icons/RemoveSharp";
 import Tooltip from "@material-ui/core/Tooltip";
 // import CardContent from "@material-ui/core/CardContent";
 import RatingModule from "../common/RatingModule/RatingModule";
-// import QtyCounter from "../common/QtyCounter";
 import PreloaderAdaptive from "../Preloader/Adaptive";
 import ItemTabs from "../common/ItemTabs/ItemTabs";
 
@@ -221,19 +220,29 @@ const ItemDetails = ({
             >
               Add to cart
             </Button>
-            <Tooltip arrow title={isAuthenticated ? "" : "Only for authorized users"}>
-              <Button
-                className={classes.actionButton}
-                aria-label="Add to wishlist"
-                variant="contained"
-              >
-                {!wishlistAll.every(el => el._id !== _id) ? (
-                  <FavoriteSharpIcon onClick={() => deleteWishlistItem(_id)} />
+            {!wishlistAll.every(el => el._id !== _id) ? (
+              <Tooltip arrow title="Remove from wishlist">
+                <Button
+                  className={classes.actionButton}
+                  aria-label="Add to wishlist"
+                  variant="contained"
+                  onClick={() => deleteWishlistItem(_id)}
+                >
+                  <FavoriteSharpIcon />
+                </Button>
+              </Tooltip>
               ) : (
-                <FavoriteBorderSharpIcon onClick={handleAddtemToWishlist} />
-              )}
-              </Button>
-            </Tooltip>
+                <Tooltip arrow title={isAuthenticated ? "Add to wishlist" : "Only for authorized users"}>
+                  <Button
+                    className={classes.actionButton}
+                    aria-label="Add to wishlist"
+                    variant="contained"
+                    onClick={handleAddtemToWishlist}
+                  >
+                    <FavoriteBorderSharpIcon />
+                  </Button>
+                </Tooltip>
+            )}
           </Box>
         </Box>
       </Box>
