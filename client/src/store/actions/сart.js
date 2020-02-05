@@ -340,6 +340,61 @@ export const changeItemCartQuantity = (id, cartQty) => dispatch => {
   }
 };
 
+export const changeItemCartQuantityFromItemDetails = (id, cartQty, itemProduct) => dispatch => {
+  if (store.getState().loginReducer.isAuthenticated) {
+    if (!store.getState().cartReducer.cart.some(el => el.product._id === id)) {
+      const updatedCart = store.getState().cartReducer.cart.concat({
+        product: itemProduct,
+        cartQuantity: cartQty,
+      });
+      const updateProductList = { products: updatedCart };
+      axios
+        .put("/api/cart", updateProductList)
+        .then(response => {
+          dispatch(changeItemCartQuantitySuccess(response.data));
+        })
+        .catch(error => {
+          dispatch(changeItemCartQuantityFailure(error));
+        });
+    } else {
+      const storeProductList = store.getState().cartReducer.cart.map(item => {
+        if (item.product._id === id) {
+          return { product: item.product._id, cartQuantity: +item.cartQuantity + cartQty };
+        }
+        return { product: item.product._id, cartQuantity: item.cartQuantity };
+      });
+      const updateProductList = { products: storeProductList };
+      axios
+        .put("/api/cart", updateProductList)
+        .then(response => {
+          dispatch(changeItemCartQuantitySuccess(response.data));
+        })
+        .catch(error => {
+          dispatch(changeItemCartQuantityFailure(error));
+        });
+    }
+  } else {
+    let addNewProductInLocalCart = true;
+    let updateLocalCart = store.getState().cartReducer.cart.map(item => {
+      if (item.product._id === id) {
+        addNewProductInLocalCart = false;
+        return {
+          ...item,
+          cartQuantity: +item.cartQuantity + cartQty,
+        };
+      }
+      return item;
+    });
+    if (addNewProductInLocalCart) {
+      updateLocalCart = updateLocalCart.concat({
+        product: itemProduct,
+        cartQuantity: cartQty,
+      });
+    }
+    dispatch(addItemCartLocalSuccess(updateLocalCart));
+  }
+};
+
 export const clearCart = () => {
   return {
     type: constants.CLEAR_CART,
