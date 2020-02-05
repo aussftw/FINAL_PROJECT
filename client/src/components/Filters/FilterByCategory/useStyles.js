@@ -1,39 +1,34 @@
 import { makeStyles } from "@material-ui/core/styles";
-import theme from "../../../theme";
 
-export const useStyles = makeStyles(() => ({
-    root: {
-    marginTop:100,
+export const useStyles = makeStyles((theme) => ({
+  root: {
+    marginTop: 100,
     width: "100%",
     maxWidth: 300,
     marginBottom: 40,
     backgroundColor: theme.palette.background.paper,
-    boxShadow: "0 0 5px",
+    boxShadow:
+      "0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.2), 0px 1px 3px 0px rgba(0,0,0,0.2)",
     borderRadius: 10,
     paddingBottom: 20,
-    [theme.breakpoints.down("md")]:{
+    [theme.breakpoints.down("sm")]: {
       width: "100%",
       maxWidth: "300px",
-      boxShadow: "none", 
-      marginTop: 0, 
-      borderRadius:0, 
+      boxShadow: "none",
+      marginTop: 0,
+      borderRadius: 0,
       marginBottom: 20,
       paddingBottom: 0,
       backgroundColor: theme.palette.primary.light,
     },
   },
-  line: {
-    margin: "10px 20px",
-    position: "relative",
-    width: "80%",
-    height: 5,
-    backgroundColor: "grey",
-    borderRadius: 10,
+  listItem: {
+    "&:selected": {
+      backgroundColor: theme.palette.primary.main,
+    },
   },
   subLine: {
-    position: "absolute",
-    top: 50,
-    left: 20,
+    margin: "10px 20px",
     width: "60%",
     height: 5,
     backgroundColor: theme.palette.primary.main,
@@ -42,12 +37,15 @@ export const useStyles = makeStyles(() => ({
   title: {
     margin: "5px 20px",
     fontSize: 20,
+    textTransform: "none",
   },
-  label: {   
+  label: {
     width: "100%",
   },
-  iconContainer:{
-    marginRight:-15
-  }
-    })
-);
+  iconContainer: {
+    marginRight: -15,
+  },
+  text: {
+    fontSize: "0.95em !important",
+  },
+}));

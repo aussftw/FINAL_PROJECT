@@ -17,6 +17,13 @@ const useStyles = makeStyles(theme => ({
   tabpanel: {
     width: "100%",
   },
+  link: {
+    color: theme.palette.primary.dark,
+    textDecoration: "none",
+    "&:focus, &:hover, &:visited, &:link, &:active": {
+      textDecoration: "none",
+    },
+  },
 }));
 
 export default useStyles;
