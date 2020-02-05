@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import {Link, Redirect} from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import Button from "@material-ui/core/Button";
@@ -33,11 +33,14 @@ const CustomizedSearch = ({ searchPhrases, searchPhrasesFailure }) => {
   const searchChange = prop => event => {
     setText({ ...text, [prop]: event.target.value });
   };
-  const onEnter = (event) => {
-   if (event.key === "Enter" && text.query.match(/^[`'"()A-Za-zd.s_-]{3,25}/)) {
-     search();
-     setEnter(true)
-   }
+  const onEnter = event => {
+    if (
+      event.key === "Enter" &&
+      text.query.match(/^[`'"()A-Za-zd.s_-]{3,25}/)
+    ) {
+      search();
+      setEnter(true);
+    }
   };
 
   return (
@@ -47,17 +50,12 @@ const CustomizedSearch = ({ searchPhrases, searchPhrasesFailure }) => {
       {/*  className={classes.link} */}
       {/* /> */}
       {/* <Divider className={classes.divider} orientation="vertical" /> */}
-<<<<<<< HEAD
-
-      <ValidatorForm noValidate={false} onSubmit={search}>
-=======
-      { enter && <Redirect to="/search" />}
+      {enter && <Redirect to="/search" />}
       <ValidatorForm
         noValidate={false}
         onSubmit={search}
-        onKeyPress={(event) => onEnter(event)}
+        onKeyPress={event => onEnter(event)}
       >
->>>>>>> origin/dev
         <TextValidator
           value={text.query}
           onChange={searchChange("query")}
@@ -65,17 +63,8 @@ const CustomizedSearch = ({ searchPhrases, searchPhrasesFailure }) => {
           variant="outlined"
           size="small"
           placeholder="Search..."
-<<<<<<< HEAD
-          validators={["required", "matchRegexp:^[`'\"()A-Za-zd.s_-]{3,50}"]}
-          // errorMessages={[
-          //   "This field is required",
-          //   "Only latin letters, 3 characters and more",
-          // ]}
-          FormHelperTextProps={{ className: classes.helper }}
-=======
           validators={["required", "matchRegexp:^[`'\"()A-Za-zd.s_-]{3,25}"]}
           errorMessages={[]}
->>>>>>> origin/dev
         />
 
         <Button
