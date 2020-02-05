@@ -70,7 +70,7 @@ const ItemTabs = ({ description, id }) => {
       >
         {value === 0 && (
           <Box>
-            <Typography className={classes.descriptionText} component="span">
+            <Typography className={classes.descriptionText}>
               {description}
             </Typography>
           </Box>

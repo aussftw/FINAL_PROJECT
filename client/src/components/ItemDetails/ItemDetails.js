@@ -25,12 +25,14 @@ import FavoriteBorderSharpIcon from "@material-ui/icons/FavoriteBorderSharp";
 import FavoriteSharpIcon from "@material-ui/icons/FavoriteSharp";
 import AddSharpIcon from "@material-ui/icons/AddSharp";
 import RemoveSharpIcon from "@material-ui/icons/RemoveSharp";
+import Tooltip from "@material-ui/core/Tooltip";
+// import CardContent from "@material-ui/core/CardContent";
 import RatingModule from "../common/RatingModule/RatingModule";
 // import QtyCounter from "../common/QtyCounter";
 import PreloaderAdaptive from "../Preloader/Adaptive";
 import ItemTabs from "../common/ItemTabs/ItemTabs";
 
-import { addItemCart } from "../../store/actions/сart";
+import { addItemCart, changeItemCartQuantityFromItemDetails } from "../../store/actions/сart";
 import {
   wishlistAddItem,
   wishlistDeleteItem,
@@ -43,7 +45,7 @@ const ItemDetails = ({
   addWishlistItem,
   deleteWishlistItem,
   isAuthenticated,
-  addCartItem,
+  addCartItem, updateCart,
 }) => {
   const itemNo = useParams();
   const classes = useStyles();
@@ -54,6 +56,7 @@ const ItemDetails = ({
   });
   const [index, setIndex] = useState(0);
   const [preloader, setPreloader] = useState(true);
+  const [qty, setQty] = useState(1);
   // const [snackbarAddToCart, setSnackbarAddToCart] = useState(false);
 
   useEffect(() => {
@@ -73,6 +76,7 @@ const ItemDetails = ({
 
     return () => {
       source.cancel();
+      setIndex(0);
     };
   }, [itemNo.id]);
 
@@ -89,7 +93,12 @@ const ItemDetails = ({
   } = item;
 
   const addItemToCart = () => {
-    addCartItem(item._id, item.itemNo);
+    if(qty === 1) {
+      addCartItem(item._id, item.itemNo);
+    } else {
+      updateCart(item._id, qty, item);
+    }
+
   };
 
   const handleAddtemToWishlist = () => {
@@ -98,7 +107,7 @@ const ItemDetails = ({
     }
   };
 
-  const [qty, setQty] = useState(1);
+  // const [qty, setQty] = useState(1);
 
   const inc = () => {
     if (qty < 99) {
@@ -146,7 +155,7 @@ const ItemDetails = ({
                 objectFit="contain"
                 src={image}
                 alt="flower_picture"
-                // className={classes.imgScale}
+                className={classes.imgScale}
               />
             ))}
           </Gallery>
@@ -157,13 +166,6 @@ const ItemDetails = ({
           </Typography>
           <Divider variant="middle" />
           <List>
-            {/* <ListItem className={classes.root}>
-              <ListItemText
-                className={classes.infoDetail}
-                primary="Product code:"
-              />
-              <Typography className={classes.infoDetailValue}>{_id}</Typography>
-            </ListItem> */}
             <ListItem className={classes.root}>
               <ListItemText className={classes.infoDetail} primary="Color:" />
               <Typography className={classes.infoDetailValue}>
@@ -180,22 +182,16 @@ const ItemDetails = ({
           <RatingModule id={item._id} rate={item.rate.rating} />
           <Divider variant="middle" />
           <List>
-            {/* <ListItem className={classes.root}>
-              <ListItemText primary="Price:" className={classes.infoDetail} />
-              <Typography className={classes.previousPrice}>
-                {previousPrice}$
-              </Typography>
-            </ListItem> */}
             <ListItem className={classes.root}>
               <ListItemText primary="Price:" className={classes.infoDetail} />
               <Typography className={classes.currentPrice}>
-                {`$${currentPrice}`}
+                {`$${currentPrice.toFixed(2)}`}
               </Typography>
             </ListItem>
           </List>
           <Divider variant="middle" />
           <Container className={classes.qty_wrapper}>
-            <Typography> Qty:</Typography>
+            <Typography>Quantity:</Typography>
             <Box>
               <IconButton aria-label="Less" onClick={() => dec()}>
                 <RemoveSharpIcon />
@@ -225,17 +221,19 @@ const ItemDetails = ({
             >
               Add to cart
             </Button>
-            <Button
-              className={classes.actionButton}
-              aria-label="Add to wishlist"
-              variant="contained"
-            >
-              {!wishlistAll.every(el => el._id !== _id) ? (
-                <FavoriteSharpIcon onClick={() => deleteWishlistItem(_id)} />
+            <Tooltip arrow title={isAuthenticated ? "" : "Only for authorized users"}>
+              <Button
+                className={classes.actionButton}
+                aria-label="Add to wishlist"
+                variant="contained"
+              >
+                {!wishlistAll.every(el => el._id !== _id) ? (
+                  <FavoriteSharpIcon onClick={() => deleteWishlistItem(_id)} />
               ) : (
                 <FavoriteBorderSharpIcon onClick={handleAddtemToWishlist} />
               )}
-            </Button>
+              </Button>
+            </Tooltip>
           </Box>
         </Box>
       </Box>
@@ -258,4 +256,5 @@ export default connect(mapStateToProps, {
   addWishlistItem: wishlistAddItem,
   deleteWishlistItem: wishlistDeleteItem,
   addCartItem: addItemCart,
+  updateCart: changeItemCartQuantityFromItemDetails,
 })(ItemDetails);
