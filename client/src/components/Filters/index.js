@@ -65,7 +65,7 @@ const Products = ({
       <Container className={classes.main}>
         <Typography
           variant="h3"
-          style={{ cursor: "default", position: "absolute" }}
+          style={{ cursor: "default", position: "absolute", top: 150}}
         >
           Shop
         </Typography>
@@ -76,13 +76,26 @@ const Products = ({
           <FilterByPrice />
         </div>
         <div className={classes.items}>
-          <ModalFiltersAdaptive />
-          <div className={classes.itemCard}>{currentProduct}</div>
-          <Pagination
-            productsPerPage={productsPerPage}
-            totalProducts={productListing.length}
-            paginate={paginate}
-          />
+          {listProduct.length === 0 ? (
+            <div className={classes.cardSkeleton}>
+              <ItemCard />
+              <ItemCard />
+              <ItemCard />
+              <ItemCard />
+              <ItemCard />
+              <ItemCard />
+            </div>
+          ) : (
+            <>
+              <ModalFiltersAdaptive />
+              <div className={classes.itemCard}>{currentProduct}</div>
+              <Pagination
+                productsPerPage={productsPerPage}
+                totalProducts={productListing.length}
+                paginate={paginate}
+              />
+            </>
+          )}
         </div>
       </Container>
     </>

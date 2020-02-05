@@ -6,9 +6,12 @@ import ListItem from "@material-ui/core/ListItem";
 import { green } from "@material-ui/core/colors";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
+import Typography from "@material-ui/core/Typography";
+
 import { withStyles } from "@material-ui/core/styles";
-import { useStyles } from "./useStyles";
 import { connect } from "react-redux";
+import { useStyles } from "./useStyles";
+
 
 import {
   getSizes,
@@ -82,7 +85,9 @@ const FilterBySize = ({
         className={classes.root}
         aria-label="mailbox folders"
       >
-        <h4 className={classes.title}>Size</h4>
+        <Typography className={classes.title} variant="h3">
+          Size
+        </Typography>
         <div className={classes.subLine} />
         {sizeList}
       </List>

@@ -3,12 +3,12 @@ import React, { useEffect } from "react";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
-// import ListItemText from "@material-ui/core/ListItemText";
+import ListItemText from "@material-ui/core/ListItemText";
 import EcoIcon from "@material-ui/icons/Eco";
 import Typography from "@material-ui/core/Typography";
+
 import { connect } from "react-redux";
 import { useStyles } from "./useStyles";
-import { withStyles } from "@material-ui/core/styles";
 
 import {
   getCategories,
@@ -16,13 +16,6 @@ import {
   setCurrentPage,
 } from "../../../store/actions/Filters";
 
-const ListItemText = withStyles({
-  root: {
-    fontSize: "0.95em",
-  },
-})(props => (
-  <ListItemText {...props} />
-));
 const FilterByCategory = ({
   categoryListing,
   getCategories,
@@ -55,7 +48,10 @@ const FilterByCategory = ({
         <ListItemIcon className={classes.iconContainer}>
           <EcoIcon />
         </ListItemIcon>
-        <ListItemText className={classes.text} primary={category.name} />
+        <ListItemText
+          primaryTypographyProps={{className: classes.text}}
+          primary={category.name}
+        />
       </ListItem>
     );
   });
@@ -69,17 +65,10 @@ const FilterByCategory = ({
         <Typography
           className={classes.title}
           variant="h3"
-          style={{ cursor: "default" }}
         >
           Category
         </Typography>
         <div className={classes.subLine} />
-        <ListItem button>
-          <ListItemIcon className={classes.iconContainer}>
-            <EcoIcon />
-          </ListItemIcon>
-          <ListItemText primary="All" />
-        </ListItem>
         {categoryList}
       </List>
     </>

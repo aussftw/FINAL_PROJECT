@@ -1,12 +1,13 @@
 import React from "react";
 import Slider from "@material-ui/core/Slider";
+import Typography from "@material-ui/core/Typography";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
 import theme from "../../../theme";
 
 import { selectPrice, setCurrentPage } from "../../../store/actions/Filters";
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   rootMain: {
     width: "100%",
     maxWidth: 300,
@@ -23,6 +24,7 @@ const useStyles = makeStyles(() => ({
   title: {
     margin: "5px 20px",
     fontSize: 20,
+    textTransform: "none",
   },
   subLine: {
     margin: "10px 20px",
@@ -76,7 +78,12 @@ const FilterByPrice = ({ selectPrice, setCurrentPage }) => {
 
   return (
     <div className={classes.rootMain}>
-      <h4 className={classes.title}>Price</h4>
+       <Typography
+          className={classes.title}
+          variant="h3"
+        >
+          Price
+        </Typography>
       <div className={classes.subLine} />
       <PrettoSlider
         onChangeCommitted={ValueByPrice}

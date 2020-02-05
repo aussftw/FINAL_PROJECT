@@ -1,7 +1,6 @@
 import { makeStyles } from "@material-ui/core/styles";
-import theme from "../../theme";
 
-export const useStyles = makeStyles(() => ({
+export const useStyles = makeStyles(theme => ({
   first: {
     marginTop: 20,
     padding: "110px 0",
@@ -12,12 +11,16 @@ export const useStyles = makeStyles(() => ({
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover",
+    [theme.breakpoints.down("md")]: {
+      backgroundPosition: "right",
+    },
   },
 
   title: {
     fontSize: 50,
     fontWeight: 600,
     margin: 0,
+    fontFamily: "'Playfair Display', serif",
   },
 
   subtitle: {
@@ -31,20 +34,35 @@ export const useStyles = makeStyles(() => ({
     display: "flex",
     justifyContent: " space-around",
     margin: "80px 0",
+    [theme.breakpoints.down("md")]: {
+      flexDirection: "column",
+      alignItems: "center",
+      justifyContent: "center",
+    },
   },
 
   text: {
     width: "38%",
+    [theme.breakpoints.down("md")]: {
+      width: "60%",
+      marginBottom: 20,
+    },
   },
 
   flowers: {
-    color: "red",
+    color: theme.palette.primary.main,
   },
 
   secondTitle: {
-    fontSize: 38,
+    fontSize: "2.3em",
     lineHeight: "1.4em",
     marginBottom: 40,
+    fontFamily: "'Playfair Display', serif",
+    letterSpacing: "1.1px",
+    marginTop: 0,
+    [theme.breakpoints.down("md")]: {
+      fontSize: "1.7em",
+    },
   },
 
   secondText: {
@@ -60,6 +78,10 @@ export const useStyles = makeStyles(() => ({
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover",
+    [theme.breakpoints.down("md")]: {
+      width: "60%",
+      height: 350,
+    },
   },
 
   third: {
@@ -72,17 +94,24 @@ export const useStyles = makeStyles(() => ({
     fontSize: 38,
     lineHeight: "1.4em",
     marginBottom: 20,
+    fontFamily: "'Playfair Display', serif",
   },
 
   thirdSubtitle: {
     fontSize: 17,
     lineHeight: "29px",
+    width: 550,
+    display: "inline-block",
   },
 
   expert: {
     display: "flex",
     justifyContent: "space-evenly",
     marginTop: 50,
+    [theme.breakpoints.down("md")]: {
+      flexWrap: "wrap",
+      flexDirection: "row",
+    },
   },
 
   expertTitle: {

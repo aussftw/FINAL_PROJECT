@@ -17,7 +17,7 @@ const AboutUs = () => {
           <h2 className={classes.secondTitle}>
             We take
             <span className={classes.flowers}> flowers </span>
-            personally & we bring you happiness ring you happiness ss
+            personally & we bring you happiness ring you happiness
           </h2>
           <p className={classes.secondText}>
             Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean

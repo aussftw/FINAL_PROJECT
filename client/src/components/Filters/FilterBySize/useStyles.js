@@ -25,6 +25,7 @@ export const useStyles = makeStyles(() => ({
   title: {
     margin: "5px 20px",
     fontSize: 20,
+    textTransform: "none",
   },
   label: {
     width: "85%",
