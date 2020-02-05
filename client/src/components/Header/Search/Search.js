@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import {Link, Redirect} from "react-router-dom";
 import { connect } from "react-redux";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import Button from "@material-ui/core/Button";
@@ -17,6 +17,7 @@ const CustomizedSearch = ({ searchPhrases, searchPhrasesFailure }) => {
   const classes = useStyles();
 
   const [text, setText] = useState({ query: "" });
+  const [enter, setEnter] = useState(false);
 
   function search() {
     axios
@@ -32,6 +33,12 @@ const CustomizedSearch = ({ searchPhrases, searchPhrasesFailure }) => {
   const searchChange = prop => event => {
     setText({ ...text, [prop]: event.target.value });
   };
+  const onEnter = (event) => {
+   if (event.key === "Enter" && text.query.match(/^[`'"()A-Za-zd.s_-]{3,25}/)) {
+     search();
+     setEnter(true)
+   }
+  };
 
   return (
     <>
@@ -40,10 +47,11 @@ const CustomizedSearch = ({ searchPhrases, searchPhrasesFailure }) => {
       {/*  className={classes.link} */}
       {/* /> */}
       {/* <Divider className={classes.divider} orientation="vertical" /> */}
-
+      { enter && <Redirect to="/search" />}
       <ValidatorForm
         noValidate={false}
         onSubmit={search}
+        onKeyPress={(event) => onEnter(event)}
       >
         <TextValidator
           value={text.query}
@@ -52,12 +60,8 @@ const CustomizedSearch = ({ searchPhrases, searchPhrasesFailure }) => {
           variant="outlined"
           size="small"
           placeholder="Search..."
-          validators={["required", "matchRegexp:^[`'\"()A-Za-zd.s_-]{3,50}"]}
-          // errorMessages={[
-          //   "This field is required",
-          //   "Only latin letters, 3 characters and more",
-          // ]}
-          FormHelperTextProps={{className: classes.helper}}
+          validators={["required", "matchRegexp:^[`'\"()A-Za-zd.s_-]{3,25}"]}
+          errorMessages={[]}
         />
 
         <Button
