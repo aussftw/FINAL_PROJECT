@@ -1,6 +1,7 @@
 import { makeStyles } from "@material-ui/core/styles";
 
 export const useStyles = makeStyles(theme => ({
+  
   first: {
     marginTop: 20,
     padding: "110px 0",
