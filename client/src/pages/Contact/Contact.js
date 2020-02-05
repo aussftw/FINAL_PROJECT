@@ -16,7 +16,6 @@ function Shop() {
       <Header />
       <SubHeader />
       <AboutUs />
-      <LastViewCarousel />
       <Subscribe />
       <Footer />
     </>

@@ -1,5 +1,6 @@
 import React from "react";
-import { Container, Grid, Link, Hidden, Box } from "@material-ui/core";
+import { Container, Grid, Hidden, Box } from "@material-ui/core";
+import { Link } from "react-router-dom";
 
 import useStyles from "./useStyles";
 
@@ -16,7 +17,7 @@ const Footer = () => {
   return (
     <Container className={classes.bg} maxWidth="xl">
       <Hidden mdUp>
-        <Link href="/#" className={classes.logoContainer}>
+        <Link to="/" className={classes.logoContainer}>
           <img src="/img/Logo.svg" alt="logo" className={classes.logo} />
         </Link>
       </Hidden>

@@ -30,6 +30,7 @@ import Contact from "../pages/Contact/Contact";
 
 const Routes = ({
   isAuthenticated,
+                  isAdmin,
   getUserData,
   getWishlistData,
   preloaderClosing,
@@ -80,7 +81,7 @@ const Routes = ({
       <Route path="/shop">
         <Shop />
       </Route>
-      <Route path="/contacts">
+      <Route path="/aboutus">
         <Contact />
       </Route>
       <Route path="/notfound">
@@ -101,9 +102,11 @@ const Routes = ({
       <Route path="/orders/:orderNo">
         <OrderDetailsPage />
       </Route>
+      {isAdmin && (
       <Route path="/admin">
         <AdminPage />
       </Route>
+      )}
       <Redirect to="/" />
     </Switch>
   ) : (
@@ -123,7 +126,7 @@ const Routes = ({
         {/* </Suspense> */}
         <Shop />
       </Route>
-      <Route path="/contacts">
+      <Route path="/aboutus">
         <Contact />
       </Route>
       {/* <Route path="/about-us"> */}
@@ -152,7 +155,7 @@ const Routes = ({
 function mapStateToProps(state) {
   return {
     isAuthenticated: state.loginReducer.isAuthenticated,
-    user: state.loginReducer.user,
+    isAdmin: state.loginReducer.user.isAdmin,
     preloader: state.loginReducer.loginPreloader,
   };
 }
