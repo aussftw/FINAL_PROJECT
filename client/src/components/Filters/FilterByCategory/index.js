@@ -12,7 +12,7 @@ import { connect } from "react-redux";
 
 const FilterByCategory = ({ categoryListing,  getCategories, selectCategory, setCurrentPage }) => {
   const classes = useStyles();
-  
+
   useEffect(() => {
     getCategories();
     // eslint-disable-next-line

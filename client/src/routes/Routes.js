@@ -11,6 +11,7 @@ import RegistrationPage from "../pages/RegistrationPage/RegistrationPage";
 import ItemDetailsPage from "../pages/ItemDetailsPage/ItemDetailsPage";
 import OrderDetailsPage from "../pages/OrderDetailsPage/OrderDetailsPage";
 import CheckoutPage from "../pages/CheckoutPage/CheckoutPage"
+import AdminPage from "../pages/AdminPage/AdminPage";
 import setAuthToken from "../components/common/setAuthToken";
 import isExpired from "../components/common/isExpired/isExpired";
 import Preloader from "../components/Preloader";
@@ -96,6 +97,9 @@ const Routes = ({
       </Route>
       <Route path="/orders/:orderNo">
         <OrderDetailsPage />
+      </Route>
+      <Route path="/admin">
+        <AdminPage />
       </Route>
       <Redirect to="/" />
     </Switch>

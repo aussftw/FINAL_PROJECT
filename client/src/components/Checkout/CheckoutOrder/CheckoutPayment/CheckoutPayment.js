@@ -201,6 +201,8 @@ const CheckoutPayments = () => {
                       inputProps={{
                         className: classes.creditCardCVInput,
                         maxLength: 3,
+                        type: "password",
+                        autoComplete: "password"
                       }}
                       validators={["required", "matchRegexp:^[0-9]{3}$"]}
                       errorMessages={[]}
@@ -223,6 +225,8 @@ const CheckoutPayments = () => {
                     inputProps={{
                       className: classes.creditCardCVInput,
                       maxLength: 3,
+                      type: "password",
+                      autoComplete: "password"
                     }}
                     validators={["required", "matchRegexp:^[0-9]{3}$"]}
                     errorMessages={[]}

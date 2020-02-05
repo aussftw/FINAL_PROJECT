@@ -23,10 +23,9 @@ const useStyles = makeStyles(theme => ({
   imagesContainer: {
     marginTop: theme.spacing(5),
   },
-  // imgScale: {
-  //   height: 150,
-  //   width: 200,
-  // },
+  imgScale: {
+    maxHeight: 500,
+  },
   detailsTitle: {
     textTransform: "capitalize",
     fontSize: 16,
@@ -36,8 +35,9 @@ const useStyles = makeStyles(theme => ({
     // },
   },
   infoContainer: {
+    // minWidth: 180,
     marginRight: theme.spacing(2),
-    [theme.breakpoints.up("md")]: {
+    [theme.breakpoints.up("sm")]: {
       width: "50%",
     },
   },
