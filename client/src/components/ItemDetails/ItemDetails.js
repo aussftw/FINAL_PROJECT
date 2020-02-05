@@ -106,8 +106,6 @@ const ItemDetails = ({
     }
   };
 
-  // const [qty, setQty] = useState(1);
-
   const inc = () => {
     if (qty < 99) {
       setQty(qty + 1);

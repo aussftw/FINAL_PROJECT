@@ -81,7 +81,7 @@ const Routes = ({
       <Route path="/shop">
         <Shop />
       </Route>
-      <Route path="/contacts">
+      <Route path="/aboutus">
         <Contact />
       </Route>
       <Route path="/notfound">
@@ -126,7 +126,7 @@ const Routes = ({
         {/* </Suspense> */}
         <Shop />
       </Route>
-      <Route path="/contacts">
+      <Route path="/aboutus">
         <Contact />
       </Route>
       {/* <Route path="/about-us"> */}
