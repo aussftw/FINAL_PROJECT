@@ -41,10 +41,7 @@ const CustomizedSearch = ({ searchPhrases, searchPhrasesFailure }) => {
       {/* /> */}
       {/* <Divider className={classes.divider} orientation="vertical" /> */}
 
-      <ValidatorForm
-        noValidate={false}
-        onSubmit={search}
-      >
+      <ValidatorForm noValidate={false} onSubmit={search}>
         <TextValidator
           value={text.query}
           onChange={searchChange("query")}
@@ -57,7 +54,7 @@ const CustomizedSearch = ({ searchPhrases, searchPhrasesFailure }) => {
           //   "This field is required",
           //   "Only latin letters, 3 characters and more",
           // ]}
-          FormHelperTextProps={{className: classes.helper}}
+          FormHelperTextProps={{ className: classes.helper }}
         />
 
         <Button
@@ -77,4 +74,6 @@ const CustomizedSearch = ({ searchPhrases, searchPhrasesFailure }) => {
   );
 };
 
-export default connect(null, { searchPhrases, searchPhrasesFailure })(CustomizedSearch);
+export default connect(null, { searchPhrases, searchPhrasesFailure })(
+  CustomizedSearch
+);
