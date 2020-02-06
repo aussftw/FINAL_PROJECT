@@ -12,13 +12,28 @@ const useStyles = makeStyles(theme => ({
   },
   link: {
     display: "inline-block",
-    padding: "0 20px",
+    position: "relative",
+    margin: "0 20px",
     color: theme.palette.secondary.main,
     textTransform: "uppercase",
     textDecoration: "none",
-    "&:hover": {
+    fontWeight: 500,
+    "&:after": {
+      position: "absolute",
+      content: "''",
+      display: "block",
+      boxSizing: "border-box",
+      height: 3,
+      width: "0",
       color: theme.palette.primary.main,
       borderBottom: `1px solid ${theme.palette.primary.main}`,
+      transition: "0.5s"
+    },
+    
+    "&:hover": {
+      "&:after": {
+        width: "100%",
+      },
     },
   },
   searchMobile: {

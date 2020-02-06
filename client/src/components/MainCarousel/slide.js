@@ -12,7 +12,7 @@ const Slide = ({ image, title, subTitle }) => {
 
   return (
     <div
-        className={classes.slider}
+      className={classes.slider}
         // classes={{
         //   root: classes.carouselBack,
         //   legend: classes.legend,

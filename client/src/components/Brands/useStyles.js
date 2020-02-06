@@ -5,7 +5,7 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "space-evenly",
     [theme.breakpoints.up("md")]: {
       flexDirection: "row",
     },

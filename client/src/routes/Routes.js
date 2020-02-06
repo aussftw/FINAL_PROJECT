@@ -21,7 +21,7 @@ import {
   preloaderClose,
   userFromJwt,
 } from "../store/actions/loginActions";
-import {getWishlist} from "../store/actions/wishlist";
+import { getWishlist } from "../store/actions/wishlist";
 
 import SearchPage from "../pages/SearchPage/SearchPage";
 // const Shop = React.lazy(() => import('../pages/Shop/Shop')); // Lazy-loaded
@@ -29,15 +29,15 @@ import Shop from "../pages/Shop/Shop";
 import Contact from "../pages/Contact/Contact";
 
 const Routes = ({
-                  isAuthenticated,
-                  isAdmin,
-                  getUserData,
-                  getWishlistData,
-                  preloaderClosing,
-                  preloader,
-                  userDataFromJwt,
-                  LogOutUser,
-                }) => {
+  isAuthenticated,
+  isAdmin,
+  getUserData,
+  getWishlistData,
+  preloaderClosing,
+  preloader,
+  userDataFromJwt,
+  LogOutUser,
+}) => {
   useEffect(() => {
     // eslint-disable-next-line no-undef
     const token = localStorage.getItem("authToken");
@@ -67,7 +67,6 @@ const Routes = ({
   // eslint-disable-next-line no-nested-ternary
   return preloader ? (
     <Preloader />
-    // eslint-disable-next-line no-nested-ternary
   ) : ( isAuthenticated ? (
     <Switch>
       <Route exact path="/">
@@ -82,7 +81,7 @@ const Routes = ({
       <Route path="/shop">
         <Shop />
       </Route>
-      <Route path="/aboutus">
+      <Route path="/about-us">
         <Contact />
       </Route>
       <Route path="/notfound">
@@ -125,7 +124,7 @@ const Routes = ({
         {/* </Suspense> */}
         <Shop />
       </Route>
-      <Route path="/aboutus">
+      <Route path="/about-us">
         <Contact />
       </Route>
       {/* <Route path="/about-us"> */}
