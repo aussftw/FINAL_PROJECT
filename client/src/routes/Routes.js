@@ -83,7 +83,7 @@ const Routes = ({
   );
   
   return preloader ? (
-    <Preloader />
+    <Preloader /> 
   ) : (
     <Switch>
       <Route exact path="/" component={HomePage} />
