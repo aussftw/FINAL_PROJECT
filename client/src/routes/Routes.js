@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
-import { connect } from "react-redux";
+import React, {useEffect} from "react";
+import {Switch, Route, Redirect} from "react-router-dom";
+import {connect} from "react-redux";
 import jwt from "jwt-decode";
 
 import HomePage from "../pages/HomePage/HomePage";
@@ -21,7 +21,7 @@ import {
   preloaderClose,
   userFromJwt,
 } from "../store/actions/loginActions";
-import { getWishlist } from "../store/actions/wishlist";
+import {getWishlist} from "../store/actions/wishlist";
 
 import SearchPage from "../pages/SearchPage/SearchPage";
 // const Shop = React.lazy(() => import('../pages/Shop/Shop')); // Lazy-loaded
@@ -29,15 +29,15 @@ import Shop from "../pages/Shop/Shop";
 import Contact from "../pages/Contact/Contact";
 
 const Routes = ({
-  isAuthenticated,
+                  isAuthenticated,
                   isAdmin,
-  getUserData,
-  getWishlistData,
-  preloaderClosing,
-  preloader,
-  userDataFromJwt,
-  LogOutUser,
-}) => {
+                  getUserData,
+                  getWishlistData,
+                  preloaderClosing,
+                  preloader,
+                  userDataFromJwt,
+                  LogOutUser,
+                }) => {
   useEffect(() => {
     // eslint-disable-next-line no-undef
     const token = localStorage.getItem("authToken");
@@ -67,7 +67,8 @@ const Routes = ({
   // eslint-disable-next-line no-nested-ternary
   return preloader ? (
     <Preloader />
-  ) : isAuthenticated ? (
+    // eslint-disable-next-line no-nested-ternary
+  ) : ( isAuthenticated ? (
     <Switch>
       <Route exact path="/">
         <HomePage />
@@ -102,11 +103,9 @@ const Routes = ({
       <Route path="/orders/:orderNo">
         <OrderDetailsPage />
       </Route>
-      {isAdmin && (
-      <Route path="/admin">
-        <AdminPage />
+      <Route path={isAdmin ? "/admin" : "/"}>
+        {isAdmin && <AdminPage />}
       </Route>
-      )}
       <Redirect to="/" />
     </Switch>
   ) : (
@@ -149,7 +148,8 @@ const Routes = ({
       </Route>
       <Redirect to="/" />
     </Switch>
-  );
+    )
+  )
 };
 
 function mapStateToProps(state) {
