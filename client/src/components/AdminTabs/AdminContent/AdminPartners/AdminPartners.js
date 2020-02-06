@@ -30,6 +30,17 @@ const AdminPartners = () => {
     });
   };
 
+  const closeModal = () => {
+    setDataEditModal({
+      isOpened: false,
+      rowData: dataEditModal.rowData
+    });
+    setAddModal({
+      isOpened: false,
+      rowData: AddModal.rowData
+    })
+  };
+
   const getPartners = () => {
     axios
       .get("/api/partners")
@@ -122,11 +133,11 @@ const AdminPartners = () => {
                   handleOpenAddModal();
                 },
               },
-              {
-                icon: () => <DeleteIcon />,
-                tooltip: "Delete Partner",
-                // onClick: {handleOpen}
-              },
+              // {
+              //   icon: () => <DeleteIcon />,
+              //   tooltip: "Delete Partner",
+              //   // onClick: {handleOpen}
+              // },
               {
                 icon: () => <EditIcon />,
                 tooltip: "Edit Partner",
@@ -138,8 +149,8 @@ const AdminPartners = () => {
 
           />
 
-          {AddModal.isOpened && <AddPartnerModal open={AddModal.isOpened} handleCloseEditModal={handleOpenAddModal} partner={AddModal.rowData} />}
-          {dataEditModal.isOpened && <AddPartnerModal open={dataEditModal.isOpened} handleCloseEditModal={handleDataEditModal} partner={dataEditModal.rowData} />}
+          {AddModal.isOpened && <AddPartnerModal open={AddModal.isOpened} handleModal={closeModal} partner={AddModal.rowData} />}
+          {dataEditModal.isOpened && <AddPartnerModal open={dataEditModal.isOpened} handleModal={closeModal} partner={dataEditModal.rowData} />}
 
         </Box>
       )}

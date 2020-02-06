@@ -1,65 +1,25 @@
-import makeStyles from "@material-ui/core/styles/makeStyles";
-import theme from "../../../theme";
+import { makeStyles } from "@material-ui/core/styles";
 
-const useStyles = makeStyles({
-  textField: {
-    width: "90%",
-    marginBottom: "20px",
+const useStyles = makeStyles(theme => ({
+  modalBox: {
+    position: "fixed",
+    top: 10,
+    left: "calc(50% - 196px)",
+    minHeight: 600,
+    minWidth: 360,
+    padding: theme.spacing(3),
+    backgroundColor: "white",
+    borderRadius: 4,
   },
-  title: {
-    margin: "10px 0 30px 0",
-    letterSpacing: "1px",
-    textTransform: "uppercase",
-    textAlign: "center",
-    color: theme.palette.primary.dark,
+  closeBtn: {
+    position: "absolute",
+    top: 8,
+    right: 8,
   },
-  wrapper: {
-    padding: "15px",
-    display: "flex",
-    flexDirection: "column",
-    textAlign: "center",
-    maxWidth: "70%",
-    margin: "0 auto",
+  input: {
+    display: "block",
+    marginTop: theme.spacing(3),
   },
-  text: {
-    marginTop: "0",
-    fontSize: "20px",
-    letterSpacing: "1px",
-  },
-  regLink: {
-    fontWeight: "bold",
-    letterSpacing: "2.5px",
-    color: theme.palette.primary.main,
-  },
-
-  modal: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  paper: {
-    backgroundColor: theme.palette.background.paper,
-    border: `5px solid ${theme.palette.primary.main}`,
-    borderRadius: "8px",
-    boxShadow: theme.shadows[5],
-    width: "40vw",
-    "&:focus": {
-      outline:"none",
-    },
-    [theme.breakpoints.down("lg")]:{
-      width: "50vw",
-    },
-    [theme.breakpoints.down("md")]:{
-      width: "70vw",
-    },
-    [theme.breakpoints.down("xs")]:{
-      width: "90vw",
-    },
-  },
-  errMsg: {
-    fontSize: "24px",
-    color: "red",
-  },
-});
+}));
 
 export default useStyles;

@@ -14,6 +14,7 @@ import Tab from "@material-ui/core/Tab";
 import AddPartnerModal from "./AdminPartners/AddPartnerModal/AddPartnerModal";
 import AdminPartners from "./AdminPartners/AdminPartners";
 import useStyles from "./useStyles";
+import AdminCategories from "./AdminCategories/AdminCategories";
 // import AdminProducts from "./AdminProducts/AdminProducts";
 // import AdminOrders from "./AdminOrders/AdminOrders";
 // import AdminContent from "./AdminContent/AdminContent";
@@ -108,7 +109,7 @@ function a11yProps(index) {
             hidden={value !== 0}
             aria-labelledby={`simple-tab-${0}`}
           >
-            {value === 0 && <Typography component="span"> Categories </Typography>}
+            {value === 0 && <AdminCategories />}
           </Box>
           <Box
             className={classes.contentBox}
