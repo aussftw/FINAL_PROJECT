@@ -81,7 +81,7 @@ const AdminProducts = () => {
       searchable: false,
       type: "string",
       render: rowData => (
-        <Typography noWrap style={{ width: "200px", fontSize: "0.875rem"}}>
+        <Typography noWrap style={{ width: "200px", fontSize: "0.875rem" }}>
           {rowData.description}
         </Typography>
       ),
