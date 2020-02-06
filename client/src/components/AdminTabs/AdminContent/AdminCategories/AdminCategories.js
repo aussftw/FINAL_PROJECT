@@ -3,6 +3,7 @@ import axios from "axios";
 import { Box } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import MaterialTable from "material-table";
+import Typography from "@material-ui/core/Typography";
 
 
 const AdminCategories = () => {
@@ -30,6 +31,17 @@ const AdminCategories = () => {
     // },
     { title: "Name", field: "name" },
     { title: "Description", field: "description" },
+    // {
+    //   title: "Description",
+    //   field: "description",
+    //   searchable: false,
+    //   type: "string",
+    //   render: rowData => (
+    //     <Typography noWrap style={{ width: "200px", fontSize: "0.875rem"}}>
+    //       {rowData.description}
+    //     </Typography>
+    //   ),
+    // },
 
   ];
 

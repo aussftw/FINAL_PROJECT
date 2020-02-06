@@ -18,6 +18,8 @@ import Typography from "@material-ui/core/Typography";
 // import FormControlLabel from "@material-ui/core/FormControlLabel";
 import CloseIcon from "@material-ui/icons/Close";
 import useStyles from "./useStyles";
+import Upload from "../../../../common/Upload/Upload";
+import FormControl from "@material-ui/core/FormControl";
 
 
          //   <Fade in={open}>
@@ -220,6 +222,11 @@ const AddPartnerModal = ({ open, handleModal, partner}) => {
                    "this field is required",
                  ]}
            />
+
+           <Box style={{marginBottom: '15px', width: "360px"}}>
+             <Upload imageUrls={[partnerInfo.imageUrl]} />
+           </Box>
+
            <Button variant="contained" type="submit">
                  Create Partner
            </Button>
