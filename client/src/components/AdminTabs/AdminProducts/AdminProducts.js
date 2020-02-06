@@ -5,13 +5,13 @@ import * as axios from "axios";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
+import AddIcon from '@material-ui/icons/Add';
+import EditIcon from '@material-ui/icons/Edit';
 
-import useStyles from "./useStyles";
 import PreloaderAdaptive from "../../Preloader/Adaptive";
 import ProductModal from "./ProductModal/ProductModal";
 
 const AdminProducts = () => {
-  const classes = useStyles();
   const [getStarted, setGetStarted] = useState(false);
   const [allProducts, setAllProducts] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -81,7 +81,7 @@ const AdminProducts = () => {
       searchable: false,
       type: "string",
       render: rowData => (
-        <Typography noWrap style={{ width: "200px", fontSize: "0.875rem" }}>
+        <Typography noWrap style={{ width: "200px", fontSize: "0.875rem"}}>
           {rowData.description}
         </Typography>
       ),
@@ -181,7 +181,7 @@ const AdminProducts = () => {
               data={allProducts}
               actions={[
                 {
-                  icon: "add",
+                  icon: ()=><AddIcon />,
                   tooltip: "Add new product",
                   isFreeAction: true,
                   onClick: () => {
@@ -189,7 +189,7 @@ const AdminProducts = () => {
                   },
                 },
                 {
-                  icon: "edit",
+                  icon: ()=><EditIcon />,
                   tooltip: "Edit product",
                   onClick: (event, rowData) => {
                     openModalHandler(rowData);
