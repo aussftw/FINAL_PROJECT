@@ -7,6 +7,8 @@ import Tab from "@material-ui/core/Tab";
 import Box from "@material-ui/core/Box";
 
 import AdminProducts from "./AdminProducts/AdminProducts";
+import AdminOrders from "./AdminOrders/AdminOrders";
+import AdminContent from "./AdminContent/AdminContent";
 import useStyles from "./useStyles";
 
 
@@ -66,7 +68,7 @@ const AdminTabs = () => {
           hidden={value !== 0}
           aria-labelledby={`simple-tab-${0}`}
         >
-          {value === 0 && <Typography component="span"> Orders </Typography>}
+          {value === 0 && <AdminOrders />}
         </Box>
         <Box
           className={classes.contentBox}
@@ -102,7 +104,7 @@ const AdminTabs = () => {
           hidden={value !== 4}
           aria-labelledby={`simple-tab-${4}`}
         >
-          {value === 4 && <Typography component="span"> Content </Typography>}
+          {value === 4 && <AdminContent />}
         </Box>
       </Box>
     </Container>
