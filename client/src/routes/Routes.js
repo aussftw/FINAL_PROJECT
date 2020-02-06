@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
-import { connect } from "react-redux";
+import React, {useEffect} from "react";
+import {Switch, Route, Redirect} from "react-router-dom";
+import {connect} from "react-redux";
 import jwt from "jwt-decode";
 
 import HomePage from "../pages/HomePage/HomePage";
@@ -67,7 +67,7 @@ const Routes = ({
   // eslint-disable-next-line no-nested-ternary
   return preloader ? (
     <Preloader />
-  ) : isAuthenticated ? (
+  ) : ( isAuthenticated ? (
     <Switch>
       <Route exact path="/">
         <HomePage />
@@ -102,11 +102,14 @@ const Routes = ({
       <Route path="/orders/:orderNo">
         <OrderDetailsPage />
       </Route>
-      {isAdmin && (
-      <Route path="/admin">
-        <AdminPage />
+      <Route path={isAdmin ? "/admin" : "/"}>
+        {isAdmin && <AdminPage />}
       </Route>
-      )}
+      {/* { isAdmin &&  ( */}
+      {/*  <Route path="/admin"> */}
+      {/*    <AdminPage /> */}
+      {/*  </Route> */}
+      {/* )} */}
       <Redirect to="/" />
     </Switch>
   ) : (
@@ -149,7 +152,8 @@ const Routes = ({
       </Route>
       <Redirect to="/" />
     </Switch>
-  );
+    )
+  )
 };
 
 function mapStateToProps(state) {
