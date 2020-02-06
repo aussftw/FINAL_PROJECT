@@ -29,6 +29,7 @@ const useStyles = makeStyles(theme => ({
       borderBottom: `1px solid ${theme.palette.primary.main}`,
       transition: "0.5s"
     },
+    
     "&:hover": {
       "&:after": {
         width: "100%",
