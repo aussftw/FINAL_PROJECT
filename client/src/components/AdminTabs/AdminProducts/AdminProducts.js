@@ -5,12 +5,10 @@ import * as axios from "axios";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
-import Modal from "@material-ui/core/Modal";
-import Fade from "@material-ui/core/Fade";
-import Backdrop from "@material-ui/core/Backdrop";
 
 import useStyles from "./useStyles";
 import PreloaderAdaptive from "../../Preloader/Adaptive";
+import ProductModal from "./ProductModal/ProductModal";
 
 const AdminProducts = () => {
   const classes = useStyles();
@@ -20,10 +18,16 @@ const AdminProducts = () => {
   const [colors, setColors] = useState([]);
   const [sizes, setSizes] = useState([]);
   const [allLoaded, setAllLoaded] = useState(false);
-  const [modalOpen, setModalOpen] = useState(false);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [oneProductData, setOneProductData] = useState(null);
 
-  const modalHandler = () => {
-    setModalOpen(!modalOpen);
+  const openModalHandler = data => {
+    setModalIsOpen(true);
+    setOneProductData(data);
+  };
+
+  const closeModalHandler = () => {
+    setModalIsOpen(false);
   };
 
   const columns = [
@@ -44,8 +48,8 @@ const AdminProducts = () => {
       title: "Price",
       field: "currentPrice",
       type: "numeric",
-      cellStyle: { padding: "16px 0 16px" },
-      headerStyle: { padding: "16px 0 16px" },
+      cellStyle: { padding: "16px 16px 16px 0" },
+      headerStyle: { padding: "16px 16px 16px 0" },
     },
     {
       title: "Qty",
@@ -70,13 +74,14 @@ const AdminProducts = () => {
       headerStyle: { padding: "16px 16px 16px 0" },
     },
     { title: "Date", field: "date", type: "date" },
-    { title: "Product url", field: "productUrl", type: "string" },
+    { title: "URL", field: "productUrl", type: "string" },
     {
       title: "Description",
       field: "description",
+      searchable: false,
       type: "string",
       render: rowData => (
-        <Typography noWrap style={{ width: "200px" }}>
+        <Typography noWrap style={{ width: "200px", fontSize: "0.875rem" }}>
           {rowData.description}
         </Typography>
       ),
@@ -159,7 +164,11 @@ const AdminProducts = () => {
 
   return (
     <Box>
-      <Button variant="contained" onClick={getAllHandler}>
+      <Button
+        variant="contained"
+        onClick={getAllHandler}
+        style={{ marginBottom: "30px" }}
+      >
         Get all products and parameters
       </Button>
       {getStarted && (
@@ -172,44 +181,36 @@ const AdminProducts = () => {
               data={allProducts}
               actions={[
                 {
-                  icon: "edit",
-                  tooltip: "Edit",
-                  onClick: (event, rowData) => {
-                    // Do save operation
+                  icon: "add",
+                  tooltip: "Add new product",
+                  isFreeAction: true,
+                  onClick: () => {
+                    openModalHandler(null);
                   },
                 },
                 {
-                  icon: "delete",
-                  tooltip: "Delete product",
+                  icon: "edit",
+                  tooltip: "Edit product",
                   onClick: (event, rowData) => {
-                    modalHandler();
+                    openModalHandler(rowData);
                   },
                 },
               ]}
               title="Products"
             />
           )}
-          <Modal
-            className={classes.modal}
-            open={modalOpen}
-            onClose={modalHandler}
-            closeAfterTransition
-            BackdropComponent={Backdrop}
-            BackdropProps={{
-              timeout: 500,
-            }}
-          >
-            <Fade in={modalOpen}>
-              <div className={classes.paper}>
-                <h2 id="transition-modal-title">Transition modal</h2>
-                <p id="transition-modal-description">
-                  react-transition-group animates me.
-                </p>
-              </div>
-            </Fade>
-          </Modal>
         </>
       )}
+      <ProductModal
+        data={oneProductData}
+        isOpen={modalIsOpen}
+        onClose={() => {
+          closeModalHandler();
+        }}
+        categories={categories}
+        colors={colors}
+        sizes={sizes}
+      />
     </Box>
   );
 };
