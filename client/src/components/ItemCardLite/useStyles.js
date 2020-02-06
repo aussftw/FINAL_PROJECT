@@ -65,6 +65,22 @@ const useStyles = makeStyles(theme => ({
     fontWeight: 700,
     color: theme.palette.secondary.medium,
   },
+  addToCart: {
+    width: 70,
+    // cursor: pointer,
+    "&:hover $mediaIcon": {
+      transform: "scale(1.1)",
+    },
+  },
+  mediaIcon: {
+    transform: "scale(0.95)",
+    transition: "transform 0.15s ease-out",
+    cursor: "pointer",
+      marginTop: 20,
+      "&:hover": {
+          color: theme.palette.primary.main,
+      },
+  },
   snackbar: {
     position: "relative",
     backgroundColor: theme.palette.primary.main,

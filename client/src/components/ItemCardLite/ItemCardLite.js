@@ -11,6 +11,8 @@ import CardContent from "@material-ui/core/CardContent";
 import Snackbar from "@material-ui/core/Snackbar";
 import SnackbarContent from "@material-ui/core/SnackbarContent";
 import Typography from "@material-ui/core/Typography";
+import Icon from '@material-ui/core/Icon';
+import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 
 import CheckCircleRoundedIcon from "@material-ui/icons/CheckCircleRounded";
 
@@ -62,23 +64,24 @@ const ItemCardLite = ({
             <Typography className={classes.title} noWrap align="center">
               {title}
             </Typography>
-
-            <Typography className={classes.price} align="center">
-              $
-              {price.toFixed(2)}
-            </Typography>
           </CardContent>
         </CardActionArea>
       </Link>
+        <Box display="flex" justifyContent="center" alignItems="center" className={classes.addToCart}>
       {stock === 0 ? (
         <Typography className={classes.outOfStock} align="center">
           out of stock
         </Typography>
       ) : (
-        <Button variant="text" fullWidth onClick={addItemToCart}>
-          + add to cart
-        </Button>
+          <Box display="flex" flexWrap="wrap" justifyContent="center">
+          <Typography className={classes.price} align="center">
+              $
+              {price.toFixed(2)}
+          </Typography>
+              <AddShoppingCartIcon fontSize="large"  className={classes.mediaIcon} onClick={addItemToCart}/>
+              </Box>
       )}
+        </Box>
       <Snackbar
         anchorOrigin={{
           vertical: "top",
