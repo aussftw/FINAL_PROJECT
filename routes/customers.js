@@ -8,8 +8,15 @@ const {
   loginCustomer,
   getCustomer,
   editCustomerInfo,
-  updatePassword
+  updatePassword,
+  getCustomers
 } = require("../controllers/customers");
+
+// @route   POST /customers
+// @desc    Register customer
+// @access  Public
+router.get("/", getCustomers);
+
 
 // @route   POST /customers
 // @desc    Register customer
