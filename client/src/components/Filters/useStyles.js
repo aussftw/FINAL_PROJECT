@@ -15,6 +15,7 @@ export const useStyles = makeStyles(theme => ({
     },
     [theme.breakpoints.down("sm")]: {
       gridTemplateColumns: "repeat(2, 1fr)",
+      marginTop: 35,
     },
     [theme.breakpoints.down("xs")]: {
       gridTemplateColumns: "repeat(1, 1fr)",
@@ -34,10 +35,11 @@ export const useStyles = makeStyles(theme => ({
     marginTop: 85,
     [theme.breakpoints.down("sm")]: {
       width: "100%",
-    },
-    [theme.breakpoints.down("sm")]: {
       marginTop: 0,
     },
+    // [theme.breakpoints.down("sm")]: {
+    //     //   marginTop: 0,
+    //     // },
   },
   modal: {
     display: "flex",
@@ -46,6 +48,7 @@ export const useStyles = makeStyles(theme => ({
   paper: {
     backgroundColor: theme.palette.primary.light,
     width: "25%",
+    minWidth: 146,
     padding: "0px 20px 24px",
     overflowX: "auto",
   },
@@ -56,9 +59,9 @@ export const useStyles = makeStyles(theme => ({
     },
     [theme.breakpoints.down("sm")]: {
       display: "block",
-      padding: "13px 45px",
-      fontSize: "16px",
-      borderRadius: "10px",
+      // padding: "13px 45px",
+      // fontSize: "16px",
+      // borderRadius: "10px",
       border: "none",
       outline: "none",
       color: "white",

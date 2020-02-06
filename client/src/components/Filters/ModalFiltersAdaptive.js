@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
+import Button from "@material-ui/core/Button";
 
 import FilterByCategory from "./FilterByCategory";
 import FilterByColor from "./FilterByColor";
@@ -24,9 +25,9 @@ const ModalFiltersAdaptive = () => {
 
   return (
     <>
-      <button className={classes.btn} type="button" onClick={handleOpen}>
+      <Button className={classes.btn} variant="contained" onClick={handleOpen}>
         Filters
-      </button>
+      </Button>
 
       <Modal
         aria-labelledby="transition-modal-title"

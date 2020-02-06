@@ -1,7 +1,6 @@
 import { makeStyles } from "@material-ui/core/styles";
 
 export const useStyles = makeStyles(theme => ({
-  
   first: {
     marginTop: 20,
     padding: "110px 0",
@@ -71,6 +70,7 @@ export const useStyles = makeStyles(theme => ({
     lineHeight: "29px",
     marginBottom: 40,
     color: "rgba(0,0,0,0.5)",
+    textAlign: "justify",
   },
 
   imgBlock: {
@@ -102,7 +102,7 @@ export const useStyles = makeStyles(theme => ({
     fontSize: 17,
     lineHeight: "29px",
     width: 550,
-    display: "inline-block",
+    // display: "inline-block",
   },
 
   expert: {

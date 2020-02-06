@@ -26,8 +26,8 @@ const Information = () => {
             <Typography className={classes.containerTittle}>INFORMATION</Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
-            <Link href="/contactus" color="secondary">
-              Contact us
+            <Link href="/aboutus" color="secondary">
+              About us
             </Link>
           </ExpansionPanelDetails>
           <ExpansionPanelDetails>
@@ -48,8 +48,8 @@ const Information = () => {
             INFORMATION
           </Typography>
           <Box className={classes.myAccountItem}>
-            <Link color="secondary" href="/contactus">
-              Contact us
+            <Link color="secondary" href="/aboutus">
+              About us
             </Link>
           </Box>
           <Box className={classes.myAccountItem}>

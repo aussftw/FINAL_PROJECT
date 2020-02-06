@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
 import Box from "@material-ui/core/Box";
-import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardMedia from "@material-ui/core/CardMedia";
@@ -11,6 +10,7 @@ import CardContent from "@material-ui/core/CardContent";
 import Snackbar from "@material-ui/core/Snackbar";
 import SnackbarContent from "@material-ui/core/SnackbarContent";
 import Typography from "@material-ui/core/Typography";
+import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 
 import CheckCircleRoundedIcon from "@material-ui/icons/CheckCircleRounded";
 
@@ -44,7 +44,6 @@ const ItemCardLite = ({
 
   return (
     <Card className={classes.card}>
-
       <Link className={classes.link} to={`/products/${itemNo}`}>
         <CardActionArea
           classes={{
@@ -62,23 +61,32 @@ const ItemCardLite = ({
             <Typography className={classes.title} noWrap align="center">
               {title}
             </Typography>
-
-            <Typography className={classes.price} align="center">
-              $
-              {price.toFixed(2)}
-            </Typography>
           </CardContent>
         </CardActionArea>
       </Link>
-      {stock === 0 ? (
-        <Typography className={classes.outOfStock} align="center">
-          out of stock
-        </Typography>
-      ) : (
-        <Button variant="text" fullWidth onClick={addItemToCart}>
-          + add to cart
-        </Button>
-      )}
+      <Box
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        className={classes.addToCart}
+      >
+        {stock === 0 ? (
+          <Typography className={classes.outOfStock} align="center">
+            out of stock
+          </Typography>
+        ) : (
+          <Box display="flex" flexWrap="wrap" justifyContent="center">
+            <Typography className={classes.price} align="center">
+              ${price.toFixed(2)}
+            </Typography>
+            <AddShoppingCartIcon
+              fontSize="large"
+              className={classes.mediaIcon}
+              onClick={addItemToCart}
+            />
+          </Box>
+        )}
+      </Box>
       <Snackbar
         anchorOrigin={{
           vertical: "top",
@@ -91,16 +99,16 @@ const ItemCardLite = ({
         <SnackbarContent
           className={classes.snackbar}
           role="alert"
-          message={(
+          message={
             <Box>
               <CheckCircleRoundedIcon />
               <span className={classes.snackbarMessage}>
                 Added to your shopping cart!
               </span>
             </Box>
-          )}
+          }
         />
-      </Snackbar>
+        </Snackbar>
     </Card>
   );
 };
@@ -112,5 +120,5 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps, {
-  addCartItem: addItemCart
+  addCartItem: addItemCart,
 })(ItemCardLite);
