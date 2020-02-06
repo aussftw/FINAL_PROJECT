@@ -1,43 +1,34 @@
 import React from "react";
-import { withStyles, makeStyles } from "@material-ui/core/styles";
 import Slider from "@material-ui/core/Slider";
+import Typography from "@material-ui/core/Typography";
+import { withStyles, makeStyles } from "@material-ui/core/styles";
+import { connect } from "react-redux";
 import theme from "../../../theme";
 
-import {
-  selectPrice,
-  setCurrentPage 
-} from "../../../store/actions/Filters";
-import { connect } from "react-redux";
+import { selectPrice, setCurrentPage } from "../../../store/actions/Filters";
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   rootMain: {
     width: "100%",
     maxWidth: 300,
     paddingTop: 8,
     backgroundColor: theme.palette.background.paper,
-    boxShadow: "0 0 5px",
+    boxShadow:
+      "0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.2), 0px 1px 3px 0px rgba(0,0,0,0.2)",
     borderRadius: 10,
     paddingBottom: 0,
   },
   margin: {
     height: theme.spacing(3),
   },
-  container: {},
   title: {
     margin: "5px 20px",
     fontSize: 20,
-  },
-  line: {
-    margin: "10px 20px",
-    position: "relative",
-    width: "80%",
-    height: 5,
-    backgroundColor: "grey",
-    borderRadius: 10,
+    textTransform: "none",
   },
   subLine: {
-    position: "absolute",
-    width: "80%",
+    margin: "10px 20px",
+    width: "60%",
     height: 5,
     backgroundColor: theme.palette.primary.main,
     borderRadius: 10,
@@ -76,33 +67,34 @@ const PrettoSlider = withStyles({
   },
 })(Slider);
 
-const FilterByPrice = ({selectPrice,setCurrentPage }) => {
+const FilterByPrice = ({ selectPrice, setCurrentPage }) => {
   const classes = useStyles();
 
   // eslint-disable-next-line no-unused-vars
   const ValueByPrice = (event, item) => {
-    setCurrentPage(1)
+    setCurrentPage(1);
     selectPrice(item);
   };
-  
+
   return (
-    <div className={classes.container}>
-      <div className={classes.rootMain}>
-        <h4 className={classes.title}>Filter By Price</h4>
-        <div className={classes.line}>
-          <div className={classes.subLine} />
-        </div>
-        <PrettoSlider
-          onChangeCommitted={ValueByPrice}
-          valueLabelDisplay="auto"
-          aria-label="pretto slider"
-          defaultValue={50}
-          max={120}
-        />
-      </div>
+    <div className={classes.rootMain}>
+       <Typography
+          className={classes.title}
+          variant="h3"
+        >
+          Price
+        </Typography>
+      <div className={classes.subLine} />
+      <PrettoSlider
+        onChangeCommitted={ValueByPrice}
+        valueLabelDisplay="auto"
+        aria-label="pretto slider"
+        defaultValue={50}
+        max={120}
+      />
     </div>
   );
-  };
+};
 
 function mapStateToProps(state) {
   return {
@@ -113,11 +105,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     selectPrice: price => dispatch(selectPrice(price)),
-     setCurrentPage: currentPage => dispatch(setCurrentPage(currentPage)),
+    setCurrentPage: currentPage => dispatch(setCurrentPage(currentPage)),
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(FilterByPrice)
-
-
-
+export default connect(mapStateToProps, mapDispatchToProps)(FilterByPrice);

@@ -4,6 +4,7 @@ import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 
 import useStyles from "./useStyles";
 
@@ -37,6 +38,7 @@ function TabPanel(props) {
 }
 
 const Profile = ({
+                   isAdmin,
   getUserData,
   getWishlistData,
   logOff,
@@ -94,10 +96,17 @@ const Profile = ({
           id="vertical-tab-4"
           aria-controls="vertical-tabpanel-4"
         />
+        {isAdmin && (
+          <Tab
+            label="Admin panel"
+            id="vertical-tab-5"
+            aria-controls="vertical-tabpanel-5"
+          />
+        )}
         <Tab
           label="Log Out"
-          id="vertical-tab-5"
-          aria-controls="vertical-tabpanel-5"
+          id="vertical-tab-6"
+          aria-controls="vertical-tabpanel-6"
           onClick={() => profileLogOut()}
         />
       </Tabs>
@@ -117,11 +126,20 @@ const Profile = ({
       <TabPanel value={value} index={4}>
         <ChangePasswordForm />
       </TabPanel>
+      <TabPanel value={value} index={5}>
+        <Redirect to="/admin" />
+      </TabPanel>
     </div>
   );
 };
 
-export default connect(null, {
+function mapStateToProps(state) {
+  return {
+    isAdmin: state.loginReducer.user.isAdmin,
+  };
+}
+
+export default connect(mapStateToProps, {
   getUserData: getUser,
   getWishlistData: getWishlist,
   logOff: logOut,

@@ -26,9 +26,11 @@ import { getWishlist } from "../store/actions/wishlist";
 import SearchPage from "../pages/SearchPage/SearchPage";
 // const Shop = React.lazy(() => import('../pages/Shop/Shop')); // Lazy-loaded
 import Shop from "../pages/Shop/Shop";
+import Contact from "../pages/Contact/Contact";
 
 const Routes = ({
   isAuthenticated,
+                  isAdmin,
   getUserData,
   getWishlistData,
   preloaderClosing,
@@ -79,6 +81,9 @@ const Routes = ({
       <Route path="/shop">
         <Shop />
       </Route>
+      <Route path="/aboutus">
+        <Contact />
+      </Route>
       <Route path="/notfound">
         <NotFound />
       </Route>
@@ -97,9 +102,11 @@ const Routes = ({
       <Route path="/orders/:orderNo">
         <OrderDetailsPage />
       </Route>
+      {isAdmin && (
       <Route path="/admin">
         <AdminPage />
       </Route>
+      )}
       <Redirect to="/" />
     </Switch>
   ) : (
@@ -118,6 +125,9 @@ const Routes = ({
         {/* <Shop /> */}
         {/* </Suspense> */}
         <Shop />
+      </Route>
+      <Route path="/aboutus">
+        <Contact />
       </Route>
       {/* <Route path="/about-us"> */}
 
@@ -145,7 +155,7 @@ const Routes = ({
 function mapStateToProps(state) {
   return {
     isAuthenticated: state.loginReducer.isAuthenticated,
-    user: state.loginReducer.user,
+    isAdmin: state.loginReducer.user.isAdmin,
     preloader: state.loginReducer.loginPreloader,
   };
 }

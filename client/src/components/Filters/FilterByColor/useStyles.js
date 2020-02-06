@@ -7,25 +7,16 @@ export const useStyles = makeStyles(() => ({
     maxWidth: 300,
     marginBottom: 40,
     backgroundColor: theme.palette.background.paper,
-    boxShadow: "0 0 5px",
+    boxShadow:
+      "0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.2), 0px 1px 3px 0px rgba(0,0,0,0.2)",
     borderRadius: 10,
     paddingBottom: 0,
-    [theme.breakpoints.down("md")]:{
+    [theme.breakpoints.down("md")]: {
       marginBottom: 20,
-    }
-  },
-  line: {
-    margin: "10px 20px",
-    position: "relative",
-    width: "80%",
-    height: 5,
-    backgroundColor: "grey",
-    borderRadius: 10,
+    },
   },
   subLine: {
-    position: "absolute",
-    top: 50,
-    left: 20,
+    margin: "10px 20px",
     width: "60%",
     height: 5,
     backgroundColor: theme.palette.primary.main,
@@ -34,8 +25,14 @@ export const useStyles = makeStyles(() => ({
   title: {
     margin: "5px 20px",
     fontSize: 20,
+    textTransform: "none",
   },
   label: {
     width: "100%",
+  },
+  text: {
+    "& > span": {
+      fontSize: "0.95em !important",
+    },
   },
 }));

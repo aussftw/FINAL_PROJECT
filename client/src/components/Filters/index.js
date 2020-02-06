@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 
 import Container from "@material-ui/core/Container";
-import { useStyles } from "./useStyles";
+import Typography from "@material-ui/core/Typography";
 
+import { connect } from "react-redux";
 import FilterByCategory from "./FilterByCategory";
 import FilterByColor from "./FilterByColor";
 import FilterBySize from "./FilterBySize";
@@ -12,7 +13,7 @@ import ModalFiltersAdaptive from "./ModalFiltersAdaptive";
 import ItemCard from "../ItemCard/ItemCard";
 
 import { getProducts, setCurrentPage } from "../../store/actions/Filters";
-import { connect } from "react-redux";
+import { useStyles } from "./useStyles";
 
 const Products = ({
   productListing,
@@ -51,32 +52,52 @@ const Products = ({
   // Get current products
   const indexLastProducts = currentPage * productsPerPage;
   const indexOfFirstProducts = indexLastProducts - productsPerPage;
-  const currentProduct = listProduct.slice(indexOfFirstProducts, indexLastProducts);
+  const currentProduct = listProduct.slice(
+    indexOfFirstProducts,
+    indexLastProducts
+  );
 
   // Change page
   const paginate = pageNumber => setCurrentPage(pageNumber);
 
   return (
     <>
-    <Container className={classes.main}>
-      <div className={classes.allFilters}>
-        <FilterByCategory />
-        <FilterByColor />
-        <FilterBySize />
-        <FilterByPrice />
-      </div>
-      <div className={classes.items}>
-        <div style={{textAlign: "center"}}>
-         <ModalFiltersAdaptive />
-          {currentProduct}
+      <Container className={classes.main}>
+        <Typography
+          variant="h3"
+          style={{ cursor: "default", position: "absolute", top: 150}}
+        >
+          Shop
+        </Typography>
+        <div className={classes.allFilters}>
+          <FilterByCategory />
+          <FilterByColor />
+          <FilterBySize />
+          <FilterByPrice />
         </div>
-       <Pagination
-          productsPerPage={productsPerPage}
-          totalProducts={productListing.length}
-          paginate={paginate}
-        />
-      </div>
-    </Container>
+        <div className={classes.items}>
+          {listProduct.length === 0 ? (
+            <div className={classes.cardSkeleton}>
+              <ItemCard />
+              <ItemCard />
+              <ItemCard />
+              <ItemCard />
+              <ItemCard />
+              <ItemCard />
+            </div>
+          ) : (
+            <>
+              <ModalFiltersAdaptive />
+              <div className={classes.itemCard}>{currentProduct}</div>
+              <Pagination
+                productsPerPage={productsPerPage}
+                totalProducts={productListing.length}
+                paginate={paginate}
+              />
+            </>
+          )}
+        </div>
+      </Container>
     </>
   );
 };
