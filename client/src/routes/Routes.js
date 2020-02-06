@@ -64,95 +64,42 @@ const Routes = ({
     LogOutUser,
   ]);
 
-  // eslint-disable-next-line no-nested-ternary
+  const ProfileRoute = ({ component: Component, ...rest }) => (
+    <Route
+      {...rest}
+      render={(props) => (
+        isAuthenticated ? <Component {...props} /> : (<Redirect to="/" />)
+      )}
+    />
+  );
+
+  const AdminRoute = ({ component: Component, ...rest }) => (
+    <Route
+      {...rest}
+      render={(props) => (
+      isAdmin ? <Component {...props} /> : (<Redirect to="/" />)
+      )}
+    />
+  );
+  
   return preloader ? (
-    <Preloader />
-  ) : ( isAuthenticated ? (
-    <Switch>
-      <Route exact path="/">
-        <HomePage />
-      </Route>
-      <Route path="/cart">
-        <CartPage />
-      </Route>
-      <Route path="/search">
-        <SearchPage />
-      </Route>
-      <Route path="/shop">
-        <Shop />
-      </Route>
-      <Route path="/about-us">
-        <Contact />
-      </Route>
-      <Route path="/notfound">
-        <NotFound />
-      </Route>
-      <Route path="/profile">
-        <ProfilePage />
-      </Route>
-      <Route path="/products/:id">
-        <ItemDetailsPage />
-      </Route>
-      <Route path="/registration">
-        <RegistrationPage />
-      </Route>
-      <Route path="/checkout">
-        <CheckoutPage />
-      </Route>
-      <Route path="/orders/:orderNo">
-        <OrderDetailsPage />
-      </Route>
-      <Route path={isAdmin ? "/admin" : "/"}>
-        {isAdmin && <AdminPage />}
-      </Route>
-      {/* { isAdmin &&  ( */}
-      {/*  <Route path="/admin"> */}
-      {/*    <AdminPage /> */}
-      {/*  </Route> */}
-      {/* )} */}
-      <Redirect to="/" />
-    </Switch>
+    <Preloader /> 
   ) : (
     <Switch>
-      <Route exact path="/">
-        <HomePage />
-      </Route>
-      <Route path="/cart">
-        <CartPage />
-      </Route>
-      <Route path="/search">
-        <SearchPage />
-      </Route>
-      <Route path="/shop">
-        {/* <Suspense fallback={<Preloader />}> */}
-        {/* <Shop /> */}
-        {/* </Suspense> */}
-        <Shop />
-      </Route>
-      <Route path="/about-us">
-        <Contact />
-      </Route>
-      {/* <Route path="/about-us"> */}
-
-      {/* </Route> */}
-      <Route path="/notfound">
-        <NotFound />
-      </Route>
-      <Route path="/registration">
-        <RegistrationPage />
-      </Route>
-      <Route path="/products/:id">
-        <ItemDetailsPage />
-      </Route>
-      <Route path="/checkout">
-        <CheckoutPage />
-      </Route>
-      <Route path="/orders/:orderNo">
-        <OrderDetailsPage />
-      </Route>
+      <Route exact path="/" component={HomePage} />
+      <Route path="/cart" component={CartPage} />
+      <Route path="/search" component={SearchPage} />
+      <Route path="/shop" component={Shop} />
+      <Route path="/about-us" component={Contact} />
+      <Route path="/notfound" component={NotFound} />
+      <ProfileRoute path="/profile" component={ProfilePage} />
+      <Route path="/products/:id" component={ItemDetailsPage} />
+      <Route path="/registration" component={RegistrationPage} />
+      <Route path="/checkout" component={CheckoutPage} />
+      <Route path="/orders/:orderNo" component={OrderDetailsPage} />
+      <AdminRoute path="/admin" component={AdminPage} />
       <Redirect to="/" />
     </Switch>
-    )
   )
 };
 

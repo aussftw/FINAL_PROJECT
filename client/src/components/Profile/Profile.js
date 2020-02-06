@@ -87,7 +87,7 @@ const Profile = ({
           onClick={() => getUserData()}
         />
         <Tab
-          label="AdminOrders History"
+          label="Orders History"
           id="vertical-tab-3"
           aria-controls="vertical-tabpanel-3"
         />
