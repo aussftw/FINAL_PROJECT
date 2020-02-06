@@ -1,12 +1,28 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
+    wrapper: {
+      display: "flex",
+      justifyContent: "center",
+    },
     table: {
       listStyle: "none",
       display: "flex",
-      width: "15%",
+      justifyContent: "center",
+      // width: "15%",
+      padding: 0,
       margin: "20px 30%",
+      [theme.breakpoints.down("sm")]: {
+        width: "20%",
+        display: "grid",
+        "grid-template-columns": "1fr 1fr 1fr 1fr 1fr 1fr",
+      },
+      [theme.breakpoints.down("xs")]: {
+        width: "20%",
+        display: "grid",
+        "grid-template-columns": "1fr 1fr 1fr 1fr 1fr",
+      },
     },
     tableItem: {
       margin: "5px",
@@ -29,14 +45,14 @@ const useStyles = makeStyles(() => ({
 
 const Pagination = ({ productsPerPage, totalProducts, paginate }) => {
   const classes = useStyles();
-  
+
   const pageNumbers = [];
-  
+
   for (let i = 1; i <= Math.ceil(totalProducts / productsPerPage); i += 1) {
     pageNumbers.push(i);
   }
   return (
-    <nav>
+    <nav className={classes.wrapper}>
       <ul className={classes.table}>
         {pageNumbers.map(number => (
           <li className={classes.tableItem} key={number} onClick={() => paginate(number)}>

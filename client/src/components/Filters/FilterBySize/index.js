@@ -6,8 +6,12 @@ import ListItem from "@material-ui/core/ListItem";
 import { green } from "@material-ui/core/colors";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
+import Typography from "@material-ui/core/Typography";
+
 import { withStyles } from "@material-ui/core/styles";
+import { connect } from "react-redux";
 import { useStyles } from "./useStyles";
+
 
 import {
   getSizes,
@@ -15,7 +19,6 @@ import {
   removeSizes,
   setCurrentPage 
 } from "../../../store/actions/Filters";
-import { connect } from "react-redux";
 
 const GreenCheckbox = withStyles({
   root: {
@@ -82,8 +85,9 @@ const FilterBySize = ({
         className={classes.root}
         aria-label="mailbox folders"
       >
-        <h4 className={classes.title}>Filter By Size</h4>
-        <div className={classes.line} />
+        <Typography className={classes.title} variant="h3">
+          Size
+        </Typography>
         <div className={classes.subLine} />
         {sizeList}
       </List>
