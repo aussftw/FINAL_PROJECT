@@ -73,7 +73,7 @@ const FilterByColor = ({
             <GreenCheckbox onClick={handleColorClick} value={color.name} />
           }
           className={classes.text}
-          label={color.name}
+          label={color.name.charAt(0).toUpperCase() + color.name.slice(1)}
         />
       </ListItem>
     );
@@ -86,10 +86,7 @@ const FilterByColor = ({
         className={classes.root}
         aria-label="mailbox folders"
       >
-         <Typography
-          className={classes.title}
-          variant="h3"
-        >
+        <Typography className={classes.title} variant="h3">
           Color
         </Typography>
         <div className={classes.subLine} />

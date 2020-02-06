@@ -51,8 +51,8 @@ const ProductCarousel = () => {
               items: 4,
             },
           }}
-          buttonsDisabled
-          // dotsDisabled
+          // buttonsDisabled
+          dotsDisabled
           mouseTrackingEnabled
           autoPlay
           autoPlayInterval={1800}

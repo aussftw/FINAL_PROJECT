@@ -72,7 +72,7 @@ const FilterBySize = ({
           control={
             <GreenCheckbox onClick={handleSizeClick} value={size.name} />
           }
-          label={size.name}
+          label={size.name.charAt(0).toUpperCase() + size.name.slice(1)}
         />
       </ListItem>
     );
