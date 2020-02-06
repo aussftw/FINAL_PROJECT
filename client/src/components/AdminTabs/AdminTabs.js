@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
@@ -7,10 +7,10 @@ import Tab from "@material-ui/core/Tab";
 import Box from "@material-ui/core/Box";
 
 import AdminProducts from "./AdminProducts/AdminProducts";
+import AdminCustomers from "./AdminCustomers/AdminCustomers";
 import AdminOrders from "./AdminOrders/AdminOrders";
 import AdminContent from "./AdminContent/AdminContent";
 import useStyles from "./useStyles";
-
 
 function a11yProps(index) {
   return {
@@ -86,7 +86,7 @@ const AdminTabs = () => {
           hidden={value !== 2}
           aria-labelledby={`simple-tab-${2}`}
         >
-          {value === 2 && <Typography component="span"> Customers </Typography>}
+          {value === 2 && <AdminCustomers />}
         </Box>
         <Box
           className={classes.contentBox}

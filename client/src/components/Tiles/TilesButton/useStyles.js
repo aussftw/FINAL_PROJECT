@@ -12,17 +12,13 @@ const useStyles = makeStyles({
     position: "absolute",
     bottom: "10%",
     left: "25%",
-    "&:hover": {
-      transform:"scale(1.2)",
-      color: theme.palette.primary.dark,
-      backgroundColor: theme.palette.primary.light,
-    },
+    transition: "ease-in-out 0.75s",
     [theme.breakpoints.down("xs")]: {
-      fontSize:"8px",
+      fontSize: "8px",
       padding: "0.5em 0 0.5em",
     },
     [theme.breakpoints.down("sm")]: {
-      fontSize:"13px",
+      fontSize: "13px",
       padding: "0.5em 0 0.5em",
     },
   },

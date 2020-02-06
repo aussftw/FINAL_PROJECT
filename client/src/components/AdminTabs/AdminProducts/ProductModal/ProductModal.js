@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import * as axios from "axios";
+// import * as axios from "axios";
 
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop/Backdrop";
@@ -16,7 +16,7 @@ import Button from "@material-ui/core/Button";
 
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
-
+import Upload from "../../../common/Upload/Upload";
 import useStyles from "./useStyles";
 
 const ModalProducts = ({
@@ -37,7 +37,8 @@ const ModalProducts = ({
       color: "",
       sizes: "",
       productUrl: "/",
-      description: ""
+      description: "",
+      imageUrls: [],
   });
 
   const handleChange = prop => event => {
@@ -67,7 +68,8 @@ const ModalProducts = ({
               color: data.color,
               sizes: data.sizes,
               productUrl: data.productUrl,
-              description: data.description
+              description: data.description,
+              imageUrls: data.imageUrls,
           })
       } else {
           setProductValue({
@@ -79,7 +81,8 @@ const ModalProducts = ({
               color: "",
               sizes: "",
               productUrl: "/",
-              description: ""
+              description: "",
+              imageUrls: [],
           })
       }
   }, [data]);
@@ -118,7 +121,7 @@ const ModalProducts = ({
             <CloseIcon />
           </IconButton>
 
-          <FormControl component="div" fullWidth>
+          <FormControl component="div" className={classes.form} fullWidth>
             <TextField
               className={classes.input}
               id="name"
@@ -141,80 +144,85 @@ const ModalProducts = ({
               label="Product Availability"
               labelPlacement="start"
             />
-            <TextField
-              className={classes.inputSmall}
-              id="price"
-              label="Price"
-              size="small"
-              type="number"
-              value={productValue.currentPrice}
-              InputProps={{
+            <Box className={classes.inputSmallBox}>
+              <TextField
+                className={classes.inputSmall}
+                id="price"
+                label="Price"
+                size="small"
+                type="number"
+                value={productValue.currentPrice}
+                InputProps={{
                   startAdornment: <InputAdornment position="start">$</InputAdornment>,
               }}
-              onChange={handleChange("currentPrice")}
-            />
-            <TextField
-              className={classes.inputSmall}
-              id="quantity"
-              label="Quantity"
-              size="small"
-              type="number"
-              value={productValue.quantity}
-              onChange={handleChange("quantity")}
-            />
-            <TextField
-              className={classes.inputSmall}
-              id="category"
-              label="Category"
-              size="small"
-              select
-              value={productValue.categories}
-              onChange={handleChange("categories")}
-            >
-              {categories.map(elem => (
-                <MenuItem key={elem.name} value={elem.name}>
-                  {elem.name}
-                </MenuItem>
+                onChange={handleChange("currentPrice")}
+              />
+              <TextField
+                className={classes.inputSmall}
+                id="quantity"
+                label="Quantity"
+                size="small"
+                type="number"
+                value={productValue.quantity}
+                onChange={handleChange("quantity")}
+              />
+              <TextField
+                className={classes.inputSmall}
+                id="category"
+                label="Category"
+                size="small"
+                select
+                value={productValue.categories}
+                onChange={handleChange("categories")}
+              >
+                {categories.map(elem => (
+                  <MenuItem key={elem.name} value={elem.name}>
+                    {elem.name}
+                  </MenuItem>
                   ))}
-            </TextField>
-            <TextField
-              className={classes.inputSmall}
-              id="color"
-              label="Color"
-              size="small"
-              select
-              value={productValue.color}
-              onChange={handleChange("color")}
-            >
-              {colors.map(elem => (
-                <MenuItem key={elem.name} value={elem.name}>
-                  {elem.name}
-                </MenuItem>
+              </TextField>
+              <TextField
+                className={classes.inputSmall}
+                id="color"
+                label="Color"
+                size="small"
+                select
+                value={productValue.color}
+                onChange={handleChange("color")}
+              >
+                {colors.map(elem => (
+                  <MenuItem key={elem.name} value={elem.name}>
+                    {elem.name}
+                  </MenuItem>
                   ))}
-            </TextField>
-            <TextField
-              className={classes.inputSmall}
-              id="sizes"
-              label="Sizes"
-              size="small"
-              select
-              value={productValue.sizes}
-              onChange={handleChange("sizes")}
-            >
-              {sizes.map(elem => (
-                <MenuItem key={elem.name} value={elem.name}>
-                  {elem.name}
-                </MenuItem>
+              </TextField>
+              <TextField
+                className={classes.inputSmall}
+                id="sizes"
+                label="Sizes"
+                size="small"
+                select
+                value={productValue.sizes}
+                onChange={handleChange("sizes")}
+              >
+                {sizes.map(elem => (
+                  <MenuItem key={elem.name} value={elem.name}>
+                    {elem.name}
+                  </MenuItem>
                   ))}
-            </TextField>
-            <TextField
-              className={classes.input}
-              id="url"
-              label="Product URL"
-              size="small"
-              value={productValue.productUrl}
-              onChange={handleChange("productUrl")}
-            />
+              </TextField>
+              <TextField
+                className={classes.inputSmall}
+                id="url"
+                label="Product URL"
+                size="small"
+                value={productValue.productUrl}
+                onChange={handleChange("productUrl")}
+              />
+            </Box>
+            <Box style={{marginBottom: 24}}>
+              <Upload imageUrls={productValue.imageUrls} />
+            </Box>
             <TextField
               className={classes.input}
               id="description"

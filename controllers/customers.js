@@ -16,8 +16,28 @@ const validateRegistrationForm = require("../validation/validationHelper");
 // Load helper for creating correct query to save customer to DB
 const queryCreator = require("../commonHelpers/queryCreator");
 
+//getCustomers
+exports.getCustomers = (req, res, next) => {  
+  console.log('getCustomers');
+
+  Customer.find({$or:[{}]})
+    .then(customers => {
+      if (customers) {        
+        return res.json(customers);        
+      } 
+      return res.json([]);
+    })
+      .catch(err =>
+
+      res.status(400).json({
+        message: `Error happened on server: "${err}" `
+      })
+    );     
+};
+
+// Create one customer
 // Controller for creating customer and saving to DB
-exports.createCustomer = (req, res, next) => {
+  exports.createCustomer = (req, res, next) => {
   // Clone query object, because validator module mutates req.body, adding other fields to object
   const initialQuery = _.cloneDeep(req.body);
   initialQuery.customerNo = rand();
@@ -78,6 +98,8 @@ exports.createCustomer = (req, res, next) => {
       })
     );
 };
+
+
 
 // Controller for customer login
 exports.loginCustomer = async (req, res, next) => {

@@ -5,8 +5,8 @@ const useStyles = makeStyles(theme => ({
         position: "fixed",
         top: 10,
         left: "calc(50% - 196px)",
-        minHeight: 600,
-        minWidth: 360,
+        minHeight: 500,
+        width: 360,
         padding: theme.spacing(2),
         backgroundColor: "white",
         borderRadius: 4,
@@ -16,16 +16,19 @@ const useStyles = makeStyles(theme => ({
         top: 8,
         right: 8,
     },
-    form: {
-        width: "100%",
-    },
     input: {
         marginBottom: theme.spacing(1),
     },
-    inputSmall: {
-        width: 160,
+    inputSmallBox: {
+        display: "flex",
+        flexWrap: "wrap",
+        justifyContent: "space-between",
         marginBottom: theme.spacing(1),
-    }
+    },
+    inputSmall: {
+        width: 170,
+        marginBottom: theme.spacing(1),
+    },
 }));
 
 export default useStyles;

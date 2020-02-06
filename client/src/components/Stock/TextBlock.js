@@ -21,6 +21,7 @@ const useStyles = makeStyles(() => ({
   },
   link: {
     color: "#6ea820",
+    textDecoration: "none",
   },
 }));
 
@@ -30,18 +31,13 @@ export default function TextBlock() {
   return (
     <div className={classes.paragraph}>
       <p>{text.name}</p>
-      <Typography variant="h3">
-        {text.title}
-      </Typography>
+      <Typography variant="h3">{text.title}</Typography>
       <Box display={{ xs: "none", md: "block" }}>
         <p>{text.desc}</p>
       </Box>
-        <Link
-            className={classes.link}
-            to="/shop"
-        >
-            Shop now &#8594;
-        </Link>
+      <Link className={classes.link} to="/shop">
+        Shop now &#8594;
+      </Link>
     </div>
   );
 }
