@@ -9,6 +9,7 @@ import ScrollOnTop from '../../components/common/ScrollOnTop/ScrollOnTop';
 import Preloader from "../../components/Preloader";
 const SearchResultsPage = React.lazy(() => import("../../components/SearchResultPage"));
 
+
 function SearchPage() {
   return (
     <>
@@ -19,7 +20,6 @@ function SearchPage() {
        <Suspense fallback={<Preloader />}>
        <SearchResultsPage />
        </Suspense>
-
       {/*<SearchResultsPage />*/}
       <Subscribe />
       <Footer />
