@@ -67,7 +67,6 @@ const useStyles = makeStyles(theme => ({
   },
   addToCart: {
     width: 70,
-    // cursor: pointer,
     "&:hover $mediaIcon": {
       transform: "scale(1.1)",
     },
