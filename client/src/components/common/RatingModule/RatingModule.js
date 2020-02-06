@@ -65,7 +65,7 @@ const RatingModule = ({id, rate, isAuthenticated}) => {
             readOnly={voted}
             precision={1}
             emptyIcon={
-              <StarBorder color="primary" style={{ fontSize: 24 }} />
+              <StarBorder color="primary" style={{ fontSize: 24}} />
                     }
             onChange={ratingHandler}
           />
