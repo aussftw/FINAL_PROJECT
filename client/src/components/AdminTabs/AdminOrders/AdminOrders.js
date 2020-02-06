@@ -6,7 +6,7 @@ import { Box } from "@material-ui/core";
 // import AddCircleIcon from '@material-ui/icons/AddCircle';
 // import IconButton from "@material-ui/core/IconButton";
 // import DeleteIcon from '@material-ui/icons/Delete';
-// import MaterialTable from 'material-table'
+import MaterialTable from 'material-table'
 // import AddPartnerModal from "../AdminContent/AddPartnerModal/AddPartnerModal";
 
 
@@ -48,6 +48,7 @@ function AdminOrders() {
   .get("/api/orders")
   .then(orders => {
     setOrdersArr(orders.data)
+    console.log(orders.data);
   })
   .catch(err => {
     console.log('orders', err);
@@ -56,13 +57,14 @@ function AdminOrders() {
 
   const columns = [
     { title: 'Order №', field: 'orderNo'},
+    { title: 'Canceled', field: 'canceled' },
     { title: 'Status', field: 'status'},
     { title: 'Name', field: 'name'},
     { title: 'Mobile', field: 'mobile'},
     { title: 'Email', field: 'email'},
     { title: 'Delivery Address', field: 'deliveryAddress'},
+    // { title: 'Products', field: 'products' },
     { title: 'Total Sum', field: 'totalSum'},
-    { title: 'Url', field: 'url', render: rowData => <a href={rowData.url}>{rowData.url}</a>  }
 
 ];
 
@@ -72,46 +74,46 @@ function AdminOrders() {
       <Button variant="contained" onClick={getOrders}>
         Get orders
       </Button>
-      {/* {ordersArr.length === 0 ? (*/}
-      {/*  <div />*/}
-      {/*):(*/}
-      {/*  <Box>*/}
+      {ordersArr.length === 0 ? (
+        <div />
+      ):(
+        <Box>
 
-      {/*    <MaterialTable*/}
-      {/*      columns={columns}*/}
-      {/*      data={ordersArr}*/}
-      {/*      title="Our partners"*/}
-      {/*      options={{ search: false }}*/}
-      {/*      actions={[*/}
-      {/*        {*/}
-      {/*          icon: () => <AddCircleIcon />,*/}
-      {/*          tooltip: 'Add Partner',*/}
-      {/*          isFreeAction: true,*/}
-      {/*          onClick: ()=>{handleOpenAddModal()}*/}
-      {/*        },*/}
-      {/*        {*/}
-      {/*          icon: () => <DeleteIcon />,*/}
-      {/*          tooltip: 'Delete Partner',*/}
-      {/*          // onClick: {handleOpen}*/}
-      {/*        },*/}
-      {/*        {*/}
-      {/*          icon: () => <EditIcon />,*/}
-      {/*          tooltip: 'Edit Partner',*/}
-      {/*          onClick: (event, rowData) => {*/}
-      {/*            console.log(event);*/}
-      {/*            handleDataEditModal(rowData);*/}
-      {/*            handleOpenEditModal()*/}
-      {/*          }*/}
-      {/*        }*/}
-      {/*      ]}*/}
+          <MaterialTable
+            columns={columns}
+            data={ordersArr}
+            title="All orders"
+            // options={{ search: false }}
+            // actions={[
+            //   {
+            //     icon: () => <AddCircleIcon />,
+            //     tooltip: 'Add Partner',
+            //     isFreeAction: true,
+            //     onClick: ()=>{handleOpenAddModal()}
+            //   },
+            //   {
+            //     icon: () => <DeleteIcon />,
+            //     tooltip: 'Delete Partner',
+            //     // onClick: {handleOpen}
+            //   },
+            //   {
+            //     icon: () => <EditIcon />,
+            //     tooltip: 'Edit Partner',
+            //     onClick: (event, rowData) => {
+            //       console.log(event);
+            //       handleDataEditModal(rowData);
+            //       handleOpenEditModal()
+            //     }
+            //   }
+            // ]}
 
-      {/*    />*/}
+          />
 
-      {/*    <AddPartnerModal open={openAddModal} handleOpen={handleOpenAddModal} partner={{name:"", url:"", customId:"", imageUrl:""}} />*/}
-      {/*    <AddPartnerModal open={openEditModal} handleOpen={handleOpenEditModal} partner={dataEditModal} />*/}
+          {/* <AddPartnerModal open={openAddModal} handleOpen={handleOpenAddModal} partner={{name:"", url:"", customId:"", imageUrl:""}} /> */}
+          {/* <AddPartnerModal open={openEditModal} handleOpen={handleOpenEditModal} partner={dataEditModal} /> */}
 
 
-      {/*  </Box>*/}
+        </Box>
       )}
     </>
   );
