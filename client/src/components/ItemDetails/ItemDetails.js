@@ -25,12 +25,13 @@ import FavoriteBorderSharpIcon from "@material-ui/icons/FavoriteBorderSharp";
 import FavoriteSharpIcon from "@material-ui/icons/FavoriteSharp";
 import AddSharpIcon from "@material-ui/icons/AddSharp";
 import RemoveSharpIcon from "@material-ui/icons/RemoveSharp";
+import Tooltip from "@material-ui/core/Tooltip";
+// import CardContent from "@material-ui/core/CardContent";
 import RatingModule from "../common/RatingModule/RatingModule";
-// import QtyCounter from "../common/QtyCounter";
 import PreloaderAdaptive from "../Preloader/Adaptive";
 import ItemTabs from "../common/ItemTabs/ItemTabs";
 
-import { addItemCart } from "../../store/actions/сart";
+import { addItemCart, changeItemCartQuantityFromItemDetails } from "../../store/actions/сart";
 import {
   wishlistAddItem,
   wishlistDeleteItem,
@@ -43,7 +44,7 @@ const ItemDetails = ({
   addWishlistItem,
   deleteWishlistItem,
   isAuthenticated,
-  addCartItem,
+  addCartItem, updateCart,
 }) => {
   const itemNo = useParams();
   const classes = useStyles();
@@ -54,6 +55,7 @@ const ItemDetails = ({
   });
   const [index, setIndex] = useState(0);
   const [preloader, setPreloader] = useState(true);
+  const [qty, setQty] = useState(1);
   // const [snackbarAddToCart, setSnackbarAddToCart] = useState(false);
 
   useEffect(() => {
@@ -90,7 +92,12 @@ const ItemDetails = ({
   } = item;
 
   const addItemToCart = () => {
-    addCartItem(item._id, item.itemNo);
+    if(qty === 1) {
+      addCartItem(item._id, item.itemNo);
+    } else {
+      updateCart(item._id, qty, item);
+    }
+
   };
 
   const handleAddtemToWishlist = () => {
@@ -98,8 +105,6 @@ const ItemDetails = ({
       addWishlistItem(_id);
     }
   };
-
-  const [qty, setQty] = useState(1);
 
   const inc = () => {
     if (qty < 99) {
@@ -213,17 +218,29 @@ const ItemDetails = ({
             >
               Add to cart
             </Button>
-            <Button
-              className={classes.actionButton}
-              aria-label="Add to wishlist"
-              variant="contained"
-            >
-              {!wishlistAll.every(el => el._id !== _id) ? (
-                <FavoriteSharpIcon onClick={() => deleteWishlistItem(_id)} />
+            {!wishlistAll.every(el => el._id !== _id) ? (
+              <Tooltip arrow title="Remove from wishlist">
+                <Button
+                  className={classes.actionButton}
+                  aria-label="Add to wishlist"
+                  variant="contained"
+                  onClick={() => deleteWishlistItem(_id)}
+                >
+                  <FavoriteSharpIcon />
+                </Button>
+              </Tooltip>
               ) : (
-                <FavoriteBorderSharpIcon onClick={handleAddtemToWishlist} />
-              )}
-            </Button>
+                <Tooltip arrow title={isAuthenticated ? "Add to wishlist" : "Only for authorized users"}>
+                  <Button
+                    className={classes.actionButton}
+                    aria-label="Add to wishlist"
+                    variant="contained"
+                    onClick={handleAddtemToWishlist}
+                  >
+                    <FavoriteBorderSharpIcon />
+                  </Button>
+                </Tooltip>
+            )}
           </Box>
         </Box>
       </Box>
@@ -246,4 +263,5 @@ export default connect(mapStateToProps, {
   addWishlistItem: wishlistAddItem,
   deleteWishlistItem: wishlistDeleteItem,
   addCartItem: addItemCart,
+  updateCart: changeItemCartQuantityFromItemDetails,
 })(ItemDetails);

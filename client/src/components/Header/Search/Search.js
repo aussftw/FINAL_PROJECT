@@ -34,7 +34,7 @@ const CustomizedSearch = ({ searchPhrases, searchPhrasesFailure }) => {
     setText({ ...text, [prop]: event.target.value });
   };
   const onEnter = (event) => {
-   if (event.key === "Enter") {
+   if (event.key === "Enter" && text.query.match(/^[`'"()A-Za-zd.s_-]{3,25}/)) {
      search();
      setEnter(true)
    }
@@ -51,7 +51,7 @@ const CustomizedSearch = ({ searchPhrases, searchPhrasesFailure }) => {
       <ValidatorForm
         noValidate={false}
         onSubmit={search}
-        onKeyPress={event => onEnter(event)}
+        onKeyPress={(event) => onEnter(event)}
       >
         <TextValidator
           value={text.query}
