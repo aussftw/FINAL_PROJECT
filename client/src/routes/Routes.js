@@ -30,7 +30,7 @@ import Contact from "../pages/Contact/Contact";
 
 const Routes = ({
   isAuthenticated,
-                  isAdmin,
+  isAdmin,
   getUserData,
   getWishlistData,
   preloaderClosing,
