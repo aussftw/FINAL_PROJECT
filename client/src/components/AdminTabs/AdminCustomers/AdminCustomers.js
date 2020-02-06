@@ -27,23 +27,25 @@ const AdminCustomers = () => {
       });
   };
 
-  const useHttp = (method, call) => {
-    const data = {
-      url: call,
-      method,
-    };
+  // const useHttp = (method, call) => {
+  //   const data = {
+  //     url: call,
+  //     method,
+  //   };
 
-    return axios(data)
-      .then(response => {
-        const body = response.data;
-        console.log(body);
-      })
-      .catch(err => {
-        // eslint-disable-next-line no-console
-        console.log(err.response);
-      });
-  };
-  useHttp("/api/customers", "GET");
+  //   return axios(data)
+  //     .then(response => {
+  //       const body = response.data;
+  //       console.log(body);
+  //     })
+  //     .catch(err => {
+  //       // eslint-disable-next-line no-console
+  //       console.log(err.response);
+  //     });
+  // };
+
+  // useHttp("/api/customers", "GET");
+  getAllCustomers();
 
   useEffect(() => {
     console.log("UseEffect");

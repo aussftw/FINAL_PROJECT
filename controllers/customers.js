@@ -19,13 +19,8 @@ const queryCreator = require("../commonHelpers/queryCreator");
 //getCustomers
 exports.getCustomers = (req, res, next) => {  
   console.log('getCustomers');
-  const { errors, isValid } = validateRegistrationForm(req.body);
 
-  if (!isValid) {
-    return res.status(400).json(errors);
-  }
-
-  Customer.find({$or:[{isAdmin:true}]})
+  Customer.find({$or:[{}]})
     .then(customers => {
       if (customers) {        
         return res.json(customers);        
