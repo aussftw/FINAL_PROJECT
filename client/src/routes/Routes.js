@@ -105,6 +105,11 @@ const Routes = ({
       <Route path={isAdmin ? "/admin" : "/"}>
         {isAdmin && <AdminPage />}
       </Route>
+      {/* { isAdmin &&  ( */}
+      {/*  <Route path="/admin"> */}
+      {/*    <AdminPage /> */}
+      {/*  </Route> */}
+      {/* )} */}
       <Redirect to="/" />
     </Switch>
   ) : (
