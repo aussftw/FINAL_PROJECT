@@ -15,7 +15,7 @@ const NotFound = () => {
       <Typography className={classes.message} align="center" variant="h6">
         We couldn&apos;t find that page
       </Typography>
-      <Typography className={classes} align="center" variant="h6">
+      <Typography className={classes.message} align="center" variant="h6">
         Try searching or go to&nbsp;
         <Link to="/" className={classes.link}>
           Plantly&apos;s home page
