@@ -168,7 +168,7 @@ exports.getCustomer = (req, res) => {
 exports.editCustomerInfo = (req, res) => {
   // Clone query object, because validator module mutates req.body, adding other fields to object
   const initialQuery = _.cloneDeep(req.body);
-
+  console.log(initialQuery);
   // Check Validation
   const { errors, isValid } = validateRegistrationForm(req.body);
 
@@ -287,4 +287,36 @@ exports.updatePassword = (req, res) => {
       }
     });
   });
+};
+
+exports.editCustomerAdmin = (req, res, next) => {
+  Customer.findOne({ _id: req.params.id })
+    .then(customer => {
+      if (!customer) {
+        return res.status(400).json({
+          message: `Customer with id "${req.params.id}" is not found.`
+        });
+      } else {
+        const initialQuery = _.cloneDeep(req.body);
+
+        const updatedCustomer = queryCreator(initialQuery);
+
+        Customer.findOneAndUpdate(
+          { _id: req.params.id },
+          { $set: updatedCustomer },
+          { new: true }
+        )
+          .then(customer => res.json(customer))
+          .catch(err =>
+            res.status(400).json({
+              message: `Error happened on server: "${err}" `
+            })
+          );
+      }
+    })
+    .catch(err =>
+      res.status(400).json({
+        message: `Error happened on server: "${err}" `
+      })
+    );
 };
