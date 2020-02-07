@@ -27,32 +27,29 @@ const AdminCustomers = () => {
       });
   };
 
-  // const useHttp = (method, call) => {
-  //   const data = {
-  //     url: call,
-  //     method,
-  //   };
+  const useHttp = (method, call) => {
+    const data = {
+      url: call,
+      method,
+    };
 
-  //   return axios(data)
-  //     .then(response => {
-  //       const body = response.data;
-  //       console.log(body);
-  //     })
-  //     .catch(err => {
-  //       // eslint-disable-next-line no-console
-  //       console.log(err.response);
-  //     });
-  // };
+    return axios(data)
+      .then(response => {
+        const body = response.data;
+        console.log(body);
+      })
+      .catch(err => {
+        // eslint-disable-next-line no-console
+        console.log(err.response);
+      });
+  };
+  const customersHandler = () => {
+    // console.log("customersHandler");
+    // getAllCustomers();
+    useHttp("/api/customers", "GET");
+  };
 
-  // useHttp("/api/customers", "GET");
-  getAllCustomers();
-
-  useEffect(() => {
-    console.log("UseEffect");
-
-    // eslint-disable-next-line
-  }, [customers]);
-  return <button>GET CUSTOMERS</button>;
+  return <button onClick={customersHandler}>GET CUSTOMERS</button>;
 };
 
 export default AdminCustomers;
