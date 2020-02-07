@@ -8,10 +8,9 @@ const Upload = ({imageUrls}) => {
 
     const handleFile = async e => {
         const file = e.target.files;
-        console.log(file);
+        setLoading(true);
         // eslint-disable-next-line no-undef
         const data = new FormData();
-        setLoading(true);
         data.append("file" , file[0]);
         data.append("upload_preset" , "plantly");
 
