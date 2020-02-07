@@ -168,7 +168,7 @@ exports.getCustomer = (req, res) => {
 exports.editCustomerInfo = (req, res) => {
   // Clone query object, because validator module mutates req.body, adding other fields to object
   const initialQuery = _.cloneDeep(req.body);
-  console.log(initialQuery);
+
   // Check Validation
   const { errors, isValid } = validateRegistrationForm(req.body);
 
