@@ -54,9 +54,10 @@ const Subscribe = () => {
           className={classes.input}
           placeholder="Your email address"
           onChange={e => setUserEmail(e.target.value)}
+          value={obj.email}
           onKeyPress={handleKeyPress}
-          validators={["isEmail", "required"]}
-          errorMessages={["This email is not valid"]}
+          validators={["required", "isEmail"]}
+          errorMessages={[]}
           variant="outlined"
         />
         <Button

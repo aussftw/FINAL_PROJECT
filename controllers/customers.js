@@ -17,14 +17,12 @@ const validateRegistrationForm = require("../validation/validationHelper");
 const queryCreator = require("../commonHelpers/queryCreator");
 
 //getCustomers
-exports.getCustomers = (req, res, next) => {  
-  console.log('getCustomers');
-
+exports.getCustomers = (req, res, next) => {
   Customer.find({$or:[{}]})
     .then(customers => {
-      if (customers) {        
-        return res.json(customers);        
-      } 
+      if (customers) {
+        return res.json(customers);
+      }
       return res.json([]);
     })
       .catch(err =>
@@ -32,7 +30,7 @@ exports.getCustomers = (req, res, next) => {
       res.status(400).json({
         message: `Error happened on server: "${err}" `
       })
-    );     
+    );
 };
 
 // Create one customer

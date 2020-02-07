@@ -43,7 +43,12 @@ const Upload = ({imageUrls}) => {
               <Box>
                 {image.map((item) => {
                   return (
-                    <img key={`id_${item}`} src={item} alt="some text" style={{width: "100px"}} />
+                    item===''?(
+                      <div />
+                    ):(
+                      <img key={`id_${item}`} src={item} alt="some text" style={{width: "100px"}} /> 
+                      )
+                   
                   )})}
               </Box>
             )}

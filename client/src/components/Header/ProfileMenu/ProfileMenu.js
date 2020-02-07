@@ -17,7 +17,7 @@ import {logOut} from "../../../store/actions/loginActions";
 import {wishlistLogOut} from "../../../store/actions/wishlist";
 import {clearCart} from "../../../store/actions/сart";
 
-const ProfileMenu = ( {logOff, wishlistLogOff, clearPersonalCart } ) => {
+const ProfileMenu = ( {isAdmin, logOff, wishlistLogOff, clearPersonalCart } ) => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const anchorRef = useRef(null);
@@ -69,6 +69,11 @@ const ProfileMenu = ( {logOff, wishlistLogOff, clearPersonalCart } ) => {
                   <Link to="/profile" className={classes.text}>
                     <MenuItem onClick={handleClose}>Profile</MenuItem>
                   </Link>
+                  {isAdmin && (
+                  <Link to="/admin" className={classes.text}>
+                    <MenuItem onClick={handleClose}>Admin Panel</MenuItem>
+                  </Link>
+                  )}
                   <MenuItem className={classes.text} onClick={profileLogOut}>Logout</MenuItem>
                 </MenuList>
               </ClickAwayListener>
@@ -80,7 +85,13 @@ const ProfileMenu = ( {logOff, wishlistLogOff, clearPersonalCart } ) => {
   );
 };
 
-export default connect(null, {
+function mapStateToProps(state) {
+  return {
+    isAdmin: state.loginReducer.user.isAdmin,
+  };
+}
+
+export default connect(mapStateToProps, {
   logOff: logOut,
   wishlistLogOff: wishlistLogOut,
   clearPersonalCart: clearCart,

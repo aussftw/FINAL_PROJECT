@@ -88,6 +88,7 @@ const loginReducer = (state = initialState, action) => {
         user: {
           firstName: action.payload.firstName,
           lastName: action.payload.lastName,
+          isAdmin: action.payload.isAdmin,
         },
       };
     case constants.GET_USER_DATA_FROM_LOCALSTORAGE:
