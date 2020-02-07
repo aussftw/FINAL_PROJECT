@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import { connect } from "react-redux";
 import useMediaQuery from "@material-ui/core/useMediaQuery/useMediaQuery";
 
@@ -107,14 +107,16 @@ const Cart = ({ cart, getCartVar }) => {
                 {totalPrice.toFixed(2)}
               </Typography>
             </Box>
-            <Button
-              variant="contained"
-              fullWidth
-              color="primary"
-              className={classes.checkoutButton}
-            >
+            <Link to="/checkout" className={classes.links}>
+              <Button
+                variant="contained"
+                fullWidth
+                color="primary"
+                className={classes.checkoutButton}
+              >
               proceed to checkout
-            </Button>
+              </Button>
+            </Link>
             <Button
               variant="text"
               fullWidth

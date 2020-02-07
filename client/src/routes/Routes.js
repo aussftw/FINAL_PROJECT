@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
-import { connect } from "react-redux";
+import React, {useEffect} from "react";
+import {Switch, Route, Redirect} from "react-router-dom";
+import {connect} from "react-redux";
 import jwt from "jwt-decode";
 
 import HomePage from "../pages/HomePage/HomePage";
@@ -11,6 +11,7 @@ import RegistrationPage from "../pages/RegistrationPage/RegistrationPage";
 import ItemDetailsPage from "../pages/ItemDetailsPage/ItemDetailsPage";
 import OrderDetailsPage from "../pages/OrderDetailsPage/OrderDetailsPage";
 import CheckoutPage from "../pages/CheckoutPage/CheckoutPage"
+import AdminPage from "../pages/AdminPage/AdminPage";
 import setAuthToken from "../components/common/setAuthToken";
 import isExpired from "../components/common/isExpired/isExpired";
 import Preloader from "../components/Preloader";
@@ -25,9 +26,11 @@ import { getWishlist } from "../store/actions/wishlist";
 import SearchPage from "../pages/SearchPage/SearchPage";
 // const Shop = React.lazy(() => import('../pages/Shop/Shop')); // Lazy-loaded
 import Shop from "../pages/Shop/Shop";
+import Contact from "../pages/Contact/Contact";
 
 const Routes = ({
   isAuthenticated,
+  isAdmin,
   getUserData,
   getWishlistData,
   preloaderClosing,
@@ -61,87 +64,49 @@ const Routes = ({
     LogOutUser,
   ]);
 
-  // eslint-disable-next-line no-nested-ternary
+  const ProfileRoute = ({ component: Component, ...rest }) => (
+    <Route
+      {...rest}
+      render={(props) => (
+        isAuthenticated ? <Component {...props} /> : (<Redirect to="/" />)
+      )}
+    />
+  );
+
+  const AdminRoute = ({ component: Component, ...rest }) => (
+    <Route
+      {...rest}
+      render={(props) => (
+      isAdmin ? <Component {...props} /> : (<Redirect to="/" />)
+      )}
+    />
+  );
+  
   return preloader ? (
-    <Preloader />
-  ) : isAuthenticated ? (
-    <Switch>
-      <Route exact path="/">
-        <HomePage />
-      </Route>
-      <Route path="/cart">
-        <CartPage />
-      </Route>
-      <Route path="/search">
-        <SearchPage />
-      </Route>
-      <Route path="/shop">
-        <Shop />
-      </Route>
-      <Route path="/notfound">
-        <NotFound />
-      </Route>
-      <Route path="/profile">
-        <ProfilePage />
-      </Route>
-      <Route path="/products/:id">
-        <ItemDetailsPage />
-      </Route>
-      <Route path="/registration">
-        <RegistrationPage />
-      </Route>
-      <Route path="/checkout">
-        <CheckoutPage />
-      </Route>
-      <Route path="/orders/:orderNo">
-        <OrderDetailsPage />
-      </Route>
-      <Redirect to="/" />
-    </Switch>
+    <Preloader /> 
   ) : (
     <Switch>
-      <Route exact path="/">
-        <HomePage />
-      </Route>
-      <Route path="/cart">
-        <CartPage />
-      </Route>
-      <Route path="/search">
-        <SearchPage />
-      </Route>
-      <Route path="/shop">
-        {/* <Suspense fallback={<Preloader />}> */}
-        {/* <Shop /> */}
-        {/* </Suspense> */}
-        <Shop />
-      </Route>
-      {/* <Route path="/about-us"> */}
-
-      {/* </Route> */}
-      <Route path="/notfound">
-        <NotFound />
-      </Route>
-      <Route path="/registration">
-        <RegistrationPage />
-      </Route>
-      <Route path="/products/:id">
-        <ItemDetailsPage />
-      </Route>
-      <Route path="/checkout">
-        <CheckoutPage />
-      </Route>
-      <Route path="/orders/:orderNo">
-        <OrderDetailsPage />
-      </Route>
+      <Route exact path="/" component={HomePage} />
+      <Route path="/cart" component={CartPage} />
+      <Route path="/search" component={SearchPage} />
+      <Route path="/shop" component={Shop} />
+      <Route path="/about-us" component={Contact} />
+      <Route path="/notfound" component={NotFound} />
+      <ProfileRoute path="/profile" component={ProfilePage} />
+      <Route path="/products/:id" component={ItemDetailsPage} />
+      <Route path="/registration" component={RegistrationPage} />
+      <Route path="/checkout" component={CheckoutPage} />
+      <Route path="/orders/:orderNo" component={OrderDetailsPage} />
+      <AdminRoute path="/admin" component={AdminPage} />
       <Redirect to="/" />
     </Switch>
-  );
+  )
 };
 
 function mapStateToProps(state) {
   return {
     isAuthenticated: state.loginReducer.isAuthenticated,
-    user: state.loginReducer.user,
+    isAdmin: state.loginReducer.user.isAdmin,
     preloader: state.loginReducer.loginPreloader,
   };
 }

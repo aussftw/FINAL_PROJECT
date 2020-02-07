@@ -9,6 +9,7 @@ const initialState = {
     email: "",
     telephone: "",
     address: "",
+    isAdmin: false,
   },
   error: "",
   modalOpen:false,
@@ -25,6 +26,7 @@ const loginReducer = (state = initialState, action) => {
           email: action.payload.email,
           telephone: action.payload.telephone,
           address: action.payload.address,
+          isAdmin: action.payload.isAdmin,
         },
         error: "",
       };
@@ -38,6 +40,7 @@ const loginReducer = (state = initialState, action) => {
           email: "",
           telephone: "",
           address: "",
+          isAdmin: false,
         },
         error: "",
       };
@@ -50,6 +53,7 @@ const loginReducer = (state = initialState, action) => {
           email: action.payload.email,
           telephone: action.payload.telephone,
           address: action.payload.address,
+          isAdmin: action.payload.isAdmin,
         },
         error: "",
       };
@@ -69,6 +73,7 @@ const loginReducer = (state = initialState, action) => {
           email: action.payload.email,
           telephone: action.payload.telephone,
           address: action.payload.address,
+          isAdmin: state.user.isAdmin,
         },
       };
     case constants.PRELOADER_CLOSE:
@@ -83,6 +88,7 @@ const loginReducer = (state = initialState, action) => {
         user: {
           firstName: action.payload.firstName,
           lastName: action.payload.lastName,
+          isAdmin: action.payload.isAdmin,
         },
       };
     case constants.GET_USER_DATA_FROM_LOCALSTORAGE:
@@ -94,6 +100,7 @@ const loginReducer = (state = initialState, action) => {
           email: action.payload.email,
           telephone: action.payload.telephone,
           address: action.payload.address,
+          isAdmin: action.payload.isAdmin,
         },
       };
     case constants.MODAL_OPEN:
