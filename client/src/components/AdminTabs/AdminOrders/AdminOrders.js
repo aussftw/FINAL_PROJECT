@@ -8,7 +8,8 @@ import { Box } from "@material-ui/core";
 // import DeleteIcon from '@material-ui/icons/Delete';
 import MaterialTable from 'material-table'
 // import AddPartnerModal from "../AdminContent/AddPartnerModal/AddPartnerModal";
-
+import EditIcon from '@material-ui/icons/Edit';
+import AddIcon from "@material-ui/icons/Add";
 
 // products: (4) [{…}, {…}, {…}, {…}]
 // canceled: false
@@ -48,16 +49,25 @@ function AdminOrders() {
   .get("/api/orders")
   .then(orders => {
     setOrdersArr(orders.data)
-    console.log(orders.data);
+    console.log('all',orders.data);
   })
   .catch(err => {
     console.log('orders', err);
   });
+    // axios
+    //   .get("/api/orders/user")
+    //   .then(orders => {
+    //     console.log('user',orders.data);
+    //   })
+    //   .catch(err => {
+    //     console.log('orders', err);
+    //   });
+
   }
 
   const columns = [
     { title: 'Order №', field: 'orderNo'},
-    { title: 'Canceled', field: 'canceled' },
+    { title: 'Canceled', field: 'canceled', type: "boolean", },
     { title: 'Status', field: 'status'},
     { title: 'Name', field: 'name'},
     { title: 'Mobile', field: 'mobile'},
@@ -83,6 +93,15 @@ function AdminOrders() {
             columns={columns}
             data={ordersArr}
             title="All orders"
+            actions={[
+              {
+                icon: ()=><EditIcon />,
+                tooltip: "Edit product",
+                // onClick: (event, rowData) => {
+                //   openModalHandler(rowData);
+                // },
+              },
+            ]}
             // options={{ search: false }}
             // actions={[
             //   {

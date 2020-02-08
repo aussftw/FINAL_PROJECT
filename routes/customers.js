@@ -13,7 +13,7 @@ const {
   getCustomers
 } = require("../controllers/customers");
 
-// @route   POST /customers
+// @route   GET /customers
 // @desc    Register customer
 // @access  Public
 router.get("/", getCustomers);

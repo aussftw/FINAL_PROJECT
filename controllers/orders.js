@@ -296,6 +296,21 @@ exports.deleteOrder = (req, res, next) => {
   });
 };
 
+exports.getAllOrders = (req, res, next) => {
+  Order.find({$or:[{}]})
+    .then(orders => {
+      if (orders) {
+        return res.json(orders);
+      }
+      return res.json([]);
+    })
+    .catch(err =>
+      res.status(400).json({
+        message: `Error happened on server: "${err}" `
+      })
+    );
+};
+
 exports.getOrders = (req, res, next) => {
   Order.find({ customerId: req.user.id })
     .populate("customerId")

@@ -9,6 +9,7 @@ const {
   cancelOrder,
   deleteOrder,
   getOrders,
+  getAllOrders,
   getOrder
 } = require("../controllers/orders");
 
@@ -45,9 +46,14 @@ router.delete(
 );
 
 // @route   GET /orders
+// @desc    Get orders of user
+// @access  Private
+router.get("/user", passport.authenticate("jwt", { session: false }), getOrders);
+
+// @route   GET /orders
 // @desc    Get all orders
 // @access  Private
-router.get("/", passport.authenticate("jwt", { session: false }), getOrders);
+router.get("/", passport.authenticate("jwt", { session: false }), getAllOrders);
 
 // @route   GET /orders/:orderNo
 // @desc    Get one order by orderNo
