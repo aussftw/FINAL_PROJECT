@@ -5,7 +5,7 @@ const useStyles = makeStyles(theme => ({
         position: "fixed",
         top: 10,
         left: "calc(50% - 196px)",
-        minHeight: 290,
+        height: 400,
         width: 320,
         padding: theme.spacing(2),
         backgroundColor: "white",
@@ -18,7 +18,7 @@ const useStyles = makeStyles(theme => ({
     },
     message: {
         width: 280,
-        padding: "20px 10px",
+        padding: "5px 10px",
         margin: "20px 10px",
     },
     btn: {

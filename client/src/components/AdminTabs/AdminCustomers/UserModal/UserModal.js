@@ -40,6 +40,17 @@ const UserModal = ({ user, allCustomers, setAllCustomers, isOpen, onClose }) => 
         });
   };
 
+  const resetComments = () => {
+    axios
+      .delete(`/api/customers/${user._id}`)
+      .then(response => {
+        console.log(response);
+      })
+      .catch(err => {
+        setError(err);
+      });
+  };
+
   const message = !user.isAdmin ?
     (`Are you sure to add shop administrator rights to user ${user.firstName} ${user.lastName}?`) :
     (`Are you sure to remove shop administrator rights from user ${user.firstName} ${user.lastName}?`);
@@ -72,6 +83,16 @@ const UserModal = ({ user, allCustomers, setAllCustomers, isOpen, onClose }) => 
             className={classes.btn}
           >
             Edit Admin Rights
+          </Button>
+          <Typography component="h3" align="center" className={classes.message}>
+            {`Are you sure to reset comments of user ${user.firstName} ${user.lastName}?`}
+          </Typography>
+          <Button
+            variant="contained"
+            onClick={() => resetComments()}
+            className={classes.btn}
+          >
+            Reset Comments
           </Button>
           {error && (
           <Typography component="h3" align="center" className={classes.message}>
