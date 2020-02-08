@@ -9,20 +9,26 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
+import PreloaderAdaptiveSmall from "../../../Preloader/AdaptiveSmall";
 
 import useStyles from "./useStyles";
 
 const UserModal = ({ user, allCustomers, setAllCustomers, isOpen, onClose }) => {
   const classes = useStyles();
-  const [ error, setError ] = useState("");
+  const [ isLoadingAdmin, setIsLoadingAdmin ] = useState(false);
+  const [ isLoadingRating, setIsLoadingRating ] = useState(false);
+  const [ adminStatus, setAdminStatus ] = useState(user.isAdmin);
+  const [ message, setMessage ] = useState("");
 
   const closeModal = () => {
-    setError("");
+    setMessage("");
     onClose();
   };
 
   const editAdminHandler = () => {
-    const updatedUser = { isAdmin: !user.isAdmin };
+    const updatedUser = { isAdmin: !adminStatus };
+    setMessage("");
+    setIsLoadingAdmin(true);
       axios
         .put(`/api/customers/${user._id}`, updatedUser)
         .then(response => {
@@ -32,17 +38,37 @@ const UserModal = ({ user, allCustomers, setAllCustomers, isOpen, onClose }) => 
               }
             return item;
           });
+          setAdminStatus(response.data.isAdmin);
           setAllCustomers(updatedCustomers);
-          closeModal();
+          setIsLoadingAdmin(false);
         })
         .catch(err => {
-          setError(err);
+          setMessage(err.response);
+          setIsLoadingAdmin(false);
         });
   };
 
-  const message = !user.isAdmin ?
+  const resetRating = () => {
+    const userId = { "userId": user._id };
+    setMessage("");
+    setIsLoadingRating(true);
+    axios
+      .delete("/api/rating/", {data: userId})
+      .then(response => {
+        setIsLoadingRating(false);
+        setMessage(response);
+      })
+      .catch(err => {
+        setIsLoadingRating(false);
+        setMessage(err.response);
+      });
+  };
+
+  const adminQuestion = !adminStatus ?
     (`Are you sure to add shop administrator rights to user ${user.firstName} ${user.lastName}?`) :
     (`Are you sure to remove shop administrator rights from user ${user.firstName} ${user.lastName}?`);
+
+  const adminEditButtonText = adminStatus ? "remove admin rights" : "add admin rights";
 
   return (
     <Modal
@@ -57,7 +83,7 @@ const UserModal = ({ user, allCustomers, setAllCustomers, isOpen, onClose }) => 
       <Fade in={isOpen}>
         <Box className={classes.modal}>
           <Typography component="h3" align="center" className={classes.message}>
-            {message}
+            {adminQuestion}
           </Typography>
           <IconButton
             component="span"
@@ -66,16 +92,30 @@ const UserModal = ({ user, allCustomers, setAllCustomers, isOpen, onClose }) => 
           >
             <CloseIcon />
           </IconButton>
-          <Button
-            variant="contained"
-            onClick={() => editAdminHandler()}
-            className={classes.btn}
-          >
-            Edit Admin Rights
-          </Button>
-          {error && (
+          {isLoadingAdmin ? <PreloaderAdaptiveSmall /> : (
+            <Button
+              variant="contained"
+              onClick={() => editAdminHandler()}
+              className={classes.btn}
+            >
+              {adminEditButtonText}
+            </Button>
+          )}
           <Typography component="h3" align="center" className={classes.message}>
-            {error.message}
+            {`Are you sure to reset rating list of user ${user.firstName} ${user.lastName}?`}
+          </Typography>
+          {isLoadingRating ? <PreloaderAdaptiveSmall /> : (
+            <Button
+              variant="contained"
+              onClick={() => resetRating()}
+              className={classes.btn}
+            >
+                Reset Rating
+            </Button>
+          )}
+          {message && (
+          <Typography component="h3" align="center" className={classes.message}>
+            {`${message.data.message}`}
           </Typography>
         )}
         </Box>

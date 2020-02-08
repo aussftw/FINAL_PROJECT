@@ -117,7 +117,7 @@ const AdminCustomers = () => {
             actions={[
               {
                 icon: "edit",
-                tooltip: "Edit admin rights",
+                tooltip: "Edit customer",
                 onClick: (event, rowData) => {
                   openModalHandler(rowData);
                 },

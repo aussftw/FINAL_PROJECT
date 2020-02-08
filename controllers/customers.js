@@ -123,6 +123,11 @@ exports.loginCustomer = async (req, res, next) => {
         return res.status(404).json(errors);
       }
 
+      if (!customer.enabled) {
+        errors.enabled = "Customer is not active";
+        return res.status(404).json(errors);
+      }
+
       // Check Password
       bcrypt.compare(password, customer.password).then(isMatch => {
         if (isMatch) {
@@ -294,7 +299,7 @@ exports.editCustomerAdmin = (req, res, next) => {
     .then(customer => {
       if (!customer) {
         return res.status(400).json({
-          message: `Customer with id "${req.params.id}" is not found.`
+          message: `Admin with id "${req.params.id}" is not found.`
         });
       } else {
         const initialQuery = _.cloneDeep(req.body);
@@ -306,7 +311,8 @@ exports.editCustomerAdmin = (req, res, next) => {
           { $set: updatedCustomer },
           { new: true }
         )
-          .then(customer => res.json(customer))
+          .then(customer =>
+            res.status(200).json(customer))
           .catch(err =>
             res.status(400).json({
               message: `Error happened on server: "${err}" `
