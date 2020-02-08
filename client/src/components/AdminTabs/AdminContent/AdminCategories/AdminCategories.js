@@ -9,9 +9,6 @@ import Typography from "@material-ui/core/Typography";
 const AdminCategories = () => {
   const [categories, setCategories] = useState([]);
 
-  // imgUrl: "/img/catalog/Ficuses.png"
-  // description: "Ficus is a genus of about 850 species of woody trees, shrubs, vines, epiphytes and hemiepiphytes in the family Moraceae. Collectively known as fig trees or figs, they are native throughout the tropics with a few species extending into the semi-warm temperate zone."
-
   const getPartners = () => {
     axios
       .get("/api/catalog")
@@ -24,17 +21,16 @@ const AdminCategories = () => {
   };
 
   const columns = [
-    // {
-    //   title: "Logo",
-    //   field: "imageUrl",
-    //   render: rowData => <img alt={rowData.name} src={rowData.imageUrl} style={{ width: 50 }} />,
-    // },
+    {
+      title: "Image",
+      field: "imageUrl",
+      render: rowData => <img alt={rowData.name} src={rowData.imgUrl} style={{ width: "50%" }} />,
+    },
     { title: "Name", field: "name" },
     { title: "Description", field: "description" },
     // {
     //   title: "Description",
     //   field: "description",
-    //   searchable: false,
     //   type: "string",
     //   render: rowData => (
     //     <Typography noWrap style={{ width: "200px", fontSize: "0.875rem"}}>

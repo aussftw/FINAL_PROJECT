@@ -56,7 +56,7 @@ const AdminPartners = () => {
     {
       title: "Logo",
       field: "imageUrl",
-      render: rowData => <img alt={rowData.name} src={rowData.imageUrl} style={{ width: 50 }} />,
+      render: rowData => <img alt={rowData.name} src={rowData.imageUrl} style={{ width: "50%" }} />,
     },
     { title: "Name", field: "name" },
     { title: "Url", field: "url", render: rowData => <a href={rowData.url}>{rowData.url}</a> },
