@@ -1,5 +1,5 @@
-import theme from '../../../theme';
 import makeStyles from '@material-ui/core/styles/makeStyles';
+import theme from '../../../theme';
 
 
 const useStyles = makeStyles({
