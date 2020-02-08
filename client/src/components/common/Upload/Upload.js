@@ -48,7 +48,7 @@ const Upload = ({imageUrls}) => {
           <h3>Loading...</h3>
             ) : (
               <Box style={{margin: "8px 0 8px"}}>
-                <img src={image} alt="" style={{width: "100px"}} />
+                <img src={image} alt="" style={{height: "80px"}} />
               </Box>
             )}
       </Box>
