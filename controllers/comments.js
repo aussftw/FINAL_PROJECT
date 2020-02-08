@@ -84,12 +84,34 @@ exports.deleteComment = (req, res, next) => {
   });
 };
 
-exports.getComments = (req, res, next) => {
+exports.getComments = async (req, res, next) => {
+    let total;
+    try {
+        total = await Comment.find().count();
+    } catch (err) {
+        res.status(400).json({
+            message: `Error happened on server: "${err}" `
+        });
+    }
+
+    const perPage = Number(req.query.perPage);
+    const startPage = Number(req.query.startPage);
+    const newestComments = {"date": -1};
+
   Comment.find()
+    .sort(newestComments)
+    .skip(startPage * perPage - perPage)
+    .limit(perPage)
     .populate("product")
     .populate("category")
     .populate("customer")
-    .then(comments => res.status(200).json(comments))
+    .then(comments => {
+        res.status(200).json({
+            "page": startPage,
+            "total": total,
+            "comments": comments,
+        })
+    })
     .catch(err =>
       res.status(400).json({
         message: `Error happened on server: "${err}" `
