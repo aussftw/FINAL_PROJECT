@@ -9,6 +9,9 @@ import Typography from "@material-ui/core/Typography";
 const AdminCategories = () => {
   const [categories, setCategories] = useState([]);
 
+  // imgUrl: "/img/catalog/Ficuses.png"
+  // description: "Ficus is a genus of about 850 species of woody trees, shrubs, vines, epiphytes and hemiepiphytes in the family Moraceae. Collectively known as fig trees or figs, they are native throughout the tropics with a few species extending into the semi-warm temperate zone."
+
   const getPartners = () => {
     axios
       .get("/api/catalog")
