@@ -106,7 +106,7 @@ const AddPartnerModal = ({ open, handleModal, partner}) => {
                align="center"
                style={{ padding: "4px" }}
              >
-               Add new partner
+               {(partner === null)? ("Add new partner"):("Edit partner")}
              </Typography>
 
              <IconButton

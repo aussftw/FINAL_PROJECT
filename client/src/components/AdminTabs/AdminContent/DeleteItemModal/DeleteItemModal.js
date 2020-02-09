@@ -15,9 +15,16 @@ const DeleteItemModal = ({ open, handleModal, id, item }) => {
   const classes = useStyles();
 
   const createMessage = () => {
-    const itemSingular = item.slice(0, item.length-1);
 
-    return(`Are you sure you want to delete this ${itemSingular}?`)
+    if (item === "catalog"){
+      const itemSingular = "category";
+
+      return(`Are you sure you want to remove this ${itemSingular} from catalog?`)
+    }
+      const itemSingular = item.slice(0, item.length-1);
+
+      return(`Are you sure you want to delete this ${itemSingular}?`) 
+    
   };
 
   const deleteItem = () => {

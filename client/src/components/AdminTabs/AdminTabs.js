@@ -33,6 +33,7 @@ const AdminTabs = () => {
         Admin Page
       </Typography>
       <Box className={classes.tabsComponent}>
+
         <Tabs
           className={classes.tabsList}
           value={value}

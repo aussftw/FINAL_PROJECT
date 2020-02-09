@@ -15,6 +15,7 @@ import AddPartnerModal from "./AdminPartners/AddPartnerModal/AddPartnerModal";
 import AdminPartners from "./AdminPartners/AdminPartners";
 import useStyles from "./useStyles";
 import AdminCategories from "./AdminCategories/AdminCategories";
+import AdminColors from "./AdminColors/AdminColors";
 // import AdminProducts from "./AdminProducts/AdminProducts";
 // import AdminOrders from "./AdminOrders/AdminOrders";
 // import AdminContent from "./AdminContent/AdminContent";
@@ -127,7 +128,7 @@ function a11yProps(index) {
             hidden={value !== 2}
             aria-labelledby={`simple-tab-${2}`}
           >
-            {value === 2 && <Typography component="span"> Colors </Typography>}
+            {value === 2 && <AdminColors />}
           </Box>
           <Box
             className={classes.contentBox}

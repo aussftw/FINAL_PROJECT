@@ -10,6 +10,10 @@ import MaterialTable from 'material-table'
 // import AddPartnerModal from "../AdminContent/AddPartnerModal/AddPartnerModal";
 import EditIcon from '@material-ui/icons/Edit';
 import AddIcon from "@material-ui/icons/Add";
+import AddCircleIcon from "@material-ui/icons/AddCircle";
+import DeleteIcon from "@material-ui/icons/Delete";
+import AddPartnerModal from "../AdminContent/AdminPartners/AddPartnerModal/AddPartnerModal";
+import DeleteItemModal from "../AdminContent/DeleteItemModal/DeleteItemModal";
 
 // products: (4) [{…}, {…}, {…}, {…}]
 // canceled: false
@@ -28,25 +32,31 @@ import AddIcon from "@material-ui/icons/Add";
 function AdminOrders() {
   // const classes = useStyles();
   const [ordersArr, setOrdersArr]= useState([])
-  // const [openAddModal, setopenAddModal]= useState(false);
-  // const [openEditModal, setEditModal]= useState(false);
-  // const [dataEditModal, setDataEditModal]= useState({});
-  //
-  // const handleOpenEditModal = ()=>{
-  //   setEditModal(!openEditModal);
-  // }
-  // const handleOpenAddModal = ()=>{
-  //   setopenAddModal(!openAddModal);
-  // }
-  //
-  // const handleDataEditModal = (rowData)=>{
-  //   setDataEditModal(rowData)
-  // }
+
+  const [AddModal, setAddModal] = useState({ isOpened: false, rowData: null });
+
+  const handleOpenAddModal = () => {
+    setAddModal({
+      isOpened: !AddModal.isOpened,
+      rowData: AddModal.rowData,
+    });
+  };
+
+
+
+  const closeModal = () => {
+    setAddModal({
+      isOpened: false,
+      rowData: AddModal.rowData,
+    });
+
+  };
+
 
 
   const getOrders =()=>{
     axios
-  .get("/api/orders")
+  .get("/api/orders/all")
   .then(orders => {
     setOrdersArr(orders.data)
     console.log('all',orders.data);
@@ -55,7 +65,7 @@ function AdminOrders() {
     console.log('orders', err);
   });
     // axios
-    //   .get("/api/orders/user")
+    //   .get("/api/orders")
     //   .then(orders => {
     //     console.log('user',orders.data);
     //   })
@@ -95,39 +105,38 @@ function AdminOrders() {
             title="All orders"
             actions={[
               {
-                icon: ()=><EditIcon />,
-                tooltip: "Edit product",
-                // onClick: (event, rowData) => {
-                //   openModalHandler(rowData);
-                // },
+                icon: () => <AddCircleIcon />,
+                tooltip: "Add Partner",
+                isFreeAction: true,
+                onClick: () => {
+                  handleOpenAddModal();
+                },
               },
+
             ]}
-            // options={{ search: false }}
-            // actions={[
-            //   {
-            //     icon: () => <AddCircleIcon />,
-            //     tooltip: 'Add Partner',
-            //     isFreeAction: true,
-            //     onClick: ()=>{handleOpenAddModal()}
-            //   },
-            //   {
-            //     icon: () => <DeleteIcon />,
-            //     tooltip: 'Delete Partner',
-            //     // onClick: {handleOpen}
-            //   },
-            //   {
-            //     icon: () => <EditIcon />,
-            //     tooltip: 'Edit Partner',
-            //     onClick: (event, rowData) => {
-            //       console.log(event);
-            //       handleDataEditModal(rowData);
-            //       handleOpenEditModal()
-            //     }
-            //   }
-            // ]}
+            editable={{
+              isEditable: rowData => rowData.name === "status", // only name(a) rows would be editable
+
+              onRowUpdate: (newData, oldData) =>
+                new Promise((resolve, reject) => {
+                  setTimeout(() => {
+                    {
+                      /* const data = this.state.data;
+                      const index = data.indexOf(oldData);
+                      data[index] = newData;
+                      this.setState({ data }, () => resolve()); */
+                    }
+                    resolve();
+                  }, 1000);
+                  console.log('newData',newData);
+                  console.log('oldData',oldData);
+                }),
+
+            }}
 
           />
-
+          {AddModal.isOpened &&
+          <AddPartnerModal open={AddModal.isOpened} handleModal={closeModal} partner={AddModal.rowData} />}
           {/* <AddPartnerModal open={openAddModal} handleOpen={handleOpenAddModal} partner={{name:"", url:"", customId:"", imageUrl:""}} /> */}
           {/* <AddPartnerModal open={openEditModal} handleOpen={handleOpenEditModal} partner={dataEditModal} /> */}
 
