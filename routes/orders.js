@@ -53,7 +53,7 @@ router.get("/", passport.authenticate("jwt", { session: false }), getOrders);
 // @route   GET /orders
 // @desc    Get all orders
 // @access  Private
-router.get("/all", passport.authenticate("jwt", { session: false }), getAllOrders);
+router.get("/all", passport.authenticate("jwt-admin", { session: false }), getAllOrders);
 
 // @route   GET /orders/:orderNo
 // @desc    Get one order by orderNo

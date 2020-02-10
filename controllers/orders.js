@@ -51,7 +51,7 @@ exports.placeOrder = async (req, res, next) => {
       (sum, cartItem) =>
         sum + cartItem.product.currentPrice * cartItem.cartQuantity,
       0
-    );
+    ).toFixed(2);
 
     const productAvailibilityInfo = await productAvailibilityChecker(
       order.products
@@ -218,14 +218,15 @@ exports.updateOrder = (req, res, next) => {
 
 exports.cancelOrder = (req, res, next) => {
   Order.findOne({ _id: req.params.id }).then(async currentOrder => {
+    console.log(currentOrder);
     if (!currentOrder) {
       return res
         .status(400)
         .json({ message: `Order with id ${req.params.id} is not found` });
     } else {
-      const subscriberMail = req.body.email;
-      const letterSubject = req.body.letterSubject;
-      const letterHtml = req.body.letterHtml;
+      const subscriberMail = currentOrder.email;
+      const letterSubject = "Your order was canceled";
+      const letterHtml = `<h2>Your order №${currentOrder.orderNo} was canceled.</h2>`;
 
       const { errors, isValid } = validateOrderForm(req.body);
 
@@ -297,7 +298,9 @@ exports.deleteOrder = (req, res, next) => {
 };
 
 exports.getAllOrders = (req, res, next) => {
-  Order.find({$or:[{}]})
+  const newestOrders = {"date":-1}
+  Order.find()
+    .sort(newestOrders)
     .then(orders => {
       if (orders) {
         return res.json(orders);

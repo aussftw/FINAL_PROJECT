@@ -16,6 +16,7 @@ import AdminPartners from "./AdminPartners/AdminPartners";
 import useStyles from "./useStyles";
 import AdminCategories from "./AdminCategories/AdminCategories";
 import AdminColors from "./AdminColors/AdminColors";
+import AdminSizes from "./AdminSizes/AdminSizes";
 // import AdminProducts from "./AdminProducts/AdminProducts";
 // import AdminOrders from "./AdminOrders/AdminOrders";
 // import AdminContent from "./AdminContent/AdminContent";
@@ -137,7 +138,7 @@ function a11yProps(index) {
             hidden={value !== 3}
             aria-labelledby={`simple-tab-${3}`}
           >
-            {value === 3 && <Typography component="span"> Sizes </Typography>}
+            {value === 3 && <AdminSizes />}
           </Box>
         </Box>
       </Container>

@@ -18,42 +18,26 @@ import useStyles from "./useStyles";
 //   return <MuiAlert elevation={6} variant="filled" {...props} />;
 // }
 
-const DeleteItemModal = ({ open, handleModal, id, item, handleOpenSnackbar }) => {
+const CancelOrder = ({ open, handleModal, id, orderNo, handleOpenSnackbar }) => {
   const classes = useStyles();
 
-
-
-  const createMessage = () => {
-
-    if (item === "catalog") {
-      const itemSingular = "category";
-
-      return (`Are you sure you want to remove this ${itemSingular} from catalog?`);
-    }
-    const itemSingular = item.slice(0, item.length - 1);
-
-    return (`Are you sure you want to delete this ${itemSingular}?`);
-
-  };
-
-  const deleteItem = () => {
-    console.log("axios to", `/api/${item}/${id}`);
+  const cancelOrder = () => {
+    console.log(id);
+    console.log(orderNo);
     axios
-      .delete(`/api/${item}/${id}`)
+      .put(`/api/orders/cancel/${id}`)
       .then(resp => {
-        const itemSingular = item.slice(0, item.length - 1);
-        const success = {type:'success', message:`${itemSingular} was successfully deleted`}
+        const success = {type:'success', message:`${orderNo} was successfully deleted`}
         handleOpenSnackbar(success);
         console.log(resp);
       })
       .catch(err => {
-        const itemSingular = item.slice(0, item.length - 1);
-        const error = {type:'error', message:`Error! ${itemSingular} wasn’t deleted.`}
+
+        const error = {type:'error', message:`Error! ${orderNo} wasn’t deleted.`}
         handleOpenSnackbar(error);
-        console.log("orders", err);
+        console.log("orders", err.response);
       });
     handleModal();
-    // handleOpenSnackbar();
   };
 
 
@@ -75,7 +59,7 @@ const DeleteItemModal = ({ open, handleModal, id, item, handleOpenSnackbar }) =>
               align="center"
               className={classes.message}
             >
-              {createMessage()}
+           `Are you sure you want cancel order № ${}`
             </Typography>
 
             <IconButton
@@ -86,8 +70,8 @@ const DeleteItemModal = ({ open, handleModal, id, item, handleOpenSnackbar }) =>
               <CloseIcon />
             </IconButton>
 
-            <Button variant="contained" fullWidth onClick={deleteItem}>
-              Delete
+            <Button variant="contained" fullWidth onClick={cancelOrder}>
+              Cancel
             </Button>
           </Box>
         </Fade>
@@ -104,4 +88,4 @@ const DeleteItemModal = ({ open, handleModal, id, item, handleOpenSnackbar }) =>
 
 };
 
-export default DeleteItemModal;
+export default CancelOrder;

@@ -35,6 +35,7 @@ const useStyles = makeStyles(theme => ({
   tabText: {
     color: theme.palette.secondary.dark,
   },
+
 }));
 
 export default useStyles;

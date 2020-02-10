@@ -9,10 +9,9 @@ import EditIcon from "@material-ui/icons/Edit";
 import DeleteItemModal from "../DeleteItemModal/DeleteItemModal";
 import AddEditModal from "./AddEditModal/AddEditModal";
 import SnackbarMessage from "../Snackbar/SnackbarMessage";
-// import Snackbar from "@material-ui/core/Snackbar";
 
 
-const AdminColors = () => {
+const AdminSizes = () => {
   const [colors, setColors] = useState([]);
 
   const [AddModal, setAddModal] = useState({ isOpened: false, rowData: null });
@@ -42,9 +41,9 @@ const AdminColors = () => {
   };
   // snackbar
 
-  const getColors = () => {
+  const getSizes = () => {
     axios
-      .get("/api/colors")
+      .get("/api/sizes")
       .then(orders => {
         setColors(orders.data);
       })
@@ -66,25 +65,27 @@ const AdminColors = () => {
       rowData,
     });
   };
-  const handleDeleteModal = (rowData) => {
-    setDeleteModal({
-      isOpened: !DeleteModal.isOpened,
-      id: rowData._id,
-    });
-  };
+  // const handleDeleteModal = (rowData) => {
+  //   setDeleteModal({
+  //     isOpened: !DeleteModal.isOpened,
+  //     id: rowData._id,
+  //   });
+  // };
 
 
     const deleteValidate = (rowData) => {
       axios
-        .get(`/api/products/filter?color=${rowData.name}`)
+        .get(`/api/products/filter?color=green,red,coloured&size=${rowData.name}`)
+        // .get(`/api/products/filter?size=${rowData.name}`)
         .then(orders => {
           console.log("orders.data.length", orders.data.products.length);
+          console.log("orders.data", orders.data);
           if (orders.data.products.length === 0) {
-            handleDeleteModal(rowData);
+            // handleDeleteModal(rowData);
           } else {
-            const error = {type:'error', message:`You can’t delete color because of active products in catalog`}
+            const error = {type:'error', message:`You can’t delete size because of active products in catalog`}
             handleOpenSnackbar(error);
-            console.log("you cant edit/delete color because of active products in catalog");
+            console.log("you cant edit/delete size because of active products in catalog");
           }
         })
         .catch(err => {
@@ -95,14 +96,14 @@ const AdminColors = () => {
 
     const editValidate = (rowData) => {
       axios
-        .get(`/api/products/filter?color=${rowData.name}`)
+        .get(`/api/products/filter?size=${rowData.name}`)
         .then(orders => {
           console.log(orders);
           console.log("orders.data.products.length", orders.data.products.length);
           if (orders.data.products.length === 0) {
             handleEditModal(rowData);
           } else {
-            const error = {type:'error', message:`You can’t edit color because of active products in catalog`}
+            const error = {type:'error', message:`You can’t edit size because of active products in catalog`}
             handleOpenSnackbar(error);
             console.log("cant edit");
           }
@@ -138,12 +139,12 @@ const AdminColors = () => {
       <MaterialTable
         columns={columns}
         data={colors}
-        title="Colors"
+        title="Sizes"
         options={{ search: false }}
         actions={[
           {
             icon: () => <AddCircleIcon />,
-            tooltip: "Add color",
+            tooltip: "Add size",
             isFreeAction: true,
             onClick: () => {
               handleOpenAddModal();
@@ -151,14 +152,14 @@ const AdminColors = () => {
           },
           {
             icon: () => <DeleteIcon />,
-            tooltip: "Delete color",
+            tooltip: "Delete size",
             onClick: (event, rowData) => {
               deleteValidate(rowData);
             },
           },
           {
             icon: () => <EditIcon />,
-            tooltip: "Edit color",
+            tooltip: "Edit size",
             onClick: (event, rowData) => {
               editValidate(rowData);
             },
@@ -184,8 +185,8 @@ const AdminColors = () => {
 
   return (
     <>
-      <Button variant="contained" onClick={getColors}>
-        Get all colours
+      <Button variant="contained" onClick={getSizes}>
+        Get all sizes
       </Button>
       {colors.length === 0 ? (
         <div />
@@ -197,7 +198,7 @@ const AdminColors = () => {
           {EditModal.isOpened &&
           <AddEditModal open={EditModal.isOpened} handleModal={closeModal} item={EditModal.rowData} />}
           {DeleteModal.isOpened &&
-          <DeleteItemModal open={DeleteModal.isOpened} handleModal={closeModal} id={DeleteModal.id} item="colors" handleOpenSnackbar={handleOpenSnackbar} />}
+          <DeleteItemModal open={DeleteModal.isOpened} handleModal={closeModal} id={DeleteModal.id} item="sizes" handleOpenSnackbar={handleOpenSnackbar} />}
           <SnackbarMessage openSnackbar={openSnackbar} handleCloseSnackbar={handleCloseSnackbar} type={snackbarType} />
         </Box>
       )}
@@ -205,4 +206,4 @@ const AdminColors = () => {
   );
 };
 
-export default AdminColors;
+export default AdminSizes;
