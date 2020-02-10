@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -33,23 +33,33 @@ const FilterByCategory = ({
     selectCategory(category);
     setCurrentPage(1);
   };
+  const [selectedIndex, setSelectedIndex] = React.useState(null);
 
   let categoryList = [];
-  categoryList = categoryListing.map(category => {
+  categoryList = categoryListing.map((category, index) => {
     return (
       <ListItem
+        index={index}
         className={classes.listItem}
         key={category._id}
         button
         onClick={event => {
           handleCategoryClick(event, category.id);
+          setSelectedIndex(index);
         }}
+        selected={selectedIndex === index}
       >
-        <ListItemIcon className={classes.iconContainer}>
+        <ListItemIcon
+          className={
+            selectedIndex === index
+              ? classes.iconActiveContainer
+              : classes.iconContainer
+          }
+        >
           <EcoIcon />
         </ListItemIcon>
         <ListItemText
-          primaryTypographyProps={{className: classes.text}}
+          primaryTypographyProps={{ className: classes.text }}
           primary={category.name}
         />
       </ListItem>
@@ -62,10 +72,7 @@ const FilterByCategory = ({
         className={classes.root}
         aria-label="mailbox folders"
       >
-        <Typography
-          className={classes.title}
-          variant="h3"
-        >
+        <Typography className={classes.title} variant="h3">
           Category
         </Typography>
         <div className={classes.subLine} />
