@@ -46,7 +46,7 @@ const AdminCustomers = () => {
   const customersHandler = () => {
     // console.log("customersHandler");
     // getAllCustomers();
-    useHttp("/api/customers", "GET");
+    // useHttp("/api/customers", "GET");
   };
 
   return <button onClick={customersHandler}>GET CUSTOMERS</button>;
