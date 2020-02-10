@@ -74,8 +74,8 @@ const AdminCustomers = () => {
   ];
 
   const openModalHandler = data => {
-    setModalIsOpen(true);
     setOneUserData(data);
+    setModalIsOpen(true);
   };
 
   const closeModalHandler = () => {
@@ -118,19 +118,13 @@ const AdminCustomers = () => {
           actions={[
             {
               icon: "edit",
-              tooltip: "Edit customer",
+              tooltip: "Edit user rights",
               onClick: (event, rowData) => {
                 openModalHandler(rowData);
               },
             },
           ]}
           title="Customers"
-          options={{
-            headerStyle: {
-              backgroundColor: theme.palette.primary.main,
-              color: "white",
-            },
-          }}
         />
       )}
       <UserModal
@@ -141,6 +135,7 @@ const AdminCustomers = () => {
         }}
         allCustomers={allCustomers}
         setAllCustomers={setAllCustomers}
+        setOneUserData={setOneUserData}
       />
     </Box>
   );

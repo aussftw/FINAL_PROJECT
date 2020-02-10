@@ -162,7 +162,7 @@ const ItemDetails = ({
           <Typography variant="h6" className={classes.infoTitle}>
             {name}
           </Typography>
-          <Divider variant="middle" />
+          <Divider />
           <List>
             <ListItem className={classes.root}>
               <ListItemText className={classes.infoDetail} primary="Color:" />
@@ -178,7 +178,7 @@ const ItemDetails = ({
             </ListItem>
           </List>
           <RatingModule id={item._id} rate={item.rate.rating} />
-          <Divider variant="middle" />
+          <Divider />
           <List>
             <ListItem className={classes.root}>
               <ListItemText primary="Price:" className={classes.infoDetail} />
@@ -187,9 +187,9 @@ const ItemDetails = ({
               </Typography>
             </ListItem>
           </List>
-          <Divider variant="middle" />
+          <Divider />
           <Container className={classes.qty_wrapper}>
-            <Typography>Quantity:</Typography>
+            <Typography className={classes.qty_text}>Quantity:</Typography>
             <Box>
               <IconButton aria-label="Less" onClick={() => dec()}>
                 <RemoveSharpIcon />
@@ -209,7 +209,7 @@ const ItemDetails = ({
               </IconButton>
             </Box>
           </Container>
-          <Divider variant="middle" />
+          <Divider />
           <Box className={classes.buttonsBar}>
             <Button
               className={classes.actionButton}
