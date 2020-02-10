@@ -3,10 +3,10 @@ import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles(theme => ({
     modal: {
         position: "fixed",
-        top: 0,
+        top: 10,
         left: "calc(50% - 196px)",
-        minHeight: 500,
-        width: 360,
+        minHeight: 420,
+        width: 320,
         padding: theme.spacing(2),
         backgroundColor: "white",
         borderRadius: 4,
@@ -16,19 +16,16 @@ const useStyles = makeStyles(theme => ({
         top: 8,
         right: 8,
     },
-    input: {
-        marginBottom: theme.spacing(1),
+    message: {
+        width: 280,
+        padding: "16px 10px",
+        margin: "0px 10px",
     },
-    inputSmallBox: {
+    btn: {
         display: "flex",
-        flexWrap: "wrap",
-        justifyContent: "space-between",
-        marginBottom: theme.spacing(1),
-    },
-    inputSmall: {
-        width: 170,
-        marginBottom: theme.spacing(1),
-    },
+        justifyContent: "center",
+        margin: "17px auto"
+    }
 }));
 
 export default useStyles;

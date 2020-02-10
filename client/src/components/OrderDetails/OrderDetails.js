@@ -47,6 +47,8 @@ const OrderDetails = () => {
     };
   },[orderNumber.orderNo]);
 
+  const statusAction = orderDetails.canceled ? "canceled" : "successfully placed";
+  const statusText = orderDetails.canceled ? "canceled" : orderDetails.status;
 
   return (preloader ? (
     <PreloaderAdaptive />
@@ -58,9 +60,10 @@ const OrderDetails = () => {
         ) : (
           <div>
             <Typography className={classes.mainText}>
-              {`Hi ${orderDetails.name}, your order №${orderDetails.orderNo} has been successfully placed at Plantly Shop. Order details are below.`}
+              {`Hi ${orderDetails.name}, your order №${orderDetails.orderNo} has been ${statusAction} at Plantly Shop.
+               Order details are below.`}
             </Typography>
-            <Typography className={classes.details}>{`Status: ${orderDetails.status}`}</Typography>
+            <Typography className={classes.details}>{`Status: ${statusText}`}</Typography>
             <Typography className={classes.details}>{`Phone: ${orderDetails.mobile}`}</Typography>
             <Typography className={classes.details}>{`Email: ${orderDetails.email}`}</Typography>
             <Typography className={classes.details}>{`Delivery address: ${orderDetails.deliveryAddress}`}</Typography>
