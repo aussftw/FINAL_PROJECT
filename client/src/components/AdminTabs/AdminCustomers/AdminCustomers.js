@@ -13,7 +13,7 @@ import UserModal from "./UserModal/UserModal";
 const AdminCustomers = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [allCustomers, setAllCustomers] = useState([]);
-  const [ error, setError ] = useState("");
+  const [error, setError] = useState("");
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [oneUserData, setOneUserData] = useState({
     isAdmin: "",
@@ -61,7 +61,8 @@ const AdminCustomers = () => {
     },
     { title: "Date", field: "date", type: "date" },
     { title: "Phone", field: "telephone", type: "string" },
-    { title: "Address",
+    {
+      title: "Address",
       field: "address",
       type: "string",
       render: rowData => (
@@ -96,31 +97,6 @@ const AdminCustomers = () => {
       });
   };
 
-<<<<<<< HEAD
-  const useHttp = (method, call) => {
-    const data = {
-      url: call,
-      method,
-    };
-
-    return axios(data)
-      .then(response => {
-        const body = response.data;
-        console.log(body);
-      })
-      .catch(err => {
-        // eslint-disable-next-line no-console
-        console.log(err.response);
-      });
-  };
-  const customersHandler = () => {
-    // console.log("customersHandler");
-    // getAllCustomers();
-    // useHttp("/api/customers", "GET");
-  };
-
-  return <button onClick={customersHandler}>GET CUSTOMERS</button>;
-=======
   return (
     <Box>
       <Button
@@ -128,35 +104,35 @@ const AdminCustomers = () => {
         onClick={() => getAllCustomers()}
         className={classes.btn}
       >
-      GET ALL CUSTOMERS
+        GET ALL CUSTOMERS
       </Button>
       <Typography component="h3" align="center" className={classes.message}>
         {error.message}
       </Typography>
       {isLoading ? (
         <PreloaderAdaptive />
-        ) : (
-          <MaterialTable
-            columns={columns}
-            data={allCustomers}
-            actions={[
-              {
-                icon: "edit",
-                tooltip: "Edit customer",
-                onClick: (event, rowData) => {
-                  openModalHandler(rowData);
-                },
+      ) : (
+        <MaterialTable
+          columns={columns}
+          data={allCustomers}
+          actions={[
+            {
+              icon: "edit",
+              tooltip: "Edit customer",
+              onClick: (event, rowData) => {
+                openModalHandler(rowData);
               },
-            ]}
-            title="Customers"
-            options={{
-              headerStyle: {
-                backgroundColor: theme.palette.primary.main,
-                color: "white",
-              }
-            }}
-          />
-          )}
+            },
+          ]}
+          title="Customers"
+          options={{
+            headerStyle: {
+              backgroundColor: theme.palette.primary.main,
+              color: "white",
+            },
+          }}
+        />
+      )}
       <UserModal
         user={oneUserData}
         isOpen={modalIsOpen}
@@ -167,8 +143,7 @@ const AdminCustomers = () => {
         setAllCustomers={setAllCustomers}
       />
     </Box>
-  )
->>>>>>> origin/dev
+  );
 };
 
 export default AdminCustomers;
