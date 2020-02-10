@@ -17,6 +17,11 @@ const AdminComments = () => {
   const [oneCommentData, setOneCommentData] = useState(null);
   const tableRef = useRef(null);
 
+  const refresh = () => {
+      tableRef.current.onQueryChange()
+  };
+
+
     const openModalHandler = data => {
     setOneCommentData(data);
     setModalIsOpen(true);
@@ -62,6 +67,8 @@ const AdminComments = () => {
       .delete(`/api/comments/${oneCommentData._id}`)
       .then(response => {
         deleteConfirmCloseHandler();
+        refresh();
+        // eslint-disable-next-line no-console
         console.log(response.data.message);
       })
       .catch(err => {
@@ -91,10 +98,10 @@ const AdminComments = () => {
             },
           },
             {
-                icon: 'refresh',
-                tooltip: 'Refresh Data',
-                isFreeAction: true,
-                onClick: () => tableRef.current && tableRef.current.onQueryChange(),
+            icon: 'refresh',
+            tooltip: 'Refresh Data',
+            isFreeAction: true,
+            onClick: () => tableRef.current && tableRef.current.onQueryChange(),
             }
         ]}
         title="Comments"
@@ -125,6 +132,7 @@ const AdminComments = () => {
         onClose={() => {
           closeModalHandler();
         }}
+        refresh={refresh}
       />
       <Dialog open={deleteConfirmOpen} onClose={deleteConfirmCloseHandler}>
         <DialogTitle id="alert-dialog-title">

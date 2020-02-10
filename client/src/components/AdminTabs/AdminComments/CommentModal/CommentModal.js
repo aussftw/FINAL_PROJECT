@@ -15,7 +15,7 @@ import CloseIcon from "@material-ui/icons/Close";
 
 import useStyles from "./useStyles";
 
-const ModalComment = ({data, isOpen, onClose}) => {
+const ModalComment = ({data, isOpen, onClose, refresh}) => {
     const classes = useStyles();
     const [commentValue, setCommentValue] = useState({
         id: "",
@@ -37,6 +37,7 @@ const ModalComment = ({data, isOpen, onClose}) => {
                 .then(response => {
                     console.log(`Comment id:"${response.data._id}" changed successfully! New value: "${response.data.content}"`);
                     onClose();
+                    refresh();
                 })
                 .catch(err => {
                     // eslint-disable-next-line no-console

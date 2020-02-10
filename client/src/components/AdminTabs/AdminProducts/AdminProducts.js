@@ -92,7 +92,6 @@ const AdminProducts = () => {
       .get("/api/products")
       .then(response => {
         setAllProducts(response.data);
-        console.log(response)
       })
       .catch(err => {
         // eslint-disable-next-line no-console
@@ -145,10 +144,6 @@ const AdminProducts = () => {
       sizes.length !== 0
     ) {
       setAllLoaded(true);
-      console.log("allProducts: ", allProducts);
-      console.log("categories: ", categories);
-      console.log("colors: ", colors);
-      console.log("sizes: ", sizes);
     }
   }, [allLoaded, allProducts, categories, colors, sizes]);
 
