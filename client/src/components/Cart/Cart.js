@@ -19,6 +19,7 @@ const Cart = ({ cart, getCartVar }) => {
   const history = useHistory();
   const matches = useMediaQuery(theme => theme.breakpoints.down("xs"));
   const [totalPrice, setTotalPrice] = useState(0);
+  const [allProducts, setAllProducts] = useState([]);
 
   const calcTotalPrice = useCallback(() => {
     const result = cart.reduce((sum, item) => {
@@ -30,6 +31,29 @@ const Cart = ({ cart, getCartVar }) => {
     setTotalPrice(Math.round(result * 100) / 100);
   }, [cart]);
 
+  const renderProducts = useCallback(() => {
+    const value = cart.map(value => {
+      let cartQty = value.cartQuantity;
+      if (value.product.quantity < cartQty) {
+        cartQty = value.product.quantity;
+      }
+      return (
+        <ProductCart
+          id={value.product._id}
+          key={`cart-key-${value.product._id}`}
+          itemNo={value.product.itemNo}
+          title={value.product.name}
+          rate={value.product.rate.rating}
+          price={value.product.currentPrice}
+          img={value.product.imageUrls[0]}
+          cartQty={cartQty}
+          shopQty={value.product.quantity}
+        />
+      );
+    });
+    setAllProducts(value)
+  }, [cart]);
+
   useEffect(() => {
     getCartVar();
   }, [getCartVar]);
@@ -37,6 +61,12 @@ const Cart = ({ cart, getCartVar }) => {
   useEffect(() => {
     calcTotalPrice();
   }, [calcTotalPrice]);
+
+  useEffect(()=> {
+    if (cart) {
+    renderProducts();
+  }
+  }, [cart, renderProducts]);
 
   return (
     <Container className={classes.cartContainer} maxWidth="lg">
@@ -75,25 +105,7 @@ const Cart = ({ cart, getCartVar }) => {
       {!cart ? (
         <Preloader />
       ) : (
-        cart.map(value => {
-          let cartQty = value.cartQuantity;
-          if (value.product.quantity < cartQty) {
-            cartQty = value.product.quantity;
-          }
-          return (
-            <ProductCart
-              id={value.product._id}
-              key={`cart-key-${value.product._id}`}
-              itemNo={value.product.itemNo}
-              title={value.product.name}
-              rate={value.product.rate.rating}
-              price={value.product.currentPrice}
-              img={value.product.imageUrls[0]}
-              cartQty={cartQty}
-              shopQty={value.product.quantity}
-            />
-          );
-        })
+          allProducts
       )}
       {cart.length !== 0 ? (
         <Box className={classes.totalContainer}>
