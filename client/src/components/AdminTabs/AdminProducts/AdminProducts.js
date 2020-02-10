@@ -92,6 +92,7 @@ const AdminProducts = () => {
       .get("/api/products")
       .then(response => {
         setAllProducts(response.data);
+        console.log(response)
       })
       .catch(err => {
         // eslint-disable-next-line no-console

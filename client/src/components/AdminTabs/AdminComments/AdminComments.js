@@ -21,7 +21,6 @@ const AdminComments = () => {
       tableRef.current.onQueryChange()
   };
 
-
     const openModalHandler = data => {
     setOneCommentData(data);
     setModalIsOpen(true);
