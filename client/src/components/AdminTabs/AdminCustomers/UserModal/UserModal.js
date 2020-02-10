@@ -13,20 +13,21 @@ import PreloaderAdaptiveSmall from "../../../Preloader/AdaptiveSmall";
 
 import useStyles from "./useStyles";
 
-const UserModal = ({ user, allCustomers, setAllCustomers, isOpen, onClose }) => {
+const UserModal = ({ user, setOneUserData, allCustomers, setAllCustomers, isOpen, onClose }) => {
   const classes = useStyles();
+  console.log(user);
   const [ isLoadingAdmin, setIsLoadingAdmin ] = useState(false);
   const [ isLoadingRating, setIsLoadingRating ] = useState(false);
-  const [ adminStatus, setAdminStatus ] = useState(user.isAdmin);
+  const [ isLoadingEnabled, setIsLoadingEnabled ] = useState(false);
+
   const [ message, setMessage ] = useState("");
 
   const closeModal = () => {
     setMessage("");
     onClose();
   };
-
   const editAdminHandler = () => {
-    const updatedUser = { isAdmin: !adminStatus };
+    const updatedUser = { isAdmin: !user.isAdmin };
     setMessage("");
     setIsLoadingAdmin(true);
       axios
@@ -38,7 +39,7 @@ const UserModal = ({ user, allCustomers, setAllCustomers, isOpen, onClose }) => 
               }
             return item;
           });
-          setAdminStatus(response.data.isAdmin);
+          setOneUserData(response.data);
           setAllCustomers(updatedCustomers);
           setIsLoadingAdmin(false);
         })
@@ -46,6 +47,29 @@ const UserModal = ({ user, allCustomers, setAllCustomers, isOpen, onClose }) => 
           setMessage(err.response);
           setIsLoadingAdmin(false);
         });
+  };
+
+  const editEnabledHandler = () => {
+    const updatedUser = { enabled: !user.enabled };
+    setMessage("");
+    setIsLoadingEnabled(true);
+    axios
+      .put(`/api/customers/${user._id}`, updatedUser)
+      .then(response => {
+        const updatedCustomers = allCustomers.map(item => {
+          if (item._id === user._id) {
+            return { ...item, enabled: response.data.enabled };
+          }
+          return item;
+        });
+        setOneUserData(response.data);
+        setAllCustomers(updatedCustomers);
+        setIsLoadingEnabled(false);
+      })
+      .catch(err => {
+        setMessage(err.response);
+        setIsLoadingEnabled(false);
+      });
   };
 
   const resetRating = () => {
@@ -64,11 +88,17 @@ const UserModal = ({ user, allCustomers, setAllCustomers, isOpen, onClose }) => 
       });
   };
 
-  const adminQuestion = !adminStatus ?
-    (`Are you sure to add shop administrator rights to user ${user.firstName} ${user.lastName}?`) :
-    (`Are you sure to remove shop administrator rights from user ${user.firstName} ${user.lastName}?`);
+  const adminQuestion = !user.isAdmin ?
+    (`Are you sure to add shop administrator rights to user?`) :
+    (`Are you sure to remove shop administrator rights from user?`);
 
-  const adminEditButtonText = adminStatus ? "remove admin rights" : "add admin rights";
+  const adminEditButtonText = user.isAdmin ? "remove admin rights" : "add admin rights";
+
+  const enableQuestion = !user.enabled ?
+    (`Are you sure to add read/write rights to user?`) :
+    (`Are you sure to assign read-only rights to user?`);
+
+  const enableEditButtonText = user.enabled ? "disable user" : "enable user";
 
   return (
     <Modal
@@ -82,6 +112,9 @@ const UserModal = ({ user, allCustomers, setAllCustomers, isOpen, onClose }) => 
     >
       <Fade in={isOpen}>
         <Box className={classes.modal}>
+          <Typography component="h3" align="center" className={classes.message}>
+            {`${user.firstName} ${user.lastName}`}
+          </Typography>
           <Typography component="h3" align="center" className={classes.message}>
             {adminQuestion}
           </Typography>
@@ -102,7 +135,19 @@ const UserModal = ({ user, allCustomers, setAllCustomers, isOpen, onClose }) => 
             </Button>
           )}
           <Typography component="h3" align="center" className={classes.message}>
-            {`Are you sure to reset rating list of user ${user.firstName} ${user.lastName}?`}
+            {enableQuestion}
+          </Typography>
+          {isLoadingEnabled ? <PreloaderAdaptiveSmall /> : (
+            <Button
+              variant="contained"
+              onClick={() => editEnabledHandler()}
+              className={classes.btn}
+            >
+              {enableEditButtonText}
+            </Button>
+          )}
+          <Typography component="h3" align="center" className={classes.message}>
+            Are you sure to reset user rating list?
           </Typography>
           {isLoadingRating ? <PreloaderAdaptiveSmall /> : (
             <Button
@@ -110,7 +155,7 @@ const UserModal = ({ user, allCustomers, setAllCustomers, isOpen, onClose }) => 
               onClick={() => resetRating()}
               className={classes.btn}
             >
-                Reset Rating
+              Reset Rating
             </Button>
           )}
           {message && (

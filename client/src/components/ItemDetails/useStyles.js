@@ -35,10 +35,11 @@ const useStyles = makeStyles(theme => ({
     // },
   },
   infoContainer: {
-    // minWidth: 180,
+    minWidth: 180,
     marginRight: theme.spacing(2),
     [theme.breakpoints.up("sm")]: {
-      width: "50%",
+      // width: "50%",
+      minWidth: 250,
     },
   },
 
@@ -61,11 +62,15 @@ const useStyles = makeStyles(theme => ({
   qty_wrapper: {
     display: "flex",
     flexDirection: "row",
+    justifyContent: "space-between",
     marginTop: 15,
     padding: 2,
-    [theme.breakpoints.up("sm")]: {
-      flexDirection: "column",
-    },
+    // [theme.breakpoints.up("sm")]: {
+    //   flexDirection: "column",
+    // },
+  },
+  qty_text: {
+    "align-self": "center",
   },
   input: {
     backgroundColor: "#fff",
@@ -79,7 +84,7 @@ const useStyles = makeStyles(theme => ({
     textAlign: "center",
   },
   infoDetail: {
-    maxWidth: 120,
+    // maxWidth: 120,
     margin: 0,
   },
   infoDetailValue: {},
