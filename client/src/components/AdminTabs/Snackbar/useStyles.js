@@ -7,13 +7,14 @@ const useStyles = makeStyles(theme => ({
   },
   snackbarError: {
     position: "relative",
-    backgroundColor: "red",
+    backgroundColor: "#f54033",
   },
   snackbarMessage: {
-    position: "absolute",
-    top: 18,
-    left: 68,
-    fontSize: 15,
+    // paddingLeft: "1%",
+  //   position: "absolute",
+  //   top: 18,
+  //   left: 68,
+  //   fontSize: 15,
   },
 }));
 

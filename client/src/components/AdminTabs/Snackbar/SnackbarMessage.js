@@ -13,7 +13,6 @@ import useStyles from "./useStyles";
 const SnackbarMessage = ({ openSnackbar, handleCloseSnackbar, type }) => {
   const classes = useStyles();
 
-  
   const snackbar = () => {
     return (
       /*      <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar}>
@@ -31,11 +30,7 @@ const SnackbarMessage = ({ openSnackbar, handleCloseSnackbar, type }) => {
         autoHideDuration={1500}
       >
         <SnackbarContent
-
-            // className={classes.snackbarError}
-
-          className={classes.snackbar}
-
+          className={type.type==='error' ? classes.snackbarError: classes.snackbar}
           role="alert"
           message={(
             <Box>
@@ -51,8 +46,6 @@ const SnackbarMessage = ({ openSnackbar, handleCloseSnackbar, type }) => {
   };
 
   return snackbar();
-
-
 };
 
 export default SnackbarMessage;

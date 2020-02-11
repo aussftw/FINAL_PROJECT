@@ -9,14 +9,14 @@ import { Box } from "@material-ui/core";
 import MaterialTable from "material-table";
 // import AddPartnerModal from "../AdminContent/AddPartnerModal/AddPartnerModal";
 import EditIcon from "@material-ui/icons/Edit";
-import AddIcon from "@material-ui/icons/Add";
+// import AddIcon from "@material-ui/icons/Add";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
-import DeleteIcon from "@material-ui/icons/Delete";
-import Typography from "@material-ui/core/Typography";
+// import DeleteIcon from "@material-ui/icons/Delete";
+// import Typography from "@material-ui/core/Typography";
 import AddPartnerModal from "../AdminContent/AdminPartners/AddPartnerModal/AddPartnerModal";
-import DeleteItemModal from "../AdminContent/DeleteItemModal/DeleteItemModal";
+// import DeleteItemModal from "../AdminContent/DeleteItemModal/DeleteItemModal";
 import CancelOrder from "./CancelOrderModal/CancelOrder";
-import SnackbarMessage from "../AdminContent/Snackbar/SnackbarMessage";
+import SnackbarMessage from "../Snackbar/SnackbarMessage";
 import AdminOrdersProducts from "./AdminOrdersProducts/AdminOrdersProducts";
 
 
@@ -128,7 +128,6 @@ function AdminOrders() {
     { title: "Total Sum", field: "totalSum" },
     // { title: 'Products', field: 'products', searchable: false,
     // render: rowData => <AdminOrdersProducts rowData={rowData.products} /> },
-
   ];
 
 
@@ -150,7 +149,7 @@ function AdminOrders() {
                 tooltip: 'Show Products',
                 render: rowData => {
                   return (
-                    <AdminOrdersProducts rowData={rowData.products} />
+                    <AdminOrdersProducts rowData={rowData.products} totalSum={rowData.totalSum} />
                   )
                 },
               },

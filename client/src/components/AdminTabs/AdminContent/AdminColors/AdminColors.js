@@ -8,7 +8,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteItemModal from "../DeleteItemModal/DeleteItemModal";
 import AddEditModal from "./AddEditModal/AddEditModal";
-import SnackbarMessage from "../Snackbar/SnackbarMessage";
+import SnackbarMessage from "../../Snackbar/SnackbarMessage";
 // import Snackbar from "@material-ui/core/Snackbar";
 
 

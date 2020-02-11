@@ -8,7 +8,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteItemModal from "../DeleteItemModal/DeleteItemModal";
 import AddEditModal from "./AddEditModal/AddEditModal";
-import SnackbarMessage from "../Snackbar/SnackbarMessage";
+import SnackbarMessage from "../../Snackbar/SnackbarMessage";
 
 
 const AdminSizes = () => {
@@ -65,27 +65,23 @@ const AdminSizes = () => {
       rowData,
     });
   };
-  // const handleDeleteModal = (rowData) => {
-  //   setDeleteModal({
-  //     isOpened: !DeleteModal.isOpened,
-  //     id: rowData._id,
-  //   });
-  // };
+  const handleDeleteModal = (rowData) => {
+    setDeleteModal({
+      isOpened: !DeleteModal.isOpened,
+      id: rowData._id,
+    });
+  };
 
 
     const deleteValidate = (rowData) => {
       axios
-        .get(`/api/products/filter?color=green,red,coloured&size=${rowData.name}`)
-        // .get(`/api/products/filter?size=${rowData.name}`)
+        .get(`/api/products/filter?sizes=${rowData.name}`)
         .then(orders => {
-          console.log("orders.data.length", orders.data.products.length);
-          console.log("orders.data", orders.data);
           if (orders.data.products.length === 0) {
-            // handleDeleteModal(rowData);
+            handleDeleteModal(rowData);
           } else {
             const error = {type:'error', message:`You can’t delete size because of active products in catalog`}
             handleOpenSnackbar(error);
-            console.log("you cant edit/delete size because of active products in catalog");
           }
         })
         .catch(err => {

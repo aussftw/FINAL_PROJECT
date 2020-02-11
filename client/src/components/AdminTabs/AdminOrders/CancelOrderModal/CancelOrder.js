@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Backdrop from "@material-ui/core/Backdrop";
 import Button from "@material-ui/core/Button";
 import Fade from "@material-ui/core/Fade";
@@ -22,8 +22,7 @@ const CancelOrder = ({ open, handleModal, id, orderNo, handleOpenSnackbar }) => 
   const classes = useStyles();
 
   const cancelOrder = () => {
-    console.log(id);
-    console.log(orderNo);
+
     axios
       .put(`/api/orders/cancel/${id}`)
       .then(resp => {
