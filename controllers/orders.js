@@ -218,7 +218,6 @@ exports.updateOrder = (req, res, next) => {
 
 exports.cancelOrder = (req, res, next) => {
   Order.findOne({ _id: req.params.id }).then(async currentOrder => {
-    console.log(currentOrder);
     if (!currentOrder) {
       return res
         .status(400)

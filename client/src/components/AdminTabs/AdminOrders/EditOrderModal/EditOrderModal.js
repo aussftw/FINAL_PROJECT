@@ -9,20 +9,12 @@ import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import CloseIcon from "@material-ui/icons/Close";
 import useStyles from "./useStyles";
-// import MuiAlert from "@material-ui/lab/Alert";
-// import Snackbar from "@material-ui/core/Snackbar";
-// import SnackbarContent from "@material-ui/core/SnackbarContent";
-// import CheckCircleRoundedIcon from "@material-ui/icons/CheckCircleRounded";
 
-// function Alert(props) {
-//   return <MuiAlert elevation={6} variant="filled" {...props} />;
-// }
 
-const CancelOrder = ({ open, handleModal, id, orderNo, handleOpenSnackbar }) => {
+const EditOrderModal = ({ open, handleModal, id, orderNo, handleOpenSnackbar }) => {
   const classes = useStyles();
 
   const cancelOrder = () => {
-
     axios
       .put(`/api/orders/cancel/${id}`)
       .then(resp => {
@@ -87,4 +79,4 @@ const CancelOrder = ({ open, handleModal, id, orderNo, handleOpenSnackbar }) => 
 
 };
 
-export default CancelOrder;
+export default EditOrderModal;

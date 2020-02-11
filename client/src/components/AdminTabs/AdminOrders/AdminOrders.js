@@ -15,7 +15,7 @@ import AddCircleIcon from "@material-ui/icons/AddCircle";
 // import Typography from "@material-ui/core/Typography";
 import AddPartnerModal from "../AdminContent/AdminPartners/AddPartnerModal/AddPartnerModal";
 // import DeleteItemModal from "../AdminContent/DeleteItemModal/DeleteItemModal";
-import CancelOrder from "./CancelOrderModal/CancelOrder";
+import EditOrderModal from "./EditOrderModal/EditOrderModal";
 import SnackbarMessage from "../Snackbar/SnackbarMessage";
 import AdminOrdersProducts from "./AdminOrdersProducts/AdminOrdersProducts";
 
@@ -41,7 +41,7 @@ function AdminOrders() {
   // const classes = useStyles();
   const [ordersArr, setOrdersArr] = useState([]);
   const [AddModal, setAddModal] = useState({ isOpened: false, rowData: null });
-  const [CancelModal, setCancelModal] = useState({ isOpened: false, id: "", orderNo: "" });
+  const [EditModal, setEditModal] = useState({ isOpened: false, id: "", orderNo: "" });
 
   const handleOpenAddModal = () => {
     setAddModal({
@@ -50,8 +50,8 @@ function AdminOrders() {
     });
   };
 
-  const handleCancelModal = (rowData) => {
-    setCancelModal({
+  const handleEditModal = (rowData) => {
+    setEditModal({
       isOpened: !AddModal.isOpened,
       id: rowData._id,
       orderNo: rowData.orderNo,
@@ -63,10 +63,10 @@ function AdminOrders() {
       isOpened: false,
       rowData: AddModal.rowData,
     });
-    setCancelModal({
+    setEditModal({
       isOpened: false,
-      id: CancelModal.id,
-      orderNo: CancelModal.orderNo,
+      id: EditModal.id,
+      orderNo: EditModal.orderNo,
     });
 
   };
@@ -167,7 +167,7 @@ function AdminOrders() {
                 icon: () => <EditIcon />,
                 tooltip: "Edit size",
                 onClick: (event, rowData) => {
-                  handleCancelModal(rowData);
+                  handleEditModal(rowData);
                 }
               },
             ]}
@@ -176,12 +176,12 @@ function AdminOrders() {
           <AddPartnerModal open={AddModal.isOpened} handleModal={closeModal} partner={AddModal.rowData} />}
           {/* <AddPartnerModal open={openAddModal} handleOpen={handleOpenAddModal} partner={{name:"", url:"", customId:"", imageUrl:""}} /> */}
           {/* <AddPartnerModal open={openEditModal} handleOpen={handleOpenEditModal} partner={dataEditModal} /> */}
-          {CancelModal.isOpened && (
-          <CancelOrder
-            open={CancelModal.isOpened}
+          {EditModal.isOpened && (
+          <EditOrderModal
+            open={EditModal.isOpened}
             handleModal={closeModal}
-            id={CancelModal.id}
-            orderNo={CancelModal.orderNo}
+            id={EditModal.id}
+            orderNo={EditModal.orderNo}
             handleOpenSnackbar={handleOpenSnackbar}
           />
         )}

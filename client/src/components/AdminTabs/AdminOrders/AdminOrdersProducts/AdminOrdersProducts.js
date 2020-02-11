@@ -2,8 +2,7 @@ import React from "react";
 import Grid from "@material-ui/core/Grid";
 import { Link } from "react-router-dom";
 import Typography from "@material-ui/core/Typography";
-import { Box } from "@material-ui/core";
-import useStyles from "../../../Header/SubHeader/useStyles";
+import useStyles from "./useStyles";
 
 
 const AdminOrdersProducts = ({ rowData, totalSum }) => {
@@ -12,25 +11,26 @@ const AdminOrdersProducts = ({ rowData, totalSum }) => {
 
   return (
     <>
-      <Box className={classes.wrapper}>
-        {rowData.map((item) => {
+      {rowData.map((item) => {
         const ProdName = item.product.name;
 
         return (
-          <Grid container>
+          <Grid container className={classes.wrapper} key={ProdName}>
             <Grid item xs={4} sm={4}>
-              <Link 
+
+              <Typography
+                component={Link}
                 to={`/products/${item.product.itemNo}`}
-                className={classes.link}
+                className={classes.name}
               >
-                <Typography>
-                  {ProdName.charAt(0).toUpperCase() + ProdName.slice(1)}
-                </Typography>
-              </Link>
+                {ProdName.charAt(0).toUpperCase() + ProdName.slice(1)}
+              </Typography>
+
+
             </Grid>
             <Grid item xs={3} sm={3}>
               {item.product.imageUrls.map((url) => {
-                return <img alt={ProdName} src={url} style={{ width: "20%" }} />;
+                return <img key={url} alt={ProdName} src={url} style={{ width: "20%" }}/>;
               })}
             </Grid>
             <Grid item xs={2} sm={2}>
@@ -41,12 +41,13 @@ const AdminOrdersProducts = ({ rowData, totalSum }) => {
           </Grid>
         );
       })}
+
         <Typography>
           Total = {totalSum}
         </Typography>
-      </Box>
+
     </>
-  )
+  );
 
 };
 
