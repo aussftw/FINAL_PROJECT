@@ -5,8 +5,6 @@ import * as axios from "axios";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
-import AddIcon from '@material-ui/icons/Add';
-import EditIcon from '@material-ui/icons/Edit';
 
 import PreloaderAdaptive from "../../Preloader/Adaptive";
 import ProductModal from "./ProductModal/ProductModal";
@@ -81,7 +79,7 @@ const AdminProducts = () => {
       searchable: false,
       type: "string",
       render: rowData => (
-        <Typography noWrap style={{ width: "200px", fontSize: "0.875rem"}}>
+        <Typography noWrap style={{ width: "200px", fontSize: "0.875rem" }}>
           {rowData.description}
         </Typography>
       ),
@@ -94,6 +92,7 @@ const AdminProducts = () => {
       .get("/api/products")
       .then(response => {
         setAllProducts(response.data);
+        console.log(response)
       })
       .catch(err => {
         // eslint-disable-next-line no-console
@@ -146,10 +145,6 @@ const AdminProducts = () => {
       sizes.length !== 0
     ) {
       setAllLoaded(true);
-      console.log("allProducts: ", allProducts);
-      console.log("categories: ", categories);
-      console.log("colors: ", colors);
-      console.log("sizes: ", sizes);
     }
   }, [allLoaded, allProducts, categories, colors, sizes]);
 
@@ -167,7 +162,7 @@ const AdminProducts = () => {
       <Button
         variant="contained"
         onClick={getAllHandler}
-        style={{ marginBottom: "30px" }}
+        style={{ marginBottom: "20px" }}
       >
         Get all products and parameters
       </Button>
@@ -181,7 +176,7 @@ const AdminProducts = () => {
               data={allProducts}
               actions={[
                 {
-                  icon: ()=><AddIcon />,
+                  icon: "add",
                   tooltip: "Add new product",
                   isFreeAction: true,
                   onClick: () => {
@@ -189,7 +184,7 @@ const AdminProducts = () => {
                   },
                 },
                 {
-                  icon: ()=><EditIcon />,
+                  icon: "edit",
                   tooltip: "Edit product",
                   onClick: (event, rowData) => {
                     openModalHandler(rowData);

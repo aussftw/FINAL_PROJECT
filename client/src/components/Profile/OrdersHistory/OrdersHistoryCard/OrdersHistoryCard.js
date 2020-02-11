@@ -9,7 +9,7 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 import OrdersHistoryCardItem from "./OrdersHistoryCardItem/OrdersHistoryCardItem";
 import useStyles from "./useStyles";
 
-const OrdersHistoryCard = ({ orderNo, date, products, name, lastName, phone, email, address, totalSum, status }) => {
+const OrdersHistoryCard = ({ orderNo, date, products, name, lastName, phone, email, address, totalSum, status, canceled }) => {
   const classes = useStyles();
   const matches = useMediaQuery(theme => theme.breakpoints.up("md"));
   const equal = useMediaQuery(theme => theme.breakpoints.up("sm"));
@@ -23,6 +23,8 @@ const OrdersHistoryCard = ({ orderNo, date, products, name, lastName, phone, ema
   const handleChangeInner = panel => (event, isExpanded) => {
     setExpandedInner(isExpanded ? panel : false);
   };
+
+  const statusText = canceled ? "canceled" : status;
 
   return (
     <ExpansionPanel
@@ -47,7 +49,7 @@ const OrdersHistoryCard = ({ orderNo, date, products, name, lastName, phone, ema
           </div>
         )}
         {matches && (<Typography className={classes.data}>{`Total: $${totalSum.toFixed(2)}`}</Typography>)}
-        {equal && (<Typography className={classes.data}>{`Status: ${status}`}</Typography>)}
+        {equal && (<Typography className={classes.data}>{`Status: ${statusText}`}</Typography>)}
       </ExpansionPanelSummary>
       <ExpansionPanelDetails className={classes.products}>
         {products.map(item => {
@@ -78,7 +80,7 @@ const OrdersHistoryCard = ({ orderNo, date, products, name, lastName, phone, ema
               <Typography className={classes.order}>order details</Typography>
             </ExpansionPanelSummary>
             <ExpansionPanelDetails className={classes.products}>
-              <Typography className={classes.details}>{`Status: ${status}`}</Typography>
+              <Typography className={classes.details}>{`Status: ${statusText}`}</Typography>
               <Typography className={classes.details}>{`Customer: ${name} ${lastName}`}</Typography>
               <Typography className={classes.details}>{`Phone: ${phone}`}</Typography>
               <Typography className={classes.details}>{`Email: ${email}`}</Typography>

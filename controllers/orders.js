@@ -65,8 +65,17 @@ exports.placeOrder = async (req, res, next) => {
     } else {
       const subscriberMail = req.body.email;
       const letterSubject = req.body.letterSubject;
-      const letterHtml = `<h2>Hello, ${order.name}.</h2><div>${req.body.letterHtml}</div><h2>OrderNo is ${order.orderNo}.</h2>
-<h3>While you’re there, you might be interested in other products, as they go well with your order. Thank you once again!<h3>`;
+      const letterHtml = `<div style="width: 600px;padding: 25px 30px 32px 27px;margin: 0 auto;color: black;">
+                            <h2 style="font-size: 28px; line-height: 32px; padding-bottom: 15px; font-weight: normal;margin: 0;color: black;">
+                              Hello, ${order.name}. Thank you for your order!
+                            </h2>
+                            <p style="font-size: 15px;padding-bottom: 22px; line-height: 24px; margin: 0;color: black;text-align: justify;">
+                              Your application is accepted. Order № is ${order.orderNo}. 
+                              You can track the status of your order in your account.
+                              While you’re there, you might be interested in other products, as they go well with your order.
+                              ${req.body.letterHtml} Thank you once again!
+                            </p>
+                          </div>`;
 
       const { errors, isValid } = validateOrderForm(req.body);
 

@@ -13,7 +13,7 @@ import UserModal from "./UserModal/UserModal";
 const AdminCustomers = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [allCustomers, setAllCustomers] = useState([]);
-  const [ error, setError ] = useState("");
+  const [error, setError] = useState("");
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [oneUserData, setOneUserData] = useState({
     isAdmin: "",
@@ -61,7 +61,8 @@ const AdminCustomers = () => {
     },
     { title: "Date", field: "date", type: "date" },
     { title: "Phone", field: "telephone", type: "string" },
-    { title: "Address",
+    {
+      title: "Address",
       field: "address",
       type: "string",
       render: rowData => (
@@ -73,8 +74,8 @@ const AdminCustomers = () => {
   ];
 
   const openModalHandler = data => {
-    setModalIsOpen(true);
     setOneUserData(data);
+    setModalIsOpen(true);
   };
 
   const closeModalHandler = () => {
@@ -103,35 +104,29 @@ const AdminCustomers = () => {
         onClick={() => getAllCustomers()}
         className={classes.btn}
       >
-      GET ALL CUSTOMERS
+        GET ALL CUSTOMERS
       </Button>
       <Typography component="h3" align="center" className={classes.message}>
         {error.message}
       </Typography>
       {isLoading ? (
         <PreloaderAdaptive />
-        ) : (
-          <MaterialTable
-            columns={columns}
-            data={allCustomers}
-            actions={[
-              {
-                icon: "edit",
-                tooltip: "Edit admin rights",
-                onClick: (event, rowData) => {
-                  openModalHandler(rowData);
-                },
+      ) : (
+        <MaterialTable
+          columns={columns}
+          data={allCustomers}
+          actions={[
+            {
+              icon: "edit",
+              tooltip: "Edit user rights",
+              onClick: (event, rowData) => {
+                openModalHandler(rowData);
               },
-            ]}
-            title="Customers"
-            options={{
-              headerStyle: {
-                backgroundColor: theme.palette.primary.main,
-                color: "white",
-              }
-            }}
-          />
-          )}
+            },
+          ]}
+          title="Customers"
+        />
+      )}
       <UserModal
         user={oneUserData}
         isOpen={modalIsOpen}
@@ -140,6 +135,7 @@ const AdminCustomers = () => {
         }}
         allCustomers={allCustomers}
         setAllCustomers={setAllCustomers}
+        setOneUserData={setOneUserData}
       />
     </Box>
   )
