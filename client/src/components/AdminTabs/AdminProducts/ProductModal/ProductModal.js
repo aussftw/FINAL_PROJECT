@@ -94,7 +94,7 @@ const ModalProducts = ({
       closeAfterTransition
       BackdropComponent={Backdrop}
       BackdropProps={{
-        timeout: 500,
+        timeout: 200,
       }}
     >
       <Fade in={isOpen}>

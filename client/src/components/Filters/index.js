@@ -33,6 +33,7 @@ const Products = ({
 
   let listProduct = [];
   if (productListing) {
+    console.log("productListing", productListing);
     listProduct = productListing.map(value => {
       return (
         <ItemCard
@@ -65,7 +66,7 @@ const Products = ({
       <Container className={classes.main}>
         <Typography
           variant="h3"
-          style={{ cursor: "default", position: "absolute", top: 150}}
+          style={{ cursor: "default", position: "absolute", top: 150 }}
         >
           Shop
         </Typography>
@@ -78,12 +79,7 @@ const Products = ({
         <div className={classes.items}>
           {listProduct.length === 0 ? (
             <div className={classes.cardSkeleton}>
-              <ItemCard />
-              <ItemCard />
-              <ItemCard />
-              <ItemCard />
-              <ItemCard />
-              <ItemCard />
+              <h1>No products were found by your request</h1>
             </div>
           ) : (
             <>

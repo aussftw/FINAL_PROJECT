@@ -79,7 +79,7 @@ const AdminProducts = () => {
       searchable: false,
       type: "string",
       render: rowData => (
-        <Typography noWrap style={{ width: "200px", fontSize: "0.875rem"}}>
+        <Typography noWrap style={{ width: "200px", fontSize: "0.875rem" }}>
           {rowData.description}
         </Typography>
       ),
@@ -145,10 +145,6 @@ const AdminProducts = () => {
       sizes.length !== 0
     ) {
       setAllLoaded(true);
-      console.log("allProducts: ", allProducts);
-      console.log("categories: ", categories);
-      console.log("colors: ", colors);
-      console.log("sizes: ", sizes);
     }
   }, [allLoaded, allProducts, categories, colors, sizes]);
 
