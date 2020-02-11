@@ -95,7 +95,7 @@ const Checkout = ({ userData, isAuthenticated, cartProducts }) => {
     link ? (<Redirect to={`/orders/${link}`} />) : (
       <Container className={classes.checkoutContainer} maxWidth="lg">
         <Typography variant="h3">Checkout</Typography>
-        {cartProducts.length > 0 ? (
+        {cartProducts.length ? (
           <ValidatorForm
             noValidate={false}
             autoComplete="off"
@@ -137,6 +137,7 @@ const mapStateToProps = state => {
   return {
     userData: state.loginReducer.user,
     isAuthenticated: state.loginReducer.isAuthenticated,
+    cartProducts: state.cartReducer.cart,
   }
 };
 

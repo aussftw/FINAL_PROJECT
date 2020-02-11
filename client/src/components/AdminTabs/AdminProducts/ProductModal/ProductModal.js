@@ -41,6 +41,14 @@ const ModalProducts = ({
       imageUrls: [],
   });
 
+  const [newImages,setNewImages] = useState([]);
+
+  const handleNewImage = images => {
+    console.log(images);
+    setNewImages([...newImages, ...images]);
+  };
+
+
   const handleChange = prop => event => {
       setProductValue({ ...productValue, [prop]: event.target.value });
   };
@@ -221,7 +229,7 @@ const ModalProducts = ({
               />
             </Box>
             <Box style={{marginBottom: 24}}>
-              <Upload imageUrls={productValue.imageUrls} />
+              <Upload imageUrls={productValue.imageUrls} handleNewImage={handleNewImage}/>
             </Box>
             <TextField
               className={classes.input}
