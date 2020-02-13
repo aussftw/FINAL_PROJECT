@@ -3,7 +3,8 @@ import * as constants from "../constants";
 
 // Получение с бэка фильтров
 export const getProducts = filters => dispatch => {
-  axios.get("/api/products/filter", {
+  axios
+    .get("/api/products/filter", {
       params: filters,
     })
     .then(list => {
@@ -49,10 +50,24 @@ export const selectCategory = category => dispatch => {
   });
 };
 
-export const selectColor = event => dispatch => {
+export const selectColor = color => dispatch => {
   dispatch({
     type: constants.SELECT_COLOR,
-    payload: { [event.target.name]: event.target.value },
+    payload: color.name,
+  });
+};
+
+export const toggleColorCheck = boolean => dispatch => {
+  dispatch({
+    type: constants.TOGGLE_COLOR_CHECK,
+    payload: boolean,
+  });
+};
+
+export const toggleSizesCheck = boolean => dispatch => {
+  dispatch({
+    type: constants.TOGGLE_COLOR_CHECK,
+    payload: boolean,
   });
 };
 
@@ -70,10 +85,10 @@ export const removeColor = color => dispatch => {
   }
 };
 
-export const selectSizes = event => dispatch => {
+export const selectSizes = size => dispatch => {
   dispatch({
     type: constants.SELECT_SIZE,
-    payload: { [event.target.name]: event.target.value },
+    payload: size.name,
   });
 };
 
@@ -99,7 +114,6 @@ export const selectPrice = price => dispatch => {
 };
 
 export const setCurrentPage = currentPage => dispatch => {
-  console.log("SELECT_CURRENT_PAGE",currentPage);
   dispatch({
     type: constants.SELECT_CURRENT_PAGE,
     payload: currentPage,

@@ -1,6 +1,10 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 
+import { connect } from "react-redux";
+
+// import { setPageIndex } from "../../store/actions/Filters";
+
 const useStyles = makeStyles(theme => ({
   wrapper: {
     display: "flex",
@@ -55,8 +59,15 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const Pagination = ({ productsPerPage, totalProducts, paginate }) => {
+const Pagination = ({
+  productsPerPage,
+  totalProducts,
+  paginate,
+  filters,
+  setPageIndex,
+}) => {
   const [selectedIndex, setSelectedIndex] = React.useState(null);
+
   const classes = useStyles();
 
   const pageNumbers = [];
@@ -80,6 +91,7 @@ const Pagination = ({ productsPerPage, totalProducts, paginate }) => {
             onClick={() => {
               paginate(number);
               setSelectedIndex(index);
+              setPageIndex(index);
             }}
             selected={selectedIndex === index}
           >
@@ -94,4 +106,17 @@ const Pagination = ({ productsPerPage, totalProducts, paginate }) => {
   );
 };
 
+// function mapStateToProps(state) {
+//   return {
+//     filters: state.filterReducer.filters,
+//   };
+// }
+
+// function mapDispatchToProps(dispatch) {
+//   return {
+//     setPageIndex: index => dispatch(setPageIndex(index)),
+//   };
+// }
+
+// export default connect(mapStateToProps)(mapDispatchToProps)(Pagination);
 export default Pagination;

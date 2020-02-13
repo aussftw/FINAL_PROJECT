@@ -5,6 +5,8 @@ const initialState = {
   categoryListing: [],
   colorListing: [],
   sizeListing: [],
+  colorChecked: false,
+  sizesChecked: false,
   filters: {
     color: undefined,
     sizes: undefined,
@@ -57,7 +59,7 @@ function filterReducer(state = initialState, action) {
           ...state,
           filters: {
             ...state.filters,
-            color: action.payload.color,
+            color: action.payload,
           },
         };
       }
@@ -65,8 +67,14 @@ function filterReducer(state = initialState, action) {
         ...state,
         filters: {
           ...state.filters,
-          color: `${state.filters.color},${action.payload.color}`,
+          color: `${state.filters.color},${action.payload}`,
         },
+      };
+
+    case constants.TOGGLE_COLOR_CHECK:
+      return {
+        ...state,
+        colorChecked: action.payload,
       };
 
     case constants.REMOVE_COLOR:
@@ -80,11 +88,12 @@ function filterReducer(state = initialState, action) {
 
     case constants.SELECT_SIZE:
       if (!state.filters.sizes) {
+        console.log("ACTION_PAYLOAD_IN_REDUCER", action.payload);
         return {
           ...state,
           filters: {
             ...state.filters,
-            sizes: action.payload.sizes,
+            sizes: action.payload,
           },
         };
       }
@@ -92,7 +101,7 @@ function filterReducer(state = initialState, action) {
         ...state,
         filters: {
           ...state.filters,
-          sizes: `${state.filters.sizes},${action.payload.sizes}`,
+          sizes: `${state.filters.sizes},${action.payload}`,
         },
       };
 

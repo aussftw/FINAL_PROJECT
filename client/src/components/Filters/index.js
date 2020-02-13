@@ -33,7 +33,6 @@ const Products = ({
 
   let listProduct = [];
   if (productListing) {
-    console.log("productListing", productListing);
     listProduct = productListing.map(value => {
       return (
         <ItemCard

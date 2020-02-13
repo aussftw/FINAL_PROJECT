@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useEffect } from "react";
 import { withRouter } from "react-router-dom";
 
@@ -11,6 +12,8 @@ import Typography from "@material-ui/core/Typography";
 
 import { connect } from "react-redux";
 import { useStyles } from "./useStyles";
+
+import ColorCheckbox from "./ColorCheckbox";
 
 import {
   setCurrentPage,
@@ -31,52 +34,24 @@ const GreenCheckbox = withStyles({
   <Checkbox color="default" inputProps={{ name: "color" }} {...props} />
 ));
 
-const FilterByColor = ({
-  filters,
-  colorListing,
-  getColors,
-  selectColor,
-  removeColor,
-  setCurrentPage,
-}) => {
+const FilterByColor = ({ colorListing, getColors, setCurrentPage }) => {
   const classes = useStyles();
 
   useEffect(() => {
     getColors();
     // eslint-disable-next-line
   }, []);
+  const [selectedIndex, setSelectedIndex] = React.useState(null);
 
   const handleColorClick = event => {
     setCurrentPage(1);
-    // eslint-disable-next-line no-param-reassign
-    event.target.indeterminate = !event.target.indeterminate;
-    let arrColor = [];
-    if (filters.color) {
-      arrColor = filters.color.split(",");
-    }
-    if (arrColor.includes(event.target.value)) {
-      const cleanColor = arrColor.filter(x => x !== event.target.value);
-      const cleanColorToString = cleanColor.join(",");
-      removeColor(cleanColorToString);
-    } else {
-      selectColor(event);
-    }
   };
 
   let colorsList = [];
+  const [filterIndex, setFilterIndex] = React.useState(null);
 
-  colorsList = colorListing.map(color => {
-    return (
-      <ListItem button key={color._id}>
-        <FormControlLabel
-          control={
-            <GreenCheckbox onClick={handleColorClick} value={color.name} />
-          }
-          className={classes.text}
-          label={color.name.charAt(0).toUpperCase() + color.name.slice(1)}
-        />
-      </ListItem>
-    );
+  colorsList = colorListing.map((color, index) => {
+    return <ColorCheckbox color={color} />;
   });
 
   return (
@@ -98,15 +73,12 @@ const FilterByColor = ({
 function mapStateToProps(state) {
   return {
     colorListing: state.filterReducer.colorListing,
-    filters: state.filterReducer.filters,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     getColors: () => dispatch(getColors()),
-    selectColor: event => dispatch(selectColor(event)),
-    removeColor: event => dispatch(removeColor(event)),
     setCurrentPage: currentPage => dispatch(setCurrentPage(currentPage)),
   };
 }

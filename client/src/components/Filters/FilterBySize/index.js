@@ -12,12 +12,13 @@ import { withStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
 import { useStyles } from "./useStyles";
 
+import SizeCheckbox from "./SizeCheckbox";
 
 import {
   getSizes,
   selectSizes,
   removeSizes,
-  setCurrentPage 
+  setCurrentPage,
 } from "../../../store/actions/Filters";
 
 const GreenCheckbox = withStyles({
@@ -32,22 +33,22 @@ const GreenCheckbox = withStyles({
   <Checkbox color="default" inputProps={{ name: "sizes" }} {...props} />
 ));
 
-const FilterBySize = ({ 
+const FilterBySize = ({
   sizeListing,
   filters,
   getSizes,
   selectSizes,
-  removeSizes, 
-  setCurrentPage }) => {
-  
+  removeSizes,
+  setCurrentPage,
+}) => {
   const classes = useStyles();
-  
+
   useEffect(() => {
     getSizes();
     // eslint-disable-next-line
   }, []);
   const handleSizeClick = event => {
-    setCurrentPage(1) 
+    setCurrentPage(1);
     // eslint-disable-next-line no-param-reassign
     event.target.indeterminate = !event.target.indeterminate;
     let arrSize = [];
@@ -57,6 +58,7 @@ const FilterBySize = ({
     if (arrSize.includes(event.target.value)) {
       const cleanSize = arrSize.filter(x => x !== event.target.value);
       const cleanSizeToString = cleanSize.join(",");
+
       removeSizes(cleanSizeToString);
     } else {
       selectSizes(event);
@@ -66,17 +68,21 @@ const FilterBySize = ({
   let sizeList = [];
 
   sizeList = sizeListing.map(size => {
-    return (
-      <ListItem button key={size._id}>
-        <FormControlLabel
-          control={
-            <GreenCheckbox onClick={handleSizeClick} value={size.name} />
-          }
-          label={size.name.charAt(0).toUpperCase() + size.name.slice(1)}
-        />
-      </ListItem>
-    );
+    return <SizeCheckbox size={size} />;
   });
+
+  // sizeList = sizeListing.map(size => {
+  //   return (
+  //     <ListItem button key={size._id}>
+  //       <FormControlLabel
+  //         control={
+  //           <GreenCheckbox onClick={handleSizeClick} value={size.name} />
+  //         }
+  //         label={size.name.charAt(0).toUpperCase() + size.name.slice(1)}
+  //       />
+  //     </ListItem>
+  //   );
+  // });
 
   return (
     <>
@@ -104,8 +110,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     getSizes: () => dispatch(getSizes()),
-    selectSizes: event => dispatch(selectSizes(event)),
-    removeSizes: event => dispatch(removeSizes(event)),
+    // selectSizes: event => dispatch(selectSizes(event)),
+    // removeSizes: event => dispatch(removeSizes(event)),
     setCurrentPage: currentPage => dispatch(setCurrentPage(currentPage)),
   };
 }
