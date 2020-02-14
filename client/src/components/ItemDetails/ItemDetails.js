@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 // import { Carousel } from "react-responsive-carousel";
 
 import { connect } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 
 import { Gallery, GalleryImage } from "react-gesture-gallery";
 
@@ -52,11 +52,12 @@ const ItemDetails = ({
     imageUrls: [],
     name: "",
     rate: { rating: 0 },
+    currentPrice: 0,
   });
   const [index, setIndex] = useState(0);
   const [preloader, setPreloader] = useState(true);
   const [qty, setQty] = useState(1);
-  // const [snackbarAddToCart, setSnackbarAddToCart] = useState(false);
+  const history = useHistory();
 
   useEffect(() => {
     const {CancelToken} = axios;
@@ -66,10 +67,10 @@ const ItemDetails = ({
       .then(response => {
         setItem(response.data);
         setPreloader(false);
+        console.log(response.data);
       })
       .catch(error => {
-        setPreloader(false);
-        // eslint-disable-next-line
+        history.push("/notfound");
         console.log(error);
       });
 
@@ -77,7 +78,7 @@ const ItemDetails = ({
       source.cancel();
       setIndex(0);
     };
-  }, [itemNo.id]);
+  }, [history, itemNo.id]);
 
   // helpers
 
@@ -161,7 +162,7 @@ const ItemDetails = ({
           <Typography variant="h6" className={classes.infoTitle}>
             {name}
           </Typography>
-          <Divider variant="middle" />
+          <Divider />
           <List>
             <ListItem className={classes.root}>
               <ListItemText className={classes.infoDetail} primary="Color:" />
@@ -177,7 +178,7 @@ const ItemDetails = ({
             </ListItem>
           </List>
           <RatingModule id={item._id} rate={item.rate.rating} />
-          <Divider variant="middle" />
+          <Divider />
           <List>
             <ListItem className={classes.root}>
               <ListItemText primary="Price:" className={classes.infoDetail} />
@@ -186,9 +187,9 @@ const ItemDetails = ({
               </Typography>
             </ListItem>
           </List>
-          <Divider variant="middle" />
+          <Divider />
           <Container className={classes.qty_wrapper}>
-            <Typography>Quantity:</Typography>
+            <Typography className={classes.qty_text}>Quantity:</Typography>
             <Box>
               <IconButton aria-label="Less" onClick={() => dec()}>
                 <RemoveSharpIcon />
@@ -208,7 +209,7 @@ const ItemDetails = ({
               </IconButton>
             </Box>
           </Container>
-          <Divider variant="middle" />
+          <Divider />
           <Box className={classes.buttonsBar}>
             <Button
               className={classes.actionButton}

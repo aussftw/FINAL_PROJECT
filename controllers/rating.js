@@ -164,7 +164,7 @@ exports.deleteRating = (req, res, next) => {
             Rating.deleteOne({ customerId: req.body.userId })
                 .then(deletedCount =>
                     res.status(200).json({
-                        message: `Rating list with id "${ratingToDelete._id}" is successfully deletes from DB `
+                        message: `Rating list with id "${ratingToDelete._id}" is successfully deleted from DB `
                     })
                 )
                 .catch(err =>

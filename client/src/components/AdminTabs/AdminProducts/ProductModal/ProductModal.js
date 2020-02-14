@@ -94,7 +94,7 @@ const ModalProducts = ({
       closeAfterTransition
       BackdropComponent={Backdrop}
       BackdropProps={{
-        timeout: 500,
+        timeout: 200,
       }}
     >
       <Fade in={isOpen}>
@@ -220,7 +220,7 @@ const ModalProducts = ({
                 onChange={handleChange("productUrl")}
               />
             </Box>
-            <Box style={{marginBottom: 24}}>
+            <Box style={{marginBottom: 18}}>
               <Upload imageUrls={productValue.imageUrls} />
             </Box>
             <TextField

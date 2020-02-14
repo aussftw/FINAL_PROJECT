@@ -29,7 +29,7 @@ router.put(
 );
 
 // @route   DELETE /rating
-// @desc    Delete rating
+// @desc    Delete all rating rec for customer
 // @access  Private
 router.delete(
     "/",

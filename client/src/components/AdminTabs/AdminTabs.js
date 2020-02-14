@@ -10,6 +10,7 @@ import AdminProducts from "./AdminProducts/AdminProducts";
 import AdminCustomers from "./AdminCustomers/AdminCustomers";
 import AdminOrders from "./AdminOrders/AdminOrders";
 import AdminContent from "./AdminContent/AdminContent";
+import AdminComments from "./AdminComments/AdminComments";
 import useStyles from "./useStyles";
 
 function a11yProps(index) {
@@ -22,6 +23,7 @@ function a11yProps(index) {
 const AdminTabs = () => {
   const classes = useStyles();
   const [value, setValue] = useState(0);
+  
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -95,7 +97,7 @@ const AdminTabs = () => {
           hidden={value !== 3}
           aria-labelledby={`simple-tab-${3}`}
         >
-          {value === 3 && <Typography component="span"> Comments </Typography>}
+          {value === 3 && <AdminComments />}
         </Box>
         <Box
           className={classes.contentBox}

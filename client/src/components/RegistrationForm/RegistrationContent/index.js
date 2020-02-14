@@ -1,19 +1,19 @@
-import React from 'react';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import IconButton from '@material-ui/core/IconButton';
-import { Visibility, VisibilityOff } from '@material-ui/icons';
-import Button from '@material-ui/core/Button';
-import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
-import useStyles from './useStyles';
+import React from "react";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import IconButton from "@material-ui/core/IconButton";
+import { Visibility, VisibilityOff } from "@material-ui/icons";
+import Button from "@material-ui/core/Button";
+import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
+import useStyles from "./useStyles";
 
 const RegistrationContent = ({
-                               setSubmitRegistration,
-                               handleChange,
-                               handleClickShowPassword,
-                               newUserData,
-                               showPassword,
-                               message,
-                             }) => {
+  setSubmitRegistration,
+  handleChange,
+  handleClickShowPassword,
+  newUserData,
+  showPassword,
+  message,
+}) => {
   const classes = useStyles();
 
   return (
@@ -32,13 +32,10 @@ const RegistrationContent = ({
             value={newUserData.firstName}
             onChange={handleChange}
             className={classes.textField}
-            validators={[
-              'required',
-              'matchRegexp:^[`\'"()A-Za-zd.s_-]{2,50}$',
-            ]}
+            validators={["required", "matchRegexp:^[`'\"()A-Za-zd.s_-]{2,50}$"]}
             errorMessages={[
-              'this field is required',
-              'Your name must be more then 2 characters, including only latin letters',
+              "this field is required",
+              "Your name must be more then 2 characters, including only latin letters",
             ]}
           />
           <TextValidator
@@ -48,13 +45,10 @@ const RegistrationContent = ({
             value={newUserData.lastName}
             onChange={handleChange}
             className={classes.textField}
-            validators={[
-              'matchRegexp:^[`\'"()A-Za-zd.s_-]{2,50}$',
-              'required',
-            ]}
+            validators={["matchRegexp:^[`'\"()A-Za-zd.s_-]{2,50}$", "required"]}
             errorMessages={[
-              'Your name must be more then 2 characters, including only latin letters',
-              'this field is required',
+              "Your name must be more then 2 characters, including only latin letters",
+              "this field is required",
             ]}
           />
           <TextValidator
@@ -64,10 +58,10 @@ const RegistrationContent = ({
             value={newUserData.login}
             onChange={handleChange}
             className={classes.textField}
-            validators={['required', 'matchRegexp:^[a-zA-Z0-9]{3,22}$']}
+            validators={["required", "matchRegexp:^[a-zA-Z0-9]{3,22}$"]}
             errorMessages={[
-              'this field is required',
-              'Your login must be 3-22 characters, including only latin letters and numbers',
+              "this field is required",
+              "Your login must be 3-22 characters, including only latin letters and numbers",
             ]}
           />
           <TextValidator
@@ -77,8 +71,8 @@ const RegistrationContent = ({
             value={newUserData.email}
             onChange={handleChange}
             className={classes.textField}
-            validators={['required', 'isEmail']}
-            errorMessages={['this field is required', 'email is not valid']}
+            validators={["required", "isEmail"]}
+            errorMessages={["this field is required", "email is not valid"]}
           />
 
           <TextValidator
@@ -89,7 +83,7 @@ const RegistrationContent = ({
             value={newUserData.password}
             onChange={handleChange}
             InputProps={{
-              type: showPassword ? 'text' : 'password',
+              type: showPassword ? "text" : "password",
               endAdornment: (
                 <InputAdornment position="end">
                   <IconButton
@@ -98,18 +92,18 @@ const RegistrationContent = ({
                     edge="end"
                   >
                     {newUserData.showPassword ? (
-                      <Visibility/>
+                      <Visibility />
                     ) : (
-                      <VisibilityOff/>
+                      <VisibilityOff />
                     )}
                   </IconButton>
                 </InputAdornment>
               ),
             }}
-            validators={['required', 'matchRegexp:^[a-zA-Z0-9]{8,16}$']}
+            validators={["required", "matchRegexp:^[a-zA-Z0-9]{8,16}$"]}
             errorMessages={[
-              'this field is required',
-              'Your password must be 8-16 characters, including only latin letters and numbers',
+              "this field is required",
+              "Your password must be 8-16 characters, including only latin letters and numbers",
             ]}
           />
           <TextValidator
@@ -120,9 +114,7 @@ const RegistrationContent = ({
             onChange={handleChange}
             className={classes.textField}
             validators={["matchRegexp:^[0-9-+\\s()]{13}$"]}
-            errorMessages={[
-              "phone is not valid, need +380... format",
-            ]}
+            errorMessages={["phone is not valid, need +380... format"]}
           />
           <TextValidator
             label="Address"
