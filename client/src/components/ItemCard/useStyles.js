@@ -68,16 +68,6 @@ const useStyles = makeStyles(theme => ({
       textDecoration: "none",
     },
   },
-  snackbar: {
-    position: "relative",
-    backgroundColor: theme.palette.primary.main,
-  },
-  snackbarMessage: {
-    position: "absolute",
-    top: 18,
-    left: 68,
-    fontSize: 15,
-  },
   cardSkeleton: {
     display: "flex",
     flexDirection: "column",

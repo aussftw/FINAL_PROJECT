@@ -5,8 +5,10 @@ import * as axios from "axios";
 import Box from "@material-ui/core/Box";
 import Rating from "@material-ui/lab/Rating";
 import Tooltip from "@material-ui/core/Tooltip";
+import Typography from "@material-ui/core/Typography";
 import StarBorder from "@material-ui/icons/StarBorder";
 import useStyles from "./useStyles";
+import {ListItemText} from "@material-ui/core";
 
 const RatingModule = ({id, rate, isAuthenticated}) => {
     const classes = useStyles();
@@ -56,7 +58,7 @@ const RatingModule = ({id, rate, isAuthenticated}) => {
 
     return (
       <Tooltip placement="top" title={cardTooltipText()}>
-        <Box align="center">
+        <Box>
           <Rating
             className={classes.rating}
             name="ratingModule"
