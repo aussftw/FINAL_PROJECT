@@ -34,7 +34,7 @@ const useStyles = makeStyles({
   btn: {
     letterSpacing: "2px",
     margin: "10px 0",
-    padding: "8px 100px",
+    padding: "12px 100px",
     color: "white",
     width: "50%",
     backgroundColor: theme.palette.primary.main,
@@ -70,6 +70,11 @@ const useStyles = makeStyles({
   errMsg: {
     fontSize: "24px",
     color: "red",
+  },
+  icon: {
+    margin:"0 auto",
+    color: theme.palette.primary.light,
+    fontSize:"6.5em",
   },
 });
 
