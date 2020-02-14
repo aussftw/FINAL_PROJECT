@@ -22,7 +22,7 @@ const useStyles = makeStyles({
     backgroundColor: theme.palette.primary.light,
     color:theme.palette.primary.dark,
     padding:"1em",
-    margin: "20px auto",
+    margin: "10px auto",
     "&:hover":{
       backgroundColor: theme.palette.primary.main,
       color:"white",

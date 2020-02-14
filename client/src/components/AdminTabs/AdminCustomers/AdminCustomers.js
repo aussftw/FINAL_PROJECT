@@ -138,7 +138,7 @@ const AdminCustomers = () => {
         setOneUserData={setOneUserData}
       />
     </Box>
-  );
+  )
 };
 
 export default AdminCustomers;
