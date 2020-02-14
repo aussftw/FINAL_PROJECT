@@ -38,7 +38,7 @@ function TabPanel(props) {
 }
 
 const Profile = ({
-                   isAdmin,
+  isAdmin,
   getUserData,
   getWishlistData,
   logOff,

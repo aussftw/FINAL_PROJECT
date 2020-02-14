@@ -23,6 +23,7 @@ function a11yProps(index) {
 const AdminTabs = () => {
   const classes = useStyles();
   const [value, setValue] = useState(0);
+  
 
   const handleChange = (event, newValue) => {
     setValue(newValue);

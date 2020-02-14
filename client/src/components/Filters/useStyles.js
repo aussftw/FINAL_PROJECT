@@ -85,4 +85,12 @@ export const useStyles = makeStyles(theme => ({
     padding: theme.spacing(1),
     margin: theme.spacing(2),
   },
+  wrapper: {
+    marginTop: "15px",
+    display: "inline-flex",
+  },
+  span: {
+    color: theme.palette.secondary.main,
+    width: 350,
+  },
 }));

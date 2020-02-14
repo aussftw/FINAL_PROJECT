@@ -39,6 +39,8 @@ export const SELECT_SIZE = "SELECT_SIZE";
 export const REMOVE_SIZE = "REMOVE_SIZE";
 export const SELECT_PRICE = "SELECT_PRICE";
 export const SELECT_CURRENT_PAGE = "SELECT_CURRENT_PAGE";
+export const TOGGLE_COLOR_CHECK = "TOGGLE_COLOR_CHECK";
+export const TOGGLE_SIZES_CHECK = "TOGGLE_COLOR_CHECK";
 
 // ----------- CART -----------
 export const GET_CART_SUCCESS = "GET_CART_SUCCESS";

@@ -45,7 +45,7 @@ const Checkout = ({ userData, isAuthenticated, cartProducts }) => {
     mobile: user.telephone,
     deliveryAddress: JSON.stringify(user.address),
     letterSubject: "Congratulations! You’re now a part of the Plantly Shop family.",
-    letterHtml: `<h2>Thank you for your order! Our product is so much more than the packaging.</h2>`,
+    letterHtml: "Our product is so much more than the packaging.",
     canceled: false,
   } : {
     name: user.firstName,
@@ -55,7 +55,7 @@ const Checkout = ({ userData, isAuthenticated, cartProducts }) => {
     mobile: user.telephone,
     deliveryAddress: JSON.stringify(user.address),
     letterSubject: "Congratulations! You’re now a part of the Plantly Shop family.",
-    letterHtml: `<h2>Thank you for your order! Our product is so much more than the packaging.</h2>`,
+    letterHtml: "Our product is so much more than the packaging.",
     canceled: false,
   };
 
@@ -95,7 +95,7 @@ const Checkout = ({ userData, isAuthenticated, cartProducts }) => {
     link ? (<Redirect to={`/orders/${link}`} />) : (
       <Container className={classes.checkoutContainer} maxWidth="lg">
         <Typography variant="h3">Checkout</Typography>
-        {cartProducts.length > 0 ? (
+        {cartProducts.length ? (
           <ValidatorForm
             noValidate={false}
             autoComplete="off"
@@ -138,7 +138,7 @@ const mapStateToProps = state => {
     userData: state.loginReducer.user,
     isAuthenticated: state.loginReducer.isAuthenticated,
     cartProducts: state.cartReducer.cart,
-  };
+  }
 };
 
 export default connect(mapStateToProps, {})(Checkout);

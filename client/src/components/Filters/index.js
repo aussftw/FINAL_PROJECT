@@ -65,7 +65,7 @@ const Products = ({
       <Container className={classes.main}>
         <Typography
           variant="h3"
-          style={{ cursor: "default", position: "absolute", top: 150}}
+          style={{ cursor: "default", position: "absolute", top: 150 }}
         >
           Shop
         </Typography>
@@ -77,13 +77,12 @@ const Products = ({
         </div>
         <div className={classes.items}>
           {listProduct.length === 0 ? (
-            <div className={classes.cardSkeleton}>
-              <ItemCard />
-              <ItemCard />
-              <ItemCard />
-              <ItemCard />
-              <ItemCard />
-              <ItemCard />
+            <div className={classes.wrapper}>
+              <div className={classes.span}>
+                <Typography component="span">
+                  No results were found for your request
+                </Typography>
+              </div>
             </div>
           ) : (
             <>
