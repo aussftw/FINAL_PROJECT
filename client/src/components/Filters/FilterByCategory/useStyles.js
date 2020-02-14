@@ -1,6 +1,6 @@
 import { makeStyles } from "@material-ui/core/styles";
 
-export const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles(theme => ({
   root: {
     marginTop: 100,
     width: "100%",
@@ -23,8 +23,9 @@ export const useStyles = makeStyles((theme) => ({
     },
   },
   listItem: {
+    color: theme.palette.primary.dark,
     "&:selected": {
-      backgroundColor: theme.palette.primary.main,
+      color: theme.palette.primary.light,
     },
   },
   subLine: {
@@ -44,6 +45,10 @@ export const useStyles = makeStyles((theme) => ({
   },
   iconContainer: {
     marginRight: -15,
+  },
+  iconActiveContainer: {
+    color: theme.palette.primary.dark,
+    marginRight: -5,
   },
   text: {
     fontSize: "0.95em !important",

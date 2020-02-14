@@ -58,6 +58,7 @@ const OrdersHistory = () => {
                 email={item.email}
                 address={item.deliveryAddress}
                 status={item.status}
+                canceled={item.canceled}
                 totalSum={item.totalSum}
                 products={item.products}
               />

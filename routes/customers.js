@@ -8,6 +8,7 @@ const {
   loginCustomer,
   getCustomer,
   editCustomerInfo,
+  editCustomerAdmin,
   updatePassword,
   getCustomers
 } = require("../controllers/customers");
@@ -53,6 +54,15 @@ router.put(
   "/password",
   passport.authenticate("jwt", { session: false }),
   updatePassword
+);
+
+// @route   PUT /customers/:id
+// @desc    Update existing customer
+// @access  Private
+router.put(
+  "/:id",
+  passport.authenticate("jwt-admin", { session: false }),
+  editCustomerAdmin
 );
 
 module.exports = router;

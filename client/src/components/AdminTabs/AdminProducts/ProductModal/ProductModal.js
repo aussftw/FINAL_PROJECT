@@ -41,14 +41,6 @@ const ModalProducts = ({
       imageUrls: [],
   });
 
-  const [newImages,setNewImages] = useState([]);
-
-  const handleNewImage = images => {
-    console.log(images);
-    setNewImages([...newImages, ...images]);
-  };
-
-
   const handleChange = prop => event => {
       setProductValue({ ...productValue, [prop]: event.target.value });
   };
@@ -102,7 +94,7 @@ const ModalProducts = ({
       closeAfterTransition
       BackdropComponent={Backdrop}
       BackdropProps={{
-        timeout: 500,
+        timeout: 200,
       }}
     >
       <Fade in={isOpen}>
@@ -228,8 +220,8 @@ const ModalProducts = ({
                 onChange={handleChange("productUrl")}
               />
             </Box>
-            <Box style={{marginBottom: 24}}>
-              <Upload imageUrls={productValue.imageUrls} handleNewImage={handleNewImage}/>
+            <Box style={{marginBottom: 18}}>
+              <Upload imageUrls={productValue.imageUrls} />
             </Box>
             <TextField
               className={classes.input}

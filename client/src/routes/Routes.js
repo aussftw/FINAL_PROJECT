@@ -1,5 +1,5 @@
 import React, {useEffect} from "react";
-import {Switch, Route} from "react-router-dom";
+import {Switch, Route, Redirect} from "react-router-dom";
 import {connect} from "react-redux";
 import jwt from "jwt-decode";
 
@@ -75,6 +75,7 @@ const Routes = ({
       <Route path="/checkout" component={CheckoutPage} />
       <Route path="/orders/:orderNo" component={OrderDetailsPage} />
       <Route path="/admin" component={AdminHOC(AdminPage)} />
+      <Redirect to="/" />
     </Switch>
   )
 };

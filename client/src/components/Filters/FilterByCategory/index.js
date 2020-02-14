@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -21,6 +21,7 @@ const FilterByCategory = ({
   getCategories,
   selectCategory,
   setCurrentPage,
+  filters,
 }) => {
   const classes = useStyles();
 
@@ -34,22 +35,45 @@ const FilterByCategory = ({
     setCurrentPage(1);
   };
 
+  const categoryIsChecked = () => {
+    const indexArr = categoryListing.map((item, index) => {
+      if (filters.categories === item.name) {
+        return index;
+      }
+    });
+    const currentIndex = indexArr.filter(x => x !== undefined);
+    const [a] = currentIndex;
+
+    return a;
+  };
+
+  const [selectedIndex, setSelectedIndex] = React.useState(categoryIsChecked());
+
   let categoryList = [];
-  categoryList = categoryListing.map(category => {
+  categoryList = categoryListing.map((category, index) => {
     return (
       <ListItem
+        index={index}
         className={classes.listItem}
         key={category._id}
         button
         onClick={event => {
           handleCategoryClick(event, category.id);
+          setSelectedIndex(index);
         }}
+        selected={selectedIndex === index}
       >
-        <ListItemIcon className={classes.iconContainer}>
+        <ListItemIcon
+          className={
+            selectedIndex === index
+              ? classes.iconActiveContainer
+              : classes.iconContainer
+          }
+        >
           <EcoIcon />
         </ListItemIcon>
         <ListItemText
-          primaryTypographyProps={{className: classes.text}}
+          primaryTypographyProps={{ className: classes.text }}
           primary={category.name}
         />
       </ListItem>
@@ -62,10 +86,7 @@ const FilterByCategory = ({
         className={classes.root}
         aria-label="mailbox folders"
       >
-        <Typography
-          className={classes.title}
-          variant="h3"
-        >
+        <Typography className={classes.title} variant="h3">
           Category
         </Typography>
         <div className={classes.subLine} />
@@ -78,6 +99,7 @@ const FilterByCategory = ({
 const mapStateToProps = state => {
   return {
     categoryListing: state.filterReducer.categoryListing,
+    filters: state.filterReducer.filters,
   };
 };
 
