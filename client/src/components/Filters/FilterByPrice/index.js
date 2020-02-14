@@ -5,9 +5,13 @@ import { withStyles, makeStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
 import theme from "../../../theme";
 
-import { selectPrice, setCurrentPage } from "../../../store/actions/Filters";
+import {
+  selectPrice,
+  setCurrentPage,
+  // filters,
+} from "../../../store/actions/Filters";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   rootMain: {
     width: "100%",
     maxWidth: 300,
@@ -67,7 +71,7 @@ const PrettoSlider = withStyles({
   },
 })(Slider);
 
-const FilterByPrice = ({ selectPrice, setCurrentPage }) => {
+const FilterByPrice = ({ selectPrice, setCurrentPage, filters }) => {
   const classes = useStyles();
 
   // eslint-disable-next-line no-unused-vars
@@ -78,18 +82,15 @@ const FilterByPrice = ({ selectPrice, setCurrentPage }) => {
 
   return (
     <div className={classes.rootMain}>
-       <Typography
-          className={classes.title}
-          variant="h3"
-        >
-          Price
-        </Typography>
+      <Typography className={classes.title} variant="h3">
+        Price
+      </Typography>
       <div className={classes.subLine} />
       <PrettoSlider
         onChangeCommitted={ValueByPrice}
         valueLabelDisplay="auto"
         aria-label="pretto slider"
-        defaultValue={50}
+        defaultValue={filters.maxPrice === undefined ? 50 : filters.maxPrice}
         max={120}
       />
     </div>

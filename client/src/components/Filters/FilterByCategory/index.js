@@ -21,6 +21,7 @@ const FilterByCategory = ({
   getCategories,
   selectCategory,
   setCurrentPage,
+  filters,
 }) => {
   const classes = useStyles();
 
@@ -33,7 +34,20 @@ const FilterByCategory = ({
     selectCategory(category);
     setCurrentPage(1);
   };
-  const [selectedIndex, setSelectedIndex] = React.useState(null);
+
+  const categoryIsChecked = () => {
+    const indexArr = categoryListing.map((item, index) => {
+      if (filters.categories === item.name) {
+        return index;
+      }
+    });
+    const currentIndex = indexArr.filter(x => x !== undefined);
+    const [a] = currentIndex;
+
+    return a;
+  };
+
+  const [selectedIndex, setSelectedIndex] = React.useState(categoryIsChecked());
 
   let categoryList = [];
   categoryList = categoryListing.map((category, index) => {
@@ -85,6 +99,7 @@ const FilterByCategory = ({
 const mapStateToProps = state => {
   return {
     categoryListing: state.filterReducer.categoryListing,
+    filters: state.filterReducer.filters,
   };
 };
 
