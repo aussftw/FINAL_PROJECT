@@ -5,6 +5,7 @@ const UploadApi = data => {
     baseURL: 'https://api.cloudinary.com/v1_1/plantly/image',
   });
 
+
 instance.defaults.headers.common = {};
 instance
   .post('/upload', data, {

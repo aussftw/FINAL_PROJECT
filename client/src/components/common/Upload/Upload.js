@@ -16,21 +16,6 @@ const Upload = ({ imageUrls, handleNewImage }) => {
   const [deletedImagesURLs, setDeletedImagesURLs] = useState([]);
   const [addedImagesFiles , setAddedImagesFiles] = useState([]);
 
-  //
-  // const removeItem = item => {
-  //   const updatedImages = [...images].filter((image, index) => index !== item);// view filter
-  //   const newArrWithFiles = [...allImgAndFiles].filter((image, index) => index !== item);
-  //   const deletedItem = [...allImgAndFiles].filter((image, index)=> index === item);
-  //   if(typeof deletedItem === "string"){
-  //     setDeletedImageURLs([...deletedImagesURLs,deletedItem]) // set deleted IMG URLS
-  //   }
-  //   const newFiles = newArrWithFiles.filter(item => typeof item  === Object); // add new FILES to state
-  //   setAddedImagesFiles(newFiles);
-  //   const updatedURLS = newArrWithFiles.filter(item => typeof item === "string"); // set UPDATED IMG URLS
-  //   setUpdatedImgURLs([...updatedImgURLs, updatedURLS]);
-  //   setImages(updatedImages);
-  // };
-  //
 
   const removeImgUrl = item => {
     const filteredImgUrls = images.filter((image,index) => index !== item);

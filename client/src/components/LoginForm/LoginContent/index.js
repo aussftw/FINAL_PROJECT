@@ -49,6 +49,7 @@ const LoginContent = ({ handleOpen, submitLogin, open, message }) => {
             <ValidatorForm
               noValidate={false}
               onSubmit={e => submitLogin(e, user)}
+              autoComplete="off"
             >
               <TextValidator
                 label="Login or Email"
