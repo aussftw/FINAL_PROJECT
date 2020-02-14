@@ -71,12 +71,6 @@ function filterReducer(state = initialState, action) {
         },
       };
 
-    case constants.TOGGLE_COLOR_CHECK:
-      return {
-        ...state,
-        colorChecked: action.payload,
-      };
-
     case constants.REMOVE_COLOR:
       return {
         ...state,
@@ -88,7 +82,6 @@ function filterReducer(state = initialState, action) {
 
     case constants.SELECT_SIZE:
       if (!state.filters.sizes) {
-        console.log("ACTION_PAYLOAD_IN_REDUCER", action.payload);
         return {
           ...state,
           filters: {

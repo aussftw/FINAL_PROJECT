@@ -15,12 +15,7 @@ import { useStyles } from "./useStyles";
 
 import ColorCheckbox from "./ColorCheckbox";
 
-import {
-  setCurrentPage,
-  getColors,
-  selectColor,
-  removeColor,
-} from "../../../store/actions/Filters";
+import { setCurrentPage, getColors } from "../../../store/actions/Filters";
 
 const GreenCheckbox = withStyles({
   root: {
@@ -42,10 +37,6 @@ const FilterByColor = ({ colorListing, getColors, setCurrentPage }) => {
     // eslint-disable-next-line
   }, []);
   const [selectedIndex, setSelectedIndex] = React.useState(null);
-
-  const handleColorClick = event => {
-    setCurrentPage(1);
-  };
 
   let colorsList = [];
   const [filterIndex, setFilterIndex] = React.useState(null);

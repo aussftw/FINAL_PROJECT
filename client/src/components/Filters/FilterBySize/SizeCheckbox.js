@@ -3,22 +3,15 @@ import React, { useEffect, useState } from "react";
 import { withRouter } from "react-router-dom";
 
 import { withStyles } from "@material-ui/core/styles";
-// import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import { green } from "@material-ui/core/colors";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
-// import Typography from "@material-ui/core/Typography";
 
 import { connect } from "react-redux";
 import { useStyles } from "./useStyles";
 
-import {
-  selectSizes,
-  removeSizes,
-  toggleSizeCheck,
-  filters,
-} from "../../../store/actions/Filters";
+import { selectSizes, removeSizes } from "../../../store/actions/Filters";
 
 const GreenCheckbox = withStyles({
   root: {
@@ -32,14 +25,7 @@ const GreenCheckbox = withStyles({
   <Checkbox color="default" inputProps={{ name: "color" }} {...props} />
 ));
 
-const SizeCheckbox = ({
-  size,
-  selectSizes,
-  removeSizes,
-  filters,
-  toggleSizesCheck,
-  sizesChecked,
-}) => {
+const SizeCheckbox = ({ size, selectSizes, removeSizes, filters }) => {
   const classes = useStyles();
 
   let arrColor = [];
@@ -97,7 +83,6 @@ function mapDispatchToProps(dispatch) {
   return {
     selectSizes: event => dispatch(selectSizes(event)),
     removeSizes: event => dispatch(removeSizes(event)),
-    toggleColorCheck: event => dispatch(toggleColorCheck(event)),
   };
 }
 

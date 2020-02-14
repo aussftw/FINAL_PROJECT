@@ -57,13 +57,6 @@ export const selectColor = color => dispatch => {
   });
 };
 
-export const toggleColorCheck = boolean => dispatch => {
-  dispatch({
-    type: constants.TOGGLE_COLOR_CHECK,
-    payload: boolean,
-  });
-};
-
 export const toggleSizesCheck = boolean => dispatch => {
   dispatch({
     type: constants.TOGGLE_COLOR_CHECK,
@@ -83,6 +76,13 @@ export const removeColor = color => dispatch => {
       payload: color,
     });
   }
+};
+
+export const setPageIndex = size => dispatch => {
+  dispatch({
+    type: constants.SELECT_SIZE,
+    payload: size.name,
+  });
 };
 
 export const selectSizes = size => dispatch => {

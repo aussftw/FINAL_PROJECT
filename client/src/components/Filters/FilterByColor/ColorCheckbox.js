@@ -13,11 +13,7 @@ import Checkbox from "@material-ui/core/Checkbox";
 import { connect } from "react-redux";
 import { useStyles } from "./useStyles";
 
-import {
-  selectColor,
-  removeColor,
-  toggleColorCheck,
-} from "../../../store/actions/Filters";
+import { selectColor, removeColor } from "../../../store/actions/Filters";
 
 const GreenCheckbox = withStyles({
   root: {
@@ -31,14 +27,7 @@ const GreenCheckbox = withStyles({
   <Checkbox color="default" inputProps={{ name: "color" }} {...props} />
 ));
 
-const ColorCheckbox = ({
-  color,
-  selectColor,
-  removeColor,
-  filters,
-  toggleColorCheck,
-  colorChecked,
-}) => {
+const ColorCheckbox = ({ color, selectColor, removeColor, filters }) => {
   const classes = useStyles();
 
   let arrColor = [];
@@ -85,7 +74,6 @@ const ColorCheckbox = ({
 
 function mapStateToProps(state) {
   return {
-    colorChecked: state.filterReducer.colorChecked,
     colorListing: state.filterReducer.colorListing,
     filters: state.filterReducer.filters,
   };
@@ -95,7 +83,6 @@ function mapDispatchToProps(dispatch) {
   return {
     selectColor: event => dispatch(selectColor(event)),
     removeColor: event => dispatch(removeColor(event)),
-    toggleColorCheck: event => dispatch(toggleColorCheck(event)),
   };
 }
 
