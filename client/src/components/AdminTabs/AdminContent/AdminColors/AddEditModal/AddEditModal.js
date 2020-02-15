@@ -12,20 +12,18 @@ import CloseIcon from "@material-ui/icons/Close";
 import useStyles from "./useStyles";
 
 
-const AddEditModal = ({ open, handleModal, item, refresh }) => {
+const AddEditModal = ({ open, handleModal, item, handleOpenSnackbar, autoRefresh}) => {
   const classes = useStyles();
 
   const [itemInfo, setItemInfo] = useState(
     {
       name: "",
-      // _id: "",
     });
 
   useEffect(() => {
     if (item !== null) {
       setItemInfo({
         name: `${item.name}`,
-        // _id: `${item._id}`,
       });
     }
   }, [item]);
@@ -37,15 +35,18 @@ const AddEditModal = ({ open, handleModal, item, refresh }) => {
 
   function addPartner() {
     if (item === null) {
-      // console.log("POST /api/colors", itemInfo);
       axios
         .post("/api/colors", itemInfo )
         .then(newColor => {
           console.log('newColor', newColor);
-          refresh();
+          const success = { type: "success", message: `New color ${itemInfo.name} was added` };
+          handleOpenSnackbar(success);
+          autoRefresh();
         })
         .catch(err => {
           console.log('newColor', err);
+          const error = { type: "error", message: `Error! New color was not added.` };
+          handleOpenSnackbar(error);
         });
     } else {
       console.log("put ", item._id, itemInfo);
@@ -54,11 +55,14 @@ const AddEditModal = ({ open, handleModal, item, refresh }) => {
         .put(`/api/colors/${item._id}`, itemInfo )
         .then(resp => {
           console.log(resp);
-          refresh();
-          // SUCCESSFULLY   data. message
+          const success = { type: "success", message: `Color was successfully edited` };
+          handleOpenSnackbar(success);
+          autoRefresh();
         })
         .catch(err => {
           console.log('put color', err);
+          const error = { type: "error", message: `Error! Color ${item.name} was not edited.` };
+          handleOpenSnackbar(error);
         });
     }
     handleModal();

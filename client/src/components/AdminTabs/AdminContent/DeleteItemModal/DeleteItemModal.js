@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Backdrop from "@material-ui/core/Backdrop";
 import Button from "@material-ui/core/Button";
 import Fade from "@material-ui/core/Fade";
@@ -9,16 +9,9 @@ import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import CloseIcon from "@material-ui/icons/Close";
 import useStyles from "./useStyles";
-// import MuiAlert from "@material-ui/lab/Alert";
-// import Snackbar from "@material-ui/core/Snackbar";
-// import SnackbarContent from "@material-ui/core/SnackbarContent";
-// import CheckCircleRoundedIcon from "@material-ui/icons/CheckCircleRounded";
 
-// function Alert(props) {
-//   return <MuiAlert elevation={6} variant="filled" {...props} />;
-// }
 
-const DeleteItemModal = ({ open, handleModal, id, item, handleOpenSnackbar }) => {
+const DeleteItemModal = ({ open, handleModal, id, item, handleOpenSnackbar, autoRefresh }) => {
   const classes = useStyles();
 
   const createMessage = () => {
@@ -40,18 +33,18 @@ const DeleteItemModal = ({ open, handleModal, id, item, handleOpenSnackbar }) =>
       .delete(`/api/${item}/${id}`)
       .then(resp => {
         const itemSingular = item.slice(0, item.length - 1);
-        const success = {type:'success', message:`${itemSingular} was successfully deleted`}
+        const success = {type:'success', message:`${itemSingular} was successfully deleted`};
         handleOpenSnackbar(success);
+        autoRefresh();
         console.log(resp);
       })
       .catch(err => {
         const itemSingular = item.slice(0, item.length - 1);
-        const error = {type:'error', message:`Error! ${itemSingular} wasn’t deleted.`}
+        const error = {type:'error', message:`Error! ${itemSingular} wasn’t deleted.`};
         handleOpenSnackbar(error);
         console.log("orders", err);
       });
     handleModal();
-    // handleOpenSnackbar();
   };
 
 

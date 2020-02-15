@@ -5,7 +5,6 @@ import Fade from "@material-ui/core/Fade";
 import Modal from "@material-ui/core/Modal";
 import IconButton from "@material-ui/core/IconButton";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
-import axios from 'axios'
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import CloseIcon from "@material-ui/icons/Close";
@@ -13,7 +12,7 @@ import useStyles from "./useStyles";
 import Upload from "../../../../common/Upload/Upload";
 
 
-const AddPartnerModal = ({ open, handleModal, partner}) => {
+const AddPartnerModal = ({ open, handleModal, partner, handleOpenSnackbar, autoRefresh}) => {
   const classes = useStyles();
 
   const [partnerInfo, setPartnerInfo] = useState(
@@ -68,9 +67,14 @@ const AddPartnerModal = ({ open, handleModal, partner}) => {
      //   .post("/api/partners", partnerInfo )
      //   .then(newPartner => {
      //     console.log('newPartner', newPartner);
+     // const success = { type: "success", message: `New size ${partnerInfo.name} was added` };
+     // handleOpenSnackbar(success);
+     // autoRefresh();
      //   })
      //   .catch(err => {
      //     console.log('newPartner', err);
+     // const error = { type: "error", message: `Error! New partner was not added.` };
+     // handleOpenSnackbar(error);
      //   });
    } else {
       console.log('put ', partner.customId, partnerInfo);
@@ -79,10 +83,14 @@ const AddPartnerModal = ({ open, handleModal, partner}) => {
      //   .put(`/api/partners/${partner.customId}`)
      //   .then(resp => {
      //     console.log(resp);
-     //     // SUCCESSFULLY   data. message
+     // const success = { type: "success", message: `Partner was successfully edited` };
+     // handleOpenSnackbar(success);
+     // autoRefresh();
      //   })
      //   .catch(err => {
-     //     console.log('orders', err);
+     //     console.log('err', err);
+     // const error = { type: "error", message: `Error! Partner ${partnerInfo.name} was not edited.` };
+     // handleOpenSnackbar(error);
      //   });
    }
    handleModal();
@@ -152,7 +160,7 @@ const AddPartnerModal = ({ open, handleModal, partner}) => {
          </Fade>
        </Modal>
      )
- }
+ };
 
  return  modal()
 

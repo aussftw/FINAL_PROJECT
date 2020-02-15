@@ -14,6 +14,30 @@ import AdminSizes from "./AdminSizes/AdminSizes";
 const AdminContent = () => {
   const classes = useStyles();
 
+  // Modals logic
+  const [AddModal, setAddModal] = useState({ isOpened: false, rowData: null });
+  const [EditModal, setEditModal] = useState({ isOpened: false, rowData: {} });
+  const [DeleteModal, setDeleteModal] = useState({ isOpened: false, id: "" });
+
+  // Snackbar logic
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [snackbarType, setSnackbarType] = useState({ type: "", message: "" });
+
+  const handleOpenSnackbar = (type) => {
+    console.log("setOpenSnackbar");
+    setOpenSnackbar(true);
+    setSnackbarType(type);
+  };
+
+  const handleCloseSnackbar = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpenSnackbar(false);
+  };
+  // snackbar
+
+
   const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
@@ -63,7 +87,20 @@ const AdminContent = () => {
           hidden={value !== 0}
           aria-labelledby={`simple-tab-${0}`}
         >
-          {value === 0 && <AdminCategories />}
+          {value === 0 && (
+            <AdminCategories
+              AddModal={AddModal}
+              setAddModal={setAddModal}
+              EditModal={EditModal}
+              setEditModal={setEditModal}
+              DeleteModal={DeleteModal}
+              setDeleteModal={setDeleteModal}
+              openSnackbar={openSnackbar}
+              handleOpenSnackbar={handleOpenSnackbar}
+              handleCloseSnackbar={handleCloseSnackbar}
+              snackbarType={snackbarType}
+            />
+          )}
         </Box>
         <Box
           className={classes.contentBox}
@@ -72,7 +109,20 @@ const AdminContent = () => {
           hidden={value !== 1}
           aria-labelledby={`simple-tab-${1}`}
         >
-          {value === 1 && <AdminPartners />}
+          {value === 1 && (
+            <AdminPartners
+              AddModal={AddModal}
+              setAddModal={setAddModal}
+              EditModal={EditModal}
+              setEditModal={setEditModal}
+              DeleteModal={DeleteModal}
+              setDeleteModal={setDeleteModal}
+              openSnackbar={openSnackbar}
+              handleOpenSnackbar={handleOpenSnackbar}
+              handleCloseSnackbar={handleCloseSnackbar}
+              snackbarType={snackbarType}
+            />
+          )}
         </Box>
         <Box
           className={classes.contentBox}
@@ -81,7 +131,20 @@ const AdminContent = () => {
           hidden={value !== 2}
           aria-labelledby={`simple-tab-${2}`}
         >
-          {value === 2 && <AdminColors />}
+          {value === 2 && (
+            <AdminColors
+              AddModal={AddModal}
+              setAddModal={setAddModal}
+              EditModal={EditModal}
+              setEditModal={setEditModal}
+              DeleteModal={DeleteModal}
+              setDeleteModal={setDeleteModal}
+              openSnackbar={openSnackbar}
+              handleOpenSnackbar={handleOpenSnackbar}
+              handleCloseSnackbar={handleCloseSnackbar}
+              snackbarType={snackbarType}
+            />
+          )}
         </Box>
         <Box
           className={classes.contentBox}
@@ -90,7 +153,20 @@ const AdminContent = () => {
           hidden={value !== 3}
           aria-labelledby={`simple-tab-${3}`}
         >
-          {value === 3 && <AdminSizes />}
+          {value === 3 && (
+            <AdminSizes
+              AddModal={AddModal}
+              setAddModal={setAddModal}
+              EditModal={EditModal}
+              setEditModal={setEditModal}
+              DeleteModal={DeleteModal}
+              setDeleteModal={setDeleteModal}
+              openSnackbar={openSnackbar}
+              handleOpenSnackbar={handleOpenSnackbar}
+              handleCloseSnackbar={handleCloseSnackbar}
+              snackbarType={snackbarType}
+            />
+          )}
         </Box>
       </Box>
     );

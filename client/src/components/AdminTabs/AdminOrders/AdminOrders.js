@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import Button from "@material-ui/core/Button";
 import axios from "axios";
 import { Box } from "@material-ui/core";
@@ -26,6 +26,7 @@ function AdminOrders() {
   const [ordersArr, setOrdersArr] = useState([]);
   const [AddModal, setAddModal] = useState({ isOpened: false, rowData: null });
   const [EditModal, setEditModal] = useState({ isOpened: false, rowData: null});
+  const [allLoaded, setAllLoaded] = useState(null);
 
   const getOrders = () => {
     axios
@@ -102,6 +103,48 @@ function AdminOrders() {
     // render: rowData => <AdminOrdersProducts rowData={rowData.products} /> },
   ];
 
+  const materialTable = () => {
+    return (
+      <MaterialTable
+        columns={columns}
+        data={ordersArr}
+        title="All orders"
+        detailPanel={[
+          {
+            tooltip: 'Show Products',
+            render: rowData => {
+              return (
+                <AdminOrdersProducts rowData={rowData.products} totalSum={rowData.totalSum} />
+              )
+            },
+          },
+        ]}
+        actions={[
+          {
+            icon: () => <AddCircleIcon />,
+            tooltip: "Add Partner",
+            isFreeAction: true,
+            onClick: () => {
+              handleOpenAddModal();
+            },
+          },
+          {
+            icon: () => <EditIcon />,
+            tooltip: "Edit size",
+            onClick: (event, rowData) => {
+              handleEditModal(rowData);
+            }
+          },
+          {
+            icon: 'refresh',
+            tooltip: 'Refresh Data',
+            isFreeAction: true,
+            onClick: () => getOrders(),
+          }
+        ]}
+      />
+    )
+  }
 
   return (
     <>
@@ -112,48 +155,9 @@ function AdminOrders() {
         <div />
       ) : (
         <Box>
-          <MaterialTable
-            columns={columns}
-            data={ordersArr}
-            title="All orders"
-            detailPanel={[
-              {
-                tooltip: 'Show Products',
-                render: rowData => {
-                  return (
-                    <AdminOrdersProducts rowData={rowData.products} totalSum={rowData.totalSum} />
-                  )
-                },
-              },
-            ]}
-            actions={[
-              {
-                icon: () => <AddCircleIcon />,
-                tooltip: "Add Partner",
-                isFreeAction: true,
-                onClick: () => {
-                  handleOpenAddModal();
-                },
-              },
-              {
-                icon: () => <EditIcon />,
-                tooltip: "Edit size",
-                onClick: (event, rowData) => {
-                  handleEditModal(rowData);
-                }
-              },
-              {
-                icon: 'refresh',
-                tooltip: 'Refresh Data',
-                isFreeAction: true,
-                onClick: () => getOrders(),
-              }
-            ]}
-          />
+          {materialTable()}
           {AddModal.isOpened &&
           <AddPartnerModal open={AddModal.isOpened} handleModal={closeModal} partner={AddModal.rowData} />}
-          {/* <AddPartnerModal open={openAddModal} handleOpen={handleOpenAddModal} partner={{name:"", url:"", customId:"", imageUrl:""}} /> */}
-          {/* <AddPartnerModal open={openEditModal} handleOpen={handleOpenEditModal} partner={dataEditModal} /> */}
           {EditModal.isOpened && (
           <EditOrderModal
             open={EditModal.isOpened}
@@ -175,23 +179,3 @@ function AdminOrders() {
 }
 
 export default AdminOrders;
-
-/* editable={{
-         isEditable: rowData => rowData.name === "status", // only name(a) rows would be editable
-
-         onRowUpdate: (newData, oldData) =>
-           new Promise((resolve, reject) => {
-             setTimeout(() => {
-               {
-                 // /!* const data = this.state.data;
-                 // const index = data.indexOf(oldData);
-                 // data[index] = newData;
-                 // this.setState({ data }, () => resolve()); *!/
-               }
-               resolve();
-             }, 1000);
-             console.log("newData", newData);
-             console.log("oldData", oldData);
-           }),
-
-       }} */

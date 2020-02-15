@@ -9,38 +9,31 @@ import DeleteItemModal from "../DeleteItemModal/DeleteItemModal";
 import AddEditModal from "./AddEditModal/AddEditModal";
 import SnackbarMessage from "../../Snackbar/SnackbarMessage";
 import PreloaderAdaptive from "../../../Preloader/Adaptive";
+import AddPartnerModal from "../AdminPartners/AddPartnerModal/AddPartnerModal";
 // import Snackbar from "@material-ui/core/Snackbar";
 
 
-const AdminColors = () => {
-  const [colors, setColors] = useState([]);
+const AdminColors = ({
+                       AddModal,
+                       setAddModal,
+                       EditModal,
+                       setEditModal,
+                       DeleteModal,
+                       setDeleteModal,
+                       openSnackbar,
+                       handleOpenSnackbar,
+                       handleCloseSnackbar,
+                       snackbarType,
+                     }) => {
 
-  const [AddModal, setAddModal] = useState({ isOpened: false, rowData: null });
-  const [EditModal, setEditModal] = useState({ isOpened: false, rowData: {} });
-  const [DeleteModal, setDeleteModal] = useState({ isOpened: false, id: "" });
+  const [colors, setColors] = useState([]);
 
   // const modalInputs = () => {
   //   const valuesArr = Object.keys(colors[0]);
   //   const inputs = valuesArr.filter(word => word !== "_id" && word !== "date" && word !=="tableData" && word !== "__v");
   // }
 
-  // snackbar
-  const [openSnackbar, setOpenSnackbar] = useState(false);
-  const [snackbarType, setSnackbarType] = useState({ type: "", message: "" });
 
-  const handleOpenSnackbar = (type) => {
-    console.log("setOpenSnackbar");
-    setOpenSnackbar(true);
-    setSnackbarType(type);
-  };
-
-  const handleCloseSnackbar = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-    setOpenSnackbar(false);
-  };
-  // snackbar
   const getColors = () => {
     axios
       .get("/api/colors")
@@ -198,19 +191,35 @@ const AdminColors = () => {
       ) : (
         <Box>
           {materialTable()}
-          {AddModal.isOpened &&
-          <AddEditModal open={AddModal.isOpened} handleModal={closeModal} item={AddModal.rowData} />}
-          {EditModal.isOpened &&
-          <AddEditModal open={EditModal.isOpened} handleModal={closeModal} item={EditModal.rowData} />}
+          {AddModal.isOpened && (
+            <AddEditModal
+              open={AddModal.isOpened}
+              handleModal={closeModal}
+              item={AddModal.rowData}
+              handleOpenSnackbar={handleOpenSnackbar}
+              autoRefresh={getColors}
+            />
+          )}
+
+          {EditModal.isOpened && (
+            <AddEditModal
+              open={EditModal.isOpened}
+              handleModal={closeModal}
+              item={EditModal.rowData}
+              handleOpenSnackbar={handleOpenSnackbar}
+              autoRefresh={getColors}
+            />
+          )}
           {DeleteModal.isOpened && (
-          <DeleteItemModal
-            open={DeleteModal.isOpened}
-            handleModal={closeModal}
-            id={DeleteModal.id}
-            item="colors"
-            handleOpenSnackbar={handleOpenSnackbar}
-          />
-        )}
+            <DeleteItemModal
+              open={DeleteModal.isOpened}
+              handleModal={closeModal}
+              id={DeleteModal.id}
+              item="colors"
+              handleOpenSnackbar={handleOpenSnackbar}
+              autoRefresh={getColors}
+            />
+          )}
           <SnackbarMessage openSnackbar={openSnackbar} handleCloseSnackbar={handleCloseSnackbar} type={snackbarType} />
         </Box>
       )}

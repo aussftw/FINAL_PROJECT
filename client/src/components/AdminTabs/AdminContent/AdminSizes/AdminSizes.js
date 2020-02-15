@@ -11,37 +11,22 @@ import SnackbarMessage from "../../Snackbar/SnackbarMessage";
 import PreloaderAdaptive from "../../../Preloader/Adaptive";
 
 
-const AdminSizes = () => {
+const AdminSizes = ({
+                      AddModal,
+                      setAddModal,
+                      EditModal,
+                      setEditModal,
+                      DeleteModal,
+                      setDeleteModal,
+                      openSnackbar,
+                      handleOpenSnackbar,
+                      handleCloseSnackbar,
+                      snackbarType,
+                    }) => {
+
   const [colors, setColors] = useState([]);
-  const [AddModal, setAddModal] = useState({ isOpened: false, rowData: null });
-  const [EditModal, setEditModal] = useState({ isOpened: false, rowData: {} });
-  const [DeleteModal, setDeleteModal] = useState({ isOpened: false, id: "" });
 
-
-  // const modalInputs = () => {
-  //   const valuesArr = Object.keys(colors[0]);
-  //   const inputs = valuesArr.filter(word => word !== "_id" && word !== "date" && word !=="tableData" && word !== "__v");
-  // }
-
-  // snackbar
-  const [openSnackbar, setOpenSnackbar] = useState(false);
-  const [snackbarType, setSnackbarType] = useState({type:'', message:''});
-
-  const handleOpenSnackbar = (type) => {
-    console.log('setOpenSnackbar');
-    setOpenSnackbar(true);
-    setSnackbarType(type)
-  };
-
-  const handleCloseSnackbar = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-    setOpenSnackbar(false);
-  };
-  // snackbar
-
-  const getSizes = () =>{
+  const getSizes = () => {
     axios
       .get("/api/sizes")
       .then(orders => {
@@ -52,9 +37,9 @@ const AdminSizes = () => {
       });
   };
 
-  useEffect (() => {
-   getSizes();
-  })
+  useEffect(() => {
+    getSizes();
+  });
 
   const handleOpenAddModal = () => {
     setAddModal({
@@ -77,42 +62,42 @@ const AdminSizes = () => {
   };
 
 
-    const deleteValidate = (rowData) => {
-      axios
-        .get(`/api/products/filter?sizes=${rowData.name}`)
-        .then(orders => {
-          if (orders.data.products.length === 0) {
-            handleDeleteModal(rowData);
-          } else {
-            const error = {type:'error', message:`You can’t delete size because of active products in catalog`}
-            handleOpenSnackbar(error);
-          }
-        })
-        .catch(err => {
-          console.log("orders", err);
-        });
+  const deleteValidate = (rowData) => {
+    axios
+      .get(`/api/products/filter?sizes=${rowData.name}`)
+      .then(orders => {
+        if (orders.data.products.length === 0) {
+          handleDeleteModal(rowData);
+        } else {
+          const error = { type: "error", message: `You can’t delete size because of active products in catalog` };
+          handleOpenSnackbar(error);
+        }
+      })
+      .catch(err => {
+        console.log("orders", err);
+      });
 
-    };
+  };
 
-    const editValidate = (rowData) => {
-      axios
-        .get(`/api/products/filter?size=${rowData.name}`)
-        .then(orders => {
-          console.log(orders);
-          console.log("orders.data.products.length", orders.data.products.length);
-          if (orders.data.products.length === 0) {
-            handleEditModal(rowData);
-          } else {
-            const error = {type:'error', message:`You can’t edit size because of active products in catalog`}
-            handleOpenSnackbar(error);
-            console.log("cant edit");
-          }
-        })
-        .catch(err => {
-          console.log("orders", err);
-        });
+  const editValidate = (rowData) => {
+    axios
+      .get(`/api/products/filter?size=${rowData.name}`)
+      .then(orders => {
+        console.log(orders);
+        console.log("orders.data.products.length", orders.data.products.length);
+        if (orders.data.products.length === 0) {
+          handleEditModal(rowData);
+        } else {
+          const error = { type: "error", message: `You can’t edit size because of active products in catalog` };
+          handleOpenSnackbar(error);
+          console.log("cant edit");
+        }
+      })
+      .catch(err => {
+        console.log("orders", err);
+      });
 
-    };
+  };
 
   const closeModal = () => {
     setEditModal({
@@ -165,25 +150,12 @@ const AdminSizes = () => {
             },
           },
           {
-            icon: 'refresh',
-            tooltip: 'Refresh Data',
+            icon: "refresh",
+            tooltip: "Refresh Data",
             isFreeAction: true,
             onClick: () => getSizes(),
-          }
+          },
         ]}
-        /*        editable={{
-                  isEditable: rowData => rowData.name === "name", // only name(a) rows would be editable
-
-                  onRowUpdate: (newData, oldData) =>
-                    new Promise((resolve, reject) => {
-
-                      resolve();
-
-                      console.log("newData", newData);
-                      console.log("oldData", oldData);
-                    }),
-                }} */
-
       />
     );
   };
@@ -196,12 +168,34 @@ const AdminSizes = () => {
       ) : (
         <Box>
           {materialTable()}
-          {AddModal.isOpened &&
-          <AddEditModal open={AddModal.isOpened} handleModal={closeModal} item={AddModal.rowData} />}
-          {EditModal.isOpened &&
-          <AddEditModal open={EditModal.isOpened} handleModal={closeModal} item={EditModal.rowData} />}
-          {DeleteModal.isOpened &&
-          <DeleteItemModal open={DeleteModal.isOpened} handleModal={closeModal} id={DeleteModal.id} item="sizes" handleOpenSnackbar={handleOpenSnackbar}  />}
+          {AddModal.isOpened && (
+            <AddEditModal
+              open={AddModal.isOpened}
+              handleModal={closeModal}
+              item={AddModal.rowData}
+              handleOpenSnackbar={handleOpenSnackbar}
+              autoRefresh={getSizes}
+            />
+          )}
+          {EditModal.isOpened && (
+            <AddEditModal
+              open={EditModal.isOpened}
+              handleModal={closeModal}
+              item={EditModal.rowData}
+              handleOpenSnackbar={handleOpenSnackbar}
+              autoRefresh={getSizes}
+            />
+          )}
+          {DeleteModal.isOpened && (
+            <DeleteItemModal
+              open={DeleteModal.isOpened}
+              handleModal={closeModal}
+              id={DeleteModal.id}
+              item="sizes"
+              handleOpenSnackbar={handleOpenSnackbar}
+              autoRefresh={getSizes}
+            />
+          )}
           <SnackbarMessage openSnackbar={openSnackbar} handleCloseSnackbar={handleCloseSnackbar} type={snackbarType} />
         </Box>
       )}

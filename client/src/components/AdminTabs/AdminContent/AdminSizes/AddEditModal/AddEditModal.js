@@ -9,45 +9,22 @@ import axios from "axios";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import CloseIcon from "@material-ui/icons/Close";
-import Snackbar from "@material-ui/core/Snackbar";
-import MuiAlert from "@material-ui/lab/Alert";
 import useStyles from "./useStyles";
 
-function Alert(props) {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
-}
 
-const AddEditModal = ({ open, handleModal, item }) => {
+const AddEditModal = ({ open, handleModal, item, handleOpenSnackbar, autoRefresh }) => {
   const classes = useStyles();
-
-  // snackbar
-  const [openSnackbar, setOpenSnackbar] = useState(false);
-
-  const handleClick = () => {
-    setOpenSnackbar(true);
-  };
-
-  const handleClose = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-
-    setOpenSnackbar(false);
-  };
-  // snackbar
 
 
   const [itemInfo, setItemInfo] = useState(
     {
       name: "",
-      // _id: "",
     });
 
   useEffect(() => {
     if (item !== null) {
       setItemInfo({
         name: `${item.name}`,
-        // _id: `${item._id}`,
       });
     }
   }, [item]);
@@ -57,30 +34,35 @@ const AddEditModal = ({ open, handleModal, item }) => {
     setItemInfo({ ...itemInfo, [prop]: event.target.value });
   };
 
-  function addPartner() {
+  function changeSize() {
     if (item === null) {
-      // console.log("POST /api/colors", itemInfo);
       axios
         .post("/api/sizes", itemInfo)
         .then(newColor => {
           console.log("new size", newColor);
-          handleClick()
-
+          const success = { type: "success", message: `New size ${itemInfo.name} was added` };
+          handleOpenSnackbar(success);
+          autoRefresh();
         })
         .catch(err => {
           console.log("new size", err);
+          const error = { type: "error", message: `Error! New size was not added.` };
+          handleOpenSnackbar(error);
         });
     } else {
       console.log("put ", item._id, itemInfo);
-      // // AR Y SURE?
       axios
         .put(`/api/sizes/${item._id}`, itemInfo)
         .then(resp => {
           console.log(resp);
-          // SUCCESSFULLY   data. message
+          const success = { type: "success", message: `Size was successfully edited` };
+          handleOpenSnackbar(success);
+          autoRefresh();
         })
         .catch(err => {
           console.log("put size", err);
+          const error = { type: "error", message: `Error! Size ${item.name} was not edited.` };
+          handleOpenSnackbar(error);
         });
     }
     handleModal();
@@ -119,7 +101,7 @@ const AddEditModal = ({ open, handleModal, item }) => {
             <ValidatorForm
               noValidate={false}
               onSubmit={() => {
-                addPartner();
+                changeSize();
               }}
             >
               <TextValidator
@@ -144,13 +126,7 @@ const AddEditModal = ({ open, handleModal, item }) => {
 
   return (
     <>
-     { modal()}
-
-      <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity="success">
-          This is a success message!
-        </Alert>
-      </Snackbar>
+      {modal()}
     </>
   );
 

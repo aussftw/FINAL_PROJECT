@@ -8,16 +8,23 @@ import EditIcon from "@material-ui/icons/Edit";
 import DeleteItemModal from "../DeleteItemModal/DeleteItemModal";
 import AddPartnerModal from "../AdminPartners/AddPartnerModal/AddPartnerModal";
 import PreloaderAdaptive from "../../../Preloader/Adaptive";
+import SnackbarMessage from "../../Snackbar/SnackbarMessage";
 
 
-const AdminCategories = () => {
+const AdminCategories = ({
+                           AddModal,
+                           setAddModal,
+                           EditModal,
+                           setEditModal,
+                           DeleteModal,
+                           setDeleteModal,
+                           openSnackbar,
+                           handleOpenSnackbar,
+                           handleCloseSnackbar,
+                           snackbarType,
+                         }) => {
+
   const [categories, setCategories] = useState([]);
-
-  // imgUrl: "/img/catalog/Ficuses.png"
-  // description: "Ficus is a genus of about 850 species of woody trees, shrubs, vines, epiphytes and hemiepiphytes in the family Moraceae. Collectively known as fig trees or figs, they are native throughout the tropics with a few species extending into the semi-warm temperate zone."
-  const [AddModal, setAddModal] = useState({ isOpened: false, rowData: null });
-  const [EditModal, setEditModal] = useState({ isOpened: false, rowData: {} });
-  const [DeleteModal, setDeleteModal] = useState({ isOpened: false, id: "" });
 
   const handleOpenAddModal = () => {
     setAddModal({
@@ -138,12 +145,35 @@ const AdminCategories = () => {
       ) : (
         <Box>
           {materialTable()}
-          {AddModal.isOpened &&
-          <AddPartnerModal open={AddModal.isOpened} handleModal={closeModal} partner={AddModal.rowData} />}
-          {EditModal.isOpened &&
-          <AddPartnerModal open={EditModal.isOpened} handleModal={closeModal} partner={EditModal.rowData} />}
-          {DeleteModal.isOpened &&
-          <DeleteItemModal open={DeleteModal.isOpened} handleModal={closeModal} id={DeleteModal.id} item="catalog" />}
+          {AddModal.isOpened && (
+            <AddPartnerModal
+              open={AddModal.isOpened}
+              handleModal={closeModal}
+              partner={AddModal.rowData}
+              handleOpenSnackbar={handleOpenSnackbar}
+              autoRefresh={getCategories}
+            />
+          )}
+          {EditModal.isOpened && (
+            <AddPartnerModal
+              open={EditModal.isOpened}
+              handleModal={closeModal}
+              partner={EditModal.rowData}
+              handleOpenSnackbar={handleOpenSnackbar}
+              autoRefresh={getCategories}
+            />
+          )}
+          {DeleteModal.isOpened && (
+            <DeleteItemModal
+              open={DeleteModal.isOpened}
+              handleModal={closeModal}
+              id={DeleteModal.id}
+              item="catalog"
+              handleOpenSnackbar={handleOpenSnackbar}
+              autoRefresh={getCategories}
+            />
+          )}
+          <SnackbarMessage openSnackbar={openSnackbar} handleCloseSnackbar={handleCloseSnackbar} type={snackbarType} />
         </Box>
       )}
     </>

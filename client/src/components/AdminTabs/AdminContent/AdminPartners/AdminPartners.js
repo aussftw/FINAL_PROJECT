@@ -9,13 +9,23 @@ import MaterialTable from "material-table";
 import AddPartnerModal from "./AddPartnerModal/AddPartnerModal";
 import DeleteItemModal from "../DeleteItemModal/DeleteItemModal";
 import PreloaderAdaptive from "../../../Preloader/Adaptive";
+import SnackbarMessage from "../../Snackbar/SnackbarMessage";
+import AddEditModal from "../AdminSizes/AddEditModal/AddEditModal";
 
 
-const AdminPartners = () => {
+const AdminPartners = ({
+                         AddModal,
+                         setAddModal,
+                         EditModal,
+                         setEditModal,
+                         DeleteModal,
+                         setDeleteModal,
+                         openSnackbar,
+                         handleOpenSnackbar,
+                         handleCloseSnackbar,
+                         snackbarType,
+                       }) => {
   const [ordersArr, setOrdersArr] = useState([]);
-  const [AddModal, setAddModal] = useState({ isOpened: false, rowData: null });
-  const [EditModal, setEditModal] = useState({ isOpened: false, rowData: {} });
-  const [DeleteModal, setDeleteModal] = useState({ isOpened: false, id: "" });
 
   const handleOpenAddModal = () => {
     setAddModal({
@@ -62,7 +72,7 @@ const AdminPartners = () => {
         console.log("orders", err);
       });
   };
-  
+
   useEffect(() => {
     getPartners();
   });
@@ -127,12 +137,35 @@ const AdminPartners = () => {
       ) : (
         <Box>
           {materialTable()}
-          {AddModal.isOpened &&
-          <AddPartnerModal open={AddModal.isOpened} handleModal={closeModal} partner={AddModal.rowData} />}
-          {EditModal.isOpened &&
-          <AddPartnerModal open={EditModal.isOpened} handleModal={closeModal} partner={EditModal.rowData} />}
-          {DeleteModal.isOpened &&
-          <DeleteItemModal open={DeleteModal.isOpened} handleModal={closeModal} id={DeleteModal.id} item="partners" />}
+          {AddModal.isOpened && (
+            <AddPartnerModal
+              open={AddModal.isOpened}
+              handleModal={closeModal}
+              partner={AddModal.rowData}
+              handleOpenSnackbar={handleOpenSnackbar}
+              autoRefresh={getPartners}
+            />
+          )}
+          {EditModal.isOpened && (
+            <AddPartnerModal
+              open={EditModal.isOpened}
+              handleModal={closeModal}
+              partner={EditModal.rowData}
+              handleOpenSnackbar={handleOpenSnackbar}
+              autoRefresh={getPartners}
+            />
+          )}
+          {DeleteModal.isOpened && (
+            <DeleteItemModal
+              open={DeleteModal.isOpened}
+              handleModal={closeModal}
+              id={DeleteModal.id}
+              item="partners"
+              handleOpenSnackbar={handleOpenSnackbar}
+              autoRefresh={getPartners}
+            />
+          )}
+          <SnackbarMessage openSnackbar={openSnackbar} handleCloseSnackbar={handleCloseSnackbar} type={snackbarType} />
         </Box>
       )}
     </>
