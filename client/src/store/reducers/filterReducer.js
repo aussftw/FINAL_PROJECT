@@ -5,6 +5,8 @@ const initialState = {
   categoryListing: [],
   colorListing: [],
   sizeListing: [],
+  colorChecked: false,
+  sizesChecked: false,
   filters: {
     color: undefined,
     sizes: undefined,
@@ -57,7 +59,7 @@ function filterReducer(state = initialState, action) {
           ...state,
           filters: {
             ...state.filters,
-            color: action.payload.color,
+            color: action.payload,
           },
         };
       }
@@ -65,7 +67,7 @@ function filterReducer(state = initialState, action) {
         ...state,
         filters: {
           ...state.filters,
-          color: `${state.filters.color},${action.payload.color}`,
+          color: `${state.filters.color},${action.payload}`,
         },
       };
 
@@ -84,7 +86,7 @@ function filterReducer(state = initialState, action) {
           ...state,
           filters: {
             ...state.filters,
-            sizes: action.payload.sizes,
+            sizes: action.payload,
           },
         };
       }
@@ -92,7 +94,7 @@ function filterReducer(state = initialState, action) {
         ...state,
         filters: {
           ...state.filters,
-          sizes: `${state.filters.sizes},${action.payload.sizes}`,
+          sizes: `${state.filters.sizes},${action.payload}`,
         },
       };
 

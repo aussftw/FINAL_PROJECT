@@ -176,8 +176,11 @@ const ItemDetails = ({
                 {sizes}
               </Typography>
             </ListItem>
+            <ListItem className={classes.root} style={{paddingTop: 0}}>
+              <ListItemText className={classes.infoDetail} primary="Rating:" />
+              <RatingModule id={item._id} rate={item.rate.rating} />
+            </ListItem>
           </List>
-          <RatingModule id={item._id} rate={item.rate.rating} />
           <Divider />
           <List>
             <ListItem className={classes.root}>

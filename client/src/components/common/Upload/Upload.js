@@ -1,58 +1,98 @@
-import React , { useState } from "react";
-import axios from "axios";
-import Box from "@material-ui/core/Box"
+import React, {useEffect, useState} from 'react';
+import Box from '@material-ui/core/Box';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
+import useStyles from "./useStyles";
 
-const Upload = ({imageUrls}) => {
-    const [image , setImage] = useState(imageUrls[0]);
-    const [loading , setLoading] = useState(false);
+const Upload = ({ imageUrls, handleImages }) => {
+  const classes = useStyles();
+  const [loading, setLoading] = useState(false);
 
-    const handleFile = async e => {
-        const file = e.target.files;
-        setLoading(true);
-        // eslint-disable-next-line no-undef
-        const data = new FormData();
-        data.append("file" , file[0]);
-        data.append("upload_preset" , "plantly");
+  const [images, setImages] = useState(imageUrls || []); // view
+  const [blobFiles, setBlobFiles] = useState([]); // view
 
-        // let options= ({
-        //   'cloud_name': 'plantly',
-        //   'api_key': '746777216353698',
-        //   'api_secret': 'yVIbGbxWxO_cYvjGJ9v9EbozXqc'
-        // });
+  // props to submit
+  const [deletedImagesURLs, setDeletedImagesURLs] = useState([]);
+  const [addedImagesFiles , setAddedImagesFiles] = useState([]);
 
-        const instance = axios.create();
-        instance.defaults.headers.common = {};
-            instance
-                .post("https://api.cloudinary.com/v1_1/plantly/image/upload", data , {headers : {
-                        "Content-Type":null
-                    }}
-                )
-                .then(response => {
-                    if (response.statusText === 'OK' && response.status === 200) {
-                        console.log(response.data);
-                        setImage(response.data.url);
-                        setLoading(false);
-                    }
-                })
-                .catch(err => {
-                    console.log(err);
-                });
-    };
+  //
+  // const removeItem = item => {
+  //   const updatedImages = [...images].filter((image, index) => index !== item);// view filter
+  //   const newArrWithFiles = [...allImgAndFiles].filter((image, index) => index !== item);
+  //   const deletedItem = [...allImgAndFiles].filter((image, index)=> index === item);
+  //   if(typeof deletedItem === "string"){
+  //     setDeletedImageURLs([...deletedImagesURLs,deletedItem]) // set deleted IMG URLS
+  //   }
+  //   const newFiles = newArrWithFiles.filter(item => typeof item  === Object); // add new FILES to state
+  //   setAddedImagesFiles(newFiles);
+  //   const updatedURLS = newArrWithFiles.filter(item => typeof item === "string"); // set UPDATED IMG URLS
+  //   setUpdatedImgURLs([...updatedImgURLs, updatedURLS]);
+  //   setImages(updatedImages);
+  // };
+  //
 
-    return (
-      <Box>
-        {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-        <label htmlFor="image_uploads">Choose images to upload (PNG, JPG, PNG)</label>
-        <input type="file" id="image_uploads" name="file" accept=".jpg, .jpeg, .png" multiple onChange={handleFile} />
-        {loading ? (
-          <h3>Loading...</h3>
-            ) : (
-              <Box style={{margin: "8px 0 8px"}}>
-                <img src={image} alt="" style={{height: "80px"}} />
-              </Box>
-            )}
-      </Box>
-    )
+  const removeImgUrl = item => {
+    const filteredImgUrls = images.filter((image,index) => index !== item);
+    setImages(filteredImgUrls);
+    const deletedImgUrl = images.filter((image,index) => index === item);
+    setDeletedImagesURLs(deletedImagesURLs.concat(deletedImgUrl));
+  };
+
+  const showImages = e => {
+    setLoading(true);
+    const filesFromInput = e.target.files;
+    setAddedImagesFiles([...addedImagesFiles, ...filesFromInput]);
+    const newImgs = [];
+    for (let key in filesFromInput) {
+      if (filesFromInput.hasOwnProperty(key)) {
+        let newFile = URL.createObjectURL(filesFromInput[key]);
+        newImgs.push(newFile);
+      }
+    }
+    setBlobFiles([...blobFiles, ...newImgs]);
+    setLoading(false);
+  };
+
+
+  const removeNewFile = item => {
+    const updatedBlobs = blobFiles.filter((image,index) => index !== item);
+    setBlobFiles(updatedBlobs);
+    const updatedFiles = addedImagesFiles.filter((image,index) => index !== item);
+    setAddedImagesFiles(updatedFiles);
+  };
+
+  useEffect(()=> {
+    handleImages(images, deletedImagesURLs, addedImagesFiles)
+    // console.log("images URL: ", images);
+    // console.log("Deletes: ", deletedImagesURLs);
+    // console.log("Files: ", addedImagesFiles);
+  }, [addedImagesFiles, deletedImagesURLs, handleImages, images]);
+
+  return (
+    <Box>
+      {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+      <label htmlFor="image_uploads">Choose images to upload (PNG, JPG, PNG)</label>
+      <input type="file" id="image_uploads" name="file" accept=".jpg, .jpeg, .png" multiple onChange={showImages}/>
+      {loading ? (
+        <h3>Loading...</h3>
+      ) : (
+        <Box style={{ margin: '8px 0 8px' }}>
+          {images.map((item, index) => {
+            return(<div key={item + index} className={classes.imgBox}>
+              <img src={item} alt={item} className={classes.img}/>
+              <IconButton className={classes.iconClose} onClick={() => removeImgUrl(index)}><CloseIcon /></IconButton>
+            </div>) ;
+          })}
+          {blobFiles.map((item , index) => {
+            return  (<div key={item + index} className={classes.imgBox}>
+              <img src={item} alt={item} className={classes.img}/>
+              <IconButton className={classes.iconClose} onClick={() => removeNewFile(index)}><CloseIcon /></IconButton>
+            </div>)
+          })}
+        </Box>
+      )}
+    </Box>
+  );
 };
 
 export default Upload;

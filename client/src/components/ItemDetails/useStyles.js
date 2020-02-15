@@ -13,9 +13,6 @@ const useStyles = makeStyles(theme => ({
   },
   linkIcon: {
     marginRight: theme.spacing(1),
-    // "&:hover": {
-    //   color: theme.palette.primary.main,
-    // },
   },
   icon: {
     fontSize: "large",
@@ -29,10 +26,7 @@ const useStyles = makeStyles(theme => ({
   detailsTitle: {
     textTransform: "capitalize",
     fontSize: 16,
-    marginTop: 5,
-    // "&:hover": {
-    //   color: theme.palette.primary.main,
-    // },
+    marginTop: 4,
   },
   infoContainer: {
     minWidth: 180,

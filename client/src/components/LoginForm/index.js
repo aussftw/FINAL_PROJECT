@@ -32,7 +32,7 @@ const LoginForm = ({logIn, isAuthenticatedUser, error, modal, modalClose}) => {
         message={error !== "" ? handleError(error) : ""}
       />
     </>
-  )
+  );
 };
 
 const mapStateToProps = state => {
