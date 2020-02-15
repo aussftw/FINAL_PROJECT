@@ -9,19 +9,17 @@ import CardActionArea from "@material-ui/core/CardActionArea";
 import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
 import IconButton from "@material-ui/core/IconButton";
-import Snackbar from "@material-ui/core/Snackbar";
-import SnackbarContent from "@material-ui/core/SnackbarContent";
 import Typography from "@material-ui/core/Typography";
 import Tooltip from "@material-ui/core/Tooltip";
 import Rating from "@material-ui/lab/Rating";
 import Skeleton from "@material-ui/lab/Skeleton";
+import { Hidden } from "@material-ui/core";
 
-import CheckCircleRoundedIcon from "@material-ui/icons/CheckCircleRounded";
 import Favorite from "@material-ui/icons/Favorite";
 import FavoriteBorder from "@material-ui/icons/FavoriteBorder";
 import StarBorder from "@material-ui/icons/StarBorder";
 
-import { Hidden } from "@material-ui/core";
+import SnackBar from "../common/SnackBar/SnackBar";
 import useStyles from "./useStyles";
 
 import { addItemCart } from "../../store/actions/сart";
@@ -67,6 +65,7 @@ const ItemCard = ({
     }
     setSnackbarAddToCart(false);
   };
+
 
   const handleAddItemToWishlist = () => {
     if (isAuthenticated) {
@@ -156,28 +155,7 @@ const ItemCard = ({
               + add to cart
             </Button>
           )}
-          <Snackbar
-            anchorOrigin={{
-              vertical: "top",
-              horizontal: "left",
-            }}
-            open={snackbarAddToCart}
-            onClose={snackbarClose}
-            autoHideDuration={1500}
-          >
-            <SnackbarContent
-              className={classes.snackbar}
-              role="alert"
-              message={(
-                <Box>
-                  <CheckCircleRoundedIcon />
-                  <span className={classes.snackbarMessage}>
-                    Added to your shopping cart!
-                  </span>
-                </Box>
-              )}
-            />
-          </Snackbar>
+          <SnackBar open={snackbarAddToCart} close={snackbarClose} text="Added to your shopping cart!" />
         </Card>
       ) : (
         <Box className={classes.cardSkeleton}>

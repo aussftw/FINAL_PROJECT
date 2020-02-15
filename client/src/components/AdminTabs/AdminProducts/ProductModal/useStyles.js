@@ -3,9 +3,11 @@ import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles(theme => ({
     modal: {
         position: "fixed",
-        top: 0,
+        overflow: "auto",
+        top: "1vh",
         left: "calc(50% - 196px)",
-        minHeight: 500,
+        minHeight: 400,
+        maxHeight: "93vh",
         width: 360,
         padding: theme.spacing(2),
         backgroundColor: "white",
@@ -26,7 +28,7 @@ const useStyles = makeStyles(theme => ({
         marginBottom: theme.spacing(1),
     },
     inputSmall: {
-        width: 170,
+        width: 160,
         marginBottom: theme.spacing(1),
     },
 }));

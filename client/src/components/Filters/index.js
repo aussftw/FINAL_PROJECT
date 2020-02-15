@@ -33,7 +33,6 @@ const Products = ({
 
   let listProduct = [];
   if (productListing) {
-    console.log("productListing", productListing);
     listProduct = productListing.map(value => {
       return (
         <ItemCard
@@ -78,8 +77,12 @@ const Products = ({
         </div>
         <div className={classes.items}>
           {listProduct.length === 0 ? (
-            <div className={classes.cardSkeleton}>
-              <h1>No products were found by your request</h1>
+            <div className={classes.wrapper}>
+              <div className={classes.span}>
+                <Typography component="span">
+                  No results were found for your request
+                </Typography>
+              </div>
             </div>
           ) : (
             <>

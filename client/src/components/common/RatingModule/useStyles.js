@@ -2,7 +2,8 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(theme => ({
     rating: {
-        paddingBottom: theme.spacing(2),
+        position: "relative",
+        top: "2px",
         color: theme.palette.primary.main
     },
 }));
