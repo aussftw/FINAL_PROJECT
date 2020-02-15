@@ -1,14 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Box } from "@material-ui/core";
-import Button from "@material-ui/core/Button";
 import MaterialTable from "material-table";
-import Typography from "@material-ui/core/Typography";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteItemModal from "../DeleteItemModal/DeleteItemModal";
 import AddPartnerModal from "../AdminPartners/AddPartnerModal/AddPartnerModal";
+import PreloaderAdaptive from "../../../Preloader/Adaptive";
 
 
 const AdminCategories = () => {
@@ -54,9 +53,8 @@ const AdminCategories = () => {
       id: DeleteModal.id,
     });
   };
-  
-  
-  const getPartners = () => {
+
+  const getCategories = () => {
     axios
       .get("/api/catalog")
       .then(orders => {
@@ -66,6 +64,10 @@ const AdminCategories = () => {
         console.log("orders", err);
       });
   };
+
+  useEffect(() => {
+    getCategories();
+  });
 
   const columns = [
     {
@@ -88,45 +90,54 @@ const AdminCategories = () => {
 
   ];
 
+  const materialTable = () => {
+    return (
+      <MaterialTable
+        columns={columns}
+        data={categories}
+        title="Categories"
+        options={{ search: false }}
+        actions={[
+          {
+            icon: () => <AddCircleIcon />,
+            tooltip: "Add Partner",
+            isFreeAction: true,
+            onClick: () => {
+              handleOpenAddModal();
+            },
+          },
+          {
+            icon: () => <DeleteIcon />,
+            tooltip: "Delete Partner",
+            onClick: (event, rowData) => {
+              handleDeleteModal(rowData);
+            },
+          },
+          {
+            icon: () => <EditIcon />,
+            tooltip: "Edit Partner",
+            onClick: (event, rowData) => {
+              handleDataEditModal(rowData);
+            },
+          },
+          {
+            icon: "refresh",
+            tooltip: "Refresh Data",
+            isFreeAction: true,
+            onClick: () => getCategories(),
+          },
+        ]}
+      />
+    );
+  };
+
   return (
     <>
-      <Button variant="contained" onClick={getPartners}>
-        Get all categories
-      </Button>
       {categories.length === 0 ? (
-        <div />
+        <PreloaderAdaptive />
       ) : (
         <Box>
-          <MaterialTable
-            columns={columns}
-            data={categories}
-            title="Categories"
-            options={{ search: false }}
-            actions={[
-              {
-                icon: () => <AddCircleIcon />,
-                tooltip: "Add Partner",
-                isFreeAction: true,
-                onClick: () => {
-                  handleOpenAddModal();
-                },
-              },
-              {
-                icon: () => <DeleteIcon />,
-                tooltip: "Delete Partner",
-                onClick: (event, rowData) => {
-                  handleDeleteModal(rowData);
-                },
-              },
-              {
-                icon: () => <EditIcon />,
-                tooltip: "Edit Partner",
-                onClick: (event, rowData) => {
-                  handleDataEditModal(rowData);
-                },
-              },
-            ]}
-          />
+          {materialTable()}
           {AddModal.isOpened &&
           <AddPartnerModal open={AddModal.isOpened} handleModal={closeModal} partner={AddModal.rowData} />}
           {EditModal.isOpened &&

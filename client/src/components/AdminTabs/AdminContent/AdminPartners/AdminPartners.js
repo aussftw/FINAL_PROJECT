@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Box } from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
@@ -7,7 +7,8 @@ import Button from "@material-ui/core/Button";
 import DeleteIcon from "@material-ui/icons/Delete";
 import MaterialTable from "material-table";
 import AddPartnerModal from "./AddPartnerModal/AddPartnerModal";
-import DeleteItemModal from "../DeleteItemModal/DeleteItemModal"
+import DeleteItemModal from "../DeleteItemModal/DeleteItemModal";
+import PreloaderAdaptive from "../../../Preloader/Adaptive";
 
 
 const AdminPartners = () => {
@@ -61,6 +62,10 @@ const AdminPartners = () => {
         console.log("orders", err);
       });
   };
+  
+  useEffect(() => {
+    getPartners();
+  });
 
   const columns = [
     {
@@ -104,6 +109,12 @@ const AdminPartners = () => {
               handleDataEditModal(rowData);
             },
           },
+          {
+            icon: "refresh",
+            tooltip: "Refresh Data",
+            isFreeAction: true,
+            onClick: () => getPartners(),
+          },
         ]}
       />
     );
@@ -111,12 +122,8 @@ const AdminPartners = () => {
 
   return (
     <>
-      <Button variant="contained" onClick={getPartners}>
-        Get all partners
-      </Button>
-
       {ordersArr.length === 0 ? (
-        <div />
+        <PreloaderAdaptive />
       ) : (
         <Box>
           {materialTable()}

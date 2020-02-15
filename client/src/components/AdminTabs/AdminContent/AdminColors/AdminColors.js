@@ -1,7 +1,6 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Box } from "@material-ui/core";
-import Button from "@material-ui/core/Button";
 import MaterialTable from "material-table";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import DeleteIcon from "@material-ui/icons/Delete";
@@ -9,6 +8,7 @@ import EditIcon from "@material-ui/icons/Edit";
 import DeleteItemModal from "../DeleteItemModal/DeleteItemModal";
 import AddEditModal from "./AddEditModal/AddEditModal";
 import SnackbarMessage from "../../Snackbar/SnackbarMessage";
+import PreloaderAdaptive from "../../../Preloader/Adaptive";
 // import Snackbar from "@material-ui/core/Snackbar";
 
 
@@ -18,11 +18,6 @@ const AdminColors = () => {
   const [AddModal, setAddModal] = useState({ isOpened: false, rowData: null });
   const [EditModal, setEditModal] = useState({ isOpened: false, rowData: {} });
   const [DeleteModal, setDeleteModal] = useState({ isOpened: false, id: "" });
-  const tableRef = useRef(null);
-
-  const refresh = () => {
-    tableRef.current.onQueryChange()
-  };
 
   // const modalInputs = () => {
   //   const valuesArr = Object.keys(colors[0]);
@@ -31,12 +26,12 @@ const AdminColors = () => {
 
   // snackbar
   const [openSnackbar, setOpenSnackbar] = useState(false);
-  const [snackbarType, setSnackbarType] = useState({type:'', message:''});
+  const [snackbarType, setSnackbarType] = useState({ type: "", message: "" });
 
   const handleOpenSnackbar = (type) => {
-    console.log('setOpenSnackbar');
+    console.log("setOpenSnackbar");
     setOpenSnackbar(true);
-    setSnackbarType(type)
+    setSnackbarType(type);
   };
 
   const handleCloseSnackbar = (event, reason) => {
@@ -46,7 +41,6 @@ const AdminColors = () => {
     setOpenSnackbar(false);
   };
   // snackbar
-
   const getColors = () => {
     axios
       .get("/api/colors")
@@ -57,6 +51,10 @@ const AdminColors = () => {
         console.log("orders", err);
       });
   };
+
+  useEffect(() => {
+    getColors();
+  });
 
   const handleOpenAddModal = () => {
     setAddModal({
@@ -79,44 +77,44 @@ const AdminColors = () => {
   };
 
 
-    const deleteValidate = (rowData) => {
-      axios
-        .get(`/api/products/filter?color=${rowData.name}`)
-        .then(orders => {
-          console.log("orders.data.length", orders.data.products.length);
-          if (orders.data.products.length === 0) {
-            handleDeleteModal(rowData);
-          } else {
-            const error = {type:'error', message:`You can’t delete color because of active products in catalog`}
-            handleOpenSnackbar(error);
-            console.log("you cant edit/delete color because of active products in catalog");
-          }
-        })
-        .catch(err => {
-          console.log("orders", err);
-        });
+  const deleteValidate = (rowData) => {
+    axios
+      .get(`/api/products/filter?color=${rowData.name}`)
+      .then(orders => {
+        console.log("orders.data.length", orders.data.products.length);
+        if (orders.data.products.length === 0) {
+          handleDeleteModal(rowData);
+        } else {
+          const error = { type: "error", message: `You can’t delete color because of active products in catalog` };
+          handleOpenSnackbar(error);
+          console.log("you cant edit/delete color because of active products in catalog");
+        }
+      })
+      .catch(err => {
+        console.log("orders", err);
+      });
 
-    };
+  };
 
-    const editValidate = (rowData) => {
-      axios
-        .get(`/api/products/filter?color=${rowData.name}`)
-        .then(orders => {
-          console.log(orders);
-          console.log("orders.data.products.length", orders.data.products.length);
-          if (orders.data.products.length === 0) {
-            handleEditModal(rowData);
-          } else {
-            const error = {type:'error', message:`You can’t edit color because of active products in catalog`}
-            handleOpenSnackbar(error);
-            console.log("cant edit");
-          }
-        })
-        .catch(err => {
-          console.log("orders", err);
-        });
+  const editValidate = (rowData) => {
+    axios
+      .get(`/api/products/filter?color=${rowData.name}`)
+      .then(orders => {
+        console.log(orders);
+        console.log("orders.data.products.length", orders.data.products.length);
+        if (orders.data.products.length === 0) {
+          handleEditModal(rowData);
+        } else {
+          const error = { type: "error", message: `You can’t edit color because of active products in catalog` };
+          handleOpenSnackbar(error);
+          console.log("cant edit");
+        }
+      })
+      .catch(err => {
+        console.log("orders", err);
+      });
 
-    };
+  };
 
   const closeModal = () => {
     setEditModal({
@@ -131,7 +129,6 @@ const AdminColors = () => {
       isOpened: false,
       id: DeleteModal.id,
     });
-    refresh()
   };
 
 
@@ -169,6 +166,12 @@ const AdminColors = () => {
               editValidate(rowData);
             },
           },
+          {
+            icon: "refresh",
+            tooltip: "Refresh Data",
+            isFreeAction: true,
+            onClick: () => getColors(),
+          },
         ]}
         /*        editable={{
                   isEditable: rowData => rowData.name === "name", // only name(a) rows would be editable
@@ -190,20 +193,24 @@ const AdminColors = () => {
 
   return (
     <>
-      <Button variant="contained" onClick={getColors}>
-        Get all colours
-      </Button>
       {colors.length === 0 ? (
-        <div />
+        <PreloaderAdaptive />
       ) : (
         <Box>
           {materialTable()}
           {AddModal.isOpened &&
           <AddEditModal open={AddModal.isOpened} handleModal={closeModal} item={AddModal.rowData} />}
           {EditModal.isOpened &&
-          <AddEditModal open={EditModal.isOpened} handleModal={closeModal} item={EditModal.rowData}  />}
-          {DeleteModal.isOpened &&
-          <DeleteItemModal open={DeleteModal.isOpened} handleModal={closeModal} id={DeleteModal.id} item="colors" handleOpenSnackbar={handleOpenSnackbar} />}
+          <AddEditModal open={EditModal.isOpened} handleModal={closeModal} item={EditModal.rowData} />}
+          {DeleteModal.isOpened && (
+          <DeleteItemModal
+            open={DeleteModal.isOpened}
+            handleModal={closeModal}
+            id={DeleteModal.id}
+            item="colors"
+            handleOpenSnackbar={handleOpenSnackbar}
+          />
+        )}
           <SnackbarMessage openSnackbar={openSnackbar} handleCloseSnackbar={handleCloseSnackbar} type={snackbarType} />
         </Box>
       )}

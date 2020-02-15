@@ -1,7 +1,6 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Box } from "@material-ui/core";
-import Button from "@material-ui/core/Button";
 import MaterialTable from "material-table";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import DeleteIcon from "@material-ui/icons/Delete";
@@ -9,19 +8,15 @@ import EditIcon from "@material-ui/icons/Edit";
 import DeleteItemModal from "../DeleteItemModal/DeleteItemModal";
 import AddEditModal from "./AddEditModal/AddEditModal";
 import SnackbarMessage from "../../Snackbar/SnackbarMessage";
+import PreloaderAdaptive from "../../../Preloader/Adaptive";
 
 
 const AdminSizes = () => {
   const [colors, setColors] = useState([]);
-
   const [AddModal, setAddModal] = useState({ isOpened: false, rowData: null });
   const [EditModal, setEditModal] = useState({ isOpened: false, rowData: {} });
   const [DeleteModal, setDeleteModal] = useState({ isOpened: false, id: "" });
-  const tableRef = useRef(null);
 
-  const refresh = () => {
-    tableRef.current.onQueryChange()
-  };
 
   // const modalInputs = () => {
   //   const valuesArr = Object.keys(colors[0]);
@@ -46,16 +41,20 @@ const AdminSizes = () => {
   };
   // snackbar
 
-  const getSizes = () => {
+  const getSizes = () =>{
     axios
       .get("/api/sizes")
       .then(orders => {
         setColors(orders.data);
       })
       .catch(err => {
-        console.log("orders", err);
+        console.log("err", err.response);
       });
   };
+
+  useEffect (() => {
+   getSizes();
+  })
 
   const handleOpenAddModal = () => {
     setAddModal({
@@ -128,7 +127,6 @@ const AdminSizes = () => {
       isOpened: false,
       id: DeleteModal.id,
     });
-    refresh()
   };
 
 
@@ -166,6 +164,12 @@ const AdminSizes = () => {
               editValidate(rowData);
             },
           },
+          {
+            icon: 'refresh',
+            tooltip: 'Refresh Data',
+            isFreeAction: true,
+            onClick: () => getSizes(),
+          }
         ]}
         /*        editable={{
                   isEditable: rowData => rowData.name === "name", // only name(a) rows would be editable
@@ -187,11 +191,8 @@ const AdminSizes = () => {
 
   return (
     <>
-      <Button variant="contained" onClick={getSizes}>
-        Get all sizes
-      </Button>
       {colors.length === 0 ? (
-        <div />
+        <PreloaderAdaptive />
       ) : (
         <Box>
           {materialTable()}
