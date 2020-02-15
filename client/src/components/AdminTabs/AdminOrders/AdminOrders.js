@@ -7,39 +7,42 @@ import { Box } from "@material-ui/core";
 // import IconButton from "@material-ui/core/IconButton";
 // import DeleteIcon from '@material-ui/icons/Delete';
 import MaterialTable from "material-table";
-// import AddPartnerModal from "../AdminContent/AddPartnerModal/AddPartnerModal";
 import EditIcon from "@material-ui/icons/Edit";
-// import AddIcon from "@material-ui/icons/Add";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
-// import DeleteIcon from "@material-ui/icons/Delete";
-// import Typography from "@material-ui/core/Typography";
 import AddPartnerModal from "../AdminContent/AdminPartners/AddPartnerModal/AddPartnerModal";
-// import DeleteItemModal from "../AdminContent/DeleteItemModal/DeleteItemModal";
 import EditOrderModal from "./EditOrderModal/EditOrderModal";
 import SnackbarMessage from "../Snackbar/SnackbarMessage";
 import AdminOrdersProducts from "./AdminOrdersProducts/AdminOrdersProducts";
-
-
+import useStyles from "./useStyles";
 
 function AdminOrders() {
-  // const classes = useStyles();
+  const classes = useStyles();
   const [ordersArr, setOrdersArr] = useState([]);
   const [AddModal, setAddModal] = useState({ isOpened: false, rowData: null });
-  const [EditModal, setEditModal] = useState({ isOpened: false, rowData: null});
-  const [allLoaded, setAllLoaded] = useState(null);
+  const [EditModal, setEditModal] = useState({ isOpened: false, rowData: null });
 
-  const getOrders = () => {
+  const getAllOrders = () => {
     axios
       .get("/api/orders/all")
       .then(orders => {
         setOrdersArr(orders.data);
-        console.log("all", orders.data);
       })
       .catch(err => {
         console.log("orders", err);
       });
   };
-  
+
+  const getActiveOrders = () => {
+    axios
+      .get("/api/orders/active")
+      .then(orders => {
+        setOrdersArr(orders.data);
+      })
+      .catch(err => {
+        console.log("orders", err);
+      });
+  };
+
   const handleOpenAddModal = () => {
     setAddModal({
       isOpened: !AddModal.isOpened,
@@ -63,7 +66,7 @@ function AdminOrders() {
       isOpened: false,
       rowData: EditModal.rowData,
     });
-    getOrders()
+    getAllOrders();
   };
 
   // const modalInputs = () => {
@@ -89,7 +92,6 @@ function AdminOrders() {
   };
 
 
-
   const columns = [
     { title: "Order №", field: "orderNo" },
     { title: "Canceled", field: "canceled", type: "boolean" },
@@ -99,8 +101,6 @@ function AdminOrders() {
     { title: "Email", field: "email" },
     { title: "Delivery Address", field: "deliveryAddress" },
     { title: "Total Sum", field: "totalSum" },
-    // { title: 'Products', field: 'products', searchable: false,
-    // render: rowData => <AdminOrdersProducts rowData={rowData.products} /> },
   ];
 
   const materialTable = () => {
@@ -111,69 +111,71 @@ function AdminOrders() {
         title="All orders"
         detailPanel={[
           {
-            tooltip: 'Show Products',
+            tooltip: "Show Products",
             render: rowData => {
               return (
                 <AdminOrdersProducts rowData={rowData.products} totalSum={rowData.totalSum} />
-              )
+              );
             },
           },
         ]}
         actions={[
-          {
+/*          {
             icon: () => <AddCircleIcon />,
-            tooltip: "Add Partner",
+            tooltip: "New order",
             isFreeAction: true,
             onClick: () => {
               handleOpenAddModal();
             },
-          },
-          {
+          }, */
+          rowData => ({
+            hidden: rowData.canceled,
             icon: () => <EditIcon />,
-            tooltip: "Edit size",
-            onClick: (event, rowData) => {
-              handleEditModal(rowData);
-            }
-          },
+            tooltip: "Edit order",
+            onClick: (event, rowData) => handleEditModal(rowData),
+          }),
           {
-            icon: 'refresh',
-            tooltip: 'Refresh Data',
+            icon: "refresh",
+            tooltip: "Refresh Data",
             isFreeAction: true,
-            onClick: () => getOrders(),
-          }
+            onClick: () => getAllOrders(),
+          },
         ]}
       />
-    )
-  }
+    );
+  };
 
   return (
     <>
-      <Button variant="contained" onClick={getOrders}>
-        Get orders
+      <Button variant="contained" onClick={getAllOrders} className={classes.btn}>
+        Get all orders
+      </Button>
+      <Button variant="contained" onClick={getActiveOrders} className={classes.btn}>
+        Get active orders
       </Button>
       {ordersArr.length === 0 ? (
         <div />
       ) : (
-        <Box>
+        <Box className={classes.wrapper}>
           {materialTable()}
           {AddModal.isOpened &&
           <AddPartnerModal open={AddModal.isOpened} handleModal={closeModal} partner={AddModal.rowData} />}
           {EditModal.isOpened && (
-          <EditOrderModal
-            open={EditModal.isOpened}
-            handleModal={closeModal}
-            handleOpenSnackbar={handleOpenSnackbar}
-            order={EditModal.rowData}
-          />
-        )}
+            <EditOrderModal
+              open={EditModal.isOpened}
+              handleModal={closeModal}
+              handleOpenSnackbar={handleOpenSnackbar}
+              order={EditModal.rowData}
+              autoRefresh={getAllOrders}
+            />
+          )}
           <SnackbarMessage
             openSnackbar={openSnackbar}
             handleCloseSnackbar={handleCloseSnackbar}
             type={snackbarType}
           />
-
         </Box>
-        )}
+      )}
     </>
   );
 }

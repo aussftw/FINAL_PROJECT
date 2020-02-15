@@ -16,33 +16,49 @@ import MenuItem from "@material-ui/core/MenuItem";
 import useStyles from "./useStyles";
 
 
-const EditOrderModal = ({ open, handleModal, handleOpenSnackbar, order}) => {
+const EditOrderModal = ({ open, handleModal, handleOpenSnackbar, order, autoRefresh }) => {
   const classes = useStyles();
 
-  const [editedOrder, setEditedOrder] = useState({enabled: order.enabled, status: order.status});
+  const [editedOrder, setEditedOrder] = useState({ canceled: order.canceled, status: order.status });
 
   const handleSwitchChange = event => {
-    setEditedOrder({ ...editedOrder, enabled: event.target.checked });
+    setEditedOrder({ ...editedOrder, canceled: event.target.checked });
   };
   const handleStatusChange = event => {
-    setEditedOrder({ ...editedOrder, status: event.target.value  });
+    setEditedOrder({ ...editedOrder, status: event.target.value });
   };
 
   const editOrder = () => {
-    console.log(editedOrder);
-    console.log(order._id);
-    // axios
-    //   .put(`/api/orders/cancel/${order.id}`)
-    //   .then(resp => {
-        const success = {type:'success', message:`The order ${order.orderNo} was successfully changed`}
-        handleOpenSnackbar(success);
-    //     console.log(resp);
-    //   })
-    //   .catch(err => {
-    //     const error = {type:'error', message:`Error! ${order.orderNo} wasn’t deleted.`}
-    //     handleOpenSnackbar(error);
-    //     console.log("orders", err.response);
-    //   });
+    if (order.status !== editedOrder.status) {
+      axios
+        .put(`/api/orders/${order._id}`, editedOrder)
+        .then(resp => {
+          const success = { type: "success", message: `The status of ${order.orderNo} was successfully changed` };
+          handleOpenSnackbar(success);
+          autoRefresh();
+          console.log(resp);
+        })
+        .catch(err => {
+          const error = { type: "error", message: `Error! ${order.orderNo} wasn’t changed.` };
+          handleOpenSnackbar(error);
+          console.log("orders", err.response);
+        });
+    }
+    if (order.canceled !== editedOrder.canceled) {
+      axios
+        .put(`/api/orders/cancel/${order._id}`)
+        .then(resp => {
+          const success = { type: "success", message: `The order ${order.orderNo} was canceled` };
+          handleOpenSnackbar(success);
+          autoRefresh();
+          console.log(resp);
+        })
+        .catch(err => {
+          const error = { type: "error", message: `Error! ${order.orderNo} wasn’t canceled.` };
+          handleOpenSnackbar(error);
+          console.log("orders", err.response);
+        });
+    }
     handleModal();
   };
 
@@ -63,9 +79,9 @@ const EditOrderModal = ({ open, handleModal, handleOpenSnackbar, order}) => {
             <Typography
               component="h3"
               align="center"
-              style={{ padding: "4px" }}
+              className={classes.title}
             >
-                Edit order №
+              Edit order №
               {order.orderNo}
             </Typography>
             <IconButton
@@ -77,27 +93,27 @@ const EditOrderModal = ({ open, handleModal, handleOpenSnackbar, order}) => {
             </IconButton>
 
             <FormControl component="div" fullWidth>
-          
-              <FormControlLabel
-                value="Product Availability"
-                control={(
-                  <Switch
-                    id="enabled"
-                    color="primary"
-                    checked={order.enabled}
-                    onChange={handleSwitchChange}
-                    value="enabled"
-                  />
-                )}
-                label="Product Availability"
-                labelPlacement="start"
-              />
-              <Box className={classes.inputSmallBox}>
-                
+              <Box className={classes.inputBox}>
+                <FormControlLabel
+                  value="Canceled"
+                  control={(
+                    <Switch
+                      disabled={editedOrder.canceled}
+                      checked={editedOrder.canceled}
+                      value="enabled"
+                      id="enabled"
+                      color="primary"
+                      onChange={handleSwitchChange}
+                    />
+                  )}
+                  label="Canceled"
+                  labelPlacement="start"
+                />
                 <TextField
-                  className={classes.inputSmall}
-                  id="category"
-                  label="Category"
+                  disabled={editedOrder.canceled}
+                  className={classes.input}
+                  id="status"
+                  label="Status"
                   size="small"
                   select
                   value={editedOrder.status}
@@ -108,10 +124,8 @@ const EditOrderModal = ({ open, handleModal, handleOpenSnackbar, order}) => {
                   <MenuItem value="Shipped">Shipped</MenuItem>
                   <MenuItem value="Recevied">Recevied</MenuItem>
                 </TextField>
-                
               </Box>
-              
-              <Button variant="contained" type="submit" onClick={editOrder}>
+              <Button variant="contained" type="submit" onClick={() => editOrder()}>
                 Submit
               </Button>
             </FormControl>
@@ -121,37 +135,11 @@ const EditOrderModal = ({ open, handleModal, handleOpenSnackbar, order}) => {
     );
   };
 
-
   return (
     <div>
       {modal()}
     </div>
   );
-
 };
 
 export default EditOrderModal;
-/*
-<Fade in={open}>
-  <Box className={classes.modalBox}>
-    <Typography
-      component="h2"
-      align="center"
-      className={classes.message}
-    >
-      `Are you sure you want cancel order № ${}`
-    </Typography>
-
-    <IconButton
-      component="span"
-      onClick={handleModal}
-      className={classes.closeBtn}
-    >
-      <CloseIcon />
-    </IconButton>
-
-    <Button variant="contained" fullWidth onClick={cancelOrder}>
-      Cancel
-    </Button>
-  </Box>
-</Fade> */

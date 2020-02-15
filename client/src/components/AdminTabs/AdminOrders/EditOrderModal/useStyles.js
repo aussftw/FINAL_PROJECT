@@ -6,35 +6,26 @@ const useStyles = makeStyles(theme => ({
     top: "30%",
     left: "calc(50% - 20%)",
     minHeight: "20%",
-    width: "35%",
+    width: "25%",
     padding: theme.spacing(3),
     backgroundColor: "white",
     borderRadius: 4,
   },
+  title: {
+    paddingBottom: theme.spacing(3),
+  },
   closeBtn: {
     position: "absolute",
-    top: 8,
-    right: 8,
+    top: "4%",
+    right: "3%",
+  },
+  inputBox: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
   },
   input: {
-    // display: "block",
-    marginTop: theme.spacing(3),
-  },
-  message: {
-    padding: theme.spacing(4),
-  },
-
-
-
-  inputSmallBox: {
-    display: "flex",
-    flexWrap: "wrap",
-    justifyContent: "space-between",
-    marginBottom: theme.spacing(1),
-  },
-  inputSmall: {
-    width: 170,
-    marginBottom: theme.spacing(1),
+    margin: theme.spacing(4),
   },
 }));
 

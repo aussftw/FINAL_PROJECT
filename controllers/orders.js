@@ -130,6 +130,7 @@ exports.placeOrder = async (req, res, next) => {
 };
 
 exports.updateOrder = (req, res, next) => {
+  //req.user.firstName
   Order.findOne({ _id: req.params.id }).then(async currentOrder => {
     if (!currentOrder) {
       return res
@@ -141,6 +142,10 @@ exports.updateOrder = (req, res, next) => {
       if (req.body.deliveryAddress) {
         order.deliveryAddress = JSON.parse(req.body.deliveryAddress);
       }
+
+      // if (req.body.status) {
+      //   order.canceled = req.body.status;
+      // }
 
       if (req.body.shipping) {
         order.shipping = JSON.parse(req.body.shipping);
@@ -178,7 +183,15 @@ exports.updateOrder = (req, res, next) => {
       const subscriberMail = req.body.email;
       const letterSubject = req.body.letterSubject;
       const letterHtml = req.body.letterHtml;
-
+      // const letterSubject = "Your order was changed";
+      // const letterHtml = `<div style="width: 600px;padding: 25px 30px 32px 27px;margin: 0 auto;color: black;">
+      //                       <h2 style="font-size: 28px; line-height: 32px; padding-bottom: 15px; font-weight: normal;margin: 0;color: black;">
+      //                         Hello, ${currentOrder._doc.name}.
+      //                       </h2>
+      //                       <p style="font-size: 15px;padding-bottom: 22px; line-height: 24px; margin: 0;color: black;text-align: justify;">
+      //                          Your order №${currentOrder.orderNo} was changed. The status of your order is ${order.status}
+      //                       </p>
+      //                     </div>`;
       const { errors, isValid } = validateOrderForm(req.body);
 
       // Check Validation
@@ -312,7 +325,7 @@ exports.deleteOrder = (req, res, next) => {
 };
 
 exports.getAllOrders = (req, res, next) => {
-  const newestOrders = {"date":-1}
+  const newestOrders = {"date":-1};
   Order.find()
     .sort(newestOrders)
     .then(orders => {
@@ -321,6 +334,18 @@ exports.getAllOrders = (req, res, next) => {
       }
       return res.json([]);
     })
+    .catch(err =>
+      res.status(400).json({
+        message: `Error happened on server: "${err}" `
+      })
+    );
+};
+
+exports.getActiveOrders = (req, res, next) => {
+  const newestOrders = {"date":-1};
+  Order.find({ canceled: false })
+    .sort(newestOrders)
+    .then(orders => res.json(orders))
     .catch(err =>
       res.status(400).json({
         message: `Error happened on server: "${err}" `

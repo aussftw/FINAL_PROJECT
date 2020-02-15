@@ -4,18 +4,16 @@ import { Link } from "react-router-dom";
 import Typography from "@material-ui/core/Typography";
 import useStyles from "./useStyles";
 
-
 const AdminOrdersProducts = ({ rowData, totalSum }) => {
-
   const classes = useStyles();
 
   return (
-    <>
+    <Grid className={classes.wrapper}>
       {rowData.map((item) => {
         const ProdName = item.product.name;
 
         return (
-          <Grid container className={classes.wrapper} key={ProdName}>
+          <Grid container key={ProdName}>
             <Grid item xs={4} sm={4}>
 
               <Typography
@@ -26,11 +24,10 @@ const AdminOrdersProducts = ({ rowData, totalSum }) => {
                 {ProdName.charAt(0).toUpperCase() + ProdName.slice(1)}
               </Typography>
 
-
             </Grid>
             <Grid item xs={3} sm={3}>
               {item.product.imageUrls.map((url) => {
-                return <img key={url} alt={ProdName} src={url} style={{ width: "20%" }}/>;
+                return <img key={url} alt={ProdName} src={url} style={{ width: "20%" }} />;
               })}
             </Grid>
             <Grid item xs={2} sm={2}>
@@ -41,25 +38,12 @@ const AdminOrdersProducts = ({ rowData, totalSum }) => {
           </Grid>
         );
       })}
-
-        <Typography>
-          Total = {totalSum}
-        </Typography>
-
-    </>
+      <Typography>
+        Total = {totalSum}
+      </Typography>
+    </Grid>
   );
 
 };
 
 export default AdminOrdersProducts;
-
-// <Grid container>
-//   <Grid item xs={8} sm={8}>
-//     {productsTable()}
-//   </Grid>
-//   <Grid item xs={1} sm={1}>
-//     <Typography>
-//       Total = {totalSum}
-//     </Typography>
-//   </Grid>
-// </Grid>
