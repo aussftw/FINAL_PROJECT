@@ -10,8 +10,8 @@ import {Button} from "@material-ui/core";
 import {ValidatorForm} from "react-material-ui-form-validator";
 import CheckoutCart from "./CheckoutCart/CheckoutCart";
 import CheckoutOrder from "./CheckoutOrder/CheckoutOrder";
-import useStyles from "./useStyles";
 import PreloaderAdaptiveSmall from "../Preloader/AdaptiveSmall";
+import useStyles from "./useStyles";
 
 
 const Checkout = ({ userData, isAuthenticated, cartProducts }) => {

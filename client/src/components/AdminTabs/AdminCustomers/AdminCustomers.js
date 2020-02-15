@@ -7,7 +7,6 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import PreloaderAdaptive from "../../Preloader/Adaptive";
 import useStyles from "./useStyles";
-import theme from "../../../theme";
 import UserModal from "./UserModal/UserModal";
 
 const AdminCustomers = () => {
@@ -87,7 +86,6 @@ const AdminCustomers = () => {
     axios
       .get("/api/customers")
       .then(response => {
-        console.log(response);
         setAllCustomers(response.data);
         setIsLoading(false);
       })

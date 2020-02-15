@@ -51,18 +51,12 @@ const useStyles = makeStyles(theme => ({
     marginRight: 15,
     textAlign: "right",
     fontSize: 12,
-    // [theme.breakpoints.up("sm")]: {
-    //   marginRight: 30,
-    // },
   },
   price: {
     marginRight: 15,
     textAlign: "right",
     fontSize: 12,
     fontWeight: 600,
-    // [theme.breakpoints.up("sm")]: {
-    //   marginRight: 30,
-    // },
   },
 }));
 
