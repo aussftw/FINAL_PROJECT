@@ -15,7 +15,6 @@ import useStyles from "./useStyles";
 
 const UserModal = ({ user, setOneUserData, allCustomers, setAllCustomers, isOpen, onClose }) => {
   const classes = useStyles();
-  console.log(user);
   const [ isLoadingAdmin, setIsLoadingAdmin ] = useState(false);
   const [ isLoadingRating, setIsLoadingRating ] = useState(false);
   const [ isLoadingEnabled, setIsLoadingEnabled ] = useState(false);
@@ -80,11 +79,11 @@ const UserModal = ({ user, setOneUserData, allCustomers, setAllCustomers, isOpen
       .delete("/api/rating/", {data: userId})
       .then(response => {
         setIsLoadingRating(false);
-        setMessage(response);
+        setMessage(response.data.message);
       })
       .catch(err => {
         setIsLoadingRating(false);
-        setMessage(err.response);
+        setMessage(err.response.data.message);
       });
   };
 
@@ -160,7 +159,7 @@ const UserModal = ({ user, setOneUserData, allCustomers, setAllCustomers, isOpen
           )}
           {message && (
           <Typography component="h3" align="center" className={classes.message}>
-            {`${message.data.message}`}
+            {message}
           </Typography>
         )}
         </Box>
