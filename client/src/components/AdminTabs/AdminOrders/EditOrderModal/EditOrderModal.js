@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Backdrop from "@material-ui/core/Backdrop";
 import Button from "@material-ui/core/Button";
 import Fade from "@material-ui/core/Fade";
@@ -8,26 +8,41 @@ import axios from "axios";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import CloseIcon from "@material-ui/icons/Close";
+import FormControl from "@material-ui/core/FormControl";
+import TextField from "@material-ui/core/TextField";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Switch from "@material-ui/core/Switch";
+import MenuItem from "@material-ui/core/MenuItem";
 import useStyles from "./useStyles";
 
 
-const EditOrderModal = ({ open, handleModal, id, orderNo, handleOpenSnackbar }) => {
+const EditOrderModal = ({ open, handleModal, handleOpenSnackbar, order}) => {
   const classes = useStyles();
 
-  const cancelOrder = () => {
-    axios
-      .put(`/api/orders/cancel/${id}`)
-      .then(resp => {
-        const success = {type:'success', message:`${orderNo} was successfully deleted`}
-        handleOpenSnackbar(success);
-        console.log(resp);
-      })
-      .catch(err => {
+  const [editedOrder, setEditedOrder] = useState({enabled: order.enabled, status: order.status});
 
-        const error = {type:'error', message:`Error! ${orderNo} wasn’t deleted.`}
-        handleOpenSnackbar(error);
-        console.log("orders", err.response);
-      });
+  const handleSwitchChange = event => {
+    setEditedOrder({ ...editedOrder, enabled: event.target.checked });
+  };
+  const handleStatusChange = event => {
+    setEditedOrder({ ...editedOrder, status: event.target.value  });
+  };
+
+  const editOrder = () => {
+    console.log(editedOrder);
+    console.log(order._id);
+    // axios
+    //   .put(`/api/orders/cancel/${order.id}`)
+    //   .then(resp => {
+        const success = {type:'success', message:`The order ${order.orderNo} was successfully changed`}
+        handleOpenSnackbar(success);
+    //     console.log(resp);
+    //   })
+    //   .catch(err => {
+    //     const error = {type:'error', message:`Error! ${order.orderNo} wasn’t deleted.`}
+    //     handleOpenSnackbar(error);
+    //     console.log("orders", err.response);
+    //   });
     handleModal();
   };
 
@@ -46,13 +61,13 @@ const EditOrderModal = ({ open, handleModal, id, orderNo, handleOpenSnackbar }) 
         <Fade in={open}>
           <Box className={classes.modalBox}>
             <Typography
-              component="h2"
+              component="h3"
               align="center"
-              className={classes.message}
+              style={{ padding: "4px" }}
             >
-           `Are you sure you want cancel order № ${}`
+                Edit order №
+              {order.orderNo}
             </Typography>
-
             <IconButton
               component="span"
               onClick={handleModal}
@@ -61,9 +76,45 @@ const EditOrderModal = ({ open, handleModal, id, orderNo, handleOpenSnackbar }) 
               <CloseIcon />
             </IconButton>
 
-            <Button variant="contained" fullWidth onClick={cancelOrder}>
-              Cancel
-            </Button>
+            <FormControl component="div" fullWidth>
+          
+              <FormControlLabel
+                value="Product Availability"
+                control={(
+                  <Switch
+                    id="enabled"
+                    color="primary"
+                    checked={order.enabled}
+                    onChange={handleSwitchChange}
+                    value="enabled"
+                  />
+                )}
+                label="Product Availability"
+                labelPlacement="start"
+              />
+              <Box className={classes.inputSmallBox}>
+                
+                <TextField
+                  className={classes.inputSmall}
+                  id="category"
+                  label="Category"
+                  size="small"
+                  select
+                  value={editedOrder.status}
+                  onChange={handleStatusChange}
+                >
+                  <MenuItem value="In progress">In progress</MenuItem>
+                  <MenuItem value="Processed">Processed</MenuItem>
+                  <MenuItem value="Shipped">Shipped</MenuItem>
+                  <MenuItem value="Recevied">Recevied</MenuItem>
+                </TextField>
+                
+              </Box>
+              
+              <Button variant="contained" type="submit" onClick={editOrder}>
+                Submit
+              </Button>
+            </FormControl>
           </Box>
         </Fade>
       </Modal>
@@ -80,3 +131,27 @@ const EditOrderModal = ({ open, handleModal, id, orderNo, handleOpenSnackbar }) 
 };
 
 export default EditOrderModal;
+/*
+<Fade in={open}>
+  <Box className={classes.modalBox}>
+    <Typography
+      component="h2"
+      align="center"
+      className={classes.message}
+    >
+      `Are you sure you want cancel order № ${}`
+    </Typography>
+
+    <IconButton
+      component="span"
+      onClick={handleModal}
+      className={classes.closeBtn}
+    >
+      <CloseIcon />
+    </IconButton>
+
+    <Button variant="contained" fullWidth onClick={cancelOrder}>
+      Cancel
+    </Button>
+  </Box>
+</Fade> */

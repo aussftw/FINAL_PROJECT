@@ -12,7 +12,7 @@ import CloseIcon from "@material-ui/icons/Close";
 import useStyles from "./useStyles";
 
 
-const AddEditModal = ({ open, handleModal, item }) => {
+const AddEditModal = ({ open, handleModal, item, refresh }) => {
   const classes = useStyles();
 
   const [itemInfo, setItemInfo] = useState(
@@ -42,6 +42,7 @@ const AddEditModal = ({ open, handleModal, item }) => {
         .post("/api/colors", itemInfo )
         .then(newColor => {
           console.log('newColor', newColor);
+          refresh();
         })
         .catch(err => {
           console.log('newColor', err);
@@ -53,6 +54,7 @@ const AddEditModal = ({ open, handleModal, item }) => {
         .put(`/api/colors/${item._id}`, itemInfo )
         .then(resp => {
           console.log(resp);
+          refresh();
           // SUCCESSFULLY   data. message
         })
         .catch(err => {

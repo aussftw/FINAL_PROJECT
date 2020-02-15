@@ -21,8 +21,6 @@ import useStyles from "./useStyles";
 const DeleteItemModal = ({ open, handleModal, id, item, handleOpenSnackbar }) => {
   const classes = useStyles();
 
-
-
   const createMessage = () => {
 
     if (item === "catalog") {

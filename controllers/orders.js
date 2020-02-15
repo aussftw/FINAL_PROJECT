@@ -234,8 +234,14 @@ exports.cancelOrder = (req, res, next) => {
     } else {
       const subscriberMail = currentOrder.email;
       const letterSubject = "Your order was canceled";
-      const letterHtml = `<h2>Your order №${currentOrder.orderNo} was canceled.</h2>`;
-
+      const letterHtml = `<div style="width: 600px;padding: 25px 30px 32px 27px;margin: 0 auto;color: black;">
+                            <h2 style="font-size: 28px; line-height: 32px; padding-bottom: 15px; font-weight: normal;margin: 0;color: black;">
+                              Hello, ${currentOrder._doc.name}.
+                            </h2>
+                            <p style="font-size: 15px;padding-bottom: 22px; line-height: 24px; margin: 0;color: black;text-align: justify;">
+                               Your order №${currentOrder.orderNo} was canceled. We will be glad to see new orders from you!
+                            </p>
+                          </div>`;
       const { errors, isValid } = validateOrderForm(req.body);
 
       // Check Validation

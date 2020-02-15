@@ -30,7 +30,7 @@ const SnackbarMessage = ({ openSnackbar, handleCloseSnackbar, type }) => {
         autoHideDuration={1500}
       >
         <SnackbarContent
-          className={type.type==='error' ? classes.snackbarError: classes.snackbar}
+          className={type.type==="error" ? classes.snackbarError: classes.snackbar}
           role="alert"
           message={(
             <Box>

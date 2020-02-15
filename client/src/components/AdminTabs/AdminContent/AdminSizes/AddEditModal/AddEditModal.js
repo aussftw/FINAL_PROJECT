@@ -65,6 +65,7 @@ const AddEditModal = ({ open, handleModal, item }) => {
         .then(newColor => {
           console.log("new size", newColor);
           handleClick()
+
         })
         .catch(err => {
           console.log("new size", err);

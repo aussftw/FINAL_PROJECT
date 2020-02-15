@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import axios from "axios";
 import { Box } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
@@ -18,6 +18,11 @@ const AdminColors = () => {
   const [AddModal, setAddModal] = useState({ isOpened: false, rowData: null });
   const [EditModal, setEditModal] = useState({ isOpened: false, rowData: {} });
   const [DeleteModal, setDeleteModal] = useState({ isOpened: false, id: "" });
+  const tableRef = useRef(null);
+
+  const refresh = () => {
+    tableRef.current.onQueryChange()
+  };
 
   // const modalInputs = () => {
   //   const valuesArr = Object.keys(colors[0]);
@@ -126,6 +131,7 @@ const AdminColors = () => {
       isOpened: false,
       id: DeleteModal.id,
     });
+    refresh()
   };
 
 
@@ -195,7 +201,7 @@ const AdminColors = () => {
           {AddModal.isOpened &&
           <AddEditModal open={AddModal.isOpened} handleModal={closeModal} item={AddModal.rowData} />}
           {EditModal.isOpened &&
-          <AddEditModal open={EditModal.isOpened} handleModal={closeModal} item={EditModal.rowData} />}
+          <AddEditModal open={EditModal.isOpened} handleModal={closeModal} item={EditModal.rowData}  />}
           {DeleteModal.isOpened &&
           <DeleteItemModal open={DeleteModal.isOpened} handleModal={closeModal} id={DeleteModal.id} item="colors" handleOpenSnackbar={handleOpenSnackbar} />}
           <SnackbarMessage openSnackbar={openSnackbar} handleCloseSnackbar={handleCloseSnackbar} type={snackbarType} />

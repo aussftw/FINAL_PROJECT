@@ -17,11 +17,24 @@ const useStyles = makeStyles(theme => ({
     right: 8,
   },
   input: {
-    display: "block",
+    // display: "block",
     marginTop: theme.spacing(3),
   },
   message: {
     padding: theme.spacing(4),
+  },
+
+
+
+  inputSmallBox: {
+    display: "flex",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
+    marginBottom: theme.spacing(1),
+  },
+  inputSmall: {
+    width: 170,
+    marginBottom: theme.spacing(1),
   },
 }));
 

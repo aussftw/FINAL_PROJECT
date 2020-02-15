@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useRef, useState } from "react";
 import Button from "@material-ui/core/Button";
 import axios from "axios";
 import { Box } from "@material-ui/core";
@@ -20,29 +20,25 @@ import SnackbarMessage from "../Snackbar/SnackbarMessage";
 import AdminOrdersProducts from "./AdminOrdersProducts/AdminOrdersProducts";
 
 
-// in progress, processed, shipped, recevied
-
-
-// products: (4) [{…}, {…}, {…}, {…}]
-// canceled: false
-// _id: "5e381a663e96e417ac8974e0"
-// name: "Gogi"
-// customerId: {isAdmin: false, enabled: true, _id: "5e21d28298d2fa29401445d1", firstName: "Gogi", lastName: "Doe", …}
-// status: "In progress"
-// email: "alink0@ukr.net"
-// mobile: "+380956920777"
-// deliveryAddress: "Petra Str 123,17"
-// letterSubject: "Congratulations! You’re now a part of the Plantly Shop family."
-// letterHtml: "<h1>Thank you for your order! Our product is so much more than the packaging.</h1>"
-// orderNo: "2916855"
-// totalSum: 86.41
 
 function AdminOrders() {
   // const classes = useStyles();
   const [ordersArr, setOrdersArr] = useState([]);
   const [AddModal, setAddModal] = useState({ isOpened: false, rowData: null });
-  const [EditModal, setEditModal] = useState({ isOpened: false, id: "", orderNo: "" });
+  const [EditModal, setEditModal] = useState({ isOpened: false, rowData: null});
 
+  const getOrders = () => {
+    axios
+      .get("/api/orders/all")
+      .then(orders => {
+        setOrdersArr(orders.data);
+        console.log("all", orders.data);
+      })
+      .catch(err => {
+        console.log("orders", err);
+      });
+  };
+  
   const handleOpenAddModal = () => {
     setAddModal({
       isOpened: !AddModal.isOpened,
@@ -52,9 +48,8 @@ function AdminOrders() {
 
   const handleEditModal = (rowData) => {
     setEditModal({
-      isOpened: !AddModal.isOpened,
-      id: rowData._id,
-      orderNo: rowData.orderNo,
+      isOpened: !EditModal.isOpened,
+      rowData,
     });
   };
 
@@ -65,10 +60,9 @@ function AdminOrders() {
     });
     setEditModal({
       isOpened: false,
-      id: EditModal.id,
-      orderNo: EditModal.orderNo,
+      rowData: EditModal.rowData,
     });
-
+    getOrders()
   };
 
   // const modalInputs = () => {
@@ -82,7 +76,6 @@ function AdminOrders() {
   const [snackbarType, setSnackbarType] = useState({ type: "", message: "" });
 
   const handleOpenSnackbar = (type) => {
-    console.log("setOpenSnackbar");
     setOpenSnackbar(true);
     setSnackbarType(type);
   };
@@ -93,29 +86,8 @@ function AdminOrders() {
     }
     setOpenSnackbar(false);
   };
-  // snackbar
 
 
-  const getOrders = () => {
-    axios
-      .get("/api/orders/all")
-      .then(orders => {
-        setOrdersArr(orders.data);
-        console.log("all", orders.data);
-      })
-      .catch(err => {
-        console.log("orders", err);
-      });
-    // axios
-    //   .get("/api/orders")
-    //   .then(orders => {
-    //     console.log('user',orders.data);
-    //   })
-    //   .catch(err => {
-    //     console.log('orders', err);
-    //   });
-
-  };
 
   const columns = [
     { title: "Order №", field: "orderNo" },
@@ -170,6 +142,12 @@ function AdminOrders() {
                   handleEditModal(rowData);
                 }
               },
+              {
+                icon: 'refresh',
+                tooltip: 'Refresh Data',
+                isFreeAction: true,
+                onClick: () => getOrders(),
+              }
             ]}
           />
           {AddModal.isOpened &&
@@ -180,9 +158,8 @@ function AdminOrders() {
           <EditOrderModal
             open={EditModal.isOpened}
             handleModal={closeModal}
-            id={EditModal.id}
-            orderNo={EditModal.orderNo}
             handleOpenSnackbar={handleOpenSnackbar}
+            order={EditModal.rowData}
           />
         )}
           <SnackbarMessage
