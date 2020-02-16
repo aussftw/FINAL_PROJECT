@@ -24,7 +24,13 @@ const DeleteItemModal = ({ open, handleModal, id, item, handleOpenSnackbar, auto
     const itemSingular = item.slice(0, item.length - 1);
 
     return (`Are you sure you want to delete this ${itemSingular}?`);
+  };
 
+  const createSnackbarMessage = () => {
+    if (item === "catalog") {
+      return "Category";
+    }
+    return item[0].toUpperCase() + item.slice(1, item.length - 1);
   };
 
   const deleteItem = () => {
@@ -32,15 +38,13 @@ const DeleteItemModal = ({ open, handleModal, id, item, handleOpenSnackbar, auto
     axios
       .delete(`/api/${item}/${id}`)
       .then(resp => {
-        const itemSingular = item.slice(0, item.length - 1);
-        const success = {type:'success', message:`${itemSingular} was successfully deleted`};
+        const success = { type: "success", message: `${createSnackbarMessage()} was successfully deleted` };
         handleOpenSnackbar(success);
         autoRefresh();
         console.log(resp);
       })
       .catch(err => {
-        const itemSingular = item.slice(0, item.length - 1);
-        const error = {type:'error', message:`Error! ${itemSingular} wasn’t deleted.`};
+        const error = { type: "error", message: `Error! ${createSnackbarMessage()} wasn’t deleted.` };
         handleOpenSnackbar(error);
         console.log("orders", err);
       });

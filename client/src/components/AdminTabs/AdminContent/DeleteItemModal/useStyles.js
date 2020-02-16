@@ -6,7 +6,7 @@ const useStyles = makeStyles(theme => ({
     top: "30%",
     left: "calc(50% - 20%)",
     minHeight: "20%",
-    width: "35%",
+    width: "20%",
     padding: theme.spacing(3),
     backgroundColor: "white",
     borderRadius: 4,

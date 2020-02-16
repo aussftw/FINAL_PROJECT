@@ -6,9 +6,10 @@ import AddCircleIcon from "@material-ui/icons/AddCircle";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteItemModal from "../DeleteItemModal/DeleteItemModal";
-import AddPartnerModal from "../AdminPartners/AddPartnerModal/AddPartnerModal";
+import AddEditPartnerModal from "../AdminPartners/AddEditPartnerModal/AddEditPartnerModal";
 import PreloaderAdaptive from "../../../Preloader/Adaptive";
 import SnackbarMessage from "../../Snackbar/SnackbarMessage";
+import AddEditCategoriesModal from "./AddEditCategoriesModal/AddEditCategoriesModal";
 
 
 const AdminCategories = ({
@@ -42,7 +43,7 @@ const AdminCategories = ({
   const handleDeleteModal = (rowData) => {
     setDeleteModal({
       isOpened: !DeleteModal.isOpened,
-      id: rowData._id,
+      id: rowData.id,
     });
   };
 
@@ -66,6 +67,7 @@ const AdminCategories = ({
       .get("/api/catalog")
       .then(orders => {
         setCategories(orders.data);
+        console.log(orders.data);
       })
       .catch(err => {
         console.log("orders", err);
@@ -74,7 +76,7 @@ const AdminCategories = ({
 
   useEffect(() => {
     getCategories();
-  });
+  },[]);
 
   const columns = [
     {
@@ -146,19 +148,19 @@ const AdminCategories = ({
         <Box>
           {materialTable()}
           {AddModal.isOpened && (
-            <AddPartnerModal
+            <AddEditCategoriesModal
               open={AddModal.isOpened}
               handleModal={closeModal}
-              partner={AddModal.rowData}
+              category={AddModal.rowData}
               handleOpenSnackbar={handleOpenSnackbar}
               autoRefresh={getCategories}
             />
           )}
           {EditModal.isOpened && (
-            <AddPartnerModal
+            <AddEditCategoriesModal
               open={EditModal.isOpened}
               handleModal={closeModal}
-              partner={EditModal.rowData}
+              category={EditModal.rowData}
               handleOpenSnackbar={handleOpenSnackbar}
               autoRefresh={getCategories}
             />

@@ -6,7 +6,7 @@ import AddCircleIcon from "@material-ui/icons/AddCircle";
 import Button from "@material-ui/core/Button";
 import DeleteIcon from "@material-ui/icons/Delete";
 import MaterialTable from "material-table";
-import AddPartnerModal from "./AddPartnerModal/AddPartnerModal";
+import AddEditPartnerModal from "./AddEditPartnerModal/AddEditPartnerModal";
 import DeleteItemModal from "../DeleteItemModal/DeleteItemModal";
 import PreloaderAdaptive from "../../../Preloader/Adaptive";
 import SnackbarMessage from "../../Snackbar/SnackbarMessage";
@@ -138,7 +138,7 @@ const AdminPartners = ({
         <Box>
           {materialTable()}
           {AddModal.isOpened && (
-            <AddPartnerModal
+            <AddEditPartnerModal
               open={AddModal.isOpened}
               handleModal={closeModal}
               partner={AddModal.rowData}
@@ -147,7 +147,7 @@ const AdminPartners = ({
             />
           )}
           {EditModal.isOpened && (
-            <AddPartnerModal
+            <AddEditPartnerModal
               open={EditModal.isOpened}
               handleModal={closeModal}
               partner={EditModal.rowData}

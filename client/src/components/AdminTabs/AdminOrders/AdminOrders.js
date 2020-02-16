@@ -9,7 +9,7 @@ import { Box } from "@material-ui/core";
 import MaterialTable from "material-table";
 import EditIcon from "@material-ui/icons/Edit";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
-import AddPartnerModal from "../AdminContent/AdminPartners/AddPartnerModal/AddPartnerModal";
+import AddEditPartnerModal from "../AdminContent/AdminPartners/AddEditPartnerModal/AddEditPartnerModal";
 import EditOrderModal from "./EditOrderModal/EditOrderModal";
 import SnackbarMessage from "../Snackbar/SnackbarMessage";
 import AdminOrdersProducts from "./AdminOrdersProducts/AdminOrdersProducts";
@@ -159,7 +159,7 @@ function AdminOrders() {
         <Box className={classes.wrapper}>
           {materialTable()}
           {AddModal.isOpened &&
-          <AddPartnerModal open={AddModal.isOpened} handleModal={closeModal} partner={AddModal.rowData} />}
+          <AddEditPartnerModal open={AddModal.isOpened} handleModal={closeModal} partner={AddModal.rowData} />}
           {EditModal.isOpened && (
             <EditOrderModal
               open={EditModal.isOpened}

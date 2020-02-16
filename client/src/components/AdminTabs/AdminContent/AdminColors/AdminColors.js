@@ -9,7 +9,7 @@ import DeleteItemModal from "../DeleteItemModal/DeleteItemModal";
 import AddEditModal from "./AddEditModal/AddEditModal";
 import SnackbarMessage from "../../Snackbar/SnackbarMessage";
 import PreloaderAdaptive from "../../../Preloader/Adaptive";
-import AddPartnerModal from "../AdminPartners/AddPartnerModal/AddPartnerModal";
+import AddEditPartnerModal from "../AdminPartners/AddEditPartnerModal/AddEditPartnerModal";
 // import Snackbar from "@material-ui/core/Snackbar";
 
 

@@ -130,7 +130,7 @@ exports.placeOrder = async (req, res, next) => {
 };
 
 exports.updateOrder = (req, res, next) => {
-  //req.user.firstName
+
   Order.findOne({ _id: req.params.id }).then(async currentOrder => {
     if (!currentOrder) {
       return res
@@ -143,9 +143,9 @@ exports.updateOrder = (req, res, next) => {
         order.deliveryAddress = JSON.parse(req.body.deliveryAddress);
       }
 
-      // if (req.body.status) {
-      //   order.canceled = req.body.status;
-      // }
+      if (req.body.status) {
+        order.status = req.body.status;
+      }
 
       if (req.body.shipping) {
         order.shipping = JSON.parse(req.body.shipping);
@@ -180,18 +180,19 @@ exports.updateOrder = (req, res, next) => {
         }
       }
 
-      const subscriberMail = req.body.email;
-      const letterSubject = req.body.letterSubject;
-      const letterHtml = req.body.letterHtml;
-      // const letterSubject = "Your order was changed";
-      // const letterHtml = `<div style="width: 600px;padding: 25px 30px 32px 27px;margin: 0 auto;color: black;">
-      //                       <h2 style="font-size: 28px; line-height: 32px; padding-bottom: 15px; font-weight: normal;margin: 0;color: black;">
-      //                         Hello, ${currentOrder._doc.name}.
-      //                       </h2>
-      //                       <p style="font-size: 15px;padding-bottom: 22px; line-height: 24px; margin: 0;color: black;text-align: justify;">
-      //                          Your order №${currentOrder.orderNo} was changed. The status of your order is ${order.status}
-      //                       </p>
-      //                     </div>`;
+      // const letterSubject = req.body.letterSubject;
+      // const subscriberMail = req.body.email;
+      // const letterHtml = req.body.letterHtml;
+      const subscriberMail = currentOrder.email;
+      const letterSubject = "Your order was changed";
+      const letterHtml = `<div style="width: 600px;padding: 25px 30px 32px 27px;margin: 0 auto;color: black;">
+                            <h2 style="font-size: 28px; line-height: 32px; padding-bottom: 15px; font-weight: normal;margin: 0;color: black;">
+                              Hello, ${currentOrder._doc.name}.
+                            </h2>
+                            <p style="font-size: 15px;padding-bottom: 22px; line-height: 24px; margin: 0;color: black;text-align: justify;">
+                               Your order №${currentOrder.orderNo} was changed. Now the status of your order is ${order.status}
+                            </p>
+                          </div>`;
       const { errors, isValid } = validateOrderForm(req.body);
 
       // Check Validation
