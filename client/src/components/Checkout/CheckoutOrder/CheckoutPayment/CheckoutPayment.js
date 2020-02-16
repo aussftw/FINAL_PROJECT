@@ -15,7 +15,7 @@ import Visa from "./pics/visa.png";
 const GreenCheckbox = withStyles({
   root: {
     color:theme.palette.primary.main,
-    '&$checked': {
+    "&$checked": {
       color: theme.palette.primary.main,
     },
   },
@@ -46,7 +46,6 @@ const CheckoutPayments = () => {
     }
   };
   const handleInputsChange = event => {
-    // eslint-disable-next-line no-restricted-globals
     if (!isNaN(event.target.value)) {
       setCardData({ ...cardData, [event.target.name]: event.target.value});
     }
@@ -87,7 +86,7 @@ const CheckoutPayments = () => {
       <>
         {state.card && (
           <div className={classes.creditCardConteiner}>
-            <div className={classes.creditCardWrapper}>
+            <div>
               <div className={classes.creditCard}>
                 <Box className={classes.paymentMethods}>
                   <img className={classes.paymentMethod} src={AmericanExpress} alt="American Express" />
