@@ -76,6 +76,7 @@ const Checkout = ({ userData, isAuthenticated, cartProducts }) => {
         setLink(response.data.order.orderNo);
       })
       .catch(error => {
+        console.log(error.response);
         setIsLoading(false);
         setMessage(error.message);
       });

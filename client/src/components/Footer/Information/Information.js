@@ -1,9 +1,8 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
 import {
   Grid,
   Typography,
-  Link,
   ExpansionPanel,
   ExpansionPanelSummary,
   ExpansionPanelDetails,
@@ -26,17 +25,17 @@ const Information = () => {
             <Typography className={classes.containerTittle}>INFORMATION</Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
-            <Link href="/aboutus" color="secondary">
+            <Link to="/aboutus" color="secondary" className={classes.informationItem}>
               About us
             </Link>
           </ExpansionPanelDetails>
           <ExpansionPanelDetails>
-            <Link href="/shop" color="secondary">
+            <Link to="/shop" color="secondary" className={classes.informationItem}>
               Shop
             </Link>
           </ExpansionPanelDetails>
           <ExpansionPanelDetails>
-            <Link href="/search" color="secondary">
+            <Link to="/search" color="secondary" className={classes.informationItem}>
               Search
             </Link>
           </ExpansionPanelDetails>
@@ -48,17 +47,17 @@ const Information = () => {
             INFORMATION
           </Typography>
           <Box className={classes.myAccountItem}>
-            <Link color="secondary" href="/aboutus">
+            <Link color="secondary" to="/aboutus" className={classes.informationItem}>
               About us
             </Link>
           </Box>
           <Box className={classes.myAccountItem}>
-            <Link color="secondary" href="/shop">
+            <Link color="secondary" to="/shop" className={classes.informationItem}>
               Shop
             </Link>
           </Box>
           <Box className={classes.myAccountItem}>
-            <Link color="secondary" href="/search">
+            <Link color="secondary" to="/search" className={classes.informationItem}>
               Search
             </Link>
           </Box>
