@@ -1,31 +1,45 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Box } from "@material-ui/core";
-import EditIcon from "@material-ui/icons/Edit";
-import AddCircleIcon from "@material-ui/icons/AddCircle";
-import Button from "@material-ui/core/Button";
-import DeleteIcon from "@material-ui/icons/Delete";
 import MaterialTable from "material-table";
-import AddEditPartnerModal from "./AddEditPartnerModal/AddEditPartnerModal";
+import AddCircleIcon from "@material-ui/icons/AddCircle";
+import DeleteIcon from "@material-ui/icons/Delete";
+import EditIcon from "@material-ui/icons/Edit";
 import DeleteItemModal from "../DeleteItemModal/DeleteItemModal";
-import PreloaderAdaptive from "../../../Preloader/Adaptive";
+import AddEditModal from "./AddEditModal/AddEditModal";
 import SnackbarMessage from "../../Snackbar/SnackbarMessage";
-import AddEditModal from "../AdminSizes/AddEditModal/AddEditModal";
+import PreloaderAdaptive from "../../../Preloader/Adaptive";
 
 
-const AdminPartners = ({
-                         AddModal,
-                         setAddModal,
-                         EditModal,
-                         setEditModal,
-                         DeleteModal,
-                         setDeleteModal,
-                         openSnackbar,
-                         handleOpenSnackbar,
-                         handleCloseSnackbar,
-                         snackbarType,
-                       }) => {
-  const [ordersArr, setOrdersArr] = useState([]);
+const AdminSizes = ({
+                      AddModal,
+                      setAddModal,
+                      EditModal,
+                      setEditModal,
+                      DeleteModal,
+                      setDeleteModal,
+                      openSnackbar,
+                      handleOpenSnackbar,
+                      handleCloseSnackbar,
+                      snackbarType,
+                    }) => {
+
+  const [colors, setColors] = useState([]);
+
+  const getSizes = () => {
+    axios
+      .get("/api/sizes")
+      .then(orders => {
+        setColors(orders.data);
+      })
+      .catch(err => {
+        console.log("err", err.response);
+      });
+  };
+
+  useEffect(() => {
+    getSizes();
+  });
 
   const handleOpenAddModal = () => {
     setAddModal({
@@ -34,7 +48,7 @@ const AdminPartners = ({
     });
   };
 
-  const handleDataEditModal = (rowData) => {
+  const handleEditModal = (rowData) => {
     setEditModal({
       isOpened: !EditModal.isOpened,
       rowData,
@@ -43,8 +57,46 @@ const AdminPartners = ({
   const handleDeleteModal = (rowData) => {
     setDeleteModal({
       isOpened: !DeleteModal.isOpened,
-      id: rowData.customId,
+      id: rowData._id,
     });
+  };
+
+
+  const deleteValidate = (rowData) => {
+    axios
+      .get(`/api/products/filter?sizes=${rowData.name}`)
+      .then(orders => {
+        if (orders.data.products.length === 0) {
+          handleDeleteModal(rowData);
+        } else {
+          const error = { type: "error", message: `You can’t delete size because of active products in catalog` };
+          handleOpenSnackbar(error);
+        }
+      })
+      .catch(err => {
+        console.log("orders", err);
+      });
+
+  };
+
+  const editValidate = (rowData) => {
+    axios
+      .get(`/api/products/filter?size=${rowData.name}`)
+      .then(orders => {
+        console.log(orders);
+        console.log("orders.data.products.length", orders.data.products.length);
+        if (orders.data.products.length === 0) {
+          handleEditModal(rowData);
+        } else {
+          const error = { type: "error", message: `You can’t edit size because of active products in catalog` };
+          handleOpenSnackbar(error);
+          console.log("cant edit");
+        }
+      })
+      .catch(err => {
+        console.log("orders", err);
+      });
+
   };
 
   const closeModal = () => {
@@ -62,44 +114,22 @@ const AdminPartners = ({
     });
   };
 
-  const getPartners = () => {
-    axios
-      .get("/api/partners")
-      .then(orders => {
-        setOrdersArr(orders.data);
-      })
-      .catch(err => {
-        console.log("orders", err);
-      });
-  };
-
-  useEffect(() => {
-    getPartners();
-  });
 
   const columns = [
-    {
-      title: "Logo",
-      field: "imageUrl",
-      render: rowData => <img alt={rowData.name} src={rowData.imageUrl} style={{ maxHeight: "50px" }} />,
-    },
     { title: "Name", field: "name" },
-    { title: "Url", field: "url", render: rowData => <a href={rowData.url}>{rowData.url}</a> },
-    { title: "Enabled", field: "enabled" },
-
   ];
 
   const materialTable = () => {
     return (
       <MaterialTable
         columns={columns}
-        data={ordersArr}
-        title="Our partners"
+        data={colors}
+        title="Sizes"
         options={{ search: false }}
         actions={[
           {
             icon: () => <AddCircleIcon />,
-            tooltip: "Add Partner",
+            tooltip: "Add size",
             isFreeAction: true,
             onClick: () => {
               handleOpenAddModal();
@@ -107,52 +137,53 @@ const AdminPartners = ({
           },
           {
             icon: () => <DeleteIcon />,
-            tooltip: "Delete Partner",
+            tooltip: "Delete size",
             onClick: (event, rowData) => {
-              handleDeleteModal(rowData);
+              deleteValidate(rowData);
             },
           },
           {
             icon: () => <EditIcon />,
-            tooltip: "Edit Partner",
+            tooltip: "Edit size",
             onClick: (event, rowData) => {
-              handleDataEditModal(rowData);
+              editValidate(rowData);
             },
           },
           {
             icon: "refresh",
             tooltip: "Refresh Data",
             isFreeAction: true,
-            onClick: () => getPartners(),
+            onClick: () => getSizes(),
           },
         ]}
       />
     );
   };
 
+
   return (
     <>
-      {ordersArr.length === 0 ? (
+      {colors.length === 0 ? (
         <PreloaderAdaptive />
       ) : (
         <Box>
           {materialTable()}
           {AddModal.isOpened && (
-            <AddEditPartnerModal
+            <AddEditModal
               open={AddModal.isOpened}
               handleModal={closeModal}
-              partner={AddModal.rowData}
+              item={AddModal.rowData}
               handleOpenSnackbar={handleOpenSnackbar}
-              autoRefresh={getPartners}
+              autoRefresh={getSizes}
             />
           )}
           {EditModal.isOpened && (
-            <AddEditPartnerModal
+            <AddEditModal
               open={EditModal.isOpened}
               handleModal={closeModal}
-              partner={EditModal.rowData}
+              item={EditModal.rowData}
               handleOpenSnackbar={handleOpenSnackbar}
-              autoRefresh={getPartners}
+              autoRefresh={getSizes}
             />
           )}
           {DeleteModal.isOpened && (
@@ -160,9 +191,9 @@ const AdminPartners = ({
               open={DeleteModal.isOpened}
               handleModal={closeModal}
               id={DeleteModal.id}
-              item="partners"
+              item="sizes"
               handleOpenSnackbar={handleOpenSnackbar}
-              autoRefresh={getPartners}
+              autoRefresh={getSizes}
             />
           )}
           <SnackbarMessage openSnackbar={openSnackbar} handleCloseSnackbar={handleCloseSnackbar} type={snackbarType} />
@@ -172,4 +203,4 @@ const AdminPartners = ({
   );
 };
 
-export default AdminPartners;
+export default AdminSizes;

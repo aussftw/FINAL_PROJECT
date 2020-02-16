@@ -17,6 +17,7 @@ const useStyles = makeStyles(theme => ({
     // },
     backgroundSize: "cover",
     overflow: "hidden",
+    maxWidth: "17vw",
   },
 }));
 
