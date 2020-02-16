@@ -1,9 +1,8 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
 import {
   Grid,
   Typography,
-  Link,
   ExpansionPanel,
   ExpansionPanelSummary,
   ExpansionPanelDetails,
@@ -26,17 +25,17 @@ const MyAccount = () => {
             <Typography className={classes.containerTittle}>MY ACCOUNT</Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
-            <Link color="secondary" href="/profile">
+            <Link color="secondary" to="/profile" className={classes.informationItem}>
               Whishlist
             </Link>
           </ExpansionPanelDetails>
           <ExpansionPanelDetails>
-            <Link color="secondary" href="/checkout">
+            <Link color="secondary" to="/checkout" className={classes.informationItem}>
               Checkout
             </Link>
           </ExpansionPanelDetails>
           <ExpansionPanelDetails>
-            <Link color="secondary" href="/registration">
+            <Link color="secondary" to="/registration" className={classes.informationItem}>
               Registration
             </Link>
           </ExpansionPanelDetails>
@@ -48,17 +47,17 @@ const MyAccount = () => {
             MY ACCOUNT
           </Typography>
           <Box className={classes.myAccountItem}>
-            <Link color="secondary" href="/profile">
+            <Link color="secondary" to="/profile" className={classes.informationItem}>
               Whishlist
             </Link>
           </Box>
           <Box className={classes.myAccountItem}>
-            <Link color="secondary" href="/checkout">
+            <Link color="secondary" to="/checkout" className={classes.informationItem}>
               Checkout
             </Link>
           </Box>
           <Box className={classes.myAccountItem}>
-            <Link color="secondary" href="/registration">
+            <Link color="secondary" to="/registration" className={classes.informationItem}>
               Registration
             </Link>
           </Box>
