@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import v4 from "uuid";
