@@ -9,6 +9,7 @@ export const useStyles = makeStyles(theme => ({
   },
   itemCard: {
     display: "grid",
+    justifyItems: "center",
     gridTemplateColumns: "repeat(3, 1fr)",
     [theme.breakpoints.down("md")]: {
       gridTemplateColumns: "repeat(2, 330px)",
