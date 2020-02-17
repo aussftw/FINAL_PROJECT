@@ -1,4 +1,5 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
+import {connect} from "react-redux";
 
 import {
   Grid,
@@ -16,6 +17,8 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import DraftsIcon from "@material-ui/icons/Drafts";
 import LocationOnSharpIcon from "@material-ui/icons/LocationOnSharp";
 import PhoneSharpIcon from "@material-ui/icons/PhoneSharp";
+
+import {getContacts} from "../../../store/actions/contacts";
 import useStyles from "./useStyles";
 
 import AmericanExpress from "../Payment/pics/AmericanExpress.png";
@@ -23,8 +26,23 @@ import Visa from "../Payment/pics/visa.png";
 import MasterCard from "../Payment/pics/mastercard.png";
 import PayPal from "../Payment/pics/PayPal.png";
 
-const ContactUs = () => {
+const ContactUs = ({getContactsVar, contacts}) => {
   const classes = useStyles();
+  const [phone, setPhone] = useState({text: "phoneTEST", link: "phone"});
+  const [email, setEmail] = useState({text: "email", link: "email"});
+  const [location, setLocation] = useState({text: "location", link: "location"});
+
+  useEffect(() => {
+    if(contacts.length === 0 ){
+      getContactsVar();
+      contacts.forEach(item => {
+        if (item.option === "phone") {
+          setPhone({text: item.content[0].text, link: item.content[0].link})
+          console.log(contacts)
+        }
+      })
+    }
+  }, [getContactsVar, contacts.length]);
 
   return (
     <Grid item xs={12} lg={4} md={12}>
@@ -47,8 +65,8 @@ const ContactUs = () => {
           </ExpansionPanelDetails>
           <ExpansionPanelDetails>
             <PhoneSharpIcon className={classes.contactUsIcon} />
-            <Link href="/#" color="secondary" className={classes.contactUsItem}>
-              Phone
+            <Link href={phone.link} color="secondary" className={classes.contactUsItem}>
+              {phone.text}
             </Link>
           </ExpansionPanelDetails>
         </ExpansionPanel>
@@ -96,4 +114,10 @@ const ContactUs = () => {
   );
 };
 
-export default ContactUs;
+function mapStateToProps(state) {
+  return {
+    contacts: state.contactsReducer.contacts,
+  };
+}
+
+export default connect(mapStateToProps,{ getContactsVar: getContacts })(ContactUs);

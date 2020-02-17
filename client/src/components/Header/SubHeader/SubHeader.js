@@ -16,7 +16,7 @@ const SubHeader = ({getLinks, links}) => {
       if(links.length === 0 ){
       getLinks();
       }
-    }, [getLinks, links.length])
+    }, [getLinks, links.length]);
 
 
 
