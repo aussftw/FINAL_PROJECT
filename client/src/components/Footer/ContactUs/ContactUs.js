@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from "react";
 import {connect} from "react-redux";
-import { Link } from "react-router-dom";
 
 import {
   Grid,
   Typography,
+  Link,
   ExpansionPanel,
   ExpansionPanelSummary,
   ExpansionPanelDetails,
@@ -28,21 +28,29 @@ import PayPal from "../Payment/pics/PayPal.png";
 
 const ContactUs = ({getContactsVar, contacts}) => {
   const classes = useStyles();
-  const [phone, setPhone] = useState({text: "phoneTEST", link: "phone"});
+  const [phone, setPhone] = useState({text: "phone", link: "phone"});
   const [email, setEmail] = useState({text: "email", link: "email"});
   const [location, setLocation] = useState({text: "location", link: "location"});
 
   useEffect(() => {
     if(contacts.length === 0 ){
       getContactsVar();
+    }
+  }, [getContactsVar, contacts.length]);
+
+  useEffect(()=> {
+    if (contacts.length !== 0){
       contacts.forEach(item => {
         if (item.option === "phone") {
           setPhone({text: item.content[0].text, link: item.content[0].link})
-          console.log(contacts)
+        } else if (item.option === "email") {
+          setEmail({text: item.content[0].text, link: item.content[0].link})
+        } else if (item.option === "location") {
+          setLocation({text: item.content[0].text, link: item.content[0].link})
         }
       })
     }
-  }, [getContactsVar, contacts.length]);
+  }, [contacts]);
 
   return (
     <Grid item xs={12} lg={4} md={12}>
@@ -53,45 +61,45 @@ const ContactUs = ({getContactsVar, contacts}) => {
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
             <DraftsIcon className={classes.contactUsIcon} />
-            <Link className={classes.contactUsItem} color="secondary" to="/#">
-              plantlyshop@gmail.com
+            <Link href={email.link} className={classes.contactUsItem} color="secondary">
+              {email.text}
             </Link>
           </ExpansionPanelDetails>
           <ExpansionPanelDetails>
             <LocationOnSharpIcon className={classes.contactUsIcon} />
-            <Link to="/#" color="secondary" className={classes.contactUsItem}>
-              Location
+            <Link href={location.link} target="_blank" rel="noopener" color="secondary" className={classes.contactUsItem}>
+              {location.text}
             </Link>
           </ExpansionPanelDetails>
           <ExpansionPanelDetails>
             <PhoneSharpIcon className={classes.contactUsIcon} />
-            <Link to="/#" color="secondary" className={classes.contactUsItem}>
-              Phone
+            <Link href={phone.link} color="secondary" className={classes.contactUsItem}>
+              {phone.text}
             </Link>
           </ExpansionPanelDetails>
         </ExpansionPanel>
       </Hidden>
       <Hidden smDown>
         <Container className={classes.mainContainer}>
-          <Link to="/" className={classes.logoContainer}>
+          <Link href="/" className={classes.logoContainer}>
             <img src="/img/Logo.svg" alt="logo" className={classes.logo} />
           </Link>
           <Box className={classes.itemContainer}>
             <DraftsIcon className={classes.contactUsIcon} />
-            <Link className={classes.contactUsItem} color="secondary" to="/#">
-              plantlyshop@gmail.com
+            <Link href={email.link} className={classes.contactUsItem} color="secondary">
+              {email.text}
             </Link>
           </Box>
           <Box className={classes.itemContainer}>
             <LocationOnSharpIcon className={classes.contactUsIcon} />
-            <Link to="/#" color="secondary" className={classes.contactUsItem}>
-              Location
+            <Link href={location.link} target="_blank" rel="noopener" color="secondary" className={classes.contactUsItem}>
+              {location.text}
             </Link>
           </Box>
           <Box className={classes.itemContainer}>
             <PhoneSharpIcon className={classes.contactUsIcon} />
-            <Link to="/#" color="secondary" className={classes.contactUsItem}>
-              Phone
+            <Link href={phone.link} color="secondary" className={classes.contactUsItem}>
+              {phone.text}
             </Link>
           </Box>
           <Box className={classes.paymentMethods}>
