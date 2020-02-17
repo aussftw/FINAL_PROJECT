@@ -10,6 +10,9 @@ module.exports = async (subscriberMail, letterSubject, letterHtml, res) => {
     tls: {
       rejectUnauthorized: false
     },
+    host: "smtp.gmail.com",
+    port: 465,
+    secure: true,
     service:
       process.env.NODE_ENV === "production"
         ? configs.production.email.mailService

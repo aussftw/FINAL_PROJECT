@@ -51,7 +51,7 @@ const ProductCarousel = () => {
               items: 4,
             },
           }}
-          // buttonsDisabled
+          buttonsDisabled
           dotsDisabled
           mouseTrackingEnabled
           autoPlay
