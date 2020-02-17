@@ -1,18 +1,11 @@
 import { makeStyles } from "@material-ui/core/styles";
 
-const useStyles = makeStyles(theme => ({
-  partnersItem: {
-    marginTop: "1%",
-    maxHeight: "8%",
-    display: "flex",
-    justifyContent: "space-around",
-    alignContent: "center",
-    flexWrap: "no-wrap",
-    backgroundColor: theme.palette.primary.light
+const useStyles = makeStyles((theme) => ({
+  wrapper: {
+    marginTop: "2%",
   },
-  partnersImg: {
-    // objectFit: "contain",
-    borderRadius: "20%",
+  btn: {
+    margin: theme.spacing(2),
   },
 }));
 

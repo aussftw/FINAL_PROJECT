@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { withRouter } from "react-router-dom";
-
+import v4 from "uuid";
 import List from "@material-ui/core/List";
 import Typography from "@material-ui/core/Typography";
 
@@ -22,7 +22,7 @@ const FilterBySize = ({ sizeListing, getSizes }) => {
   let sizeList = [];
 
   sizeList = sizeListing.map(size => {
-    return <SizeCheckbox size={size} />;
+    return <SizeCheckbox key={v4()} size={size} />;
   });
 
   return (
