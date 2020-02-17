@@ -7,7 +7,7 @@ const {
   addColor,
   updateColor,
   deleteColor,
-  getColors
+  getColors,
 } = require("../controllers/colors");
 
 // @route   POST /colors
