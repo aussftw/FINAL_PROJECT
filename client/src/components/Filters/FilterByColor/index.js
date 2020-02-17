@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import v4 from "uuid";
@@ -42,7 +41,7 @@ const FilterByColor = ({ colorListing, getColors, setCurrentPage }) => {
   const [filterIndex, setFilterIndex] = React.useState(null);
 
   colorsList = colorListing.map((color, index) => {
-    return <ColorCheckbox key={v4()} color={color} />;
+    return <ColorCheckbox color={color} />;
   });
 
   return (
