@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from "react";
 import {connect} from "react-redux";
+import { Link } from "react-router-dom";
 
 import {
   Grid,
   Typography,
-  Link,
   ExpansionPanel,
   ExpansionPanelSummary,
   ExpansionPanelDetails,
@@ -53,44 +53,44 @@ const ContactUs = ({getContactsVar, contacts}) => {
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
             <DraftsIcon className={classes.contactUsIcon} />
-            <Link className={classes.contactUsItem} color="secondary" href="/#">
+            <Link className={classes.contactUsItem} color="secondary" to="/#">
               plantlyshop@gmail.com
             </Link>
           </ExpansionPanelDetails>
           <ExpansionPanelDetails>
             <LocationOnSharpIcon className={classes.contactUsIcon} />
-            <Link href="/#" color="secondary" className={classes.contactUsItem}>
+            <Link to="/#" color="secondary" className={classes.contactUsItem}>
               Location
             </Link>
           </ExpansionPanelDetails>
           <ExpansionPanelDetails>
             <PhoneSharpIcon className={classes.contactUsIcon} />
-            <Link href={phone.link} color="secondary" className={classes.contactUsItem}>
-              {phone.text}
+            <Link to="/#" color="secondary" className={classes.contactUsItem}>
+              Phone
             </Link>
           </ExpansionPanelDetails>
         </ExpansionPanel>
       </Hidden>
       <Hidden smDown>
         <Container className={classes.mainContainer}>
-          <Link href="/#" className={classes.logoContainer}>
+          <Link to="/" className={classes.logoContainer}>
             <img src="/img/Logo.svg" alt="logo" className={classes.logo} />
           </Link>
           <Box className={classes.itemContainer}>
             <DraftsIcon className={classes.contactUsIcon} />
-            <Link className={classes.contactUsItem} color="secondary" href="/#">
+            <Link className={classes.contactUsItem} color="secondary" to="/#">
               plantlyshop@gmail.com
             </Link>
           </Box>
           <Box className={classes.itemContainer}>
             <LocationOnSharpIcon className={classes.contactUsIcon} />
-            <Link href="/#" color="secondary" className={classes.contactUsItem}>
+            <Link to="/#" color="secondary" className={classes.contactUsItem}>
               Location
             </Link>
           </Box>
           <Box className={classes.itemContainer}>
             <PhoneSharpIcon className={classes.contactUsIcon} />
-            <Link href="/#" color="secondary" className={classes.contactUsItem}>
+            <Link to="/#" color="secondary" className={classes.contactUsItem}>
               Phone
             </Link>
           </Box>

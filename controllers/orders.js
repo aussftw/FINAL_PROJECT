@@ -51,7 +51,7 @@ exports.placeOrder = async (req, res, next) => {
       (sum, cartItem) =>
         sum + cartItem.product.currentPrice * cartItem.cartQuantity,
       0
-    );
+    ).toFixed(2);
 
     const productAvailibilityInfo = await productAvailibilityChecker(
       order.products
@@ -130,6 +130,7 @@ exports.placeOrder = async (req, res, next) => {
 };
 
 exports.updateOrder = (req, res, next) => {
+
   Order.findOne({ _id: req.params.id }).then(async currentOrder => {
     if (!currentOrder) {
       return res
@@ -140,6 +141,10 @@ exports.updateOrder = (req, res, next) => {
 
       if (req.body.deliveryAddress) {
         order.deliveryAddress = JSON.parse(req.body.deliveryAddress);
+      }
+
+      if (req.body.status) {
+        order.status = req.body.status;
       }
 
       if (req.body.shipping) {
@@ -175,10 +180,19 @@ exports.updateOrder = (req, res, next) => {
         }
       }
 
-      const subscriberMail = req.body.email;
-      const letterSubject = req.body.letterSubject;
-      const letterHtml = req.body.letterHtml;
-
+      // const letterSubject = req.body.letterSubject;
+      // const subscriberMail = req.body.email;
+      // const letterHtml = req.body.letterHtml;
+      const subscriberMail = currentOrder.email;
+      const letterSubject = "Your order was changed";
+      const letterHtml = `<div style="width: 600px;padding: 25px 30px 32px 27px;margin: 0 auto;color: black;">
+                            <h2 style="font-size: 28px; line-height: 32px; padding-bottom: 15px; font-weight: normal;margin: 0;color: black;">
+                              Hello, ${currentOrder._doc.name}.
+                            </h2>
+                            <p style="font-size: 15px;padding-bottom: 22px; line-height: 24px; margin: 0;color: black;text-align: justify;">
+                               Your order №${currentOrder.orderNo} was changed. Now the status of your order is ${order.status}
+                            </p>
+                          </div>`;
       const { errors, isValid } = validateOrderForm(req.body);
 
       // Check Validation
@@ -232,10 +246,16 @@ exports.cancelOrder = (req, res, next) => {
         .status(400)
         .json({ message: `Order with id ${req.params.id} is not found` });
     } else {
-      const subscriberMail = req.body.email;
-      const letterSubject = req.body.letterSubject;
-      const letterHtml = req.body.letterHtml;
-
+      const subscriberMail = currentOrder.email;
+      const letterSubject = "Your order was canceled";
+      const letterHtml = `<div style="width: 600px;padding: 25px 30px 32px 27px;margin: 0 auto;color: black;">
+                            <h2 style="font-size: 28px; line-height: 32px; padding-bottom: 15px; font-weight: normal;margin: 0;color: black;">
+                              Hello, ${currentOrder._doc.name}.
+                            </h2>
+                            <p style="font-size: 15px;padding-bottom: 22px; line-height: 24px; margin: 0;color: black;text-align: justify;">
+                               Your order №${currentOrder.orderNo} was canceled. We will be glad to see new orders from you!
+                            </p>
+                          </div>`;
       const { errors, isValid } = validateOrderForm(req.body);
 
       // Check Validation
@@ -303,6 +323,35 @@ exports.deleteOrder = (req, res, next) => {
         );
     }
   });
+};
+
+exports.getAllOrders = (req, res, next) => {
+  const newestOrders = {"date":-1};
+  Order.find()
+    .sort(newestOrders)
+    .then(orders => {
+      if (orders) {
+        return res.json(orders);
+      }
+      return res.json([]);
+    })
+    .catch(err =>
+      res.status(400).json({
+        message: `Error happened on server: "${err}" `
+      })
+    );
+};
+
+exports.getActiveOrders = (req, res, next) => {
+  const newestOrders = {"date":-1};
+  Order.find({ canceled: false })
+    .sort(newestOrders)
+    .then(orders => res.json(orders))
+    .catch(err =>
+      res.status(400).json({
+        message: `Error happened on server: "${err}" `
+      })
+    );
 };
 
 exports.getOrders = (req, res, next) => {

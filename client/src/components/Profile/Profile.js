@@ -65,7 +65,7 @@ const Profile = ({
         variant="scrollable"
         value={value}
         onChange={handleChange}
-        aria-label="Vertical tabs example"
+        aria-label="Vertical tabs"
         className={classes.tabs}
       >
         <Tab
@@ -87,7 +87,7 @@ const Profile = ({
           onClick={() => getUserData()}
         />
         <Tab
-          label="Orders History"
+          label="AdminOrders History"
           id="vertical-tab-3"
           aria-controls="vertical-tabpanel-3"
         />

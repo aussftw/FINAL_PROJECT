@@ -4,7 +4,7 @@ import { createLogger } from "redux-logger";
 import thunk from "redux-thunk";
 
 import rootReducer from "./reducers/rootReducer";
-// eslint-disable-next-line
+
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const logger = createLogger();

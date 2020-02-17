@@ -27,7 +27,6 @@ const OrdersHistory = () => {
             return;
           }
           setOrders(ordered.data);
-          console.log(ordered.data);
         })
         .catch(error => {
           setIsLoading(false);

@@ -71,7 +71,7 @@ const Upload = ({ imageUrls, handleImages }) => {
   return (
     <Box>
       {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-      <label htmlFor="image_uploads">Choose images to upload (PNG, JPG, PNG)</label>
+      <label htmlFor="image_uploads">Choose images to upload (PNG, JPG, JPEG)</label>
       <input type="file" id="image_uploads" name="file" accept=".jpg, .jpeg, .png" multiple onChange={showImages}/>
       {loading ? (
         <h3>Loading...</h3>
