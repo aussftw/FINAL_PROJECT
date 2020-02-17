@@ -4,6 +4,7 @@ import storage from "redux-persist/lib/storage";
 
 import loginReducer from "./loginReducer";
 import linksReducer from "./linksReducer";
+import contactsReducer from "./contactsReducer";
 import cartReducer from "./cartReducer";
 import wishlistReducer from "./wishlistReducer";
 import searchReducer from "./searchReducer";
@@ -20,6 +21,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
   loginReducer,
   linksReducer,
+  contactsReducer,
   wishlistReducer,
   cartReducer,
   searchReducer,

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+ import React, { useState, useEffect } from "react";
 
 import axios from "axios";
 
@@ -31,7 +31,7 @@ const Brands = () => {
         <PreloaderAdaptive />
       ) : (
         brands.map(brand => (
-          <Link href={brand.url} key={brand._id}>
+          <Link href={brand.url} target="_blank" rel="noopener" key={brand._id}>
             <Box>
               <img
                 src={`${brand.imageUrl}`}
