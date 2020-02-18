@@ -31,7 +31,7 @@ const OrderDetails = ({ isAuthenticated }) => {
       .then( order => {
         if(!order.data) {
           setPreloader(false);
-          setMessage(`Order with №${orderNumber.orderNo} does not exist`);
+          setMessage(`Order with №${orderNumber.orderNo} does not exist or it is not your order.`);
           return;
         }
         setPreloader(false);

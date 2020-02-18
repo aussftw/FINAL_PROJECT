@@ -41,7 +41,7 @@ const FilterByColor = ({ colorListing, getColors, setCurrentPage }) => {
   const [filterIndex, setFilterIndex] = React.useState(null);
 
   colorsList = colorListing.map((color, index) => {
-    return <ColorCheckbox color={color} />;
+    return <ColorCheckbox key={v4()} color={color} />;
   });
 
   return (

@@ -72,6 +72,7 @@ exports.placeOrder = async (req, res, next) => {
                             <p style="font-size: 15px;padding-bottom: 22px; line-height: 24px; margin: 0;color: black;text-align: justify;">
                               Your application is accepted. Order № is ${order.orderNo}. 
                               You can track the status of your order in your account.
+                              View order details go to http://plantlyshop.herokuapp.com/orders/${order.orderNo}. 
                               While you’re there, you might be interested in other products, as they go well with your order.
                               ${req.body.letterHtml} Thank you once again!
                             </p>
@@ -366,7 +367,7 @@ exports.getOrders = (req, res, next) => {
 };
 
 exports.getOrder = (req, res, next) => {
-  Order.findOne({ orderNo: req.params.orderNo })
+  Order.findOne({ orderNo: req.params.orderNo, customerId: req.user.id })
     .populate("customerId")
     .then(order => res.json(order))
     .catch(err =>
