@@ -24,6 +24,7 @@ const useStyles = makeStyles({
   },
   tileBox: {
     width:"100%",
+    margin:"0 !important",
   },
 });
 

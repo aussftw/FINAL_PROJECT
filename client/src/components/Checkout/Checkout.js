@@ -76,7 +76,6 @@ const Checkout = ({ userData, isAuthenticated, cartProducts }) => {
         setLink(response.data.order.orderNo);
       })
       .catch(error => {
-        console.log(error.response);
         setIsLoading(false);
         setMessage(error.message);
       });
@@ -139,7 +138,7 @@ const mapStateToProps = state => {
     userData: state.loginReducer.user,
     isAuthenticated: state.loginReducer.isAuthenticated,
     cartProducts: state.cartReducer.cart,
-  }
+  };
 };
 
 export default connect(mapStateToProps, {})(Checkout);
