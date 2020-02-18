@@ -9,6 +9,7 @@ import useStyles from "./useStyles";
 import AdminCategories from "./AdminCategories/AdminCategories";
 import AdminColors from "./AdminColors/AdminColors";
 import AdminSizes from "./AdminSizes/AdminSizes";
+import AdminContacts from "./AdminContacts/AdminContacts";
 
 
 const AdminContent = () => {
@@ -78,6 +79,10 @@ const AdminContent = () => {
           <Tab
             label={<span className={classes.tabText}>Sizes</span>}
             {...a11yProps(3)}
+          />
+          <Tab
+            label={<span className={classes.tabText}>Contacts</span>}
+            {...a11yProps(4)}
           />
         </Tabs>
         <Box
@@ -168,6 +173,29 @@ const AdminContent = () => {
             />
           )}
         </Box>
+        <Box
+          className={classes.contentBox}
+          component="div"
+          role="tabpanel"
+          hidden={value !== 4}
+          aria-labelledby={`simple-tab-${4}`}
+        >
+          {value === 4 && (
+            <AdminContacts
+              AddModal={AddModal}
+              setAddModal={setAddModal}
+              EditModal={EditModal}
+              setEditModal={setEditModal}
+              DeleteModal={DeleteModal}
+              setDeleteModal={setDeleteModal}
+              openSnackbar={openSnackbar}
+              handleOpenSnackbar={handleOpenSnackbar}
+              handleCloseSnackbar={handleCloseSnackbar}
+              snackbarType={snackbarType}
+            />
+          )}
+        </Box>
+
       </Box>
     );
   };

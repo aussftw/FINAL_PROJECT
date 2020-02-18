@@ -11,34 +11,37 @@ import SnackbarMessage from "../../Snackbar/SnackbarMessage";
 import PreloaderAdaptive from "../../../Preloader/Adaptive";
 
 
-const AdminSizes = ({
-                      AddModal,
-                      setAddModal,
-                      EditModal,
-                      setEditModal,
-                      DeleteModal,
-                      setDeleteModal,
-                      openSnackbar,
-                      handleOpenSnackbar,
-                      handleCloseSnackbar,
-                      snackbarType,
-                    }) => {
 
-  const [colors, setColors] = useState([]);
+const AdminContacts = ({
+                       AddModal,
+                       setAddModal,
+                       EditModal,
+                       setEditModal,
+                       DeleteModal,
+                       setDeleteModal,
+                       openSnackbar,
+                       handleOpenSnackbar,
+                       handleCloseSnackbar,
+                       snackbarType,
+                     }) => {
 
-  const getSizes = () => {
+  const [contacts, setContacts] = useState([]);
+
+
+  const getContacts = () => {
     axios
-      .get("/api/sizes")
+      .get("/api/contacts")
       .then(orders => {
-        setColors(orders.data);
+        console.log('orders.data',orders.data);
+        setContacts(orders.data);
       })
       .catch(err => {
-        console.log("err", err.response);
+        console.log("orders", err);
       });
   };
 
   useEffect(() => {
-    getSizes();
+    getContacts();
   },[]);
 
   const handleOpenAddModal = () => {
@@ -62,43 +65,6 @@ const AdminSizes = ({
   };
 
 
-  const deleteValidate = (rowData) => {
-    axios
-      .get(`/api/products/filter?sizes=${rowData.name}`)
-      .then(orders => {
-        if (orders.data.products.length === 0) {
-          handleDeleteModal(rowData);
-        } else {
-          const error = { type: "error", message: `You can’t delete size because of active products in catalog` };
-          handleOpenSnackbar(error);
-        }
-      })
-      .catch(err => {
-        console.log("orders", err);
-      });
-
-  };
-
-  const editValidate = (rowData) => {
-    axios
-      .get(`/api/products/filter?size=${rowData.name}`)
-      .then(orders => {
-        console.log(orders);
-        console.log("orders.data.products.length", orders.data.products.length);
-        if (orders.data.products.length === 0) {
-          handleEditModal(rowData);
-        } else {
-          const error = { type: "error", message: `You can’t edit size because of active products in catalog` };
-          handleOpenSnackbar(error);
-          console.log("cant edit");
-        }
-      })
-      .catch(err => {
-        console.log("orders", err);
-      });
-
-  };
-
   const closeModal = () => {
     setEditModal({
       isOpened: false,
@@ -116,20 +82,22 @@ const AdminSizes = ({
 
 
   const columns = [
-    { title: "Name", field: "name" },
+    { title: "Option", field: "option" },
+    { title: "Text", field: "content.text" },
+    { title: "Link", field: "content.link" },
   ];
 
   const materialTable = () => {
     return (
       <MaterialTable
         columns={columns}
-        data={colors}
-        title="Sizes"
+        data={contacts}
+        title="Contacts"
         options={{ search: false }}
         actions={[
           {
             icon: () => <AddCircleIcon />,
-            tooltip: "Add size",
+            tooltip: "Add contact",
             isFreeAction: true,
             onClick: () => {
               handleOpenAddModal();
@@ -137,33 +105,32 @@ const AdminSizes = ({
           },
           {
             icon: () => <DeleteIcon />,
-            tooltip: "Delete size",
+            tooltip: "Delete contact",
             onClick: (event, rowData) => {
-              deleteValidate(rowData);
+              handleDeleteModal(rowData);
             },
           },
           {
             icon: () => <EditIcon />,
-            tooltip: "Edit size",
+            tooltip: "Edit contact",
             onClick: (event, rowData) => {
-              editValidate(rowData);
+              handleEditModal(rowData);
             },
           },
           {
             icon: "refresh",
             tooltip: "Refresh Data",
             isFreeAction: true,
-            onClick: () => getSizes(),
+            onClick: () => getContacts(),
           },
         ]}
       />
     );
   };
 
-
   return (
     <>
-      {colors.length === 0 ? (
+      {contacts.length === 0 ? (
         <PreloaderAdaptive />
       ) : (
         <Box>
@@ -174,16 +141,17 @@ const AdminSizes = ({
               handleModal={closeModal}
               item={AddModal.rowData}
               handleOpenSnackbar={handleOpenSnackbar}
-              autoRefresh={getSizes}
+              autoRefresh={getContacts}
             />
           )}
+
           {EditModal.isOpened && (
             <AddEditModal
               open={EditModal.isOpened}
               handleModal={closeModal}
               item={EditModal.rowData}
               handleOpenSnackbar={handleOpenSnackbar}
-              autoRefresh={getSizes}
+              autoRefresh={getContacts}
             />
           )}
           {DeleteModal.isOpened && (
@@ -191,9 +159,9 @@ const AdminSizes = ({
               open={DeleteModal.isOpened}
               handleModal={closeModal}
               id={DeleteModal.id}
-              item="sizes"
+              item="contacts"
               handleOpenSnackbar={handleOpenSnackbar}
-              autoRefresh={getSizes}
+              autoRefresh={getContacts}
             />
           )}
           <SnackbarMessage openSnackbar={openSnackbar} handleCloseSnackbar={handleCloseSnackbar} type={snackbarType} />
@@ -203,4 +171,4 @@ const AdminSizes = ({
   );
 };
 
-export default AdminSizes;
+export default AdminContacts;

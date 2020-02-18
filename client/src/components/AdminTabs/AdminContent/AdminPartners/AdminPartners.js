@@ -75,7 +75,7 @@ const AdminPartners = ({
 
   useEffect(() => {
     getPartners();
-  });
+  },[]);
 
   const columns = [
     {
