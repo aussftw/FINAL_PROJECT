@@ -16,27 +16,28 @@ import setAuthToken from "../components/common/setAuthToken";
 import isExpired from "../components/common/isExpired/isExpired";
 import Preloader from "../components/Preloader";
 import {
+  getUser,
   logOut,
   preloaderClose,
   userFromJwt,
 } from "../store/actions/loginActions";
-import { getWishlist} from '../store/actions/wishlist';
+import {getWishlist} from "../store/actions/wishlist";
 import SearchPage from "../pages/SearchPage/SearchPage";
 // const Shop = React.lazy(() => import('../pages/Shop/Shop')); // Lazy-loaded
 import Shop from "../pages/Shop/Shop";
 import Contact from "../pages/Contact/Contact";
-import { AdminHOC } from '../components/common/hoc/AdminHOC';
-import { AuthHOC } from '../components/common/hoc/AuthHOC';
+import {AdminHOC} from '../components/common/hoc/AdminHOC';
+import {AuthHOC} from '../components/common/hoc/AuthHOC';
 
 const Routes = ({
-  preloaderClose,
-  preloader,
-  userFromJwt,
-  logOut,
-  getWishlist
-}) => {
+                  preloaderClose,
+                  preloader,
+                  userFromJwt,
+                  logOut,
+                  getWishlist,
+                  getUser,
+                }) => {
   useEffect(() => {
-    // eslint-disable-next-line no-undef
     const token = localStorage.getItem("authToken");
     if (token) {
       const isExpiredToken = isExpired(jwt(token));
@@ -44,6 +45,7 @@ const Routes = ({
         userFromJwt(jwt(token));
         preloaderClose();
         setAuthToken(token);
+        getUser();
         getWishlist();
       } else {
         logOut();
@@ -52,15 +54,10 @@ const Routes = ({
     } else {
       preloaderClose();
     }
-  }, [
-    preloaderClose,
-    userFromJwt,
-    logOut,
-    getWishlist,
-  ]);
+  }, [preloaderClose, userFromJwt, logOut, getWishlist, getUser]);
 
   return preloader ? (
-    <Preloader /> 
+    <Preloader />
   ) : (
     <Switch>
       <Route exact path="/" component={HomePage} />
@@ -87,8 +84,9 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps, {
- preloaderClose,
- userFromJwt,
- logOut,
- getWishlist,
+  preloaderClose,
+  userFromJwt,
+  logOut,
+  getWishlist,
+  getUser,
 })(Routes);

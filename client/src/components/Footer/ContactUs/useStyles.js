@@ -7,9 +7,11 @@ const useStyles = makeStyles(theme => ({
   },
   contactUsItem: {
     fontSize: 16,
-    // [theme.breakpoints.up("sm")]: {
-    //   marginTop: "-2rem",
-    // },
+    color: theme.palette.secondary.main,
+    textDecoration: "none",
+    "&:hover": {
+      textDecoration: "underline",
+    }
   },
   itemContainer: {
     display: "flex",

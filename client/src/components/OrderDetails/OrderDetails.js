@@ -1,12 +1,13 @@
 import React, {useEffect, useState} from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import { connect } from "react-redux";
 import { Container, Typography, Grid } from "@material-ui/core";
 import PreloaderAdaptive from "../Preloader/Adaptive";
 import useStyles from "./useStyles";
 import OrderCart from "./OrderCart/OrderCart";
 
-const OrderDetails = () => {
+const OrderDetails = ({ isAuthenticated }) => {
   const classes = useStyles();
   const orderNumber = useParams();
   const [ orderDetails, setOrderDetails ] =  useState({
@@ -30,22 +31,27 @@ const OrderDetails = () => {
       .then( order => {
         if(!order.data) {
           setPreloader(false);
-          setMessage(`Order with №${orderNumber.orderNo} does not exist`);
+          setMessage(`Order with №${orderNumber.orderNo} does not exist or it is not your order.`);
           return;
         }
-        console.log(order);
         setPreloader(false);
-        setOrderDetails(order.data);
+        if (typeof(order.data) !== "string") {
+          setOrderDetails(order.data);
+        }
       })
       .catch(error => {
-        setMessage(`Error: ${error.message}`);
+        if(!isAuthenticated) {
+          setMessage("Order details only for authorized users");
+        } else {
+          setMessage(`Error: ${error.message}`);
+        }
         setPreloader(false);
       });
 
     return () => {
       source.cancel();
     };
-  },[orderNumber.orderNo]);
+  },[isAuthenticated, orderNumber.orderNo]);
 
   const statusAction = orderDetails.canceled ? "canceled" : "successfully placed";
   const statusText = orderDetails.canceled ? "canceled" : orderDetails.status;
@@ -77,4 +83,10 @@ const OrderDetails = () => {
   )
 };
 
-export default OrderDetails;
+const mapStateToProps = state => {
+  return {
+    isAuthenticated: state.loginReducer.isAuthenticated,
+  }
+};
+
+export default connect(mapStateToProps)(OrderDetails);

@@ -3,42 +3,63 @@ import axios from "axios";
 import { Box } from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
-import IconButton from "@material-ui/core/IconButton";
 import Button from "@material-ui/core/Button";
 import DeleteIcon from "@material-ui/icons/Delete";
 import MaterialTable from "material-table";
-import AddPartnerModal from "./AddPartnerModal/AddPartnerModal";
+import AddEditPartnerModal from "./AddEditPartnerModal/AddEditPartnerModal";
+import DeleteItemModal from "../DeleteItemModal/DeleteItemModal";
+import PreloaderAdaptive from "../../../Preloader/Adaptive";
+import SnackbarMessage from "../../Snackbar/SnackbarMessage";
+import AddEditModal from "../AdminSizes/AddEditModal/AddEditModal";
 
 
-const AdminPartners = () => {
-  // const classes = useStyles();
+const AdminPartners = ({
+                         AddModal,
+                         setAddModal,
+                         EditModal,
+                         setEditModal,
+                         DeleteModal,
+                         setDeleteModal,
+                         openSnackbar,
+                         handleOpenSnackbar,
+                         handleCloseSnackbar,
+                         snackbarType,
+                       }) => {
   const [ordersArr, setOrdersArr] = useState([]);
-  const [AddModal, setAddModal] = useState({ isOpened: false, rowData: {name: "", url: "", customId: "", imageUrl: "" } });
-  const [dataEditModal, setDataEditModal] = useState({ isOpened: false, rowData: {} });
 
   const handleOpenAddModal = () => {
     setAddModal({
-      isOpened: !dataEditModal.isOpened,
-      rowData: AddModal.rowData
-    })
+      isOpened: !AddModal.isOpened,
+      rowData: AddModal.rowData,
+    });
   };
 
   const handleDataEditModal = (rowData) => {
-    setDataEditModal({
-      isOpened: !dataEditModal.isOpened,
+    setEditModal({
+      isOpened: !EditModal.isOpened,
       rowData,
+    });
+  };
+  const handleDeleteModal = (rowData) => {
+    setDeleteModal({
+      isOpened: !DeleteModal.isOpened,
+      id: rowData.customId,
     });
   };
 
   const closeModal = () => {
-    setDataEditModal({
+    setEditModal({
       isOpened: false,
-      rowData: dataEditModal.rowData
+      rowData: EditModal.rowData,
     });
     setAddModal({
       isOpened: false,
-      rowData: AddModal.rowData
-    })
+      rowData: AddModal.rowData,
+    });
+    setDeleteModal({
+      isOpened: false,
+      id: DeleteModal.id,
+    });
   };
 
   const getPartners = () => {
@@ -52,11 +73,15 @@ const AdminPartners = () => {
       });
   };
 
+  useEffect(() => {
+    getPartners();
+  });
+
   const columns = [
     {
       title: "Logo",
       field: "imageUrl",
-      render: rowData => <img alt={rowData.name} src={rowData.imageUrl} style={{ width: 50 }} />,
+      render: rowData => <img alt={rowData.name} src={rowData.imageUrl} style={{ maxHeight: "50px" }} />,
     },
     { title: "Name", field: "name" },
     { title: "Url", field: "url", render: rowData => <a href={rowData.url}>{rowData.url}</a> },
@@ -64,94 +89,83 @@ const AdminPartners = () => {
 
   ];
 
-  // const addPartner = () =>{
-  //    const newPartner = {
-  //      customId: "adidas",
-  //      name: "Adidas",
-  //      imageUrl: "/img/partners/adidas/001.png",
-  //      url: "https://www.adidas.com/us"
-  //    };
-  //    axios
-  //      .post("/api/partners")
-  //      .then(orders => {
-  //        setOrdersArr(orders.data)
-  //      })
-  //      .catch(err => {
-  //        console.log('orders', err);
-  //      });
-  //  }
-  //
-  // const deletePartner = (id) =>{
-  //   // AR Y SURE?
-  //   axios
-  //     .delete(`/api/partners/${id}`)
-  //     .then(resp => {
-  //       console.log(resp);
-  //       // SUCCESSFULLY DELETED data. message
-  //     })
-  //     .catch(err => {
-  //       console.log('orders', err);
-  //     });
-  // }
-  // const updatePartner = (id) =>{
-  //   // modal
-  //   const updatedPartner = {
-  //     imageUrl: "/img/partners/adidas/002.png"
-  //   };
-  //   // // AR Y SURE?
-  //   // axios
-  //   //   .put(`/api/partners/${id}`)
-  //   //   .then(resp => {
-  //   //     console.log(resp);
-  //   //     // SUCCESSFULLY DELETED data. message
-  //   //   })
-  //   //   .catch(err => {
-  //   //     console.log('orders', err);
-  //   //   });
-  // }
+  const materialTable = () => {
+    return (
+      <MaterialTable
+        columns={columns}
+        data={ordersArr}
+        title="Our partners"
+        options={{ search: false }}
+        actions={[
+          {
+            icon: () => <AddCircleIcon />,
+            tooltip: "Add Partner",
+            isFreeAction: true,
+            onClick: () => {
+              handleOpenAddModal();
+            },
+          },
+          {
+            icon: () => <DeleteIcon />,
+            tooltip: "Delete Partner",
+            onClick: (event, rowData) => {
+              handleDeleteModal(rowData);
+            },
+          },
+          {
+            icon: () => <EditIcon />,
+            tooltip: "Edit Partner",
+            onClick: (event, rowData) => {
+              handleDataEditModal(rowData);
+            },
+          },
+          {
+            icon: "refresh",
+            tooltip: "Refresh Data",
+            isFreeAction: true,
+            onClick: () => getPartners(),
+          },
+        ]}
+      />
+    );
+  };
 
   return (
     <>
-      <Button variant="contained" onClick={getPartners}>
-        Get all partners
-      </Button>
       {ordersArr.length === 0 ? (
-        <div />
+        <PreloaderAdaptive />
       ) : (
         <Box>
-          <MaterialTable
-            columns={columns}
-            data={ordersArr}
-            title="Our partners"
-            options={{ search: false }}
-            actions={[
-              {
-                icon: () => <AddCircleIcon />,
-                tooltip: "Add Partner",
-                isFreeAction: true,
-                onClick: () => {
-                  handleOpenAddModal();
-                },
-              },
-              // {
-              //   icon: () => <DeleteIcon />,
-              //   tooltip: "Delete Partner",
-              //   // onClick: {handleOpen}
-              // },
-              {
-                icon: () => <EditIcon />,
-                tooltip: "Edit Partner",
-                onClick: (event, rowData) => {
-                  handleDataEditModal(rowData);
-                },
-              },
-            ]}
-
-          />
-
-          {AddModal.isOpened && <AddPartnerModal open={AddModal.isOpened} handleModal={closeModal} partner={AddModal.rowData} />}
-          {dataEditModal.isOpened && <AddPartnerModal open={dataEditModal.isOpened} handleModal={closeModal} partner={dataEditModal.rowData} />}
-
+          {materialTable()}
+          {AddModal.isOpened && (
+            <AddEditPartnerModal
+              open={AddModal.isOpened}
+              handleModal={closeModal}
+              partner={AddModal.rowData}
+              handleOpenSnackbar={handleOpenSnackbar}
+              autoRefresh={getPartners}
+            />
+          )}
+          {EditModal.isOpened && (
+            <AddEditPartnerModal
+              open={EditModal.isOpened}
+              handleModal={closeModal}
+              partner={EditModal.rowData}
+              handleOpenSnackbar={handleOpenSnackbar}
+              autoRefresh={getPartners}
+            />
+          )}
+          {DeleteModal.isOpened && (
+            <DeleteItemModal
+              open={DeleteModal.isOpened}
+              handleModal={closeModal}
+              id={DeleteModal.id}
+              item="partners"
+              handleOpenSnackbar={handleOpenSnackbar}
+              autoRefresh={getPartners}
+            />
+          )}
+          <SnackbarMessage openSnackbar={openSnackbar} handleCloseSnackbar={handleCloseSnackbar} type={snackbarType} />
         </Box>
       )}
     </>

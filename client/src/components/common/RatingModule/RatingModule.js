@@ -56,7 +56,7 @@ const RatingModule = ({id, rate, isAuthenticated}) => {
 
     return (
       <Tooltip placement="top" title={cardTooltipText()}>
-        <Box align="center">
+        <Box>
           <Rating
             className={classes.rating}
             name="ratingModule"

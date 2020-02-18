@@ -12,7 +12,7 @@ const initialState = {
     isAdmin: false,
   },
   error: "",
-  modalOpen:false,
+  modalOpen: false,
 };
 
 const loginReducer = (state = initialState, action) => {
@@ -88,18 +88,9 @@ const loginReducer = (state = initialState, action) => {
         user: {
           firstName: action.payload.firstName,
           lastName: action.payload.lastName,
-          isAdmin: action.payload.isAdmin,
-        },
-      };
-    case constants.GET_USER_DATA_FROM_LOCALSTORAGE:
-      return {
-        ...state,
-        user: {
-          firstName: action.payload.firstName,
-          lastName: action.payload.lastName,
-          email: action.payload.email,
-          telephone: action.payload.telephone,
-          address: action.payload.address,
+          email: "",
+          telephone: "",
+          address: "",
           isAdmin: action.payload.isAdmin,
         },
       };

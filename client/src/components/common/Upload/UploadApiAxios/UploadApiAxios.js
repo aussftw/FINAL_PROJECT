@@ -1,10 +1,9 @@
 import axios from 'axios';
 
-const UploadApi = data => {
+const UploadApiAxios = data => {
   const instance = axios.create({
     baseURL: 'https://api.cloudinary.com/v1_1/plantly/image',
   });
-
 
 instance.defaults.headers.common = {};
 instance
@@ -26,4 +25,4 @@ instance
   });
 };
 
-export default UploadApi;
+export default UploadApiAxios;
