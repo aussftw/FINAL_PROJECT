@@ -29,7 +29,6 @@ const QtyCounter = () => {
   };
 
   const changeQuantity = (e) => {
-    // eslint-disable-next-line no-restricted-globals
    if (!isNaN(+e.target.value) && e.target.value !== "0" && e.target.value !== "")  {
      setQty(+e.target.value)
    }

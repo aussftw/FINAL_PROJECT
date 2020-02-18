@@ -1,7 +1,6 @@
-/* eslint-disable */
 import React, { useEffect } from "react";
 import { withRouter } from "react-router-dom";
-
+import v4 from "uuid";
 import { withStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -42,7 +41,7 @@ const FilterByColor = ({ colorListing, getColors, setCurrentPage }) => {
   const [filterIndex, setFilterIndex] = React.useState(null);
 
   colorsList = colorListing.map((color, index) => {
-    return <ColorCheckbox color={color} />;
+    return <ColorCheckbox key={v4()} color={color} />;
   });
 
   return (

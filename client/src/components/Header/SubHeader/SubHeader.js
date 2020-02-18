@@ -12,15 +12,14 @@ import useStyles from "./useStyles";
 
 const SubHeader = ({getLinks, links}) => {
 
+  const classes = useStyles();
+
     useEffect(() => {
       if(links.length === 0 ){
       getLinks();
       }
-    }, [getLinks, links.length])
+    }, [getLinks, links.length]);
 
-
-
-  const classes = useStyles();
 
   return (
     <div>

@@ -13,9 +13,6 @@ const useStyles = makeStyles(theme => ({
   },
   linkIcon: {
     marginRight: theme.spacing(1),
-    // "&:hover": {
-    //   color: theme.palette.primary.main,
-    // },
   },
   icon: {
     fontSize: "large",
@@ -29,16 +26,12 @@ const useStyles = makeStyles(theme => ({
   detailsTitle: {
     textTransform: "capitalize",
     fontSize: 16,
-    marginTop: 5,
-    // "&:hover": {
-    //   color: theme.palette.primary.main,
-    // },
+    marginTop: 4,
   },
   infoContainer: {
     minWidth: 180,
     marginRight: theme.spacing(2),
     [theme.breakpoints.up("sm")]: {
-      // width: "50%",
       minWidth: 250,
     },
   },
@@ -63,11 +56,7 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
-    marginTop: 15,
     padding: 2,
-    // [theme.breakpoints.up("sm")]: {
-    //   flexDirection: "column",
-    // },
   },
   qty_text: {
     "align-self": "center",
@@ -75,7 +64,6 @@ const useStyles = makeStyles(theme => ({
   input: {
     backgroundColor: "#fff",
     paddingLeft: 13,
-    // paddingRight: 10,
     paddingTop: 2,
     paddingBottom: 2,
     width: "35px",
@@ -84,7 +72,6 @@ const useStyles = makeStyles(theme => ({
     textAlign: "center",
   },
   infoDetail: {
-    // maxWidth: 120,
     margin: 0,
   },
   infoDetailValue: {},
