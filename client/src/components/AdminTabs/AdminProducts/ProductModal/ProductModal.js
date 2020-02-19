@@ -89,16 +89,6 @@ const ModalProducts = ({
       axiosArray.push(newPromise);
     });
 
-    const axiosArray = [];
-    imagesArr.forEach(item => {
-      const newPromise = instance.post("/upload", item, {
-        headers: {
-          "Content-Type": null,
-        },
-      });
-      axiosArray.push(newPromise);
-    });
-
     return axiosArray;
   };
 
@@ -132,6 +122,7 @@ const ModalProducts = ({
       axios
         .put(`/api/products/${data._id}`, productData)
         .then(response => {
+          console.log(response.data);
           setSnackbar(true);
         })
         .catch(err => {
@@ -142,6 +133,7 @@ const ModalProducts = ({
       axios
         .post("/api/products", productData)
         .then(response => {
+          console.log(response.data);
           setSnackbar(true);
         })
         .catch(err => {

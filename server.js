@@ -70,10 +70,7 @@ app.use("/api/shipping-methods", shippingMethods);
 app.use("/api/payment-methods", paymentMethods);
 app.use("/api/partners", partners);
 app.use("/api/rating", rating);
-<<<<<<< HEAD
-=======
 app.use("/api/contacts", contacts);
->>>>>>> origin/dev
 app.use("/api/discounts", discounts);
 app.use("/api/", mainRoute);
 
