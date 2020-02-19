@@ -11,6 +11,7 @@ import AdminCustomers from "./AdminCustomers/AdminCustomers";
 import AdminOrders from "./AdminOrders/AdminOrders";
 import AdminContent from "./AdminContent/AdminContent";
 import AdminComments from "./AdminComments/AdminComments";
+
 import useStyles from "./useStyles";
 
 function a11yProps(index) {
@@ -23,7 +24,6 @@ function a11yProps(index) {
 const AdminTabs = () => {
   const classes = useStyles();
   const [value, setValue] = useState(0);
-  
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -35,7 +35,6 @@ const AdminTabs = () => {
         Admin Page
       </Typography>
       <Box className={classes.tabsComponent}>
-
         <Tabs
           className={classes.tabsList}
           value={value}
@@ -62,6 +61,10 @@ const AdminTabs = () => {
           <Tab
             label={<span className={classes.tabText}>Content</span>}
             {...a11yProps(4)}
+          />
+          <Tab
+            label={<span className={classes.tabText}>Discounts</span>}
+            {...a11yProps(5)}
           />
         </Tabs>
         <Box

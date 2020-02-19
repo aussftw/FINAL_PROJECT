@@ -57,11 +57,7 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
-    marginTop: 15,
     padding: 2,
-    // [theme.breakpoints.up("sm")]: {
-    //   flexDirection: "column",
-    // },
   },
   qty_text: {
     "align-self": "center",
@@ -69,7 +65,6 @@ const useStyles = makeStyles(theme => ({
   input: {
     backgroundColor: "#fff",
     paddingLeft: 13,
-    // paddingRight: 10,
     paddingTop: 2,
     paddingBottom: 2,
     width: "35px",
@@ -78,12 +73,15 @@ const useStyles = makeStyles(theme => ({
     textAlign: "center",
   },
   infoDetail: {
-    // maxWidth: 120,
     margin: 0,
   },
   infoDetailValue: {},
   currentPrice: {
     fontWeight: 600,
+  },
+  oldPrice: {
+    fontWeight: 600,
+    color: theme.palette.secondary.medium,
   },
   buttonsBar: {
     marginTop: 15,

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import * as axios from "axios";
 
 import Modal from "@material-ui/core/Modal";
@@ -31,162 +31,165 @@ const ModalProducts = ({
   const classes = useStyles();
   const [snackbar, setSnackbar] = useState(false);
   const [productValue, setProductValue] = useState({
-      name: "",
-      enabled: true,
-      quantity: "",
-      currentPrice: "",
-      categories: "",
-      color: "",
-      sizes: "",
-      productUrl: "/",
-      description: "",
-      imageUrls: [],
+    name: "",
+    enabled: true,
+    quantity: "",
+    currentPrice: "",
+    previousPrice: "",
+    categories: "",
+    color: "",
+    sizes: "",
+    productUrl: "/",
+    description: "",
+    imageUrls: [],
   });
   const [remainingImgUrls, setRemainingImgUrls] = useState([]);
   const [deletedImgUrls, setDeletedImgUrl] = useState([]);
   const [addedImgFiles, setAddedImgFiles] = useState([]);
 
   const snackbarClose = (event, reason) => {
-      if (reason === "clickaway") {
-          return;
-      }
-      setSnackbar(false);
+    if (reason === "clickaway") {
+      return;
+    }
+    setSnackbar(false);
   };
 
   const handleImages = (remainingImages, deletedImages, addedImages) => {
-      setRemainingImgUrls(remainingImages);
-      setDeletedImgUrl(deletedImages);
-      setAddedImgFiles(addedImages);
+    setRemainingImgUrls(remainingImages);
+    setDeletedImgUrl(deletedImages);
+    setAddedImgFiles(addedImages);
   };
 
   const handleChange = prop => event => {
-      setProductValue({ ...productValue, [prop]: event.target.value });
+    setProductValue({ ...productValue, [prop]: event.target.value });
   };
   const handleSwitchChange = event => {
-      setProductValue({ ...productValue, enabled: event.target.checked });
+    setProductValue({ ...productValue, enabled: event.target.checked });
   };
 
-  const UploadApiAxios = (addImgs) => {
-      const imagesArr = addImgs.map(item => {
-          const data = new FormData();
-          data.append('file', item);
-          data.append('upload_preset','plantly');
-          return data
-      });
+  const UploadApiAxios = addImgs => {
+    const imagesArr = addImgs.map(item => {
+      const data = new FormData();
+      data.append("file", item);
+      data.append("upload_preset", "plantly");
+      return data;
+    });
 
-      const instance = axios.create({
-          baseURL: 'https://api.cloudinary.com/v1_1/plantly/image',
-      });
-      instance.defaults.headers.common = {};
+    const instance = axios.create({
+      baseURL: "https://api.cloudinary.com/v1_1/plantly/image",
+    });
+    instance.defaults.headers.common = {};
 
-      const axiosArray = [];
-      imagesArr.forEach(item => {
-            const newPromise = instance
-                .post('/upload', item, {
-                        headers: {
-                            'Content-Type': null,
-                        },
-                    },
-                );
-            axiosArray.push(newPromise);
+    const axiosArray = [];
+    imagesArr.forEach(item => {
+      const newPromise = instance.post("/upload", item, {
+        headers: {
+          "Content-Type": null,
+        },
+      });
+      axiosArray.push(newPromise);
+    });
+
+    return axiosArray;
+  };
+
+  const submitHandler = async () => {
+    let productData = productValue;
+
+    if (deletedImgUrls.length !== 0) {
+      productData = { ...productData, imageUrls: remainingImgUrls };
+    }
+
+    if (addedImgFiles.length !== 0) {
+      const uploadResult = UploadApiAxios(addedImgFiles);
+
+      await axios
+        .all(uploadResult)
+        .then(response => {
+          const newUrls = productData.imageUrls;
+          response.forEach(item => {
+            newUrls.push(item.data.url);
+          });
+          productData = { ...productData, imageUrls: newUrls };
+        })
+        .catch(error => {
+          console.log(error);
         });
+    }
 
-      return axiosArray;
-    };
+    setProductValue(productData);
 
-
-    const submitHandler = async () => {
-      let productData = productValue;
-
-        if (deletedImgUrls.length !== 0) {
-            productData = {...productData, imageUrls: remainingImgUrls};
-        }
-
-        if (addedImgFiles.length !== 0) {
-            const uploadResult = UploadApiAxios(addedImgFiles);
-
-            await axios
-                .all(uploadResult).then(response => {
-                    const newUrls = productData.imageUrls;
-                    response.forEach(item => {
-                        newUrls.push(item.data.url);
-                    });
-                    productData = {...productData, imageUrls: newUrls};
-                })
-                .catch(error => {
-                    console.log(error);
-                });
-        }
-
-        setProductValue(productData);
-
-        if (data !== null) {
-            axios
-                .put(`/api/products/${data._id}`, productData)
-                .then(response => {
-                    console.log(response.data);
-                    setSnackbar(true);
-                })
-                .catch(err => {
-                    // eslint-disable-next-line no-console
-                    console.log(err.response);
-                });
-        } else {
-            axios
-                .post("/api/products", productData)
-                .then(response => {
-                    console.log(response.data);
-                    setSnackbar(true);
-                })
-                .catch(err => {
-                    // eslint-disable-next-line no-console
-                    console.log(err.response);
-                });
-        }
-      onClose();
+    if (data !== null) {
+      axios
+        .put(`/api/products/${data._id}`, productData)
+        .then(response => {
+          setSnackbar(true);
+        })
+        .catch(err => {
+          // eslint-disable-next-line no-console
+          console.log(err.response);
+        });
+    } else {
+      axios
+        .post("/api/products", productData)
+        .then(response => {
+          setSnackbar(true);
+        })
+        .catch(err => {
+          // eslint-disable-next-line no-console
+          console.log(err.response);
+        });
+    }
+    onClose();
   };
 
   useEffect(() => {
-      if (data !== null) {
-          setProductValue({
-              name: data.name,
-              enabled: data.enabled,
-              quantity: data.quantity,
-              currentPrice: data.currentPrice,
-              categories: data.categories,
-              color: data.color,
-              sizes: data.sizes,
-              productUrl: data.productUrl,
-              description: data.description,
-              imageUrls: data.imageUrls,
-          })
-      } else {
-          setProductValue({
-              name: "",
-              enabled: true,
-              quantity: "",
-              currentPrice: "",
-              categories: "",
-              color: "",
-              sizes: "",
-              productUrl: "/",
-              description: "",
-              imageUrls: [],
-          })
-      }
+    if (data !== null) {
+      setProductValue({
+        name: data.name,
+        enabled: data.enabled,
+        quantity: data.quantity,
+        currentPrice: data.currentPrice,
+        previousPrice: data.previousPrice,
+        categories: data.categories,
+        color: data.color,
+        sizes: data.sizes,
+        productUrl: data.productUrl,
+        description: data.description,
+        imageUrls: data.imageUrls,
+      });
+    } else {
+      setProductValue({
+        name: "",
+        enabled: true,
+        quantity: "",
+        currentPrice: "",
+        previousPrice: "",
+        categories: "",
+        color: "",
+        sizes: "",
+        productUrl: "/",
+        description: "",
+        imageUrls: [],
+      });
+    }
   }, [data]);
 
   return (
     <>
-      <SnackBar open={snackbar} close={snackbarClose} text="Product successfully changed!" />
+      <SnackBar
+        open={snackbar}
+        close={snackbarClose}
+        text="Product successfully changed!"
+      />
       <Modal
         open={isOpen}
         onClose={onClose}
         closeAfterTransition
         BackdropComponent={Backdrop}
         BackdropProps={{
-        timeout: 200,
-      }}
+          timeout: 200,
+        }}
       >
         <Fade in={isOpen}>
           <Box className={classes.modal}>
@@ -198,11 +201,15 @@ const ModalProducts = ({
               >
                 {`Edit product № ${data.itemNo}`}
               </Typography>
-          ) : (
-            <Typography component="h3" align="center" style={{ padding: "4px" }}>
-              Create new product
-            </Typography>
-          )}
+            ) : (
+              <Typography
+                component="h3"
+                align="center"
+                style={{ padding: "4px" }}
+              >
+                Create new product
+              </Typography>
+            )}
             <IconButton
               component="span"
               onClick={onClose}
@@ -222,7 +229,7 @@ const ModalProducts = ({
               />
               <FormControlLabel
                 value="Product Availability"
-                control={(
+                control={
                   <Switch
                     id="enabled"
                     color="primary"
@@ -230,7 +237,7 @@ const ModalProducts = ({
                     onChange={handleSwitchChange}
                     value="enabled"
                   />
-              )}
+                }
                 label="Product Availability"
                 labelPlacement="start"
               />
@@ -243,9 +250,25 @@ const ModalProducts = ({
                   type="number"
                   value={productValue.currentPrice}
                   InputProps={{
-                  startAdornment: <InputAdornment position="start">$</InputAdornment>,
-              }}
+                    startAdornment: (
+                      <InputAdornment position="start">$</InputAdornment>
+                    ),
+                  }}
                   onChange={handleChange("currentPrice")}
+                />
+                <TextField
+                  className={classes.inputSmall}
+                  id="price"
+                  label="oldPrice"
+                  size="small"
+                  type="number"
+                  value={productValue.previousPrice}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">$</InputAdornment>
+                    ),
+                  }}
+                  onChange={handleChange("previousPrice")}
                 />
                 <TextField
                   className={classes.inputSmall}
@@ -310,8 +333,11 @@ const ModalProducts = ({
                   onChange={handleChange("productUrl")}
                 />
               </Box>
-              <Box style={{marginBottom: 12}}>
-                <Upload imageUrls={productValue.imageUrls} handleImages={handleImages} />
+              <Box style={{ marginBottom: 12 }}>
+                <Upload
+                  imageUrls={productValue.imageUrls}
+                  handleImages={handleImages}
+                />
               </Box>
               <TextField
                 className={classes.input}
@@ -325,7 +351,7 @@ const ModalProducts = ({
                 onChange={handleChange("description")}
               />
               <Button variant="contained" type="submit" onClick={submitHandler}>
-               Submit
+                Submit
               </Button>
             </FormControl>
           </Box>

@@ -1,5 +1,4 @@
-/* eslint-disable */
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
 
 import { withStyles } from "@material-ui/core/styles";
@@ -31,13 +30,11 @@ const SizeCheckbox = ({ size, selectSizes, removeSizes, filters }) => {
   let arrColor = [];
   const isChecked = () => {
     if (filters.sizes) {
-      console.log("filters.color", filters.sizes);
       arrColor = filters.sizes.split(",");
     }
     return arrColor.includes(size.name);
   };
   const [check, setCheck] = useState(isChecked());
-  console.log("check", check);
 
   const handleOnClick = (event, sizes) => {
     setCheck(event.target.checked);

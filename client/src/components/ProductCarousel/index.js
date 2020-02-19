@@ -67,6 +67,7 @@ const ProductCarousel = () => {
                 title={value.name}
                 rate={value.rate.rating}
                 price={value.currentPrice}
+                oldPrice={value.previousPrice}
                 img={value.imageUrls[0]}
                 stock={value.quantity}
               />
