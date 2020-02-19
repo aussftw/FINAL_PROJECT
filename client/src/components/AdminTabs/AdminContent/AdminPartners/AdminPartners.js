@@ -3,14 +3,12 @@ import axios from "axios";
 import { Box } from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
-import Button from "@material-ui/core/Button";
 import DeleteIcon from "@material-ui/icons/Delete";
 import MaterialTable from "material-table";
 import AddEditPartnerModal from "./AddEditPartnerModal/AddEditPartnerModal";
 import DeleteItemModal from "../DeleteItemModal/DeleteItemModal";
 import PreloaderAdaptive from "../../../Preloader/Adaptive";
 import SnackbarMessage from "../../Snackbar/SnackbarMessage";
-import AddEditModal from "../AdminSizes/AddEditModal/AddEditModal";
 
 
 const AdminPartners = ({
@@ -67,6 +65,7 @@ const AdminPartners = ({
       .get("/api/partners")
       .then(orders => {
         setOrdersArr(orders.data);
+        console.log(orders.data);
       })
       .catch(err => {
         console.log("orders", err);
@@ -75,7 +74,7 @@ const AdminPartners = ({
 
   useEffect(() => {
     getPartners();
-  });
+  },[]);
 
   const columns = [
     {
@@ -85,7 +84,7 @@ const AdminPartners = ({
     },
     { title: "Name", field: "name" },
     { title: "Url", field: "url", render: rowData => <a href={rowData.url}>{rowData.url}</a> },
-    { title: "Enabled", field: "enabled" },
+    // { title: "Enabled", field: "enabled" },
 
   ];
 
