@@ -10,8 +10,8 @@
 - React styles & libraries: axios, material-ui; react-responsive-carousel, see more in package.json;
 #### Backend: Node.js, Express.
 #### Database: MongoDB;
-#### Cloud storage:  ___;
-#### Deployment server: (Heroku server?).
+#### Cloud storage: Cloudinary;
+#### Deployment server: Heroku.
 
 ## Tasks & Responsibilities
 ### Tech:
