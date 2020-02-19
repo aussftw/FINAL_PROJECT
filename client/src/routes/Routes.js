@@ -16,10 +16,10 @@ import setAuthToken from "../components/common/setAuthToken";
 import isExpired from "../components/common/isExpired/isExpired";
 import Preloader from "../components/Preloader";
 import {
+  getUser,
   logOut,
   preloaderClose,
   userFromJwt,
-  getUser,
 } from "../store/actions/loginActions";
 import {getWishlist} from "../store/actions/wishlist";
 import SearchPage from "../pages/SearchPage/SearchPage";
