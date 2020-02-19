@@ -51,6 +51,10 @@ const ProductCarousel = () => {
               items: 4,
             },
           }}
+          stagePadding={{
+          paddingLeft: 30,
+          paddingRight: 0
+        }}
           buttonsDisabled
           dotsDisabled
           mouseTrackingEnabled
