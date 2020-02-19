@@ -1,18 +1,16 @@
 import axios from "axios";
+import { store } from "../index";
 import * as constants from "../constants";
 
 // Получение с бэка фильтров
-export const getProducts = filters => dispatch => {
-  axios
-    .get("/api/products/filter", {
-      params: filters,
-    })
-    .then(list => {
-      dispatch({
-        type: constants.GET_PRODUCT_LISTING,
-        payload: list.data.products,
-      });
+export const getProducts = () => dispatch => {
+  dispatch({ type: constants.GET_PRODUCT_REQUEST });
+  axios.get("/api/products").then(list => {
+    dispatch({
+      type: constants.GET_ALL_PRODUCT_LISTING,
+      payload: list.data,
     });
+  });
 };
 
 export const getCategories = () => dispatch => {
@@ -48,6 +46,17 @@ export const selectCategory = category => dispatch => {
     type: constants.SELECT_CATEGORY,
     payload: category,
   });
+
+  axios
+    .get("/api/products/filter", {
+      params: store.getState().filterReducer.filters,
+    })
+    .then(list => {
+      dispatch({
+        type: constants.GET_PRODUCT_LISTING,
+        payload: list.data.products,
+      });
+    });
 };
 
 export const selectColor = color => dispatch => {
@@ -55,13 +64,17 @@ export const selectColor = color => dispatch => {
     type: constants.SELECT_COLOR,
     payload: color.name,
   });
-};
 
-export const toggleSizesCheck = boolean => dispatch => {
-  dispatch({
-    type: constants.TOGGLE_COLOR_CHECK,
-    payload: boolean,
-  });
+  axios
+    .get("/api/products/filter", {
+      params: store.getState().filterReducer.filters,
+    })
+    .then(list => {
+      dispatch({
+        type: constants.GET_PRODUCT_LISTING,
+        payload: list.data.products,
+      });
+    });
 };
 
 export const removeColor = color => dispatch => {
@@ -70,11 +83,31 @@ export const removeColor = color => dispatch => {
       type: constants.REMOVE_COLOR,
       payload: undefined,
     });
+    axios
+      .get("/api/products/filter", {
+        params: store.getState().filterReducer.filters,
+      })
+      .then(list => {
+        dispatch({
+          type: constants.GET_PRODUCT_LISTING,
+          payload: list.data.products,
+        });
+      });
   } else {
     dispatch({
       type: constants.REMOVE_COLOR,
       payload: color,
     });
+    axios
+      .get("/api/products/filter", {
+        params: store.getState().filterReducer.filters,
+      })
+      .then(list => {
+        dispatch({
+          type: constants.GET_PRODUCT_LISTING,
+          payload: list.data.products,
+        });
+      });
   }
 };
 
@@ -90,6 +123,16 @@ export const selectSizes = size => dispatch => {
     type: constants.SELECT_SIZE,
     payload: size.name,
   });
+  axios
+    .get("/api/products/filter", {
+      params: store.getState().filterReducer.filters,
+    })
+    .then(list => {
+      dispatch({
+        type: constants.GET_PRODUCT_LISTING,
+        payload: list.data.products,
+      });
+    });
 };
 
 export const removeSizes = size => dispatch => {
@@ -98,11 +141,31 @@ export const removeSizes = size => dispatch => {
       type: constants.REMOVE_SIZE,
       payload: undefined,
     });
+    axios
+      .get("/api/products/filter", {
+        params: store.getState().filterReducer.filters,
+      })
+      .then(list => {
+        dispatch({
+          type: constants.GET_PRODUCT_LISTING,
+          payload: list.data.products,
+        });
+      });
   } else {
     dispatch({
       type: constants.REMOVE_SIZE,
       payload: size,
     });
+    axios
+      .get("/api/products/filter", {
+        params: store.getState().filterReducer.filters,
+      })
+      .then(list => {
+        dispatch({
+          type: constants.GET_PRODUCT_LISTING,
+          payload: list.data.products,
+        });
+      });
   }
 };
 
@@ -111,6 +174,16 @@ export const selectPrice = price => dispatch => {
     type: constants.SELECT_PRICE,
     payload: price,
   });
+  axios
+    .get("/api/products/filter", {
+      params: store.getState().filterReducer.filters,
+    })
+    .then(list => {
+      dispatch({
+        type: constants.GET_PRODUCT_LISTING,
+        payload: list.data.products,
+      });
+    });
 };
 
 export const setCurrentPage = currentPage => dispatch => {
@@ -118,4 +191,14 @@ export const setCurrentPage = currentPage => dispatch => {
     type: constants.SELECT_CURRENT_PAGE,
     payload: currentPage,
   });
+  axios
+    .get("/api/products/filter", {
+      params: store.getState().filterReducer.filters,
+    })
+    .then(list => {
+      dispatch({
+        type: constants.GET_PRODUCT_LISTING,
+        payload: list.data.products,
+      });
+    });
 };

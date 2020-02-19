@@ -38,49 +38,45 @@ const TopRated = () => {
   };
 
   function SkeletonGenerator() {
-      const query = [0, 1, 2, 3, 4, 5, 6, 7];
-      const skeletons = query.map((value, index) => {
-          const hidePoint = calcHide(index);
+    const query = [0, 1, 2, 3, 4, 5, 6, 7];
+    const skeletons = query.map((value, index) => {
+      const hidePoint = calcHide(index);
 
-          return (
-            <ItemCard
-              key={`skeleton-${value}`}
-              hidden={hidePoint}
-            />
-          );
-      });
+      return <ItemCard key={`skeleton-${value}`} hidden={hidePoint} />;
+    });
 
-      return skeletons;
+    return skeletons;
   }
 
-    const [products, setProducts] = useState(SkeletonGenerator());
+  const [products, setProducts] = useState(SkeletonGenerator());
 
-    const cardsGenerator = useCallback (data => {
-        const query = data.slice(0, 8).map((value, index) => {
-            const hidePoint = calcHide(index);
+  const cardsGenerator = useCallback(data => {
+    const query = data.slice(0, 8).map((value, index) => {
+      const hidePoint = calcHide(index);
 
-            return (
-              <ItemCard
-                key={`card-${value._id}`}
-                id={value._id}
-                itemNo={value.itemNo}
-                title={value.name}
-                rate={value.rate.rating}
-                price={value.currentPrice}
-                img={value.imageUrls[0]}
-                stock={value.quantity}
-                hidden={hidePoint}
-              />
-            );
-        });
-        setProducts(query);
-    }, []);
+      return (
+        <ItemCard
+          key={`card-${value._id}`}
+          id={value._id}
+          itemNo={value.itemNo}
+          title={value.name}
+          rate={value.rate.rating}
+          price={value.currentPrice}
+          oldPrice={value.previousPrice}
+          img={value.imageUrls[0]}
+          stock={value.quantity}
+          hidden={hidePoint}
+        />
+      );
+    });
+    setProducts(query);
+  }, []);
 
   useEffect(() => {
     axios
       .get("/api/products/top")
       .then(response => {
-          cardsGenerator(response.data);
+        cardsGenerator(response.data);
       })
       .catch(err => {
         // eslint-disable-next-line no-console

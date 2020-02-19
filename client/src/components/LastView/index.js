@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 import * as axios from "axios";
-
 import "react-alice-carousel/lib/alice-carousel.css";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-
 import { connect } from "react-redux";
 import RenderCards from "./renderCards";
 import { addToLastView } from "../../store/actions/addToLastView";

@@ -14,11 +14,23 @@ const initialState = {
     maxPrice: undefined,
   },
   currentPage: 1,
+  isLoading: false,
 };
 
 function filterReducer(state = initialState, action) {
   switch (action.type) {
     // Action на получение фильтров с бэка
+    case constants.GET_PRODUCT_REQUEST:
+      return {
+        ...state,
+        isLoading: true,
+      };
+    case constants.GET_ALL_PRODUCT_LISTING:
+      return {
+        ...state,
+        isLoading: false,
+        productListing: action.payload,
+      };
     case constants.GET_PRODUCT_LISTING:
       return {
         ...state,
