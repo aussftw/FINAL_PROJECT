@@ -68,7 +68,7 @@ const ModalProducts = ({
 
   const UploadApiAxios = (addImgs) => {
       const instance = axios.create({
-          baseURL: 'https://api.cloudinary.com/v1_1/plantly/image',
+          baseURL: 'https://api.cloudinary.com/v1_1/plantly/image/upload/',
       });
       instance.defaults.headers.common = {};
 
@@ -77,11 +77,12 @@ const ModalProducts = ({
           // eslint-disable-next-line no-undef
           const file = new FormData();
           file.append('file', item);
-          file.append('upload_preset','plantly');
+
+          file.append('upload_preset','products');
           // file.append('public_id', `${item.name.split('.', 1)[0]}`);
 
           const newPromise = instance
-              .post(`/upload/`, file, {
+              .post(null, file, {
                       headers: {
                           'Content-Type': null,
                       },

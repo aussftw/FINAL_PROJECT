@@ -10,8 +10,8 @@
 - React styles & libraries: axios, material-ui; react-responsive-carousel, see more in package.json;
 #### Backend: Node.js, Express.
 #### Database: MongoDB;
-#### Cloud storage:  ___;
-#### Deployment server: (Heroku server?).
+#### Cloud storage: Cloudinary;
+#### Deployment server: Heroku.
 
 ## Tasks & Responsibilities
 ### Tech:
@@ -19,6 +19,7 @@
 - Data structures architecture: Alexander Suhak & Glib Slivko. 
 - Project navigation: Alexander Suhak, Eugen Markov & Max Yevtushenko. 
 - Header: Alina Yehanian.
+- Search: Alina Yehanian.
 - Login & Registration Forms: Max Yevtushenko.
 - Client profile: Eugen Markov.
 - Wishlist page: Eugen Markov.
@@ -35,10 +36,14 @@
 - Item Detail page: Alexander Kaminskiy & Eugen Markov.
 - Comments: Alexander Suhak.
 - Preloader: Andrew Yakovenko.
+- Order details: Eugen Markov.
+- Admin Page:
+  - Products, Comments: Alexander Suhak.
+  - Orders, Contents: Alina Yehanian.
+  - Customers: Eugen Markov.
+  - Image upload API: Max Yevtushenko.
 - Database engineers: Alina Yehanian & Alexander Suhak.
 
-
 ### Non-tech:
-##### Managment :  team leader - Andrew Yakovenko, project manager: Alexander Kaminskiy.
 #### UX/DESIGN:
 ##### Alexander Suhak & Andrew Yakovenko.
