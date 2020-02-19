@@ -36,6 +36,7 @@
 - Item Detail page: Alexander Kaminskiy & Eugen Markov.
 - Comments: Alexander Suhak.
 - Preloader: Andrew Yakovenko.
+- Order details: Eugen Markov.
 - Admin Page:
   - Products, Comments: Alexander Suhak.
   - Orders, Contents: Alina Yehanian.
@@ -43,8 +44,6 @@
   - Image upload API: Max Yevtushenko.
 - Database engineers: Alina Yehanian & Alexander Suhak.
 
-
 ### Non-tech:
-##### Managment :  team leader - Andrew Yakovenko, project manager: Alexander Kaminskiy.
 #### UX/DESIGN:
 ##### Alexander Suhak & Andrew Yakovenko.
