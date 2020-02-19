@@ -1,20 +1,20 @@
-import React, { useCallback, useEffect, useState } from "react";
-import Backdrop from "@material-ui/core/Backdrop";
-import Button from "@material-ui/core/Button";
-import Fade from "@material-ui/core/Fade";
-import Modal from "@material-ui/core/Modal";
-import IconButton from "@material-ui/core/IconButton";
-import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
-import Box from "@material-ui/core/Box";
-import Typography from "@material-ui/core/Typography";
-import CloseIcon from "@material-ui/icons/Close";
-import * as axios from "axios";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Switch from "@material-ui/core/Switch";
-import useStyles from "./useStyles";
-import SingleUpload from "../../../../common/SingleUpload/SingleUpload";
-import singleUploadApiAxios from "../../../../common/SingleUpload/singleUploadApiAxios/singleUploadApiAxios";
-import PreloaderAdaptive from "../../../../Preloader/Adaptive";
+import React, { useEffect, useState } from 'react';
+import Backdrop from '@material-ui/core/Backdrop';
+import Button from '@material-ui/core/Button';
+import Fade from '@material-ui/core/Fade';
+import Modal from '@material-ui/core/Modal';
+import IconButton from '@material-ui/core/IconButton';
+import { TextValidator, ValidatorForm } from 'react-material-ui-form-validator';
+import Box from '@material-ui/core/Box';
+import Typography from '@material-ui/core/Typography';
+import CloseIcon from '@material-ui/icons/Close';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Switch from '@material-ui/core/Switch';
+import useStyles from './useStyles';
+import axios from "axios";
+import SingleUpload from '../../../../common/SingleUpload/SingleUpload';
+import singleUploadApiAxios from '../../../../common/SingleUpload/singleUploadApiAxios/singleUploadApiAxios';
+import PreloaderAdaptive from '../../../../Preloader/Adaptive';
 
 
 const AddEditPartnerModal = ({ open, handleModal, partner, handleOpenSnackbar, autoRefresh }) => {
@@ -23,11 +23,12 @@ const AddEditPartnerModal = ({ open, handleModal, partner, handleOpenSnackbar, a
   const [partnerInfo, setPartnerInfo] = useState(
     {
       enabled: false,
-      name: "",
-      url: "",
-      customId: "",
-      imageUrl: "",
+      name: '',
+      url: '',
+      customId: '',
+      imageUrl: '',
     });
+
   const [imgToUpload, setImgToUpload] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -47,67 +48,65 @@ const AddEditPartnerModal = ({ open, handleModal, partner, handleOpenSnackbar, a
     setPartnerInfo({ ...partnerInfo, [prop]: event.target.value });
   };
 
-  const request = useCallback(async (data) => {
-    await singleUploadApiAxios(data);
-    setPartnerInfo({ ...partnerInfo, imageUrl: data.url });
-  }, [setPartnerInfo, partnerInfo]);
+  const requestToDb = partnerInfo => {
+    if (partner === null) {
 
-
-  const imgLogic = async () => {
-    if (imgToUpload !== null) {
-      const data = new FormData();
-      data.append("file", imgToUpload);
-      data.append("upload_preset", "partners");
-      await request(data);
+      const newPartner = { ...partnerInfo, customId: partnerInfo.name.split(' ').join('') };
+      console.log('/api/partners', newPartner);
+      axios
+        .post("/api/partners", newPartner)
+        .then(newPartner => {
+          console.log("newPartner", newPartner);
+          const success = { type: "success", message: `New partner ${partnerInfo.name} was added` };
+          handleOpenSnackbar(success);
+          autoRefresh();
+        })
+        .catch(err => {
+          console.log("newPartner", err);
+          const error = { type: "error", message: `Error! New partner was not added.` };
+          handleOpenSnackbar(error);
+        });
+    } else {
+      console.log(`/api/partners/${partner.customId}`, partnerInfo);
+      const editedPartner = {...partnerInfo};
+      axios
+        .put(`/api/partners/${partner.customId}`, editedPartner)
+        .then(resp => {
+          console.log(resp);
+          const success = { type: "success", message: `Partner was successfully edited` };
+          handleOpenSnackbar(success);
+          autoRefresh();
+        })
+        .catch(err => {
+          console.log("err", err);
+          const error = { type: "error", message: `Error! Partner ${partnerInfo.name} was not edited.` };
+          handleOpenSnackbar(error);
+        });
     }
+    setLoading(false);
+    handleModal();
   };
+
 
   const submitHandler = async () => {
     setLoading(true);
+    let partnerRequest = partnerInfo;
 
-    // if(imgToUpload !== {}){
-    await imgLogic();
-    setLoading(false);
-    // }
-
-    if (partner === null) {
-      const newPartner = { ...partnerInfo, customId: partnerInfo.name.split(" ").join("") };
-      console.log("/api/partners", newPartner);
-      // axios
-      //   .post("/api/partners", newPartner)
-      //   .then(newPartner => {
-      //     console.log("newPartner", newPartner);
-      //     const success = { type: "success", message: `New partner ${partnerInfo.name} was added` };
-      //     handleOpenSnackbar(success);
-      //     autoRefresh();
-      //   })
-      //   .catch(err => {
-      //     console.log("newPartner", err);
-      //     const error = { type: "error", message: `Error! New partner was not added.` };
-      //     handleOpenSnackbar(error);
-      //   });
-    } else {
-      const editedPartner = {
-        ...partnerInfo,
-        imageUrl: imgToUpload === null ? partner.imageUrl : partnerInfo.imageUrl,
-      };
-      console.log(`/api/partners/${partner.customId}`, editedPartner);
-      // const editedPartner = { ...partnerInfo };
-      // axios
-      //   .put(`/api/partners/${partner.customId}`, editedPartner)
-      //   .then(resp => {
-      //     console.log(resp);
-      //     const success = { type: "success", message: `Partner was successfully edited` };
-      //     handleOpenSnackbar(success);
-      //     autoRefresh();
-      //   })
-      //   .catch(err => {
-      //     console.log("err", err);
-      //     const error = { type: "error", message: `Error! Partner ${partnerInfo.name} was not edited.` };
-      //     handleOpenSnackbar(error);
-      //   });
+    if (imgToUpload !== null) {
+      singleUploadApiAxios(imgToUpload).then(response => {
+        if (response.status === 200) {
+          console.log(response);
+          partnerRequest = ({ ...partnerRequest, imageUrl: response.data.url });
+          console.log(partnerRequest);
+          requestToDb(partnerRequest);
+        }
+      })
+        .catch(err => {
+          console.log(err);
+        });
+    }else {
+      requestToDb(partnerRequest);
     }
-    handleModal();
   };
 
 
@@ -129,7 +128,7 @@ const AddEditPartnerModal = ({ open, handleModal, partner, handleOpenSnackbar, a
               align="center"
               className={classes.title}
             >
-              {(partner === null) ? ("Add new partner") : ("Edit partner")}
+              {(partner === null) ? ('Add new partner') : ('Edit partner')}
             </Typography>
 
             <IconButton
@@ -154,7 +153,7 @@ const AddEditPartnerModal = ({ open, handleModal, partner, handleOpenSnackbar, a
                     value="enabled"
                     id="enabled"
                     color="primary"
-                    onChange={handlePartnerInfo("enabled")}
+                    onChange={handlePartnerInfo('enabled')}
                   />
                 )}
                 label="Enabled"
@@ -164,19 +163,19 @@ const AddEditPartnerModal = ({ open, handleModal, partner, handleOpenSnackbar, a
                 label="Partner name"
                 variant="outlined"
                 value={partnerInfo.name}
-                onChange={handlePartnerInfo("name")}
+                onChange={handlePartnerInfo('name')}
                 className={classes.input}
-                validators={["required"]}
-                errorMessages={["This field is required"]}
+                validators={['required']}
+                errorMessages={['This field is required']}
               />
               <TextValidator
                 label="Partner url"
                 variant="outlined"
                 value={partnerInfo.url}
-                onChange={handlePartnerInfo("url")}
+                onChange={handlePartnerInfo('url')}
                 className={classes.input}
-                validators={["required"]}
-                errorMessages={["This field is required"]}
+                validators={['required']}
+                errorMessages={['This field is required']}
               />
               <Box className={classes.imgBox}>
                 <SingleUpload imageUrls={partnerInfo.imageUrl} setImgToUpload={setImgToUpload} />
@@ -184,12 +183,10 @@ const AddEditPartnerModal = ({ open, handleModal, partner, handleOpenSnackbar, a
               {loading ? (
                 <PreloaderAdaptive />
               ) : (
-                <Button variant="contained" type="submit" style={{ width: "100%" }}>
+                <Button variant="contained" type="submit" style={{ width: '100%' }}>
                   Submit
                 </Button>
               )}
-
-
             </ValidatorForm>
           </Box>
         </Fade>
