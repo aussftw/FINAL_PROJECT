@@ -32,7 +32,6 @@ const useStyles = makeStyles(theme => ({
     minWidth: 180,
     marginRight: theme.spacing(2),
     [theme.breakpoints.up("sm")]: {
-      // width: "50%",
       minWidth: 250,
     },
   },

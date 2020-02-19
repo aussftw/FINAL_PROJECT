@@ -6,7 +6,6 @@ import AddCircleIcon from "@material-ui/icons/AddCircle";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteItemModal from "../DeleteItemModal/DeleteItemModal";
-import AddEditPartnerModal from "../AdminPartners/AddEditPartnerModal/AddEditPartnerModal";
 import PreloaderAdaptive from "../../../Preloader/Adaptive";
 import SnackbarMessage from "../../Snackbar/SnackbarMessage";
 import AddEditCategoriesModal from "./AddEditCategoriesModal/AddEditCategoriesModal";
@@ -67,7 +66,6 @@ const AdminCategories = ({
       .get("/api/catalog")
       .then(orders => {
         setCategories(orders.data);
-        console.log(orders.data);
       })
       .catch(err => {
         console.log("orders", err);
@@ -86,17 +84,6 @@ const AdminCategories = ({
     },
     { title: "Name", field: "name" },
     { title: "Description", field: "description" },
-    // {
-    //   title: "Description",
-    //   field: "description",
-    //   type: "string",
-    //   render: rowData => (
-    //     <Typography noWrap style={{ width: "200px", fontSize: "0.875rem"}}>
-    //       {rowData.description}
-    //     </Typography>
-    //   ),
-    // },
-
   ];
 
   const materialTable = () => {

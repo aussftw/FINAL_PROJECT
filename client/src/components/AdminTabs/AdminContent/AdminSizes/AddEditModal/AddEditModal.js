@@ -85,9 +85,9 @@ const AddEditModal = ({ open, handleModal, item, handleOpenSnackbar, autoRefresh
             <Typography
               component="h3"
               align="center"
-              style={{ padding: "4px" }}
+              className={classes.title}
             >
-              Add new size
+              {(item === null) ? ("Add new size") : ("Edit size")}
             </Typography>
 
             <IconButton
@@ -100,6 +100,7 @@ const AddEditModal = ({ open, handleModal, item, handleOpenSnackbar, autoRefresh
 
             <ValidatorForm
               noValidate={false}
+              className={classes.inputBox}
               onSubmit={() => {
                 changeSize();
               }}
