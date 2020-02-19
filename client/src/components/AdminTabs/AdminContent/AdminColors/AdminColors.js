@@ -47,7 +47,7 @@ const AdminColors = ({
 
   useEffect(() => {
     getColors();
-  });
+  },[]);
 
   const handleOpenAddModal = () => {
     setAddModal({

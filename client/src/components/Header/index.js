@@ -1,28 +1,28 @@
 import React from 'react';
-import { Link } from "react-router-dom";
-import { connect } from "react-redux";
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import IconButton from "@material-ui/core/IconButton";
-import Badge from "@material-ui/core/Badge";
-import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
-import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import IconButton from '@material-ui/core/IconButton';
+import Badge from '@material-ui/core/Badge';
+import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 
-import useMediaQuery from "@material-ui/core/useMediaQuery";
-import TemporaryDrawer from "./BurgerMenu/BurgerMenu";
-import CustomizedSearch from "./Search/Search";
-import LoginButton from "../LoginButton/LoginButton";
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+import TemporaryDrawer from './BurgerMenu/BurgerMenu';
+import CustomizedSearch from './Search/Search';
+import LoginButton from '../LoginButton/LoginButton';
 import LoginForm from '../LoginForm';
-import CartMiniButton from "./CartMiniButton/CartMiniButton";
-import useStyles from "./useStyles";
+import CartMiniButton from './CartMiniButton/CartMiniButton';
+import useStyles from './useStyles';
 
 
-import MobileSearch from "./MobileSearch/MobileSearch";
+import MobileSearch from './MobileSearch/MobileSearch';
 
 const Header = ({ isAuthenticated, wishlistCounter, cartCounter }) => {
   const classes = useStyles();
-  const matches = useMediaQuery(theme => theme.breakpoints.up("sm"));
+  const matches = useMediaQuery(theme => theme.breakpoints.up('sm'));
 
   return (
     <div>
@@ -31,12 +31,12 @@ const Header = ({ isAuthenticated, wishlistCounter, cartCounter }) => {
           <div className={classes.flex}>
             <TemporaryDrawer />
             <Link to="/">
-              <img src="/img/Logo.svg" alt="Plantly" className={classes.logo} />
+              <img src="https://res.cloudinary.com/plantly/image/upload/v1582046905/Logo_d0lwiz.svg" alt="Plantly" className={classes.logo} />
             </Link>
             <MobileSearch />
           </div>
           <div className={classes.searchDesktop}>
-            <CustomizedSearch  />
+            <CustomizedSearch />
           </div>
           <div>
             <LoginButton />
@@ -59,7 +59,7 @@ const Header = ({ isAuthenticated, wishlistCounter, cartCounter }) => {
                   </Badge>
                 </IconButton>
               </Link>
-              )}
+            )}
           </div>
         </Toolbar>
       </AppBar>

@@ -4,6 +4,7 @@ import Backdrop from "@material-ui/core/Backdrop";
 import Button from "@material-ui/core/Button";
 import Fade from "@material-ui/core/Fade";
 import Modal from "@material-ui/core/Modal";
+import LockOpenIcon from '@material-ui/icons/LockOpen';
 import InputAdornment from "@material-ui/core/InputAdornment";
 import IconButton from "@material-ui/core/IconButton";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
@@ -44,7 +45,8 @@ const LoginContent = ({ handleOpen, submitLogin, open, message }) => {
       <Fade in={open}>
         <div className={classes.paper}>
           <div className={classes.wrapper}>
-            <h3 className={classes.title}>Log In Form</h3>
+            <LockOpenIcon className={classes.icon} />
+            <h3 className={classes.title}>LogIn</h3>
             {Boolean(message) && <p className={classes.errMsg}>{message}</p>}
             <ValidatorForm
               noValidate={false}

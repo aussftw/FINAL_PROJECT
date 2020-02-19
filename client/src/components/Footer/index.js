@@ -18,7 +18,7 @@ const Footer = () => {
     <Container className={classes.bg} maxWidth="xl">
       <Hidden mdUp>
         <Link to="/" className={classes.logoContainer}>
-          <img src="/img/Logo.svg" alt="logo" className={classes.logo} />
+          <img src="https://res.cloudinary.com/plantly/image/upload/v1582046905/Logo_d0lwiz.svg" alt="logo" className={classes.logo} />
         </Link>
       </Hidden>
       <Box className={classes.footerData}>

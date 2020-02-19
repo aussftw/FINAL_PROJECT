@@ -7,29 +7,26 @@ import Container from "@material-ui/core/Container";
 import Box from '@material-ui/core/Box';
 import Slide from "./slide";
 import PreloaderAdaptive from "../Preloader/Adaptive";
-// import useStyles from "./useStyles";
 
 const MainCarousel = () => {
   const [slidesData, setSlidesData] = useState(null);
-  // const classes = useStyles;
   const fakeStyle = {height: 'calc(100vw /1920 * 720)'};
-  const fakeStyle2 = {marginTop: '-100px'};
-
 
   useEffect(() => {
     axios.get("/api/slides").then(slides => {
       setSlidesData(slides.data);
+    })
+    .catch(err => {
+      // eslint-disable-next-line no-console
+      console.log(err.response);
     });
-    // .catch(err => {
-    //   console.log(err.response.data);
-    // });
   }, []);
 
   return (
     <Container disableGutters style={fakeStyle} maxWidth="xl">
 
       {!slidesData ? (
-        <Box width="100vw" style={fakeStyle2}>
+        <Box width="100vw">
           <PreloaderAdaptive />
         </Box>
       ) : (
@@ -42,7 +39,6 @@ const MainCarousel = () => {
           stopOnHover={false}
           style={fakeStyle}
         >
-
           {slidesData.map(value => {
             return (
               <Slide
