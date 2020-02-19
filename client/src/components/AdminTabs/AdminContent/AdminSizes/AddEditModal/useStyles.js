@@ -1,24 +1,36 @@
+
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(theme => ({
   modalBox: {
     position: "fixed",
-    top: 10,
-    left: "calc(50% - 196px)",
-    minHeight: 600,
-    minWidth: 360,
+    top: "10%",
+    left: "calc(50% - 20%)",
+    minHeight: "20%",
+    width: "25%",
     padding: theme.spacing(3),
     backgroundColor: "white",
     borderRadius: 4,
   },
+  title: {
+    paddingBottom: theme.spacing(3),
+  },
   closeBtn: {
     position: "absolute",
-    top: 8,
-    right: 8,
+    top: "2%",
+    right: "4%",
+  },
+  inputBox: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
   },
   input: {
-    display: "block",
-    marginTop: theme.spacing(3),
+    margin: theme.spacing(1),
+  },
+  btn: {
+    width: '100%',
+    marginBottom: theme.spacing(21),
   },
 }));
 

@@ -6,8 +6,9 @@ export const AuthHOC = (Component ) => {
     const Wrapper = ({ isAuthenticated }) => {
       if (isAuthenticated){
         return <Component />
-      }
+      }else {
         return <Redirect to="/" />
+      }
     };
 
     const mapStateToProps = state => {
