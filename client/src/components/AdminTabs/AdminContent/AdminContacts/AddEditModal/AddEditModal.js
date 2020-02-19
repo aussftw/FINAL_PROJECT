@@ -10,7 +10,7 @@ import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import CloseIcon from "@material-ui/icons/Close";
 import useStyles from "../../AdminCategories/AddEditCategoriesModal/useStyles";
-import Upload from "../../../../common/Upload/Upload";
+import AddContentInput from "../AddContentInput/AddContentInput";
 
 
 const AddEditModal = ({ open, handleModal, item, handleOpenSnackbar, autoRefresh }) => {
@@ -19,7 +19,8 @@ const AddEditModal = ({ open, handleModal, item, handleOpenSnackbar, autoRefresh
   const [itemInfo, setItemInfo] = useState(
     {
       option: "",
-      content: [{_id: ``, text: ``, link: ``}],
+      // content: [{_id: ``, text: ``, link: ``}],
+      content: [],
     });
 
   useEffect(() => {
@@ -78,6 +79,11 @@ const AddEditModal = ({ open, handleModal, item, handleOpenSnackbar, autoRefresh
     handleModal();
   }
 
+ // const addMore =()=>{
+ //    return(
+ //      <AddContentInput item={null} itemInfo={itemInfo} setItemInfo={setItemInfo} />
+ //    )
+ // };
 
   const modal = () => {
     return (
@@ -122,56 +128,62 @@ const AddEditModal = ({ open, handleModal, item, handleOpenSnackbar, autoRefresh
                 validators={["required"]}
                 errorMessages={["this field is required"]}
               />
-              {(item.content.length === 0) ? (
-                itemInfo.content.map((item, index) => {
+              {(item !== null) ? (
+                itemInfo.content.map((item) => {
                   return (
-                    <div key={`${item._id}`}>
-                      <TextValidator
-                        label={`${item.text}`}
-                        variant="outlined"
-                        value={`${item.text}`}
-                        onChange={handleInfo(`content${[index]}.text`)}
-                        className={classes.input}
-                        validators={["required"]}
-                        errorMessages={["this field is required"]}
-                      />
-                      <TextValidator
-                        label={`${item.link}`}
-                        variant="outlined"
-                        value={`${item.link}`}
-                        onChange={handleInfo(`content${[index]}.link`)}
-                        className={classes.input}
-                        validators={["required"]}
-                        errorMessages={["this field is required"]}
-                      />
-                    </div>
+                    <AddContentInput key={item._id} item={item} itemInfo={itemInfo} setItemInfo={setItemInfo} />
+                    // <div key={`${item._id}`}>
+                    //   <TextValidator
+                    //     label={`${item.text}`}
+                    //     variant="outlined"
+                    //     value={`${item.text}`}
+                    //     onChange={handleInfo(`content${[index]}.text`)}
+                    //     className={classes.input}
+                    //     validators={["required"]}
+                    //     errorMessages={["this field is required"]}
+                    //   />
+                    //   <TextValidator
+                    //     label={`${item.link}`}
+                    //     variant="outlined"
+                    //     value={`${item.link}`}
+                    //     onChange={handleInfo(`content${[index]}.link`)}
+                    //     className={classes.input}
+                    //     validators={["required"]}
+                    //     errorMessages={["this field is required"]}
+                    //   />
+                    // </div>
                   );
                 })
 
               ) : (
                 <div>
-                  <TextValidator
-                    label="Text"
-                    variant="outlined"
-                    value={itemInfo.content[0].text}
-                    onChange={handleInfo('content[0].text')}
-                    className={classes.input}
-                    validators={["required"]}
-                    errorMessages={["this field is required"]}
-                  />
-                  <TextValidator
-                    label='Link'
-                    variant="outlined"
-                    value={itemInfo.content[0].link}
-                    onChange={handleInfo('content[0].link')}
-                    className={classes.input}
-                    validators={["required"]}
-                    errorMessages={["this field is required"]}
-                  />
+                  <AddContentInput item={null} itemInfo={itemInfo} setItemInfo={setItemInfo} />
+                  {/*<Button variant="text" onClick={()=>{addMore()}}>*/}
+                  {/*  Add info*/}
+                  {/*</Button>*/}
+
+                  {/* <TextValidator */}
+                  {/*  label="Text" */}
+                  {/*  variant="outlined" */}
+                  {/*  value={itemInfo.content[0].text} */}
+                  {/*  onChange={handleInfo('content[0].text')} */}
+                  {/*  className={classes.input} */}
+                  {/*  validators={["required"]} */}
+                  {/*  errorMessages={["this field is required"]} */}
+                  {/* /> */}
+                  {/* <TextValidator */}
+                  {/*  label='Link' */}
+                  {/*  variant="outlined" */}
+                  {/*  value={itemInfo.content[0].link} */}
+                  {/*  onChange={handleInfo('content[0].link')} */}
+                  {/*  className={classes.input} */}
+                  {/*  validators={["required"]} */}
+                  {/*  errorMessages={["this field is required"]} */}
+                  {/* /> */}
                 </div>
               )}
               <Button variant="contained" type="submit">
-                Create color
+                Submit
               </Button>
             </ValidatorForm>
           </Box>

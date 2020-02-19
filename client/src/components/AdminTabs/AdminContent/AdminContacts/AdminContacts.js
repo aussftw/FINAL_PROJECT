@@ -80,11 +80,17 @@ const AdminContacts = ({
     });
   };
 
+  // const getLines = (rowData)=>{
+  //   {rowData.content.map((item)=><div>{item.text}<div/>) }
+  // }
 
   const columns = [
     { title: "Option", field: "option" },
-    { title: "Text", field: "content.text" },
-    { title: "Link", field: "content.link" },
+    // { title: "Text", field: "content[0].text", type: "string"},
+    // { title: "Link", field: "content[0].link", type: "string" },
+    // { title: "Text", field: "content", type: "string",
+    //   render: rowData => <div> {getLines(rowData)}</div>
+    // }
   ];
 
   const materialTable = () => {
