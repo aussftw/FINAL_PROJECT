@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-// import { Carousel } from "react-responsive-carousel";
 
 import { connect } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
@@ -26,12 +25,14 @@ import FavoriteSharpIcon from "@material-ui/icons/FavoriteSharp";
 import AddSharpIcon from "@material-ui/icons/AddSharp";
 import RemoveSharpIcon from "@material-ui/icons/RemoveSharp";
 import Tooltip from "@material-ui/core/Tooltip";
-// import CardContent from "@material-ui/core/CardContent";
 import RatingModule from "../common/RatingModule/RatingModule";
 import PreloaderAdaptive from "../Preloader/Adaptive";
 import ItemTabs from "../common/ItemTabs/ItemTabs";
 
-import { addItemCart, changeItemCartQuantityFromItemDetails } from "../../store/actions/сart";
+import {
+  addItemCart,
+  changeItemCartQuantityFromItemDetails,
+} from "../../store/actions/сart";
 import {
   wishlistAddItem,
   wishlistDeleteItem,
@@ -44,7 +45,8 @@ const ItemDetails = ({
   addWishlistItem,
   deleteWishlistItem,
   isAuthenticated,
-  addCartItem, updateCart,
+  addCartItem,
+  updateCart,
 }) => {
   const itemNo = useParams();
   const classes = useStyles();
@@ -60,7 +62,7 @@ const ItemDetails = ({
   const history = useHistory();
 
   useEffect(() => {
-    const {CancelToken} = axios;
+    const { CancelToken } = axios;
     const source = CancelToken.source();
     axios
       .get(`/api/products/${itemNo.id}`, { cancelToken: source.token })
@@ -88,17 +90,17 @@ const ItemDetails = ({
     color,
     sizes,
     currentPrice,
+    previousPrice,
     _id,
     quantity,
   } = item;
 
   const addItemToCart = () => {
-    if(qty === 1) {
+    if (qty === 1) {
       addCartItem(item._id, item.itemNo);
     } else {
       updateCart(item._id, qty, item);
     }
-
   };
 
   const handleAddtemToWishlist = () => {
@@ -121,7 +123,11 @@ const ItemDetails = ({
 
   const changeQuantity = e => {
     // eslint-disable-next-line no-restricted-globals
-    if (!isNaN(+e.target.value) && e.target.value !== "0" && e.target.value !== "") {
+    if (
+      !isNaN(+e.target.value) &&
+      e.target.value !== "0" &&
+      e.target.value !== ""
+    ) {
       setQty(+e.target.value);
     }
   };
@@ -176,7 +182,7 @@ const ItemDetails = ({
                 {sizes}
               </Typography>
             </ListItem>
-            <ListItem className={classes.root} style={{paddingTop: 0}}>
+            <ListItem className={classes.root} style={{ paddingTop: 0 }}>
               <ListItemText className={classes.infoDetail} primary="Rating:" />
               <RatingModule id={item._id} rate={item.rate.rating} />
             </ListItem>
@@ -187,6 +193,15 @@ const ItemDetails = ({
               <ListItemText primary="Price:" className={classes.infoDetail} />
               <Typography className={classes.currentPrice}>
                 {`$${currentPrice.toFixed(2)}`}
+              </Typography>
+            </ListItem>
+            <ListItem className={classes.root}>
+              <ListItemText
+                primary="Old price:"
+                className={classes.infoDetail}
+              />
+              <Typography className={classes.oldPrice}>
+                <s> {`$${previousPrice.toFixed(2)}`}</s>
               </Typography>
             </ListItem>
           </List>
@@ -233,25 +248,29 @@ const ItemDetails = ({
                   <FavoriteSharpIcon />
                 </Button>
               </Tooltip>
-              ) : (
-                <Tooltip arrow title={isAuthenticated ? "Add to wishlist" : "Only for authorized users"}>
-                  <Button
-                    className={classes.actionButton}
-                    aria-label="Add to wishlist"
-                    variant="contained"
-                    onClick={handleAddtemToWishlist}
-                  >
-                    <FavoriteBorderSharpIcon />
-                  </Button>
-                </Tooltip>
+            ) : (
+              <Tooltip
+                arrow
+                title={
+                  isAuthenticated
+                    ? "Add to wishlist"
+                    : "Only for authorized users"
+                }
+              >
+                <Button
+                  className={classes.actionButton}
+                  aria-label="Add to wishlist"
+                  variant="contained"
+                  onClick={handleAddtemToWishlist}
+                >
+                  <FavoriteBorderSharpIcon />
+                </Button>
+              </Tooltip>
             )}
           </Box>
         </Box>
       </Box>
-      <ItemTabs
-        description={item.description}
-        id={item._id}
-      />
+      <ItemTabs description={item.description} id={item._id} />
     </Container>
   );
 };

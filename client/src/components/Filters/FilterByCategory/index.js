@@ -33,8 +33,10 @@ const FilterByCategory = ({
     selectCategory(category);
     setCurrentPage(1);
   };
-  const currentIndex = categoryListing.findIndex(item => filters.categories === item.name);
 
+  const currentIndex = categoryListing.findIndex(
+    item => filters.categories === item.name
+  );
   const [selectedIndex, setSelectedIndex] = useState(currentIndex);
 
   let categoryList = [];

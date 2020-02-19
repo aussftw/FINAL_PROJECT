@@ -34,6 +34,7 @@ const ItemCard = ({
   itemNo,
   title,
   rate,
+  oldPrice,
   price,
   img,
   stock,
@@ -66,7 +67,6 @@ const ItemCard = ({
     setSnackbarAddToCart(false);
   };
 
-
   const handleAddItemToWishlist = () => {
     if (isAuthenticated) {
       addWishlistItem(id);
@@ -94,7 +94,9 @@ const ItemCard = ({
             <Tooltip
               arrow
               title={
-                isAuthenticated ? "Add to wishlist" : "Only for authorized users"
+                isAuthenticated
+                  ? "Add to wishlist"
+                  : "Only for authorized users"
               }
             >
               <IconButton
@@ -139,10 +141,25 @@ const ItemCard = ({
                     />
                   </Box>
                 </Tooltip>
-                <Typography className={classes.price} align="center">
-                  $
-                  {price.toFixed(2)}
-                </Typography>
+                {oldPrice ? (
+                  <Box className={classes.priceBox}>
+                    <Typography className={classes.price} align="center">
+                      ${price.toFixed(2)}
+                    </Typography>
+
+                    <Typography
+                      className={classes.OldPrice}
+                      align="center"
+                      color="textSecondary"
+                    >
+                      <s disabled>${oldPrice.toFixed(2)}</s>
+                    </Typography>
+                  </Box>
+                ) : (
+                  <Typography className={classes.price} align="center">
+                    ${price.toFixed(2)}
+                  </Typography>
+                )}
               </CardContent>
             </CardActionArea>
           </Link>
@@ -155,7 +172,11 @@ const ItemCard = ({
               + add to cart
             </Button>
           )}
-          <SnackBar open={snackbarAddToCart} close={snackbarClose} text="Added to your shopping cart!" />
+          <SnackBar
+            open={snackbarAddToCart}
+            close={snackbarClose}
+            text="Added to your shopping cart!"
+          />
         </Card>
       ) : (
         <Box className={classes.cardSkeleton}>
