@@ -27,27 +27,15 @@ const FilterByCategory = ({
 
   useEffect(() => {
     getCategories();
-    // eslint-disable-next-line
-  }, []);
+  }, [getCategories]);
 
   const handleCategoryClick = (event, category) => {
     selectCategory(category);
     setCurrentPage(1);
   };
+  const currentIndex = categoryListing.findIndex(item => filters.categories === item.name);
 
-  const categoryIsChecked = () => {
-    const indexArr = categoryListing.map((item, index) => {
-      if (filters.categories === item.name) {
-        return index;
-      }
-    });
-    const currentIndex = indexArr.filter(x => x !== undefined);
-    const [a] = currentIndex;
-
-    return a;
-  };
-
-  const [selectedIndex, setSelectedIndex] = React.useState(categoryIsChecked());
+  const [selectedIndex, setSelectedIndex] = useState(currentIndex);
 
   let categoryList = [];
   categoryList = categoryListing.map((category, index) => {
