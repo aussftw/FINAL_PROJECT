@@ -82,7 +82,7 @@ const ContactUs = ({getContactsVar, contacts}) => {
       <Hidden smDown>
         <Container className={classes.mainContainer}>
           <Link href="/" className={classes.logoContainer}>
-            <img src="/img/Logo.svg" alt="logo" className={classes.logo} />
+            <img src="https://res.cloudinary.com/plantly/image/upload/v1582046905/Logo_d0lwiz.svg" alt="logo" className={classes.logo} />
           </Link>
           <Box className={classes.itemContainer}>
             <DraftsIcon className={classes.contactUsIcon} />

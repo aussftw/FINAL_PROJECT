@@ -7,6 +7,7 @@ const useStyle = makeStyles(() => ({
     alignItems: "center",
     height: 180,
     marginTop: 100,
+    marginRight: "-60px",
   },
   adaptive: {
     display: "inline-block",

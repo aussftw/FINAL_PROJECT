@@ -77,7 +77,6 @@ const ModalProducts = ({
           // eslint-disable-next-line no-undef
           const file = new FormData();
           file.append('file', item);
-
           file.append('upload_preset','products');
           // file.append('public_id', `${item.name.split('.', 1)[0]}`);
 
