@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import axios from "axios";
 import Backdrop from '@material-ui/core/Backdrop';
 import Button from '@material-ui/core/Button';
 import Fade from '@material-ui/core/Fade';
@@ -11,7 +12,6 @@ import CloseIcon from '@material-ui/icons/Close';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 import useStyles from './useStyles';
-import axios from "axios";
 import SingleUpload from '../../../../common/SingleUpload/SingleUpload';
 import singleUploadApiAxios from '../../../../common/SingleUpload/singleUploadApiAxios/singleUploadApiAxios';
 import PreloaderAdaptive from '../../../../Preloader/Adaptive';
@@ -23,12 +23,11 @@ const AddEditPartnerModal = ({ open, handleModal, partner, handleOpenSnackbar, a
   const [partnerInfo, setPartnerInfo] = useState(
     {
       enabled: false,
-      name: '',
-      url: '',
-      customId: '',
-      imageUrl: '',
+      name: "",
+      url: "",
+      customId: "",
+      imageUrl: "",
     });
-
   const [imgToUpload, setImgToUpload] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -87,7 +86,6 @@ const AddEditPartnerModal = ({ open, handleModal, partner, handleOpenSnackbar, a
     handleModal();
   };
 
-
   const submitHandler = async () => {
     setLoading(true);
     let partnerRequest = partnerInfo;
@@ -107,6 +105,7 @@ const AddEditPartnerModal = ({ open, handleModal, partner, handleOpenSnackbar, a
     }else {
       requestToDb(partnerRequest);
     }
+    handleModal();
   };
 
 
@@ -128,7 +127,7 @@ const AddEditPartnerModal = ({ open, handleModal, partner, handleOpenSnackbar, a
               align="center"
               className={classes.title}
             >
-              {(partner === null) ? ('Add new partner') : ('Edit partner')}
+              {(partner === null) ? ("Add new partner") : ("Edit partner")}
             </Typography>
 
             <IconButton
@@ -153,7 +152,7 @@ const AddEditPartnerModal = ({ open, handleModal, partner, handleOpenSnackbar, a
                     value="enabled"
                     id="enabled"
                     color="primary"
-                    onChange={handlePartnerInfo('enabled')}
+                    onChange={handlePartnerInfo("enabled")}
                   />
                 )}
                 label="Enabled"
@@ -163,19 +162,19 @@ const AddEditPartnerModal = ({ open, handleModal, partner, handleOpenSnackbar, a
                 label="Partner name"
                 variant="outlined"
                 value={partnerInfo.name}
-                onChange={handlePartnerInfo('name')}
+                onChange={handlePartnerInfo("name")}
                 className={classes.input}
-                validators={['required']}
-                errorMessages={['This field is required']}
+                validators={["required"]}
+                errorMessages={["This field is required"]}
               />
               <TextValidator
                 label="Partner url"
                 variant="outlined"
                 value={partnerInfo.url}
-                onChange={handlePartnerInfo('url')}
+                onChange={handlePartnerInfo("url")}
                 className={classes.input}
-                validators={['required']}
-                errorMessages={['This field is required']}
+                validators={["required"]}
+                errorMessages={["This field is required"]}
               />
               <Box className={classes.imgBox}>
                 <SingleUpload imageUrls={partnerInfo.imageUrl} setImgToUpload={setImgToUpload} />
@@ -183,7 +182,7 @@ const AddEditPartnerModal = ({ open, handleModal, partner, handleOpenSnackbar, a
               {loading ? (
                 <PreloaderAdaptive />
               ) : (
-                <Button variant="contained" type="submit" style={{ width: '100%' }}>
+                <Button variant="contained" type="submit" style={{ width: "100%" }}>
                   Submit
                 </Button>
               )}
