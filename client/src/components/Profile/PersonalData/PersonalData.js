@@ -118,8 +118,8 @@ function PersonalData({
               type: "tel",
             }}
             onChange={handleChange}
-            validators={["matchRegexp:^[0-9-+\\s()]{13}$"]}
-            errorMessages={["phone is not valid, need +380... format",]}
+            validators={["matchRegexp:^3?8?[0-9-+\\s()]{10,18}$"]}
+            errorMessages={["phone is not valid, need minimum 10 figures, country code is preferable",]}
           />
           {isEditable ? (
             <Button className={classes.btn} type="submit">

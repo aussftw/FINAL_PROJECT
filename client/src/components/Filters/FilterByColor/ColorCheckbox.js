@@ -1,19 +1,20 @@
-/* eslint-disable */
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
 
 import { withStyles } from "@material-ui/core/styles";
-// import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import { green } from "@material-ui/core/colors";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
-// import Typography from "@material-ui/core/Typography";
 
 import { connect } from "react-redux";
 import { useStyles } from "./useStyles";
 
-import { selectColor, removeColor } from "../../../store/actions/Filters";
+import {
+  selectColor,
+  removeColor,
+  getProducts,
+} from "../../../store/actions/Filters";
 
 const GreenCheckbox = withStyles({
   root: {
@@ -33,7 +34,6 @@ const ColorCheckbox = ({ color, selectColor, removeColor, filters }) => {
   let arrColor = [];
   const isChecked = () => {
     if (filters.color) {
-      console.log("filters.color", filters.color);
       arrColor = filters.color.split(",");
     }
     return arrColor.includes(color.name);
@@ -83,6 +83,7 @@ function mapDispatchToProps(dispatch) {
   return {
     selectColor: event => dispatch(selectColor(event)),
     removeColor: event => dispatch(removeColor(event)),
+    getProducts: filters => dispatch(getProducts(filters)),
   };
 }
 

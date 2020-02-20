@@ -10,9 +10,6 @@ const SingleUpload = ({ imageUrls, setImgToUpload }) => {
 
   const [image, setImage] = useState(imageUrls || ""); // view
 
-  // props to submit
-  // const [deletedImageURL, setDeletedImageURL] = useState("");
-
   const removeImgUrl = () => {
     setImage("");
   };
@@ -20,7 +17,6 @@ const SingleUpload = ({ imageUrls, setImgToUpload }) => {
   const showImages = e => {
     setLoading(true);
     const fileFromInput = e.target.files;
-    console.log(fileFromInput[0]);
     const blobImg = URL.createObjectURL(fileFromInput[0]);
     setImgToUpload(fileFromInput[0]);
     setImage(blobImg);
@@ -38,7 +34,8 @@ const SingleUpload = ({ imageUrls, setImgToUpload }) => {
         <Box style={{ margin: "8px 0 8px" }}>
           <div className={classes.imgBox}>
             <img src={image} alt={image} className={classes.img} />
-            <IconButton className={classes.iconClose} onClick={() => removeImgUrl()}><CloseIcon /></IconButton>
+            {image !== "" &&
+            <IconButton className={classes.iconClose} onClick={() => removeImgUrl()}><CloseIcon /></IconButton>}
           </div>
         </Box>
       )}

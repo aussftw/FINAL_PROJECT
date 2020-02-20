@@ -66,6 +66,12 @@ exports.placeOrder = async (req, res, next) => {
       const subscriberMail = req.body.email;
       const letterSubject = req.body.letterSubject;
       const letterHtml = `<div style="width: 600px;padding: 25px 30px 32px 27px;margin: 0 auto;color: black;">
+                            <div style="width: 600px;">
+                              <a href="http://plantlyshop.herokuapp.com/">
+                                <img style="padding: 5px;margin: 10px auto; width: 100px; height: 50px; display: block;"
+                                src="https://res.cloudinary.com/plantly/image/upload/v1582145267/logo_muwchw.png" alt="logo"/>
+                              </a>
+                            </div>
                             <h2 style="font-size: 28px; line-height: 32px; padding-bottom: 15px; font-weight: normal;margin: 0;color: black;">
                               Hello, ${order.name}. Thank you for your order!
                             </h2>
@@ -77,7 +83,6 @@ exports.placeOrder = async (req, res, next) => {
                               ${req.body.letterHtml} Thank you once again!
                             </p>
                           </div>`;
-
       const { errors, isValid } = validateOrderForm(req.body);
 
       // Check Validation
@@ -187,11 +192,19 @@ exports.updateOrder = (req, res, next) => {
       const subscriberMail = currentOrder.email;
       const letterSubject = "Your order was changed";
       const letterHtml = `<div style="width: 600px;padding: 25px 30px 32px 27px;margin: 0 auto;color: black;">
+                            <div style="width: 600px;">
+                              <a href="http://plantlyshop.herokuapp.com/">
+                                <img style="padding: 5px;margin: 10px auto; width: 100px; height: 50px; display: block;"
+                                src="https://res.cloudinary.com/plantly/image/upload/v1582145267/logo_muwchw.png" alt="logo"/>
+                              </a>
+                            </div>
                             <h2 style="font-size: 28px; line-height: 32px; padding-bottom: 15px; font-weight: normal;margin: 0;color: black;">
                               Hello, ${currentOrder._doc.name}.
                             </h2>
                             <p style="font-size: 15px;padding-bottom: 22px; line-height: 24px; margin: 0;color: black;text-align: justify;">
-                               Your order №${currentOrder.orderNo} was changed. Now the status of your order is ${order.status}
+                              Your order №${currentOrder.orderNo} was changed. Now the status of your order is ${order.status}.
+                              You can track the status of your order in your account.
+                              View order details go to http://plantlyshop.herokuapp.com/orders/${currentOrder.orderNo}. 
                             </p>
                           </div>`;
       const { errors, isValid } = validateOrderForm(req.body);
@@ -250,6 +263,12 @@ exports.cancelOrder = (req, res, next) => {
       const subscriberMail = currentOrder.email;
       const letterSubject = "Your order was canceled";
       const letterHtml = `<div style="width: 600px;padding: 25px 30px 32px 27px;margin: 0 auto;color: black;">
+                            <div style="width: 600px;">
+                              <a href="http://plantlyshop.herokuapp.com/">
+                                <img style="padding: 5px;margin: 10px auto; width: 100px; height: 50px; display: block;"
+                                src="https://res.cloudinary.com/plantly/image/upload/v1582145267/logo_muwchw.png" alt="logo"/>
+                              </a>
+                            </div>
                             <h2 style="font-size: 28px; line-height: 32px; padding-bottom: 15px; font-weight: normal;margin: 0;color: black;">
                               Hello, ${currentOrder._doc.name}.
                             </h2>
@@ -369,7 +388,9 @@ exports.getOrders = (req, res, next) => {
 exports.getOrder = (req, res, next) => {
   Order.findOne({ orderNo: req.params.orderNo, customerId: req.user.id })
     .populate("customerId")
-    .then(order => res.json(order))
+    .then(order => {
+      res.json(order);
+    })
     .catch(err =>
       res.status(400).json({
         message: `Error happened on server: "${err}" `

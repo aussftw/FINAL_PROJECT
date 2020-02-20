@@ -9,8 +9,6 @@ import DeleteItemModal from "../DeleteItemModal/DeleteItemModal";
 import AddEditModal from "./AddEditModal/AddEditModal";
 import SnackbarMessage from "../../Snackbar/SnackbarMessage";
 import PreloaderAdaptive from "../../../Preloader/Adaptive";
-import AddEditPartnerModal from "../AdminPartners/AddEditPartnerModal/AddEditPartnerModal";
-// import Snackbar from "@material-ui/core/Snackbar";
 
 
 const AdminColors = ({
@@ -27,12 +25,6 @@ const AdminColors = ({
                      }) => {
 
   const [colors, setColors] = useState([]);
-
-  // const modalInputs = () => {
-  //   const valuesArr = Object.keys(colors[0]);
-  //   const inputs = valuesArr.filter(word => word !== "_id" && word !== "date" && word !=="tableData" && word !== "__v");
-  // }
-
 
   const getColors = () => {
     axios
@@ -69,18 +61,15 @@ const AdminColors = ({
     });
   };
 
-
   const deleteValidate = (rowData) => {
     axios
       .get(`/api/products/filter?color=${rowData.name}`)
       .then(orders => {
-        console.log("orders.data.length", orders.data.products.length);
         if (orders.data.products.length === 0) {
           handleDeleteModal(rowData);
         } else {
           const error = { type: "error", message: `You can’t delete color because of active products in catalog` };
           handleOpenSnackbar(error);
-          console.log("you cant edit/delete color because of active products in catalog");
         }
       })
       .catch(err => {
@@ -93,14 +82,11 @@ const AdminColors = ({
     axios
       .get(`/api/products/filter?color=${rowData.name}`)
       .then(orders => {
-        console.log(orders);
-        console.log("orders.data.products.length", orders.data.products.length);
         if (orders.data.products.length === 0) {
           handleEditModal(rowData);
         } else {
           const error = { type: "error", message: `You can’t edit color because of active products in catalog` };
           handleOpenSnackbar(error);
-          console.log("cant edit");
         }
       })
       .catch(err => {
@@ -166,19 +152,6 @@ const AdminColors = ({
             onClick: () => getColors(),
           },
         ]}
-        /*        editable={{
-                  isEditable: rowData => rowData.name === "name", // only name(a) rows would be editable
-
-                  onRowUpdate: (newData, oldData) =>
-                    new Promise((resolve, reject) => {
-
-                      resolve();
-
-                      console.log("newData", newData);
-                      console.log("oldData", oldData);
-                    }),
-                }} */
-
       />
     );
   };

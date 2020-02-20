@@ -74,7 +74,6 @@ const PrettoSlider = withStyles({
 const FilterByPrice = ({ selectPrice, setCurrentPage, filters }) => {
   const classes = useStyles();
 
-  // eslint-disable-next-line no-unused-vars
   const ValueByPrice = (event, item) => {
     setCurrentPage(1);
     selectPrice(item);
