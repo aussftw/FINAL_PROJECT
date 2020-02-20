@@ -98,14 +98,16 @@ exports.placeOrder = async (req, res, next) => {
                             <h2 style="font-size: 28px; line-height: 32px; padding-bottom: 15px; font-weight: normal;margin: 0;color: black;">
                               Hello, ${order.name}. Thank you for your order!
                             </h2>
-                            <p style="font-size: 15px;padding-bottom: 22px; line-height: 24px; margin: 0;color: black;text-align: justify;">
-                              Your application is accepted. <p>Order № is ${order.orderNo}.</p>  
+                            <p style="font-size: 15px; line-height: 24px; margin: 0;color: black;text-align: justify;">
+                              Your application is accepted. Order № is ${order.orderNo}.
                               You can track the status of your order in your account.
-                              View order details - go to: <p>http://plantlyshop.herokuapp.com/orders/${order.orderNo}. </p>
+                              View order details - go to: <br/>
+                              http://plantlyshop.herokuapp.com/orders/${order.orderNo}.
+                              <p style="font-size: 15px;padding-bottom: 22px; line-height: 24px; margin: 0;color: black;text-align: justify;">
                               While you’re there, you might be interested in other products, as they go well with your order.
                               ${req.body.letterHtml} Thank you once again!
+                              </p>
                             </p>
-                            
                             ${products}
                             <div style='width:500px;height:40px;display:flex;align-items:center;justify-content:space-between;margin:0 auto;'>
                               <span style='font-size:14px;font-weight: 600;line-height: 24px; margin:10px 300px 10px 20px;color:black;'>
@@ -238,7 +240,7 @@ exports.updateOrder = (req, res, next) => {
                             <p style="font-size: 15px;padding-bottom: 22px; line-height: 24px; margin: 0;color: black;text-align: justify;">
                               Your order №${currentOrder.orderNo} was changed. Now the status of your order is ${order.status}.
                               You can track the status of your order in your account.
-                              View order details - go to:  <p>http://plantlyshop.herokuapp.com/orders/${currentOrder.orderNo}. </p>
+                              View order details - go to:  <br/>http://plantlyshop.herokuapp.com/orders/${currentOrder.orderNo}.
                             </p>
                           </div>`;
       const { errors, isValid } = validateOrderForm(req.body);

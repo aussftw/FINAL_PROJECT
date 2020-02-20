@@ -30,11 +30,6 @@ const Information = () => {
             </Link>
           </ExpansionPanelDetails>
           <ExpansionPanelDetails>
-            <Link to="/shop" color="secondary" className={classes.informationItem}>
-              Shop
-            </Link>
-          </ExpansionPanelDetails>
-          <ExpansionPanelDetails>
             <Link to="/cart" color="secondary" className={classes.informationItem}>
               Cart
             </Link>
@@ -54,11 +49,6 @@ const Information = () => {
           <Box className={classes.myAccountItem}>
             <Link color="secondary" to="/cart" className={classes.informationItem}>
               Cart
-            </Link>
-          </Box>
-          <Box className={classes.myAccountItem}>
-            <Link color="secondary" to="/search" className={classes.informationItem}>
-              Search
             </Link>
           </Box>
         </Container>

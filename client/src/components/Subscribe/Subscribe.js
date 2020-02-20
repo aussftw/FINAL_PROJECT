@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Typography, Divider, Container, Button } from "@material-ui/core";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
-import Card from "@material-ui/core/Card";
 import SnackBar from "../common/SnackBar/SnackBar";
 import useStyles from "./useStyles";
 

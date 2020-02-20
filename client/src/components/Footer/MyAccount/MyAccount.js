@@ -34,11 +34,6 @@ const MyAccount = () => {
               Checkout
             </Link>
           </ExpansionPanelDetails>
-          <ExpansionPanelDetails>
-            <Link color="secondary" to="/registration" className={classes.informationItem}>
-              Registration
-            </Link>
-          </ExpansionPanelDetails>
         </ExpansionPanel>
       </Hidden>
       <Hidden smDown>
@@ -54,11 +49,6 @@ const MyAccount = () => {
           <Box className={classes.myAccountItem}>
             <Link color="secondary" to="/checkout" className={classes.informationItem}>
               Checkout
-            </Link>
-          </Box>
-          <Box className={classes.myAccountItem}>
-            <Link color="secondary" to="/registration" className={classes.informationItem}>
-              Registration
             </Link>
           </Box>
         </Container>
