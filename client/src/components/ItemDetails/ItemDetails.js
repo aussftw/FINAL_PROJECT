@@ -69,7 +69,6 @@ const ItemDetails = ({
       .then(response => {
         setItem(response.data);
         setPreloader(false);
-        console.log(response.data);
       })
       .catch(error => {
         history.push("/notfound");
@@ -123,11 +122,7 @@ const ItemDetails = ({
 
   const changeQuantity = e => {
     // eslint-disable-next-line no-restricted-globals
-    if (
-      !isNaN(+e.target.value) &&
-      e.target.value !== "0" &&
-      e.target.value !== ""
-    ) {
+    if (!isNaN(+e.target.value) && e.target.value !== "0" && e.target.value !== "") {
       setQty(+e.target.value);
     }
   };
@@ -195,15 +190,17 @@ const ItemDetails = ({
                 {`$${currentPrice.toFixed(2)}`}
               </Typography>
             </ListItem>
+            {previousPrice && (
             <ListItem className={classes.root}>
               <ListItemText
                 primary="Old price:"
                 className={classes.infoDetail}
               />
               <Typography className={classes.oldPrice}>
-                <s> {`$${previousPrice.toFixed(2)}`}</s>
+                <s>{`$${previousPrice.toFixed(2)}`}</s>
               </Typography>
             </ListItem>
+            )}
           </List>
           <Divider />
           <Container className={classes.qty_wrapper}>

@@ -113,8 +113,8 @@ const RegistrationContent = ({
             value={newUserData.telephone}
             onChange={handleChange}
             className={classes.textField}
-            validators={["matchRegexp:^[0-9-+\\s()]{13}$"]}
-            errorMessages={["phone is not valid, need +380... format"]}
+            validators={["matchRegexp:^3?8?[0-9-+\\s()]{10,18}$"]}
+            errorMessages={["phone is not valid, need minimum 10 figures, country code is preferable",]}
           />
           <TextValidator
             label="Address"

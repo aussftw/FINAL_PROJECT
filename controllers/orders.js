@@ -202,7 +202,9 @@ exports.updateOrder = (req, res, next) => {
                               Hello, ${currentOrder._doc.name}.
                             </h2>
                             <p style="font-size: 15px;padding-bottom: 22px; line-height: 24px; margin: 0;color: black;text-align: justify;">
-                               Your order №${currentOrder.orderNo} was changed. Now the status of your order is ${order.status}
+                              Your order №${currentOrder.orderNo} was changed. Now the status of your order is ${order.status}.
+                              You can track the status of your order in your account.
+                              View order details go to http://plantlyshop.herokuapp.com/orders/${currentOrder.orderNo}. 
                             </p>
                           </div>`;
       const { errors, isValid } = validateOrderForm(req.body);
