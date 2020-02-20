@@ -69,7 +69,6 @@ const ItemDetails = ({
       .then(response => {
         setItem(response.data);
         setPreloader(false);
-        console.log(response.data);
       })
       .catch(error => {
         history.push("/notfound");
@@ -195,15 +194,17 @@ const ItemDetails = ({
                 {`$${currentPrice.toFixed(2)}`}
               </Typography>
             </ListItem>
-            <ListItem className={classes.root}>
-              <ListItemText
-                primary="Old price:"
-                className={classes.infoDetail}
-              />
-              <Typography className={classes.oldPrice}>
-                <s> {`$${previousPrice.toFixed(2)}`}</s>
-              </Typography>
-            </ListItem>
+            {previousPrice && (
+              <ListItem className={classes.root}>
+                <ListItemText
+                  primary="Old price:"
+                  className={classes.infoDetail}
+                />
+                <Typography className={classes.oldPrice}>
+                  <s>{`$${previousPrice.toFixed(2)}`}</s>
+                </Typography>
+              </ListItem>
+            )}
           </List>
           <Divider />
           <Container className={classes.qty_wrapper}>

@@ -13,6 +13,7 @@ const useStyle = makeStyles(() => ({
     width: 0,
     height: 0,
     padding: "16px 8px",
+    marginRight: "-19px",
     background: "rgba(12, 241, 62, 0.2)",
     transform: "rotate(120deg)",
     "border-top-left-radius": 99,

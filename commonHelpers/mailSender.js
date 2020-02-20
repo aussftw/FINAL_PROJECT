@@ -36,7 +36,7 @@ module.exports = async (subscriberMail, letterSubject, letterHtml, res) => {
         : configs.development.email.mailUser,
     to: subscriberMail,
     subject: letterSubject,
-    html: letterHtml
+    html: letterHtml,
   };
 
   const result = await transporter.sendMail(mailOptions);
