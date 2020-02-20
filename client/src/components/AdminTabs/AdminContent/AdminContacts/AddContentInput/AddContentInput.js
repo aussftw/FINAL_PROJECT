@@ -4,7 +4,7 @@ import Button from "@material-ui/core/Button";
 import {Typography, Box} from "@material-ui/core";
 import useStyles from "./useStyles";
 
-const AddContentInput = ({ item, itemInfo, setItemInfo }) => {
+const AddContentInput = ({ item, itemInfo, addContentToState }) => {
   const classes = useStyles();
 
 
@@ -27,7 +27,7 @@ const AddContentInput = ({ item, itemInfo, setItemInfo }) => {
   };
 
   function submitHandler() {
-    setItemInfo({ ...itemInfo, content: [...itemInfo.content, contentInput] });
+    addContentToState(contentInput);
     seHintLine({show: true, message: `Successfully added ${itemInfo.content.length+1} field` })
   }
 

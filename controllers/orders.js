@@ -76,9 +76,9 @@ exports.placeOrder = async (req, res, next) => {
                               Hello, ${order.name}. Thank you for your order!
                             </h2>
                             <p style="font-size: 15px;padding-bottom: 22px; line-height: 24px; margin: 0;color: black;text-align: justify;">
-                              Your application is accepted. Order № is ${order.orderNo}. 
+                              Your application is accepted. <p>Order № is ${order.orderNo}.</p> 
                               You can track the status of your order in your account.
-                              View order details go to http://plantlyshop.herokuapp.com/orders/${order.orderNo}. 
+                              View order details - go to: <p>http://plantlyshop.herokuapp.com/orders/${order.orderNo}. </p>
                               While you’re there, you might be interested in other products, as they go well with your order.
                               ${req.body.letterHtml} Thank you once again!
                             </p>
@@ -204,7 +204,7 @@ exports.updateOrder = (req, res, next) => {
                             <p style="font-size: 15px;padding-bottom: 22px; line-height: 24px; margin: 0;color: black;text-align: justify;">
                               Your order №${currentOrder.orderNo} was changed. Now the status of your order is ${order.status}.
                               You can track the status of your order in your account.
-                              View order details go to http://plantlyshop.herokuapp.com/orders/${currentOrder.orderNo}. 
+                              View order details - go to:  <p>http://plantlyshop.herokuapp.com/orders/${currentOrder.orderNo}. </p>
                             </p>
                           </div>`;
       const { errors, isValid } = validateOrderForm(req.body);

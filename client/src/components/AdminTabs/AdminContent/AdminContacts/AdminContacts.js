@@ -4,7 +4,7 @@ import { Box } from "@material-ui/core";
 import MaterialTable from "material-table";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import DeleteIcon from "@material-ui/icons/Delete";
-import EditIcon from "@material-ui/icons/Edit";
+// import EditIcon from "@material-ui/icons/Edit";
 import DeleteItemModal from "../DeleteItemModal/DeleteItemModal";
 import AddEditModal from "./AddEditModal/AddEditModal";
 import SnackbarMessage from "../../Snackbar/SnackbarMessage";
@@ -51,12 +51,12 @@ const AdminContacts = ({
     });
   };
 
-  const handleEditModal = (rowData) => {
-    setEditModal({
-      isOpened: !EditModal.isOpened,
-      rowData,
-    });
-  };
+  // const handleEditModal = (rowData) => {
+  //   setEditModal({
+  //     isOpened: !EditModal.isOpened,
+  //     rowData,
+  //   });
+  // };
   const handleDeleteModal = (rowData) => {
     setDeleteModal({
       isOpened: !DeleteModal.isOpened,
@@ -66,10 +66,10 @@ const AdminContacts = ({
 
 
   const closeModal = () => {
-    setEditModal({
-      isOpened: false,
-      rowData: EditModal.rowData,
-    });
+    // setEditModal({
+    //   isOpened: false,
+    //   rowData: EditModal.rowData,
+    // });
     setAddModal({
       isOpened: false,
       rowData: AddModal.rowData,
@@ -116,13 +116,13 @@ const AdminContacts = ({
               handleDeleteModal(rowData);
             },
           },
-          {
-            icon: () => <EditIcon />,
-            tooltip: "Edit contact",
-            onClick: (event, rowData) => {
-              handleEditModal(rowData);
-            },
-          },
+          // {
+          //   icon: () => <EditIcon />,
+          //   tooltip: "Edit contact",
+          //   onClick: (event, rowData) => {
+          //     handleEditModal(rowData);
+          //   },
+          // },
           {
             icon: "refresh",
             tooltip: "Refresh Data",
@@ -151,15 +151,15 @@ const AdminContacts = ({
             />
           )}
 
-          {EditModal.isOpened && (
-            <AddEditModal
-              open={EditModal.isOpened}
-              handleModal={closeModal}
-              item={EditModal.rowData}
-              handleOpenSnackbar={handleOpenSnackbar}
-              autoRefresh={getContacts}
-            />
-          )}
+          {/* {EditModal.isOpened && ( */}
+          {/*  <AddEditModal */}
+          {/*    open={EditModal.isOpened} */}
+          {/*    handleModal={closeModal} */}
+          {/*    item={EditModal.rowData} */}
+          {/*    handleOpenSnackbar={handleOpenSnackbar} */}
+          {/*    autoRefresh={getContacts} */}
+          {/*  /> */}
+          {/* )} */}
           {DeleteModal.isOpened && (
             <DeleteItemModal
               open={DeleteModal.isOpened}
