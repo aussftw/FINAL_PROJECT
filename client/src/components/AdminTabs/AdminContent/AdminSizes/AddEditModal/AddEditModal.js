@@ -115,7 +115,7 @@ const AddEditModal = ({ open, handleModal, item, handleOpenSnackbar, autoRefresh
                 errorMessages={["this field is required"]}
               />
 
-              <Button variant="contained" type="submit">
+              <Button variant="contained" type="submit" className={classes.btn}>
                 Create size
               </Button>
             </ValidatorForm>

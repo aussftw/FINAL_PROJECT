@@ -10,16 +10,16 @@ import Typography from "@material-ui/core/Typography";
 import CloseIcon from "@material-ui/icons/Close";
 import * as axios from "axios";
 import useStyles from "./useStyles";
-import singleUploadApiAxios from '../../../../common/SingleUpload/singleUploadApiAxios/singleUploadApiAxios';
-import SingleUpload from '../../../../common/SingleUpload/SingleUpload';
-import PreloaderAdaptive from '../../../../Preloader/Adaptive';
+import singleUploadApiAxios from "../../../../common/SingleUpload/singleUploadApiAxios/singleUploadApiAxios";
+import SingleUpload from "../../../../common/SingleUpload/SingleUpload";
+import PreloaderAdaptiveSmall from "../../../../Preloader/AdaptiveSmall";
 
 
 const AddEditCategoriesModal = ({ open, handleModal, category, handleOpenSnackbar, autoRefresh }) => {
   const classes = useStyles();
 
   const [loading, setLoading] = useState(false);
-  const [imgToUpload ,setImgToUpload] = useState(null);
+  const [imgToUpload, setImgToUpload] = useState(null);
   const [categoryInfo, setCategoryInfo] = useState(
     {
       id: "",
@@ -49,13 +49,11 @@ const AddEditCategoriesModal = ({ open, handleModal, category, handleOpenSnackba
   const requestToDb = categoryInfo => {
     if (category === null) {
 
-      const newCategory = { ...categoryInfo, id: categoryInfo.name.split(' ').join('') };
-      console.log('/api/catalog', newCategory);
+      const newCategory = { ...categoryInfo, id: categoryInfo.name.split(" ").join("") };
       axios
         .post("/api/catalog", newCategory)
         .then(newCategory => {
-          console.log("newCategory", newCategory);
-          const success = { type: "success", message: `New category ${categoryInfo.name} was added` };
+          const success = { type: "success", message: `New category ${newCategory.data.name} was added` };
           handleOpenSnackbar(success);
           autoRefresh();
         })
@@ -65,18 +63,16 @@ const AddEditCategoriesModal = ({ open, handleModal, category, handleOpenSnackba
           handleOpenSnackbar(error);
         });
     } else {
-      console.log(`/api/catalog/${category.id}`, categoryInfo);
-      const editedCategory = {...categoryInfo};
+      const editedCategory = { ...categoryInfo };
       axios
         .put(`/api/catalog/${category.id}`, editedCategory)
         .then(resp => {
-          console.log(resp);
+          console.log('resp',resp);
           const success = { type: "success", message: `Category was successfully edited` };
           handleOpenSnackbar(success);
           autoRefresh();
         })
-        .catch(err => {
-          console.log("err", err);
+        .catch(() => {
           const error = { type: "error", message: `Error! Category ${categoryInfo.name} was not edited.` };
           handleOpenSnackbar(error);
         });
@@ -91,7 +87,7 @@ const AddEditCategoriesModal = ({ open, handleModal, category, handleOpenSnackba
     let categoryRequest = categoryInfo;
 
     if (imgToUpload !== null) {
-      singleUploadApiAxios(imgToUpload , "partners").then(response => {
+      singleUploadApiAxios(imgToUpload, "categories").then(response => {
         if (response.status === 200) {
           console.log(response);
           categoryRequest = ({ ...categoryRequest, imgUrl: response.data.url });
@@ -102,7 +98,7 @@ const AddEditCategoriesModal = ({ open, handleModal, category, handleOpenSnackba
         .catch(err => {
           console.log(err);
         });
-    }else {
+    } else {
       requestToDb(categoryRequest);
     }
   };
@@ -235,9 +231,9 @@ const AddEditCategoriesModal = ({ open, handleModal, category, handleOpenSnackba
                 <SingleUpload imageUrls={categoryInfo.imgUrl} setImgToUpload={setImgToUpload} />
               </Box>
               {loading ? (
-                <PreloaderAdaptive />
+                <PreloaderAdaptiveSmall />
               ) : (
-                <Button variant="contained" type="submit" style={{ width: '100%' }}>
+                <Button variant="contained" type="submit" className={classes.btn}>
                   Submit
                 </Button>
               )}

@@ -1,20 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import Backdrop from '@material-ui/core/Backdrop';
-import Button from '@material-ui/core/Button';
-import Fade from '@material-ui/core/Fade';
-import Modal from '@material-ui/core/Modal';
-import IconButton from '@material-ui/core/IconButton';
-import { TextValidator, ValidatorForm } from 'react-material-ui-form-validator';
-import Box from '@material-ui/core/Box';
-import Typography from '@material-ui/core/Typography';
-import CloseIcon from '@material-ui/icons/Close';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Switch from '@material-ui/core/Switch';
-import useStyles from './useStyles';
-import SingleUpload from '../../../../common/SingleUpload/SingleUpload';
-import singleUploadApiAxios from '../../../../common/SingleUpload/singleUploadApiAxios/singleUploadApiAxios';
-import PreloaderAdaptive from '../../../../Preloader/Adaptive';
+import Backdrop from "@material-ui/core/Backdrop";
+import Button from "@material-ui/core/Button";
+import Fade from "@material-ui/core/Fade";
+import Modal from "@material-ui/core/Modal";
+import IconButton from "@material-ui/core/IconButton";
+import { TextValidator, ValidatorForm } from "react-material-ui-form-validator";
+import Box from "@material-ui/core/Box";
+import Typography from "@material-ui/core/Typography";
+import CloseIcon from "@material-ui/icons/Close";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Switch from "@material-ui/core/Switch";
+import useStyles from "./useStyles";
+import SingleUpload from "../../../../common/SingleUpload/SingleUpload";
+import singleUploadApiAxios from "../../../../common/SingleUpload/singleUploadApiAxios/singleUploadApiAxios";
+import PreloaderAdaptiveSmall from "../../../../Preloader/AdaptiveSmall";
 
 
 const AddEditPartnerModal = ({ open, handleModal, partner, handleOpenSnackbar, autoRefresh }) => {
@@ -22,7 +22,7 @@ const AddEditPartnerModal = ({ open, handleModal, partner, handleOpenSnackbar, a
 
   const [partnerInfo, setPartnerInfo] = useState(
     {
-      enabled: false,
+      enabled: true,
       name: "",
       url: "",
       customId: "",
@@ -50,13 +50,11 @@ const AddEditPartnerModal = ({ open, handleModal, partner, handleOpenSnackbar, a
   const requestToDb = partnerInfo => {
     if (partner === null) {
 
-      const newPartner = { ...partnerInfo, customId: partnerInfo.name.split(' ').join('') };
-      console.log('/api/partners', newPartner);
+      const newPartner = { ...partnerInfo, customId: partnerInfo.name.split(" ").join("") };
       axios
         .post("/api/partners", newPartner)
         .then(newPartner => {
-          console.log("newPartner", newPartner);
-          const success = { type: "success", message: `New partner ${partnerInfo.name} was added` };
+          const success = { type: "success", message: `New partner ${newPartner.data.name} was added` };
           handleOpenSnackbar(success);
           autoRefresh();
         })
@@ -66,18 +64,16 @@ const AddEditPartnerModal = ({ open, handleModal, partner, handleOpenSnackbar, a
           handleOpenSnackbar(error);
         });
     } else {
-      console.log(`/api/partners/${partner.customId}`, partnerInfo);
-      const editedPartner = {...partnerInfo};
+      const editedPartner = { ...partnerInfo };
       axios
         .put(`/api/partners/${partner.customId}`, editedPartner)
         .then(resp => {
-          console.log(resp);
+          console.log('resp',resp);
           const success = { type: "success", message: `Partner was successfully edited` };
           handleOpenSnackbar(success);
           autoRefresh();
         })
-        .catch(err => {
-          console.log("err", err);
+        .catch(() => {
           const error = { type: "error", message: `Error! Partner ${partnerInfo.name} was not edited.` };
           handleOpenSnackbar(error);
         });
@@ -91,7 +87,7 @@ const AddEditPartnerModal = ({ open, handleModal, partner, handleOpenSnackbar, a
     let partnerRequest = partnerInfo;
 
     if (imgToUpload !== null) {
-      singleUploadApiAxios(imgToUpload).then(response => {
+      singleUploadApiAxios(imgToUpload, "partners").then(response => {
         if (response.status === 200) {
           console.log(response);
           partnerRequest = ({ ...partnerRequest, imageUrl: response.data.url });
@@ -102,10 +98,9 @@ const AddEditPartnerModal = ({ open, handleModal, partner, handleOpenSnackbar, a
         .catch(err => {
           console.log(err);
         });
-    }else {
+    } else {
       requestToDb(partnerRequest);
     }
-    handleModal();
   };
 
 
@@ -180,12 +175,12 @@ const AddEditPartnerModal = ({ open, handleModal, partner, handleOpenSnackbar, a
                 <SingleUpload imageUrls={partnerInfo.imageUrl} setImgToUpload={setImgToUpload} />
               </Box>
               {loading ? (
-                <PreloaderAdaptive />
-              ) : (
-                <Button variant="contained" type="submit" style={{ width: "100%" }}>
-                  Submit
-                </Button>
-              )}
+                <PreloaderAdaptiveSmall />
+                ) : (
+                  <Button variant="contained" type="submit" className={classes.btn}>
+                    Submit
+                  </Button>
+                )}
             </ValidatorForm>
           </Box>
         </Fade>

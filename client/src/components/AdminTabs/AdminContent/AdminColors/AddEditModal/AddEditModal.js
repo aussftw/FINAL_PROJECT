@@ -9,7 +9,7 @@ import axios from "axios";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import CloseIcon from "@material-ui/icons/Close";
-import useStyles from "./useStyles";
+import useStyles from "../../AdminSizes/AddEditModal/useStyles";
 
 
 const AddEditModal = ({ open, handleModal, item, handleOpenSnackbar, autoRefresh}) => {
@@ -114,7 +114,7 @@ const AddEditModal = ({ open, handleModal, item, handleOpenSnackbar, autoRefresh
                 errorMessages={["this field is required"]}
               />
 
-              <Button variant="contained" type="submit">
+              <Button variant="contained" type="submit" className={classes.btn}>
                 Create color
               </Button>
             </ValidatorForm>

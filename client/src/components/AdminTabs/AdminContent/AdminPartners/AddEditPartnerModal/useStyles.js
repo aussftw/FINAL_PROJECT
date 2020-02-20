@@ -36,6 +36,10 @@ const useStyles = makeStyles(theme => ({
   input: {
     margin: theme.spacing(1),
   },
+  btn :{
+    width: "100%",
+    marginTop: theme.spacing(3),
+  }
 }));
 
 export default useStyles;
