@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { connect } from "react-redux";
 import axios from "axios";
+import jwt from "jwt-decode";
 
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop/Backdrop";
@@ -14,13 +14,13 @@ import PreloaderAdaptiveSmall from "../../../Preloader/AdaptiveSmall";
 
 import useStyles from "./useStyles";
 
-const UserModal = ({ user, setOneUserData, allCustomers, setAllCustomers, isOpen, onClose, adminName }) => {
+const UserModal = ({ user, setOneUserData, allCustomers, setAllCustomers, isOpen, onClose }) => {
   const classes = useStyles();
   const [ isLoadingAdmin, setIsLoadingAdmin ] = useState(false);
   const [ isLoadingRating, setIsLoadingRating ] = useState(false);
   const [ isLoadingEnabled, setIsLoadingEnabled ] = useState(false);
-
   const [ message, setMessage ] = useState("");
+  const adminId = jwt(localStorage.getItem("authToken")).id;
 
   const closeModal = () => {
     setMessage("");
@@ -89,14 +89,14 @@ const UserModal = ({ user, setOneUserData, allCustomers, setAllCustomers, isOpen
   };
 
   const adminQuestion = !user.isAdmin ?
-    (`Are you sure to add shop administrator rights to user?`) :
-    (`Are you sure to remove shop administrator rights from user?`);
+    ("Are you sure to add shop administrator rights to user?") :
+    ("Are you sure to remove shop administrator rights from user?");
 
   const adminEditButtonText = user.isAdmin ? "remove admin rights" : "add admin rights";
 
   const enableQuestion = !user.enabled ?
-    (`Are you sure to add read/write rights to user?`) :
-    (`Are you sure to assign read-only rights to user?`);
+    ("Are you sure to add read/write rights to user?") :
+    ("Are you sure to assign read-only rights to user?");
 
   const enableEditButtonText = user.enabled ? "disable user" : "enable user";
 
@@ -130,7 +130,7 @@ const UserModal = ({ user, setOneUserData, allCustomers, setAllCustomers, isOpen
               variant="contained"
               onClick={() => editAdminHandler()}
               className={classes.btn}
-              disabled={adminName === user.firstName}
+              disabled={adminId === user._id}
             >
               {adminEditButtonText}
             </Button>
@@ -143,7 +143,7 @@ const UserModal = ({ user, setOneUserData, allCustomers, setAllCustomers, isOpen
               variant="contained"
               onClick={() => editEnabledHandler()}
               className={classes.btn}
-              disabled={adminName === user.firstName}
+              disabled={adminId === user._id}
             >
               {enableEditButtonText}
             </Button>
@@ -171,10 +171,4 @@ const UserModal = ({ user, setOneUserData, allCustomers, setAllCustomers, isOpen
   );
 };
 
-const mapStateToProps = state => {
-  return {
-    adminName: state.loginReducer.user.firstName,
-  };
-};
-
-export default connect(mapStateToProps)(UserModal);
+export default UserModal;
