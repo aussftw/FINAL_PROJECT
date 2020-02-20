@@ -195,7 +195,6 @@ const AdminContent = () => {
             />
           )}
         </Box>
-
       </Box>
     );
   };

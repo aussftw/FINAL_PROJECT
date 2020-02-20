@@ -12,12 +12,13 @@ const useStyles = makeStyles(theme => ({
   },
   brand: {
     margin: "1rem",
-    // [theme.breakpoints.up("sm")]: {
-    //   margin: "2rem",
-    // },
     backgroundSize: "cover",
     overflow: "hidden",
     maxWidth: "17vw",
+    [theme.breakpoints.down("sm")]: {
+      margin: "2rem",
+      maxWidth: "50vw"
+    },
   },
 }));
 

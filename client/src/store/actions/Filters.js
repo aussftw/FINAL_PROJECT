@@ -46,7 +46,7 @@ export const selectCategory = category => dispatch => {
     type: constants.SELECT_CATEGORY,
     payload: category,
   });
-
+  console.log(store.getState().filterReducer.filters);
   axios
     .get("/api/products/filter", {
       params: store.getState().filterReducer.filters,

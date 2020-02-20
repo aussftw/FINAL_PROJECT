@@ -27,17 +27,21 @@ const AddEditModal = ({ open, handleModal, item, handleOpenSnackbar, autoRefresh
     if (item !== null) {
       setItemInfo({
         option: `${item.option}`,
-        content: [ item.content.map((item) => {
+        content: [item.content.map((item) => {
           return {
             _id: `${item._id}`,
             text: `${item.text}`,
             link: `${item.link}`,
-          }})
-        ]
-        });
+          };
+        }),
+        ],
+      });
     }
   }, [item, itemInfo.content]);
 
+  const addContentToState = (contentInput) => {
+    setItemInfo({ ...itemInfo, content: [...itemInfo.content, contentInput] });
+  };
 
   const handleInfo = prop => event => {
     setItemInfo({ ...itemInfo, [prop]: event.target.value });
@@ -46,44 +50,36 @@ const AddEditModal = ({ open, handleModal, item, handleOpenSnackbar, autoRefresh
 
   function submitHandler() {
     if (item === null) {
-      console.log("post Contact", itemInfo);
-      // axios
-      //   .post("/api/contacts ", itemInfo)
-      //   .then(newContact => {
-      //     console.log("newContact", newContact);
-      //     const success = { type: "success", message: `New contact ${itemInfo.option} was added` };
-      //     handleOpenSnackbar(success);
-      //     autoRefresh();
-      //   })
-      //   .catch(err => {
-      //     console.log("newContact", err);
-      //     const error = { type: "error", message: `Error! New contact was not added.` };
-      //     handleOpenSnackbar(error);
-      //   });
+      axios
+        .post("/api/contacts ", itemInfo)
+        .then(newContact => {
+          console.log("newContact", newContact);
+          const success = { type: "success", message: `New contact ${itemInfo.option} was added` };
+          handleOpenSnackbar(success);
+          autoRefresh();
+        })
+        .catch(err => {
+          console.log("newContact", err);
+          const error = { type: "error", message: `Error! New contact was not added.` };
+          handleOpenSnackbar(error);
+        });
     } else {
-      console.log("put Contact", item._id, itemInfo);
-      // axios
-      //   .put(`/api/contacts/${item._id}`, itemInfo)
-      //   .then(resp => {
-      //     console.log(resp);
-      //     const success = { type: "success", message: `Contact was successfully edited` };
-      //     handleOpenSnackbar(success);
-      //     autoRefresh();
-      //   })
-      //   .catch(err => {
-      //     console.log("put Contact", err);
-      //     const error = { type: "error", message: `Error! Contact ${item.option} was not edited.` };
-      //     handleOpenSnackbar(error);
-      //   });
+      axios
+        .put(`/api/contacts/${item._id}`, itemInfo)
+        .then(resp => {
+          console.log(resp);
+          const success = { type: "success", message: `Contact was successfully edited` };
+          handleOpenSnackbar(success);
+          autoRefresh();
+        })
+        .catch(err => {
+          console.log("put Contact", err);
+          const error = { type: "error", message: `Error! Contact ${item.option} was not edited.` };
+          handleOpenSnackbar(error);
+        });
     }
     handleModal();
   }
-
- // const addMore =()=>{
- //    return(
- //      <AddContentInput item={null} itemInfo={itemInfo} setItemInfo={setItemInfo} />
- //    )
- // };
 
   const modal = () => {
     return (
@@ -129,60 +125,13 @@ const AddEditModal = ({ open, handleModal, item, handleOpenSnackbar, autoRefresh
                 errorMessages={["this field is required"]}
               />
               {(item !== null) ? (
-                itemInfo.content.map((item) => {
-                  return (
-                    <AddContentInput key={item._id} item={item} itemInfo={itemInfo} setItemInfo={setItemInfo} />
-                    // <div key={`${item._id}`}>
-                    //   <TextValidator
-                    //     label={`${item.text}`}
-                    //     variant="outlined"
-                    //     value={`${item.text}`}
-                    //     onChange={handleInfo(`content${[index]}.text`)}
-                    //     className={classes.input}
-                    //     validators={["required"]}
-                    //     errorMessages={["this field is required"]}
-                    //   />
-                    //   <TextValidator
-                    //     label={`${item.link}`}
-                    //     variant="outlined"
-                    //     value={`${item.link}`}
-                    //     onChange={handleInfo(`content${[index]}.link`)}
-                    //     className={classes.input}
-                    //     validators={["required"]}
-                    //     errorMessages={["this field is required"]}
-                    //   />
-                    // </div>
-                  );
-                })
-
+                <AddContentInput item={item.content[0]} itemInfo={itemInfo} addContentToState={addContentToState} />
               ) : (
                 <div>
-                  <AddContentInput item={null} itemInfo={itemInfo} setItemInfo={setItemInfo} />
-                  {/*<Button variant="text" onClick={()=>{addMore()}}>*/}
-                  {/*  Add info*/}
-                  {/*</Button>*/}
-
-                  {/* <TextValidator */}
-                  {/*  label="Text" */}
-                  {/*  variant="outlined" */}
-                  {/*  value={itemInfo.content[0].text} */}
-                  {/*  onChange={handleInfo('content[0].text')} */}
-                  {/*  className={classes.input} */}
-                  {/*  validators={["required"]} */}
-                  {/*  errorMessages={["this field is required"]} */}
-                  {/* /> */}
-                  {/* <TextValidator */}
-                  {/*  label='Link' */}
-                  {/*  variant="outlined" */}
-                  {/*  value={itemInfo.content[0].link} */}
-                  {/*  onChange={handleInfo('content[0].link')} */}
-                  {/*  className={classes.input} */}
-                  {/*  validators={["required"]} */}
-                  {/*  errorMessages={["this field is required"]} */}
-                  {/* /> */}
+                  <AddContentInput item={null} itemInfo={itemInfo} addContentToState={addContentToState} />
                 </div>
               )}
-              <Button variant="contained" type="submit">
+              <Button variant="contained" type="submit" className={classes.btn}>
                 Submit
               </Button>
             </ValidatorForm>
