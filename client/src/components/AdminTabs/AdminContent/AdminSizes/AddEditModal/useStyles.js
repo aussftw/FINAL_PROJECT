@@ -30,7 +30,7 @@ const useStyles = makeStyles(theme => ({
   },
   btn: {
     width: '100%',
-    marginBottom: theme.spacing(21),
+    marginTop: theme.spacing(2),
   },
 }));
 

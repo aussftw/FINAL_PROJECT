@@ -96,7 +96,7 @@ const AdminCategories = ({
         actions={[
           {
             icon: () => <AddCircleIcon />,
-            tooltip: "Add Partner",
+            tooltip: "Add Category",
             isFreeAction: true,
             onClick: () => {
               handleOpenAddModal();
@@ -104,14 +104,14 @@ const AdminCategories = ({
           },
           {
             icon: () => <DeleteIcon />,
-            tooltip: "Delete Partner",
+            tooltip: "Delete Category",
             onClick: (event, rowData) => {
               handleDeleteModal(rowData);
             },
           },
           {
             icon: () => <EditIcon />,
-            tooltip: "Edit Partner",
+            tooltip: "Edit Category",
             onClick: (event, rowData) => {
               handleDataEditModal(rowData);
             },

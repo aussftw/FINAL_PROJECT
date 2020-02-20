@@ -33,7 +33,7 @@ const useStyles = makeStyles(theme => ({
     marginTop: 30,
   },
   totalBox: {
-    width: 200,
+    width: 210,
     marginRight: 40,
   },
   totalSum: {
@@ -44,10 +44,10 @@ const useStyles = makeStyles(theme => ({
     marginTop: 20,
   },
   continueButton: {
-    marginTop: 20,
+    marginTop: 16,
   },
   emptyCartContinueButton: {
-    width: 200,
+    width: 210,
   },
   links: {
     textDecoration: "none",

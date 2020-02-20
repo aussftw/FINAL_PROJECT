@@ -8,8 +8,11 @@ import Button from "@material-ui/core/Button";
 
 import PreloaderAdaptive from "../../Preloader/Adaptive";
 import ProductModal from "./ProductModal/ProductModal";
+import useStyles from "../AdminOrders/useStyles";
 
 const AdminProducts = () => {
+  const classes = useStyles();
+
   const [getStarted, setGetStarted] = useState(false);
   const [allProducts, setAllProducts] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -161,7 +164,7 @@ const AdminProducts = () => {
       <Button
         variant="contained"
         onClick={getAllHandler}
-        style={{ marginBottom: "20px" }}
+        className={classes.btn}
       >
         Get all products and parameters
       </Button>
