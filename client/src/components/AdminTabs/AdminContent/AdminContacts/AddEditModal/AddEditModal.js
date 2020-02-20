@@ -39,6 +39,9 @@ const AddEditModal = ({ open, handleModal, item, handleOpenSnackbar, autoRefresh
     }
   }, [item, itemInfo.content]);
 
+  const addContentToState = (contentInput) => {
+    setItemInfo({ ...itemInfo, content: [...itemInfo.content, contentInput] });
+  };
 
   const handleInfo = prop => event => {
     setItemInfo({ ...itemInfo, [prop]: event.target.value });
@@ -122,10 +125,10 @@ const AddEditModal = ({ open, handleModal, item, handleOpenSnackbar, autoRefresh
                 errorMessages={["this field is required"]}
               />
               {(item !== null) ? (
-                <AddContentInput item={item.content[0]} itemInfo={itemInfo} setItemInfo={setItemInfo} />
+                <AddContentInput item={item.content[0]} itemInfo={itemInfo} addContentToState={addContentToState} />
               ) : (
                 <div>
-                  <AddContentInput item={null} itemInfo={itemInfo} setItemInfo={setItemInfo} />
+                  <AddContentInput item={null} itemInfo={itemInfo} addContentToState={addContentToState} />
                 </div>
               )}
               <Button variant="contained" type="submit" className={classes.btn}>
