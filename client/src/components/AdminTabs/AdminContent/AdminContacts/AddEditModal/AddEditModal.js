@@ -129,9 +129,9 @@ const AddEditModal = ({ open, handleModal, item, handleOpenSnackbar, autoRefresh
                 errorMessages={["this field is required"]}
               />
               {(item !== null) ? (
-                itemInfo.content.map((item) => {
-                  return (
-                    <AddContentInput key={item._id} item={item} itemInfo={itemInfo} setItemInfo={setItemInfo} />
+                // itemInfo.content.map((item) => {
+                //   return (
+                    <AddContentInput item={item.content[0]} itemInfo={itemInfo} setItemInfo={setItemInfo} />
                     // <div key={`${item._id}`}>
                     //   <TextValidator
                     //     label={`${item.text}`}
@@ -152,8 +152,8 @@ const AddEditModal = ({ open, handleModal, item, handleOpenSnackbar, autoRefresh
                     //     errorMessages={["this field is required"]}
                     //   />
                     // </div>
-                  );
-                })
+                  // );
+                // })
 
               ) : (
                 <div>
@@ -182,7 +182,7 @@ const AddEditModal = ({ open, handleModal, item, handleOpenSnackbar, autoRefresh
                   {/* /> */}
                 </div>
               )}
-              <Button variant="contained" type="submit">
+              <Button variant="contained" type="submit" className={classes.btn}>
                 Submit
               </Button>
             </ValidatorForm>
