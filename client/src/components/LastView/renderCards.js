@@ -1,14 +1,8 @@
 import React from "react";
-
-// import uniqBy from "lodash/uniqBy";
-
 import AliceCarousel from "react-alice-carousel";
 import "react-alice-carousel/lib/alice-carousel.css";
-
 import Container from "@material-ui/core/Container";
-
 import ItemCardLite from "../ItemCardLite/ItemCardLite";
-
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import useStyles from "./useStyles";
 
@@ -52,6 +46,7 @@ const RenderCards = ({ productsLV }) => {
                 title={value.name}
                 rate={value.rate.rating}
                 price={value.currentPrice}
+                oldPrice={value.previousPrice}
                 img={value.imageUrls[0]}
                 stock={value.quantity}
               />

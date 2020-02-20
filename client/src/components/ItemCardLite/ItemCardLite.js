@@ -23,6 +23,7 @@ const ItemCardLite = ({
   itemNo,
   title,
   price,
+  oldPrice,
   img,
   stock,
   addCartItem,
@@ -79,6 +80,11 @@ const ItemCardLite = ({
             <Typography className={classes.price} align="center">
               ${price.toFixed(2)}
             </Typography>
+            {oldPrice && (
+              <Typography className={classes.OldPrice} align="center">
+                <s disabled>${oldPrice.toFixed(2)}</s>
+              </Typography>
+            )}
             <AddShoppingCartIcon
               fontSize="large"
               className={classes.mediaIcon}
@@ -108,7 +114,7 @@ const ItemCardLite = ({
             </Box>
           }
         />
-        </Snackbar>
+      </Snackbar>
     </Card>
   );
 };

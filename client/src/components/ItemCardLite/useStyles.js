@@ -3,8 +3,8 @@ import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles(theme => ({
   card: {
     position: "relative",
-    display: 'flex',
-    flexDirection: 'row',
+    display: "flex",
+    flexDirection: "row",
     flexGrow: 1,
     margin: theme.spacing(1),
     width: 240,
@@ -51,6 +51,12 @@ const useStyles = makeStyles(theme => ({
       color: theme.palette.primary.main,
     },
   },
+  OldPrice: {
+    marginTop: 0,
+    fontSize: 13,
+    fontWeight: 600,
+    color: theme.palette.secondary.medium,
+  },
   link: {
     textDecoration: "none",
     "&:focus, &:hover, &:visited, &:link, &:active": {
@@ -75,10 +81,10 @@ const useStyles = makeStyles(theme => ({
     transform: "scale(0.95)",
     transition: "transform 0.15s ease-out",
     cursor: "pointer",
-      marginTop: 20,
-      "&:hover": {
-          color: theme.palette.primary.main,
-      },
+    marginTop: 20,
+    "&:hover": {
+      color: theme.palette.primary.main,
+    },
   },
   snackbar: {
     position: "relative",

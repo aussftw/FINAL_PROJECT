@@ -124,7 +124,7 @@ const formValidationRules = [
   {
     field: "telephone",
     method: "matches",
-    args: [/^\+380\d{3}\d{2}\d{2}\d{2}$/],
+    args: [/^3?8?[0-9-+\s()]{10,18}$/],
     validWhen: true,
     message: "That is not a valid phone number."
   },

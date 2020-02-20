@@ -10,19 +10,23 @@ import Typography from "@material-ui/core/Typography";
 import CloseIcon from "@material-ui/icons/Close";
 import * as axios from "axios";
 import useStyles from "./useStyles";
-import Upload from "../../../../common/Upload/Upload";
+import singleUploadApiAxios from '../../../../common/SingleUpload/singleUploadApiAxios/singleUploadApiAxios';
+import SingleUpload from '../../../../common/SingleUpload/SingleUpload';
+import PreloaderAdaptive from '../../../../Preloader/Adaptive';
 
 
 const AddEditCategoriesModal = ({ open, handleModal, category, handleOpenSnackbar, autoRefresh }) => {
   const classes = useStyles();
 
+  const [loading, setLoading] = useState(false);
+  const [imgToUpload ,setImgToUpload] = useState(null);
   const [categoryInfo, setCategoryInfo] = useState(
     {
       id: "",
       name: "",
       parentId: "null",
       description: "",
-      imgUrl: [],
+      imgUrl: "",
     });
 
   useEffect(() => {
@@ -32,105 +36,37 @@ const AddEditCategoriesModal = ({ open, handleModal, category, handleOpenSnackba
         id: `${category.id}`,
         parentId: `${category.parentId}`,
         description: `${category.description}`,
-        imgUrl: [`${category.imgUrl}`],
+        imgUrl: `${category.imgUrl}`,
       });
     }
   }, [category]);
-
-  // imgs
-  const [remainingImgUrls, setRemainingImgUrls] = useState([]);
-  const [deletedImgUrls, setDeletedImgUrl] = useState([]);
-  const [addedImgFiles, setAddedImgFiles] = useState([]);
-
-  const handleImages = (remainingImages, deletedImages, addedImages) => {
-    setRemainingImgUrls(remainingImages);
-    setDeletedImgUrl(deletedImages);
-    setAddedImgFiles(addedImages);
-  };
-  const UploadApiAxios = (addImgs) => {
-    const imagesArr = addImgs.map(item => {
-      const data = new FormData();
-      data.append("file", item);
-      data.append("upload_preset", "plantly");
-      return data;
-    });
-
-    const instance = axios.create({
-      baseURL: "https://api.cloudinary.com/v1_1/plantly/image",
-    });
-    instance.defaults.headers.common = {};
-
-    const axiosArray = [];
-    imagesArr.forEach(item => {
-      const newPromise = instance
-        .post("/upload", item, {
-            headers: {
-              "Content-Type": null,
-            },
-          },
-        );
-      axiosArray.push(newPromise);
-    });
-
-    return axiosArray;
-  };
-  // imgs
 
   const handlePartnerInfo = prop => event => {
     setCategoryInfo({ ...categoryInfo, [prop]: event.target.value });
   };
 
 
-  const submitHandler = async () => {
-    let partnerData = categoryInfo;
-
-    if (deletedImgUrls.length !== 0) {
-      partnerData = { ...partnerData, imgUrl: remainingImgUrls };
-    }
-
-    if (addedImgFiles.length !== 0) {
-      const uploadResult = UploadApiAxios(addedImgFiles);
-
-      await axios
-        .all(uploadResult).then(response => {
-          const newUrls = partnerData.imgUrl;
-          response.forEach(item => {
-            newUrls.push(item.data.url);
-          });
-          partnerData = { ...partnerData, imgUrl: newUrls };
-        })
-        .catch(error => {
-          console.log(error);
-        });
-    }
-
-    setCategoryInfo(partnerData);
-
+  const requestToDb = categoryInfo => {
     if (category === null) {
-      const newCategory = {
-        ...categoryInfo,
-        id: categoryInfo.name.split(" ").join("").toLowerCase(),
-        imgUrl: categoryInfo.imgUrl[0],
-      };
+
+      const newCategory = { ...categoryInfo, id: categoryInfo.name.split(' ').join('') };
+      console.log('/api/catalog', newCategory);
       axios
         .post("/api/catalog", newCategory)
-        .then(newPartner => {
-          console.log("newPartner", newPartner);
+        .then(newCategory => {
+          console.log("newCategory", newCategory);
           const success = { type: "success", message: `New category ${categoryInfo.name} was added` };
           handleOpenSnackbar(success);
           autoRefresh();
         })
         .catch(err => {
-          console.log("newPartner", err);
+          console.log("newCategory", err);
           const error = { type: "error", message: `Error! New category was not added.` };
           handleOpenSnackbar(error);
         });
     } else {
-      const editedCategory = {
-        ...categoryInfo,
-        id: categoryInfo.name.split(" ").join("").toLowerCase(),
-        imgUrl: categoryInfo.imgUrl[0],
-      };
+      console.log(`/api/catalog/${category.id}`, categoryInfo);
+      const editedCategory = {...categoryInfo};
       axios
         .put(`/api/catalog/${category.id}`, editedCategory)
         .then(resp => {
@@ -145,8 +81,98 @@ const AddEditCategoriesModal = ({ open, handleModal, category, handleOpenSnackba
           handleOpenSnackbar(error);
         });
     }
+    setLoading(false);
     handleModal();
   };
+
+
+  const submitHandler = async () => {
+    setLoading(true);
+    let categoryRequest = categoryInfo;
+
+    if (imgToUpload !== null) {
+      singleUploadApiAxios(imgToUpload , "partners").then(response => {
+        if (response.status === 200) {
+          console.log(response);
+          categoryRequest = ({ ...categoryRequest, imgUrl: response.data.url });
+          console.log(categoryRequest);
+          requestToDb(categoryRequest);
+        }
+      })
+        .catch(err => {
+          console.log(err);
+        });
+    }else {
+      requestToDb(categoryRequest);
+    }
+  };
+
+  // const submitHandler = async () => {
+  //   let partnerData = categoryInfo;
+  //
+  //   if (deletedImgUrls.length !== 0) {
+  //     partnerData = { ...partnerData, imgUrl: remainingImgUrls };
+  //   }
+  //
+  //   if (addedImgFiles.length !== 0) {
+  //     const uploadResult = UploadApiAxios(addedImgFiles);
+  //
+  //     await axios
+  //       .all(uploadResult).then(response => {
+  //         const newUrls = partnerData.imgUrl;
+  //         response.forEach(item => {
+  //           newUrls.push(item.data.url);
+  //         });
+  //         partnerData = { ...partnerData, imgUrl: newUrls };
+  //       })
+  //       .catch(error => {
+  //         console.log(error);
+  //       });
+  //   }
+  //
+  //   setCategoryInfo(partnerData);
+  //
+  //   if (category === null) {
+  //     const newCategory = {
+  //       ...categoryInfo,
+  //       id: categoryInfo.name.split(" ").join("").toLowerCase(),
+  //       imgUrl: categoryInfo.imgUrl[0],
+  //     };
+  //     axios
+  //       .post("/api/catalog", newCategory)
+  //       .then(newPartner => {
+  //         console.log("newPartner", newPartner);
+  //         const success = { type: "success", message: `New category ${categoryInfo.name} was added` };
+  //         handleOpenSnackbar(success);
+  //         autoRefresh();
+  //       })
+  //       .catch(err => {
+  //         console.log("newPartner", err);
+  //         const error = { type: "error", message: `Error! New category was not added.` };
+  //         handleOpenSnackbar(error);
+  //       });
+  //   } else {
+  //     const editedCategory = {
+  //       ...categoryInfo,
+  //       id: categoryInfo.name.split(" ").join("").toLowerCase(),
+  //       imgUrl: categoryInfo.imgUrl[0],
+  //     };
+  //     axios
+  //       .put(`/api/catalog/${category.id}`, editedCategory)
+  //       .then(resp => {
+  //         console.log(resp);
+  //         const success = { type: "success", message: `Category was successfully edited` };
+  //         handleOpenSnackbar(success);
+  //         autoRefresh();
+  //       })
+  //       .catch(err => {
+  //         console.log("err", err);
+  //         const error = { type: "error", message: `Error! Category ${categoryInfo.name} was not edited.` };
+  //         handleOpenSnackbar(error);
+  //       });
+  //   }
+  //   handleModal();
+  // };
 
 
   const modal = () => {
@@ -206,11 +232,15 @@ const AddEditCategoriesModal = ({ open, handleModal, category, handleOpenSnackba
                 errorMessages={["This field is required"]}
               />
               <Box className={classes.imgBox}>
-                <Upload imageUrls={categoryInfo.imgUrl} handleImages={handleImages} />
+                <SingleUpload imageUrls={categoryInfo.imgUrl} setImgToUpload={setImgToUpload} />
               </Box>
-              <Button variant="contained" type="submit" style={{ width: "100%" }}>
-                Submit
-              </Button>
+              {loading ? (
+                <PreloaderAdaptive />
+              ) : (
+                <Button variant="contained" type="submit" style={{ width: '100%' }}>
+                  Submit
+                </Button>
+              )}
             </ValidatorForm>
           </Box>
         </Fade>

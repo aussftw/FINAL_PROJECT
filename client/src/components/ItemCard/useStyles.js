@@ -54,6 +54,11 @@ const useStyles = makeStyles(theme => ({
     paddingBottom: 6,
     color: theme.palette.primary.main,
   },
+  priceBox: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+  },
   price: {
     fontSize: 14,
     fontWeight: 600,
@@ -61,6 +66,13 @@ const useStyles = makeStyles(theme => ({
     "&:hover": {
       color: theme.palette.primary.main,
     },
+  },
+  OldPrice: {
+    marginTop: 1,
+    fontSize: 13,
+    marginLeft: 10,
+    fontWeight: 600,
+    color: theme.palette.secondary.medium,
   },
   link: {
     textDecoration: "none",
@@ -77,7 +89,7 @@ const useStyles = makeStyles(theme => ({
     height: 320,
     padding: theme.spacing(1),
     margin: theme.spacing(2),
-  }
+  },
 }));
 
 export default useStyles;

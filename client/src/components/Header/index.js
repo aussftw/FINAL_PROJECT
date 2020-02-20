@@ -31,7 +31,7 @@ const Header = ({ isAuthenticated, wishlistCounter, cartCounter }) => {
           <div className={classes.flex}>
             <TemporaryDrawer />
             <Link to="/">
-              <img src="/img/Logo.svg" alt="Plantly" className={classes.logo} />
+              <img src="https://res.cloudinary.com/plantly/image/upload/v1582046905/Logo_d0lwiz.svg" alt="Plantly" className={classes.logo} />
             </Link>
             <MobileSearch />
           </div>

@@ -78,6 +78,10 @@ const useStyles = makeStyles(theme => ({
   currentPrice: {
     fontWeight: 600,
   },
+  oldPrice: {
+    fontWeight: 600,
+    color: theme.palette.secondary.medium,
+  },
   buttonsBar: {
     marginTop: 15,
     marginBottom: 15,

@@ -1,9 +1,8 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useState } from "react";
 import Box from "@material-ui/core/Box";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 import useStyles from "../Upload/useStyles";
-import singleUploadApiAxios from "./singleUploadApiAxios/singleUploadApiAxios";
 
 const SingleUpload = ({ imageUrls, setImgToUpload }) => {
   const classes = useStyles();
@@ -13,12 +12,9 @@ const SingleUpload = ({ imageUrls, setImgToUpload }) => {
 
   // props to submit
   // const [deletedImageURL, setDeletedImageURL] = useState("");
-  const [addedImageFile, setAddedImageFile] = useState(null);
-
 
   const removeImgUrl = () => {
     setImage("");
-    setAddedImageFile(null);
   };
 
   const showImages = e => {
@@ -30,21 +26,6 @@ const SingleUpload = ({ imageUrls, setImgToUpload }) => {
     setImage(blobImg);
     setLoading(false);
   };
-
-  // const request = useCallback(async (data)=>{
-  //    await singleUploadApiAxios(data)
-  // },[]);
-
-
-  // useEffect(() => {
-  //   if(addedImageFile !== null){
-  //       const data = new FormData();
-  //       data.append("file", addedImageFile);
-  //       data.append("upload_preset", "partners");
-  //       const res = request(data);
-  //       console.log(res);
-  //   }
-  // }, [addedImageFile, request]);
 
   return (
     <Box>
