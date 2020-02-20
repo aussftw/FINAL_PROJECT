@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
 import axios from "axios";
 
 import Modal from "@material-ui/core/Modal";
@@ -13,7 +14,7 @@ import PreloaderAdaptiveSmall from "../../../Preloader/AdaptiveSmall";
 
 import useStyles from "./useStyles";
 
-const UserModal = ({ user, setOneUserData, allCustomers, setAllCustomers, isOpen, onClose }) => {
+const UserModal = ({ user, setOneUserData, allCustomers, setAllCustomers, isOpen, onClose, adminName }) => {
   const classes = useStyles();
   const [ isLoadingAdmin, setIsLoadingAdmin ] = useState(false);
   const [ isLoadingRating, setIsLoadingRating ] = useState(false);
@@ -129,6 +130,7 @@ const UserModal = ({ user, setOneUserData, allCustomers, setAllCustomers, isOpen
               variant="contained"
               onClick={() => editAdminHandler()}
               className={classes.btn}
+              disabled={adminName === user.firstName}
             >
               {adminEditButtonText}
             </Button>
@@ -141,6 +143,7 @@ const UserModal = ({ user, setOneUserData, allCustomers, setAllCustomers, isOpen
               variant="contained"
               onClick={() => editEnabledHandler()}
               className={classes.btn}
+              disabled={adminName === user.firstName}
             >
               {enableEditButtonText}
             </Button>
@@ -168,4 +171,10 @@ const UserModal = ({ user, setOneUserData, allCustomers, setAllCustomers, isOpen
   );
 };
 
-export default UserModal;
+const mapStateToProps = state => {
+  return {
+    adminName: state.loginReducer.user.firstName,
+  };
+};
+
+export default connect(mapStateToProps)(UserModal);
