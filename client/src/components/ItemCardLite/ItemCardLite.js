@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
@@ -23,7 +24,7 @@ const ItemCardLite = ({
   itemNo,
   title,
   price,
-  oldPrice,
+  oldPrice = null,
   img,
   stock,
   addCartItem,
@@ -80,11 +81,11 @@ const ItemCardLite = ({
             <Typography className={classes.price} align="center">
               ${price.toFixed(2)}
             </Typography>
-            {oldPrice && (
+            {oldPrice ? (
               <Typography className={classes.OldPrice} align="center">
                 <s>${oldPrice.toFixed(2)}</s>
               </Typography>
-            )}
+            ) : null}
             <AddShoppingCartIcon
               fontSize="large"
               className={classes.mediaIcon}

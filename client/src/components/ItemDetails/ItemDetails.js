@@ -194,7 +194,7 @@ const ItemDetails = ({
                 {`$${currentPrice.toFixed(2)}`}
               </Typography>
             </ListItem>
-            {previousPrice && (
+            {previousPrice ? (
               <ListItem className={classes.root}>
                 <ListItemText
                   primary="Old price:"
@@ -204,7 +204,7 @@ const ItemDetails = ({
                   <s>{`$${previousPrice.toFixed(2)}`}</s>
                 </Typography>
               </ListItem>
-            )}
+            ) : null}
           </List>
           <Divider />
           <Container className={classes.qty_wrapper}>
