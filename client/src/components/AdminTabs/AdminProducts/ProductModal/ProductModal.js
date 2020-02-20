@@ -260,7 +260,7 @@ const ModalProducts = ({
                 <TextField
                   className={classes.inputSmall}
                   id="price"
-                  label="oldPrice"
+                  label="Old Price"
                   size="small"
                   type="number"
                   value={productValue.previousPrice}
