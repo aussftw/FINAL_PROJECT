@@ -62,10 +62,6 @@ const AdminTabs = () => {
             label={<span className={classes.tabText}>Content</span>}
             {...a11yProps(4)}
           />
-          <Tab
-            label={<span className={classes.tabText}>Discounts</span>}
-            {...a11yProps(5)}
-          />
         </Tabs>
         <Box
           className={classes.contentBox}

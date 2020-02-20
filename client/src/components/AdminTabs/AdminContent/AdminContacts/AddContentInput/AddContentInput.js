@@ -24,18 +24,11 @@ const AddContentInput = ({ item, itemInfo, setItemInfo }) => {
 
   const handleInfo = prop => event => {
     setContentInput({ ...contentInput, [prop]: event.target.value });
-    // setItemInfo({ ...itemInfo, content: [...itemInfo.content, contentInput] });
   };
 
   function submitHandler() {
-// PUSH
-//     if (item !== null){
-    // setItemInfo({...ItemInfo, content: [...ItemInfo.content, contentInput] })
-    // } else {
     setItemInfo({ ...itemInfo, content: [...itemInfo.content, contentInput] });
-    seHintLine({show: true, message: `Successfully added${itemInfo.content.length+1}` })
-    // }
-
+    seHintLine({show: true, message: `Successfully added ${itemInfo.content.length+1} field` })
   }
 
 
@@ -68,7 +61,6 @@ const AddContentInput = ({ item, itemInfo, setItemInfo }) => {
       </Box>
     );
   };
-
 
   return input();
 };
