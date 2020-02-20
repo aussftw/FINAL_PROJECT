@@ -63,6 +63,29 @@ exports.placeOrder = async (req, res, next) => {
         productAvailibilityInfo
       });
     } else {
+      const products = order.products.map(item => {
+        const subtotal = item.product.currentPrice*item.cartQuantity;
+        return `<div style='width: 500px;height: 40px;display: flex;align-items: center;justify-content: space-between;
+                   margin: 0 auto;'>
+                 <a href=http://plantlyshop.herokuapp.com/products/${item.product.itemNo} style='text-decoration: none'>
+                   <img src=${item.product.imageUrls[0]} alt=${item.product.name} style='height: 40px;object-fit:cover'/>
+                 </a> 
+                 <a href=http://plantlyshop.herokuapp.com/products/${item.product.itemNo} style='text-decoration:none;margin:10px;width:240px;'>
+                   <span style='min-width: 220px;font-size:12px;line-height:24px;margin:10px;color:black;text-transform:capitalize'>
+                     ${item.product.name}
+                   </span>           
+                 </a> 
+                 <p style='font-size:12px; text-align: right;margin:10px;'>
+                   <span style='font-size:12px; line-height: 24px; margin:10px 20px;color: black; text-transform:capitalize'>
+                     Quantity: ${item.cartQuantity} 
+                   </span>  
+                   <span style='font-size:12px; line-height: 24px; margin:10px 20px;color: black; text-transform:capitalize'>
+                     $${subtotal}
+                   </span>  
+                 </p>
+               </div>`
+      }).join('');
+
       const subscriberMail = req.body.email;
       const letterSubject = req.body.letterSubject;
       const letterHtml = `<div style="width: 600px;padding: 25px 30px 32px 27px;margin: 0 auto;color: black;">
@@ -75,13 +98,23 @@ exports.placeOrder = async (req, res, next) => {
                             <h2 style="font-size: 28px; line-height: 32px; padding-bottom: 15px; font-weight: normal;margin: 0;color: black;">
                               Hello, ${order.name}. Thank you for your order!
                             </h2>
-                            <p style="font-size: 15px;padding-bottom: 22px; line-height: 24px; margin: 0;color: black;text-align: justify;">
+                            <p style="font-size:15px;padding-bottom:22px;line-height:24px;margin:0;color:black;text-align:justify;">
                               Your application is accepted. Order № is ${order.orderNo}. 
                               You can track the status of your order in your account.
                               View order details go to http://plantlyshop.herokuapp.com/orders/${order.orderNo}. 
                               While you’re there, you might be interested in other products, as they go well with your order.
                               ${req.body.letterHtml} Thank you once again!
                             </p>
+                            
+                            ${products}
+                            <div style='width:500px;height:40px;display:flex;align-items:center;justify-content:space-between;margin:0 auto;'>
+                              <span style='font-size:14px;font-weight: 600;line-height: 24px; margin:10px 300px 10px 20px;color:black;'>
+                                Total
+                              </span>  
+                              <span  style='font-size:14px;font-weight: 600;line-height: 24px; margin:10px 80px 10px 20px;color:black;text-align: right';>
+                                $${order.totalSum}
+                              </span>
+                            </div>
                           </div>`;
       const { errors, isValid } = validateOrderForm(req.body);
 
