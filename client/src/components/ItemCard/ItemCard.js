@@ -34,7 +34,7 @@ const ItemCard = ({
   itemNo,
   title,
   rate,
-  oldPrice,
+  oldPrice = null,
   price,
   img,
   stock,
