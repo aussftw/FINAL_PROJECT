@@ -21,14 +21,23 @@ const Products = ({
   getProducts,
   setCurrentPage,
   isLoading,
+  filters,
 }) => {
   const [productsPerPage] = useState(9);
 
   const classes = useStyles();
 
   useEffect(() => {
-    getProducts();
-  }, [getProducts]);
+    if (
+      !filters.categories &&
+      !filters.color &&
+      !filters.sizes &&
+      !filters.maxPrice
+    ) {
+      getProducts();
+    }
+    // eslint-disable-next-line
+  }, []);
 
   let listProduct = [];
   if (productListing) {

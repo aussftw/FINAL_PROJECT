@@ -1,6 +1,6 @@
 import { makeStyles } from "@material-ui/core/styles";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   address: {
     width: "200px",
     fontSize: "0.875rem"
@@ -10,8 +10,8 @@ const useStyles = makeStyles({
     textAlign: "center",
   },
   btn: {
-    marginBottom: "30px",
+    margin: theme.spacing(2),
   }
-});
+}));
 
 export default useStyles;

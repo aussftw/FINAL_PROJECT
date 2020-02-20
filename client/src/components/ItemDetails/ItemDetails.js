@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+// import { Carousel } from "react-responsive-carousel";
 
 import { connect } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
@@ -25,6 +26,7 @@ import FavoriteSharpIcon from "@material-ui/icons/FavoriteSharp";
 import AddSharpIcon from "@material-ui/icons/AddSharp";
 import RemoveSharpIcon from "@material-ui/icons/RemoveSharp";
 import Tooltip from "@material-ui/core/Tooltip";
+import SnackBar from "../common/SnackBar/SnackBar";
 import RatingModule from "../common/RatingModule/RatingModule";
 import PreloaderAdaptive from "../Preloader/Adaptive";
 import ItemTabs from "../common/ItemTabs/ItemTabs";
@@ -56,6 +58,7 @@ const ItemDetails = ({
     rate: { rating: 0 },
     currentPrice: 0,
   });
+  const [snackbarAddToCart, setSnackbarAddToCart] = useState(false);
   const [index, setIndex] = useState(0);
   const [preloader, setPreloader] = useState(true);
   const [qty, setQty] = useState(1);
@@ -69,6 +72,7 @@ const ItemDetails = ({
       .then(response => {
         setItem(response.data);
         setPreloader(false);
+        console.log(response.data);
       })
       .catch(error => {
         history.push("/notfound");
@@ -100,6 +104,7 @@ const ItemDetails = ({
     } else {
       updateCart(item._id, qty, item);
     }
+    setSnackbarAddToCart(true);
   };
 
   const handleAddtemToWishlist = () => {
@@ -131,10 +136,18 @@ const ItemDetails = ({
     }
   };
 
+  const snackbarClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setSnackbarAddToCart(false);
+  };
+
   return preloader ? (
     <PreloaderAdaptive />
   ) : (
     <Container className={classes.brandsContaier} maxWidth="lg">
+      <SnackBar open={snackbarAddToCart} close={snackbarClose} text="Added to your shopping cart!" />
       <Box className={classes.detailsHeader}>
         <Link href="/#" className={classes.linkIcon}>
           <HomeIcon style={{ fontSize: "30px", color: "black" }} />
@@ -230,14 +243,24 @@ const ItemDetails = ({
           </Container>
           <Divider />
           <Box className={classes.buttonsBar}>
-            <Button
-              className={classes.actionButton}
-              onClick={addItemToCart}
-              disabled={!(quantity > 0)}
-              variant={quantity > 0 ? "contained" : "text"}
-            >
+            { quantity > 0 ? (
+              <Button
+                className={classes.actionButton}
+                onClick={addItemToCart}
+                variant={quantity > 0 ? "contained" : "text"}
+              >
               Add to cart
-            </Button>
+              </Button>
+            ) : (
+              <Button
+                className={classes.actionButton}
+                onClick={addItemToCart}
+                disabled
+                variant={quantity > 0 ? "contained" : "text"}
+              >
+                  Out of stock
+              </Button>
+            )}
             {!wishlistAll.every(el => el._id !== _id) ? (
               <Tooltip arrow title="Remove from wishlist">
                 <Button
