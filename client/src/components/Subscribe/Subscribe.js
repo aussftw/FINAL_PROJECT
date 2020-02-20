@@ -2,13 +2,22 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Typography, Divider, Container, Button } from "@material-ui/core";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
+import SnackBar from "../common/SnackBar/SnackBar";
 import useStyles from "./useStyles";
 
 const Subscribe = () => {
   const [email, setUserEmail] = useState("");
   // eslint-disable-next-line
   const [error, setError] = useState(false);
+  const [snackbarAddToCart, setSnackbarAddToCart] = useState(false);
   const classes = useStyles();
+
+  const snackbarClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setSnackbarAddToCart(false);
+  };
 
   const obj = {
     email,
@@ -35,6 +44,7 @@ const Subscribe = () => {
         // eslint-disable-next-line
         console.log(error.response);
       });
+    setSnackbarAddToCart(true);
   };
 
   const handleKeyPress = e => {
@@ -45,6 +55,11 @@ const Subscribe = () => {
 
   return (
     <Container className={classes.subscribeContainer} maxWidth="xl">
+      <SnackBar
+        open={snackbarAddToCart}
+        close={snackbarClose}
+        text="You have successfully subscribed!"
+      />
       <Typography className={classes.subscribeTitle}>NEWSLETTER</Typography>
       <ValidatorForm
         className={classes.subscribeBar}

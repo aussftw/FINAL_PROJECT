@@ -2,13 +2,8 @@ import React, { useState } from "react";
 import Button from "@material-ui/core/Button";
 import axios from "axios";
 import { Box } from "@material-ui/core";
-// import EditIcon from '@material-ui/icons/Edit';
-// import AddCircleIcon from '@material-ui/icons/AddCircle';
-// import IconButton from "@material-ui/core/IconButton";
-// import DeleteIcon from '@material-ui/icons/Delete';
 import MaterialTable from "material-table";
 import EditIcon from "@material-ui/icons/Edit";
-import AddCircleIcon from "@material-ui/icons/AddCircle";
 import AddEditPartnerModal from "../AdminContent/AdminPartners/AddEditPartnerModal/AddEditPartnerModal";
 import EditOrderModal from "./EditOrderModal/EditOrderModal";
 import SnackbarMessage from "../Snackbar/SnackbarMessage";
@@ -43,13 +38,6 @@ function AdminOrders() {
       });
   };
 
-  const handleOpenAddModal = () => {
-    setAddModal({
-      isOpened: !AddModal.isOpened,
-      rowData: AddModal.rowData,
-    });
-  };
-
   const handleEditModal = (rowData) => {
     setEditModal({
       isOpened: !EditModal.isOpened,
@@ -68,12 +56,6 @@ function AdminOrders() {
     });
     getAllOrders();
   };
-
-  // const modalInputs = () => {
-  //   const valuesArr = Object.keys(colors[0]);
-  //   const inputs = valuesArr.filter(word => word !== "_id" && word !== "date" && word !=="tableData" && word !== "__v");
-  // }
-
 
   // snackbar
   const [openSnackbar, setOpenSnackbar] = useState(false);
@@ -120,14 +102,6 @@ function AdminOrders() {
           },
         ]}
         actions={[
-/*          {
-            icon: () => <AddCircleIcon />,
-            tooltip: "New order",
-            isFreeAction: true,
-            onClick: () => {
-              handleOpenAddModal();
-            },
-          }, */
           rowData => ({
             hidden: rowData.canceled,
             icon: () => <EditIcon />,

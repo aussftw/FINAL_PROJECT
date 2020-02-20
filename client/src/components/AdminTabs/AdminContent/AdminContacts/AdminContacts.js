@@ -4,14 +4,15 @@ import { Box } from "@material-ui/core";
 import MaterialTable from "material-table";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import DeleteIcon from "@material-ui/icons/Delete";
-import EditIcon from "@material-ui/icons/Edit";
+// import EditIcon from "@material-ui/icons/Edit";
 import DeleteItemModal from "../DeleteItemModal/DeleteItemModal";
 import AddEditModal from "./AddEditModal/AddEditModal";
 import SnackbarMessage from "../../Snackbar/SnackbarMessage";
 import PreloaderAdaptive from "../../../Preloader/Adaptive";
 
 
-const AdminColors = ({
+
+const AdminContacts = ({
                        AddModal,
                        setAddModal,
                        EditModal,
@@ -24,13 +25,15 @@ const AdminColors = ({
                        snackbarType,
                      }) => {
 
-  const [colors, setColors] = useState([]);
+  const [contacts, setContacts] = useState([]);
 
-  const getColors = () => {
+
+  const getContacts = () => {
     axios
-      .get("/api/colors")
+      .get("/api/contacts")
       .then(orders => {
-        setColors(orders.data);
+        console.log('orders.data',orders.data);
+        setContacts(orders.data);
       })
       .catch(err => {
         console.log("orders", err);
@@ -38,7 +41,7 @@ const AdminColors = ({
   };
 
   useEffect(() => {
-    getColors();
+    getContacts();
   },[]);
 
   const handleOpenAddModal = () => {
@@ -48,12 +51,12 @@ const AdminColors = ({
     });
   };
 
-  const handleEditModal = (rowData) => {
-    setEditModal({
-      isOpened: !EditModal.isOpened,
-      rowData,
-    });
-  };
+  // const handleEditModal = (rowData) => {
+  //   setEditModal({
+  //     isOpened: !EditModal.isOpened,
+  //     rowData,
+  //   });
+  // };
   const handleDeleteModal = (rowData) => {
     setDeleteModal({
       isOpened: !DeleteModal.isOpened,
@@ -61,45 +64,12 @@ const AdminColors = ({
     });
   };
 
-  const deleteValidate = (rowData) => {
-    axios
-      .get(`/api/products/filter?color=${rowData.name}`)
-      .then(orders => {
-        if (orders.data.products.length === 0) {
-          handleDeleteModal(rowData);
-        } else {
-          const error = { type: "error", message: `You can’t delete color because of active products in catalog` };
-          handleOpenSnackbar(error);
-        }
-      })
-      .catch(err => {
-        console.log("orders", err);
-      });
-
-  };
-
-  const editValidate = (rowData) => {
-    axios
-      .get(`/api/products/filter?color=${rowData.name}`)
-      .then(orders => {
-        if (orders.data.products.length === 0) {
-          handleEditModal(rowData);
-        } else {
-          const error = { type: "error", message: `You can’t edit color because of active products in catalog` };
-          handleOpenSnackbar(error);
-        }
-      })
-      .catch(err => {
-        console.log("orders", err);
-      });
-
-  };
 
   const closeModal = () => {
-    setEditModal({
-      isOpened: false,
-      rowData: EditModal.rowData,
-    });
+    // setEditModal({
+    //   isOpened: false,
+    //   rowData: EditModal.rowData,
+    // });
     setAddModal({
       isOpened: false,
       rowData: AddModal.rowData,
@@ -110,22 +80,30 @@ const AdminColors = ({
     });
   };
 
+  // const getLines = (rowData)=>{
+  //   {rowData.content.map((item)=><div>{item.text}<div/>) }
+  // }
 
   const columns = [
-    { title: "Name", field: "name" },
+    { title: "Option", field: "option" },
+    // { title: "Text", field: "content[0].text", type: "string"},
+    // { title: "Link", field: "content[0].link", type: "string" },
+    // { title: "Text", field: "content", type: "string",
+    //   render: rowData => <div> {getLines(rowData)}</div>
+    // }
   ];
 
   const materialTable = () => {
     return (
       <MaterialTable
         columns={columns}
-        data={colors}
-        title="Colors"
+        data={contacts}
+        title="Contacts"
         options={{ search: false }}
         actions={[
           {
             icon: () => <AddCircleIcon />,
-            tooltip: "Add color",
+            tooltip: "Add contact",
             isFreeAction: true,
             onClick: () => {
               handleOpenAddModal();
@@ -133,33 +111,32 @@ const AdminColors = ({
           },
           {
             icon: () => <DeleteIcon />,
-            tooltip: "Delete color",
+            tooltip: "Delete contact",
             onClick: (event, rowData) => {
-              deleteValidate(rowData);
+              handleDeleteModal(rowData);
             },
           },
-          {
-            icon: () => <EditIcon />,
-            tooltip: "Edit color",
-            onClick: (event, rowData) => {
-              editValidate(rowData);
-            },
-          },
+          // {
+          //   icon: () => <EditIcon />,
+          //   tooltip: "Edit contact",
+          //   onClick: (event, rowData) => {
+          //     handleEditModal(rowData);
+          //   },
+          // },
           {
             icon: "refresh",
             tooltip: "Refresh Data",
             isFreeAction: true,
-            onClick: () => getColors(),
+            onClick: () => getContacts(),
           },
         ]}
       />
     );
   };
 
-
   return (
     <>
-      {colors.length === 0 ? (
+      {contacts.length === 0 ? (
         <PreloaderAdaptive />
       ) : (
         <Box>
@@ -170,27 +147,27 @@ const AdminColors = ({
               handleModal={closeModal}
               item={AddModal.rowData}
               handleOpenSnackbar={handleOpenSnackbar}
-              autoRefresh={getColors}
+              autoRefresh={getContacts}
             />
           )}
 
-          {EditModal.isOpened && (
-            <AddEditModal
-              open={EditModal.isOpened}
-              handleModal={closeModal}
-              item={EditModal.rowData}
-              handleOpenSnackbar={handleOpenSnackbar}
-              autoRefresh={getColors}
-            />
-          )}
+          {/* {EditModal.isOpened && ( */}
+          {/*  <AddEditModal */}
+          {/*    open={EditModal.isOpened} */}
+          {/*    handleModal={closeModal} */}
+          {/*    item={EditModal.rowData} */}
+          {/*    handleOpenSnackbar={handleOpenSnackbar} */}
+          {/*    autoRefresh={getContacts} */}
+          {/*  /> */}
+          {/* )} */}
           {DeleteModal.isOpened && (
             <DeleteItemModal
               open={DeleteModal.isOpened}
               handleModal={closeModal}
               id={DeleteModal.id}
-              item="colors"
+              item="contacts"
               handleOpenSnackbar={handleOpenSnackbar}
-              autoRefresh={getColors}
+              autoRefresh={getContacts}
             />
           )}
           <SnackbarMessage openSnackbar={openSnackbar} handleCloseSnackbar={handleCloseSnackbar} type={snackbarType} />
@@ -200,4 +177,4 @@ const AdminColors = ({
   );
 };
 
-export default AdminColors;
+export default AdminContacts;

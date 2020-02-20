@@ -6,7 +6,6 @@ import AddCircleIcon from "@material-ui/icons/AddCircle";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteItemModal from "../DeleteItemModal/DeleteItemModal";
-import AddEditPartnerModal from "../AdminPartners/AddEditPartnerModal/AddEditPartnerModal";
 import PreloaderAdaptive from "../../../Preloader/Adaptive";
 import SnackbarMessage from "../../Snackbar/SnackbarMessage";
 import AddEditCategoriesModal from "./AddEditCategoriesModal/AddEditCategoriesModal";
@@ -86,17 +85,6 @@ const AdminCategories = ({
     },
     { title: "Name", field: "name" },
     { title: "Description", field: "description" },
-    // {
-    //   title: "Description",
-    //   field: "description",
-    //   type: "string",
-    //   render: rowData => (
-    //     <Typography noWrap style={{ width: "200px", fontSize: "0.875rem"}}>
-    //       {rowData.description}
-    //     </Typography>
-    //   ),
-    // },
-
   ];
 
   const materialTable = () => {
@@ -109,7 +97,7 @@ const AdminCategories = ({
         actions={[
           {
             icon: () => <AddCircleIcon />,
-            tooltip: "Add Partner",
+            tooltip: "Add Category",
             isFreeAction: true,
             onClick: () => {
               handleOpenAddModal();
@@ -117,14 +105,14 @@ const AdminCategories = ({
           },
           {
             icon: () => <DeleteIcon />,
-            tooltip: "Delete Partner",
+            tooltip: "Delete Category",
             onClick: (event, rowData) => {
               handleDeleteModal(rowData);
             },
           },
           {
             icon: () => <EditIcon />,
-            tooltip: "Edit Partner",
+            tooltip: "Edit Category",
             onClick: (event, rowData) => {
               handleDataEditModal(rowData);
             },

@@ -1,6 +1,10 @@
 import { makeStyles } from "@material-ui/core/styles";
 
 export const useStyles = makeStyles(theme => ({
+  filtersContainer: {
+    paddingTop: 30,
+    paddingBottom: 30,
+  },
   main: {
     width: "100%",
     display: "flex",
@@ -38,9 +42,6 @@ export const useStyles = makeStyles(theme => ({
       width: "100%",
       marginTop: 0,
     },
-    // [theme.breakpoints.down("sm")]: {
-    //     //   marginTop: 0,
-    //     // },
   },
   modal: {
     display: "flex",
@@ -56,25 +57,22 @@ export const useStyles = makeStyles(theme => ({
   btn: {
     display: "none",
     [theme.breakpoints.down("md")]: {
-      margin: "20px 1.5em 20px auto ",
+      margin: "0 1.5em 20px auto ",
     },
     [theme.breakpoints.down("sm")]: {
       display: "block",
-      // padding: "13px 45px",
-      // fontSize: "16px",
-      // borderRadius: "10px",
       border: "none",
       outline: "none",
       color: "white",
       cursor: "pointer",
-      margin: "20px -0.5em 20px auto ",
+      margin: "0 0 20px auto ",
       backgroundColor: theme.palette.primary.main,
       "&:active": {
         boxShadow: "1px 1px black",
       },
     },
     [theme.breakpoints.down("xs")]: {
-      margin: "20px 2.5em 20px auto ",
+      margin: "0 2.5em 20px auto ",
     },
   },
   category: {

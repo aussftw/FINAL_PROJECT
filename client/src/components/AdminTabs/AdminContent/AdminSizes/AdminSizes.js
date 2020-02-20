@@ -39,7 +39,7 @@ const AdminSizes = ({
 
   useEffect(() => {
     getSizes();
-  });
+  },[]);
 
   const handleOpenAddModal = () => {
     setAddModal({

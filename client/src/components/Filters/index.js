@@ -11,25 +11,33 @@ import FilterByPrice from "./FilterByPrice";
 import Pagination from "./Pagination";
 import ModalFiltersAdaptive from "./ModalFiltersAdaptive";
 import ItemCard from "../ItemCard/ItemCard";
-
+import PreloaderAdaptive from "../Preloader/Adaptive";
 import { getProducts, setCurrentPage } from "../../store/actions/Filters";
 import { useStyles } from "./useStyles";
 
 const Products = ({
   productListing,
-  filters,
   currentPage,
   getProducts,
   setCurrentPage,
+  isLoading,
+  filters,
 }) => {
   const [productsPerPage] = useState(9);
 
   const classes = useStyles();
 
   useEffect(() => {
-    getProducts(filters);
+    if (
+      !filters.categories &&
+      !filters.color &&
+      !filters.sizes &&
+      !filters.maxPrice
+    ) {
+      getProducts();
+    }
     // eslint-disable-next-line
-  }, [filters]);
+  }, []);
 
   let listProduct = [];
   if (productListing) {
@@ -42,6 +50,7 @@ const Products = ({
           title={value.name}
           rate={value.rate.rating}
           price={value.currentPrice}
+          oldPrice={value.previousPrice}
           img={value.imageUrls[0]}
           stock={value.quantity}
         />
@@ -62,39 +71,40 @@ const Products = ({
 
   return (
     <>
-      <Container className={classes.main}>
-        <Typography
-          variant="h3"
-          style={{ cursor: "default", position: "absolute", top: 150 }}
-        >
+      <Container className={classes.filtersContainer} maxWidth="lg">
+        <Typography variant="h3" style={{ cursor: "default" }}>
           Shop
         </Typography>
-        <div className={classes.allFilters}>
-          <FilterByCategory />
-          <FilterByColor />
-          <FilterBySize />
-          <FilterByPrice />
-        </div>
-        <div className={classes.items}>
-          {listProduct.length === 0 ? (
-            <div className={classes.wrapper}>
-              <div className={classes.span}>
-                <Typography component="span">
-                  No results were found for your request
-                </Typography>
+        <div className={classes.main}>
+          <div className={classes.allFilters}>
+            <FilterByCategory />
+            <FilterByColor />
+            <FilterBySize />
+            <FilterByPrice />
+          </div>
+          <div className={classes.items}>
+            {isLoading ? (
+              <PreloaderAdaptive />
+            ) : listProduct.length === 0 ? (
+              <div className={classes.wrapper}>
+                <div className={classes.span}>
+                  <Typography component="span">
+                    No results were found for your request
+                  </Typography>
+                </div>
               </div>
-            </div>
-          ) : (
-            <>
-              <ModalFiltersAdaptive />
-              <div className={classes.itemCard}>{currentProduct}</div>
-              <Pagination
-                productsPerPage={productsPerPage}
-                totalProducts={productListing.length}
-                paginate={paginate}
-              />
-            </>
-          )}
+            ) : (
+              <>
+                <ModalFiltersAdaptive />
+                <div className={classes.itemCard}>{currentProduct}</div>
+                <Pagination
+                  productsPerPage={productsPerPage}
+                  totalProducts={productListing.length}
+                  paginate={paginate}
+                />
+              </>
+            )}
+          </div>
         </div>
       </Container>
     </>
@@ -106,12 +116,13 @@ const mapStateToProps = state => {
     productListing: state.filterReducer.productListing,
     filters: state.filterReducer.filters,
     currentPage: state.filterReducer.currentPage,
+    isLoading: state.filterReducer.isLoading,
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    getProducts: filters => dispatch(getProducts(filters)),
+    getProducts: () => dispatch(getProducts()),
     setCurrentPage: currentPage => dispatch(setCurrentPage(currentPage)),
   };
 };

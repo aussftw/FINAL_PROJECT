@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-// import { Carousel } from "react-responsive-carousel";
 
 import { connect } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
@@ -26,12 +25,15 @@ import FavoriteSharpIcon from "@material-ui/icons/FavoriteSharp";
 import AddSharpIcon from "@material-ui/icons/AddSharp";
 import RemoveSharpIcon from "@material-ui/icons/RemoveSharp";
 import Tooltip from "@material-ui/core/Tooltip";
-// import CardContent from "@material-ui/core/CardContent";
+import SnackBar from "../common/SnackBar/SnackBar";
 import RatingModule from "../common/RatingModule/RatingModule";
 import PreloaderAdaptive from "../Preloader/Adaptive";
 import ItemTabs from "../common/ItemTabs/ItemTabs";
 
-import { addItemCart, changeItemCartQuantityFromItemDetails } from "../../store/actions/сart";
+import {
+  addItemCart,
+  changeItemCartQuantityFromItemDetails,
+} from "../../store/actions/сart";
 import {
   wishlistAddItem,
   wishlistDeleteItem,
@@ -44,7 +46,8 @@ const ItemDetails = ({
   addWishlistItem,
   deleteWishlistItem,
   isAuthenticated,
-  addCartItem, updateCart,
+  addCartItem,
+  updateCart,
 }) => {
   const itemNo = useParams();
   const classes = useStyles();
@@ -54,20 +57,20 @@ const ItemDetails = ({
     rate: { rating: 0 },
     currentPrice: 0,
   });
+  const [snackbarAddToCart, setSnackbarAddToCart] = useState(false);
   const [index, setIndex] = useState(0);
   const [preloader, setPreloader] = useState(true);
   const [qty, setQty] = useState(1);
   const history = useHistory();
 
   useEffect(() => {
-    const {CancelToken} = axios;
+    const { CancelToken } = axios;
     const source = CancelToken.source();
     axios
       .get(`/api/products/${itemNo.id}`, { cancelToken: source.token })
       .then(response => {
         setItem(response.data);
         setPreloader(false);
-        console.log(response.data);
       })
       .catch(error => {
         history.push("/notfound");
@@ -88,17 +91,18 @@ const ItemDetails = ({
     color,
     sizes,
     currentPrice,
+    previousPrice,
     _id,
     quantity,
   } = item;
 
   const addItemToCart = () => {
-    if(qty === 1) {
+    if (qty === 1) {
       addCartItem(item._id, item.itemNo);
     } else {
       updateCart(item._id, qty, item);
     }
-
+    setSnackbarAddToCart(true);
   };
 
   const handleAddtemToWishlist = () => {
@@ -126,10 +130,18 @@ const ItemDetails = ({
     }
   };
 
+  const snackbarClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setSnackbarAddToCart(false);
+  };
+
   return preloader ? (
     <PreloaderAdaptive />
   ) : (
     <Container className={classes.brandsContaier} maxWidth="lg">
+      <SnackBar open={snackbarAddToCart} close={snackbarClose} text="Added to your shopping cart!" />
       <Box className={classes.detailsHeader}>
         <Link href="/#" className={classes.linkIcon}>
           <HomeIcon style={{ fontSize: "30px", color: "black" }} />
@@ -176,7 +188,7 @@ const ItemDetails = ({
                 {sizes}
               </Typography>
             </ListItem>
-            <ListItem className={classes.root} style={{paddingTop: 0}}>
+            <ListItem className={classes.root} style={{ paddingTop: 0 }}>
               <ListItemText className={classes.infoDetail} primary="Rating:" />
               <RatingModule id={item._id} rate={item.rate.rating} />
             </ListItem>
@@ -189,6 +201,17 @@ const ItemDetails = ({
                 {`$${currentPrice.toFixed(2)}`}
               </Typography>
             </ListItem>
+            {previousPrice ? (
+              <ListItem className={classes.root}>
+                <ListItemText
+                  primary="Old price:"
+                  className={classes.infoDetail}
+                />
+                <Typography className={classes.oldPrice}>
+                  <s>{`$${previousPrice.toFixed(2)}`}</s>
+                </Typography>
+              </ListItem>
+            ) : null}
           </List>
           <Divider />
           <Container className={classes.qty_wrapper}>
@@ -214,14 +237,24 @@ const ItemDetails = ({
           </Container>
           <Divider />
           <Box className={classes.buttonsBar}>
-            <Button
-              className={classes.actionButton}
-              onClick={addItemToCart}
-              disabled={!(quantity > 0)}
-              variant={quantity > 0 ? "contained" : "text"}
-            >
+            { quantity > 0 ? (
+              <Button
+                className={classes.actionButton}
+                onClick={addItemToCart}
+                variant={quantity > 0 ? "contained" : "text"}
+              >
               Add to cart
-            </Button>
+              </Button>
+            ) : (
+              <Button
+                className={classes.actionButton}
+                onClick={addItemToCart}
+                disabled
+                variant={quantity > 0 ? "contained" : "text"}
+              >
+                  Out of stock
+              </Button>
+            )}
             {!wishlistAll.every(el => el._id !== _id) ? (
               <Tooltip arrow title="Remove from wishlist">
                 <Button
@@ -233,25 +266,29 @@ const ItemDetails = ({
                   <FavoriteSharpIcon />
                 </Button>
               </Tooltip>
-              ) : (
-                <Tooltip arrow title={isAuthenticated ? "Add to wishlist" : "Only for authorized users"}>
-                  <Button
-                    className={classes.actionButton}
-                    aria-label="Add to wishlist"
-                    variant="contained"
-                    onClick={handleAddtemToWishlist}
-                  >
-                    <FavoriteBorderSharpIcon />
-                  </Button>
-                </Tooltip>
+            ) : (
+              <Tooltip
+                arrow
+                title={
+                  isAuthenticated
+                    ? "Add to wishlist"
+                    : "Only for authorized users"
+                }
+              >
+                <Button
+                  className={classes.actionButton}
+                  aria-label="Add to wishlist"
+                  variant="contained"
+                  onClick={handleAddtemToWishlist}
+                >
+                  <FavoriteBorderSharpIcon />
+                </Button>
+              </Tooltip>
             )}
           </Box>
         </Box>
       </Box>
-      <ItemTabs
-        description={item.description}
-        id={item._id}
-      />
+      <ItemTabs description={item.description} id={item._id} />
     </Container>
   );
 };

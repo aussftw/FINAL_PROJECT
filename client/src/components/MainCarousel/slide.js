@@ -22,7 +22,6 @@ const Slide = ({ image, title, subTitle }) => {
       <Grid
         container
         alignItems="center"
-        // justify="center"
       >
         <Grid item xs={6} className={classes.block}>
           <Box className={classes.paragraph}>
