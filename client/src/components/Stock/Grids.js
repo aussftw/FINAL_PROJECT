@@ -5,12 +5,12 @@ import React from "react";
 
 export default function GridElem(props) {
   // const classes = useStyles();
-  const { xs, sm, image } = props;
+  const { xs, sm, image, alt } = props;
 
   return (
     <Grid item xs={xs} sm={sm}>
       {/* eslint-disable-next-line jsx-a11y/alt-text */}
-      <img src={image} width="100%" />
+      <img src={image} width="100%" alt={alt} />
     </Grid>
   );
 }

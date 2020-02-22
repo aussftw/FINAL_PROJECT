@@ -41,15 +41,11 @@ export const getSizes = () => dispatch => {
 };
 
 // Работа с фильтрами
-export const selectCategory = category => dispatch => {
-  dispatch({
-    type: constants.SELECT_CATEGORY,
-    payload: category,
-  });
-  console.log(store.getState().filterReducer.filters);
+
+const getFilteredProducts = (filters, dispatch) => {
   axios
     .get("/api/products/filter", {
-      params: store.getState().filterReducer.filters,
+      params: filters,
     })
     .then(list => {
       dispatch({
@@ -59,22 +55,20 @@ export const selectCategory = category => dispatch => {
     });
 };
 
+export const selectCategory = category => dispatch => {
+  dispatch({
+    type: constants.SELECT_CATEGORY,
+    payload: category,
+  });
+  getFilteredProducts(store.getState().filterReducer.filters, dispatch);
+};
+
 export const selectColor = color => dispatch => {
   dispatch({
     type: constants.SELECT_COLOR,
     payload: color.name,
   });
-
-  axios
-    .get("/api/products/filter", {
-      params: store.getState().filterReducer.filters,
-    })
-    .then(list => {
-      dispatch({
-        type: constants.GET_PRODUCT_LISTING,
-        payload: list.data.products,
-      });
-    });
+  getFilteredProducts(store.getState().filterReducer.filters, dispatch);
 };
 
 export const removeColor = color => dispatch => {
@@ -83,31 +77,13 @@ export const removeColor = color => dispatch => {
       type: constants.REMOVE_COLOR,
       payload: undefined,
     });
-    axios
-      .get("/api/products/filter", {
-        params: store.getState().filterReducer.filters,
-      })
-      .then(list => {
-        dispatch({
-          type: constants.GET_PRODUCT_LISTING,
-          payload: list.data.products,
-        });
-      });
+    getFilteredProducts(store.getState().filterReducer.filters, dispatch);
   } else {
     dispatch({
       type: constants.REMOVE_COLOR,
       payload: color,
     });
-    axios
-      .get("/api/products/filter", {
-        params: store.getState().filterReducer.filters,
-      })
-      .then(list => {
-        dispatch({
-          type: constants.GET_PRODUCT_LISTING,
-          payload: list.data.products,
-        });
-      });
+    getFilteredProducts(store.getState().filterReducer.filters, dispatch);
   }
 };
 
@@ -123,16 +99,7 @@ export const selectSizes = size => dispatch => {
     type: constants.SELECT_SIZE,
     payload: size.name,
   });
-  axios
-    .get("/api/products/filter", {
-      params: store.getState().filterReducer.filters,
-    })
-    .then(list => {
-      dispatch({
-        type: constants.GET_PRODUCT_LISTING,
-        payload: list.data.products,
-      });
-    });
+  getFilteredProducts(store.getState().filterReducer.filters, dispatch);
 };
 
 export const removeSizes = size => dispatch => {
@@ -141,31 +108,13 @@ export const removeSizes = size => dispatch => {
       type: constants.REMOVE_SIZE,
       payload: undefined,
     });
-    axios
-      .get("/api/products/filter", {
-        params: store.getState().filterReducer.filters,
-      })
-      .then(list => {
-        dispatch({
-          type: constants.GET_PRODUCT_LISTING,
-          payload: list.data.products,
-        });
-      });
+    getFilteredProducts(store.getState().filterReducer.filters, dispatch);
   } else {
     dispatch({
       type: constants.REMOVE_SIZE,
       payload: size,
     });
-    axios
-      .get("/api/products/filter", {
-        params: store.getState().filterReducer.filters,
-      })
-      .then(list => {
-        dispatch({
-          type: constants.GET_PRODUCT_LISTING,
-          payload: list.data.products,
-        });
-      });
+    getFilteredProducts(store.getState().filterReducer.filters, dispatch);
   }
 };
 
@@ -174,16 +123,7 @@ export const selectPrice = price => dispatch => {
     type: constants.SELECT_PRICE,
     payload: price,
   });
-  axios
-    .get("/api/products/filter", {
-      params: store.getState().filterReducer.filters,
-    })
-    .then(list => {
-      dispatch({
-        type: constants.GET_PRODUCT_LISTING,
-        payload: list.data.products,
-      });
-    });
+  getFilteredProducts(store.getState().filterReducer.filters, dispatch);
 };
 
 export const setCurrentPage = currentPage => dispatch => {
@@ -191,14 +131,5 @@ export const setCurrentPage = currentPage => dispatch => {
     type: constants.SELECT_CURRENT_PAGE,
     payload: currentPage,
   });
-  axios
-    .get("/api/products/filter", {
-      params: store.getState().filterReducer.filters,
-    })
-    .then(list => {
-      dispatch({
-        type: constants.GET_PRODUCT_LISTING,
-        payload: list.data.products,
-      });
-    });
+  getFilteredProducts(store.getState().filterReducer.filters, dispatch);
 };

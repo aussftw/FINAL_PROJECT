@@ -86,10 +86,10 @@ export const useStyles = makeStyles(theme => ({
   },
   wrapper: {
     marginTop: "15px",
-    display: "inline-flex",
+    display: "flex",
+    justifyContent: "center",
   },
   span: {
     color: theme.palette.secondary.main,
-    width: 350,
   },
 }));

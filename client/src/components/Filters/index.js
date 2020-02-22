@@ -28,16 +28,13 @@ const Products = ({
   const classes = useStyles();
 
   useEffect(() => {
-    if (
-      !filters.categories &&
-      !filters.color &&
-      !filters.sizes &&
-      !filters.maxPrice
-    ) {
+    const valuesToBoolean = Object.values(filters).every(value => Boolean(value) === false);
+    if (valuesToBoolean) {
       getProducts();
     }
     // eslint-disable-next-line
-  }, []);
+    }, []);
+
 
   let listProduct = [];
   if (productListing) {
@@ -85,17 +82,18 @@ const Products = ({
           <div className={classes.items}>
             {isLoading ? (
               <PreloaderAdaptive />
-            ) : listProduct.length === 0 ? (
-              <div className={classes.wrapper}>
-                <div className={classes.span}>
-                  <Typography component="span">
-                    No results were found for your request
-                  </Typography>
-                </div>
-              </div>
             ) : (
               <>
                 <ModalFiltersAdaptive />
+                { listProduct.length === 0 && (
+                <div className={classes.wrapper}>
+                  <div className={classes.span}>
+                    <Typography align="center">
+                      No results were found for your request
+                    </Typography>
+                  </div>
+                </div>
+                )}
                 <div className={classes.itemCard}>{currentProduct}</div>
                 <Pagination
                   productsPerPage={productsPerPage}

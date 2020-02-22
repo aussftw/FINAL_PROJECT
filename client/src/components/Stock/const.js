@@ -2,7 +2,9 @@
 
 export const imagesObj = {
   fst: "/img/banner1.jpg",
+  altFirst: "banner1",
   snd: "/img/banner2.jpg",
+  altSecond: "banner2",
 };
 export const textObj = {
   name: "New Collection 2020",
