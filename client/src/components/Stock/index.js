@@ -20,8 +20,8 @@ export default function Stock() {
       <Typography variant="h4">Our collection</Typography>
       <Grid container className={classes.root} spacing={2}>
         <Grid container justify="center" spacing={spacing}>
-          <GridElem xs={12} sm={5} image={images.fst} />
-          <GridElem xs={5} sm={3} image={images.snd} />
+          <GridElem xs={12} sm={5} image={images.fst} alt={images.altFirst} />
+          <GridElem xs={5} sm={3} image={images.snd} alt={images.altSecond} />
           <Grid item xs={7} sm={4}>
             <Paper className={classes.paper}>
               <TextBlock />

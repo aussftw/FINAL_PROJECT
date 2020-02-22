@@ -10,24 +10,16 @@ const LastViewCarousel = ({ lastView, currentId }) => {
   const [productsLV, setProductsLV] = useState([]);
   useEffect(() => {
     if (lastView.length > 0) {
-      const lastViewObj = { products: lastView };
       axios
-        .post("/api/products/actualization", lastViewObj)
+        .post("/api/products/actualization", { products: lastView })
         .then(response => {
-          const responseData = response.data;
-          const sortData = [];
-          // eslint-disable-next-line
-          const result = lastView.map(item => {
-            const x = responseData.find(el => el._id === item);
-            sortData.push(x);
-          });
-          setProductsLV([...productsLV, ...sortData]);
+          const sortData = lastView.map(item => response.data.find(el => el._id === item));
+          setProductsLV(sortData);
         })
         .catch(err => {
           console.log(err.response);
         });
     }
-    // eslint-disable-next-line
   }, [lastView]);
   return <RenderCards productsLV={productsLV} currentId={currentId} />;
 };
