@@ -17,7 +17,7 @@ import PreloaderAdaptiveSmall from "../../../../Preloader/AdaptiveSmall";
 
 const AddEditCategoriesModal = ({ open, handleModal, category, handleOpenSnackbar, autoRefresh }) => {
   const classes = useStyles();
-
+  
   const [loading, setLoading] = useState(false);
   const [imgToUpload, setImgToUpload] = useState(null);
   const [categoryInfo, setCategoryInfo] = useState(
@@ -45,7 +45,7 @@ const AddEditCategoriesModal = ({ open, handleModal, category, handleOpenSnackba
     setCategoryInfo({ ...categoryInfo, [prop]: event.target.value });
   };
 
-
+  
   const requestToDb = categoryInfo => {
     if (category === null) {
 

@@ -66,6 +66,7 @@ const AdminCategories = ({
       .get("/api/catalog")
       .then(orders => {
         setCategories(orders.data);
+        console.log(orders.data);
       })
       .catch(err => {
         console.log("orders", err);
