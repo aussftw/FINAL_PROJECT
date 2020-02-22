@@ -35,6 +35,7 @@ const Products = ({
     // eslint-disable-next-line
     }, []);
 
+
   let listProduct = [];
   if (productListing) {
     listProduct = productListing.map(value => {
